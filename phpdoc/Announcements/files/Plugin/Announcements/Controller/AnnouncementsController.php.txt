@@ -1,0 +1,101 @@
+<?php
+/**
+ * Announcements Controller
+ *
+ * @author Noriko Arai <arai@nii.ac.jp>
+ * @author Shohei Nakajima <nakajimashouhei@gmail.com>
+ * @link http://www.netcommons.org NetCommons Project
+ * @license http://www.netcommons.org/license.txt NetCommons License
+ * @copyright Copyright 2014, NetCommons Project
+ */
+
+App::uses('AnnouncementsAppController', 'Announcements.Controller');
+
+/**
+ * Announcements Controller
+ *
+ * @author Shohei Nakajima <nakajimashouhei@gmail.com>
+ * @package NetCommons\Announcements\Controller
+ */
+class AnnouncementsController extends AnnouncementsAppController {
+
+/**
+ * use models
+ *
+ * @var array
+ */
+	public $uses = array(
+		'Workflow.WorkflowComment',
+	);
+
+/**
+ * use components
+ *
+ * @var array
+ */
+	public $components = array(
+		'NetCommons.Permission' => array(
+			//アクセスの権限
+			'allow' => array(
+				'edit' => 'content_editable',
+			),
+		)
+	);
+
+/**
+ * use helpers
+ *
+ * @var array
+ */
+	public $helpers = array(
+		'Workflow.Workflow',
+	);
+
+/**
+ * view method
+ *
+ * @return void
+ */
+	public function view() {
+		$announcement = $this->Announcement->getAnnouncement();
+		if (! $announcement) {
+			if (Current::permission('content_editable')) {
+				$announcement = $this->Announcement->createAll();
+			} else {
+				return $this->setAction('emptyRender');
+			}
+		}
+		$this->set('announcement', $announcement['Announcement']);
+	}
+
+/**
+ * edit method
+ *
+ * @return void
+ */
+	public function edit() {
+		if ($this->request->is('post') || $this->request->is('put')) {
+			$data = $this->data;
+			$data['Announcement']['status'] = $this->Workflow->parseStatus();
+			unset($data['Announcement']['id']);
+
+			if ($this->Announcement->saveAnnouncement($data)) {
+				return $this->redirect(NetCommonsUrl::backToPageUrl());
+			}
+			$this->NetCommons->handleValidationError($this->Announcement->validationErrors);
+
+		} else {
+			//初期データセット
+			if (! $this->request->data = $this->Announcement->getAnnouncement()) {
+				$this->request->data = $this->Announcement->createAll();
+			}
+			$this->request->data['Frame'] = Current::read('Frame');
+		}
+
+		$comments = $this->Announcement->getCommentsByContentKey(
+			$this->request->data['Announcement']['key']
+		);
+		$this->set('comments', $comments);
+	}
+}
+
