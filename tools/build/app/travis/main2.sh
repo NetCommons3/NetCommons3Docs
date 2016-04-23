@@ -39,8 +39,5 @@ do
   if [ "$TRAVIS_BRANCH" == "master" ]; then
     git add -A
     git commit -m "Update phpdoc $plugin"
-    git pull
-    [ $GH_TOKEN ] && git push --quiet https://$GH_TOKEN@github.com/$NETCOMMONS3DOCS.git 2> /dev/null
   fi
 done
-

@@ -5,12 +5,15 @@ php:
 
 env:
   matrix:
-    - PATTERN="[ABCD]"
-    - PATTERN="[EFGHI]"
-    - PATTERN="[JKLMN]"
-    - PATTERN="[OPQR]"
-    - PATTERN="[STUV]"
-    - PATTERN="[WXYZ]"
+    - PATTERN="[ABC]"
+    - PATTERN="[DEF]"
+    - PATTERN="[GHI]"
+    - PATTERN="[JKL]"
+    - PATTERN="[MNO]"
+    - PATTERN="[PQR]"
+    - PATTERN="[STU]"
+    - PATTERN="[VWX]"
+    - PATTERN="[YZ]"
   global:
     - secure: "S9QtTDWb49VduRwS3xCgFSdAAA/xyyccW6W88e0OF0z8zRTO6MSkSQqSh7GDCPoc3mOhMEfPEszZ04jSPYDZToEA2m6O1VhFWKnXJhetnIWYzQhq9gUeXcONVp0PvSzEkrarzFY9Xu1lrERX1ZSpwWkvki+jyLJo/7brpS8ZDXk="
 
