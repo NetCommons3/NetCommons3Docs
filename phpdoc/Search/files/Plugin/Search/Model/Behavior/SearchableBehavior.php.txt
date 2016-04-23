@@ -1,0 +1,207 @@
+<?php
+/**
+ * Searchable Behavior
+ *
+ * @author Jun Nishikawa <topaz2@m0n0m0n0.com>
+ * @link http://www.netcommons.org NetCommons Project
+ * @license http://www.netcommons.org/license.txt NetCommons License
+ * @copyright Copyright 2014, NetCommons Project
+ */
+
+App::uses('ModelBehavior', 'Model');
+
+/**
+ * Searchable Behavior
+ *
+ * @package NetCommons\Search\Model\Befavior
+ * @author Jun Nishikawa <topaz2@m0n0m0n0.com>
+ */
+class SearchableBehavior extends ModelBehavior {
+
+/**
+ * Default settings
+ */
+	protected $_defaults = [
+		'searchModel' => 'Topics.Topic',
+		'fields' => [
+			'title' => 'title',
+			'contents' => ['content'],
+		],
+	];
+
+/**
+ * Default settings
+ */
+	private $__contents = [
+		'title' => null,
+		'contents' => [],
+	];
+
+/**
+ * Default settings
+ */
+	private $__searchModel;
+
+/**
+ * Setup
+ *
+ * @param Model $model instance of model
+ * @param array $config array of configuration settings.
+ * @return void
+ */
+	public function setup(Model $model, $config = []) {
+		$this->settings[$model->alias] = Set::merge($this->_defaults, $config);
+		if ($this->_hasTrackableFields($model)) {
+			$this->setSearchableContents($model->data);
+		}
+		$config = $this->settings[$model->alias];
+		$this->__searchModel = ClassRegistry::init($config['searchModel']);
+	}
+
+/**
+ * Checks wether model has the required fields
+ *
+ * @param Model $model instance of model
+ * @return bool True if $model has the required fields
+ */
+	protected function _hasTrackableFields(Model $model) {
+		$fields = $this->settings[$model->alias]['fields'];
+		return
+			$model->hasField($fields['title']) ||
+			$model->hasField($fields['contents']);
+	}
+
+/**
+ * Getter method to handle contents
+ *
+ * @return void
+ */
+	public function getSearchableContents() {
+		return $this->__contents['contents'];
+	}
+
+/**
+ * Setter method to handle contents
+ *
+ * @param array $contents contents
+ * @return void
+ */
+	public function setSearchableContents($contents = []) {
+		$this->__contents['contents'] = $contents;
+	}
+
+/**
+ * Getter method to handle title
+ *
+ * @return void
+ */
+	public function getSearchableTitle() {
+		return $this->__contents['title'];
+	}
+
+/**
+ * Setter method to handle title
+ *
+ * @param string $title title
+ * @return void
+ */
+	public function setSearchableTitle($title) {
+		$this->__contents['title'] = $title;
+	}
+
+/**
+ * beforeSave is called before a model is saved. Returning false from a beforeSave callback
+ * will abort the save operation.
+ *
+ * @param Model $model Model using this behavior
+ * @param array $options Options passed from Model::save().
+ * @return mixed False if the operation should abort. Any other result will continue.
+ * @see Model::save()
+ */
+	public function beforeSave(Model $model, $options = []) {
+		$fields = $this->settings[$model->alias]['fields'];
+		$columns = ['title', 'contents'];
+		foreach ($columns as $column) {
+			if (!isset($fields[$column])) {
+				continue;
+			}
+			if (is_array($fields[$column])) {
+				foreach ($fields[$column] as $field) {
+					if (!isset($model->data[$model->alias][$field])) {
+						continue;
+					}
+					$indexes[$column][] = $model->data[$model->alias][$field];
+				}
+			} else {
+				if (!isset($model->data[$model->alias][$fields[$column]])) {
+					continue;
+				}
+				$indexes[$column] = $model->data[$model->alias][$fields[$column]];
+			}
+		}
+		//if (isset($indexes['title'])) {
+		//	$this->setSearchableTitle($indexes['title']);
+		//}
+		$this->setSearchableTitle(Hash::get($indexes, 'title'));
+
+		//if (isset($indexes['contents'])) {
+		//	$this->setSearchableContents($indexes['contents']);
+		//	/* var_dump($this->getSearchableContents()); */
+		//}
+		$this->setSearchableContents(Hash::get($indexes, 'contents'));
+
+		/* var_dump($indexes); */
+		/* /\* var_dump($model); *\/ */
+		/* var_dump($model->data); */
+		/* /\* exit; *\/ */
+		if (!$this->getSearchableContents()) {
+			return true;
+		}
+		/* //  beforeSave はupdateAllでも呼び出される。 */
+		/* if (isset($model->data[$model->name]['id']) && ($model->data[$model->name]['id'] > 0)) { */
+		/* 	// updateのときは何もしない */
+		/* 	return true; */
+		/* } */
+		/* if (! isset($model->data[$model->name]['key']) || $model->data[$model->name]['key'] === '') { */
+		/* 	$model->data[$model->name]['key'] = Security::hash($model->name . mt_rand() . microtime(), 'md5'); */
+		/* } */
+		/* var_dump($this->getSearchableContents()); */
+		/* 	var_dump($this->getSearchableContents()); */
+		$this->__searchModel->set([
+			'title' => $this->getSearchableTitle(),
+			'contents' => implode(' ', $this->getSearchableContents()),
+		]);
+		return true;
+	}
+
+/**
+ * afterSave is called after a model is saved.
+ *
+ * @param Model $model Model using this behavior
+ * @param bool $created True if this save created a new record
+ * @param array $options Options passed from Model::save().
+ * @return bool
+ * @see Model::save()
+ */
+	public function afterSave(Model $model, $created, $options = []) {
+		/* $this->__searchModel->save(); */
+		/* 	var_dump($this->__searchModel->data); */
+			/* exit; */
+		/* if ($created && $model->hasField('origin_id')) { */
+		/* 	if (isset($model->data[$model->name]['origin_id']) && */
+		/* 			(int)$model->data[$model->name]['origin_id'] === 0) { */
+		/* 		// origin_id がセットされてなかったらkey=idでupdate */
+		/* $model->saveField('contents', implode(' ', $model->getSearchableContents())); */
+		/* 	} */
+		/* } */
+		/* if ($created && $model->hasField('origin_id')) { */
+		/* 	if (isset($model->data[$model->name]['origin_id']) && */
+		/* 			(int)$model->data[$model->name]['origin_id'] === 0) { */
+		/* 		// origin_id がセットされてなかったらkey=idでupdate */
+		/* 		$model->saveField('origin_id', $model->data[$model->name]['id']); */
+		/* 	} */
+		/* } */
+	}
+
+}
+
