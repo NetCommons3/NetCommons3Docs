@@ -5,10 +5,11 @@ php:
 
 env:
   matrix:
-    - PATTERN="ABCD QRST"
-    - PATTERN="EFGH UVWX"
-    - PATTERN="IJKL YZ"
-    - PATTERN="MNOP"
+    - PATTERN="[ABC]"
+    - PATTERN="[DEFGHIJ]"
+    - PATTERN="[KLMNOP]"
+    - PATTERN="[QRS]"
+    - PATTERN="[TUVWXYZ]"
   global:
     - secure: "S9QtTDWb49VduRwS3xCgFSdAAA/xyyccW6W88e0OF0z8zRTO6MSkSQqSh7GDCPoc3mOhMEfPEszZ04jSPYDZToEA2m6O1VhFWKnXJhetnIWYzQhq9gUeXcONVp0PvSzEkrarzFY9Xu1lrERX1ZSpwWkvki+jyLJo/7brpS8ZDXk="
 
@@ -26,13 +27,7 @@ before_script:
 
 script:
   - cd $TRAVIS_BUILD_DIR; . ./main.sh
-  - cd $TRAVIS_BUILD_DIR; . ./main2.sh "[ABCD]" "ABCD QRST"
-  - cd $TRAVIS_BUILD_DIR; . ./main2.sh "[EFGH]" "EFGH UVWX"
-  - cd $TRAVIS_BUILD_DIR; . ./main2.sh "[IJKL]" "IJKL YZ"
-  - cd $TRAVIS_BUILD_DIR; . ./main2.sh "[MNOP]" "MNOP"
-  - cd $TRAVIS_BUILD_DIR; . ./main2.sh "[QRST]" "ABCD QRST"
-  - cd $TRAVIS_BUILD_DIR; . ./main2.sh "[UVWX]" "EFGH UVWX"
-  - cd $TRAVIS_BUILD_DIR; . ./main2.sh "[YZ]" "IJKL YZ"
+  - cd $TRAVIS_BUILD_DIR; . ./main2.sh
   - cd $TRAVIS_BUILD_DIR; . ./main3.sh
 
 after_script:
