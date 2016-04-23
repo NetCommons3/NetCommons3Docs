@@ -1,0 +1,116 @@
+<?php
+/**
+ * Auth Controller
+ *
+ * @author Noriko Arai <arai@nii.ac.jp>
+ * @author Shohei Nakajima <nakajimashouhei@gmail.com>
+ * @link http://www.netcommons.org NetCommons Project
+ * @license http://www.netcommons.org/license.txt NetCommons License
+ * @copyright Copyright 2014, NetCommons Project
+ */
+
+App::uses('AuthAppController', 'Auth.Controller');
+
+/**
+ * Auth Controller
+ *
+ * @author Shohei Nakajima <nakajimashouhei@gmail.com>
+ * @package NetCommons\Auth\Controller
+ */
+class AuthController extends AuthAppController {
+
+/**
+ * use model
+ *
+ * @var array
+ */
+	public $uses = array(
+		'Auth.ForgotPass',
+		'Rooms.Room',
+		'Users.User',
+		'UserRoles.UserRole',
+	);
+
+/**
+ * beforeFilter
+ *
+ * @return void
+ **/
+	public function beforeFilter() {
+		// Load available authenticators
+		$authenticators = $this->getAuthenticators();
+		$this->set('authenticators', $authenticators);
+
+		$this->__setDefaultAuthenticator();
+
+		parent::beforeFilter();
+		$this->Auth->allow('login', 'logout');
+	}
+
+/**
+ * index
+ *
+ * @return void
+ **/
+	public function index() {
+		$this->redirect($this->Auth->loginAction);
+	}
+
+/**
+ * ログイン処理
+ *
+ * @return void
+ * @throws InternalErrorException
+ **/
+	public function login() {
+		$siteSettions = $this->ForgotPass->getSiteSetting();
+		$this->set('siteSettions', $siteSettions);
+
+		if ($this->request->is('post')) {
+			if ($this->Auth->login()) {
+				$this->User->updateLoginTime($this->Auth->user('id'));
+				Current::write('User', $this->Auth->user());
+				$this->Auth->loginRedirect = $this->SiteSetting->getDefaultStartPage();
+				return $this->redirect($this->Auth->redirect());
+			}
+
+			$this->NetCommons->setFlashNotification(
+				__d('auth', 'Invalid username or password, try again'),
+				array(
+					'class' => 'danger',
+					'interval' => NetCommonsComponent::ALERT_VALIDATE_ERROR_INTERVAL,
+				),
+				400
+			);
+			$this->redirect($this->Auth->loginAction);
+		}
+	}
+
+/**
+ * logout
+ *
+ * @return void
+ **/
+	public function logout() {
+		$this->redirect($this->Auth->logout());
+	}
+
+/**
+ * Set authenticator
+ *
+ * @return void
+ **/
+	private function __setDefaultAuthenticator() {
+		$scheme = strtr(Inflector::camelize($this->request->offsetGet('plugin')), array('Auth' => ''));
+		$callee = array(sprintf('Auth%sAppController', $scheme), '_getAuthenticator');
+
+		if (is_callable($callee)) {
+			$authenticator = call_user_func($callee);
+			$this->Auth->authenticate = array($authenticator => array());
+			//CakeLog::info(sprintf('Will load %s authenticator', $authenticator), true);
+		} else {
+			//CakeLog::info(sprintf('Unknown authenticator %s.%s', $plugin, $scheme), true);
+		}
+	}
+}
+
