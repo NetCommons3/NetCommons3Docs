@@ -5,15 +5,8 @@ php:
 
 env:
   matrix:
-    - PATTERN="[ABC]"
-    - PATTERN="[DEF]"
-    - PATTERN="[GHI]"
-    - PATTERN="[JKL]"
-    - PATTERN="[MNO]"
-    - PATTERN="[PQR]"
-    - PATTERN="[STU]"
-    - PATTERN="[VWX]"
-    - PATTERN="[YZ]"
+    - PATTERN=1
+    - PATTERN=2
   global:
     - secure: "S9QtTDWb49VduRwS3xCgFSdAAA/xyyccW6W88e0OF0z8zRTO6MSkSQqSh7GDCPoc3mOhMEfPEszZ04jSPYDZToEA2m6O1VhFWKnXJhetnIWYzQhq9gUeXcONVp0PvSzEkrarzFY9Xu1lrERX1ZSpwWkvki+jyLJo/7brpS8ZDXk="
 
@@ -33,9 +26,19 @@ script:
   - cd $TRAVIS_BUILD_DIR
   - . ./main.sh
   - cd $TRAVIS_BUILD_DIR
-  - . ./main2.sh
+  - . ./main2.sh "[ABCD]"
   - cd $TRAVIS_BUILD_DIR
-  - . ./main3.sh
+  - . ./main3.sh "[EFGH]"
+  - cd $TRAVIS_BUILD_DIR
+  - . ./main2.sh "[IJKL]"
+  - cd $TRAVIS_BUILD_DIR
+  - . ./main3.sh "[MNOP]"
+  - cd $TRAVIS_BUILD_DIR
+  - . ./main2.sh "[QRST]"
+  - cd $TRAVIS_BUILD_DIR
+  - . ./main3.sh "[UVWX]"
+  - cd $TRAVIS_BUILD_DIR
+  - . ./main2.sh "[YZ]"
 
 after_script:
   - cd $TRAVIS_BUILD_DIR; . ./post.sh
