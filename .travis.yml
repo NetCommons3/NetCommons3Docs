@@ -3,18 +3,44 @@ language: php
 php:
   - 5.6
 
+env:
+  global:
+    - secure: "PFTtZ+Bs63b++QNvbwjeD/zBzqjW29S9EEKYDIZEXL67RaFQTxARzZL4rQ4dc4fOvDO43cExZgNoJnB9UA9cBy1P/aI9bBlcVZndFdAOWk/wnwnew9ZchBYpzdLIAzdDEhCTM11djcq5ZYylV94aSyKwcm7bRVZGLvO6ZkPfqo0="
+
+sudo: required
+
 before_script:
   - export CLASS_DOC_SOURCE_URI=https://github.com/NetCommons3/NetCommons3.git
-  - for s in pre main main2 main3 post; do wget https://raw.githubusercontent.com/NetCommons3/NetCommons3/master/tools/build/app_docs/travis/$s.sh; chmod +x $s.sh; done
+  - export CLASS_DOC_SOURCE_ROOT=`dirname $TRAVIS_BUILD_DIR`/build/NetCommons3
+  - export APP_ROOT=$CLASS_DOC_SOURCE_ROOT/app
+  - export NETCOMMONS_BUILD_DIR=`dirname $TRAVIS_BUILD_DIR`/build/NetCommons3Docs
+  - export NETCOMMONS3DOCS=NetCommons3/NetCommons3Docs
+  - cd $TRAVIS_BUILD_DIR
+  - for s in pre main main2 main3 post; do wget https://raw.githubusercontent.com/$NETCOMMONS3DOCS/$TRAVIS_BRANCH/tools/build/app/travis/$s.sh; chmod +x $s.sh; done
   - . ./pre.sh
 
 script:
-  - travis_wait . ./main.sh
-  - travis_wait . ./main2.sh
-  - travis_wait . ./main3.sh
+  - cd $TRAVIS_BUILD_DIR
+  - . ./main.sh
+  - cd $TRAVIS_BUILD_DIR
+  - . ./main2.sh "[ABCD]"
+  - cd $TRAVIS_BUILD_DIR
+  - . ./main2.sh "[EFGH]"
+  - cd $TRAVIS_BUILD_DIR
+  - . ./main2.sh "[IJKL]"
+  - cd $TRAVIS_BUILD_DIR
+  - . ./main2.sh "[MNOP]"
+  - cd $TRAVIS_BUILD_DIR
+  - . ./main2.sh "[QRST]"
+  - cd $TRAVIS_BUILD_DIR
+  - . ./main2.sh "[UVWX]"
+  - cd $TRAVIS_BUILD_DIR
+  - . ./main2.sh "[YZ]"
+  - cd $TRAVIS_BUILD_DIR
+  - . ./main3.sh
 
 after_script:
-  - . ./post.sh
+  - cd $TRAVIS_BUILD_DIR; . ./post.sh
 
 notifications:
   email:
