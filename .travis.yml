@@ -36,7 +36,7 @@ script:
   - cd $TRAVIS_BUILD_DIR; . ./main3.sh
 
 after_script:
-  - cd $TRAVIS_BUILD_DIR; . ./post.sh
+  - cd $TRAVIS_BUILD_DIR; travis_wait . ./post.sh
 
 notifications:
   email:
