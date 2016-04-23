@@ -28,8 +28,6 @@ do
     continue
   fi
 
-  git pull
-
   if [ -d phpdoc/$plugin ]; then
     rm -r phpdoc/$plugin
   fi
@@ -39,6 +37,7 @@ do
   rm -r phpdoc/$plugin/cache
 
   if [ "$TRAVIS_BRANCH" == "master" ]; then
+    git pull
     git add -A
     git commit -m "Update phpdoc $plugin"
 
