@@ -19,7 +19,7 @@ before_script:
   - export NETCOMMONS_BUILD_DIR=`dirname $TRAVIS_BUILD_DIR`/build/NetCommons3Docs
   - export NETCOMMONS3DOCS=NetCommons3/NetCommons3Docs
   - cd $TRAVIS_BUILD_DIR
-  - for s in pre main main2 main3 post; do wget https://raw.githubusercontent.com/$NETCOMMONS3DOCS/$TRAVIS_BRANCH/tools/build/app/travis/$s.sh; chmod +x $s.sh; done
+  - for s in pre main main2 main3 phpdoc post; do wget https://raw.githubusercontent.com/$NETCOMMONS3DOCS/$TRAVIS_BRANCH/tools/build/app/travis/$s.sh; chmod +x $s.sh; done
   - . ./pre.sh
 
 script:
