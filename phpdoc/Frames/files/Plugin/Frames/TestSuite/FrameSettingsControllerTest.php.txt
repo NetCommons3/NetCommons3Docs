@@ -1,0 +1,189 @@
+<?php
+/**
+ * BlocksControllerTest
+ *
+ * @author Noriko Arai <arai@nii.ac.jp>
+ * @author Shohei Nakajima <nakajimashouhei@gmail.com>
+ * @link http://www.netcommons.org NetCommons Project
+ * @license http://www.netcommons.org/license.txt NetCommons License
+ * @copyright Copyright 2014, NetCommons Project
+ */
+
+App::uses('NetCommonsControllerTestCase', 'NetCommons.TestSuite');
+
+/**
+ * BlocksControllerTest
+ *
+ * @author Shohei Nakajima <nakajimashouhei@gmail.com>
+ * @package NetCommons\Blocks\TestSuite
+ * @codeCoverageIgnore
+ */
+class FrameSettingsControllerTest extends NetCommonsControllerTestCase {
+
+/**
+ * setUp method
+ *
+ * @return void
+ */
+	public function setUp() {
+		if (! $this->_controller) {
+			$this->_controller = Inflector::singularize($this->plugin) . '_' . 'frame_settings';
+		}
+		parent::setUp();
+	}
+
+/**
+ * ロールチェックdataProvider
+ *
+ * ### 戻り値
+ *  - action: アクション名
+ *  - method: リクエストメソッド（get or post or put）
+ *  - expected: 期待するviewファイル
+ *  - role: ロール名
+ *  - exception: Exception
+ *
+ * @return array
+ */
+	public function dataProviderRoleAccess() {
+		$data = array(
+			array('edit', 'get', 'edit', Role::ROOM_ROLE_KEY_CHIEF_EDITOR, false),
+			array('edit', 'get', 'edit', Role::ROOM_ROLE_KEY_EDITOR, 'ForbiddenException'),
+			array('edit', 'get', 'edit', Role::ROOM_ROLE_KEY_GENERAL_USER, 'ForbiddenException'),
+			array('edit', 'get', 'edit', Role::ROOM_ROLE_KEY_VISITOR, 'ForbiddenException'),
+			array('edit', 'get', 'edit', null, 'ForbiddenException'),
+		);
+		return $data;
+	}
+
+/**
+ * アクセス許可テスト
+ *
+ * @param string $action アクション名
+ * @param string $method リクエストメソッド（get or post or put）
+ * @param string $expected 期待するviewファイル
+ * @param string $role ロール名
+ * @param string $exception Exception
+ * @dataProvider dataProviderRoleAccess
+ * @return void
+ */
+	public function testAccessPermission($action, $method, $expected, $role, $exception) {
+		if ($exception) {
+			$this->setExpectedException($exception);
+		}
+		if (isset($role)) {
+			TestAuthGeneral::login($this, $role);
+		}
+
+		//アクション実行
+		$frameId = '6';
+
+		$url = array(
+			'plugin' => $this->plugin,
+			'controller' => $this->_controller,
+			'action' => $action,
+			'frame_id' => $frameId
+		);
+
+		$params = array(
+			'method' => $method,
+			'return' => 'view'
+		);
+		$this->testAction(NetCommonsUrl::actionUrl($url), $params);
+
+		//チェック
+		$this->assertTextEquals($this->controller->view, $expected);
+
+		//ログアウト
+		if (isset($role)) {
+			TestAuthGeneral::logout($this);
+		}
+	}
+
+/**
+ * edit()のテスト
+ *
+ * @param string $method リクエストメソッド（get or post or put）
+ * @param array $data 登録データ
+ * @param bool $validationError バリデーションエラー
+ * @param null|string $exception Exceptions Error
+ * @dataProvider dataProviderEdit
+ * @return void
+ * @SuppressWarnings(PHPMD.BooleanArgumentFlag)
+ */
+	public function testEdit($method, $data = null, $validationError = false, $exception = null) {
+		if ($exception) {
+			$this->setExpectedException($exception);
+		}
+
+		//ログイン
+		TestAuthGeneral::login($this);
+
+		$frameId = '6';
+		if ($validationError) {
+			$data = Hash::insert($data, $validationError['field'], $validationError['value']);
+		}
+
+		//アクション実行
+		$url = NetCommonsUrl::actionUrl(array(
+			'plugin' => $this->plugin,
+			'controller' => $this->_controller,
+			'action' => 'edit',
+			'frame_id' => $frameId,
+		));
+		$params = array(
+			'method' => $method,
+			'return' => 'view',
+			'data' => $data
+		);
+		$this->testAction($url, $params);
+
+		//チェック
+		if ($exception) {
+			//ログアウト
+			TestAuthGeneral::logout($this);
+			return;
+		}
+
+		if (in_array($method, ['put', 'post'], true) && ! $validationError) {
+			$header = $this->controller->response->header();
+			$asserts = array(
+				array('method' => 'assertNotEmpty', 'value' => $header['Location'])
+			);
+		} else {
+			$asserts = array(
+				array(
+					'method' => 'assertInput', 'type' => 'form',
+					'name' => null, 'value' => $url
+				),
+				array(
+					'method' => 'assertInput', 'type' => 'input',
+					'name' => 'data[Frame][id]', 'value' => $frameId
+				),
+				array(
+					'method' => 'assertInput', 'type' => 'input',
+					'name' => 'data[Frame][key]', 'value' => 'frame_3'
+				),
+			);
+
+			//バリデーションエラー(エラー表示あり)
+			if ($validationError) {
+				if ($validationError['message']) {
+					array_push($asserts, array(
+						'method' => 'assertNotEmpty', 'value' => $this->controller->validationErrors
+					));
+					array_push($asserts, array(
+						'method' => 'assertTextContains', 'expected' => $validationError['message']
+					));
+				}
+			}
+		}
+
+		//チェック
+		$this->asserts($asserts, $this->contents);
+
+		//ログアウト
+		TestAuthGeneral::logout($this);
+	}
+
+}
+
