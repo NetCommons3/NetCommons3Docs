@@ -1,0 +1,108 @@
+<?php
+/**
+ * RoomsHelper::roomsRender()のテスト
+ *
+ * @author Noriko Arai <arai@nii.ac.jp>
+ * @author Shohei Nakajima <nakajimashouhei@gmail.com>
+ * @link http://www.netcommons.org NetCommons Project
+ * @license http://www.netcommons.org/license.txt NetCommons License
+ * @copyright Copyright 2014, NetCommons Project
+ */
+
+App::uses('NetCommonsHelperTestCase', 'NetCommons.TestSuite');
+
+/**
+ * RoomsHelper::roomsRender()のテスト
+ *
+ * @author Shohei Nakajima <nakajimashouhei@gmail.com>
+ * @package NetCommons\Rooms\Test\Case\View\Helper\RoomsHelper
+ */
+class RoomsHelperRoomsRenderTest extends NetCommonsHelperTestCase {
+
+/**
+ * Fixtures
+ *
+ * @var array
+ */
+	public $fixtures = array(
+		'plugin.rooms.rooms_language4test',
+	);
+
+/**
+ * Plugin name
+ *
+ * @var string
+ */
+	public $plugin = 'rooms';
+
+/**
+ * setUp method
+ *
+ * @return void
+ */
+	public function setUp() {
+		parent::setUp();
+		$this->Room = ClassRegistry::init('Rooms.Room');
+		//テストプラグインのロード
+		NetCommonsCakeTestCase::loadTestPlugin($this, 'Rooms', 'TestRooms');
+	}
+
+/**
+ * roomsRender()のテスト用DataProvider
+ *
+ * ### 戻り値
+ *  - roomTreeList ルームツリーリスト
+ *
+ * @return array テストデータ
+ */
+	public function dataProvider() {
+		return array(
+			// * roomTreeList指定なし
+			array('roomTreeList' => null),
+			// * roomTreeList指定あり
+			array('roomTreeList' => array('5' => chr(9) . chr(9) . '5')),
+		);
+	}
+
+/**
+ * roomsRender()のテスト
+ *
+ * @param array $roomTreeList ルームツリーリスト
+ * @dataProvider dataProvider
+ * @return void
+ */
+	public function testRoomsRender($roomTreeList) {
+		//テストデータ生成
+		$viewVars = array();
+		$viewVars['spaces'] = $this->Room->getSpaces();
+		$viewVars['rooms'] = array(
+			'4' => array('Room' => array('id' => '4')),
+			'5' => array('Room' => array('id' => '5')),
+		);
+		$viewVars['roomTreeList'] = array('4' => chr(9) . '4');
+		$requestData = array();
+
+		//Helperロード
+		$this->loadHelper('Rooms.Rooms', $viewVars, $requestData);
+
+		//データ生成
+		$activeSpaceId = '2';
+		$headElementPath = 'TestRooms.TestRoomsHelperRoomsRender/render_header';
+		$dataElementPath = 'TestRooms.TestRoomsHelperRoomsRender/render_room_index';
+		$paginator = false;
+
+		//テスト実施
+		$result = $this->Rooms->roomsRender($activeSpaceId, $dataElementPath, $headElementPath, $roomTreeList, $paginator);
+
+		//チェック
+		$this->assertTextContains('View/Helper/TestRoomsHelperRoomsRender/render_header', $result);
+		$this->assertTextContains('View/Helper/TestRoomsHelperRoomsRender/render_room_index/1/0', $result);
+		if ($roomTreeList) {
+			$this->assertTextContains('View/Helper/TestRoomsHelperRoomsRender/render_room_index/5/2', $result);
+		} else {
+			$this->assertTextContains('View/Helper/TestRoomsHelperRoomsRender/render_room_index/4/1', $result);
+		}
+	}
+
+}
+
