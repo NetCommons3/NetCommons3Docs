@@ -1,0 +1,33 @@
+<?php
+/**
+ * CircularNoticeMailSettings Controller
+ *
+ * @author Masaki Goto <go8ogle@gmail.com>
+ * @link http://www.netcommons.org NetCommons Project
+ * @license http://www.netcommons.org/license.txt NetCommons License
+ */
+
+App::uses('MailSettingsController', 'Mails.Controller');
+
+/**
+ * CircularNoticeFrameSettings Controller
+ *
+ * @author Hirohisa Kuwata <Kuwata.Hirohisa@withone.co.jp>
+ * @package NetCommons\CircularNotices\Controller
+ */
+class CircularNoticeMailSettingsController extends MailSettingsController {
+
+/**
+ * use helpers
+ *
+ * @var array
+ */
+	public $helpers = array(
+		'Blocks.BlockRolePermissionForm',
+		'Blocks.BlockTabs' => array(
+			'mainTabs' => array('role_permissions', 'frame_settings', 'mail_settings')
+		),
+	);
+
+}
+
