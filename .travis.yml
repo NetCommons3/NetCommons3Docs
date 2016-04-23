@@ -7,6 +7,8 @@ env:
   matrix:
     - PATTERN=1
     - PATTERN=2
+    - PATTERN=3
+    - PATTERN=4
   global:
     - secure: "S9QtTDWb49VduRwS3xCgFSdAAA/xyyccW6W88e0OF0z8zRTO6MSkSQqSh7GDCPoc3mOhMEfPEszZ04jSPYDZToEA2m6O1VhFWKnXJhetnIWYzQhq9gUeXcONVp0PvSzEkrarzFY9Xu1lrERX1ZSpwWkvki+jyLJo/7brpS8ZDXk="
 
@@ -19,26 +21,19 @@ before_script:
   - export NETCOMMONS_BUILD_DIR=`dirname $TRAVIS_BUILD_DIR`/build/NetCommons3Docs
   - export NETCOMMONS3DOCS=NetCommons3/NetCommons3Docs
   - cd $TRAVIS_BUILD_DIR
-  - for s in pre main main2 main3 phpdoc post; do wget https://raw.githubusercontent.com/$NETCOMMONS3DOCS/$TRAVIS_BRANCH/tools/build/app/travis/$s.sh; chmod +x $s.sh; done
+  - for s in pre main main2 main3 post; do wget https://raw.githubusercontent.com/$NETCOMMONS3DOCS/$TRAVIS_BRANCH/tools/build/app/travis/$s.sh; chmod +x $s.sh; done
   - . ./pre.sh
 
 script:
-  - cd $TRAVIS_BUILD_DIR
-  - . ./main.sh
-  - cd $TRAVIS_BUILD_DIR
-  - . ./main2.sh "[ABCD]"
-  - cd $TRAVIS_BUILD_DIR
-  - . ./main3.sh "[EFGH]"
-  - cd $TRAVIS_BUILD_DIR
-  - . ./main2.sh "[IJKL]"
-  - cd $TRAVIS_BUILD_DIR
-  - . ./main3.sh "[MNOP]"
-  - cd $TRAVIS_BUILD_DIR
-  - . ./main2.sh "[QRST]"
-  - cd $TRAVIS_BUILD_DIR
-  - . ./main3.sh "[UVWX]"
-  - cd $TRAVIS_BUILD_DIR
-  - . ./main2.sh "[YZ]"
+  - cd $TRAVIS_BUILD_DIR; . ./main.sh
+  - cd $TRAVIS_BUILD_DIR; . ./main2.sh "[ABCD]" 1
+  - cd $TRAVIS_BUILD_DIR; . ./main2.sh "[EFGH]" 2
+  - cd $TRAVIS_BUILD_DIR; . ./main2.sh "[IJKL]" 3
+  - cd $TRAVIS_BUILD_DIR; . ./main2.sh "[MNOP]" 4
+  - cd $TRAVIS_BUILD_DIR; . ./main2.sh "[QRST]" 1
+  - cd $TRAVIS_BUILD_DIR; . ./main2.sh "[UVWX]" 2
+  - cd $TRAVIS_BUILD_DIR; . ./main2.sh "[YZ]" 3
+  - cd $TRAVIS_BUILD_DIR; . ./main3.sh
 
 after_script:
   - cd $TRAVIS_BUILD_DIR; . ./post.sh
