@@ -1,0 +1,122 @@
+<?php
+/**
+ * SearchBoxTargetPlugins Controller
+ *
+ * @property SearchBoxTargetPlugin $SearchBoxTargetPlugin
+ * @property PaginatorComponent $Paginator
+ *
+ * @author Jun Nishikawa <topaz2@m0n0m0n0.com>
+ * @link http://www.netcommons.org NetCommons Project
+ * @license http://www.netcommons.org/license.txt NetCommons License
+ */
+
+App::uses('AppController', 'Controller');
+
+/**
+ * Summary for SearchBoxTargetPlugins Controller
+ */
+class SearchBoxTargetPluginsController extends AppController {
+
+/**
+ * Components
+ *
+ * @var array
+ */
+	public $components = array('Paginator');
+
+/**
+ * index method
+ *
+ * @return void
+ */
+	public function index() {
+		$this->SearchBoxTargetPlugin->recursive = 0;
+		$this->set('searchBoxTargetPlugins', $this->Paginator->paginate());
+	}
+
+/**
+ * view method
+ *
+ * @param string $id id
+ * @throws NotFoundException
+ * @return void
+ */
+	public function view($id = null) {
+		if (!$this->SearchBoxTargetPlugin->exists($id)) {
+			throw new NotFoundException(__('Invalid search box target plugin'));
+		}
+		$options = array('conditions' => array('SearchBoxTargetPlugin.' . $this->SearchBoxTargetPlugin->primaryKey => $id));
+		$this->set('searchBoxTargetPlugin', $this->SearchBoxTargetPlugin->find('first', $options));
+	}
+
+/**
+ * add method
+ *
+ * @return void
+ */
+	public function add() {
+		if ($this->request->is('post')) {
+			$this->SearchBoxTargetPlugin->create();
+			if ($this->SearchBoxTargetPlugin->save($this->request->data)) {
+				$this->Session->setFlash(__('The search box target plugin has been saved.'));
+				return $this->redirect(array('action' => 'index'));
+			} else {
+				$this->Session->setFlash(__('The search box target plugin could not be saved. Please, try again.'));
+			}
+		}
+		$searchBoxes = $this->SearchBoxTargetPlugin->SearchBox->find('list');
+		$trackableCreators = $this->SearchBoxTargetPlugin->TrackableCreator->find('list');
+		$trackableUpdaters = $this->SearchBoxTargetPlugin->TrackableUpdater->find('list');
+		$this->set(compact('searchBoxes', 'trackableCreators', 'trackableUpdaters'));
+	}
+
+/**
+ * edit method
+ *
+ * @param string $id id
+ * @throws NotFoundException
+ * @return void
+ */
+	public function edit($id = null) {
+		if (!$this->SearchBoxTargetPlugin->exists($id)) {
+			throw new NotFoundException(__('Invalid search box target plugin'));
+		}
+		if ($this->request->is(array('post', 'put'))) {
+			if ($this->SearchBoxTargetPlugin->save($this->request->data)) {
+				$this->Session->setFlash(__('The search box target plugin has been saved.'));
+				return $this->redirect(array('action' => 'index'));
+			} else {
+				$this->Session->setFlash(__('The search box target plugin could not be saved. Please, try again.'));
+			}
+		} else {
+			$options = array('conditions' => array('SearchBoxTargetPlugin.' . $this->SearchBoxTargetPlugin->primaryKey => $id));
+			$this->request->data = $this->SearchBoxTargetPlugin->find('first', $options);
+		}
+		$searchBoxes = $this->SearchBoxTargetPlugin->SearchBox->find('list');
+		$trackableCreators = $this->SearchBoxTargetPlugin->TrackableCreator->find('list');
+		$trackableUpdaters = $this->SearchBoxTargetPlugin->TrackableUpdater->find('list');
+		$this->set(compact('searchBoxes', 'trackableCreators', 'trackableUpdaters'));
+	}
+
+/**
+ * delete method
+ *
+ * @param string $id id
+ * @throws NotFoundException
+ * @return void
+ */
+	public function delete($id = null) {
+		$this->SearchBoxTargetPlugin->id = $id;
+		if (!$this->SearchBoxTargetPlugin->exists()) {
+			throw new NotFoundException(__('Invalid search box target plugin'));
+		}
+		$this->request->onlyAllow('post', 'delete');
+		if ($this->SearchBoxTargetPlugin->delete()) {
+			$this->Session->setFlash(__('The search box target plugin has been deleted.'));
+		} else {
+			$this->Session->setFlash(__('The search box target plugin could not be deleted. Please, try again.'));
+		}
+		return $this->redirect(array('action' => 'index'));
+	}
+}
+

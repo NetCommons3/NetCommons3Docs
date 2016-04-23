@@ -1,0 +1,94 @@
+<?php
+/**
+ * SearchBoxTargetPlugin Model
+ *
+ * @property SearchBox $SearchBox
+ *
+ * @author Jun Nishikawa <topaz2@m0n0m0n0.com>
+ * @link http://www.netcommons.org NetCommons Project
+ * @license http://www.netcommons.org/license.txt NetCommons License
+ */
+
+App::uses('AppModel', 'Model');
+
+/**
+ * Summary for SearchBoxTargetPlugin Model
+ */
+class SearchBoxTargetPlugin extends SearchBoxesAppModel {
+
+/**
+ * belongsTo associations
+ *
+ * @var array
+ */
+	public $belongsTo = array(
+		'Plugin' => array(
+			'className' => 'PluginManager.Plugin',
+			'foreignKey' => false,
+			'conditions' => array('SearchBoxTargetPlugin.plugin_key = Plugin.key'),
+			'fields' => '',
+			'order' => ''
+		),
+		'SearchBox' => array(
+			'className' => 'SearchBoxes.SearchBox',
+			'foreignKey' => 'search_box_id',
+			'conditions' => '',
+			'fields' => '',
+			'order' => ''
+		)
+	);
+
+/**
+ * Called during validation operations, before validation. Please note that custom
+ * validation rules can be defined in $validate.
+ *
+ * @param array $options Options passed from Model::save().
+ * @return bool True if validate operation should continue, false to abort
+ * @link http://book.cakephp.org/2.0/en/models/callback-methods.html#beforevalidate
+ * @see Model::save()
+ */
+	public function beforeValidate($options = array()) {
+		$this->validate = Hash::merge($this->validate, array(
+			'search_box_id' => array(
+				'numeric' => array(
+					'rule' => array('numeric'),
+					'message' => __d('net_commons', 'Invalid request.'),
+				),
+			),
+			'plugin_key' => array(
+				'inList' => array(
+					'rule' => array('inList', Topic::$availablePlugins),
+					'message' => __d('net_commons', 'Invalid request.'),
+					'allowEmpty' => true,
+				)
+			),
+			'created_user' => array(
+				'numeric' => array(
+					'rule' => array('numeric'),
+					'message' => __d('net_commons', 'Invalid request.'),
+				),
+			),
+			'modified_user' => array(
+				'numeric' => array(
+					'rule' => array('numeric'),
+					'message' => __d('net_commons', 'Invalid request.'),
+				),
+			),
+		));
+
+		return parent::beforeValidate($options);
+	}
+
+/**
+ * validate search box target plugin
+ *
+ * @param array $data received post data
+ * @return bool True on success, false on error
+ */
+	public function validateSearchBoxTargetPlugin($data) {
+		$this->set($data);
+		$this->validates();
+		return $this->validationErrors ? false : true;
+	}
+}
+
