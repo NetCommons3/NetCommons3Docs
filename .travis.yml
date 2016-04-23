@@ -5,7 +5,7 @@ php:
 
 env:
   global:
-    - secure: "PFTtZ+Bs63b++QNvbwjeD/zBzqjW29S9EEKYDIZEXL67RaFQTxARzZL4rQ4dc4fOvDO43cExZgNoJnB9UA9cBy1P/aI9bBlcVZndFdAOWk/wnwnew9ZchBYpzdLIAzdDEhCTM11djcq5ZYylV94aSyKwcm7bRVZGLvO6ZkPfqo0=
+    - secure: "PFTtZ+Bs63b++QNvbwjeD/zBzqjW29S9EEKYDIZEXL67RaFQTxARzZL4rQ4dc4fOvDO43cExZgNoJnB9UA9cBy1P/aI9bBlcVZndFdAOWk/wnwnew9ZchBYpzdLIAzdDEhCTM11djcq5ZYylV94aSyKwcm7bRVZGLvO6ZkPfqo0="
 
 sudo: required
 
