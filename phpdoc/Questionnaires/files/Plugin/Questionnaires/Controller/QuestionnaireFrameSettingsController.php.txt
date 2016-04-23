@@ -1,0 +1,143 @@
+<?php
+/**
+ * Questionnaires FrameSettingsController
+ *
+ * @author Noriko Arai <arai@nii.ac.jp>
+ * @author Allcreator <info@allcreator.net>
+ * @link http://www.netcommons.org NetCommons Project
+ * @license http://www.netcommons.org/license.txt NetCommons License
+ * @copyright Copyright 2014, NetCommons Project
+ */
+
+App::uses('QuestionnaireBlocksController', 'Questionnaires.Controller');
+App::uses('QuestionnaireFrameSetting', 'Questionnaires.Model');
+
+/**
+ * QuestionnaireFrameSettingsController
+ *
+ * @author Allcreator <info@allcreator.net>
+ * @package NetCommons\Questionnaires\Controller
+ */
+class QuestionnaireFrameSettingsController extends QuestionnaireBlocksController {
+
+/**
+ * layout
+ *
+ * @var array
+ */
+	public $layout = 'NetCommons.setting';
+
+/**
+ * use model
+ *
+ * @var array
+ */
+	public $uses = array(
+		'Blocks.Block',
+		'Frames.Frame',
+		'Questionnaires.Questionnaire',
+		'Questionnaires.QuestionnaireFrameSetting',
+		'Questionnaires.QuestionnaireFrameDisplayQuestionnaire',
+	);
+
+/**
+ * use components
+ *
+ * @var array
+ */
+	public $components = array(
+		'NetCommons.Permission' => array(
+			//アクセスの権限
+			'allow' => array(
+				'edit' => 'page_editable',
+			),
+		),
+		'Questionnaires.Questionnaires',
+		'Paginator',
+	);
+
+/**
+ * use helpers
+ *
+ * @var array
+ */
+	public $helpers = array(
+		'Blocks.BlockTabs' => array(
+			'mainTabs' => array(
+				'block_index' => array(
+					'url' => array('controller' => 'questionnaire_blocks')
+				),
+				'role_permissions' => array(
+					'url' => array('controller' => 'questionnaire_block_role_permissions')
+				),
+				'frame_settings' => array(
+					'url' => array('controller' => 'questionnaire_frame_settings')
+				),
+				'mail_settings' => array(
+					'url' => array('controller' => 'questionnaire_mail_settings')
+				),
+			),
+		),
+		'NetCommons.DisplayNumber',
+		'NetCommons.Date',
+		'NetCommons.TitleIcon',
+		'Questionnaires.QuestionnaireUtil'
+	);
+
+/**
+ * edit method
+ *
+ * @return void
+ */
+	public function edit() {
+		// Postデータ登録
+		if ($this->request->is('put') || $this->request->is('post')) {
+			if ($this->QuestionnaireFrameSetting->saveFrameSettings($this->request->data)) {
+				$this->NetCommons->setFlashNotification(__d('net_commons', 'Successfully saved.'), array(
+					'class' => 'success',
+				));
+				$this->redirect(NetCommonsUrl::backToPageUrl());
+				return;
+			}
+			$this->NetCommons->handleValidationError($this->QuestionnaireFrameSetting->validationErrors);
+		}
+
+		$conditions = $this->Questionnaire->getBaseCondition();
+		$this->paginate = array(
+			'fields' => array('Questionnaire.*', 'QuestionnaireFrameDisplayQuestionnaire.*'),
+			'conditions' => $conditions,
+			'page' => 1,
+			'order' => array('Questionnaire.modified' => 'DESC'),
+			//'limit' => 1000,
+			'recursive' => -1,
+			'joins' => array(
+				array(
+					'table' => 'questionnaire_frame_display_questionnaires',
+					'alias' => 'QuestionnaireFrameDisplayQuestionnaire',
+					'type' => 'LEFT',
+					'conditions' => array(
+						'QuestionnaireFrameDisplayQuestionnaire.questionnaire_key = Questionnaire.key',
+						'QuestionnaireFrameDisplayQuestionnaire.frame_key' => Current::read('Frame.key'),
+					),
+				)
+			)
+		);
+		$questionnaires = $this->paginate('Questionnaire');
+
+		$frame = $this->QuestionnaireFrameSetting->find('first', array(
+			'conditions' => array(
+				'frame_key' => Current::read('Frame.key'),
+			),
+			'order' => 'QuestionnaireFrameSetting.id DESC'
+		));
+		if (!$frame) {
+			$frame = $this->QuestionnaireFrameSetting->getDefaultFrameSetting();
+		}
+
+		$this->set('questionnaires', $questionnaires);
+		$this->set('questionnaireFrameSettings', $frame['QuestionnaireFrameSetting']);
+		$this->request->data['QuestionnaireFrameSetting'] = $frame['QuestionnaireFrameSetting'];
+		$this->request->data['Frame'] = Current::read('Frame');
+		$this->request->data['Block'] = Current::read('Block');
+	}
+}
