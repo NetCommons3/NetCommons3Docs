@@ -136,10 +136,10 @@
                                 <div class="accordion" style="margin-bottom: 0">
         <div class="accordion-group">
             <div class="accordion-heading">
-                                    <a class="accordion-toggle " data-toggle="collapse" data-target="#namespace-763295109"></a>
+                                    <a class="accordion-toggle " data-toggle="collapse" data-target="#namespace-275755520"></a>
                                 <a href="../namespaces/default.html" style="margin-left: 30px; padding-left: 0">\</a>
             </div>
-            <div id="namespace-763295109" class="accordion-body collapse in">
+            <div id="namespace-275755520" class="accordion-body collapse in">
                 <div class="accordion-inner">
 
                     
@@ -379,26 +379,26 @@ NetCommonsForm::uploadFile()<br>
 <li>
 <p><a id="method__input_checkbox" name="method__input_checkbox" class="anchor"></a>
 NetCommonsForm::checkbox()<br>
-<a href="../../NetCommons/classes/FormInputHelper.html#method_checkbox">NetCommons.FormInputHelper::checkbox()</a>
+<a href="./FormInputHelper.html#method_checkbox">NetCommons.FormInputHelper::checkbox()</a>
 の結果を出力する。</p>
 </li>
 <li>
 <p><a id="method__input_radio" name="method__input_radio" class="anchor"></a>
 NetCommonsForm::radio()<br>
-<a href="../../NetCommons/classes/FormInputHelper.html#method_radio">NetCommons.FormInputHelper::radio()</a>
+<a href="./FormInputHelper.html#method_radio">NetCommons.FormInputHelper::radio()</a>
 の結果を出力する。</p>
 </li>
 <li>
 <p><a id="method__input_wysiwyg" name="method__input_wysiwyg" class="anchor"></a>
 NetCommonsForm::wysiwyg()<br>
-<a href="../../Wysiwyg/classes/WysiwygHelper.html#method_radio">Wysiwyg.WysiwygHelper::wysiwyg()</a>
+<a href="../../Wysiwyg/classes/WysiwygHelper.html#method_wysiwyg">Wysiwyg.WysiwygHelper::wysiwyg()</a>
 の結果を出力する。</p>
 </li>
 <li>
 <p><a id="method__input_inlineCheckbox" name="method__input_inlineCheckbox" class="anchor"></a>
 NetCommonsForm::inlineCheckbox()<br>
 $paramsに以下を追加して、
-<a href="../../NetCommons/classes/FormInputHelper.html#method_checkbox">NetCommons.FormInputHelper::checkbox()</a>
+<a href="./FormInputHelper.html#method_checkbox">NetCommons.FormInputHelper::checkbox()</a>
 の結果を出力する。ただし、すでに$paramsにあれば、無視する。</p>
 <pre><code>$params[1] = array(
     'class' =&gt; false,
@@ -408,19 +408,19 @@ $paramsに以下を追加して、
 <li>
 <p><a id="method__input_inputWithTitleIcon" name="method__input_inputWithTitleIcon" class="anchor"></a>
 NetCommonsForm::inputWithTitleIcon()<br>
-<a href="../../NetCommons/classes/TitleIconHelper.html#method_inputWithTitleIcon">NetCommons.TitleIconHelper::inputWithTitleIcon()</a>
+<a href="./TitleIconHelper.html#method_inputWithTitleIcon">NetCommons.TitleIconHelper::inputWithTitleIcon()</a>
 の結果を出力する。</p>
 </li>
 <li>
 <p><a id="method__input_titleIconPicker" name="method__input_titleIconPicker" class="anchor"></a>
 NetCommonsForm::titleIconPicker()<br>
-<a href="../../NetCommons/classes/TitleIconHelper.html#method_titleIconPicker">NetCommons.TitleIconHelper::titleIconPicker()</a>
+<a href="./TitleIconHelper.html#method_titleIconPicker">NetCommons.TitleIconHelper::titleIconPicker()</a>
 の結果を出力する。</p>
 </li>
 <li>
 <p><a id="method__input_ngTitleIconPicker" name="method__input_ngTitleIconPicker" class="anchor"></a>
 NetCommonsForm::ngTitleIconPicker()<br>
-<a href="../../NetCommons/classes/TitleIconHelper.html#method_ngTitleIconPicker">NetCommons.TitleIconHelper::ngTitleIconPicker()</a>
+<a href="./TitleIconHelper.html#method_ngTitleIconPicker">NetCommons.TitleIconHelper::ngTitleIconPicker()</a>
 の結果を出力する。</p>
 </li>
 <li><a id="method__input_others" name="method__input_others" class="anchor"></a>
@@ -527,6 +527,25 @@ NetCommonsForm::ngTitleIconPicker()<br>
     'min' =&gt; 0,
     'div' =&gt; array('class' =&gt; 'form-group')
 );</code></pre></li>
+</ul>
+<h5>$optionsの値<br></h5>
+<p>基本的なオプションについては、<a href="http://book.cakephp.org/2.0/ja/core-libraries/helpers/form.html#id5">FormHelperのオプション</a>を参照。
+そのうち、下記が良く使われるオプションである。</p>
+<ul>
+<li>必須マークを付ける場合
+<pre><code>array(
+    'required' =&gt; true,
+);</code></pre></li>
+<li><a id="method_input_options_placeholder" name="method_input_options_placeholder" class="anchor"></a>
+プレースホルダーテキストを表示する場合
+<pre><code>array(
+    'placeholder' =&gt; 'アンケートを入力してください。',
+);</code></pre></li>
+<li>ヘルプブロックを表示する場合（NetCommonsのみのオプション）<br>
+出力内容については、<a href="#method_input_help">こちら</a> を参照。
+<pre><code>array(
+    'help' =&gt; 'アンケートを入力してください。',
+);</code></pre></li>
 </ul></td>
                             </tr>
                                             </table>
@@ -543,9 +562,24 @@ help=メッセージ（NCオリジナル）<br>
 [サンプル]</p>
 <ul>
 <li>入力
-<pre><code></code></pre></li>
+<pre><code>echo $this-&gt;NetCommonsForm-&gt;input('Bbs.name',
+    array(
+        'type' =&gt; 'text',
+        'label' =&gt; __d('bbses', 'Bbs name'),
+        'required' =&gt; true,
+        'help' =&gt; '掲示板名を入力してください。',
+    )
+);</code></pre></li>
 <li>出力
-<pre><code></code></pre></li>
+<pre><code>&lt;div class="form-group"&gt;
+    &lt;label class="control-label" for="BbsName"&gt;
+        掲示板名
+        &lt;strong class="text-danger h4"&gt;*&lt;/strong&gt;
+    &lt;/label&gt;
+    &lt;input type="text" id="BbsName" class="form-control" name="data[Bbs][name]"&gt;
+    &lt;div class="help-block"&gt;掲示板名を入力してください。&lt;/div&gt;
+    &lt;div class="has-error"&gt;&lt;/div&gt;
+&lt;/div&gt;</code></pre></li>
 </ul>
 </li>
 <li>
@@ -582,44 +616,57 @@ type=textarea<br>
 [サンプル]</p>
 <ul>
 <li>入力
-<pre><code></code></pre></li>
+<pre><code>echo $this-&gt;NetCommonsForm-&gt;input('Bbs.name',
+    array(
+        'type' =&gt; 'textarea',
+        'label' =&gt; '内容',
+        'required' =&gt; true,
+    )
+);</code></pre></li>
 <li>出力
-<pre><code></code></pre></li>
+<pre><code>&lt;div class="form-group"&gt;
+    &lt;label class="control-label" for="BbsName"&gt;
+        内容
+        &lt;strong class="text-danger h4"&gt;*&lt;/strong&gt;
+    &lt;/label&gt;
+    &lt;textarea id="BbsName" rows="6" cols="30" class="form-control" name="data[Bbs][name]"&gt;&lt;/textarea&gt;
+    &lt;div class="has-error"&gt;&lt;/div&gt;
+&lt;/div&gt;</code></pre></li>
 </ul>
 </li>
 <li>
 <p><a id="method_input_radio" name="method_input_radio" class="anchor"></a>
 type=radio<br>
-<a href="../../NetCommons/classes/FormInputHelper.html#method_radio">FormInputHelper::radio()</a>
+<a href="./FormInputHelper.html#method_radio">FormInputHelper::radio()</a>
 の結果を出力する。</p>
 </li>
 <li>
 <p><a id="method_input_multiple_checkbox" name="method_input_multiple_checkbox" class="anchor"></a>
 type=select, multiple=checkbox<br>
-<a href="../../NetCommons/classes/FormInputHelper.html#method_multipleCheckbox">FormInputHelper::multipleCheckbox()</a>
+<a href="./FormInputHelper.html#method_multipleCheckbox">FormInputHelper::multipleCheckbox()</a>
 の結果を出力する。</p>
 </li>
 <li>
 <p><a id="method_input_checkbox" name="method_input_checkbox" class="anchor"></a>
 type=checkbox<br>
-<a href="../../NetCommons/classes/FormInputHelper.html#method_checkbox">FormInputHelper::checkbox()</a>
+<a href="./FormInputHelper.html#method_checkbox">FormInputHelper::checkbox()</a>
 の結果を出力する。</p>
 </li>
 <li>
 <p><a id="method_input_select" name="method_input_select" class="anchor"></a>
 type=select<br>
-<a href="../../NetCommons/classes/FormInputHelper.html#method_select">FormInputHelper::select()</a>
+<a href="./FormInputHelper.html#method_select">FormInputHelper::select()</a>
 の結果を出力する。</p>
 </li>
 <li>
 <p><a id="method_input_hidden" name="method_input_hidden" class="anchor"></a>
 type=hidden<br>
-<a href="../../NetCommons/classes/FormInputHelper.html#method_hidden">FormInputHelper::hidden()</a>
+<a href="./FormInputHelper.html#method_hidden">FormInputHelper::hidden()</a>
 の結果を出力する。</p>
 </li>
 <li><a id="method_input_datetime" name="method_input_datetime" class="anchor"></a>
 type=datetime<br>
-<a href="../../NetCommons/classes/DatetimePickerHelper.html">datetimepicker</a>
+<a href="./DatetimePickerHelper.html">datetimepicker</a>
 の結果を出力する。<br>
 [サンプル]
 <ul>
@@ -706,6 +753,9 @@ type=datetime<br>
                 
                                     <h4>Returns</h4>
                     string
+                                            &mdash; <p><a href="http://book.cakephp.org/2.0/ja/core-libraries/helpers/form.html#FormHelper::end">FormHelper::end()</a>と
+<a href="./DatetimePickerHelper.html#method_beforeFormEnd">DatetimePickerHelper::beforeFormEnd()</a>と
+<a href="./NetCommonsTimeHelper.html#method_beforeFormEnd">NetCommonsTimeHelper::beforeFormEnd()</a>の内容を出力する</p>
                                     				
                             </article>
         </div>
@@ -983,7 +1033,7 @@ type=datetime<br>
                 <section class="span10 offset1">
                     <hr />
                     Documentation is powered by <a href="http://www.phpdoc.org/">phpDocumentor </a> and authored
-                    on April 24th, 2016 at 11:58.
+                    on April 24th, 2016 at 21:12.
                 </section>
             </section>
         </section>
