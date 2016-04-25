@@ -1,9 +1,10 @@
 <?php
 /**
- * LayoutComponent
+ * ページLayout Component
  *
  * @copyright Copyright 2014, NetCommons Project
  * @author Kohei Teraguchi <kteraguchi@commonsnet.org>
+ * @author Shohei Nakajima <nakajimashouhei@gmail.com>
  * @link http://www.netcommons.org NetCommons Project
  * @license http://www.netcommons.org/license.txt NetCommons License
  */
@@ -11,7 +12,7 @@
 App::uses('Component', 'Controller');
 
 /**
- * LayoutComponent
+ * ページLayout Component
  *
  * @package NetCommons\Pages\Controller\Component
  */

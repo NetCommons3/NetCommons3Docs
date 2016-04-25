@@ -1,9 +1,10 @@
 <?php
 /**
- * Pages Controller
+ * ページ編集 Controller
  *
  * @copyright Copyright 2014, NetCommons Project
  * @author Kohei Teraguchi <kteraguchi@commonsnet.org>
+ * @author Shohei Nakajima <nakajimashouhei@gmail.com>
  * @link http://www.netcommons.org NetCommons Project
  * @license http://www.netcommons.org/license.txt NetCommons License
  */
@@ -11,15 +12,21 @@
 App::uses('PagesAppController', 'Pages.Controller');
 
 /**
- * Pages Controller
+ * ページ編集 Controller
  *
  * @author Kohei Teraguchi <kteraguchi@commonsnet.org>
+ * @author Shohei Nakajima <nakajimashouhei@gmail.com>
  * @package NetCommons\Pages\Controller
  */
 class PagesEditController extends PagesAppController {
 
 /**
- * uses
+ * 使用するModels
+ *
+ * - [Containers.Page](../../Containers/classes/ContainersPage.html)
+ * - [Pages.LanguagesPage](../../Pages/classes/LanguagesPage.html)
+ * - [Pages.Page](../../Pages/classes/Page.html)
+ * - [Rooms.Room](../../Rooms/classes/Room.html)
  *
  * @var array
  */
@@ -31,7 +38,10 @@ class PagesEditController extends PagesAppController {
 	);
 
 /**
- * use components
+ * 使用するComponents
+ *
+ * - [NetCommons.Permission](../../NetCommons/classes/PermissionComponent.html)
+ * - [Pages.PageLayoutComponent](../../Pages/classes/PageLayoutComponent.html)
  *
  * @var array
  */
@@ -45,12 +55,14 @@ class PagesEditController extends PagesAppController {
 	);
 
 /**
- * use helpers
+ * 使用するHelpers
+ *
+ * - [Pages.PagesEditHelper](../../Pages/classes/PagesEditHelper.html)
+ * - [ThemeSettings.ThemeSettings](../../ThemeSettings/classes/ThemeSettingsHelper.html)
  *
  * @var array
  */
 	public $helpers = array(
-		'NetCommons.Composer',
 		'Pages.PagesEdit',
 		'ThemeSettings.ThemeSettings',
 	);

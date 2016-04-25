@@ -19,12 +19,14 @@ App::uses('AppController', 'Controller');
 class PagesAppController extends AppController {
 
 /**
- * use components
+ * 使用するComponents
+ *
+ * - [SecurityComponent](http://book.cakephp.org/2.0/ja/core-libraries/components/security-component.html)
  *
  * @var array
  */
 	public $components = array(
-		'Security'
+		'Security',
 	);
 
 }
