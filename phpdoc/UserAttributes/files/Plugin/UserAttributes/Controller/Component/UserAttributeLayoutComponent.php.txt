@@ -1,6 +1,6 @@
 <?php
 /**
- * UserAttributeLayouts Component
+ * 会員項目のレイアウト Component
  *
  * @author Noriko Arai <arai@nii.ac.jp>
  * @author Shohei Nakajima <nakajimashouhei@gmail.com>
@@ -12,7 +12,7 @@
 App::uses('Component', 'Controller');
 
 /**
- * UserAttributeLayouts Component
+ * 会員項目のレイアウト Component
  *
  * @author Shohei Nakajima <nakajimashouhei@gmail.com>
  * @package NetCommons\ControlPanel\Controller
@@ -20,11 +20,11 @@ App::uses('Component', 'Controller');
 class UserAttributeLayoutComponent extends Component {
 
 /**
- * Called after the Controller::beforeFilter() and before the controller action
+ * 会員項目のレイアウトに必要なデータを取得し、viewにセットする
  *
- * @param Controller $controller Controller with components to startup
+ * @param Controller $controller コントローラ
  * @return void
- * @link http://book.cakephp.org/2.0/en/controllers/components.html#Component::startup
+ * @link http://book.cakephp.org/2.0/ja/controllers/components.html#Component::startup Component::startup
  */
 	public function startup(Controller $controller) {
 		//RequestActionの場合、スキップする

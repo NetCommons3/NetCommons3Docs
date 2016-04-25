@@ -15,13 +15,21 @@ App::uses('UserAttributeLayout', 'UserAttributes.Model');
 /**
  * 会員項目設定で使用するヘルパー
  *
+ * このHelperを使う場合、
+ * [UserAttributes.UserAttributeLayoutComponent](./UserAttributeLayoutComponent.html)
+ * が読み込まれている必要がある。
+ *
  * @author Shohei Nakajima <nakajimashouhei@gmail.com>
  * @package NetCommons\UserAttribute\View\Helper
  */
 class UserAttributeHelper extends AppHelper {
 
 /**
- * 使用するヘルパー
+ * 使用するHelpsers
+ *
+ * - [NetCommons.ButtonHelper](../../NetCommons/classes/ButtonHelper.html)
+ * - [NetCommons.NetCommonsHtml](../../NetCommons/classes/NetCommonsHtml.html)
+ * - [NetCommons.NetCommonsForm](../../NetCommons/classes/NetCommonsForm.html)
  *
  * @var array
  */

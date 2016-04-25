@@ -12,7 +12,11 @@
 App::uses('AppHelper', 'View/Helper');
 
 /**
- * 会員項目のレイアウトで使用するヘルパー
+ * 会員項目のレイアウトで使用するHelper
+ *
+ * このHelperを使う場合、
+ * [UserAttributes.UserAttributeLayoutComponent](./UserAttributeLayoutComponent.html)
+ * が読み込まれている必要がある。
  *
  * @author Shohei Nakajima <nakajimashouhei@gmail.com>
  * @package NetCommons\UserAttribute\View\Helper
@@ -20,7 +24,11 @@ App::uses('AppHelper', 'View/Helper');
 class UserAttributeLayoutHelper extends AppHelper {
 
 /**
- * 使用するヘルパー
+ * 使用するHelpsers
+ *
+ * - [NetCommons.ButtonHelper](../../NetCommons/classes/ButtonHelper.html)
+ * - [NetCommons.NetCommonsHtml](../../NetCommons/classes/NetCommonsHtml.html)
+ * - [NetCommons.NetCommonsForm](../../NetCommons/classes/NetCommonsForm.html)
  *
  * @var array
  */
@@ -31,12 +39,11 @@ class UserAttributeLayoutHelper extends AppHelper {
 	);
 
 /**
- * Before render callback. beforeRender is called before the view file is rendered.
+ * CSS Style Sheetを読み込む
  *
- * Overridden in subclasses.
- *
- * @param string $viewFile The view file that is going to be rendered
+ * @param string $viewFile viewファイル
  * @return void
+ * @link http://book.cakephp.org/2.0/ja/views/helpers.html#Helper::beforeRender Helper::beforeRender
  */
 	public function beforeRender($viewFile) {
 		$this->NetCommonsHtml->css('/user_attributes/css/style.css');
