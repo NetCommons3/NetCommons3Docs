@@ -136,10 +136,10 @@
                                 <div class="accordion" style="margin-bottom: 0">
         <div class="accordion-group">
             <div class="accordion-heading">
-                                    <a class="accordion-toggle " data-toggle="collapse" data-target="#namespace-1538559809"></a>
+                                    <a class="accordion-toggle " data-toggle="collapse" data-target="#namespace-941811797"></a>
                                 <a href="../namespaces/default.html" style="margin-left: 30px; padding-left: 0">\</a>
             </div>
-            <div id="namespace-1538559809" class="accordion-body collapse in">
+            <div id="namespace-941811797" class="accordion-body collapse in">
                 <div class="accordion-inner">
 
                     
@@ -316,7 +316,7 @@
                     <a href="#source-view" role="button" class="pull-right btn" data-toggle="modal"><i class="icon-code"></i></a>
 
                     <h1><small>\</small>FormInputHelper</h1>
-                    <p><em>getDivOption</em></p>
+                    <p><em>FormInputHelper</em></p>
                     <p>Add your application-wide methods in the class below, your helpers
 will inherit them.</p>
                     
@@ -399,14 +399,7 @@ will inherit them.</p>
                                                                         </dl>
                     <h2>Tags</h2>
                     <table class="table table-condensed">
-                                            <tr>
-                            <th>
-                                SuppressWarnings
-                            </th>
-                            <td>
-                                                                    <p>(PHPMD.TooManyPublicMethods)</p>
-                                                            </td>
-                        </tr>
+                                            <tr><td colspan="2"><em>None found</em></td></tr>
                                         </table>
                 </aside>
             </div>
@@ -426,7 +419,7 @@ will inherit them.</p>
             <article class="property">
                 <h3 class="public ">$helpers</h3>
                 <pre class="signature">$helpers : array</pre>
-                <p><em>Other helpers used by FormHelper</em></p>
+                <p><em>使用ヘルパー</em></p>
                 
 
                                 <h4>Type</h4>
@@ -458,7 +451,7 @@ will inherit them.</p>
                 <h3 class="public ">getDivOption()</h3>
                 <a href="#source-view" role="button" class="pull-right btn" data-toggle="modal" style="font-size: 1.1em; padding: 9px 14px"><i class="icon-code"></i></a>
                 <pre class="signature" style="margin-right: 54px;">getDivOption(string  <span class="argument">$type</span>, array  <span class="argument">$options</span>, string  <span class="argument">$key</span>, mixed  <span class="argument">$default = array()</span>) : array</pre>
-                <p><em>divのオプション取得</em></p>
+                <p><em>$optionsの中身をarrat(&#039;div&#039; =&gt; css文字列)をarray(&#039;div&#039; =&gt; [&#039;class&#039; =&gt; css文字列])に変換して出力する</em></p>
                 
 
                                     <h4>Parameters</h4>
@@ -510,7 +503,7 @@ will inherit them.</p>
                 <h3 class="public ">radio()</h3>
                 <a href="#source-view" role="button" class="pull-right btn" data-toggle="modal" style="font-size: 1.1em; padding: 9px 14px"><i class="icon-code"></i></a>
                 <pre class="signature" style="margin-right: 54px;">radio(string  <span class="argument">$fieldName</span>, array  <span class="argument">$options = array()</span>, array  <span class="argument">$attributes = array()</span>) : string</pre>
-                <p><em>Overwrite FormHelper::radio()</em></p>
+                <p><em>ラジオボタンを出力する</em></p>
                 
 
                                     <h4>Parameters</h4>
@@ -535,7 +528,13 @@ will inherit them.</p>
                 
                                     <h4>Returns</h4>
                     string
-                                            &mdash; <p>HTML</p>
+                                            &mdash; <h5>return サンプル</h5>
+<ul>
+<li>入力
+<pre><code></code></pre></li>
+<li>出力
+<pre><code></code></pre></li>
+</ul>
                                     				
                             </article>
         </div>
@@ -543,7 +542,8 @@ will inherit them.</p>
             <h1><i class="icon-arrow-down"></i></h1>
                                                             <dl>
                                                                                             <dt>See also</dt>
-                                                                <dd><a href="http://book.cakephp.org/2.0/ja/core-libraries/helpers/form.html#options-for-select-checkbox-and-radio-inputs"><span class="namespace-wrapper">http://book.cakephp.org/2.0/ja/core-libraries/helpers/form.html#options-for-select-checkbox-and-radio-inputs</span></a></dd>
+                                                                <dd><a href="http://book.cakephp.org/2.0/ja/core-libraries/helpers/form.html#FormHelper::radio"><span class="namespace-wrapper">FormHelper::radio()</span></a></dd>
+                                            <dd><a href="http://book.cakephp.org/2.0/ja/core-libraries/helpers/form.html#select-checkbox-radio"><span class="namespace-wrapper">checkbox, radio に関するオプション</span></a></dd>
                                                                 </dl>
             <h2>Tags</h2>
             <table class="table table-condensed">
@@ -559,7 +559,7 @@ will inherit them.</p>
                 <h3 class="public ">checkbox()</h3>
                 <a href="#source-view" role="button" class="pull-right btn" data-toggle="modal" style="font-size: 1.1em; padding: 9px 14px"><i class="icon-code"></i></a>
                 <pre class="signature" style="margin-right: 54px;">checkbox(string  <span class="argument">$fieldName</span>, array  <span class="argument">$options = array()</span>) : string</pre>
-                <p><em>Overwrite FormHelper::checkbox()</em></p>
+                <p><em>チェックボックスを出力する</em></p>
                 
 
                                     <h4>Parameters</h4>
@@ -579,7 +579,13 @@ will inherit them.</p>
                 
                                     <h4>Returns</h4>
                     string
-                                            &mdash; <p>HTML</p>
+                                            &mdash; <h5>return サンプル</h5>
+<ul>
+<li>入力
+<pre><code></code></pre></li>
+<li>出力
+<pre><code></code></pre></li>
+</ul>
                                     				
                             </article>
         </div>
@@ -587,7 +593,8 @@ will inherit them.</p>
             <h1><i class="icon-arrow-down"></i></h1>
                                                             <dl>
                                                                                             <dt>See also</dt>
-                                                                <dd><a href="http://book.cakephp.org/2.0/en/core-libraries/helpers/form.html#options-for-select-checkbox-and-radio-inputs"><span class="namespace-wrapper">http://book.cakephp.org/2.0/en/core-libraries/helpers/form.html#options-for-select-checkbox-and-radio-inputs</span></a></dd>
+                                                                <dd><a href="http://book.cakephp.org/2.0/ja/core-libraries/helpers/form.html#FormHelper::checkbox"><span class="namespace-wrapper">FormHelper::checkbox()</span></a></dd>
+                                            <dd><a href="http://book.cakephp.org/2.0/ja/core-libraries/helpers/form.html#select-checkbox-radio"><span class="namespace-wrapper">checkbox, radio に関するオプション</span></a></dd>
                                                                 </dl>
             <h2>Tags</h2>
             <table class="table table-condensed">
@@ -603,7 +610,7 @@ will inherit them.</p>
                 <h3 class="public ">select()</h3>
                 <a href="#source-view" role="button" class="pull-right btn" data-toggle="modal" style="font-size: 1.1em; padding: 9px 14px"><i class="icon-code"></i></a>
                 <pre class="signature" style="margin-right: 54px;">select(string  <span class="argument">$fieldName</span>, array  <span class="argument">$options = array()</span>, array  <span class="argument">$attributes = array()</span>) : string</pre>
-                <p><em>Returns a formatted SELECT element.</em></p>
+                <p><em>セレクトボックスを出力する</em></p>
                 
 
                                     <h4>Parameters</h4>
@@ -616,7 +623,17 @@ will inherit them.</p>
                                                     <tr>
                                 <td>array</td>
                                 <td>$options </td>
-                                <td><p>selectオプション配列</p></td>
+                                <td><p>selectオプション配列</p>
+<ul>
+<li>
+<p>multiple=checkboxを指定している場合<br>
+<a href="#method_multipleCheckbox">FormInputHelper::multipleCheckbox()</a>
+を実行する。</p>
+</li>
+<li>それ以外の場合<br>
+<a href="http://book.cakephp.org/2.0/ja/core-libraries/helpers/form.html#FormHelper::select">FormHelper::select()</a>
+を実行する</li>
+</ul></td>
                             </tr>
                                                     <tr>
                                 <td>array</td>
@@ -628,7 +645,6 @@ will inherit them.</p>
                 
                                     <h4>Returns</h4>
                     string
-                                            &mdash; <p>HTML</p>
                                     				
                             </article>
         </div>
@@ -636,7 +652,9 @@ will inherit them.</p>
             <h1><i class="icon-arrow-down"></i></h1>
                                                             <dl>
                                                                                             <dt>See also</dt>
-                                                                <dd><a href="http://book.cakephp.org/2.0/ja/core-libraries/helpers/form.html#options-for-select-checkbox-and-radio-inputs"><span class="namespace-wrapper">http://book.cakephp.org/2.0/ja/core-libraries/helpers/form.html#options-for-select-checkbox-and-radio-inputs</span></a></dd>
+                                                                <dd><a href="http://book.cakephp.org/2.0/ja/core-libraries/helpers/form.html#FormHelper::select"><span class="namespace-wrapper">FormHelper::select()</span></a></dd>
+                                            <dd><a href="http://book.cakephp.org/2.0/ja/core-libraries/helpers/form.html#select-checkbox-radio"><span class="namespace-wrapper">checkbox, radio に関するオプション</span></a></dd>
+                                            <dd><a href=""><span class="namespace-wrapper">NetCommons.FormInputHelper::multipleCheckbox()</span></a></dd>
                                                                 </dl>
             <h2>Tags</h2>
             <table class="table table-condensed">
@@ -652,7 +670,7 @@ will inherit them.</p>
                 <h3 class="public ">multipleCheckbox()</h3>
                 <a href="#source-view" role="button" class="pull-right btn" data-toggle="modal" style="font-size: 1.1em; padding: 9px 14px"><i class="icon-code"></i></a>
                 <pre class="signature" style="margin-right: 54px;">multipleCheckbox(string  <span class="argument">$fieldName</span>, array  <span class="argument">$options = array()</span>) : string</pre>
-                <p><em>複数チェックボックス</em></p>
+                <p><em>複数チェックボックスを出力する</em></p>
                 
 
                                     <h4>Parameters</h4>
@@ -672,14 +690,22 @@ will inherit them.</p>
                 
                                     <h4>Returns</h4>
                     string
-                                            &mdash; <p>HTML</p>
+                                            &mdash; <h5>return サンプル</h5>
+<ul>
+<li>入力
+<pre><code></code></pre></li>
+<li>出力
+<pre><code></code></pre></li>
+</ul>
                                     				
                             </article>
         </div>
         <aside class="span4 detailsbar">
             <h1><i class="icon-arrow-down"></i></h1>
                                                             <dl>
-                                                                            </dl>
+                                                                                            <dt>See also</dt>
+                                                                <dd><a href="http://book.cakephp.org/2.0/ja/core-libraries/helpers/form.html#FormHelper::select"><span class="namespace-wrapper">FormHelper::select()</span></a></dd>
+                                                                </dl>
             <h2>Tags</h2>
             <table class="table table-condensed">
                                     <tr><td colspan="2"><em>None found</em></td></tr>
@@ -694,8 +720,9 @@ will inherit them.</p>
                 <h3 class="public ">hidden()</h3>
                 <a href="#source-view" role="button" class="pull-right btn" data-toggle="modal" style="font-size: 1.1em; padding: 9px 14px"><i class="icon-code"></i></a>
                 <pre class="signature" style="margin-right: 54px;">hidden(string  <span class="argument">$fieldName</span>, array  <span class="argument">$options = array()</span>) : string</pre>
-                <p><em>Overwrite FormHelper::hidden()</em></p>
-                <p>値がfalseの場合、hiddenのvalueが消えてしまい、validationErrorになってしまう。</p>
+                <p><em>NetCommons用にFormHelper::hidden()を付与してHTMLを出力する</em></p>
+                <p>値がfalseの場合、hiddenのvalueが消えてしまい、validationErrorになってしまう。<br>
+<a href="https://github.com/cakephp/cakephp/issues/5639"><a href="https://github.com/cakephp/cakephp/issues/5639">https://github.com/cakephp/cakephp/issues/5639</a></a></p>
 
                                     <h4>Parameters</h4>
                     <table class="table table-condensed table-hover">
@@ -714,16 +741,21 @@ will inherit them.</p>
                 
                                     <h4>Returns</h4>
                     string
-                                            &mdash; <p>Completed hiddenタグ</p>
+                                            &mdash; <h5>return サンプル</h5>
+<ul>
+<li>入力
+<pre><code>$this-&gt;request-&gt;data['BbsSetting']['use_comment'] = false;</code></pre>
+<pre><code>echo $this-&gt;NetCommonsForm-&gt;hidden('BbsSetting.use_comment');</code></pre></li>
+<li>出力
+<pre><code>&lt;input type="hidden" name="data[BbsSetting][use_comment]" value="0" id="BbsSettingUseComment"/&gt;</code></pre></li>
+</ul>
                                     				
                             </article>
         </div>
         <aside class="span4 detailsbar">
             <h1><i class="icon-arrow-down"></i></h1>
                                                             <dl>
-                                                                                            <dt>See also</dt>
-                                                                <dd><a href="https://github.com/cakephp/cakephp/issues/5639"><span class="namespace-wrapper">https://github.com/cakephp/cakephp/issues/5639</span></a></dd>
-                                                                </dl>
+                                                                            </dl>
             <h2>Tags</h2>
             <table class="table table-condensed">
                                     <tr><td colspan="2"><em>None found</em></td></tr>
@@ -758,7 +790,13 @@ will inherit them.</p>
                 
                                     <h4>Returns</h4>
                     string
-                                            &mdash; <p>HTML</p>
+                                            &mdash; <h5>return サンプル</h5>
+<ul>
+<li>入力
+<pre><code></code></pre></li>
+<li>出力
+<pre><code></code></pre></li>
+</ul>
                                     				
                             </article>
         </div>
@@ -822,7 +860,7 @@ will inherit them.</p>
                 <section class="span10 offset1">
                     <hr />
                     Documentation is powered by <a href="http://www.phpdoc.org/">phpDocumentor </a> and authored
-                    on April 23rd, 2016 at 23:25.
+                    on April 25th, 2016 at 08:31.
                 </section>
             </section>
         </section>
