@@ -136,10 +136,10 @@
                                 <div class="accordion" style="margin-bottom: 0">
         <div class="accordion-group">
             <div class="accordion-heading">
-                                    <a class="accordion-toggle " data-toggle="collapse" data-target="#namespace-861184910"></a>
+                                    <a class="accordion-toggle " data-toggle="collapse" data-target="#namespace-693947909"></a>
                                 <a href="../namespaces/default.html" style="margin-left: 30px; padding-left: 0">\</a>
             </div>
-            <div id="namespace-861184910" class="accordion-body collapse in">
+            <div id="namespace-693947909" class="accordion-body collapse in">
                 <div class="accordion-inner">
 
                     
@@ -396,14 +396,7 @@ will inherit them.</p>
                                                                         </dl>
                     <h2>Tags</h2>
                     <table class="table table-condensed">
-                                            <tr>
-                            <th>
-                                SuppressWarnings
-                            </th>
-                            <td>
-                                                                    <p>(PHPMD.TooManyPublicMethods)</p>
-                                                            </td>
-                        </tr>
+                                            <tr><td colspan="2"><em>None found</em></td></tr>
                                         </table>
                 </aside>
             </div>
@@ -456,37 +449,7 @@ will inherit them.</p>
                 <a href="#source-view" role="button" class="pull-right btn" data-toggle="modal" style="font-size: 1.1em; padding: 9px 14px"><i class="icon-code"></i></a>
                 <pre class="signature" style="margin-right: 54px;">__call(string  <span class="argument">$method</span>, array  <span class="argument">$params</span>) : mixed</pre>
                 <p><em>各プラグインFormHelperラップ用マジックメソッド</em></p>
-                <h3>NetCommonsForm-&gt;uploadFile()</h3>
-<p>Files.FilesFormHelper-&gt;uploadFile()を実行する。
-あとでseeを付ける</p>
-<h3>NetCommonsForm-&gt;checkbox() の場合</h3>
-<p>NetCommons.FormInputHelper-&gt;checkbox()を実行する。
-あとでseeを付ける</p>
-<h3>NetCommonsForm-&gt;radio() の場合</h3>
-<p>NetCommons.FormInputHelper-&gt;radio()を実行する。
-あとでseeを付ける</p>
-<h3>NetCommonsForm-&gt;wysiwyg() の場合</h3>
-<p>Wysiwyg.WysiwygHelper-&gt;wysiwyg()を実行する。
-あとでseeを付ける</p>
-<h3>NetCommonsForm-&gt;inlineCheckbox() の場合</h3>
-<p>$paramsに以下を追加して、$this-&gt;input()を実行する。ただし、すでに$paramsにあれば、無視する。</p>
-<pre><code>$params[1] = array(
-    'type' =&gt; 'checkbox',
-    'class' =&gt; false,
-    'childDiv' =&gt; array('class' =&gt; 'form-inline')
-)</code></pre>
-<h3>NetCommonsForm-&gt;inputWithTitleIcon()</h3>
-<p>NetCommons.TitleIconHelper-&gt;inputWithTitleIcon()を実行する。
-あとでseeを付ける</p>
-<h3>NetCommonsForm-&gt;titleIconPicker()</h3>
-<p>NetCommons.TitleIconHelper-&gt;titleIconPicker()を実行する。
-あとでseeを付ける</p>
-<h3>NetCommonsForm-&gt;ngTitleIconPicker()</h3>
-<p>NetCommons.TitleIconHelper-&gt;ngTitleIconPicker()を実行する。
-あとでseeを付ける</p>
-<h3>それ以外</h3>
-<p>FormHelperの各メソッドを実行する
-あとでseeを付ける</p>
+                <p>指定されたメソッドにより、各プラグインのFormHelperのメソッドを間接的に呼び出します。</p>
 
                                     <h4>Parameters</h4>
                     <table class="table table-condensed table-hover">
@@ -505,6 +468,66 @@ will inherit them.</p>
                 
                                     <h4>Returns</h4>
                     mixed
+                                            &mdash; <h5>$method の内容による出力</h5>
+<ul>
+<li>
+<p><a id="method__input_uploadFile" name="method__input_uploadFile" class="anchor"></a>
+NetCommonsForm::uploadFile()<br>
+<a href="../../Files/classes/FilesFormHelper.html#method_uploadFile">Files.FilesFormHelper::uploadFile()</a>
+の結果を出力する。</p>
+</li>
+<li>
+<p><a id="method__input_checkbox" name="method__input_checkbox" class="anchor"></a>
+NetCommonsForm::checkbox()<br>
+<a href="./FormInputHelper.html#method_checkbox">NetCommons.FormInputHelper::checkbox()</a>
+の結果を出力する。</p>
+</li>
+<li>
+<p><a id="method__input_radio" name="method__input_radio" class="anchor"></a>
+NetCommonsForm::radio()<br>
+<a href="./FormInputHelper.html#method_radio">NetCommons.FormInputHelper::radio()</a>
+の結果を出力する。</p>
+</li>
+<li>
+<p><a id="method__input_wysiwyg" name="method__input_wysiwyg" class="anchor"></a>
+NetCommonsForm::wysiwyg()<br>
+<a href="../../Wysiwyg/classes/WysiwygHelper.html#method_wysiwyg">Wysiwyg.WysiwygHelper::wysiwyg()</a>
+の結果を出力する。</p>
+</li>
+<li>
+<p><a id="method__input_inlineCheckbox" name="method__input_inlineCheckbox" class="anchor"></a>
+NetCommonsForm::inlineCheckbox()<br>
+$paramsに以下を追加して、
+<a href="./FormInputHelper.html#method_checkbox">NetCommons.FormInputHelper::checkbox()</a>
+の結果を出力する。ただし、すでに$paramsにあれば、無視する。</p>
+<pre><code>$params[1] = array(
+    'class' =&gt; false,
+    'div' =&gt; array('class' =&gt; 'form-group')
+)</code></pre>
+</li>
+<li>
+<p><a id="method__input_inputWithTitleIcon" name="method__input_inputWithTitleIcon" class="anchor"></a>
+NetCommonsForm::inputWithTitleIcon()<br>
+<a href="./TitleIconHelper.html#method_inputWithTitleIcon">NetCommons.TitleIconHelper::inputWithTitleIcon()</a>
+の結果を出力する。</p>
+</li>
+<li>
+<p><a id="method__input_titleIconPicker" name="method__input_titleIconPicker" class="anchor"></a>
+NetCommonsForm::titleIconPicker()<br>
+<a href="./TitleIconHelper.html#method_titleIconPicker">NetCommons.TitleIconHelper::titleIconPicker()</a>
+の結果を出力する。</p>
+</li>
+<li>
+<p><a id="method__input_ngTitleIconPicker" name="method__input_ngTitleIconPicker" class="anchor"></a>
+NetCommonsForm::ngTitleIconPicker()<br>
+<a href="./TitleIconHelper.html#method_ngTitleIconPicker">NetCommons.TitleIconHelper::ngTitleIconPicker()</a>
+の結果を出力する。</p>
+</li>
+<li><a id="method__input_others" name="method__input_others" class="anchor"></a>
+それ以外<br>
+<a href="http://book.cakephp.org/2.0/ja/core-libraries/helpers/form.html#formhelper">FormHelper</a>
+の各メソッドの結果を出力する。</li>
+</ul>
                                     				
                             </article>
         </div>
@@ -531,8 +554,6 @@ will inherit them.</p>
 <li>二重submit防止のため、ng-submit=submit($event)をセットする</li>
 <li>エラー出力をNetCommons用の表示をするため、novalidateをOffにする</li>
 </ul>
-<h3>出力結果サンプル</h3>
-<pre><code>&lt;form method="post" novalidate="novalidate" ng-submit="submit($event)" action="/auth_general/auth_general/login"&gt;</code></pre>
 
                                     <h4>Parameters</h4>
                     <table class="table table-condensed table-hover">
@@ -551,7 +572,8 @@ will inherit them.</p>
                 
                                     <h4>Returns</h4>
                     string
-                                            &mdash; <p>HTMLタグ</p>
+                                            &mdash; <h5>return サンプル</h5>
+<pre><code>&lt;form method="post" novalidate="novalidate" ng-submit="submit($event)" action="/auth_general/auth_general/login"&gt;</code></pre>
                                     				
                             </article>
         </div>
@@ -575,42 +597,107 @@ will inherit them.</p>
                 <h3 class="public ">input()</h3>
                 <a href="#source-view" role="button" class="pull-right btn" data-toggle="modal" style="font-size: 1.1em; padding: 9px 14px"><i class="icon-code"></i></a>
                 <pre class="signature" style="margin-right: 54px;">input(string  <span class="argument">$fieldName</span>, array  <span class="argument">$options = array()</span>) : string</pre>
-                <p><em>NetCommons用Htmlを付加して、FormHelper::input()の結果を出力する&lt;br&gt;
-※Overwrite FormHelper::input()</em></p>
-                <h3>FormHelper-&gt;input()の$optionsに対する初期値</h3>
-<h4>共通</h4>
+                <p><em>NetCommons用Htmlを付加して、FormHelper::input()の結果を出力する。</em></p>
+                
+
+                                    <h4>Parameters</h4>
+                    <table class="table table-condensed table-hover">
+                                                    <tr>
+                                <td>string</td>
+                                <td>$fieldName </td>
+                                <td><p>フィールド名(&quot;Modelname.fieldname&quot;形式)</p></td>
+                            </tr>
+                                                    <tr>
+                                <td>array</td>
+                                <td>$options </td>
+                                <td><p>オプション配列</p>
+<h5>$optionsの初期値</h5>
+<ul>
+<li>共通
 <pre><code>array(
     'error' =&gt; false,
     'required' =&gt; null,
     'label' =&gt; null,
-);</code></pre>
-<h4>type=number の場合</h4>
+);</code></pre></li>
+<li>type=number の場合
 <pre><code>array(
     'error' =&gt; false,
     'required' =&gt; null,
     'label' =&gt; null,
     'min' =&gt; 0,
     'div' =&gt; array('class' =&gt; 'form-group')
-);</code></pre>
-<h3>エラー発生時、入力ボックスの色を変えるためのdivを付与</h3>
-<pre><code>&lt;div class="has-error"&gt;
-&lt;/div&gt;</code></pre>
-<h3>help=メッセージ（NCオリジナル）</h3>
-<p>ヘルプブロックを付与する</p>
-<h4>サンプル</h4>
-<pre><code></code></pre>
-<h4>結果サンプル</h4>
-<pre><code></code></pre>
-<h3>type=text の出力(デフォルト)</h3>
-<h4>サンプル</h4>
+);</code></pre></li>
+</ul>
+<h5>$optionsの値<br></h5>
+<p>基本的なオプションについては、<a href="http://book.cakephp.org/2.0/ja/core-libraries/helpers/form.html#id5">FormHelperのオプション</a>を参照。
+そのうち、下記が良く使われるオプションである。</p>
+<ul>
+<li>必須マークを付ける場合
+<pre><code>array(
+    'required' =&gt; true,
+);</code></pre></li>
+<li><a id="method_input_options_placeholder" name="method_input_options_placeholder" class="anchor"></a>
+プレースホルダーテキストを表示する場合
+<pre><code>array(
+    'placeholder' =&gt; 'アンケートを入力してください。',
+);</code></pre></li>
+<li>ヘルプブロックを表示する場合（NetCommonsのみのオプション）<br>
+出力内容については、<a href="#method_input_help">こちら</a> を参照。
+<pre><code>array(
+    'help' =&gt; 'アンケートを入力してください。',
+);</code></pre></li>
+</ul></td>
+                            </tr>
+                                            </table>
+                
+                
+                                    <h4>Returns</h4>
+                    string
+                                            &mdash; <h5>下記の$optionsに指定した内容に基づきHTMLを出力する。</h5>
+<ul>
+<li>
+<p><a id="method_input_help" name="method_input_help" class="anchor"></a>
+help=メッセージ（NCオリジナル）<br>
+このオプションは、ヘルプブロックを出力するオプション。<br>
+[サンプル]</p>
+<ul>
+<li>入力
+<pre><code>echo $this-&gt;NetCommonsForm-&gt;input('Bbs.name',
+    array(
+        'type' =&gt; 'text',
+        'label' =&gt; __d('bbses', 'Bbs name'),
+        'required' =&gt; true,
+        'help' =&gt; '掲示板名を入力してください。',
+    )
+);</code></pre></li>
+<li>出力
+<pre><code>&lt;div class="form-group"&gt;
+    &lt;label class="control-label" for="BbsName"&gt;
+        掲示板名
+        &lt;strong class="text-danger h4"&gt;*&lt;/strong&gt;
+    &lt;/label&gt;
+    &lt;input type="text" id="BbsName" class="form-control" name="data[Bbs][name]"&gt;
+    &lt;div class="help-block"&gt;掲示板名を入力してください。&lt;/div&gt;
+    &lt;div class="has-error"&gt;&lt;/div&gt;
+&lt;/div&gt;</code></pre></li>
+</ul>
+</li>
+<li>
+<p><a id="method_input_text" name="method_input_text" class="anchor"></a>
+type=text (typeを省略した場合、デフォルト値)<br>
+<a href="http://book.cakephp.org/2.0/ja/core-libraries/helpers/form.html#formhelper">FormHelper::input()</a>
+の結果を出力する。<br>
+[サンプル]</p>
+<ul>
+<li>入力
 <pre><code>echo $this-&gt;NetCommonsForm-&gt;input('Bbs.name',
     array(
         'type' =&gt; 'text',
         'label' =&gt; __d('bbses', 'Bbs name'),
         'required' =&gt; true,
     )
-);</code></pre>
-<h4>結果サンプル</h4>
+);</code></pre></li>
+<li>出力
 <pre><code>&lt;div class="form-group"&gt;
     &lt;label for="BbsName" class="control-label"&gt;
         掲示板名
@@ -618,46 +705,80 @@ will inherit them.</p>
     &lt;/label&gt;
     &lt;input name="data[Bbs][name]" class="form-control" maxlength="255" type="text" value="サンプル" id="BbsName"/&gt;
     &lt;div class="has-error"&gt;&lt;/div&gt;
-&lt;/div&gt;</code></pre>
-<h3>type=textarea の出力</h3>
-<h4>サンプル</h4>
-<pre><code></code></pre>
-<h4>結果サンプル</h4>
-<pre><code></code></pre>
-<h3>type=radio の出力</h3>
-<h4>サンプル</h4>
-<pre><code></code></pre>
-<h4>結果サンプル</h4>
-<pre><code></code></pre>
-<h3>type=select, multiple=checkbox の出力</h3>
-<h4>サンプル</h4>
-<pre><code></code></pre>
-<h4>結果サンプル</h4>
-<pre><code></code></pre>
-<h3>type=select の出力</h3>
-<h4>サンプル</h4>
-<pre><code></code></pre>
-<h4>結果サンプル</h4>
-<pre><code></code></pre>
-<h3>type=hidden の出力</h3>
-<p>NetCommons.FormInput-&gt;hidden()を実行し、出力する
-あとでseeを付ける</p>
-<h4>サンプル</h4>
-<pre><code>echo $this-&gt;NetCommonsForm-&gt;hidden('Frame.id');</code></pre>
-<h4>結果サンプル</h4>
-<pre><code>&lt;input type="hidden" name="data[Frame][id]" value="7" id="FrameId"/&gt;</code></pre>
-<h3>type=datetime の出力</h3>
-<p>datetimepickerのHTMLを出力する
-あとでseeを付ける</p>
-<h4>サンプル</h4>
+&lt;/div&gt;</code></pre></li>
+</ul>
+</li>
+<li>
+<p><a id="method_input_textarea" name="method_input_textarea" class="anchor"></a>
+type=textarea<br>
+<a href="http://book.cakephp.org/2.0/ja/core-libraries/helpers/form.html#formhelper">FormHelper::input()</a>
+の結果を出力する。<br>
+[サンプル]</p>
+<ul>
+<li>入力
+<pre><code>echo $this-&gt;NetCommonsForm-&gt;input('Bbs.name',
+    array(
+        'type' =&gt; 'textarea',
+        'label' =&gt; '内容',
+        'required' =&gt; true,
+    )
+);</code></pre></li>
+<li>出力
+<pre><code>&lt;div class="form-group"&gt;
+    &lt;label class="control-label" for="BbsName"&gt;
+        内容
+        &lt;strong class="text-danger h4"&gt;*&lt;/strong&gt;
+    &lt;/label&gt;
+    &lt;textarea id="BbsName" rows="6" cols="30" class="form-control" name="data[Bbs][name]"&gt;&lt;/textarea&gt;
+    &lt;div class="has-error"&gt;&lt;/div&gt;
+&lt;/div&gt;</code></pre></li>
+</ul>
+</li>
+<li>
+<p><a id="method_input_radio" name="method_input_radio" class="anchor"></a>
+type=radio<br>
+<a href="./FormInputHelper.html#method_radio">FormInputHelper::radio()</a>
+の結果を出力する。</p>
+</li>
+<li>
+<p><a id="method_input_multiple_checkbox" name="method_input_multiple_checkbox" class="anchor"></a>
+type=select, multiple=checkbox<br>
+<a href="./FormInputHelper.html#method_multipleCheckbox">FormInputHelper::multipleCheckbox()</a>
+の結果を出力する。</p>
+</li>
+<li>
+<p><a id="method_input_checkbox" name="method_input_checkbox" class="anchor"></a>
+type=checkbox<br>
+<a href="./FormInputHelper.html#method_checkbox">FormInputHelper::checkbox()</a>
+の結果を出力する。</p>
+</li>
+<li>
+<p><a id="method_input_select" name="method_input_select" class="anchor"></a>
+type=select<br>
+<a href="./FormInputHelper.html#method_select">FormInputHelper::select()</a>
+の結果を出力する。</p>
+</li>
+<li>
+<p><a id="method_input_hidden" name="method_input_hidden" class="anchor"></a>
+type=hidden<br>
+<a href="./FormInputHelper.html#method_hidden">FormInputHelper::hidden()</a>
+の結果を出力する。</p>
+</li>
+<li><a id="method_input_datetime" name="method_input_datetime" class="anchor"></a>
+type=datetime<br>
+<a href="./DatetimePickerHelper.html">datetimepicker</a>
+の結果を出力する。<br>
+[サンプル]
+<ul>
+<li>入力
 <pre><code>echo $this-&gt;NetCommonsForm-&gt;input('publish_start',
     array(
         'type' =&gt; 'datetime',
         'required' =&gt; 'required',
         'label' =&gt; __d('blogs', 'Published datetime')
     )
-);</code></pre>
-<h4>結果サンプル</h4>
+);</code></pre></li>
+<li>出力
 <pre><code>&lt;div class="form-group"&gt;
     &lt;label for="BlogEntryPublishStart" class="control-label"&gt;公開日時
         &lt;strong class="text-danger h4"&gt;*&lt;/strong&gt;
@@ -673,42 +794,31 @@ will inherit them.</p>
         type="text" id="BlogEntryPublishStart"/&gt;
     &lt;div class="has-error"&gt;&lt;/div&gt;
 &lt;/div&gt;</code></pre>
-<h3>TimeZone関係のHTMLを出力する</h3>
+<p><br></p></li>
+</ul></li>
+</ul>
+<h5>$optionsの内容の他に、下記のHTMLを強制的に出力する。</h5>
+<ul>
+<li>TimeZone関係のHTML
 <pre><code>&lt;input type="hidden"
     name="data[_NetCommonsTime][user_timezone]"
     value="Asia/Tokyo" id="_NetCommonsTimeUserTimezone"/&gt;
 &lt;input type="hidden"
     name="data[_NetCommonsTime][convert_fields]"
     value="BlogEntry.publish_start"
-    id="_NetCommonsTimeConvertFields"/&gt;</code></pre>
-
-                                    <h4>Parameters</h4>
-                    <table class="table table-condensed table-hover">
-                                                    <tr>
-                                <td>string</td>
-                                <td>$fieldName </td>
-                                <td><p>フィールド名(&quot;Modelname.fieldname&quot;形式)</p></td>
-                            </tr>
-                                                    <tr>
-                                <td>array</td>
-                                <td>$options </td>
-                                <td><p>オプション配列</p></td>
-                            </tr>
-                                            </table>
-                
-                
-                                    <h4>Returns</h4>
-                    string
-                                            &mdash; <p>HTML</p>
+    id="_NetCommonsTimeConvertFields"/&gt;</code></pre></li>
+<li>エラー発生時、入力ボックスの色を変えるためのdiv
+<pre><code>&lt;div class="has-error"&gt;
+    ・・・
+&lt;/div&gt;</code></pre></li>
+</ul>
                                     				
                             </article>
         </div>
         <aside class="span4 detailsbar">
             <h1><i class="icon-arrow-down"></i></h1>
                                                             <dl>
-                                                                                            <dt>See also</dt>
-                                                                <dd><a href="http://book.cakephp.org/2.0/en/core-libraries/helpers/form.html#creating-form-elements"><span class="namespace-wrapper">http://book.cakephp.org/2.0/en/core-libraries/helpers/form.html#creating-form-elements</span></a></dd>
-                                                                </dl>
+                                                                            </dl>
             <h2>Tags</h2>
             <table class="table table-condensed">
                                     <tr><td colspan="2"><em>None found</em></td></tr>
@@ -743,13 +853,18 @@ will inherit them.</p>
                 
                                     <h4>Returns</h4>
                     string
+                                            &mdash; <p><a href="http://book.cakephp.org/2.0/ja/core-libraries/helpers/form.html#FormHelper::end">FormHelper::end()</a>と
+<a href="./DatetimePickerHelper.html#method_beforeFormEnd">DatetimePickerHelper::beforeFormEnd()</a>と
+<a href="./NetCommonsTimeHelper.html#method_beforeFormEnd">NetCommonsTimeHelper::beforeFormEnd()</a>の内容を出力する</p>
                                     				
                             </article>
         </div>
         <aside class="span4 detailsbar">
             <h1><i class="icon-arrow-down"></i></h1>
                                                             <dl>
-                                                                            </dl>
+                                                                                            <dt>See also</dt>
+                                                                <dd><a href="http://book.cakephp.org/2.0/ja/core-libraries/helpers/form.html#FormHelper::end"><span class="namespace-wrapper">FormHelper::end()</span></a></dd>
+                                                                </dl>
             <h2>Tags</h2>
             <table class="table table-condensed">
                                     <tr><td colspan="2"><em>None found</em></td></tr>
@@ -764,7 +879,7 @@ will inherit them.</p>
                 <h3 class="public ">error()</h3>
                 <a href="#source-view" role="button" class="pull-right btn" data-toggle="modal" style="font-size: 1.1em; padding: 9px 14px"><i class="icon-code"></i></a>
                 <pre class="signature" style="margin-right: 54px;">error(string  <span class="argument">$fieldName</span>, string|array  <span class="argument">$text = null</span>, array  <span class="argument">$options = array()</span>) : string</pre>
-                <p><em>Overwrite FormHelper::error()</em></p>
+                <p><em>エラーの出力</em></p>
                 
 
                                     <h4>Parameters</h4>
@@ -772,25 +887,30 @@ will inherit them.</p>
                                                     <tr>
                                 <td>string</td>
                                 <td>$fieldName </td>
-                                <td><p>A field name, like &quot;Modelname.fieldname&quot;</p></td>
+                                <td><p>フィールド名 &quot;Modelname.fieldname&quot;</p></td>
                             </tr>
                                                     <tr>
                                 <td>string|array</td>
                                 <td>$text </td>
-                                <td><p>Error message as string or array of messages.
-If array contains <code>attributes</code> key it will be used as options for error container</p></td>
+                                <td><p>エラーメッセージ</p></td>
                             </tr>
                                                     <tr>
                                 <td>array</td>
                                 <td>$options </td>
-                                <td><p>Rendering options for <div /> wrapper tag</p></td>
+                                <td><div>の属性オプション</td>
                             </tr>
                                             </table>
                 
                 
                                     <h4>Returns</h4>
                     string
-                                            &mdash; <p>error html</p>
+                                            &mdash; <h5>return サンプル</h5>
+<ul>
+<li>入力
+<pre><code></code></pre></li>
+<li>出力
+<pre><code></code></pre></li>
+</ul>
                                     				
                             </article>
         </div>
@@ -827,7 +947,13 @@ If array contains <code>attributes</code> key it will be used as options for err
                 
                                     <h4>Returns</h4>
                     string
-                                            &mdash; <p>HTML</p>
+                                            &mdash; <h5>return サンプル</h5>
+<ul>
+<li>入力
+<pre><code></code></pre></li>
+<li>出力
+<pre><code></code></pre></li>
+</ul>
                                     				
                             </article>
         </div>
@@ -880,6 +1006,20 @@ If array contains <code>attributes</code> key it will be used as options for err
                                     <h4>Returns</h4>
                     string|array
                                             &mdash; <p>HTMLもしくはoption配列</p>
+<h5>return サンプル（$returnHtml=true）</h5>
+<ul>
+<li>入力
+<pre><code></code></pre></li>
+<li>出力
+<pre><code></code></pre></li>
+</ul>
+<h5>return サンプル（$returnHtml=false）</h5>
+<ul>
+<li>入力
+<pre><code></code></pre></li>
+<li>出力
+<pre><code></code></pre></li>
+</ul>
                                     				
                             </article>
         </div>
@@ -908,7 +1048,8 @@ If array contains <code>attributes</code> key it will be used as options for err
                 <h3 class="protected ">_input()</h3>
                 <a href="#source-view" role="button" class="pull-right btn" data-toggle="modal" style="font-size: 1.1em; padding: 9px 14px"><i class="icon-code"></i></a>
                 <pre class="signature" style="margin-right: 54px;">_input(string  <span class="argument">$fieldName</span>, array  <span class="argument">$options = array()</span>) : string</pre>
-                <p><em>&lt;input&gt;の出力</em></p>
+                <p><em>&lt;input&gt;の出力
+このメソッドは、NetCommonsFormHelper-&gt;input()から実行される。</em></p>
                 
 
                                     <h4>Parameters</h4>
@@ -992,7 +1133,7 @@ If array contains <code>attributes</code> key it will be used as options for err
                 <section class="span10 offset1">
                     <hr />
                     Documentation is powered by <a href="http://www.phpdoc.org/">phpDocumentor </a> and authored
-                    on April 23rd, 2016 at 23:28.
+                    on April 25th, 2016 at 08:33.
                 </section>
             </section>
         </section>
