@@ -37,6 +37,6 @@ do
 
   if [ "$TRAVIS_BRANCH" == "master" ]; then
     git add -A
-    git commit -m "Update phpdoc $plugin"
+    git commit -m "Update phpdoc $plugin by PATTERN=$PATTERN"
   fi
 done
