@@ -31,7 +31,7 @@ do
     rm -r phpdoc/$plugin
   fi
   echo "phpdoc ${APP_ROOT}/Plugin/$plugin"
-  phpdoc run -d "$PHPDOC_OPTIONS,${APP_ROOT}/Plugin/$plugin" -t phpdoc/$plugin -i "$IGNORE_PLUGINS,${APP_ROOT}/Plugin/$plugin/Test/*" --cache-folder phpdoc/$plugin/cache --force --ansi --log $LOG2 > $LOG
+  phpdoc run -d "$PHPDOC_OPTIONS,${APP_ROOT}/Plugin/$plugin" -t phpdoc/$plugin -i "*/Test/*" --cache-folder phpdoc/$plugin/cache --force --ansi --log $LOG2 > $LOG
 
   rm -r phpdoc/$plugin/cache
 
