@@ -136,10 +136,10 @@
                                 <div class="accordion" style="margin-bottom: 0">
         <div class="accordion-group">
             <div class="accordion-heading">
-                                    <a class="accordion-toggle " data-toggle="collapse" data-target="#namespace-1039860733"></a>
+                                    <a class="accordion-toggle " data-toggle="collapse" data-target="#namespace-2069093016"></a>
                                 <a href="../namespaces/default.html" style="margin-left: 30px; padding-left: 0">\</a>
             </div>
-            <div id="namespace-1039860733" class="accordion-body collapse in">
+            <div id="namespace-2069093016" class="accordion-body collapse in">
                 <div class="accordion-inner">
 
                     
@@ -266,6 +266,7 @@ will inherit them.</p>
                                                                     <a href="../classes/NetCommonsAppModel.html#method_loadModels" class="">loadModels()</a><br />
                                                                     <a href="../classes/User.html#method_prepare" class="">prepare()</a><br />
                                                                     <a href="../classes/User.html#method_beforeValidate" class="">beforeValidate()</a><br />
+                                                                    <a href="../classes/User.html#method_afterValidate" class="">afterValidate()</a><br />
                                                                     <a href="../classes/User.html#method_afterSave" class="">afterSave()</a><br />
                                                                     <a href="../classes/User.html#method_createUser" class="">createUser()</a><br />
                                                                     <a href="../classes/User.html#method_existsUser" class="">existsUser()</a><br />
@@ -362,6 +363,7 @@ will inherit them.</p>
                             </th>
                             <td>
                                                                     <p>(PHPMD.CouplingBetweenObjects)</p>
+                                                                    <p>(PHPMD.TooManyPublicMethods)</p>
                                                             </td>
                         </tr>
                                         </table>
@@ -1169,7 +1171,9 @@ schema data defaults are not merged.</p></td>
                 <a href="#source-view" role="button" class="pull-right btn" data-toggle="modal" style="font-size: 1.1em; padding: 9px 14px"><i class="icon-code"></i></a>
                 <pre class="signature" style="margin-right: 54px;">prepare(boolean  <span class="argument">$force = false</span>) : void</pre>
                 <p><em>UserModelの前準備</em></p>
-                
+                <p>自動登録の場合、この処理を呼び出す前に$this-&gt;userAttributeDataをセットする。詳しくは、
+<a href="../../Auth/classes/AutoUserRegist.html#method_saveAutoUserRegist">Auth.AutoUserRegist::saveAutoUserRegist()</a>
+を参照してください。</p>
 
                                     <h4>Parameters</h4>
                     <table class="table table-condensed table-hover">
@@ -1209,23 +1213,32 @@ schema data defaults are not merged.</p></td>
                 <h3 class="public ">beforeValidate()</h3>
                 <a href="#source-view" role="button" class="pull-right btn" data-toggle="modal" style="font-size: 1.1em; padding: 9px 14px"><i class="icon-code"></i></a>
                 <pre class="signature" style="margin-right: 54px;">beforeValidate(array  <span class="argument">$options = array()</span>) : boolean</pre>
-                <p><em>Called during validation operations, before validation. Please note that custom
-validation rules can be defined in $validate.</em></p>
-                
+                <p><em>バリデーションのセット</em></p>
+                <ul>
+<li>
+<p>ログインIDとパスワードのバリデーションルールをセットする。<br>
+その他のUserモデルのバリデーションルールのセットは、
+<a href="../../Users/classes/SaveUserBehavior.html#method_beforeValidate">Users.SaveUserBehavior::beforeValidate</a>
+で行う。<br>
+また、UsersLanguageのバリデーションも実施する。</p>
+</li>
+<li>自動登録のバリデーションの初期値のセットは、
+<a href="../../Users/classes/SaveUserBehavior.html#method_validateRequest">Auth.AutoUserRegist::validateRequest</a>
+で行う。</li>
+</ul>
 
                                     <h4>Parameters</h4>
                     <table class="table table-condensed table-hover">
                                                     <tr>
                                 <td>array</td>
                                 <td>$options </td>
-                                <td><p>Options passed from Model::save().</p></td>
+                                <td><p>Model::save()のオプション</p></td>
                             </tr>
                                             </table>
                 
                 
                                     <h4>Returns</h4>
                     boolean
-                                            &mdash; <p>True if validate operation should continue, false to abort</p>
                                     				
                             </article>
         </div>
@@ -1233,9 +1246,35 @@ validation rules can be defined in $validate.</em></p>
             <h1><i class="icon-arrow-down"></i></h1>
                                                             <dl>
                                                                                             <dt>See also</dt>
-                                                                <dd><a href="http://book.cakephp.org/2.0/en/models/callback-methods.html#beforevalidate"><span class="namespace-wrapper">http://book.cakephp.org/2.0/en/models/callback-methods.html#beforevalidate</span></a></dd>
+                                                                <dd><a href="http://book.cakephp.org/2.0/ja/models/callback-methods.html#beforevalidate"><span class="namespace-wrapper">http://book.cakephp.org/2.0/ja/models/callback-methods.html#beforevalidate</span></a></dd>
                                                                                                     <dd><a href=""><span class="namespace-wrapper"></span></a></dd>
                                                                 </dl>
+            <h2>Tags</h2>
+            <table class="table table-condensed">
+                                    <tr><td colspan="2"><em>None found</em></td></tr>
+                            </table>
+        </aside>
+    </div>
+
+                                    <div class="row-fluid">
+        <div class="span8 content class">
+            <a id="method_afterValidate" name="method_afterValidate" class="anchor"></a>
+            <article class="method">
+                <h3 class="public ">afterValidate()</h3>
+                <a href="#source-view" role="button" class="pull-right btn" data-toggle="modal" style="font-size: 1.1em; padding: 9px 14px"><i class="icon-code"></i></a>
+                <pre class="signature" style="margin-right: 54px;">afterValidate() : void</pre>
+                <p><em>Called after data has been checked for errors</em></p>
+                
+
+                
+                
+                				
+                            </article>
+        </div>
+        <aside class="span4 detailsbar">
+            <h1><i class="icon-arrow-down"></i></h1>
+                                                            <dl>
+                                                                            </dl>
             <h2>Tags</h2>
             <table class="table table-condensed">
                                     <tr><td colspan="2"><em>None found</em></td></tr>
@@ -1701,7 +1740,7 @@ validation rules can be defined in $validate.</em></p>
                 <section class="span10 offset1">
                     <hr />
                     Documentation is powered by <a href="http://www.phpdoc.org/">phpDocumentor </a> and authored
-                    on April 25th, 2016 at 21:45.
+                    on April 28th, 2016 at 04:49.
                 </section>
             </section>
         </section>
