@@ -136,10 +136,10 @@
                                 <div class="accordion" style="margin-bottom: 0">
         <div class="accordion-group">
             <div class="accordion-heading">
-                                    <a class="accordion-toggle " data-toggle="collapse" data-target="#namespace-850718820"></a>
+                                    <a class="accordion-toggle " data-toggle="collapse" data-target="#namespace-69550024"></a>
                                 <a href="../namespaces/default.html" style="margin-left: 30px; padding-left: 0">\</a>
             </div>
-            <div id="namespace-850718820" class="accordion-body collapse in">
+            <div id="namespace-69550024" class="accordion-body collapse in">
                 <div class="accordion-inner">
 
                     
@@ -213,7 +213,7 @@
                     <a href="#source-view" role="button" class="pull-right btn" data-toggle="modal"><i class="icon-code"></i></a>
 
                     <h1><small>\</small>NetCommonsFormHelper</h1>
-                    <p><em>NetCommonsFormHelper</em></p>
+                    <p><em>NetCommonsでFormHelperをOverrideしたHelper</em></p>
                     <p>Add your application-wide methods in the class below, your helpers
 will inherit them.</p>
                     
@@ -316,8 +316,17 @@ will inherit them.</p>
             <article class="property">
                 <h3 class="public ">$helpers</h3>
                 <pre class="signature">$helpers : array</pre>
-                <p><em>使用するFormHelper</em></p>
-                
+                <p><em>使用するHelpers</em></p>
+                <ul>
+<li><a href="http://book.cakephp.org/2.0/ja/core-libraries/helpers/form.html">FormHelper</a></li>
+<li><a href="http://book.cakephp.org/2.0/ja/core-libraries/helpers/html.html">HtmlHelper</a></li>
+<li><a href="../../Files/classes/FilesFormHelper.html">Files.FilesFormHelper</a></li>
+<li><a href="../../NetCommons/classes/ButtonHelper.html">NetCommons.ButtonHelper</a></li>
+<li><a href="../../NetCommons/classes/FormInputHelper.html">NetCommons.FormInputHelper</a></li>
+<li><a href="../../NetCommons/classes/NetCommonsHtmlHelper.html">NetCommons.NetCommonsHtmlHelper</a></li>
+<li><a href="../../NetCommons/classes/NetCommonsTimeHelper.html">NetCommons.NetCommonsTimeHelper</a></li>
+<li><a href="../../NetCommons/classes/DatetimePickerHelper.html">NetCommons.DatetimePickerHelper</a></li>
+</ul>
 
                                 <h4>Type</h4>
                 array
@@ -349,7 +358,7 @@ will inherit them.</p>
                 <a href="#source-view" role="button" class="pull-right btn" data-toggle="modal" style="font-size: 1.1em; padding: 9px 14px"><i class="icon-code"></i></a>
                 <pre class="signature" style="margin-right: 54px;">__call(string  <span class="argument">$method</span>, array  <span class="argument">$params</span>) : mixed</pre>
                 <p><em>各プラグインFormHelperラップ用マジックメソッド</em></p>
-                <p>指定されたメソッドにより、各プラグインのFormHelperのメソッドを間接的に呼び出します。</p>
+                <p>指定されたメソッドにより、各プラグインのFormHelperのメソッドを呼び出します。</p>
 
                                     <h4>Parameters</h4>
                     <table class="table table-condensed table-hover">
@@ -371,31 +380,31 @@ will inherit them.</p>
                                             &mdash; <h5>$method の内容による出力</h5>
 <ul>
 <li>
-<p><a id="method__input_uploadFile" name="method__input_uploadFile" class="anchor"></a>
+<p><a id="method___call_uploadFile" name="method___call_uploadFile" class="anchor"></a>
 NetCommonsForm::uploadFile()<br>
 <a href="../../Files/classes/FilesFormHelper.html#method_uploadFile">Files.FilesFormHelper::uploadFile()</a>
 の結果を出力する。</p>
 </li>
 <li>
-<p><a id="method__input_checkbox" name="method__input_checkbox" class="anchor"></a>
+<p><a id="method___call_checkbox" name="method___call_checkbox" class="anchor"></a>
 NetCommonsForm::checkbox()<br>
 <a href="./FormInputHelper.html#method_checkbox">NetCommons.FormInputHelper::checkbox()</a>
 の結果を出力する。</p>
 </li>
 <li>
-<p><a id="method__input_radio" name="method__input_radio" class="anchor"></a>
+<p><a id="method___call_radio" name="method___call_radio" class="anchor"></a>
 NetCommonsForm::radio()<br>
 <a href="./FormInputHelper.html#method_radio">NetCommons.FormInputHelper::radio()</a>
 の結果を出力する。</p>
 </li>
 <li>
-<p><a id="method__input_wysiwyg" name="method__input_wysiwyg" class="anchor"></a>
+<p><a id="method___call_wysiwyg" name="method___call_wysiwyg" class="anchor"></a>
 NetCommonsForm::wysiwyg()<br>
 <a href="../../Wysiwyg/classes/WysiwygHelper.html#method_wysiwyg">Wysiwyg.WysiwygHelper::wysiwyg()</a>
 の結果を出力する。</p>
 </li>
 <li>
-<p><a id="method__input_inlineCheckbox" name="method__input_inlineCheckbox" class="anchor"></a>
+<p><a id="method___call_inlineCheckbox" name="method___call_inlineCheckbox" class="anchor"></a>
 NetCommonsForm::inlineCheckbox()<br>
 $paramsに以下を追加して、
 <a href="./FormInputHelper.html#method_checkbox">NetCommons.FormInputHelper::checkbox()</a>
@@ -406,24 +415,24 @@ $paramsに以下を追加して、
 )</code></pre>
 </li>
 <li>
-<p><a id="method__input_inputWithTitleIcon" name="method__input_inputWithTitleIcon" class="anchor"></a>
+<p><a id="method___call_inputWithTitleIcon" name="method___call_inputWithTitleIcon" class="anchor"></a>
 NetCommonsForm::inputWithTitleIcon()<br>
 <a href="./TitleIconHelper.html#method_inputWithTitleIcon">NetCommons.TitleIconHelper::inputWithTitleIcon()</a>
 の結果を出力する。</p>
 </li>
 <li>
-<p><a id="method__input_titleIconPicker" name="method__input_titleIconPicker" class="anchor"></a>
+<p><a id="method___call_titleIconPicker" name="method___call_titleIconPicker" class="anchor"></a>
 NetCommonsForm::titleIconPicker()<br>
 <a href="./TitleIconHelper.html#method_titleIconPicker">NetCommons.TitleIconHelper::titleIconPicker()</a>
 の結果を出力する。</p>
 </li>
 <li>
-<p><a id="method__input_ngTitleIconPicker" name="method__input_ngTitleIconPicker" class="anchor"></a>
+<p><a id="method___call_ngTitleIconPicker" name="method___call_ngTitleIconPicker" class="anchor"></a>
 NetCommonsForm::ngTitleIconPicker()<br>
 <a href="./TitleIconHelper.html#method_ngTitleIconPicker">NetCommons.TitleIconHelper::ngTitleIconPicker()</a>
 の結果を出力する。</p>
 </li>
-<li><a id="method__input_others" name="method__input_others" class="anchor"></a>
+<li><a id="method___call_others" name="method___call_others" class="anchor"></a>
 それ以外<br>
 <a href="http://book.cakephp.org/2.0/ja/core-libraries/helpers/form.html#formhelper">FormHelper</a>
 の各メソッドの結果を出力する。</li>
@@ -1033,7 +1042,7 @@ type=datetime<br>
                 <section class="span10 offset1">
                     <hr />
                     Documentation is powered by <a href="http://www.phpdoc.org/">phpDocumentor </a> and authored
-                    on April 25th, 2016 at 10:33.
+                    on April 28th, 2016 at 05:14.
                 </section>
             </section>
         </section>
