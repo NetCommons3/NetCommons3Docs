@@ -108,6 +108,8 @@ class UserAttributesSchema extends CakeSchema {
 		'self_public_setting' => array('type' => 'boolean', 'null' => true, 'default' => '0', 'comment' => '「各自で公開・非公開の設定可能にする」の有無'),
 		'self_email_setting' => array('type' => 'boolean', 'null' => true, 'default' => '0', 'comment' => '「各自でメールの受信可否を設定可能にする」の有無'),
 		'is_multilingualization' => array('type' => 'boolean', 'null' => true, 'default' => '1', 'comment' => '「多言語にする」の有無'),
+		'auto_regist_display' => array('type' => 'boolean', 'null' => true, 'default' => null, 'comment' => '自動登録での表示有無'),
+		'auto_regist_weight' => array('type' => 'integer', 'null' => true, 'default' => '9999', 'unsigned' => false, 'comment' => '自動登録での表示順'),
 		'created_user' => array('type' => 'integer', 'null' => true, 'default' => null, 'unsigned' => false),
 		'created' => array('type' => 'datetime', 'null' => true, 'default' => null),
 		'modified_user' => array('type' => 'integer', 'null' => true, 'default' => null, 'unsigned' => false),

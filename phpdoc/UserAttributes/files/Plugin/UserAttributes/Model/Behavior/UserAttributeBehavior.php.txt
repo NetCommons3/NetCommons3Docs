@@ -115,14 +115,20 @@ class UserAttributeBehavior extends ModelBehavior {
  * 会員項目レイアウト用のFindオプション
  *
  * @param Model $model Model ビヘイビア呼び出し元モデル
+ * @param array $conditions 条件配列
  * @return array findOptions
  */
-	public function findOptionsForLayout(Model $model) {
+	public function findOptionsForLayout(Model $model, $conditions = array()) {
 		$model->loadModels([
 			'UserAttributeSetting' => 'UserAttributes.UserAttributeSetting',
 			'UserRoleSetting' => 'UserRoles.UserRoleSetting',
 			'UserAttributesRole' => 'UserRoles.UserAttributesRole',
 		]);
+
+		$conditions = Hash::merge(
+			array($model->alias . '.language_id' => Current::read('Language.id')),
+			$conditions
+		);
 
 		$options = array(
 			'recursive' => -1,
@@ -131,9 +137,7 @@ class UserAttributeBehavior extends ModelBehavior {
 				$model->UserAttributeSetting->alias . '.*',
 				$model->UserAttributesRole->alias . '.*',
 			),
-			'conditions' => array(
-				$model->alias . '.language_id' => Current::read('Language.id')
-			),
+			'conditions' => $conditions,
 			'joins' => array(
 				array(
 					'table' => $model->UserAttributeSetting->table,
