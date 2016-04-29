@@ -157,7 +157,9 @@ class ThemeSettingsSiteController extends ThemeSettingsAppController {
  * @return CakeResponse
  */
 	private function __noticeThemeError($listType) {
-		$this->set('errors', array(__('指定されたテーマは、存在しないか削除されています。')));
+		$this->set('errors', array(
+			__('指定されたテーマは、存在しないか削除されています。'))
+		);
 		$this->view = 'index';
 		$this->response->statusCode(404);
 		return $this->index($listType);
