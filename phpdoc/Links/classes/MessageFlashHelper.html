@@ -136,10 +136,10 @@
                                 <div class="accordion" style="margin-bottom: 0">
         <div class="accordion-group">
             <div class="accordion-heading">
-                                    <a class="accordion-toggle " data-toggle="collapse" data-target="#namespace-154964030"></a>
+                                    <a class="accordion-toggle " data-toggle="collapse" data-target="#namespace-254667058"></a>
                                 <a href="../namespaces/default.html" style="margin-left: 30px; padding-left: 0">\</a>
             </div>
-            <div id="namespace-154964030" class="accordion-body collapse in">
+            <div id="namespace-254667058" class="accordion-body collapse in">
                 <div class="accordion-inner">
 
                     
@@ -230,7 +230,7 @@
                     <a href="#source-view" role="button" class="pull-right btn" data-toggle="modal"><i class="icon-code"></i></a>
 
                     <h1><small>\</small>MessageFlashHelper</h1>
-                    <p><em>MessageFlash Helper</em></p>
+                    <p><em>メッセージ表示のためのHelper</em></p>
                     <p>Add your application-wide methods in the class below, your helpers
 will inherit them.</p>
                     
@@ -327,8 +327,10 @@ will inherit them.</p>
             <article class="property">
                 <h3 class="public ">$helpers</h3>
                 <pre class="signature">$helpers : array</pre>
-                <p><em>ヘルパー</em></p>
-                
+                <p><em>使用するHelpers</em></p>
+                <ul>
+<li><a href="../../NetCommons/classes/NetCommonsHtmlHelper.html">NetCommons.NetCommonsHtmlHelper</a></li>
+</ul>
 
                                 <h4>Type</h4>
                 array
@@ -380,6 +382,15 @@ will inherit them.</p>
                                     <h4>Returns</h4>
                     string
                                             &mdash; <p>HTML出力</p>
+<h5>return サンプル</h5>
+<ul>
+<li>入力
+<pre><code>echo $this-&gt;MessageFlash-&gt;description('メッセージ内容');</code></pre></li>
+<li>出力
+<pre><code>&lt;div class="alert alert-info"&gt;
+    メッセージ内容
+&lt;/div&gt;</code></pre></li>
+</ul>
                                     				
                             </article>
         </div>
@@ -443,7 +454,7 @@ will inherit them.</p>
                 <section class="span10 offset1">
                     <hr />
                     Documentation is powered by <a href="http://www.phpdoc.org/">phpDocumentor </a> and authored
-                    on April 25th, 2016 at 10:32.
+                    on April 29th, 2016 at 16:17.
                 </section>
             </section>
         </section>
