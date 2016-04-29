@@ -469,6 +469,9 @@ class UserAttribute extends UserAttributesAppModel {
 				$this->saveDefaultUserAttributeRoles($data);
 			}
 
+			//各自で受信可否を不可にした場合、User.is_xxxx_mail_receptionをONにする
+			$this->saveSelfEmailSetting($before, $data);
+
 			if (! $updated) {
 				//フィールドの作成処理
 				$this->addColumnByUserAttribute($data);

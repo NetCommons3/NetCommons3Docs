@@ -12,6 +12,7 @@
 App::uses('DataType', 'DataTypes.Model');
 App::uses('ModelBehavior', 'Model');
 App::uses('CakeMigration', 'Migrations.Lib');
+App::uses('UserAttribute', 'UserAttributes.Model');
 
 /**
  * DefaultUserRole Behavior
@@ -104,6 +105,45 @@ class UserAttributeBehavior extends ModelBehavior {
 
 			$model->UserAttributesRole->create(false);
 			if (! $model->UserAttributesRole->save($userAttributeRole, array('validate' => false))) {
+				throw new InternalErrorException(__d('net_commons', 'Internal Server Error'));
+			}
+		}
+
+		return true;
+	}
+
+/**
+ * 各自でメールの受信可否を設定不可にした場合、User.is_xxxx_mail_receptionをONにする
+ *
+ * @param Model $model Model ビヘイビア呼び出し元モデル
+ * @param array $before 変更前データ
+ * @param array $data 登録データ
+ * @return bool True on success
+ * @throws InternalErrorException
+ */
+	public function saveSelfEmailSetting(Model $model, $before, $data) {
+		$model->loadModels([
+			'User' => 'Users.User',
+		]);
+
+		if (! $before) {
+			return true;
+		}
+
+		if (Hash::get($before, 'UserAttributeSetting.data_type_key') !== DataType::DATA_TYPE_EMAIL) {
+			return true;
+		}
+
+		$beforeValue = (int)Hash::get($before, 'UserAttributeSetting.self_email_setting');
+		$afterValue = (int)Hash::get($data, 'UserAttributeSetting.self_email_setting');
+
+		$attributeKey = Hash::get($data, 'UserAttributeSetting.user_attribute_key');
+		$updateField = sprintf(UserAttribute::MAIL_RECEPTION_FIELD_FORMAT, $attributeKey);
+		if ($afterValue === 0 && $beforeValue !== $afterValue) {
+			$result = $model->User->updateAll(
+				array($model->User->alias . '.' . $updateField => true)
+			);
+			if (! $result) {
 				throw new InternalErrorException(__d('net_commons', 'Internal Server Error'));
 			}
 		}
@@ -221,7 +261,7 @@ class UserAttributeBehavior extends ModelBehavior {
 			$this->cakeMigration->migration['up']['create_field'][$model->User->table][$key] = array(
 				'type' => 'boolean',
 				'null' => false,
-				'default' => '0',
+				'default' => '1',
 				'after' => sprintf(UserAttribute::PUBLIC_FIELD_FORMAT, $userAttributeKey)
 			);
 		}
