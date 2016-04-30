@@ -127,16 +127,12 @@ class Announcement extends AnnouncementsAppModel {
  * @throws InternalErrorException
  */
 	public function saveAnnouncement($data) {
-		$this->loadModels([
-			'Announcement' => 'Announcements.Announcement'
-		]);
 		//トランザクションBegin
 		$this->begin();
 
 		//バリデーション
 		$this->set($data);
 		if (! $this->validates()) {
-			$this->rollback();
 			return false;
 		}
 
@@ -166,10 +162,6 @@ class Announcement extends AnnouncementsAppModel {
  * @throws InternalErrorException
  */
 	public function deleteAnnouncement($data) {
-		$this->loadModels([
-			'Announcement' => 'Announcements.Announcement',
-		]);
-
 		//トランザクションBegin
 		$this->begin();
 

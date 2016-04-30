@@ -136,10 +136,10 @@
                                 <div class="accordion" style="margin-bottom: 0">
         <div class="accordion-group">
             <div class="accordion-heading">
-                                    <a class="accordion-toggle " data-toggle="collapse" data-target="#namespace-141326056"></a>
+                                    <a class="accordion-toggle " data-toggle="collapse" data-target="#namespace-1906564338"></a>
                                 <a href="../namespaces/default.html" style="margin-left: 30px; padding-left: 0">\</a>
             </div>
-            <div id="namespace-141326056" class="accordion-body collapse in">
+            <div id="namespace-1906564338" class="accordion-body collapse in">
                 <div class="accordion-inner">
 
                     
@@ -414,7 +414,13 @@ will inherit them.</p>
                 <a href="#source-view" role="button" class="pull-right btn" data-toggle="modal" style="font-size: 1.1em; padding: 9px 14px"><i class="icon-code"></i></a>
                 <pre class="signature" style="margin-right: 54px;">radio(string  <span class="argument">$fieldName</span>, array  <span class="argument">$options = array()</span>, array  <span class="argument">$attributes = array()</span>) : string</pre>
                 <p><em>ラジオボタンを出力する</em></p>
-                
+                <h4>サンプル</h4>
+<ul>
+<li>入力
+<pre><code></code></pre></li>
+<li>出力
+<pre><code></code></pre></li>
+</ul>
 
                                     <h4>Parameters</h4>
                     <table class="table table-condensed table-hover">
@@ -438,13 +444,6 @@ will inherit them.</p>
                 
                                     <h4>Returns</h4>
                     string
-                                            &mdash; <h5>return サンプル</h5>
-<ul>
-<li>入力
-<pre><code></code></pre></li>
-<li>出力
-<pre><code></code></pre></li>
-</ul>
                                     				
                             </article>
         </div>
@@ -470,7 +469,13 @@ will inherit them.</p>
                 <a href="#source-view" role="button" class="pull-right btn" data-toggle="modal" style="font-size: 1.1em; padding: 9px 14px"><i class="icon-code"></i></a>
                 <pre class="signature" style="margin-right: 54px;">checkbox(string  <span class="argument">$fieldName</span>, array  <span class="argument">$options = array()</span>) : string</pre>
                 <p><em>チェックボックスを出力する</em></p>
-                
+                <h4>サンプル</h4>
+<ul>
+<li>入力
+<pre><code></code></pre></li>
+<li>出力
+<pre><code></code></pre></li>
+</ul>
 
                                     <h4>Parameters</h4>
                     <table class="table table-condensed table-hover">
@@ -489,13 +494,6 @@ will inherit them.</p>
                 
                                     <h4>Returns</h4>
                     string
-                                            &mdash; <h5>return サンプル</h5>
-<ul>
-<li>入力
-<pre><code></code></pre></li>
-<li>出力
-<pre><code></code></pre></li>
-</ul>
                                     				
                             </article>
         </div>
@@ -581,7 +579,13 @@ will inherit them.</p>
                 <a href="#source-view" role="button" class="pull-right btn" data-toggle="modal" style="font-size: 1.1em; padding: 9px 14px"><i class="icon-code"></i></a>
                 <pre class="signature" style="margin-right: 54px;">multipleCheckbox(string  <span class="argument">$fieldName</span>, array  <span class="argument">$options = array()</span>) : string</pre>
                 <p><em>複数チェックボックスを出力する</em></p>
-                
+                <h5>サンプル</h5>
+<ul>
+<li>入力
+<pre><code></code></pre></li>
+<li>出力
+<pre><code></code></pre></li>
+</ul>
 
                                     <h4>Parameters</h4>
                     <table class="table table-condensed table-hover">
@@ -600,13 +604,6 @@ will inherit them.</p>
                 
                                     <h4>Returns</h4>
                     string
-                                            &mdash; <h5>return サンプル</h5>
-<ul>
-<li>入力
-<pre><code></code></pre></li>
-<li>出力
-<pre><code></code></pre></li>
-</ul>
                                     				
                             </article>
         </div>
@@ -633,6 +630,14 @@ will inherit them.</p>
                 <p><em>NetCommons用にFormHelper::hidden()を付与してHTMLを出力する</em></p>
                 <p>値がfalseの場合、hiddenのvalueが消えてしまい、validationErrorになってしまう。<br>
 <a href="https://github.com/cakephp/cakephp/issues/5639"><a href="https://github.com/cakephp/cakephp/issues/5639">https://github.com/cakephp/cakephp/issues/5639</a></a></p>
+<h4>サンプル</h4>
+<ul>
+<li>入力
+<pre><code>$this-&gt;request-&gt;data['BbsSetting']['use_comment'] = false;</code></pre>
+<pre><code>echo $this-&gt;NetCommonsForm-&gt;hidden('BbsSetting.use_comment');</code></pre></li>
+<li>出力
+<pre><code>&lt;input type="hidden" name="data[BbsSetting][use_comment]" value="0" id="BbsSettingUseComment"/&gt;</code></pre></li>
+</ul>
 
                                     <h4>Parameters</h4>
                     <table class="table table-condensed table-hover">
@@ -651,14 +656,6 @@ will inherit them.</p>
                 
                                     <h4>Returns</h4>
                     string
-                                            &mdash; <h5>return サンプル</h5>
-<ul>
-<li>入力
-<pre><code>$this-&gt;request-&gt;data['BbsSetting']['use_comment'] = false;</code></pre>
-<pre><code>echo $this-&gt;NetCommonsForm-&gt;hidden('BbsSetting.use_comment');</code></pre></li>
-<li>出力
-<pre><code>&lt;input type="hidden" name="data[BbsSetting][use_comment]" value="0" id="BbsSettingUseComment"/&gt;</code></pre></li>
-</ul>
                                     				
                             </article>
         </div>
@@ -681,7 +678,13 @@ will inherit them.</p>
                 <a href="#source-view" role="button" class="pull-right btn" data-toggle="modal" style="font-size: 1.1em; padding: 9px 14px"><i class="icon-code"></i></a>
                 <pre class="signature" style="margin-right: 54px;">password(string  <span class="argument">$fieldName</span>, array  <span class="argument">$options = array()</span>) : string</pre>
                 <p><em>パスワードの出力</em></p>
-                
+                <h4>サンプル</h4>
+<ul>
+<li>入力
+<pre><code></code></pre></li>
+<li>出力
+<pre><code></code></pre></li>
+</ul>
 
                                     <h4>Parameters</h4>
                     <table class="table table-condensed table-hover">
@@ -700,13 +703,6 @@ will inherit them.</p>
                 
                                     <h4>Returns</h4>
                     string
-                                            &mdash; <h5>return サンプル</h5>
-<ul>
-<li>入力
-<pre><code></code></pre></li>
-<li>出力
-<pre><code></code></pre></li>
-</ul>
                                     				
                             </article>
         </div>
@@ -729,7 +725,13 @@ will inherit them.</p>
                 <a href="#source-view" role="button" class="pull-right btn" data-toggle="modal" style="font-size: 1.1em; padding: 9px 14px"><i class="icon-code"></i></a>
                 <pre class="signature" style="margin-right: 54px;">email(string  <span class="argument">$fieldName</span>, array  <span class="argument">$options = array()</span>) : string</pre>
                 <p><em>emailの出力</em></p>
-                
+                <h4>サンプル</h4>
+<ul>
+<li>入力
+<pre><code></code></pre></li>
+<li>出力
+<pre><code></code></pre></li>
+</ul>
 
                                     <h4>Parameters</h4>
                     <table class="table table-condensed table-hover">
@@ -748,13 +750,6 @@ will inherit them.</p>
                 
                                     <h4>Returns</h4>
                     string
-                                            &mdash; <h5>return サンプル</h5>
-<ul>
-<li>入力
-<pre><code></code></pre></li>
-<li>出力
-<pre><code></code></pre></li>
-</ul>
                                     				
                             </article>
         </div>
@@ -818,7 +813,7 @@ will inherit them.</p>
                 <section class="span10 offset1">
                     <hr />
                     Documentation is powered by <a href="http://www.phpdoc.org/">phpDocumentor </a> and authored
-                    on April 29th, 2016 at 10:01.
+                    on April 30th, 2016 at 15:07.
                 </section>
             </section>
         </section>
