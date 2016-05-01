@@ -136,10 +136,10 @@
                                 <div class="accordion" style="margin-bottom: 0">
         <div class="accordion-group">
             <div class="accordion-heading">
-                                    <a class="accordion-toggle " data-toggle="collapse" data-target="#namespace-1742800351"></a>
+                                    <a class="accordion-toggle " data-toggle="collapse" data-target="#namespace-348248919"></a>
                                 <a href="../namespaces/default.html" style="margin-left: 30px; padding-left: 0">\</a>
             </div>
-            <div id="namespace-1742800351" class="accordion-body collapse in">
+            <div id="namespace-348248919" class="accordion-body collapse in">
                 <div class="accordion-inner">
 
                     
@@ -213,8 +213,8 @@
                                             </nav>
                     <a href="#source-view" role="button" class="pull-right btn" data-toggle="modal"><i class="icon-code"></i></a>
 
-                    <h1><small>\</small>DisplayNumberHelper</h1>
-                    <p><em>DisplayNumber Helper</em></p>
+                    <h1><small>\</small>TableListHelper</h1>
+                    <p><em>テーブルリスト用Helper</em></p>
                     <p>Add your application-wide methods in the class below, your helpers
 will inherit them.</p>
                     
@@ -234,12 +234,16 @@ will inherit them.</p>
                         </section>
                         <section class="row-fluid public">
                             <section class="span4">
-                                                                    <a href="../classes/DisplayNumberHelper.html#method_select" class="">select()</a><br />
-                                                                    <a href="../classes/DisplayNumberHelper.html#method_dropDownToggle" class="">dropDownToggle()</a><br />
+                                                                    <a href="../classes/TableListHelper.html#method___call" class="">__call()</a><br />
+                                                                    <a href="../classes/TableListHelper.html#method_startTable" class="">startTable()</a><br />
+                                                                    <a href="../classes/TableListHelper.html#method_endTable" class="">endTable()</a><br />
+                                                                    <a href="../classes/TableListHelper.html#method_startTableRow" class="">startTableRow()</a><br />
+                                                                    <a href="../classes/TableListHelper.html#method_endTableRow" class="">endTableRow()</a><br />
+                                                                    <a href="../classes/TableListHelper.html#method_tableHeader" class="">tableHeader()</a><br />
+                                                                    <a href="../classes/TableListHelper.html#method_tableData" class="">tableData()</a><br />
                                                             </section>
                             <section class="span4">
-                                                                    <a href="../classes/DisplayNumberHelper.html#property_helpers" class="">$helpers</a><br />
-                                                                    <a href="../classes/DisplayNumberHelper.html#property_displayNumberOptions" class="">$displayNumberOptions</a><br />
+                                                                    <a href="../classes/TableListHelper.html#property_helpers" class="">$helpers</a><br />
                                                             </section>
                             <section class="span4">
                                                                     <em>No constants found</em>
@@ -258,7 +262,7 @@ will inherit them.</p>
                         </section>
                         <section class="row-fluid private">
                             <section class="span4">
-                                                                    <a href="../classes/DisplayNumberHelper.html#method___getOptions" class="">__getOptions()</a><br />
+                                                                    <em>No private methods found</em>
                                                             </section>
                             <section class="span4">
                                                                     <em>No private properties found</em>
@@ -274,7 +278,7 @@ will inherit them.</p>
                     
                     <dl>
                         <dt>File</dt>
-                            <dd><a href="../files/Plugin.NetCommons.View.Helper.DisplayNumberHelper.html"><div class="path-wrapper">Plugin/NetCommons/View/Helper/DisplayNumberHelper.php</div></a></dd>
+                            <dd><a href="../files/Plugin.NetCommons.View.Helper.TableListHelper.html"><div class="path-wrapper">Plugin/NetCommons/View/Helper/TableListHelper.php</div></a></dd>
                                                 <dt>Package</dt>
                             <dd><div class="namespace-wrapper">View\Helper</div></dd>
                                                 <dt>Class hierarchy</dt>
@@ -283,7 +287,7 @@ will inherit them.</p>
                                         <div class="namespace-wrapper">\Helper</div>
                                                                     
                                         <div class="namespace-wrapper"><a href="../classes/AppHelper.html">\AppHelper</a></div>
-                                                                                                    <div class="namespace-wrapper">\DisplayNumberHelper</div>
+                                                                                                    <div class="namespace-wrapper">\TableListHelper</div>
                             </dd>
 
                         
@@ -313,31 +317,7 @@ will inherit them.</p>
             <article class="property">
                 <h3 class="public ">$helpers</h3>
                 <pre class="signature">$helpers : array</pre>
-                <p><em>Other helpers used by FormHelper</em></p>
-                
-
-                                <h4>Type</h4>
-                array
-                                            </article>
-        </div>
-        <aside class="span4 detailsbar">
-            <h1><i class="icon-arrow-down"></i></h1>
-                        <dl>
-                                                            </dl>
-            <h2>Tags</h2>
-            <table class="table table-condensed">
-                                    <tr><td colspan="2"><em>None found</em></td></tr>
-                            </table>
-        </aside>
-    </div>
-
-                                    <div class="row-fluid">
-        <div class="span8 content class">
-            <a id="property_displayNumberOptions" name="property_displayNumberOptions" class="anchor"></a>
-            <article class="property">
-                <h3 class="public ">$displayNumberOptions</h3>
-                <pre class="signature">$displayNumberOptions : array</pre>
-                <p><em>listStyle</em></p>
+                <p><em>使用するHelper</em></p>
                 
 
                                 <h4>Type</h4>
@@ -364,32 +344,31 @@ will inherit them.</p>
 
                                     <div class="row-fluid">
         <div class="span8 content class">
-            <a id="method_select" name="method_select" class="anchor"></a>
+            <a id="method___call" name="method___call" class="anchor"></a>
             <article class="method">
-                <h3 class="public ">select()</h3>
+                <h3 class="public ">__call()</h3>
                 <a href="#source-view" role="button" class="pull-right btn" data-toggle="modal" style="font-size: 1.1em; padding: 9px 14px"><i class="icon-code"></i></a>
-                <pre class="signature" style="margin-right: 54px;">select(string  <span class="argument">$fieldName</span>, array  <span class="argument">$attributes = array()</span>) : string</pre>
-                <p><em>Setting display number</em></p>
-                
+                <pre class="signature" style="margin-right: 54px;">__call(string  <span class="argument">$method</span>, array  <span class="argument">$params</span>) : mixed</pre>
+                <p><em>各プラグインのHelperラップ用マジックメソッド</em></p>
+                <p>指定されたメソッドにより、各プラグインのHelperのメソッドを呼び出します。</p>
 
                                     <h4>Parameters</h4>
                     <table class="table table-condensed table-hover">
                                                     <tr>
                                 <td>string</td>
-                                <td>$fieldName </td>
-                                <td><p>Name of a field, like this &quot;Modelname.fieldname&quot;</p></td>
+                                <td>$method </td>
+                                <td><p>メソッド</p></td>
                             </tr>
                                                     <tr>
                                 <td>array</td>
-                                <td>$attributes </td>
-                                <td><p>Array of HTML attributes, and special attributes above.</p></td>
+                                <td>$params </td>
+                                <td><p>パラメータ</p></td>
                             </tr>
                                             </table>
                 
                 
                                     <h4>Returns</h4>
-                    string
-                                            &mdash; <p>Completed radio widget set.</p>
+                    mixed
                                     				
                             </article>
         </div>
@@ -406,27 +385,19 @@ will inherit them.</p>
 
                                     <div class="row-fluid">
         <div class="span8 content class">
-            <a id="method_dropDownToggle" name="method_dropDownToggle" class="anchor"></a>
+            <a id="method_startTable" name="method_startTable" class="anchor"></a>
             <article class="method">
-                <h3 class="public ">dropDownToggle()</h3>
+                <h3 class="public ">startTable()</h3>
                 <a href="#source-view" role="button" class="pull-right btn" data-toggle="modal" style="font-size: 1.1em; padding: 9px 14px"><i class="icon-code"></i></a>
-                <pre class="signature" style="margin-right: 54px;">dropDownToggle(array  <span class="argument">$attributes = array()</span>) : string</pre>
-                <p><em>Output display number drop down toggle</em></p>
+                <pre class="signature" style="margin-right: 54px;">startTable() : string</pre>
+                <p><em>`&lt;table&gt;`を表示する</em></p>
                 
 
-                                    <h4>Parameters</h4>
-                    <table class="table table-condensed table-hover">
-                                                    <tr>
-                                <td>array</td>
-                                <td>$attributes </td>
-                                <td><p>Array of options and HTML arguments.</p></td>
-                            </tr>
-                                            </table>
                 
                 
                                     <h4>Returns</h4>
                     string
-                                            &mdash; <p>HTML tags</p>
+                                            &mdash; <p>HTML</p>
                                     				
                             </article>
         </div>
@@ -441,29 +412,21 @@ will inherit them.</p>
         </aside>
     </div>
 
-                                                                    <div class="row-fluid">
+                                    <div class="row-fluid">
         <div class="span8 content class">
-            <a id="method___getOptions" name="method___getOptions" class="anchor"></a>
+            <a id="method_endTable" name="method_endTable" class="anchor"></a>
             <article class="method">
-                <h3 class="private ">__getOptions()</h3>
+                <h3 class="public ">endTable()</h3>
                 <a href="#source-view" role="button" class="pull-right btn" data-toggle="modal" style="font-size: 1.1em; padding: 9px 14px"><i class="icon-code"></i></a>
-                <pre class="signature" style="margin-right: 54px;">__getOptions(array  <span class="argument">$attributes = array()</span>) : string</pre>
-                <p><em>Get display number options</em></p>
+                <pre class="signature" style="margin-right: 54px;">endTable() : string</pre>
+                <p><em>`&lt;/table&gt;`を表示する</em></p>
                 
 
-                                    <h4>Parameters</h4>
-                    <table class="table table-condensed table-hover">
-                                                    <tr>
-                                <td>array</td>
-                                <td>$attributes </td>
-                                <td><p>Array of HTML attributes, and special attributes above.</p></td>
-                            </tr>
-                                            </table>
                 
                 
                                     <h4>Returns</h4>
                     string
-                                            &mdash; <p>Completed radio widget set.</p>
+                                            &mdash; <p>HTML</p>
                                     				
                             </article>
         </div>
@@ -478,16 +441,220 @@ will inherit them.</p>
         </aside>
     </div>
 
-                                    </div>
+                                    <div class="row-fluid">
+        <div class="span8 content class">
+            <a id="method_startTableRow" name="method_startTableRow" class="anchor"></a>
+            <article class="method">
+                <h3 class="public ">startTableRow()</h3>
+                <a href="#source-view" role="button" class="pull-right btn" data-toggle="modal" style="font-size: 1.1em; padding: 9px 14px"><i class="icon-code"></i></a>
+                <pre class="signature" style="margin-right: 54px;">startTableRow(integer  <span class="argument">$currentId = null</span>, string  <span class="argument">$fieldName = null</span>) : string</pre>
+                <p><em>`&lt;tr&gt;`を表示する</em></p>
+                
+
+                                    <h4>Parameters</h4>
+                    <table class="table table-condensed table-hover">
+                                                    <tr>
+                                <td>integer</td>
+                                <td>$currentId </td>
+                                <td><p>カレントのID</p></td>
+                            </tr>
+                                                    <tr>
+                                <td>string</td>
+                                <td>$fieldName </td>
+                                <td><p>フィールド名(Model.field)</p></td>
+                            </tr>
+                                            </table>
+                
+                
+                                    <h4>Returns</h4>
+                    string
+                                            &mdash; <p>HTML</p>
+                                    				
+                            </article>
+        </div>
+        <aside class="span4 detailsbar">
+            <h1><i class="icon-arrow-down"></i></h1>
+                                                            <dl>
+                                                                            </dl>
+            <h2>Tags</h2>
+            <table class="table table-condensed">
+                                    <tr><td colspan="2"><em>None found</em></td></tr>
+                            </table>
+        </aside>
+    </div>
+
+                                    <div class="row-fluid">
+        <div class="span8 content class">
+            <a id="method_endTableRow" name="method_endTableRow" class="anchor"></a>
+            <article class="method">
+                <h3 class="public ">endTableRow()</h3>
+                <a href="#source-view" role="button" class="pull-right btn" data-toggle="modal" style="font-size: 1.1em; padding: 9px 14px"><i class="icon-code"></i></a>
+                <pre class="signature" style="margin-right: 54px;">endTableRow() : string</pre>
+                <p><em>`&lt;/tr&gt;`を表示する</em></p>
+                
+
+                
+                
+                                    <h4>Returns</h4>
+                    string
+                                            &mdash; <p>HTML</p>
+                                    				
+                            </article>
+        </div>
+        <aside class="span4 detailsbar">
+            <h1><i class="icon-arrow-down"></i></h1>
+                                                            <dl>
+                                                                            </dl>
+            <h2>Tags</h2>
+            <table class="table table-condensed">
+                                    <tr><td colspan="2"><em>None found</em></td></tr>
+                            </table>
+        </aside>
+    </div>
+
+                                    <div class="row-fluid">
+        <div class="span8 content class">
+            <a id="method_tableHeader" name="method_tableHeader" class="anchor"></a>
+            <article class="method">
+                <h3 class="public ">tableHeader()</h3>
+                <a href="#source-view" role="button" class="pull-right btn" data-toggle="modal" style="font-size: 1.1em; padding: 9px 14px"><i class="icon-code"></i></a>
+                <pre class="signature" style="margin-right: 54px;">tableHeader(string  <span class="argument">$fieldName</span>, string  <span class="argument">$title = &#039;&#039;</span>, array  <span class="argument">$options = array()</span>) : string</pre>
+                <p><em>`&lt;th&gt;.</em></p>
+                <p>..</th>`を表示する</p>
+
+                                    <h4>Parameters</h4>
+                    <table class="table table-condensed table-hover">
+                                                    <tr>
+                                <td>string</td>
+                                <td>$fieldName </td>
+                                <td><p>フィールド名(Model.field)</p></td>
+                            </tr>
+                                                    <tr>
+                                <td>string</td>
+                                <td>$title </td>
+                                <td><p>タイトル</p></td>
+                            </tr>
+                                                    <tr>
+                                <td>array</td>
+                                <td>$options </td>
+                                <td><p>オプション</p>
+<ul>
+<li>type
+<ul>
+<li>false</li>
+<li>text</li>
+<li>datetime</li>
+<li>numeric</li>
+<li>center</li>
+<li>right</li>
+<li>link</li>
+<li>handle</li>
+</ul></li>
+<li>sort<br>
+ソートを表示するかどうか</li>
+</ul></td>
+                            </tr>
+                                            </table>
+                
+                
+                                    <h4>Returns</h4>
+                    string
+                                            &mdash; <p>HTML</p>
+                                    				
+                            </article>
+        </div>
+        <aside class="span4 detailsbar">
+            <h1><i class="icon-arrow-down"></i></h1>
+                                                            <dl>
+                                                                            </dl>
+            <h2>Tags</h2>
+            <table class="table table-condensed">
+                                    <tr><td colspan="2"><em>None found</em></td></tr>
+                            </table>
+        </aside>
+    </div>
+
+                                    <div class="row-fluid">
+        <div class="span8 content class">
+            <a id="method_tableData" name="method_tableData" class="anchor"></a>
+            <article class="method">
+                <h3 class="public ">tableData()</h3>
+                <a href="#source-view" role="button" class="pull-right btn" data-toggle="modal" style="font-size: 1.1em; padding: 9px 14px"><i class="icon-code"></i></a>
+                <pre class="signature" style="margin-right: 54px;">tableData(string  <span class="argument">$fieldName</span>, string|array  <span class="argument">$value = &#039;&#039;</span>, array  <span class="argument">$options = array()</span>) : string</pre>
+                <p><em>`&lt;td&gt;.</em></p>
+                <p>..</td>`を表示する</p>
+
+                                    <h4>Parameters</h4>
+                    <table class="table table-condensed table-hover">
+                                                    <tr>
+                                <td>string</td>
+                                <td>$fieldName </td>
+                                <td><p>フィールド名(Model.field)<br>
+ただし、$option['handle']の場合は、Model名(TrackableCreatorなど)をセットする</p></td>
+                            </tr>
+                                                    <tr>
+                                <td>string|array</td>
+                                <td>$value </td>
+                                <td><p>値</p></td>
+                            </tr>
+                                                    <tr>
+                                <td>array</td>
+                                <td>$options </td>
+                                <td><p>オプション</p>
+<ul>
+<li>type
+<ul>
+<li>false</li>
+<li>text</li>
+<li>datetime</li>
+<li>numeric</li>
+<li>center</li>
+<li>right</li>
+<li>link リンクを付ける</li>
+<li>handle ハンドルを表示する</li>
+</ul></li>
+<li>escape</li>
+<li>editUrl<br>
+編集ボタンを付与させる</li>
+<li>format（数値の場合のみ有効）<br>
+出力のフォーマット。詳しくは、<a href="http://book.cakephp.org/2.0/ja/core-libraries/global-constants-and-functions.html#__dn">__dn()</a>
+<ul>
+<li>domain</li>
+<li>singular</li>
+<li>plural</li>
+</ul></li>
+</ul></td>
+                            </tr>
+                                            </table>
+                
+                
+                                    <h4>Returns</h4>
+                    string
+                                            &mdash; <p>HTML</p>
+                                    				
+                            </article>
+        </div>
+        <aside class="span4 detailsbar">
+            <h1><i class="icon-arrow-down"></i></h1>
+                                                            <dl>
+                                                                            </dl>
+            <h2>Tags</h2>
+            <table class="table table-condensed">
+                                    <tr><td colspan="2"><em>None found</em></td></tr>
+                            </table>
+        </aside>
+    </div>
+
+                                                                    </div>
     </section>
 
     <div id="source-view" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="source-view-label" aria-hidden="true">
         <div class="modal-header">
             <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
-            <h3 id="source-view-label">DisplayNumberHelper.php</h3>
+            <h3 id="source-view-label">TableListHelper.php</h3>
         </div>
         <div class="modal-body">
-            <pre data-src="../files/Plugin/NetCommons/View/Helper/DisplayNumberHelper.php.txt" class="language-php line-numbers"></pre>
+            <pre data-src="../files/Plugin/NetCommons/View/Helper/TableListHelper.php.txt" class="language-php line-numbers"></pre>
         </div>
     </div>
 
