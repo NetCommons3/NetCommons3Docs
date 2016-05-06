@@ -20,11 +20,11 @@ App::uses('MailsAppModel', 'Mails.Model');
 class MailSettingFixedPhrase extends MailsAppModel {
 
 /**
- * typeのデフォルト値
- *
- * @var int
+ * @var string typeのデフォルト値
+ * @var string 回答タイプ
  */
-	const DEFAULT_TYPE = 'contents';
+	const DEFAULT_TYPE = 'contents',
+		ANSWER_TYPE = 'answer';
 
 /**
  * Validation rules
@@ -80,7 +80,7 @@ class MailSettingFixedPhrase extends MailsAppModel {
  * メール設定-定型文 データ新規作成
  *
  * @param int $languageId 言語ID
- * @param string $typeKey メールの種類
+ * @param string $typeKey メール定型文の種類
  * @param string $pluginKey プラグインキー
  * @return array メール設定データ配列
  */
@@ -105,17 +105,13 @@ class MailSettingFixedPhrase extends MailsAppModel {
 			$mailFixedPhrase = Hash::remove($mailFixedPhrase, '{s}.id');
 		} else {
 			$mailFixedPhrase = $this->create();
+			$mailFixedPhrase[$this->alias]['type_key'] = $typeKey;
 		}
 
 		//初期データセット
-		if (! $mailFixedPhrase[$this->alias]['mail_fixed_phrase_subject']) {
-			$mailFixedPhrase[$this->alias]['mail_fixed_phrase_subject'] =
-				__d('mails', 'MailSetting.mail_fixed_phrase_subject');
-		}
-		if (! $mailFixedPhrase[$this->alias]['mail_fixed_phrase_body']) {
-			$mailFixedPhrase[$this->alias]['mail_fixed_phrase_body'] =
-				__d('mails', 'MailSetting.mail_fixed_phrase_body');
-		}
+		$this->__noSetData('mail_fixed_phrase_subject', $mailFixedPhrase, $typeKey);
+		$this->__noSetData('mail_fixed_phrase_body', $mailFixedPhrase, $typeKey);
+
 		$mailFixedPhrase = Hash::remove($mailFixedPhrase, '{s}.created');
 		$mailFixedPhrase = Hash::remove($mailFixedPhrase, '{s}.created_user');
 		$mailFixedPhrase = Hash::remove($mailFixedPhrase, '{s}.modified');
@@ -128,11 +124,11 @@ class MailSettingFixedPhrase extends MailsAppModel {
  * メール設定-定型文 取得
  *
  * @param array $conditions 検索条件
+ * @param string $type Type of find operation (all / first / count / neighbors / list / threaded)
  * @return array メール設定データ配列
  */
-	public function getMailSettingFixedPhrase($conditions) {
-		$mailSetting = $this->find('first', array(
-			//'recursive' => -1,
+	public function getMailSettingFixedPhrase($conditions, $type = 'first') {
+		$mailSetting = $this->find($type, array(
 			'recursive' => 0,
 			'conditions' => $conditions,
 		));
@@ -140,37 +136,25 @@ class MailSettingFixedPhrase extends MailsAppModel {
 	}
 
 /**
- * メール設定-定型文 保存
+ * Dataにセットされてなかったら、セット
  *
- * @param array $data received post data
- * @return mixed On success Model::$data if its not empty or true, false on failure
- * @throws InternalErrorException
+ * @param string $key 配列のキー
+ * @param array &$mailFixedPhrase メール設定データ配列
+ * @param string $typeKey メール定型文の種類
+ * @return void
  */
-	public function saveMailSettingFixedPhrase($data) {
-		//トランザクションBegin
-		$this->begin();
-
-		//バリデーション
-		$this->set($data);
-		if (! $this->validates()) {
-			return false;
+	private function __noSetData($key, &$mailFixedPhrase, $typeKey = self::DEFAULT_TYPE) {
+		if ($mailFixedPhrase[$this->alias][$key]) {
+			return;
 		}
 
-		try {
-			// 保存
-			if (! $mailFixedPhrase = $this->save(null, false)) {
-				throw new InternalErrorException(__d('net_commons', 'Internal Server Error'));
-			}
-
-			//トランザクションCommit
-			$this->commit();
-
-		} catch (Exception $ex) {
-			//トランザクションRollback
-			$this->rollback($ex);
+		if ($typeKey == self::DEFAULT_TYPE) {
+			$mailFixedPhrase[$this->alias][$key] = __d('mails', 'MailSetting.' . $key);
+		} elseif ($typeKey == self::ANSWER_TYPE) {
+			$mailFixedPhrase[$this->alias][$key] = __d('mails', 'MailSetting.' . $key . '.answer');
+		} else {
+			$mailFixedPhrase[$this->alias][$key] = '';
 		}
-
-		return $mailFixedPhrase;
 	}
 }
 
