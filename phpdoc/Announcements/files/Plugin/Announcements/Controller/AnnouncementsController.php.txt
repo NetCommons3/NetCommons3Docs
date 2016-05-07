@@ -66,6 +66,9 @@ class AnnouncementsController extends AnnouncementsAppController {
 			}
 		}
 		$this->set('announcement', $announcement['Announcement']);
+
+		//新着データを既読にする
+		$this->Announcement->saveTopicUserStatus($announcement);
 	}
 
 /**

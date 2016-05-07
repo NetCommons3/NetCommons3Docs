@@ -33,10 +33,16 @@ class Announcement extends AnnouncementsAppModel {
 				'WorkflowComment' => 'Workflow.WorkflowComment',
 			)
 		),
-		//'NetCommons.OriginalKey',
-		'M17n.M17n',
+		'NetCommons.OriginalKey',
+		//'M17n.M17n',
 		'Workflow.WorkflowComment',
 		'Workflow.Workflow',
+		'Topics.Topics' => array(
+			'fields' => array(
+				'title' => 'Announcement.content',
+				'summary' => 'Announcement.content',
+			),
+		),
 	);
 
 /**

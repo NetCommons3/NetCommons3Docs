@@ -136,10 +136,10 @@
                                 <div class="accordion" style="margin-bottom: 0">
         <div class="accordion-group">
             <div class="accordion-heading">
-                                    <a class="accordion-toggle " data-toggle="collapse" data-target="#namespace-1527435351"></a>
+                                    <a class="accordion-toggle " data-toggle="collapse" data-target="#namespace-957874567"></a>
                                 <a href="../namespaces/default.html" style="margin-left: 30px; padding-left: 0">\</a>
             </div>
-            <div id="namespace-1527435351" class="accordion-body collapse in">
+            <div id="namespace-957874567" class="accordion-body collapse in">
                 <div class="accordion-inner">
 
                     
@@ -243,6 +243,7 @@ will inherit them.</p>
                         <section class="row-fluid public">
                             <section class="span4">
                                                                     <a href="../classes/DisplayNumberHelper.html#method_select" class="">select()</a><br />
+                                                                    <a href="../classes/DisplayNumberHelper.html#method_selectDays" class="">selectDays()</a><br />
                                                                     <a href="../classes/DisplayNumberHelper.html#method_dropDownToggle" class="">dropDownToggle()</a><br />
                                                             </section>
                             <section class="span4">
@@ -267,6 +268,7 @@ will inherit them.</p>
                         <section class="row-fluid private">
                             <section class="span4">
                                                                     <a href="../classes/DisplayNumberHelper.html#method___getOptions" class="">__getOptions()</a><br />
+                                                                    <a href="../classes/DisplayNumberHelper.html#method___getOptionsForDays" class="">__getOptionsForDays()</a><br />
                                                             </section>
                             <section class="span4">
                                                                     <em>No private properties found</em>
@@ -414,6 +416,48 @@ will inherit them.</p>
 
                                     <div class="row-fluid">
         <div class="span8 content class">
+            <a id="method_selectDays" name="method_selectDays" class="anchor"></a>
+            <article class="method">
+                <h3 class="public ">selectDays()</h3>
+                <a href="#source-view" role="button" class="pull-right btn" data-toggle="modal" style="font-size: 1.1em; padding: 9px 14px"><i class="icon-code"></i></a>
+                <pre class="signature" style="margin-right: 54px;">selectDays(string  <span class="argument">$fieldName</span>, array  <span class="argument">$attributes = array()</span>) : string</pre>
+                <p><em>Setting display number</em></p>
+                
+
+                                    <h4>Parameters</h4>
+                    <table class="table table-condensed table-hover">
+                                                    <tr>
+                                <td>string</td>
+                                <td>$fieldName </td>
+                                <td><p>Name of a field, like this &quot;Modelname.fieldname&quot;</p></td>
+                            </tr>
+                                                    <tr>
+                                <td>array</td>
+                                <td>$attributes </td>
+                                <td><p>Array of HTML attributes, and special attributes above.</p></td>
+                            </tr>
+                                            </table>
+                
+                
+                                    <h4>Returns</h4>
+                    string
+                                            &mdash; <p>Completed radio widget set.</p>
+                                    				
+                            </article>
+        </div>
+        <aside class="span4 detailsbar">
+            <h1><i class="icon-arrow-down"></i></h1>
+                                                            <dl>
+                                                                            </dl>
+            <h2>Tags</h2>
+            <table class="table table-condensed">
+                                    <tr><td colspan="2"><em>None found</em></td></tr>
+                            </table>
+        </aside>
+    </div>
+
+                                    <div class="row-fluid">
+        <div class="span8 content class">
             <a id="method_dropDownToggle" name="method_dropDownToggle" class="anchor"></a>
             <article class="method">
                 <h3 class="public ">dropDownToggle()</h3>
@@ -455,8 +499,8 @@ will inherit them.</p>
             <article class="method">
                 <h3 class="private ">__getOptions()</h3>
                 <a href="#source-view" role="button" class="pull-right btn" data-toggle="modal" style="font-size: 1.1em; padding: 9px 14px"><i class="icon-code"></i></a>
-                <pre class="signature" style="margin-right: 54px;">__getOptions(array  <span class="argument">$attributes = array()</span>) : string</pre>
-                <p><em>Get display number options</em></p>
+                <pre class="signature" style="margin-right: 54px;">__getOptions(array  <span class="argument">$attributes = array()</span>) : array</pre>
+                <p><em>件数セレクトボックスのオプション</em></p>
                 
 
                                     <h4>Parameters</h4>
@@ -464,14 +508,49 @@ will inherit them.</p>
                                                     <tr>
                                 <td>array</td>
                                 <td>$attributes </td>
-                                <td><p>Array of HTML attributes, and special attributes above.</p></td>
+                                <td><p>HTMLの属性オプション</p></td>
                             </tr>
                                             </table>
                 
                 
                                     <h4>Returns</h4>
-                    string
-                                            &mdash; <p>Completed radio widget set.</p>
+                    array
+                                    				
+                            </article>
+        </div>
+        <aside class="span4 detailsbar">
+            <h1><i class="icon-arrow-down"></i></h1>
+                                                            <dl>
+                                                                            </dl>
+            <h2>Tags</h2>
+            <table class="table table-condensed">
+                                    <tr><td colspan="2"><em>None found</em></td></tr>
+                            </table>
+        </aside>
+    </div>
+
+                                    <div class="row-fluid">
+        <div class="span8 content class">
+            <a id="method___getOptionsForDays" name="method___getOptionsForDays" class="anchor"></a>
+            <article class="method">
+                <h3 class="private ">__getOptionsForDays()</h3>
+                <a href="#source-view" role="button" class="pull-right btn" data-toggle="modal" style="font-size: 1.1em; padding: 9px 14px"><i class="icon-code"></i></a>
+                <pre class="signature" style="margin-right: 54px;">__getOptionsForDays(array  <span class="argument">$attributes = array()</span>) : array</pre>
+                <p><em>日数セレクトボックスのオプション</em></p>
+                
+
+                                    <h4>Parameters</h4>
+                    <table class="table table-condensed table-hover">
+                                                    <tr>
+                                <td>array</td>
+                                <td>$attributes </td>
+                                <td><p>HTMLの属性オプション</p></td>
+                            </tr>
+                                            </table>
+                
+                
+                                    <h4>Returns</h4>
+                    array
                                     				
                             </article>
         </div>
@@ -535,7 +614,7 @@ will inherit them.</p>
                 <section class="span10 offset1">
                     <hr />
                     Documentation is powered by <a href="http://www.phpdoc.org/">phpDocumentor </a> and authored
-                    on May 6th, 2016 at 09:23.
+                    on May 7th, 2016 at 08:34.
                 </section>
             </section>
         </section>
