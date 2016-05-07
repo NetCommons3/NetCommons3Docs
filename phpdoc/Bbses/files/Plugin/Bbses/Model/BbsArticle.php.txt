@@ -51,7 +51,6 @@ class BbsArticle extends BbsesAppModel {
  */
 	public $actsAs = array(
 		'Bbses.BbsArticle',
-		'Bbses.BbsArticlesUser',
 		'Likes.Like',
 		'NetCommons.OriginalKey',
 		'Workflow.WorkflowComment',
@@ -61,6 +60,13 @@ class BbsArticle extends BbsesAppModel {
 				'X-SUBJECT' => 'BbsArticle.title',
 				'X-BODY' => 'BbsArticle.content',
 				'X-BBS_NAME' => 'Bbs.name',
+			),
+		),
+		'Topics.Topics' => array(
+			'fields' => array(
+				'title' => 'BbsArticle.title',
+				'summary' => 'BbsArticle.content',
+				'path' => '/:plugin_key/bbs_articles/view/:block_id/:content_key',
 			),
 		),
 	);
