@@ -136,10 +136,10 @@
                                 <div class="accordion" style="margin-bottom: 0">
         <div class="accordion-group">
             <div class="accordion-heading">
-                                    <a class="accordion-toggle " data-toggle="collapse" data-target="#namespace-658217977"></a>
+                                    <a class="accordion-toggle " data-toggle="collapse" data-target="#namespace-755951368"></a>
                                 <a href="../namespaces/default.html" style="margin-left: 30px; padding-left: 0">\</a>
             </div>
-            <div id="namespace-658217977" class="accordion-body collapse in">
+            <div id="namespace-755951368" class="accordion-body collapse in">
                 <div class="accordion-inner">
 
                     
@@ -266,8 +266,7 @@ will inherit them.</p>
                                                                     <a href="../classes/Video.html#method_isFfmpegEnable" class="">isFfmpegEnable()</a><br />
                                                                     <a href="../classes/Video.html#method_getConditions" class="">getConditions()</a><br />
                                                                     <a href="../classes/Video.html#method_updateCountUp" class="">updateCountUp()</a><br />
-                                                                    <a href="../classes/Video.html#method_addSaveVideo" class="">addSaveVideo()</a><br />
-                                                                    <a href="../classes/Video.html#method_editSaveVideo" class="">editSaveVideo()</a><br />
+                                                                    <a href="../classes/Video.html#method_saveVideo" class="">saveVideo()</a><br />
                                                                     <a href="../classes/Video.html#method_deleteVideo" class="">deleteVideo()</a><br />
                                                             </section>
                             <section class="span4">
@@ -1446,12 +1445,12 @@ validation rules can be defined in $validate.</em></p>
 
                                     <div class="row-fluid">
         <div class="span8 content class">
-            <a id="method_addSaveVideo" name="method_addSaveVideo" class="anchor"></a>
+            <a id="method_saveVideo" name="method_saveVideo" class="anchor"></a>
             <article class="method">
-                <h3 class="public ">addSaveVideo()</h3>
+                <h3 class="public ">saveVideo()</h3>
                 <a href="#source-view" role="button" class="pull-right btn" data-toggle="modal" style="font-size: 1.1em; padding: 9px 14px"><i class="icon-code"></i></a>
-                <pre class="signature" style="margin-right: 54px;">addSaveVideo(array  <span class="argument">$data</span>) : mixed</pre>
-                <p><em>登録Videoデータ保存</em></p>
+                <pre class="signature" style="margin-right: 54px;">saveVideo(array  <span class="argument">$data</span>, integer  <span class="argument">$isEdit</span>) : mixed</pre>
+                <p><em>Videoデータ保存</em></p>
                 
 
                                     <h4>Parameters</h4>
@@ -1461,47 +1460,10 @@ validation rules can be defined in $validate.</em></p>
                                 <td>$data </td>
                                 <td><p>received post data</p></td>
                             </tr>
-                                            </table>
-                
-                                    <h4>Throws</h4>
-                    <dl>
-                                                    <dt>\InternalErrorException</dt>
-                            <dd></dd>
-                                                                    </dl>
-                
-                                    <h4>Returns</h4>
-                    mixed
-                                            &mdash; <p>On success Model::$data if its not empty or true, false on failure</p>
-                                    				
-                            </article>
-        </div>
-        <aside class="span4 detailsbar">
-            <h1><i class="icon-arrow-down"></i></h1>
-                                                            <dl>
-                                                                            </dl>
-            <h2>Tags</h2>
-            <table class="table table-condensed">
-                                    <tr><td colspan="2"><em>None found</em></td></tr>
-                            </table>
-        </aside>
-    </div>
-
-                                    <div class="row-fluid">
-        <div class="span8 content class">
-            <a id="method_editSaveVideo" name="method_editSaveVideo" class="anchor"></a>
-            <article class="method">
-                <h3 class="public ">editSaveVideo()</h3>
-                <a href="#source-view" role="button" class="pull-right btn" data-toggle="modal" style="font-size: 1.1em; padding: 9px 14px"><i class="icon-code"></i></a>
-                <pre class="signature" style="margin-right: 54px;">editSaveVideo(array  <span class="argument">$data</span>) : mixed</pre>
-                <p><em>編集Videoデータ保存</em></p>
-                
-
-                                    <h4>Parameters</h4>
-                    <table class="table table-condensed table-hover">
                                                     <tr>
-                                <td>array</td>
-                                <td>$data </td>
-                                <td><p>received post data</p></td>
+                                <td>integer</td>
+                                <td>$isEdit </td>
+                                <td><p>編集か</p></td>
                             </tr>
                                             </table>
                 
@@ -1709,7 +1671,7 @@ validation rules can be defined in $validate.</em></p>
                 <section class="span10 offset1">
                     <hr />
                     Documentation is powered by <a href="http://www.phpdoc.org/">phpDocumentor </a> and authored
-                    on May 9th, 2016 at 06:13.
+                    on May 9th, 2016 at 06:28.
                 </section>
             </section>
         </section>
