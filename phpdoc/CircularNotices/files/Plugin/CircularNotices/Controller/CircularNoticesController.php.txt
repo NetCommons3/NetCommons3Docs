@@ -175,6 +175,9 @@ class CircularNoticesController extends CircularNoticesAppController {
 			);
 
 			if ($this->CircularNoticeTargetUser->saveCircularNoticeTargetUser($data)) {
+				//新着データを回答済みにする
+				$this->CircularNoticeContent->saveTopicUserStatus($content, true);
+
 				$url = NetCommonsUrl::actionUrl(array(
 					'controller' => $this->params['controller'],
 					'action' => 'view',
@@ -189,6 +192,9 @@ class CircularNoticesController extends CircularNoticesAppController {
 
 			$myTargetUser['CircularNoticeTargetUser']['reply_text_value'] = $replyTextValue;
 			$myTargetUser['CircularNoticeTargetUser']['reply_selection_value'] = $replySelectionValue;
+		} else {
+			//新着データを既読にする
+			$this->CircularNoticeContent->saveTopicUserStatus($content);
 		}
 
 		$results = Hash::merge(

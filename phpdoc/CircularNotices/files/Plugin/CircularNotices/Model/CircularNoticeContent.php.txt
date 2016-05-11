@@ -158,6 +158,16 @@ class CircularNoticeContent extends CircularNoticesAppModel {
 				'X-BODY' => 'CircularNoticeContent.content',
 			),
 		),
+		'Topics.Topics' => array(
+			'fields' => array(
+				'title' => 'CircularNoticeContent.subject',
+				'summary' => 'CircularNoticeContent.content',
+				'answer_period_start' => 'CircularNoticeContent.publish_start',
+				'answer_period_end' => 'CircularNoticeContent.reply_deadline',
+				'path' => '/:plugin_key/:plugin_key/view/:block_id/:content_key',
+			),
+			'is_workflow' => false
+		),
 	);
 
 /**
@@ -360,6 +370,9 @@ class CircularNoticeContent extends CircularNoticesAppModel {
 					);
 				}
 			} else {
+				//新着データのユーザIDセット
+				$this->setTopicUsers(Hash::extract($users, '{n}.user_id'));
+
 				$targetUsers = Hash::map($users, '{n}.user_id', function ($value) {
 					return array(
 						'CircularNoticeTargetUser' => array(
