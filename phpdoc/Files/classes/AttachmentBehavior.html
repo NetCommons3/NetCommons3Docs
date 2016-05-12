@@ -136,10 +136,10 @@
                                 <div class="accordion" style="margin-bottom: 0">
         <div class="accordion-group">
             <div class="accordion-heading">
-                                    <a class="accordion-toggle " data-toggle="collapse" data-target="#namespace-2102979599"></a>
+                                    <a class="accordion-toggle " data-toggle="collapse" data-target="#namespace-719588050"></a>
                                 <a href="../namespaces/default.html" style="margin-left: 30px; padding-left: 0">\</a>
             </div>
-            <div id="namespace-2102979599" class="accordion-body collapse in">
+            <div id="namespace-719588050" class="accordion-body collapse in">
                 <div class="accordion-inner">
 
                     
@@ -232,7 +232,7 @@
 
                     <h1><small>\</small>AttachmentBehavior</h1>
                     <p><em>Class AttachmentBehavior</em></p>
-                    
+                    <p>Uploadビヘイビアのバリデータをwrapするためにphpmd制限を外してる</p>
                     
                                         
                     <section id="summary">
@@ -254,8 +254,10 @@
                                                                     <a href="../classes/AttachmentBehavior.html#method_afterFind" class="">afterFind()</a><br />
                                                                     <a href="../classes/AttachmentBehavior.html#method_beforeSave" class="">beforeSave()</a><br />
                                                                     <a href="../classes/AttachmentBehavior.html#method_afterSave" class="">afterSave()</a><br />
+                                                                    <a href="../classes/AttachmentBehavior.html#method_afterDelete" class="">afterDelete()</a><br />
                                                                     <a href="../classes/AttachmentBehavior.html#method_uploadSettings" class="">uploadSettings()</a><br />
                                                                     <a href="../classes/AttachmentBehavior.html#method_attachFile" class="">attachFile()</a><br />
+                                                                    <a href="../classes/AttachmentBehavior.html#method_downloadCountUp" class="">downloadCountUp()</a><br />
                                                                     <a href="../classes/AttachmentBehavior.html#method_isUnderPhpSizeLimit" class="">isUnderPhpSizeLimit()</a><br />
                                                                     <a href="../classes/AttachmentBehavior.html#method_isUnderFormSizeLimit" class="">isUnderFormSizeLimit()</a><br />
                                                                     <a href="../classes/AttachmentBehavior.html#method_isCompletedUpload" class="">isCompletedUpload()</a><br />
@@ -336,6 +338,7 @@
                             </th>
                             <td>
                                                                     <p>(PHPMD.TooManyPublicMethods)</p>
+                                                                    <p>(PHPMD.TooManyMethods)</p>
                                                             </td>
                         </tr>
                                         </table>
@@ -644,6 +647,40 @@
 
                                     <div class="row-fluid">
         <div class="span8 content class">
+            <a id="method_afterDelete" name="method_afterDelete" class="anchor"></a>
+            <article class="method">
+                <h3 class="public ">afterDelete()</h3>
+                <a href="#source-view" role="button" class="pull-right btn" data-toggle="modal" style="font-size: 1.1em; padding: 9px 14px"><i class="icon-code"></i></a>
+                <pre class="signature" style="margin-right: 54px;">afterDelete(\Model  <span class="argument">$model</span>) : void</pre>
+                <p><em>After delete</em></p>
+                
+
+                                    <h4>Parameters</h4>
+                    <table class="table table-condensed table-hover">
+                                                    <tr>
+                                <td>\Model</td>
+                                <td>$model </td>
+                                <td><p>元モデル</p></td>
+                            </tr>
+                                            </table>
+                
+                
+                				
+                            </article>
+        </div>
+        <aside class="span4 detailsbar">
+            <h1><i class="icon-arrow-down"></i></h1>
+                                                            <dl>
+                                                                            </dl>
+            <h2>Tags</h2>
+            <table class="table table-condensed">
+                                    <tr><td colspan="2"><em>None found</em></td></tr>
+                            </table>
+        </aside>
+    </div>
+
+                                    <div class="row-fluid">
+        <div class="span8 content class">
             <a id="method_uploadSettings" name="method_uploadSettings" class="anchor"></a>
             <article class="method">
                 <h3 class="public ">uploadSettings()</h3>
@@ -722,6 +759,50 @@
                                 <td>string</td>
                                 <td>$keyFieldName </td>
                                 <td><p>コンテンツキーのフィールド名 省略可能 デフォルト key</p></td>
+                            </tr>
+                                            </table>
+                
+                
+                				
+                            </article>
+        </div>
+        <aside class="span4 detailsbar">
+            <h1><i class="icon-arrow-down"></i></h1>
+                                                            <dl>
+                                                                            </dl>
+            <h2>Tags</h2>
+            <table class="table table-condensed">
+                                    <tr><td colspan="2"><em>None found</em></td></tr>
+                            </table>
+        </aside>
+    </div>
+
+                                    <div class="row-fluid">
+        <div class="span8 content class">
+            <a id="method_downloadCountUp" name="method_downloadCountUp" class="anchor"></a>
+            <article class="method">
+                <h3 class="public ">downloadCountUp()</h3>
+                <a href="#source-view" role="button" class="pull-right btn" data-toggle="modal" style="font-size: 1.1em; padding: 9px 14px"><i class="icon-code"></i></a>
+                <pre class="signature" style="margin-right: 54px;">downloadCountUp(\Model  <span class="argument">$model</span>, array  <span class="argument">$data</span>, string  <span class="argument">$fieldName</span>) : void</pre>
+                <p><em>ダウンロードカウントアップ</em></p>
+                
+
+                                    <h4>Parameters</h4>
+                    <table class="table table-condensed table-hover">
+                                                    <tr>
+                                <td>\Model</td>
+                                <td>$model </td>
+                                <td><p>元モデル</p></td>
+                            </tr>
+                                                    <tr>
+                                <td>array</td>
+                                <td>$data </td>
+                                <td><p>UploadFile Model Data</p></td>
+                            </tr>
+                                                    <tr>
+                                <td>string</td>
+                                <td>$fieldName </td>
+                                <td><p>アップロードファイルフィールド名</p></td>
                             </tr>
                                             </table>
                 
@@ -1785,7 +1866,7 @@ or the existing value in the database is not blank.</em></p>
                 <section class="span10 offset1">
                     <hr />
                     Documentation is powered by <a href="http://www.phpdoc.org/">phpDocumentor </a> and authored
-                    on May 11th, 2016 at 10:40.
+                    on May 12th, 2016 at 03:24.
                 </section>
             </section>
         </section>

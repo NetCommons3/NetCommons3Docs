@@ -136,10 +136,10 @@
                                 <div class="accordion" style="margin-bottom: 0">
         <div class="accordion-group">
             <div class="accordion-heading">
-                                    <a class="accordion-toggle " data-toggle="collapse" data-target="#namespace-418517548"></a>
+                                    <a class="accordion-toggle " data-toggle="collapse" data-target="#namespace-1166400679"></a>
                                 <a href="../namespaces/default.html" style="margin-left: 30px; padding-left: 0">\</a>
             </div>
-            <div id="namespace-418517548" class="accordion-body collapse in">
+            <div id="namespace-1166400679" class="accordion-body collapse in">
                 <div class="accordion-inner">
 
                     
@@ -263,6 +263,7 @@ will inherit them.</p>
                                                                     <a href="../classes/NetCommonsAppModel.html#method_loadModels" class="">loadModels()</a><br />
                                                                     <a href="../classes/UploadFile.html#method_setOptions" class="">setOptions()</a><br />
                                                                     <a href="../classes/UploadFile.html#method_removeFile" class="">removeFile()</a><br />
+                                                                    <a href="../classes/UploadFile.html#method_deleteUploadFile" class="">deleteUploadFile()</a><br />
                                                                     <a href="../classes/UploadFile.html#method_nameCallback" class="">nameCallback()</a><br />
                                                                     <a href="../classes/UploadFile.html#method_beforeSave" class="">beforeSave()</a><br />
                                                                     <a href="../classes/UploadFile.html#method_getFile" class="">getFile()</a><br />
@@ -277,6 +278,7 @@ will inherit them.</p>
                                                                     <a href="../classes/UploadFile.html#property_actsAs" class="">$actsAs</a><br />
                                                                     <a href="../classes/NetCommonsAppModel.html#property_validate" class="">$validate</a><br />
                                                                     <a href="../classes/NetCommonsAppModel.html#property_useDbConfig" class="">$useDbConfig</a><br />
+                                                                    <a href="../classes/UploadFile.html#property_uploadBasePath" class="">$uploadBasePath</a><br />
                                                                     <a href="../classes/UploadFile.html#property_recursive" class="">$recursive</a><br />
                                                                     <a href="../classes/UploadFile.html#property_hasMany" class="">$hasMany</a><br />
                                                             </section>
@@ -421,6 +423,30 @@ will inherit them.</p>
                         <dl>
                                     <dt>Inherited from</dt>
                     <dd><a href="../classes/NetCommonsAppModel.html"><div class="path-wrapper">\NetCommonsAppModel</div></a></dd>
+                                                            </dl>
+            <h2>Tags</h2>
+            <table class="table table-condensed">
+                                    <tr><td colspan="2"><em>None found</em></td></tr>
+                            </table>
+        </aside>
+    </div>
+
+                                    <div class="row-fluid">
+        <div class="span8 content class">
+            <a id="property_uploadBasePath" name="property_uploadBasePath" class="anchor"></a>
+            <article class="property">
+                <h3 class="public ">$uploadBasePath</h3>
+                <pre class="signature">$uploadBasePath : string</pre>
+                <p><em></em></p>
+                
+
+                                <h4>Type</h4>
+                string
+                &mdash; UploadFileでアップロードする基準パス                            </article>
+        </div>
+        <aside class="span4 detailsbar">
+            <h1><i class="icon-arrow-down"></i></h1>
+                        <dl>
                                                             </dl>
             <h2>Tags</h2>
             <table class="table table-condensed">
@@ -1009,6 +1035,42 @@ schema data defaults are not merged.</p></td>
 
                                     <div class="row-fluid">
         <div class="span8 content class">
+            <a id="method_deleteUploadFile" name="method_deleteUploadFile" class="anchor"></a>
+            <article class="method">
+                <h3 class="public ">deleteUploadFile()</h3>
+                <a href="#source-view" role="button" class="pull-right btn" data-toggle="modal" style="font-size: 1.1em; padding: 9px 14px"><i class="icon-code"></i></a>
+                <pre class="signature" style="margin-right: 54px;">deleteUploadFile(integer  <span class="argument">$fileId</span>) : boolean</pre>
+                <p><em>Delete uploadFile</em></p>
+                
+
+                                    <h4>Parameters</h4>
+                    <table class="table table-condensed table-hover">
+                                                    <tr>
+                                <td>integer</td>
+                                <td>$fileId </td>
+                                <td><p>UploadFile.id</p></td>
+                            </tr>
+                                            </table>
+                
+                
+                                    <h4>Returns</h4>
+                    boolean
+                                    				
+                            </article>
+        </div>
+        <aside class="span4 detailsbar">
+            <h1><i class="icon-arrow-down"></i></h1>
+                                                            <dl>
+                                                                            </dl>
+            <h2>Tags</h2>
+            <table class="table table-condensed">
+                                    <tr><td colspan="2"><em>None found</em></td></tr>
+                            </table>
+        </aside>
+    </div>
+
+                                    <div class="row-fluid">
+        <div class="span8 content class">
             <a id="method_nameCallback" name="method_nameCallback" class="anchor"></a>
             <article class="method">
                 <h3 class="public ">nameCallback()</h3>
@@ -1353,7 +1415,7 @@ schema data defaults are not merged.</p></td>
             <article class="method">
                 <h3 class="public ">deleteLink()</h3>
                 <a href="#source-view" role="button" class="pull-right btn" data-toggle="modal" style="font-size: 1.1em; padding: 9px 14px"><i class="icon-code"></i></a>
-                <pre class="signature" style="margin-right: 54px;">deleteLink(string  <span class="argument">$pluginKey</span>, integer  <span class="argument">$contentId</span>, string  <span class="argument">$fieldName</span>) : void</pre>
+                <pre class="signature" style="margin-right: 54px;">deleteLink(string  <span class="argument">$pluginKey</span>, integer  <span class="argument">$contentId</span>, string  <span class="argument">$fieldName = null</span>) : void</pre>
                 <p><em>関連テーブルデータの削除</em></p>
                 
 
@@ -1623,7 +1685,7 @@ schema data defaults are not merged.</p></td>
                 <section class="span10 offset1">
                     <hr />
                     Documentation is powered by <a href="http://www.phpdoc.org/">phpDocumentor </a> and authored
-                    on May 11th, 2016 at 10:40.
+                    on May 12th, 2016 at 03:24.
                 </section>
             </section>
         </section>
