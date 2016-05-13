@@ -58,7 +58,7 @@ class Records extends NetCommonsMigration {
 				'rght' => '3',
 				'type' => '2',
 				'plugin_key' => 'public_space',
-				'default_setting_action' => 'rooms/index/2'
+				'default_setting_action' => 'rooms/index/2',
 			),
 			array(
 				'id' => '3',
@@ -67,7 +67,8 @@ class Records extends NetCommonsMigration {
 				'rght' => '5',
 				'type' => '3',
 				'plugin_key' => 'private_space',
-				'default_setting_action' => ''
+				'default_setting_action' => '',
+				'room_disk_size' => '52428800',
 			),
 			array(
 				'id' => '4',
@@ -76,7 +77,8 @@ class Records extends NetCommonsMigration {
 				'rght' => '7',
 				'type' => '4',
 				'plugin_key' => 'room_space',
-				'default_setting_action' => 'rooms/index/4'
+				'default_setting_action' => 'rooms/index/4',
+				'room_disk_size' => '524288000',
 			),
 		),
 		'RolesRoom' => array(
