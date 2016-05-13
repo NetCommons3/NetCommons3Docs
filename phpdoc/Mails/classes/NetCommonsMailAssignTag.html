@@ -136,10 +136,10 @@
                                 <div class="accordion" style="margin-bottom: 0">
         <div class="accordion-group">
             <div class="accordion-heading">
-                                    <a class="accordion-toggle " data-toggle="collapse" data-target="#namespace-1779651573"></a>
+                                    <a class="accordion-toggle " data-toggle="collapse" data-target="#namespace-1105105648"></a>
                                 <a href="../namespaces/default.html" style="margin-left: 30px; padding-left: 0">\</a>
             </div>
-            <div id="namespace-1779651573" class="accordion-body collapse in">
+            <div id="namespace-1105105648" class="accordion-body collapse in">
                 <div class="accordion-inner">
 
                     
@@ -238,7 +238,98 @@
 
                     <h1><small>\</small>NetCommonsMailAssignTag</h1>
                     <p><em>NetCommonsメール 埋め込みタグ Utility</em></p>
-                    
+                    <h4>自動セットする埋め込みタグ</h4>
+<table>
+<thead>
+<tr>
+<th>埋め込みタグ</th>
+<th>名</th>
+<th>参照元</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>X-FROM_EMAIL</code></td>
+<td>送信者メールアドレス</td>
+<td>SiteSettingUtil::read('Mail.from');</td>
+</tr>
+<tr>
+<td><code>X-FROM_NAME</code></td>
+<td>送信者名</td>
+<td>SiteSettingUtil::read('Mail.from_name');</td>
+</tr>
+<tr>
+<td><code>X-SITE_NAME</code></td>
+<td>サイト名</td>
+<td>SiteSettingUtil::read('App.site_name');</td>
+</tr>
+<tr>
+<td><code>X-SITE_URL</code></td>
+<td>サイトURL</td>
+<td>Router::fullbaseUrl());</td>
+</tr>
+<tr>
+<td><code>X-PLUGIN_NAME</code></td>
+<td>プラグイン名</td>
+<td>Current::read('Plugin.name');</td>
+</tr>
+<tr>
+<td><code>X-BLOCK_NAME</code></td>
+<td>ブロック名</td>
+<td>Current::read('Block.name');</td>
+</tr>
+<tr>
+<td><code>X-TO_DATE</code></td>
+<td>今日日付 'Y/m/d H:i:s'</td>
+<td></td>
+</tr>
+<tr>
+<td><code>X-BODY_HEADER</code></td>
+<td>本文ヘッダー</td>
+<td>SiteSettingUtil::read('Mail.body_header');</td>
+</tr>
+<tr>
+<td><code>X-SIGNATURE</code></td>
+<td>署名</td>
+<td>SiteSettingUtil::read('Mail.signature');</td>
+</tr>
+<tr>
+<td><code>X-USER</code></td>
+<td>ユーザ名(ハンドル)</td>
+<td>NetCommonsMailAssignTag::getXUser()</td>
+</tr>
+<tr>
+<td><code>X-ROOM</code></td>
+<td>ルーム名</td>
+<td>NetCommonsMailAssignTag::getXRoom()</td>
+</tr>
+<tr>
+<td><code>X-URL</code></td>
+<td>コンテンツURL</td>
+<td>NetCommonsMailAssignTag::getXUrl()</td>
+</tr>
+<tr>
+<td><code>X-TAGS</code></td>
+<td>タグ(タグプラグイン)</td>
+<td>NetCommonsMailAssignTag::getXTags()</td>
+</tr>
+<tr>
+<td><code>X-WORKFLOW_COMMENT</code></td>
+<td>承認コメント</td>
+<td>NetCommonsMailAssignTag::getXWorkflowComment()</td>
+</tr>
+<tr>
+<td><code>X-PLUGIN_MAIL_SUBJECT</code></td>
+<td>プラグイン側で設定した件名(承認メール用)</td>
+<td>NetCommonsMailAssignTag::setMailFixedPhraseSiteSetting()</td>
+</tr>
+<tr>
+<td><code>X-PLUGIN_MAIL_BODY</code></td>
+<td>プラグイン側で設定した本文(承認メール用)</td>
+<td>NetCommonsMailAssignTag::setMailFixedPhraseSiteSetting()</td>
+</tr>
+</tbody>
+</table>
                     
                                         
                     <section id="summary">
@@ -1263,7 +1354,7 @@
                 <section class="span10 offset1">
                     <hr />
                     Documentation is powered by <a href="http://www.phpdoc.org/">phpDocumentor </a> and authored
-                    on May 13th, 2016 at 07:55.
+                    on May 13th, 2016 at 08:22.
                 </section>
             </section>
         </section>
