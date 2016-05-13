@@ -136,10 +136,10 @@
                                 <div class="accordion" style="margin-bottom: 0">
         <div class="accordion-group">
             <div class="accordion-heading">
-                                    <a class="accordion-toggle " data-toggle="collapse" data-target="#namespace-1523698577"></a>
+                                    <a class="accordion-toggle " data-toggle="collapse" data-target="#namespace-333379800"></a>
                                 <a href="../namespaces/default.html" style="margin-left: 30px; padding-left: 0">\</a>
             </div>
-            <div id="namespace-1523698577" class="accordion-body collapse in">
+            <div id="namespace-333379800" class="accordion-body collapse in">
                 <div class="accordion-inner">
 
                     
@@ -643,13 +643,12 @@
         'X-SUBJECT' =&gt; 'Video.title',
         'X-BODY' =&gt; 'Video.description',
     ),
+        // アンケート回答、登録フォーム回答時は指定
+        //'workflowType' =&gt; MailQueueBehavior::MAIL_QUEUE_WORKFLOW_TYPE_ANSWER,
+        // アンケートの未来公開日は指定
+        //'publishStartField' =&gt; 'answer_start_period',
 ),</code></pre>
 <p>注意事項：ワークフロー利用時はWorkflow.Workflowより下に記述</p>
-<h5>Model - アンケート回答、登録フォーム回答時は、下記も指定</h5>
-<pre><code>public $actsAs = array(
-'Mails.MailQueue' =&gt; array(
-        'workflowType' =&gt; MailQueueBehavior::MAIL_QUEUE_WORKFLOW_TYPE_ANSWER,
-),</code></pre>
 
                                     <h4>Parameters</h4>
                     <table class="table table-condensed table-hover">
@@ -785,7 +784,45 @@
                 <a href="#source-view" role="button" class="pull-right btn" data-toggle="modal" style="font-size: 1.1em; padding: 9px 14px"><i class="icon-code"></i></a>
                 <pre class="signature" style="margin-right: 54px;">setSetting(\Model  <span class="argument">$model</span>, string  <span class="argument">$settingKey</span>, string|array  <span class="argument">$settingValue</span>) : void</pre>
                 <p><em>セッティング セット</em></p>
-                
+                <h4>サンプルコード</h4>
+<h5>Model</h5>
+<pre><code>public function saveVideo($data) {
+    $this-&gt;begin();
+
+    $this-&gt;set($data);
+    if (! $this-&gt;validates()) {
+        return false;
+    }
+
+    try {
+        // 試し：投稿メールのOFF セット(カレンダー、回覧板等)
+        //$this-&gt;setSetting(MailQueueBehavior::MAIL_QUEUE_SETTING_IS_MAIL_SEND_POST, 0);
+        // 試し：メールアドレス セット(登録フォーム回答)
+        //          $toAddresses = array(
+        //              'test1@example.com',
+        //              'test2@example.com',
+        //          );
+        //          $this-&gt;setSetting(MailQueueBehavior::MAIL_QUEUE_SETTING_TO_ADDRESSES, $toAddresses);
+        // 試し：ユーザID セット(アンケート設置者)、ユーザID複数でグループ配信（回覧板、カレンダー）
+        //          $userIds = array(
+        //              4,
+        //              5,
+        //          );
+        //          $this-&gt;setSetting(MailQueueBehavior::MAIL_QUEUE_SETTING_USER_IDS, $userIds);
+        // 試し：グループ配信のみ（回覧板、カレンダー(プライベート予定のグループ共有)）
+        //          $this-&gt;setSetting(MailQueueBehavior::MAIL_QUEUE_SETTING_WORKFLOW_TYPE,
+        //              MailQueueBehavior::MAIL_QUEUE_WORKFLOW_TYPE_GROUP_ONLY);
+
+        if (! $video = $this-&gt;save(null, false)) {
+            throw new InternalErrorException(__d('net_commons', 'Internal Server Error'));
+        }
+        $this-&gt;commit();
+
+    } catch (Exception $ex) {
+        $this-&gt;rollback($ex);
+    }
+    return $video;
+}</code></pre>
 
                                     <h4>Parameters</h4>
                     <table class="table table-condensed table-hover">
@@ -835,7 +872,36 @@
                 <a href="#source-view" role="button" class="pull-right btn" data-toggle="modal" style="font-size: 1.1em; padding: 9px 14px"><i class="icon-code"></i></a>
                 <pre class="signature" style="margin-right: 54px;">setSendTimeReminder(\Model  <span class="argument">$model</span>, array  <span class="argument">$sendTimeReminders</span>) : void</pre>
                 <p><em>リマインダー送信日時 セット</em></p>
-                
+                <h4>サンプルコード</h4>
+<h5>Model</h5>
+<pre><code>public function saveVideo($data) {
+    $this-&gt;begin();
+
+    $this-&gt;set($data);
+    if (! $this-&gt;validates()) {
+        return false;
+    }
+
+    try {
+        // 試し：リマインダー(カレンダー等)
+        // 送信条件：site_settings['Mail.use_cron'] =&gt; 1
+        $netCommonsTime = new NetCommonsTime();
+        $sendTimes = array(
+            $netCommonsTime-&gt;toServerDatetime('2017-03-31 14:30:00'),
+            $netCommonsTime-&gt;toServerDatetime('2017-04-20 13:30:00'),
+        );
+        $this-&gt;setSendTimeReminder($sendTimes);
+
+        if (! $video = $this-&gt;save(null, false)) {
+            throw new InternalErrorException(__d('net_commons', 'Internal Server Error'));
+        }
+        $this-&gt;commit();
+
+    } catch (Exception $ex) {
+        $this-&gt;rollback($ex);
+    }
+    return $video;
+}</code></pre>
 
                                     <h4>Parameters</h4>
                     <table class="table table-condensed table-hover">
@@ -1450,7 +1516,7 @@
                 <section class="span10 offset1">
                     <hr />
                     Documentation is powered by <a href="http://www.phpdoc.org/">phpDocumentor </a> and authored
-                    on May 13th, 2016 at 05:39.
+                    on May 13th, 2016 at 06:08.
                 </section>
             </section>
         </section>
