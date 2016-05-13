@@ -136,10 +136,10 @@
                                 <div class="accordion" style="margin-bottom: 0">
         <div class="accordion-group">
             <div class="accordion-heading">
-                                    <a class="accordion-toggle " data-toggle="collapse" data-target="#namespace-94409545"></a>
+                                    <a class="accordion-toggle " data-toggle="collapse" data-target="#namespace-181672450"></a>
                                 <a href="../namespaces/default.html" style="margin-left: 30px; padding-left: 0">\</a>
             </div>
-            <div id="namespace-94409545" class="accordion-body collapse in">
+            <div id="namespace-181672450" class="accordion-body collapse in">
                 <div class="accordion-inner">
 
                     
@@ -286,7 +286,7 @@
                                                                     <em>No protected methods found</em>
                                                             </section>
                             <section class="span4">
-                                                                    <em>No protected properties found</em>
+                                                                    <a href="../classes/MailQueueBehavior.html#property__defaultSettings" class="">$_defaultSettings</a><br />
                                                             </section>
                             <section class="span4">
                                 <em>N/A</em>
@@ -294,7 +294,6 @@
                         </section>
                         <section class="row-fluid private">
                             <section class="span4">
-                                                                    <a href="../classes/MailQueueBehavior.html#method___noSetSetting" class="">__noSetSetting()</a><br />
                                                                     <a href="../classes/MailQueueBehavior.html#method___getSendTimePublish" class="">__getSendTimePublish()</a><br />
                                                                     <a href="../classes/MailQueueBehavior.html#method___getSaveSendTime" class="">__getSaveSendTime()</a><br />
                                                                     <a href="../classes/MailQueueBehavior.html#method___getUseWorkflow" class="">__getUseWorkflow()</a><br />
@@ -589,7 +588,39 @@
     </div>
 
                             
-                        
+                                    <a id="properties" name="properties"></a>
+            <div class="row-fluid">
+                <div class="span8 content class">
+                    <h2>Properties</h2>
+                </div>
+                <aside class="span4 detailsbar"></aside>
+            </div>
+
+                                                    <div class="row-fluid">
+        <div class="span8 content class">
+            <a id="property__defaultSettings" name="property__defaultSettings" class="anchor"></a>
+            <article class="property">
+                <h3 class="protected ">$_defaultSettings</h3>
+                <pre class="signature">$_defaultSettings : array</pre>
+                <p><em>ビヘイビアの初期設定</em></p>
+                
+
+                                <h4>Type</h4>
+                array
+                                            </article>
+        </div>
+        <aside class="span4 detailsbar">
+            <h1><i class="icon-arrow-down"></i></h1>
+                        <dl>
+                                                            </dl>
+            <h2>Tags</h2>
+            <table class="table table-condensed">
+                                    <tr><td colspan="2"><em>None found</em></td></tr>
+                            </table>
+        </aside>
+    </div>
+
+                                            
                                     <a id="methods" name="methods"></a>
             <div class="row-fluid">
                 <div class="span8 content class"><h2>Methods</h2></div>
@@ -614,6 +645,11 @@
     ),
 ),</code></pre>
 <p>注意事項：ワークフロー利用時はWorkflow.Workflowより下に記述</p>
+<h5>Model - アンケート回答、登録フォーム回答時は、下記も指定</h5>
+<pre><code>public $actsAs = array(
+'Mails.MailQueue' =&gt; array(
+        'workflowType' =&gt; MailQueueBehavior::MAIL_QUEUE_WORKFLOW_TYPE_ANSWER,
+),</code></pre>
 
                                     <h4>Parameters</h4>
                     <table class="table table-condensed table-hover">
@@ -947,50 +983,6 @@
     </div>
 
                                                                     <div class="row-fluid">
-        <div class="span8 content class">
-            <a id="method___noSetSetting" name="method___noSetSetting" class="anchor"></a>
-            <article class="method">
-                <h3 class="private ">__noSetSetting()</h3>
-                <a href="#source-view" role="button" class="pull-right btn" data-toggle="modal" style="font-size: 1.1em; padding: 9px 14px"><i class="icon-code"></i></a>
-                <pre class="signature" style="margin-right: 54px;">__noSetSetting(\Model  <span class="argument">$model</span>, string  <span class="argument">$settingKey</span>, string|array  <span class="argument">$settingValue</span>) : void</pre>
-                <p><em>設定ないsettingにセット</em></p>
-                
-
-                                    <h4>Parameters</h4>
-                    <table class="table table-condensed table-hover">
-                                                    <tr>
-                                <td>\Model</td>
-                                <td>$model </td>
-                                <td><p>モデル</p></td>
-                            </tr>
-                                                    <tr>
-                                <td>string</td>
-                                <td>$settingKey </td>
-                                <td><p>セッティングのキー</p></td>
-                            </tr>
-                                                    <tr>
-                                <td>string|array</td>
-                                <td>$settingValue </td>
-                                <td><p>セッティングの値</p></td>
-                            </tr>
-                                            </table>
-                
-                
-                				
-                            </article>
-        </div>
-        <aside class="span4 detailsbar">
-            <h1><i class="icon-arrow-down"></i></h1>
-                                                            <dl>
-                                                                            </dl>
-            <h2>Tags</h2>
-            <table class="table table-condensed">
-                                    <tr><td colspan="2"><em>None found</em></td></tr>
-                            </table>
-        </aside>
-    </div>
-
-                                    <div class="row-fluid">
         <div class="span8 content class">
             <a id="method___getSendTimePublish" name="method___getSendTimePublish" class="anchor"></a>
             <article class="method">
@@ -1458,7 +1450,7 @@
                 <section class="span10 offset1">
                     <hr />
                     Documentation is powered by <a href="http://www.phpdoc.org/">phpDocumentor </a> and authored
-                    on May 13th, 2016 at 02:50.
+                    on May 13th, 2016 at 05:35.
                 </section>
             </section>
         </section>
