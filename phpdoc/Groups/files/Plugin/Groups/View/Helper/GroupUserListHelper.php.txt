@@ -73,7 +73,8 @@ class GroupUserListHelper extends AppHelper {
  * @param array $selectUsers 選択済みユーザ配列
  * @return string HTML tags
  */
-	public function select($title = '', $pluginModel = 'GroupsUser', $roomId = Room::PUBLIC_PARENT_ID, $selectUsers = array()) {
+	public function select($title = '', $pluginModel = 'GroupsUser', $roomId = Room::PUBLIC_PARENT_ID,
+			$selectUsers = array()) {
 		if ($title === '') {
 			$title = __d('groups', 'User select');
 		}
