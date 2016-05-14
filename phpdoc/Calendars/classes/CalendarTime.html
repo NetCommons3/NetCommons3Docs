@@ -1,0 +1,1163 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0"/>
+    <meta charset="utf-8"/>
+    <title>API Documentation</title>
+    <meta name="author" content=""/>
+    <meta name="description" content=""/>
+
+    <link href="../css/bootstrap-combined.no-icons.min.css" rel="stylesheet">
+    <link href="../css/font-awesome.min.css" rel="stylesheet">
+    <link href="../css/prism.css" rel="stylesheet" media="all"/>
+    <link href="../css/template.css" rel="stylesheet" media="all"/>
+    
+    <!--[if lt IE 9]>
+    <script src="../js/html5.js"></script>
+    <![endif]-->
+    <script src="../js/jquery-1.11.0.min.js"></script>
+    <script src="../js/ui/1.10.4/jquery-ui.min.js"></script>
+    <script src="../js/bootstrap.min.js"></script>
+    <script src="../js/jquery.smooth-scroll.js"></script>
+    <script src="../js/prism.min.js"></script>
+    <!-- TODO: Add http://jscrollpane.kelvinluck.com/ to style the scrollbars for browsers not using webkit-->
+    <script type="text/javascript">
+    function loadExternalCodeSnippets() {
+        Array.prototype.slice.call(document.querySelectorAll('pre[data-src]')).forEach(function (pre) {
+            var src = pre.getAttribute('data-src');
+            var extension = (src.match(/\.(\w+)$/) || [, ''])[1];
+            var language = 'php';
+
+            var code = document.createElement('code');
+            code.className = 'language-' + language;
+
+            pre.textContent = '';
+
+            code.textContent = 'Loading…';
+
+            pre.appendChild(code);
+
+            var xhr = new XMLHttpRequest();
+
+            xhr.open('GET', src, true);
+
+            xhr.onreadystatechange = function () {
+                if (xhr.readyState == 4) {
+
+                    if (xhr.status < 400 && xhr.responseText) {
+                        code.textContent = xhr.responseText;
+
+                        Prism.highlightElement(code);
+                    }
+                    else if (xhr.status >= 400) {
+                        code.textContent = '✖ Error ' + xhr.status + ' while fetching file: ' + xhr.statusText;
+                    }
+                    else {
+                        code.textContent = '✖ Error: File does not exist or is empty';
+                    }
+                }
+            };
+
+            xhr.send(null);
+        });
+    }
+
+    $(document).ready(function(){
+        loadExternalCodeSnippets();
+    });
+    $('#source-view').on('shown', function () {
+        loadExternalCodeSnippets();
+    })
+</script>
+
+    <link rel="shortcut icon" href="../images/favicon.ico"/>
+    <link rel="apple-touch-icon" href="../images/apple-touch-icon.png"/>
+    <link rel="apple-touch-icon" sizes="72x72" href="../images/apple-touch-icon-72x72.png"/>
+    <link rel="apple-touch-icon" sizes="114x114" href="../images/apple-touch-icon-114x114.png"/>
+</head>
+<body>
+
+<div class="navbar navbar-fixed-top">
+    <div class="navbar-inner">
+        <div class="container">
+            <a class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
+                <i class="icon-ellipsis-vertical"></i>
+            </a>
+            <a class="brand" href="../index.html">API Documentation</a>
+
+            <div class="nav-collapse">
+                <ul class="nav pull-right">
+                                        <li class="dropdown" id="charts-menu">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                            Charts <b class="caret"></b>
+                        </a>
+                        <ul class="dropdown-menu">
+                            <li>
+                                <a href="../graphs/class.html">
+                                    <i class="icon-list-alt"></i>&#160;Class hierarchy diagram
+                                </a>
+                            </li>
+                        </ul>
+                    </li>
+                    <li class="dropdown" id="reports-menu">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                            Reports <b class="caret"></b>
+                        </a>
+                        <ul class="dropdown-menu">
+                            <li>
+                                <a href="../reports/errors.html">
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                <i class="icon-list-alt"></i>&#160;Errors <span class="label label-info pull-right">0</span>
+                                </a>
+                            </li>
+                            <li>
+                                <a href="../reports/markers.html">
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                <i class="icon-list-alt"></i>&#160;Markers <span class="label label-info pull-right">14</span>
+                                </a>
+                            </li>
+                            <li>
+                                <a href="../reports/deprecated.html">
+                                                                                                            <i class="icon-list-alt"></i>&#160;Deprecated <span class="label label-info pull-right">0</span>
+                                </a>
+                            </li>
+                        </ul>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+    <!--<div class="go_to_top">-->
+    <!--<a href="#___" style="color: inherit">Back to top&#160;&#160;<i class="icon-upload icon-white"></i></a>-->
+    <!--</div>-->
+</div>
+
+<div id="___" class="container-fluid">
+        <section class="row-fluid">
+        <div class="span2 sidebar">
+                                <div class="accordion" style="margin-bottom: 0">
+        <div class="accordion-group">
+            <div class="accordion-heading">
+                                    <a class="accordion-toggle " data-toggle="collapse" data-target="#namespace-1073412197"></a>
+                                <a href="../namespaces/default.html" style="margin-left: 30px; padding-left: 0">\</a>
+            </div>
+            <div id="namespace-1073412197" class="accordion-body collapse in">
+                <div class="accordion-inner">
+
+                    
+                    <ul>
+                                                                                                    <li class="class"><a href="../classes/AccessCtrlComponent.html">AccessCtrlComponent</a></li>
+                                                    <li class="class"><a href="../classes/AppController.html">AppController</a></li>
+                                                    <li class="class"><a href="../classes/AppController.html">AppController</a></li>
+                                                    <li class="class"><a href="../classes/AppHelper.html">AppHelper</a></li>
+                                                    <li class="class"><a href="../classes/AppModel.html">AppModel</a></li>
+                                                    <li class="class"><a href="../classes/AssetComponent.html">AssetComponent</a></li>
+                                                    <li class="class"><a href="../classes/BackToHelper.html">BackToHelper</a></li>
+                                                    <li class="class"><a href="../classes/ButtonHelper.html">ButtonHelper</a></li>
+                                                    <li class="class"><a href="../classes/Calendar.html">Calendar</a></li>
+                                                    <li class="class"><a href="../classes/CalendarActionPlan.html">CalendarActionPlan</a></li>
+                                                    <li class="class"><a href="../classes/CalendarAppBehavior.html">CalendarAppBehavior</a></li>
+                                                    <li class="class"><a href="../classes/CalendarBlockRolePermissionsController.html">CalendarBlockRolePermissionsController</a></li>
+                                                    <li class="class"><a href="../classes/CalendarCommonHelper.html">CalendarCommonHelper</a></li>
+                                                    <li class="class"><a href="../classes/CalendarDailyEntryBehavior.html">CalendarDailyEntryBehavior</a></li>
+                                                    <li class="class"><a href="../classes/CalendarDailyHelper.html">CalendarDailyHelper</a></li>
+                                                    <li class="class"><a href="../classes/CalendarDailyTimelineHelper.html">CalendarDailyTimelineHelper</a></li>
+                                                    <li class="class"><a href="../classes/CalendarDeleteActionPlan.html">CalendarDeleteActionPlan</a></li>
+                                                    <li class="class"><a href="../classes/CalendarDeletePlanBehavior.html">CalendarDeletePlanBehavior</a></li>
+                                                    <li class="class"><a href="../classes/CalendarEntryBehavior.html">CalendarEntryBehavior</a></li>
+                                                    <li class="class"><a href="../classes/CalendarEvent.html">CalendarEvent</a></li>
+                                                    <li class="class"><a href="../classes/CalendarEventContent.html">CalendarEventContent</a></li>
+                                                    <li class="class"><a href="../classes/CalendarEventShareUser.html">CalendarEventShareUser</a></li>
+                                                    <li class="class"><a href="../classes/CalendarExposeRoomBehavior.html">CalendarExposeRoomBehavior</a></li>
+                                                    <li class="class"><a href="../classes/CalendarExposeTargetHelper.html">CalendarExposeTargetHelper</a></li>
+                                                    <li class="class"><a href="../classes/CalendarFrameSetting.html">CalendarFrameSetting</a></li>
+                                                    <li class="class"><a href="../classes/CalendarFrameSettingsController.html">CalendarFrameSettingsController</a></li>
+                                                    <li class="class"><a href="../classes/CalendarFrameSettingSelectRoom.html">CalendarFrameSettingSelectRoom</a></li>
+                                                    <li class="class"><a href="../classes/CalendarInsertPlanBehavior.html">CalendarInsertPlanBehavior</a></li>
+                                                    <li class="class"><a href="../classes/CalendarLegendHelper.html">CalendarLegendHelper</a></li>
+                                                    <li class="class"><a href="../classes/CalendarMailSetting.html">CalendarMailSetting</a></li>
+                                                    <li class="class"><a href="../classes/CalendarMailSettingsController.html">CalendarMailSettingsController</a></li>
+                                                    <li class="class"><a href="../classes/CalendarMonthlyEntryBehavior.html">CalendarMonthlyEntryBehavior</a></li>
+                                                    <li class="class"><a href="../classes/CalendarMonthlyHelper.html">CalendarMonthlyHelper</a></li>
+                                                    <li class="class"><a href="../classes/CalendarPermission.html">CalendarPermission</a></li>
+                                                    <li class="class"><a href="../classes/CalendarPermissionHelper.html">CalendarPermissionHelper</a></li>
+                                                    <li class="class"><a href="../classes/CalendarPlanHelper.html">CalendarPlanHelper</a></li>
+                                                    <li class="class"><a href="../classes/CalendarPlanOptionBehavior.html">CalendarPlanOptionBehavior</a></li>
+                                                    <li class="class"><a href="../classes/CalendarPlanRruleValidateBehavior.html">CalendarPlanRruleValidateBehavior</a></li>
+                                                    <li class="class"><a href="../classes/CalendarPlansController.html">CalendarPlansController</a></li>
+                                                    <li class="class"><a href="../classes/CalendarPlanTimeValidateBehavior.html">CalendarPlanTimeValidateBehavior</a></li>
+                                                    <li class="class"><a href="../classes/CalendarPlanValidateBehavior.html">CalendarPlanValidateBehavior</a></li>
+                                                    <li class="class"><a href="../classes/CalendarRoomSelectHelper.html">CalendarRoomSelectHelper</a></li>
+                                                    <li class="class"><a href="../classes/CalendarRrule.html">CalendarRrule</a></li>
+                                                    <li class="class"><a href="../classes/CalendarRruleEntryBehavior.html">CalendarRruleEntryBehavior</a></li>
+                                                    <li class="class"><a href="../classes/CalendarRruleHandleBehavior.html">CalendarRruleHandleBehavior</a></li>
+                                                    <li class="class"><a href="../classes/CalendarsAppController.html">CalendarsAppController</a></li>
+                                                    <li class="class"><a href="../classes/CalendarsAppModel.html">CalendarsAppModel</a></li>
+                                                    <li class="class"><a href="../classes/CalendarScheduleHelper.html">CalendarScheduleHelper</a></li>
+                                                    <li class="class"><a href="../classes/CalendarsComponent.html">CalendarsComponent</a></li>
+                                                    <li class="class"><a href="../classes/CalendarsController.html">CalendarsController</a></li>
+                                                    <li class="class"><a href="../classes/CalendarsDailyComponent.html">CalendarsDailyComponent</a></li>
+                                                    <li class="class"><a href="../classes/CalendarSearchPlanBehavior.html">CalendarSearchPlanBehavior</a></li>
+                                                    <li class="class"><a href="../classes/CalendarSetting.html">CalendarSetting</a></li>
+                                                    <li class="class"><a href="../classes/CalendarSettingManage.html">CalendarSettingManage</a></li>
+                                                    <li class="class"><a href="../classes/CalendarShareUserEntryBehavior.html">CalendarShareUserEntryBehavior</a></li>
+                                                    <li class="class"><a href="../classes/CalendarsSchema.html">CalendarsSchema</a></li>
+                                                    <li class="class"><a href="../classes/CalendarSupport.html">CalendarSupport</a></li>
+                                                    <li class="class"><a href="../classes/CalendarTime.html">CalendarTime</a></li>
+                                                    <li class="class"><a href="../classes/CalendarTurnCalendarHelper.html">CalendarTurnCalendarHelper</a></li>
+                                                    <li class="class"><a href="../classes/CalendarUpdatePlanBehavior.html">CalendarUpdatePlanBehavior</a></li>
+                                                    <li class="class"><a href="../classes/CalendarUrlHelper.html">CalendarUrlHelper</a></li>
+                                                    <li class="class"><a href="../classes/CalendarValidateAppBehavior.html">CalendarValidateAppBehavior</a></li>
+                                                    <li class="class"><a href="../classes/CalendarValidateBehavior.html">CalendarValidateBehavior</a></li>
+                                                    <li class="class"><a href="../classes/CalendarWeeklyEntryBehavior.html">CalendarWeeklyEntryBehavior</a></li>
+                                                    <li class="class"><a href="../classes/CalendarWeeklyHelper.html">CalendarWeeklyHelper</a></li>
+                                                    <li class="class"><a href="../classes/CalendarYearlyEntryBehavior.html">CalendarYearlyEntryBehavior</a></li>
+                                                    <li class="class"><a href="../classes/ComposerHelper.html">ComposerHelper</a></li>
+                                                    <li class="class"><a href="../classes/Current.html">Current</a></li>
+                                                    <li class="class"><a href="../classes/CurrentBase.html">CurrentBase</a></li>
+                                                    <li class="class"><a href="../classes/CurrentFrame.html">CurrentFrame</a></li>
+                                                    <li class="class"><a href="../classes/CurrentPage.html">CurrentPage</a></li>
+                                                    <li class="class"><a href="../classes/CurrentSystem.html">CurrentSystem</a></li>
+                                                    <li class="class"><a href="../classes/DatabaseConfiguration.html">DatabaseConfiguration</a></li>
+                                                    <li class="class"><a href="../classes/DateHelper.html">DateHelper</a></li>
+                                                    <li class="class"><a href="../classes/DatetimePickerHelper.html">DatetimePickerHelper</a></li>
+                                                    <li class="class"><a href="../classes/DisplayNumberHelper.html">DisplayNumberHelper</a></li>
+                                                    <li class="class"><a href="../classes/FormInputHelper.html">FormInputHelper</a></li>
+                                                    <li class="class"><a href="../classes/Init.html">Init</a></li>
+                                                    <li class="class"><a href="../classes/LinkButtonHelper.html">LinkButtonHelper</a></li>
+                                                    <li class="class"><a href="../classes/MessageFlashHelper.html">MessageFlashHelper</a></li>
+                                                    <li class="class"><a href="../classes/NetCommonsAppController.html">NetCommonsAppController</a></li>
+                                                    <li class="class"><a href="../classes/NetCommonsAppModel.html">NetCommonsAppModel</a></li>
+                                                    <li class="class"><a href="../classes/NetCommonsCakeTestCase.html">NetCommonsCakeTestCase</a></li>
+                                                    <li class="class"><a href="../classes/NetCommonsComponent.html">NetCommonsComponent</a></li>
+                                                    <li class="class"><a href="../classes/NetCommonsConsoleTestCase.html">NetCommonsConsoleTestCase</a></li>
+                                                    <li class="class"><a href="../classes/NetCommonsController.html">NetCommonsController</a></li>
+                                                    <li class="class"><a href="../classes/NetCommonsControllerBaseTestCase.html">NetCommonsControllerBaseTestCase</a></li>
+                                                    <li class="class"><a href="../classes/NetCommonsControllerTestCase.html">NetCommonsControllerTestCase</a></li>
+                                                    <li class="class"><a href="../classes/NetCommonsDeleteTest.html">NetCommonsDeleteTest</a></li>
+                                                    <li class="class"><a href="../classes/NetCommonsFormHelper.html">NetCommonsFormHelper</a></li>
+                                                    <li class="class"><a href="../classes/NetCommonsGetTest.html">NetCommonsGetTest</a></li>
+                                                    <li class="class"><a href="../classes/NetCommonsHelperTestCase.html">NetCommonsHelperTestCase</a></li>
+                                                    <li class="class"><a href="../classes/NetCommonsHtmlHelper.html">NetCommonsHtmlHelper</a></li>
+                                                    <li class="class"><a href="../classes/NetCommonsMigration.html">NetCommonsMigration</a></li>
+                                                    <li class="class"><a href="../classes/NetCommonsModelTestCase.html">NetCommonsModelTestCase</a></li>
+                                                    <li class="class"><a href="../classes/NetCommonsSaveTest.html">NetCommonsSaveTest</a></li>
+                                                    <li class="class"><a href="../classes/NetCommonsTestSuite.html">NetCommonsTestSuite</a></li>
+                                                    <li class="class"><a href="../classes/NetCommonsTime.html">NetCommonsTime</a></li>
+                                                    <li class="class"><a href="../classes/NetCommonsTimeComponent.html">NetCommonsTimeComponent</a></li>
+                                                    <li class="class"><a href="../classes/NetCommonsTimeHelper.html">NetCommonsTimeHelper</a></li>
+                                                    <li class="class"><a href="../classes/NetCommonsUrl.html">NetCommonsUrl</a></li>
+                                                    <li class="class"><a href="../classes/NetCommonsValidateTest.html">NetCommonsValidateTest</a></li>
+                                                    <li class="class"><a href="../classes/OriginalKeyBehavior.html">OriginalKeyBehavior</a></li>
+                                                    <li class="class"><a href="../classes/PermissionComponent.html">PermissionComponent</a></li>
+                                                    <li class="class"><a href="../classes/PluginRecords.html">PluginRecords</a></li>
+                                                    <li class="class"><a href="../classes/SingletonViewBlockHtmlHelper.html">SingletonViewBlockHtmlHelper</a></li>
+                                                    <li class="class"><a href="../classes/SiteCloseController.html">SiteCloseController</a></li>
+                                                    <li class="class"><a href="../classes/SnsButtonHelper.html">SnsButtonHelper</a></li>
+                                                    <li class="class"><a href="../classes/TableListHelper.html">TableListHelper</a></li>
+                                                    <li class="class"><a href="../classes/TitleIconHelper.html">TitleIconHelper</a></li>
+                                                    <li class="class"><a href="../classes/TokenHelper.html">TokenHelper</a></li>
+                                                    <li class="class"><a href="../classes/TrackableBehavior.html">TrackableBehavior</a></li>
+                                                    <li class="class"><a href="../classes/WizardHelper.html">WizardHelper</a></li>
+                                                    <li class="class"><a href="../classes/YAExceptionRenderer.html">YAExceptionRenderer</a></li>
+                                            </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+
+        </div>
+    </section>
+    <section class="row-fluid">
+        <div class="span10 offset2">
+            <div class="row-fluid">
+                <div class="span8 content class">
+                    <nav>
+                                                <a href="../namespaces/default.html">\</a> <i class="icon-level-up"></i>
+                                            </nav>
+                    <a href="#source-view" role="button" class="pull-right btn" data-toggle="modal"><i class="icon-code"></i></a>
+
+                    <h1><small>\</small>CalendarTime</h1>
+                    <p><em>CalendarTime Utility</em></p>
+                    
+                    
+                                        
+                    <section id="summary">
+                        <h2>Summary</h2>
+                        <section class="row-fluid heading">
+                            <section class="span4">
+                                <a href="#methods">Methods</a>
+                            </section>
+                            <section class="span4">
+                                <a href="#properties">Properties</a>
+                            </section>
+                            <section class="span4">
+                                <a href="#constants">Constants</a>
+                            </section>
+                        </section>
+                        <section class="row-fluid public">
+                            <section class="span4">
+                                                                    <a href="../classes/CalendarTime.html#method_dateWdayIdxWithUserTz" class="">dateWdayIdxWithUserTz()</a><br />
+                                                                    <a href="../classes/CalendarTime.html#method_convUserFromTo2SvrFromTo" class="">convUserFromTo2SvrFromTo()</a><br />
+                                                                    <a href="../classes/CalendarTime.html#method_convUserDate2SvrFromToDateTime" class="">convUserDate2SvrFromToDateTime()</a><br />
+                                                                    <a href="../classes/CalendarTime.html#method_addDashColonAndSp" class="">addDashColonAndSp()</a><br />
+                                                                    <a href="../classes/CalendarTime.html#method_stripDashColonAndSp" class="">stripDashColonAndSp()</a><br />
+                                                                    <a href="../classes/CalendarTime.html#method_getTheTimeInTheLastHour" class="">getTheTimeInTheLastHour()</a><br />
+                                                                    <a href="../classes/CalendarTime.html#method_getHourColonMin" class="">getHourColonMin()</a><br />
+                                                                    <a href="../classes/CalendarTime.html#method_getNextDay" class="">getNextDay()</a><br />
+                                                                    <a href="../classes/CalendarTime.html#method_getPrevMonth" class="">getPrevMonth()</a><br />
+                                                                    <a href="../classes/CalendarTime.html#method_getNextMonth" class="">getNextMonth()</a><br />
+                                                                    <a href="../classes/CalendarTime.html#method_dt2CalDt" class="">dt2CalDt()</a><br />
+                                                                    <a href="../classes/CalendarTime.html#method_getWday" class="">getWday()</a><br />
+                                                                    <a href="../classes/CalendarTime.html#method_getMonthlyInfo" class="">getMonthlyInfo()</a><br />
+                                                                    <a href="../classes/CalendarTime.html#method_transFromYmdHisToArray" class="">transFromYmdHisToArray()</a><br />
+                                                                    <a href="../classes/CalendarTime.html#method_getTimezoneOffsetAndMinitueOffsetEtc" class="">getTimezoneOffsetAndMinitueOffsetEtc()</a><br />
+                                                                    <a href="../classes/CalendarTime.html#method_getTimezoneOffsetWithSummerTimeWhenInsert" class="">getTimezoneOffsetWithSummerTimeWhenInsert()</a><br />
+                                                                    <a href="../classes/CalendarTime.html#method_getFormatedTimezoneDate" class="">getFormatedTimezoneDate()</a><br />
+                                                            </section>
+                            <section class="span4">
+                                                                    <em>No public properties found</em>
+                                                            </section>
+                            <section class="span4">
+                                                                    <em>No constants found</em>
+                                                            </section>
+                        </section>
+                        <section class="row-fluid protected">
+                            <section class="span4">
+                                                                    <em>No protected methods found</em>
+                                                            </section>
+                            <section class="span4">
+                                                                    <em>No protected properties found</em>
+                                                            </section>
+                            <section class="span4">
+                                <em>N/A</em>
+                            </section>
+                        </section>
+                        <section class="row-fluid private">
+                            <section class="span4">
+                                                                    <em>No private methods found</em>
+                                                            </section>
+                            <section class="span4">
+                                                                    <em>No private properties found</em>
+                                                            </section>
+                            <section class="span4">
+                                <em>N/A</em>
+                            </section>
+                        </section>
+                    </section>
+                </div>
+                <aside class="span4 detailsbar">
+                                        
+                    
+                    <dl>
+                        <dt>File</dt>
+                            <dd><a href="../files/Plugin.Calendars.Utility.CalendarTime.html"><div class="path-wrapper">Plugin/Calendars/Utility/CalendarTime.php</div></a></dd>
+                                                <dt>Package</dt>
+                            <dd><div class="namespace-wrapper">Calendars\Utility</div></dd>
+                                                <dt>Class hierarchy</dt>
+                            <dd class="hierarchy">
+                                                                                                                                                                    <div class="namespace-wrapper">\CalendarTime</div>
+                            </dd>
+
+                        
+                        
+                        
+                        
+                                                                        </dl>
+                    <h2>Tags</h2>
+                    <table class="table table-condensed">
+                                            <tr>
+                            <th>
+                                author
+                            </th>
+                            <td>
+                                                                    <p>Allcreator <a href="mailto:info@allcreator.net">info@allcreator.net</a></p>
+                                                            </td>
+                        </tr>
+                                        </table>
+                </aside>
+            </div>
+
+                        
+                        
+                                    <a id="methods" name="methods"></a>
+            <div class="row-fluid">
+                <div class="span8 content class"><h2>Methods</h2></div>
+                <aside class="span4 detailsbar"></aside>
+            </div>
+
+                                    <div class="row-fluid">
+        <div class="span8 content class">
+            <a id="method_dateWdayIdxWithUserTz" name="method_dateWdayIdxWithUserTz" class="anchor"></a>
+            <article class="method">
+                <h3 class="public ">dateWdayIdxWithUserTz()</h3>
+                <a href="#source-view" role="button" class="pull-right btn" data-toggle="modal" style="font-size: 1.1em; padding: 9px 14px"><i class="icon-code"></i></a>
+                <pre class="signature" style="margin-right: 54px;">dateWdayIdxWithUserTz(integer  <span class="argument">$timestamp</span>, string  <span class="argument">$userTz</span>) : string</pre>
+                <p><em>dateWdayIdxWithUserTz</em></p>
+                <p>ユーザタイムゾーンでのdate('w', タイムスタンプ)を実行する</p>
+
+                                    <h4>Parameters</h4>
+                    <table class="table table-condensed table-hover">
+                                                    <tr>
+                                <td>integer</td>
+                                <td>$timestamp </td>
+                                <td><p>UNIXタイムスタンプ</p></td>
+                            </tr>
+                                                    <tr>
+                                <td>string</td>
+                                <td>$userTz </td>
+                                <td><p>ユーザータイムゾーン(ex.&quot;Asia/Tokyo&quot;)</p></td>
+                            </tr>
+                                            </table>
+                
+                
+                                    <h4>Returns</h4>
+                    string
+                                            &mdash; <p>タイムスタンプを、ユーザタイムゾーンでの曜日になおし、数字文字&quot;0&quot;(SU),&quot;1&quot;(MO),...,&quot;6&quot;(SA)を返す</p>
+                                    				
+                            </article>
+        </div>
+        <aside class="span4 detailsbar">
+            <h1><i class="icon-arrow-down"></i></h1>
+                            <span class="label label-info">static</span>
+                                                            <dl>
+                                                                            </dl>
+            <h2>Tags</h2>
+            <table class="table table-condensed">
+                                    <tr><td colspan="2"><em>None found</em></td></tr>
+                            </table>
+        </aside>
+    </div>
+
+                                    <div class="row-fluid">
+        <div class="span8 content class">
+            <a id="method_convUserFromTo2SvrFromTo" name="method_convUserFromTo2SvrFromTo" class="anchor"></a>
+            <article class="method">
+                <h3 class="public ">convUserFromTo2SvrFromTo()</h3>
+                <a href="#source-view" role="button" class="pull-right btn" data-toggle="modal" style="font-size: 1.1em; padding: 9px 14px"><i class="icon-code"></i></a>
+                <pre class="signature" style="margin-right: 54px;">convUserFromTo2SvrFromTo(string  <span class="argument">$userYmdFrom</span>, string  <span class="argument">$userYmdTo</span>, string  <span class="argument">$userTimezoneOffset</span>) : array</pre>
+                <p><em>convUserFromTo2SvrFromTo</em></p>
+                <p>ユーザー系の開始日と終了日とタイムゾーンを、サーバ系の開始日の00:00:00から終了翌日の00:00:00に変換し返す</p>
+
+                                    <h4>Parameters</h4>
+                    <table class="table table-condensed table-hover">
+                                                    <tr>
+                                <td>string</td>
+                                <td>$userYmdFrom </td>
+                                <td><p>&quot;YYYY-MM-DD&quot;形式(ユーザ系)</p></td>
+                            </tr>
+                                                    <tr>
+                                <td>string</td>
+                                <td>$userYmdTo </td>
+                                <td><p>&quot;YYYY-MM-DD&quot;形式(ユーザ系)</p></td>
+                            </tr>
+                                                    <tr>
+                                <td>string</td>
+                                <td>$userTimezoneOffset </td>
+                                <td><p>タイムゾーン文字列（ex.Asia/Tokyo）</p></td>
+                            </tr>
+                                            </table>
+                
+                
+                                    <h4>Returns</h4>
+                    array
+                                            &mdash; <p>開始日の00:00から終了日翌日の00:00をサーバ系時刻になおして返す。</p>
+                                    				
+                            </article>
+        </div>
+        <aside class="span4 detailsbar">
+            <h1><i class="icon-arrow-down"></i></h1>
+                                                            <dl>
+                                                                            </dl>
+            <h2>Tags</h2>
+            <table class="table table-condensed">
+                                    <tr><td colspan="2"><em>None found</em></td></tr>
+                            </table>
+        </aside>
+    </div>
+
+                                    <div class="row-fluid">
+        <div class="span8 content class">
+            <a id="method_convUserDate2SvrFromToDateTime" name="method_convUserDate2SvrFromToDateTime" class="anchor"></a>
+            <article class="method">
+                <h3 class="public ">convUserDate2SvrFromToDateTime()</h3>
+                <a href="#source-view" role="button" class="pull-right btn" data-toggle="modal" style="font-size: 1.1em; padding: 9px 14px"><i class="icon-code"></i></a>
+                <pre class="signature" style="margin-right: 54px;">convUserDate2SvrFromToDateTime(string  <span class="argument">$userYmd</span>, string  <span class="argument">$userTimezoneOffset</span>) : array</pre>
+                <p><em>convUserDate2SvrFromToDateTime</em></p>
+                <p>ユーザー系の日とタイムゾーンを、サーバ系の終日(From,To)日付時刻に変換</p>
+
+                                    <h4>Parameters</h4>
+                    <table class="table table-condensed table-hover">
+                                                    <tr>
+                                <td>string</td>
+                                <td>$userYmd </td>
+                                <td><p>&quot;YYYY-MM-DD&quot;形式(ユーザ系)</p></td>
+                            </tr>
+                                                    <tr>
+                                <td>string</td>
+                                <td>$userTimezoneOffset </td>
+                                <td><p>タイムゾーン文字列（ex.Asia/Tokyo）</p></td>
+                            </tr>
+                                            </table>
+                
+                
+                                    <h4>Returns</h4>
+                    array
+                                            &mdash; <p>その日の00:00から翌日の00:00をサーバ系時刻になおして返す。</p>
+                                    				
+                            </article>
+        </div>
+        <aside class="span4 detailsbar">
+            <h1><i class="icon-arrow-down"></i></h1>
+                                                            <dl>
+                                                                            </dl>
+            <h2>Tags</h2>
+            <table class="table table-condensed">
+                                    <tr><td colspan="2"><em>None found</em></td></tr>
+                            </table>
+        </aside>
+    </div>
+
+                                    <div class="row-fluid">
+        <div class="span8 content class">
+            <a id="method_addDashColonAndSp" name="method_addDashColonAndSp" class="anchor"></a>
+            <article class="method">
+                <h3 class="public ">addDashColonAndSp()</h3>
+                <a href="#source-view" role="button" class="pull-right btn" data-toggle="modal" style="font-size: 1.1em; padding: 9px 14px"><i class="icon-code"></i></a>
+                <pre class="signature" style="margin-right: 54px;">addDashColonAndSp(string  <span class="argument">$data</span>) : string</pre>
+                <p><em>addDashColonAndSp</em></p>
+                <p>&quot;YmdHis&quot;, &quot;Ymd&quot;, &quot;His&quot;形式の指定日付時刻に記号と空白(-,:,SPACE)を付与して、&quot;YYYY-MM-DD hh:mm:ss&quot;などに変換して返す。</p>
+
+                                    <h4>Parameters</h4>
+                    <table class="table table-condensed table-hover">
+                                                    <tr>
+                                <td>string</td>
+                                <td>$data </td>
+                                <td><p>整形前の日付時刻</p></td>
+                            </tr>
+                                            </table>
+                
+                
+                                    <h4>Returns</h4>
+                    string
+                                            &mdash; <p>整形後の日付時刻</p>
+                                    				
+                            </article>
+        </div>
+        <aside class="span4 detailsbar">
+            <h1><i class="icon-arrow-down"></i></h1>
+                            <span class="label label-info">static</span>
+                                                            <dl>
+                                                                            </dl>
+            <h2>Tags</h2>
+            <table class="table table-condensed">
+                                    <tr><td colspan="2"><em>None found</em></td></tr>
+                            </table>
+        </aside>
+    </div>
+
+                                    <div class="row-fluid">
+        <div class="span8 content class">
+            <a id="method_stripDashColonAndSp" name="method_stripDashColonAndSp" class="anchor"></a>
+            <article class="method">
+                <h3 class="public ">stripDashColonAndSp()</h3>
+                <a href="#source-view" role="button" class="pull-right btn" data-toggle="modal" style="font-size: 1.1em; padding: 9px 14px"><i class="icon-code"></i></a>
+                <pre class="signature" style="margin-right: 54px;">stripDashColonAndSp(string  <span class="argument">$data</span>) : string</pre>
+                <p><em>stripDashColonAndSp</em></p>
+                <p>&quot;Y-m-d H:i:s&quot;,&quot;Y-m-d&quot;,&quot;H:i:s&quot;形式の指定日付時刻から記号と空白(-,:,SPACE)を取り除く</p>
+
+                                    <h4>Parameters</h4>
+                    <table class="table table-condensed table-hover">
+                                                    <tr>
+                                <td>string</td>
+                                <td>$data </td>
+                                <td><p>整形前の日付時刻</p></td>
+                            </tr>
+                                            </table>
+                
+                
+                                    <h4>Returns</h4>
+                    string
+                                            &mdash; <p>整形後の日付時刻</p>
+                                    				
+                            </article>
+        </div>
+        <aside class="span4 detailsbar">
+            <h1><i class="icon-arrow-down"></i></h1>
+                            <span class="label label-info">static</span>
+                                                            <dl>
+                                                                            </dl>
+            <h2>Tags</h2>
+            <table class="table table-condensed">
+                                    <tr><td colspan="2"><em>None found</em></td></tr>
+                            </table>
+        </aside>
+    </div>
+
+                                    <div class="row-fluid">
+        <div class="span8 content class">
+            <a id="method_getTheTimeInTheLastHour" name="method_getTheTimeInTheLastHour" class="anchor"></a>
+            <article class="method">
+                <h3 class="public ">getTheTimeInTheLastHour()</h3>
+                <a href="#source-view" role="button" class="pull-right btn" data-toggle="modal" style="font-size: 1.1em; padding: 9px 14px"><i class="icon-code"></i></a>
+                <pre class="signature" style="margin-right: 54px;">getTheTimeInTheLastHour(string  <span class="argument">$ymdHis</span>) : array</pre>
+                <p><em>getTheTimeInTheLastHour</em></p>
+                <p>&quot;Y-m-d H:i:s&quot;形式の指定日付時刻からの直近１時間の日付時刻(from,to)を取得</p>
+
+                                    <h4>Parameters</h4>
+                    <table class="table table-condensed table-hover">
+                                                    <tr>
+                                <td>string</td>
+                                <td>$ymdHis </td>
+                                <td><p>&quot;Y-m-d H:i:s&quot;形式の指定日付時刻</p></td>
+                            </tr>
+                                            </table>
+                
+                
+                                    <h4>Returns</h4>
+                    array
+                                            &mdash; <p>直近１時間の日付、from日付時刻, to日付時刻の配列を返す。</p>
+                                    				
+                            </article>
+        </div>
+        <aside class="span4 detailsbar">
+            <h1><i class="icon-arrow-down"></i></h1>
+                            <span class="label label-info">static</span>
+                                                            <dl>
+                                                                            </dl>
+            <h2>Tags</h2>
+            <table class="table table-condensed">
+                                    <tr><td colspan="2"><em>None found</em></td></tr>
+                            </table>
+        </aside>
+    </div>
+
+                                    <div class="row-fluid">
+        <div class="span8 content class">
+            <a id="method_getHourColonMin" name="method_getHourColonMin" class="anchor"></a>
+            <article class="method">
+                <h3 class="public ">getHourColonMin()</h3>
+                <a href="#source-view" role="button" class="pull-right btn" data-toggle="modal" style="font-size: 1.1em; padding: 9px 14px"><i class="icon-code"></i></a>
+                <pre class="signature" style="margin-right: 54px;">getHourColonMin(string  <span class="argument">$ymdHis</span>) : string</pre>
+                <p><em>getHourColonMin</em></p>
+                <p>&quot;Y-m-d H:i:s&quot;形式より&quot;H:i&quot;を抜き出す</p>
+
+                                    <h4>Parameters</h4>
+                    <table class="table table-condensed table-hover">
+                                                    <tr>
+                                <td>string</td>
+                                <td>$ymdHis </td>
+                                <td><p>&quot;Y-m-d H:i:s&quot;形式のDatetime文字列</p></td>
+                            </tr>
+                                            </table>
+                
+                
+                                    <h4>Returns</h4>
+                    string
+                                            &mdash; <p>&quot;H:i&quot;形式の文字列</p>
+                                    				
+                            </article>
+        </div>
+        <aside class="span4 detailsbar">
+            <h1><i class="icon-arrow-down"></i></h1>
+                            <span class="label label-info">static</span>
+                                                            <dl>
+                                                                            </dl>
+            <h2>Tags</h2>
+            <table class="table table-condensed">
+                                    <tr><td colspan="2"><em>None found</em></td></tr>
+                            </table>
+        </aside>
+    </div>
+
+                                    <div class="row-fluid">
+        <div class="span8 content class">
+            <a id="method_getNextDay" name="method_getNextDay" class="anchor"></a>
+            <article class="method">
+                <h3 class="public ">getNextDay()</h3>
+                <a href="#source-view" role="button" class="pull-right btn" data-toggle="modal" style="font-size: 1.1em; padding: 9px 14px"><i class="icon-code"></i></a>
+                <pre class="signature" style="margin-right: 54px;">getNextDay(integer  <span class="argument">$year</span>, integer  <span class="argument">$month</span>, integer  <span class="argument">$day</span>) : array</pre>
+                <p><em>getNextDay</em></p>
+                <p>年月日の次日を取得する</p>
+
+                                    <h4>Parameters</h4>
+                    <table class="table table-condensed table-hover">
+                                                    <tr>
+                                <td>integer</td>
+                                <td>$year </td>
+                                <td><p>年</p></td>
+                            </tr>
+                                                    <tr>
+                                <td>integer</td>
+                                <td>$month </td>
+                                <td><p>月</p></td>
+                            </tr>
+                                                    <tr>
+                                <td>integer</td>
+                                <td>$day </td>
+                                <td><p>日</p></td>
+                            </tr>
+                                            </table>
+                
+                
+                                    <h4>Returns</h4>
+                    array
+                                            &mdash; <p>次日の年と月と日を配列で返す。</p>
+                                    				
+                            </article>
+        </div>
+        <aside class="span4 detailsbar">
+            <h1><i class="icon-arrow-down"></i></h1>
+                            <span class="label label-info">static</span>
+                                                            <dl>
+                                                                            </dl>
+            <h2>Tags</h2>
+            <table class="table table-condensed">
+                                    <tr><td colspan="2"><em>None found</em></td></tr>
+                            </table>
+        </aside>
+    </div>
+
+                                    <div class="row-fluid">
+        <div class="span8 content class">
+            <a id="method_getPrevMonth" name="method_getPrevMonth" class="anchor"></a>
+            <article class="method">
+                <h3 class="public ">getPrevMonth()</h3>
+                <a href="#source-view" role="button" class="pull-right btn" data-toggle="modal" style="font-size: 1.1em; padding: 9px 14px"><i class="icon-code"></i></a>
+                <pre class="signature" style="margin-right: 54px;">getPrevMonth(integer  <span class="argument">$year</span>, integer  <span class="argument">$month</span>) : array</pre>
+                <p><em>getPrevMonth</em></p>
+                <p>年月の前月を取得する</p>
+
+                                    <h4>Parameters</h4>
+                    <table class="table table-condensed table-hover">
+                                                    <tr>
+                                <td>integer</td>
+                                <td>$year </td>
+                                <td><p>年</p></td>
+                            </tr>
+                                                    <tr>
+                                <td>integer</td>
+                                <td>$month </td>
+                                <td><p>月</p></td>
+                            </tr>
+                                            </table>
+                
+                
+                                    <h4>Returns</h4>
+                    array
+                                            &mdash; <p>前月の年と月を配列で返す。</p>
+                                    				
+                            </article>
+        </div>
+        <aside class="span4 detailsbar">
+            <h1><i class="icon-arrow-down"></i></h1>
+                            <span class="label label-info">static</span>
+                                                            <dl>
+                                                                            </dl>
+            <h2>Tags</h2>
+            <table class="table table-condensed">
+                                    <tr><td colspan="2"><em>None found</em></td></tr>
+                            </table>
+        </aside>
+    </div>
+
+                                    <div class="row-fluid">
+        <div class="span8 content class">
+            <a id="method_getNextMonth" name="method_getNextMonth" class="anchor"></a>
+            <article class="method">
+                <h3 class="public ">getNextMonth()</h3>
+                <a href="#source-view" role="button" class="pull-right btn" data-toggle="modal" style="font-size: 1.1em; padding: 9px 14px"><i class="icon-code"></i></a>
+                <pre class="signature" style="margin-right: 54px;">getNextMonth(integer  <span class="argument">$year</span>, integer  <span class="argument">$month</span>) : array</pre>
+                <p><em>getNextMonth</em></p>
+                <p>年月の次月を取得する</p>
+
+                                    <h4>Parameters</h4>
+                    <table class="table table-condensed table-hover">
+                                                    <tr>
+                                <td>integer</td>
+                                <td>$year </td>
+                                <td><p>年</p></td>
+                            </tr>
+                                                    <tr>
+                                <td>integer</td>
+                                <td>$month </td>
+                                <td><p>月</p></td>
+                            </tr>
+                                            </table>
+                
+                
+                                    <h4>Returns</h4>
+                    array
+                                            &mdash; <p>次月の年と次月の月を配列で返す。</p>
+                                    				
+                            </article>
+        </div>
+        <aside class="span4 detailsbar">
+            <h1><i class="icon-arrow-down"></i></h1>
+                            <span class="label label-info">static</span>
+                                                            <dl>
+                                                                            </dl>
+            <h2>Tags</h2>
+            <table class="table table-condensed">
+                                    <tr><td colspan="2"><em>None found</em></td></tr>
+                            </table>
+        </aside>
+    </div>
+
+                                    <div class="row-fluid">
+        <div class="span8 content class">
+            <a id="method_dt2CalDt" name="method_dt2CalDt" class="anchor"></a>
+            <article class="method">
+                <h3 class="public ">dt2CalDt()</h3>
+                <a href="#source-view" role="button" class="pull-right btn" data-toggle="modal" style="font-size: 1.1em; padding: 9px 14px"><i class="icon-code"></i></a>
+                <pre class="signature" style="margin-right: 54px;">dt2CalDt(string  <span class="argument">$datetime</span>) : string</pre>
+                <p><em>dt2CalDt</em></p>
+                <p>Y-m-d H:i:s形式からYmdHis形式に変換する</p>
+
+                                    <h4>Parameters</h4>
+                    <table class="table table-condensed table-hover">
+                                                    <tr>
+                                <td>string</td>
+                                <td>$datetime </td>
+                                <td><p>&quot;Y-m-d H:i:s&quot;形式の日付時刻</p></td>
+                            </tr>
+                                            </table>
+                
+                
+                                    <h4>Returns</h4>
+                    string
+                                            &mdash; <p>&quot;YmdHis&quot;形式の日付時刻</p>
+                                    				
+                            </article>
+        </div>
+        <aside class="span4 detailsbar">
+            <h1><i class="icon-arrow-down"></i></h1>
+                            <span class="label label-info">static</span>
+                                                            <dl>
+                                                                            </dl>
+            <h2>Tags</h2>
+            <table class="table table-condensed">
+                                    <tr><td colspan="2"><em>None found</em></td></tr>
+                            </table>
+        </aside>
+    </div>
+
+                                    <div class="row-fluid">
+        <div class="span8 content class">
+            <a id="method_getWday" name="method_getWday" class="anchor"></a>
+            <article class="method">
+                <h3 class="public ">getWday()</h3>
+                <a href="#source-view" role="button" class="pull-right btn" data-toggle="modal" style="font-size: 1.1em; padding: 9px 14px"><i class="icon-code"></i></a>
+                <pre class="signature" style="margin-right: 54px;">getWday(integer  <span class="argument">$year</span>, integer  <span class="argument">$month</span>, integer  <span class="argument">$day</span>) : integer</pre>
+                <p><em>getWday</em></p>
+                <p>年月日から曜日(0-6)を返す</p>
+
+                                    <h4>Parameters</h4>
+                    <table class="table table-condensed table-hover">
+                                                    <tr>
+                                <td>integer</td>
+                                <td>$year </td>
+                                <td><p>年</p></td>
+                            </tr>
+                                                    <tr>
+                                <td>integer</td>
+                                <td>$month </td>
+                                <td><p>月</p></td>
+                            </tr>
+                                                    <tr>
+                                <td>integer</td>
+                                <td>$day </td>
+                                <td><p>日</p></td>
+                            </tr>
+                                            </table>
+                
+                
+                                    <h4>Returns</h4>
+                    integer
+                                            &mdash; <p>曜日(0-6)</p>
+                                    				
+                            </article>
+        </div>
+        <aside class="span4 detailsbar">
+            <h1><i class="icon-arrow-down"></i></h1>
+                            <span class="label label-info">static</span>
+                                                            <dl>
+                                                                            </dl>
+            <h2>Tags</h2>
+            <table class="table table-condensed">
+                                    <tr><td colspan="2"><em>None found</em></td></tr>
+                            </table>
+        </aside>
+    </div>
+
+                                    <div class="row-fluid">
+        <div class="span8 content class">
+            <a id="method_getMonthlyInfo" name="method_getMonthlyInfo" class="anchor"></a>
+            <article class="method">
+                <h3 class="public ">getMonthlyInfo()</h3>
+                <a href="#source-view" role="button" class="pull-right btn" data-toggle="modal" style="font-size: 1.1em; padding: 9px 14px"><i class="icon-code"></i></a>
+                <pre class="signature" style="margin-right: 54px;">getMonthlyInfo(integer  <span class="argument">$year</span>, integer  <span class="argument">$month</span>) : array</pre>
+                <p><em>getMonthlyInfo</em></p>
+                <p>月カレンダーで必要な情報を返す</p>
+
+                                    <h4>Parameters</h4>
+                    <table class="table table-condensed table-hover">
+                                                    <tr>
+                                <td>integer</td>
+                                <td>$year </td>
+                                <td><p>年</p></td>
+                            </tr>
+                                                    <tr>
+                                <td>integer</td>
+                                <td>$month </td>
+                                <td><p>月</p></td>
+                            </tr>
+                                            </table>
+                
+                
+                                    <h4>Returns</h4>
+                    array
+                                            &mdash; <p>前月、次月、今月の月カレンダー情報の配列</p>
+                                    				
+                            </article>
+        </div>
+        <aside class="span4 detailsbar">
+            <h1><i class="icon-arrow-down"></i></h1>
+                            <span class="label label-info">static</span>
+                                                            <dl>
+                                                                            </dl>
+            <h2>Tags</h2>
+            <table class="table table-condensed">
+                                    <tr><td colspan="2"><em>None found</em></td></tr>
+                            </table>
+        </aside>
+    </div>
+
+                                    <div class="row-fluid">
+        <div class="span8 content class">
+            <a id="method_transFromYmdHisToArray" name="method_transFromYmdHisToArray" class="anchor"></a>
+            <article class="method">
+                <h3 class="public ">transFromYmdHisToArray()</h3>
+                <a href="#source-view" role="button" class="pull-right btn" data-toggle="modal" style="font-size: 1.1em; padding: 9px 14px"><i class="icon-code"></i></a>
+                <pre class="signature" style="margin-right: 54px;">transFromYmdHisToArray(string  <span class="argument">$strYmdHis</span>) : \mix</pre>
+                <p><em>transFromYmdHisToArray</em></p>
+                <p>Y-m-d H:i:s形式の文字列から配列に変える</p>
+
+                                    <h4>Parameters</h4>
+                    <table class="table table-condensed table-hover">
+                                                    <tr>
+                                <td>string</td>
+                                <td>$strYmdHis </td>
+                                <td><p>Y-m-d H:i:s形式の文字列</p></td>
+                            </tr>
+                                            </table>
+                
+                
+                                    <h4>Returns</h4>
+                    \mix
+                                            &mdash; <p>成功時は、各時間の構成要素からなる配列(array). 失敗時はfalse.</p>
+                                    				
+                            </article>
+        </div>
+        <aside class="span4 detailsbar">
+            <h1><i class="icon-arrow-down"></i></h1>
+                            <span class="label label-info">static</span>
+                                                            <dl>
+                                                                            </dl>
+            <h2>Tags</h2>
+            <table class="table table-condensed">
+                                    <tr><td colspan="2"><em>None found</em></td></tr>
+                            </table>
+        </aside>
+    </div>
+
+                                    <div class="row-fluid">
+        <div class="span8 content class">
+            <a id="method_getTimezoneOffsetAndMinitueOffsetEtc" name="method_getTimezoneOffsetAndMinitueOffsetEtc" class="anchor"></a>
+            <article class="method">
+                <h3 class="public ">getTimezoneOffsetAndMinitueOffsetEtc()</h3>
+                <a href="#source-view" role="button" class="pull-right btn" data-toggle="modal" style="font-size: 1.1em; padding: 9px 14px"><i class="icon-code"></i></a>
+                <pre class="signature" style="margin-right: 54px;">getTimezoneOffsetAndMinitueOffsetEtc(integer  <span class="argument">$insertFlag</span>) : array</pre>
+                <p><em>タイムゾーン等の設定</em></p>
+                
+
+                                    <h4>Parameters</h4>
+                    <table class="table table-condensed table-hover">
+                                                    <tr>
+                                <td>integer</td>
+                                <td>$insertFlag </td>
+                                <td><p>insertFlag</p></td>
+                            </tr>
+                                            </table>
+                
+                
+                                    <h4>Returns</h4>
+                    array
+                                            &mdash; <p>array(string $time, fload $timezoneOffset)</p>
+                                    				
+                            </article>
+        </div>
+        <aside class="span4 detailsbar">
+            <h1><i class="icon-arrow-down"></i></h1>
+                            <span class="label label-info">static</span>
+                                                            <dl>
+                                                                            </dl>
+            <h2>Tags</h2>
+            <table class="table table-condensed">
+                                    <tr><td colspan="2"><em>None found</em></td></tr>
+                            </table>
+        </aside>
+    </div>
+
+                                    <div class="row-fluid">
+        <div class="span8 content class">
+            <a id="method_getTimezoneOffsetWithSummerTimeWhenInsert" name="method_getTimezoneOffsetWithSummerTimeWhenInsert" class="anchor"></a>
+            <article class="method">
+                <h3 class="public ">getTimezoneOffsetWithSummerTimeWhenInsert()</h3>
+                <a href="#source-view" role="button" class="pull-right btn" data-toggle="modal" style="font-size: 1.1em; padding: 9px 14px"><i class="icon-code"></i></a>
+                <pre class="signature" style="margin-right: 54px;">getTimezoneOffsetWithSummerTimeWhenInsert(boolean  <span class="argument">$timeNullFlag</span>, float  <span class="argument">$_defaultTZ</span>, float  <span class="argument">$timezoneOffset</span>) : float</pre>
+                <p><em>登録時のサーバタイムゾーン減算(サマータイム考慮)</em></p>
+                
+
+                                    <h4>Parameters</h4>
+                    <table class="table table-condensed table-hover">
+                                                    <tr>
+                                <td>boolean</td>
+                                <td>$timeNullFlag </td>
+                                <td><p>timeNullFlag</p></td>
+                            </tr>
+                                                    <tr>
+                                <td>float</td>
+                                <td>$_defaultTZ </td>
+                                <td><p>defaultTimeZone</p></td>
+                            </tr>
+                                                    <tr>
+                                <td>float</td>
+                                <td>$timezoneOffset </td>
+                                <td><p>timezoneOffset</p></td>
+                            </tr>
+                                            </table>
+                
+                
+                                    <h4>Returns</h4>
+                    float
+                                            &mdash; <p>$timezoneOffset 計算した結果のtimezoneOffset</p>
+                                    				
+                            </article>
+        </div>
+        <aside class="span4 detailsbar">
+            <h1><i class="icon-arrow-down"></i></h1>
+                            <span class="label label-info">static</span>
+                                                            <dl>
+                                                                            </dl>
+            <h2>Tags</h2>
+            <table class="table table-condensed">
+                                    <tr><td colspan="2"><em>None found</em></td></tr>
+                            </table>
+        </aside>
+    </div>
+
+                                    <div class="row-fluid">
+        <div class="span8 content class">
+            <a id="method_getFormatedTimezoneDate" name="method_getFormatedTimezoneDate" class="anchor"></a>
+            <article class="method">
+                <h3 class="public ">getFormatedTimezoneDate()</h3>
+                <a href="#source-view" role="button" class="pull-right btn" data-toggle="modal" style="font-size: 1.1em; padding: 9px 14px"><i class="icon-code"></i></a>
+                <pre class="signature" style="margin-right: 54px;">getFormatedTimezoneDate(string  <span class="argument">$time</span>, string  <span class="argument">$format</span>, float  <span class="argument">$timezoneOffset</span>) : string</pre>
+                <p><em>フォーマット指定のタイムゾーン考慮日付取得</em></p>
+                
+
+                                    <h4>Parameters</h4>
+                    <table class="table table-condensed table-hover">
+                                                    <tr>
+                                <td>string</td>
+                                <td>$time </td>
+                                <td><p>time</p></td>
+                            </tr>
+                                                    <tr>
+                                <td>string</td>
+                                <td>$format </td>
+                                <td><p>format</p></td>
+                            </tr>
+                                                    <tr>
+                                <td>float</td>
+                                <td>$timezoneOffset </td>
+                                <td><p>timezoneOffset</p></td>
+                            </tr>
+                                            </table>
+                
+                
+                                    <h4>Returns</h4>
+                    string
+                                            &mdash; <p>$date</p>
+                                    				
+                            </article>
+        </div>
+        <aside class="span4 detailsbar">
+            <h1><i class="icon-arrow-down"></i></h1>
+                            <span class="label label-info">static</span>
+                                                            <dl>
+                                                                            </dl>
+            <h2>Tags</h2>
+            <table class="table table-condensed">
+                                    <tr><td colspan="2"><em>None found</em></td></tr>
+                            </table>
+        </aside>
+    </div>
+
+                                                                    </div>
+    </section>
+
+    <div id="source-view" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="source-view-label" aria-hidden="true">
+        <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+            <h3 id="source-view-label">CalendarTime.php</h3>
+        </div>
+        <div class="modal-body">
+            <pre data-src="../files/Plugin/Calendars/Utility/CalendarTime.php.txt" class="language-php line-numbers"></pre>
+        </div>
+    </div>
+
+    <footer class="row-fluid">
+        <section class="span10 offset2">
+            <section class="row-fluid">
+                <section class="span10 offset1">
+                    <section class="row-fluid footer-sections">
+                        <section class="span4">
+                                                        <h1><i class="icon-code"></i></h1>
+                            <div>
+                                <ul>
+                                                                    </ul>
+                            </div>
+                        </section>
+                        <section class="span4">
+                                                        <h1><i class="icon-bar-chart"></i></h1>
+                            <div>
+                                <ul>
+                                    <li><a href="../graphs/class.html">Class Hierarchy Diagram</a></li>
+                                </ul>
+                            </div>
+                        </section>
+                        <section class="span4">
+                                                        <h1><i class="icon-pushpin"></i></h1>
+                            <div>
+                                <ul>
+                                    <li><a href="../reports/errors.html">Errors</a></li>
+                                    <li><a href="../reports/markers.html">Markers</a></li>
+                                </ul>
+                            </div>
+                        </section>
+                    </section>
+                </section>
+            </section>
+            <section class="row-fluid">
+                <section class="span10 offset1">
+                    <hr />
+                    Documentation is powered by <a href="http://www.phpdoc.org/">phpDocumentor </a> and authored
+                    on May 14th, 2016 at 01:56.
+                </section>
+            </section>
+        </section>
+    </footer>
+</div>
+
+</body>
+</html>
