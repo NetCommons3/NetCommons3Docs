@@ -136,10 +136,10 @@
                                 <div class="accordion" style="margin-bottom: 0">
         <div class="accordion-group">
             <div class="accordion-heading">
-                                    <a class="accordion-toggle " data-toggle="collapse" data-target="#namespace-623669057"></a>
+                                    <a class="accordion-toggle " data-toggle="collapse" data-target="#namespace-1938935019"></a>
                                 <a href="../namespaces/default.html" style="margin-left: 30px; padding-left: 0">\</a>
             </div>
-            <div id="namespace-623669057" class="accordion-body collapse in">
+            <div id="namespace-1938935019" class="accordion-body collapse in">
                 <div class="accordion-inner">
 
                     
@@ -224,10 +224,9 @@
                                             </nav>
                     <a href="#source-view" role="button" class="pull-right btn" data-toggle="modal"><i class="icon-code"></i></a>
 
-                    <h1><small>\</small>ThemeSettingsController</h1>
-                    <p><em>Theme Controller</em></p>
-                    <p>Add your application-wide methods in the class below, your controllers
-will inherit them.</p>
+                    <h1><small>\</small>AccessCtrlComponent</h1>
+                    <p><em>アクセス制御 Component</em></p>
+                    
                     
                                         
                     <section id="summary">
@@ -245,8 +244,8 @@ will inherit them.</p>
                         </section>
                         <section class="row-fluid public">
                             <section class="span4">
-                                                                    <a href="../classes/ThemeSettingsController.html#method_beforeFilter" class="">beforeFilter()</a><br />
-                                                                    <a href="../classes/ThemeSettingsController.html#method_index" class="">index()</a><br />
+                                                                    <a href="../classes/AccessCtrlComponent.html#method_initialize" class="">initialize()</a><br />
+                                                                    <a href="../classes/AccessCtrlComponent.html#method_allowAccess" class="">allowAccess()</a><br />
                                                             </section>
                             <section class="span4">
                                                                     <em>No public properties found</em>
@@ -284,16 +283,14 @@ will inherit them.</p>
                     
                     <dl>
                         <dt>File</dt>
-                            <dd><a href="../files/Plugin.ThemeSettings.Controller.ThemeSettingsController.html"><div class="path-wrapper">Plugin/ThemeSettings/Controller/ThemeSettingsController.php</div></a></dd>
+                            <dd><a href="../files/Plugin.NetCommons.Controller.Component.AccessCtrlComponent.html"><div class="path-wrapper">Plugin/NetCommons/Controller/Component/AccessCtrlComponent.php</div></a></dd>
                                                 <dt>Package</dt>
-                            <dd><div class="namespace-wrapper">ThemeSettings\Controller</div></dd>
+                            <dd><div class="namespace-wrapper">Controller\Component</div></dd>
                                                 <dt>Class hierarchy</dt>
                             <dd class="hierarchy">
-                                                                                                                                                                                                                                                                                                                                                                                                                                                            
-                                        <div class="namespace-wrapper">\Controller</div>
-                                                                    
-                                        <div class="namespace-wrapper"><a href="../classes/AppController.html">\AppController</a></div>
-                                                                                                    <div class="namespace-wrapper">\ThemeSettingsController</div>
+                                                                                                                                                                                                                                                                                                
+                                        <div class="namespace-wrapper">\Component</div>
+                                                                                                    <div class="namespace-wrapper">\AccessCtrlComponent</div>
                             </dd>
 
                         
@@ -308,7 +305,7 @@ will inherit them.</p>
                                 author
                             </th>
                             <td>
-                                                                    <p>Takako Miyagawa <a href="mailto:nekoget@gmail.com">nekoget@gmail.com</a></p>
+                                                                    <p>Shohei Nakajima <a href="mailto:nakajimashouhei@gmail.com">nakajimashouhei@gmail.com</a></p>
                                                             </td>
                         </tr>
                                         </table>
@@ -325,14 +322,22 @@ will inherit them.</p>
 
                                     <div class="row-fluid">
         <div class="span8 content class">
-            <a id="method_beforeFilter" name="method_beforeFilter" class="anchor"></a>
+            <a id="method_initialize" name="method_initialize" class="anchor"></a>
             <article class="method">
-                <h3 class="public ">beforeFilter()</h3>
+                <h3 class="public ">initialize()</h3>
                 <a href="#source-view" role="button" class="pull-right btn" data-toggle="modal" style="font-size: 1.1em; padding: 9px 14px"><i class="icon-code"></i></a>
-                <pre class="signature" style="margin-right: 54px;">beforeFilter() : void</pre>
-                <p><em>beforeFilter</em></p>
+                <pre class="signature" style="margin-right: 54px;">initialize(\Controller  <span class="argument">$controller</span>) : void</pre>
+                <p><em>Called before the Controller::beforeFilter().</em></p>
                 
 
+                                    <h4>Parameters</h4>
+                    <table class="table table-condensed table-hover">
+                                                    <tr>
+                                <td>\Controller</td>
+                                <td>$controller </td>
+                                <td><p>Controller with components to initialize</p></td>
+                            </tr>
+                                            </table>
                 
                 
                 				
@@ -341,7 +346,9 @@ will inherit them.</p>
         <aside class="span4 detailsbar">
             <h1><i class="icon-arrow-down"></i></h1>
                                                             <dl>
-                                                                            </dl>
+                                                                                            <dt>See also</dt>
+                                                                <dd><a href="http://book.cakephp.org/2.0/en/controllers/components.html#Component::initialize"><span class="namespace-wrapper">http://book.cakephp.org/2.0/en/controllers/components.html#Component::initialize</span></a></dd>
+                                                                </dl>
             <h2>Tags</h2>
             <table class="table table-condensed">
                                     <tr><td colspan="2"><em>None found</em></td></tr>
@@ -351,12 +358,12 @@ will inherit them.</p>
 
                                     <div class="row-fluid">
         <div class="span8 content class">
-            <a id="method_index" name="method_index" class="anchor"></a>
+            <a id="method_allowAccess" name="method_allowAccess" class="anchor"></a>
             <article class="method">
-                <h3 class="public ">index()</h3>
+                <h3 class="public ">allowAccess()</h3>
                 <a href="#source-view" role="button" class="pull-right btn" data-toggle="modal" style="font-size: 1.1em; padding: 9px 14px"><i class="icon-code"></i></a>
-                <pre class="signature" style="margin-right: 54px;">index() : void</pre>
-                <p><em>index</em></p>
+                <pre class="signature" style="margin-right: 54px;">allowAccess() : void</pre>
+                <p><em>アクセスチェック</em></p>
                 
 
                 
@@ -381,10 +388,10 @@ will inherit them.</p>
     <div id="source-view" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="source-view-label" aria-hidden="true">
         <div class="modal-header">
             <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
-            <h3 id="source-view-label">ThemeSettingsController.php</h3>
+            <h3 id="source-view-label">AccessCtrlComponent.php</h3>
         </div>
         <div class="modal-body">
-            <pre data-src="../files/Plugin/ThemeSettings/Controller/ThemeSettingsController.php.txt" class="language-php line-numbers"></pre>
+            <pre data-src="../files/Plugin/NetCommons/Controller/Component/AccessCtrlComponent.php.txt" class="language-php line-numbers"></pre>
         </div>
     </div>
 
