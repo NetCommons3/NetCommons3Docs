@@ -45,7 +45,8 @@ class GroupsUserBehavior extends ModelBehavior {
 		}
 		$model->GroupsUser->set($model->data['GroupsUser']);
 		if (! $model->GroupsUser->validates()) {
-				$model->validationErrors = Hash::merge($model->validationErrors, $model->GroupsUser->validationErrors);
+				$model->validationErrors = Hash::merge($model->validationErrors,
+					$model->GroupsUser->validationErrors);
 				return false;
 		}
 

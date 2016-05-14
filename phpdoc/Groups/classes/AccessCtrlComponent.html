@@ -136,10 +136,10 @@
                                 <div class="accordion" style="margin-bottom: 0">
         <div class="accordion-group">
             <div class="accordion-heading">
-                                    <a class="accordion-toggle " data-toggle="collapse" data-target="#namespace-1188367471"></a>
+                                    <a class="accordion-toggle " data-toggle="collapse" data-target="#namespace-597946955"></a>
                                 <a href="../namespaces/default.html" style="margin-left: 30px; padding-left: 0">\</a>
             </div>
-            <div id="namespace-1188367471" class="accordion-body collapse in">
+            <div id="namespace-597946955" class="accordion-body collapse in">
                 <div class="accordion-inner">
 
                     
@@ -226,8 +226,8 @@
                                             </nav>
                     <a href="#source-view" role="button" class="pull-right btn" data-toggle="modal"><i class="icon-code"></i></a>
 
-                    <h1><small>\</small>NetCommonsMigration</h1>
-                    <p><em>NetCommonsMigration</em></p>
+                    <h1><small>\</small>AccessCtrlComponent</h1>
+                    <p><em>アクセス制御 Component</em></p>
                     
                     
                                         
@@ -246,8 +246,8 @@
                         </section>
                         <section class="row-fluid public">
                             <section class="span4">
-                                                                    <a href="../classes/NetCommonsMigration.html#method_updateRecords" class="">updateRecords()</a><br />
-                                                                    <a href="../classes/NetCommonsMigration.html#method_loadModels" class="">loadModels()</a><br />
+                                                                    <a href="../classes/AccessCtrlComponent.html#method_initialize" class="">initialize()</a><br />
+                                                                    <a href="../classes/AccessCtrlComponent.html#method_allowAccess" class="">allowAccess()</a><br />
                                                             </section>
                             <section class="span4">
                                                                     <em>No public properties found</em>
@@ -285,14 +285,14 @@
                     
                     <dl>
                         <dt>File</dt>
-                            <dd><a href="../files/Plugin.NetCommons.Config.Migration.NetCommonsMigration.html"><div class="path-wrapper">Plugin/NetCommons/Config/Migration/NetCommonsMigration.php</div></a></dd>
+                            <dd><a href="../files/Plugin.NetCommons.Controller.Component.AccessCtrlComponent.html"><div class="path-wrapper">Plugin/NetCommons/Controller/Component/AccessCtrlComponent.php</div></a></dd>
                                                 <dt>Package</dt>
-                            <dd><div class="namespace-wrapper">Config\Migration</div></dd>
+                            <dd><div class="namespace-wrapper">Controller\Component</div></dd>
                                                 <dt>Class hierarchy</dt>
                             <dd class="hierarchy">
                                                                                                                                                                                                                                                                                                 
-                                        <div class="namespace-wrapper">\CakeMigration</div>
-                                                                                                    <div class="namespace-wrapper">\NetCommonsMigration</div>
+                                        <div class="namespace-wrapper">\Component</div>
+                                                                                                    <div class="namespace-wrapper">\AccessCtrlComponent</div>
                             </dd>
 
                         
@@ -324,81 +324,50 @@
 
                                     <div class="row-fluid">
         <div class="span8 content class">
-            <a id="method_updateRecords" name="method_updateRecords" class="anchor"></a>
+            <a id="method_initialize" name="method_initialize" class="anchor"></a>
             <article class="method">
-                <h3 class="public ">updateRecords()</h3>
+                <h3 class="public ">initialize()</h3>
                 <a href="#source-view" role="button" class="pull-right btn" data-toggle="modal" style="font-size: 1.1em; padding: 9px 14px"><i class="icon-code"></i></a>
-                <pre class="signature" style="margin-right: 54px;">updateRecords(string  <span class="argument">$model</span>, string  <span class="argument">$records</span>, string  <span class="argument">$clear = true</span>) : boolean</pre>
-                <p><em>Update model records</em></p>
+                <pre class="signature" style="margin-right: 54px;">initialize(\Controller  <span class="argument">$controller</span>) : void</pre>
+                <p><em>Called before the Controller::beforeFilter().</em></p>
                 
 
                                     <h4>Parameters</h4>
                     <table class="table table-condensed table-hover">
                                                     <tr>
-                                <td>string</td>
-                                <td>$model </td>
-                                <td><p>model name to update</p></td>
-                            </tr>
-                                                    <tr>
-                                <td>string</td>
-                                <td>$records </td>
-                                <td><p>records to be stored</p></td>
-                            </tr>
-                                                    <tr>
-                                <td>string</td>
-                                <td>$clear </td>
-                                <td><p>初期化するかどうか</p></td>
+                                <td>\Controller</td>
+                                <td>$controller </td>
+                                <td><p>Controller with components to initialize</p></td>
                             </tr>
                                             </table>
                 
                 
-                                    <h4>Returns</h4>
-                    boolean
-                                            &mdash; <p>Should process continue</p>
-                                    				
+                				
                             </article>
         </div>
         <aside class="span4 detailsbar">
             <h1><i class="icon-arrow-down"></i></h1>
                                                             <dl>
-                                                                            </dl>
+                                                                                            <dt>See also</dt>
+                                                                <dd><a href="http://book.cakephp.org/2.0/en/controllers/components.html#Component::initialize"><span class="namespace-wrapper">http://book.cakephp.org/2.0/en/controllers/components.html#Component::initialize</span></a></dd>
+                                                                </dl>
             <h2>Tags</h2>
             <table class="table table-condensed">
-                                    <tr>
-                        <th>
-                            SuppressWarnings
-                        </th>
-                        <td>
-                                                                                            <p>(PHPMD.BooleanArgumentFlag)</p>
-                                                    </td>
-                    </tr>
+                                    <tr><td colspan="2"><em>None found</em></td></tr>
                             </table>
         </aside>
     </div>
 
                                     <div class="row-fluid">
         <div class="span8 content class">
-            <a id="method_loadModels" name="method_loadModels" class="anchor"></a>
+            <a id="method_allowAccess" name="method_allowAccess" class="anchor"></a>
             <article class="method">
-                <h3 class="public ">loadModels()</h3>
+                <h3 class="public ">allowAccess()</h3>
                 <a href="#source-view" role="button" class="pull-right btn" data-toggle="modal" style="font-size: 1.1em; padding: 9px 14px"><i class="icon-code"></i></a>
-                <pre class="signature" style="margin-right: 54px;">loadModels(array  <span class="argument">$models = array()</span>, string  <span class="argument">$source = &#039;master&#039;</span>) : void</pre>
-                <p><em>Load models</em></p>
+                <pre class="signature" style="margin-right: 54px;">allowAccess() : void</pre>
+                <p><em>アクセスチェック</em></p>
                 
 
-                                    <h4>Parameters</h4>
-                    <table class="table table-condensed table-hover">
-                                                    <tr>
-                                <td>array</td>
-                                <td>$models </td>
-                                <td><p>models to load</p></td>
-                            </tr>
-                                                    <tr>
-                                <td>string</td>
-                                <td>$source </td>
-                                <td><p>data source</p></td>
-                            </tr>
-                                            </table>
                 
                 
                 				
@@ -421,10 +390,10 @@
     <div id="source-view" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="source-view-label" aria-hidden="true">
         <div class="modal-header">
             <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
-            <h3 id="source-view-label">NetCommonsMigration.php</h3>
+            <h3 id="source-view-label">AccessCtrlComponent.php</h3>
         </div>
         <div class="modal-body">
-            <pre data-src="../files/Plugin/NetCommons/Config/Migration/NetCommonsMigration.php.txt" class="language-php line-numbers"></pre>
+            <pre data-src="../files/Plugin/NetCommons/Controller/Component/AccessCtrlComponent.php.txt" class="language-php line-numbers"></pre>
         </div>
     </div>
 
