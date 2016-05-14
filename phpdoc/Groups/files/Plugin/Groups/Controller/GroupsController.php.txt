@@ -117,7 +117,8 @@ class GroupsController extends GroupsAppController {
 				if ($isModal) {
 					return;
 				} else {
-					$this->NetCommons->setFlashNotification(__d('net_commons', 'Successfully saved.'), array('class' => 'success'));
+					$this->NetCommons->setFlashNotification(__d('net_commons', 'Successfully saved.'),
+						array('class' => 'success'));
 					$this->redirect('/users/users/view/' . Current::read('User.id') . '#/user-groups');
 					return;
 				}
@@ -154,7 +155,8 @@ class GroupsController extends GroupsAppController {
 			$group = $this->Group->saveGroup($data);
 			if ($group) {
 				// 正常の場合
-				$this->NetCommons->setFlashNotification(__d('net_commons', 'Successfully saved.'), array('class' => 'success'));
+				$this->NetCommons->setFlashNotification(__d('net_commons', 'Successfully saved.'),
+					array('class' => 'success'));
 				$this->redirect('/users/users/view/' . Current::read('User.id') . '#/user-groups');
 				return;
 			} else {
@@ -192,7 +194,8 @@ class GroupsController extends GroupsAppController {
 		$this->request->onlyAllow('post', 'delete');
 		if ($this->Group->deleteGroup($id)) {
 			// 正常の場合
-			$this->NetCommons->setFlashNotification(__d('net_commons', 'Successfully saved.'), array('class' => 'success'));
+			$this->NetCommons->setFlashNotification(__d('net_commons', 'Successfully saved.'),
+				array('class' => 'success'));
 		}
 		return $this->redirect('/users/users/view/' . Current::read('User.id') . '#/user-groups');
 	}

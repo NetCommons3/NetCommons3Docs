@@ -84,7 +84,8 @@ class Group extends GroupsAppModel {
 				),
 				'maxLength' => array(
 					'rule' => array('maxLength', Group::GROUP_NAME_MAX_LENGTH),
-					'message' => sprintf(__d('groups', 'Please enter group name no more than %s characters'), Group::GROUP_NAME_MAX_LENGTH),
+					'message' => sprintf(__d('groups', 'Please enter group name no more than %s characters'),
+						Group::GROUP_NAME_MAX_LENGTH),
 				),
 			)
 		);
