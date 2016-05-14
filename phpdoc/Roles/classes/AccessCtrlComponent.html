@@ -136,10 +136,10 @@
                                 <div class="accordion" style="margin-bottom: 0">
         <div class="accordion-group">
             <div class="accordion-heading">
-                                    <a class="accordion-toggle " data-toggle="collapse" data-target="#namespace-1447272997"></a>
+                                    <a class="accordion-toggle " data-toggle="collapse" data-target="#namespace-476125673"></a>
                                 <a href="../namespaces/default.html" style="margin-left: 30px; padding-left: 0">\</a>
             </div>
-            <div id="namespace-1447272997" class="accordion-body collapse in">
+            <div id="namespace-476125673" class="accordion-body collapse in">
                 <div class="accordion-inner">
 
                     
@@ -221,8 +221,8 @@
                                             </nav>
                     <a href="#source-view" role="button" class="pull-right btn" data-toggle="modal"><i class="icon-code"></i></a>
 
-                    <h1><small>\</small>NetCommonsComponent</h1>
-                    <p><em>NetCommons Component</em></p>
+                    <h1><small>\</small>AccessCtrlComponent</h1>
+                    <p><em>アクセス制御 Component</em></p>
                     
                     
                                         
@@ -241,17 +241,14 @@
                         </section>
                         <section class="row-fluid public">
                             <section class="span4">
-                                                                    <a href="../classes/NetCommonsComponent.html#method_initialize" class="">initialize()</a><br />
-                                                                    <a href="../classes/NetCommonsComponent.html#method_renderJson" class="">renderJson()</a><br />
-                                                                    <a href="../classes/NetCommonsComponent.html#method_handleValidationError" class="">handleValidationError()</a><br />
-                                                                    <a href="../classes/NetCommonsComponent.html#method_setFlashNotification" class="">setFlashNotification()</a><br />
+                                                                    <a href="../classes/AccessCtrlComponent.html#method_initialize" class="">initialize()</a><br />
+                                                                    <a href="../classes/AccessCtrlComponent.html#method_allowAccess" class="">allowAccess()</a><br />
                                                             </section>
                             <section class="span4">
                                                                     <em>No public properties found</em>
                                                             </section>
                             <section class="span4">
-                                                                    <a href="../classes/NetCommonsComponent.html#constant_ALERT_SUCCESS_INTERVAL" class="">ALERT_SUCCESS_INTERVAL</a><br />
-                                                                    <a href="../classes/NetCommonsComponent.html#constant_ALERT_VALIDATE_ERROR_INTERVAL" class="">ALERT_VALIDATE_ERROR_INTERVAL</a><br />
+                                                                    <em>No constants found</em>
                                                             </section>
                         </section>
                         <section class="row-fluid protected">
@@ -283,14 +280,14 @@
                     
                     <dl>
                         <dt>File</dt>
-                            <dd><a href="../files/Plugin.NetCommons.Controller.Component.NetCommonsComponent.html"><div class="path-wrapper">Plugin/NetCommons/Controller/Component/NetCommonsComponent.php</div></a></dd>
+                            <dd><a href="../files/Plugin.NetCommons.Controller.Component.AccessCtrlComponent.html"><div class="path-wrapper">Plugin/NetCommons/Controller/Component/AccessCtrlComponent.php</div></a></dd>
                                                 <dt>Package</dt>
                             <dd><div class="namespace-wrapper">Controller\Component</div></dd>
                                                 <dt>Class hierarchy</dt>
                             <dd class="hierarchy">
                                                                                                                                                                                                                                                                                                 
                                         <div class="namespace-wrapper">\Component</div>
-                                                                                                    <div class="namespace-wrapper">\NetCommonsComponent</div>
+                                                                                                    <div class="namespace-wrapper">\AccessCtrlComponent</div>
                             </dd>
 
                         
@@ -312,57 +309,7 @@
                 </aside>
             </div>
 
-                                    <a id="constants" name="constants"></a>
-            <div class="row-fluid">
-                <div class="span8 content class">
-                    <h2>Constants</h2>
-                </div>
-                <aside class="span4 detailsbar"></aside>
-            </div>
-
-                                <div class="row-fluid">
-        <div class="span8 content class">
-            <a id="constant_ALERT_SUCCESS_INTERVAL" name="constant_ALERT_SUCCESS_INTERVAL" class="anchor"></a>
-            <article id="constant_ALERT_SUCCESS_INTERVAL" class="constant">
-                <h3 class="">ALERT_SUCCESS_INTERVAL</h3>
-                <pre class="signature">ALERT_SUCCESS_INTERVAL</pre>
-                <p><em>alert</em></p>
-                
-            </article>
-        </div>
-        <aside class="span4 detailsbar">
-            <h1><i class="icon-arrow-down"></i></h1>
-                        <dl>
-                                                                            </dl>
-            <h2>Tags</h2>
-            <table class="table table-condensed">
-                                    <tr><td colspan="2"><em>None found</em></td></tr>
-                            </table>
-        </aside>
-    </div>
-
-                                    <div class="row-fluid">
-        <div class="span8 content class">
-            <a id="constant_ALERT_VALIDATE_ERROR_INTERVAL" name="constant_ALERT_VALIDATE_ERROR_INTERVAL" class="anchor"></a>
-            <article id="constant_ALERT_VALIDATE_ERROR_INTERVAL" class="constant">
-                <h3 class="">ALERT_VALIDATE_ERROR_INTERVAL</h3>
-                <pre class="signature">ALERT_VALIDATE_ERROR_INTERVAL</pre>
-                <p><em>alert</em></p>
-                
-            </article>
-        </div>
-        <aside class="span4 detailsbar">
-            <h1><i class="icon-arrow-down"></i></h1>
-                        <dl>
-                                                                            </dl>
-            <h2>Tags</h2>
-            <table class="table table-condensed">
-                                    <tr><td colspan="2"><em>None found</em></td></tr>
-                            </table>
-        </aside>
-    </div>
-
-                            
+                        
                         
                                     <a id="methods" name="methods"></a>
             <div class="row-fluid">
@@ -385,7 +332,7 @@
                                                     <tr>
                                 <td>\Controller</td>
                                 <td>$controller </td>
-                                <td><p>Instantiating controller</p></td>
+                                <td><p>Controller with components to initialize</p></td>
                             </tr>
                                             </table>
                 
@@ -396,7 +343,9 @@
         <aside class="span4 detailsbar">
             <h1><i class="icon-arrow-down"></i></h1>
                                                             <dl>
-                                                                            </dl>
+                                                                                            <dt>See also</dt>
+                                                                <dd><a href="http://book.cakephp.org/2.0/en/controllers/components.html#Component::initialize"><span class="namespace-wrapper">http://book.cakephp.org/2.0/en/controllers/components.html#Component::initialize</span></a></dd>
+                                                                </dl>
             <h2>Tags</h2>
             <table class="table table-condensed">
                                     <tr><td colspan="2"><em>None found</em></td></tr>
@@ -406,125 +355,14 @@
 
                                     <div class="row-fluid">
         <div class="span8 content class">
-            <a id="method_renderJson" name="method_renderJson" class="anchor"></a>
+            <a id="method_allowAccess" name="method_allowAccess" class="anchor"></a>
             <article class="method">
-                <h3 class="public ">renderJson()</h3>
+                <h3 class="public ">allowAccess()</h3>
                 <a href="#source-view" role="button" class="pull-right btn" data-toggle="modal" style="font-size: 1.1em; padding: 9px 14px"><i class="icon-code"></i></a>
-                <pre class="signature" style="margin-right: 54px;">renderJson(array  <span class="argument">$results = array()</span>, string  <span class="argument">$name = &#039;OK&#039;</span>, integer  <span class="argument">$status = 200</span>) : void</pre>
-                <p><em>render json</em></p>
+                <pre class="signature" style="margin-right: 54px;">allowAccess() : void</pre>
+                <p><em>アクセスチェック</em></p>
                 
 
-                                    <h4>Parameters</h4>
-                    <table class="table table-condensed table-hover">
-                                                    <tr>
-                                <td>array</td>
-                                <td>$results </td>
-                                <td><p>results data</p></td>
-                            </tr>
-                                                    <tr>
-                                <td>string</td>
-                                <td>$name </td>
-                                <td><p>message</p></td>
-                            </tr>
-                                                    <tr>
-                                <td>integer</td>
-                                <td>$status </td>
-                                <td><p>status code</p></td>
-                            </tr>
-                                            </table>
-                
-                
-                				
-                            </article>
-        </div>
-        <aside class="span4 detailsbar">
-            <h1><i class="icon-arrow-down"></i></h1>
-                                                            <dl>
-                                                                            </dl>
-            <h2>Tags</h2>
-            <table class="table table-condensed">
-                                    <tr><td colspan="2"><em>None found</em></td></tr>
-                            </table>
-        </aside>
-    </div>
-
-                                    <div class="row-fluid">
-        <div class="span8 content class">
-            <a id="method_handleValidationError" name="method_handleValidationError" class="anchor"></a>
-            <article class="method">
-                <h3 class="public ">handleValidationError()</h3>
-                <a href="#source-view" role="button" class="pull-right btn" data-toggle="modal" style="font-size: 1.1em; padding: 9px 14px"><i class="icon-code"></i></a>
-                <pre class="signature" style="margin-right: 54px;">handleValidationError(array  <span class="argument">$errors</span>, string  <span class="argument">$message = null</span>) : boolean</pre>
-                <p><em>Handle validation error</em></p>
-                
-
-                                    <h4>Parameters</h4>
-                    <table class="table table-condensed table-hover">
-                                                    <tr>
-                                <td>array</td>
-                                <td>$errors </td>
-                                <td><p>validation errors</p></td>
-                            </tr>
-                                                    <tr>
-                                <td>string</td>
-                                <td>$message </td>
-                                <td><p>エラーメッセージ</p></td>
-                            </tr>
-                                            </table>
-                
-                
-                                    <h4>Returns</h4>
-                    boolean
-                                            &mdash; <p>true on success, false on error</p>
-                                    				
-                            </article>
-        </div>
-        <aside class="span4 detailsbar">
-            <h1><i class="icon-arrow-down"></i></h1>
-                                                            <dl>
-                                                                            </dl>
-            <h2>Tags</h2>
-            <table class="table table-condensed">
-                                    <tr>
-                        <th>
-                            SuppressWarnings
-                        </th>
-                        <td>
-                                                                                            <p>(PHPMD.DevelopmentCodeFragment)</p>
-                                                    </td>
-                    </tr>
-                            </table>
-        </aside>
-    </div>
-
-                                    <div class="row-fluid">
-        <div class="span8 content class">
-            <a id="method_setFlashNotification" name="method_setFlashNotification" class="anchor"></a>
-            <article class="method">
-                <h3 class="public ">setFlashNotification()</h3>
-                <a href="#source-view" role="button" class="pull-right btn" data-toggle="modal" style="font-size: 1.1em; padding: 9px 14px"><i class="icon-code"></i></a>
-                <pre class="signature" style="margin-right: 54px;">setFlashNotification(string  <span class="argument">$message</span>, array  <span class="argument">$params = array()</span>, integer  <span class="argument">$status = 200</span>) : void</pre>
-                <p><em>Used to set a session variable that can be used to output messages in the view.</em></p>
-                
-
-                                    <h4>Parameters</h4>
-                    <table class="table table-condensed table-hover">
-                                                    <tr>
-                                <td>string</td>
-                                <td>$message </td>
-                                <td><p>message</p></td>
-                            </tr>
-                                                    <tr>
-                                <td>array</td>
-                                <td>$params </td>
-                                <td><p>Parameters to be sent to layout as view variables</p></td>
-                            </tr>
-                                                    <tr>
-                                <td>integer</td>
-                                <td>$status </td>
-                                <td><p>status code</p></td>
-                            </tr>
-                                            </table>
                 
                 
                 				
@@ -547,10 +385,10 @@
     <div id="source-view" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="source-view-label" aria-hidden="true">
         <div class="modal-header">
             <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
-            <h3 id="source-view-label">NetCommonsComponent.php</h3>
+            <h3 id="source-view-label">AccessCtrlComponent.php</h3>
         </div>
         <div class="modal-body">
-            <pre data-src="../files/Plugin/NetCommons/Controller/Component/NetCommonsComponent.php.txt" class="language-php line-numbers"></pre>
+            <pre data-src="../files/Plugin/NetCommons/Controller/Component/AccessCtrlComponent.php.txt" class="language-php line-numbers"></pre>
         </div>
     </div>
 
