@@ -136,10 +136,10 @@
                                 <div class="accordion" style="margin-bottom: 0">
         <div class="accordion-group">
             <div class="accordion-heading">
-                                    <a class="accordion-toggle " data-toggle="collapse" data-target="#namespace-1525951091"></a>
+                                    <a class="accordion-toggle " data-toggle="collapse" data-target="#namespace-12391589"></a>
                                 <a href="../namespaces/default.html" style="margin-left: 30px; padding-left: 0">\</a>
             </div>
-            <div id="namespace-1525951091" class="accordion-body collapse in">
+            <div id="namespace-12391589" class="accordion-body collapse in">
                 <div class="accordion-inner">
 
                     
@@ -222,24 +222,9 @@
                                             </nav>
                     <a href="#source-view" role="button" class="pull-right btn" data-toggle="modal"><i class="icon-code"></i></a>
 
-                    <h1><small>\</small>YAExceptionRenderer</h1>
-                    <p><em>Exception Renderer.</em></p>
-                    <p>Captures and handles all unhandled exceptions. Displays helpful framework errors when debug &gt; 1.
-When debug &lt; 1 a CakeException will render 404 or 500 errors. If an uncaught exception is thrown
-and it is a type that ExceptionHandler does not know about it will be treated as a 500 error.</p>
-<h3>Implementing application specific exception rendering</h3>
-<p>You can implement application specific exception handling in one of a few ways:</p>
-<ul>
-<li>Create a AppController::appError();</li>
-<li>Create a subclass of YAExceptionRenderer and configure it to be the <code>Exception.renderer</code></li>
-</ul>
-<h4>Using AppController::appError();</h4>
-<p>This controller method is called instead of the default exception handling. It receives the
-thrown exception as its only argument. You should implement your error handling in that method.</p>
-<h4>Using a subclass of YAExceptionRenderer</h4>
-<p>Using a subclass of YAExceptionRenderer gives you full control over how Exceptions are rendered, you
-can configure your class in your core.php, with <code>Configure::write('Exception.renderer', 'MyClass');</code>
-You should place any custom exception renderers in <code>app/Lib/Error</code>.</p>
+                    <h1><small>\</small>AccessCtrlComponent</h1>
+                    <p><em>アクセス制御 Component</em></p>
+                    
                     
                                         
                     <section id="summary">
@@ -257,8 +242,8 @@ You should place any custom exception renderers in <code>app/Lib/Error</code>.</
                         </section>
                         <section class="row-fluid public">
                             <section class="span4">
-                                                                    <a href="../classes/YAExceptionRenderer.html#method_error400" class="">error400()</a><br />
-                                                                    <a href="../classes/YAExceptionRenderer.html#method_error500" class="">error500()</a><br />
+                                                                    <a href="../classes/AccessCtrlComponent.html#method_initialize" class="">initialize()</a><br />
+                                                                    <a href="../classes/AccessCtrlComponent.html#method_allowAccess" class="">allowAccess()</a><br />
                                                             </section>
                             <section class="span4">
                                                                     <em>No public properties found</em>
@@ -296,14 +281,14 @@ You should place any custom exception renderers in <code>app/Lib/Error</code>.</
                     
                     <dl>
                         <dt>File</dt>
-                            <dd><a href="../files/Plugin.NetCommons.Error.YAExceptionRenderer.html"><div class="path-wrapper">Plugin/NetCommons/Error/YAExceptionRenderer.php</div></a></dd>
+                            <dd><a href="../files/Plugin.NetCommons.Controller.Component.AccessCtrlComponent.html"><div class="path-wrapper">Plugin/NetCommons/Controller/Component/AccessCtrlComponent.php</div></a></dd>
                                                 <dt>Package</dt>
-                            <dd><div class="namespace-wrapper">NetCommons\Error</div></dd>
+                            <dd><div class="namespace-wrapper">Controller\Component</div></dd>
                                                 <dt>Class hierarchy</dt>
                             <dd class="hierarchy">
                                                                                                                                                                                                                                                                                                 
-                                        <div class="namespace-wrapper">\ExceptionRenderer</div>
-                                                                                                    <div class="namespace-wrapper">\YAExceptionRenderer</div>
+                                        <div class="namespace-wrapper">\Component</div>
+                                                                                                    <div class="namespace-wrapper">\AccessCtrlComponent</div>
                             </dd>
 
                         
@@ -313,7 +298,14 @@ You should place any custom exception renderers in <code>app/Lib/Error</code>.</
                                                                         </dl>
                     <h2>Tags</h2>
                     <table class="table table-condensed">
-                                            <tr><td colspan="2"><em>None found</em></td></tr>
+                                            <tr>
+                            <th>
+                                author
+                            </th>
+                            <td>
+                                                                    <p>Shohei Nakajima <a href="mailto:nakajimashouhei@gmail.com">nakajimashouhei@gmail.com</a></p>
+                                                            </td>
+                        </tr>
                                         </table>
                 </aside>
             </div>
@@ -328,20 +320,20 @@ You should place any custom exception renderers in <code>app/Lib/Error</code>.</
 
                                     <div class="row-fluid">
         <div class="span8 content class">
-            <a id="method_error400" name="method_error400" class="anchor"></a>
+            <a id="method_initialize" name="method_initialize" class="anchor"></a>
             <article class="method">
-                <h3 class="public ">error400()</h3>
+                <h3 class="public ">initialize()</h3>
                 <a href="#source-view" role="button" class="pull-right btn" data-toggle="modal" style="font-size: 1.1em; padding: 9px 14px"><i class="icon-code"></i></a>
-                <pre class="signature" style="margin-right: 54px;">error400(\Exception  <span class="argument">$error</span>) : void</pre>
-                <p><em>Convenience method to display a 400 series page.</em></p>
+                <pre class="signature" style="margin-right: 54px;">initialize(\Controller  <span class="argument">$controller</span>) : void</pre>
+                <p><em>Called before the Controller::beforeFilter().</em></p>
                 
 
                                     <h4>Parameters</h4>
                     <table class="table table-condensed table-hover">
                                                     <tr>
-                                <td>\Exception</td>
-                                <td>$error </td>
-                                <td><p>Exception</p></td>
+                                <td>\Controller</td>
+                                <td>$controller </td>
+                                <td><p>Controller with components to initialize</p></td>
                             </tr>
                                             </table>
                 
@@ -352,7 +344,9 @@ You should place any custom exception renderers in <code>app/Lib/Error</code>.</
         <aside class="span4 detailsbar">
             <h1><i class="icon-arrow-down"></i></h1>
                                                             <dl>
-                                                                            </dl>
+                                                                                            <dt>See also</dt>
+                                                                <dd><a href="http://book.cakephp.org/2.0/en/controllers/components.html#Component::initialize"><span class="namespace-wrapper">http://book.cakephp.org/2.0/en/controllers/components.html#Component::initialize</span></a></dd>
+                                                                </dl>
             <h2>Tags</h2>
             <table class="table table-condensed">
                                     <tr><td colspan="2"><em>None found</em></td></tr>
@@ -362,22 +356,14 @@ You should place any custom exception renderers in <code>app/Lib/Error</code>.</
 
                                     <div class="row-fluid">
         <div class="span8 content class">
-            <a id="method_error500" name="method_error500" class="anchor"></a>
+            <a id="method_allowAccess" name="method_allowAccess" class="anchor"></a>
             <article class="method">
-                <h3 class="public ">error500()</h3>
+                <h3 class="public ">allowAccess()</h3>
                 <a href="#source-view" role="button" class="pull-right btn" data-toggle="modal" style="font-size: 1.1em; padding: 9px 14px"><i class="icon-code"></i></a>
-                <pre class="signature" style="margin-right: 54px;">error500(\Exception  <span class="argument">$error</span>) : void</pre>
-                <p><em>Convenience method to display a 500 page.</em></p>
+                <pre class="signature" style="margin-right: 54px;">allowAccess() : void</pre>
+                <p><em>アクセスチェック</em></p>
                 
 
-                                    <h4>Parameters</h4>
-                    <table class="table table-condensed table-hover">
-                                                    <tr>
-                                <td>\Exception</td>
-                                <td>$error </td>
-                                <td><p>Exception</p></td>
-                            </tr>
-                                            </table>
                 
                 
                 				
@@ -400,10 +386,10 @@ You should place any custom exception renderers in <code>app/Lib/Error</code>.</
     <div id="source-view" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="source-view-label" aria-hidden="true">
         <div class="modal-header">
             <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
-            <h3 id="source-view-label">YAExceptionRenderer.php</h3>
+            <h3 id="source-view-label">AccessCtrlComponent.php</h3>
         </div>
         <div class="modal-body">
-            <pre data-src="../files/Plugin/NetCommons/Error/YAExceptionRenderer.php.txt" class="language-php line-numbers"></pre>
+            <pre data-src="../files/Plugin/NetCommons/Controller/Component/AccessCtrlComponent.php.txt" class="language-php line-numbers"></pre>
         </div>
     </div>
 
