@@ -136,10 +136,10 @@
                                 <div class="accordion" style="margin-bottom: 0">
         <div class="accordion-group">
             <div class="accordion-heading">
-                                    <a class="accordion-toggle " data-toggle="collapse" data-target="#namespace-1093368632"></a>
+                                    <a class="accordion-toggle " data-toggle="collapse" data-target="#namespace-518816837"></a>
                                 <a href="../namespaces/default.html" style="margin-left: 30px; padding-left: 0">\</a>
             </div>
-            <div id="namespace-1093368632" class="accordion-body collapse in">
+            <div id="namespace-518816837" class="accordion-body collapse in">
                 <div class="accordion-inner">
 
                     
@@ -226,8 +226,8 @@
                                             </nav>
                     <a href="#source-view" role="button" class="pull-right btn" data-toggle="modal"><i class="icon-code"></i></a>
 
-                    <h1><small>\</small>TokenHelper</h1>
-                    <p><em>TokenHelper</em></p>
+                    <h1><small>\</small>AccessCtrlComponent</h1>
+                    <p><em>アクセス制御 Component</em></p>
                     
                     
                                         
@@ -246,7 +246,8 @@
                         </section>
                         <section class="row-fluid public">
                             <section class="span4">
-                                                                    <a href="../classes/TokenHelper.html#method_getToken" class="">getToken()</a><br />
+                                                                    <a href="../classes/AccessCtrlComponent.html#method_initialize" class="">initialize()</a><br />
+                                                                    <a href="../classes/AccessCtrlComponent.html#method_allowAccess" class="">allowAccess()</a><br />
                                                             </section>
                             <section class="span4">
                                                                     <em>No public properties found</em>
@@ -257,8 +258,7 @@
                         </section>
                         <section class="row-fluid protected">
                             <section class="span4">
-                                                                    <a href="../classes/TokenHelper.html#method__getInputsFields" class="">_getInputsFields()</a><br />
-                                                                    <a href="../classes/TokenHelper.html#method__extractToken" class="">_extractToken()</a><br />
+                                                                    <em>No protected methods found</em>
                                                             </section>
                             <section class="span4">
                                                                     <em>No protected properties found</em>
@@ -285,14 +285,14 @@
                     
                     <dl>
                         <dt>File</dt>
-                            <dd><a href="../files/Plugin.NetCommons.View.Helper.TokenHelper.html"><div class="path-wrapper">Plugin/NetCommons/View/Helper/TokenHelper.php</div></a></dd>
+                            <dd><a href="../files/Plugin.NetCommons.Controller.Component.AccessCtrlComponent.html"><div class="path-wrapper">Plugin/NetCommons/Controller/Component/AccessCtrlComponent.php</div></a></dd>
                                                 <dt>Package</dt>
-                            <dd><div class="namespace-wrapper">Default</div></dd>
+                            <dd><div class="namespace-wrapper">Controller\Component</div></dd>
                                                 <dt>Class hierarchy</dt>
                             <dd class="hierarchy">
                                                                                                                                                                                                                                                                                                 
-                                        <div class="namespace-wrapper">\FormHelper</div>
-                                                                                                    <div class="namespace-wrapper">\TokenHelper</div>
+                                        <div class="namespace-wrapper">\Component</div>
+                                                                                                    <div class="namespace-wrapper">\AccessCtrlComponent</div>
                             </dd>
 
                         
@@ -302,7 +302,14 @@
                                                                         </dl>
                     <h2>Tags</h2>
                     <table class="table table-condensed">
-                                            <tr><td colspan="2"><em>None found</em></td></tr>
+                                            <tr>
+                            <th>
+                                author
+                            </th>
+                            <td>
+                                                                    <p>Shohei Nakajima <a href="mailto:nakajimashouhei@gmail.com">nakajimashouhei@gmail.com</a></p>
+                                                            </td>
+                        </tr>
                                         </table>
                 </aside>
             </div>
@@ -317,99 +324,33 @@
 
                                     <div class="row-fluid">
         <div class="span8 content class">
-            <a id="method_getToken" name="method_getToken" class="anchor"></a>
+            <a id="method_initialize" name="method_initialize" class="anchor"></a>
             <article class="method">
-                <h3 class="public ">getToken()</h3>
+                <h3 class="public ">initialize()</h3>
                 <a href="#source-view" role="button" class="pull-right btn" data-toggle="modal" style="font-size: 1.1em; padding: 9px 14px"><i class="icon-code"></i></a>
-                <pre class="signature" style="margin-right: 54px;">getToken(mixed  <span class="argument">$model = null</span>, array|string  <span class="argument">$actionUrl = null</span>, array  <span class="argument">$tokenFields = null</span>, array  <span class="argument">$hiddenFields = array()</span>, array  <span class="argument">$blacklist = null</span>) : array</pre>
-                <p><em>Return _Token array.</em></p>
+                <pre class="signature" style="margin-right: 54px;">initialize(\Controller  <span class="argument">$controller</span>) : void</pre>
+                <p><em>Called before the Controller::beforeFilter().</em></p>
                 
 
                                     <h4>Parameters</h4>
                     <table class="table table-condensed table-hover">
                                                     <tr>
-                                <td>mixed</td>
-                                <td>$model </td>
-                                <td><p>The model name for which the form is being defined. Should
-include the plugin name for plugin models. e.g. <code>ContactManager.Contact</code>.
-If an array is passed and $options argument is empty, the array will be used as options.
-If <code>false</code> no model is used.</p></td>
-                            </tr>
-                                                    <tr>
-                                <td>array|string</td>
-                                <td>$actionUrl </td>
-                                <td><p>Action url.</p></td>
-                            </tr>
-                                                    <tr>
-                                <td>array</td>
-                                <td>$tokenFields </td>
-                                <td><p>An array of fields to generate inputs for, or null.</p></td>
-                            </tr>
-                                                    <tr>
-                                <td>array</td>
-                                <td>$hiddenFields </td>
-                                <td><p>An array of fields that exist in $tokenFields to generate inputs hidden for, or null.</p></td>
-                            </tr>
-                                                    <tr>
-                                <td>array</td>
-                                <td>$blacklist </td>
-                                <td><p>A array of fields to not create inputs for.</p></td>
+                                <td>\Controller</td>
+                                <td>$controller </td>
+                                <td><p>Controller with components to initialize</p></td>
                             </tr>
                                             </table>
                 
                 
-                                    <h4>Returns</h4>
-                    array
-                                            &mdash; <p>_Token</p>
-                                    				
+                				
                             </article>
         </div>
         <aside class="span4 detailsbar">
             <h1><i class="icon-arrow-down"></i></h1>
                                                             <dl>
-                                                                            </dl>
-            <h2>Tags</h2>
-            <table class="table table-condensed">
-                                    <tr><td colspan="2"><em>None found</em></td></tr>
-                            </table>
-        </aside>
-    </div>
-
-                                                    <div class="row-fluid">
-        <div class="span8 content class">
-            <a id="method__getInputsFields" name="method__getInputsFields" class="anchor"></a>
-            <article class="method">
-                <h3 class="protected ">_getInputsFields()</h3>
-                <a href="#source-view" role="button" class="pull-right btn" data-toggle="modal" style="font-size: 1.1em; padding: 9px 14px"><i class="icon-code"></i></a>
-                <pre class="signature" style="margin-right: 54px;">_getInputsFields(array  <span class="argument">$tokenFields</span>, array  <span class="argument">$hiddenFields</span>) : array</pre>
-                <p><em>Return input fields array added hidden option.</em></p>
-                
-
-                                    <h4>Parameters</h4>
-                    <table class="table table-condensed table-hover">
-                                                    <tr>
-                                <td>array</td>
-                                <td>$tokenFields </td>
-                                <td><p>An array of fields to generate inputs for, or null.</p></td>
-                            </tr>
-                                                    <tr>
-                                <td>array</td>
-                                <td>$hiddenFields </td>
-                                <td><p>An array of fields that exist in $tokenFields to generate inputs hidden for, or null.</p></td>
-                            </tr>
-                                            </table>
-                
-                
-                                    <h4>Returns</h4>
-                    array
-                                            &mdash; <p>input fields</p>
-                                    				
-                            </article>
-        </div>
-        <aside class="span4 detailsbar">
-            <h1><i class="icon-arrow-down"></i></h1>
-                                                            <dl>
-                                                                            </dl>
+                                                                                            <dt>See also</dt>
+                                                                <dd><a href="http://book.cakephp.org/2.0/en/controllers/components.html#Component::initialize"><span class="namespace-wrapper">http://book.cakephp.org/2.0/en/controllers/components.html#Component::initialize</span></a></dd>
+                                                                </dl>
             <h2>Tags</h2>
             <table class="table table-condensed">
                                     <tr><td colspan="2"><em>None found</em></td></tr>
@@ -419,28 +360,17 @@ If <code>false</code> no model is used.</p></td>
 
                                     <div class="row-fluid">
         <div class="span8 content class">
-            <a id="method__extractToken" name="method__extractToken" class="anchor"></a>
+            <a id="method_allowAccess" name="method_allowAccess" class="anchor"></a>
             <article class="method">
-                <h3 class="protected ">_extractToken()</h3>
+                <h3 class="public ">allowAccess()</h3>
                 <a href="#source-view" role="button" class="pull-right btn" data-toggle="modal" style="font-size: 1.1em; padding: 9px 14px"><i class="icon-code"></i></a>
-                <pre class="signature" style="margin-right: 54px;">_extractToken(string  <span class="argument">$formHtml</span>) : array</pre>
-                <p><em>Return _Token array.</em></p>
+                <pre class="signature" style="margin-right: 54px;">allowAccess() : void</pre>
+                <p><em>アクセスチェック</em></p>
                 
 
-                                    <h4>Parameters</h4>
-                    <table class="table table-condensed table-hover">
-                                                    <tr>
-                                <td>string</td>
-                                <td>$formHtml </td>
-                                <td><p>Token html string</p></td>
-                            </tr>
-                                            </table>
                 
                 
-                                    <h4>Returns</h4>
-                    array
-                                            &mdash; <p>_Token</p>
-                                    				
+                				
                             </article>
         </div>
         <aside class="span4 detailsbar">
@@ -454,16 +384,16 @@ If <code>false</code> no model is used.</p></td>
         </aside>
     </div>
 
-                                                    </div>
+                                                                    </div>
     </section>
 
     <div id="source-view" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="source-view-label" aria-hidden="true">
         <div class="modal-header">
             <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
-            <h3 id="source-view-label">TokenHelper.php</h3>
+            <h3 id="source-view-label">AccessCtrlComponent.php</h3>
         </div>
         <div class="modal-body">
-            <pre data-src="../files/Plugin/NetCommons/View/Helper/TokenHelper.php.txt" class="language-php line-numbers"></pre>
+            <pre data-src="../files/Plugin/NetCommons/Controller/Component/AccessCtrlComponent.php.txt" class="language-php line-numbers"></pre>
         </div>
     </div>
 
