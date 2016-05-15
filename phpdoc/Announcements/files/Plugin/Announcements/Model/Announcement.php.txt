@@ -29,9 +29,6 @@ class Announcement extends AnnouncementsAppModel {
 	public $actsAs = array(
 		'Blocks.Block' => array(
 			'name' => 'Announcement.content',
-			'loadModels' => array(
-				'WorkflowComment' => 'Workflow.WorkflowComment',
-			)
 		),
 		'NetCommons.OriginalKey',
 		//'M17n.M17n',
@@ -173,7 +170,9 @@ class Announcement extends AnnouncementsAppModel {
 
 		try {
 			//Announcementの削除
-			if (! $this->deleteAll(array($this->alias . '.key' => $data[$this->alias]['key']), false)) {
+			$this->contentKey = $data[$this->alias]['key'];
+			$conditions = array($this->alias . '.key' => $data[$this->alias]['key']);
+			if (! $this->deleteAll($conditions, false, true)) {
 				throw new InternalErrorException(__d('net_commons', 'Internal Server Error'));
 			}
 
