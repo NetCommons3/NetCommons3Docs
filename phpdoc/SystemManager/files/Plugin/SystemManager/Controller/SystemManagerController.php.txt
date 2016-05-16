@@ -26,6 +26,7 @@ class SystemManagerController extends SystemManagerAppController {
  */
 	public $uses = array(
 		'SiteManager.SiteSetting',
+		'Rooms.Space',
 	);
 
 /**
@@ -44,12 +45,29 @@ class SystemManagerController extends SystemManagerAppController {
 				array('SiteSetting.key' => array(
 					// * サイトタイムゾーン
 					'App.default_timezone',
-					// * グループルームの容量
-					'App.disk_for_group_room',
-					// * プライベートルームの容量
-					'App.disk_for_private_room',
 				)
 			));
+
+			$spaces = $this->Space->find('all', array(
+				'recursive' => -1,
+				'conditions' => array('id' => [Space::PRIVATE_SPACE_ID, Space::ROOM_SPACE_ID]),
+			));
+
+			$setSpaceDisk = array(
+				// * グループルームの容量
+				Space::ROOM_SPACE_ID => 'App.disk_for_group_room',
+				// * プライベートルームの容量
+				Space::PRIVATE_SPACE_ID => 'App.disk_for_private_room',
+			);
+			foreach ($setSpaceDisk as $spaceId => $key) {
+				$this->request->data['SiteSetting'][$key]['0'] = $this->SiteSetting->create(
+					array(
+						'key' => $key,
+						'language_id' => '0',
+						'value' => Hash::extract($spaces, '{n}.Space[id=' . $spaceId . '].room_disk_size')[0]
+					)
+				)['SiteSetting'];
+			}
 		}
 	}
 }
