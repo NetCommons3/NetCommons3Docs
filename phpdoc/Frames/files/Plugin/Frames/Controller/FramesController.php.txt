@@ -86,9 +86,7 @@ class FramesController extends FramesAppController {
 		$data = $this->data;
 		$data['Frame']['is_deleted'] = false;
 		$data['Frame']['name'] = __d('frames', 'New frame %s', date('YmdHis'));
-		if (! $data['Frame']['room_id']) {
-			$data['Frame']['room_id'] = 1;
-		}
+		$data['Frame']['room_id'] = Hash::get($data, 'Frame.room_id', 1);
 
 		if (! $frame = $this->Frame->saveFrame($data)) {
 			//エラー処理
