@@ -308,7 +308,8 @@ class Room extends RoomsAppModel {
 			$this->saveDefaultRolesRoomsUser($room, true);
 			$this->saveDefaultRolesPluginsRoom($room);
 			$this->saveDefaultRoomRolePermission($room);
-			$this->saveDefaultPage($room);
+			$page = $this->saveDefaultPage($room);
+			$this->data = Hash::merge($room, $page);
 		}
 
 		if (isset($room['RoomRolePermission'])) {

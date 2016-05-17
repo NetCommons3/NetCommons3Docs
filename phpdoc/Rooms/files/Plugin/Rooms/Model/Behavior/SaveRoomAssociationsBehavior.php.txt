@@ -274,7 +274,7 @@ class SaveRoomAssociationsBehavior extends ModelBehavior {
  *
  * @param Model $model 呼び出し元のモデル
  * @param array $data Room data
- * @return bool True on success
+ * @return array ページ
  * @throws InternalErrorException
  */
 	public function saveDefaultPage(Model $model, $data) {
@@ -311,7 +311,7 @@ class SaveRoomAssociationsBehavior extends ModelBehavior {
 			throw new InternalErrorException(__d('net_commons', 'Internal Server Error'));
 		}
 
-		return true;
+		return $page;
 	}
 
 /**
