@@ -28,68 +28,35 @@ class ButtonHelper extends FormHelper {
 		'Html',
 		'NetCommons.BackTo',
 		'NetCommons.LinkButton',
-		'NetCommons.NetCommonsForm',
 		'NetCommons.NetCommonsHtml',
 	);
 
 /**
- * LinkButtonHelperラップ用マジックメソッド。
- *
- * @param string $method メソッド
- * @param array $params パラメータ
- * @return mixed
- */
-	public function __call($method, $params) {
-		if (in_array($method, ['addLink', 'editLink', 'searchLink', 'sortLink'], true)) {
-			$method = substr($method, 0, -4);
-			return call_user_func_array(array($this->LinkButton, $method), $params);
-		}
-	}
-
-/**
- * ボタンサイズ取得
- *
- * @return string A HTML button tag.
- */
-	public function getButtonSize() {
-		if (Configure::read('isMobile')) {
-			$btnSize = ' btn-sm';
-		} else {
-			$btnSize = '';
-		}
-		return $btnSize;
-	}
-
-/**
- * <button>タグの出力
+ * Creates a `<a>` tag for add link. The type attribute defaults
+ * 後で削除
  *
  * @param string $title The button's caption. Not automatically HTML encoded
+ * @param mixed $url Link url
  * @param array $options Array of options and HTML attributes.
- * @return string <button>タグ
+ * @return string A HTML button tag.
+ * @link http://book.cakephp.org/2.0/en/core-libraries/helpers/form.html#FormHelper::button
  */
-	public function button($title, $options = array()) {
-		$icon = Hash::get($options, 'icon');
-		if ($icon) {
-			$title = '<span class="glyphicon ' . $icon . '"></span> ' . $title;
-			$options = Hash::remove($options, 'icon');
-			$options = Hash::insert($options, 'escape', false);
-		}
-		if (Hash::check($options, 'class')) {
-			if (is_string(Hash::get($options, 'class'))) {
-				$class = explode(' ', trim(Hash::get($options, 'class')));
-			} else {
-				$class = Hash::get($options, 'class', array());
-			}
-			if (in_array('btn', $class, true)) {
-				$class[] = 'nc-btn-style';
-				if (Configure::read('isMobile')) {
-					$btnSize = 'btn-sm';
-					$class = array_merge($class, array($btnSize));
-				}
-			}
-			$options = Hash::insert($options, 'class', $class);
-		}
-		return $this->Form->button($title, $options);
+	public function addLink($title = '', $url = null, $options = array()) {
+		return $this->LinkButton->add($title, $url, $options);
+	}
+
+/**
+ * Creates a `<a>` tag for edit link link. The type attribute defaults
+ * 後で削除
+ *
+ * @param string $title The button's caption. Not automatically HTML encoded
+ * @param mixed $url Link url
+ * @param array $options Array of options and HTML attributes.
+ * @return string A HTML button tag.
+ * @link http://book.cakephp.org/2.0/en/core-libraries/helpers/form.html#FormHelper::button
+ */
+	public function editLink($title = '', $url = null, $options = array()) {
+		return $this->LinkButton->edit($title, $url, $options);
 	}
 
 /**
@@ -116,7 +83,7 @@ class ButtonHelper extends FormHelper {
 
 		$defaultOptions = array(
 			'name' => 'delete',
-			'class' => 'btn btn-danger' . $this->getButtonSize(),
+			'class' => 'btn btn-danger',
 			'onclick' => 'return confirm(\'' . $confirm . '\')',
 			'ng-disabled' => 'sending'
 		);
@@ -155,38 +122,19 @@ class ButtonHelper extends FormHelper {
  */
 	public function save($title, $options = array()) {
 		if (isset($options['icon'])) {
-			$title = h($title);
-			$title .= ' <span class="glyphicon glyphicon-' . $options['icon'] . '"></span>';
-			$options['escape'] = false;
+			$title .= '<span class="glyphicon glyphicon-' . $options['icon'] . '"></span>';
 		}
+		$output = '';
 
 		$defaultOptions = array(
 			'name' => 'save',
-			'class' => 'btn btn-primary' . $this->getButtonSize() . ' btn-workflow',
+			'class' => 'btn btn-primary btn-workflow',
 			'ng-disabled' => 'sending'
 		);
 		$inputOptions = Hash::merge($defaultOptions, $options);
 
-		if (Hash::get($options, 'url')) {
-			$options['url'] = $this->NetCommonsHtml->url(Hash::get($options, 'url'));
-
-			$inputOptions = Hash::merge(array(
-				'class' => 'btn btn-primary' . $this->getButtonSize() . ' btn-workflow',
-				'ng-disabled' => 'sending',
-				'ng-click' => 'sending=true',
-			), $options);
-			$inputOptions = Hash::remove($inputOptions, 'url');
-
-			return $this->Html->link($title, Hash::get($options, 'url'), $inputOptions);
-		} else {
-			$inputOptions = Hash::merge(array(
-				'name' => 'save',
-				'class' => 'btn btn-primary' . $this->getButtonSize() . ' btn-workflow',
-				'ng-disabled' => 'sending'
-			), $options);
-
-			return $this->Form->button($title, $inputOptions);
-		}
+		$output .= $this->Form->button($title, $inputOptions);
+		return $output;
 	}
 
 /**
@@ -225,8 +173,7 @@ class ButtonHelper extends FormHelper {
  * @return string A HTML button tag.
  * @link http://book.cakephp.org/2.0/en/core-libraries/helpers/form.html#FormHelper::button
  */
-	public function cancelAndSave($cancelTitle, $saveTitle, $cancelUrl = null,
-									$cancelOptions = [], $saveOptions = []) {
+	public function cancelAndSave($cancelTitle, $saveTitle, $cancelUrl = null, $cancelOptions = array(), $saveOptions = array()) {
 		if (! isset($cancelUrl)) {
 			$cancelUrl = NetCommonsUrl::backToPageUrl();
 		}
@@ -247,8 +194,7 @@ class ButtonHelper extends FormHelper {
  * @param string|null $backUrl Back url
  * @return string ボタン群のタグ.
  */
-	public function cancelAndSaveAndSaveTemp($cancelUrl = null, $cancelOptions = [],
-												$saveTempOptions = [], $saveOptions = [], $backUrl = null) {
+	public function cancelAndSaveAndSaveTemp($cancelUrl = null, $cancelOptions = array(), $saveTempOptions = array(), $saveOptions = array(), $backUrl = null) {
 		App::uses('WorkflowComponent', 'Workflow.Controller/Component');
 
 		if (! isset($cancelUrl)) {
@@ -258,7 +204,7 @@ class ButtonHelper extends FormHelper {
 
 		//キャンセル
 		$cancelOptions = Hash::merge(array(
-			'class' => 'btn btn-default' . $this->getButtonSize() . ' btn-workflow', 'escape' => false
+			'class' => 'btn btn-default btn-workflow', 'escape' => false
 		), $cancelOptions);
 
 		$label = Hash::get($cancelOptions, 'label', __d('net_commons', 'Cancel'));
@@ -270,22 +216,18 @@ class ButtonHelper extends FormHelper {
 			$cancelOptions
 		);
 
-		//前へボタン
+		//戻るボタン
 		if (isset($backUrl)) {
 			$output .= $this->Html->link(
 				'<span class="glyphicon glyphicon-chevron-left"></span> ' . __d('net_commons', 'BACK'),
 				$backUrl,
-				array(
-					'class' => 'btn btn-default' . $this->getButtonSize() . ' btn-workflow',
-					'escape' => false,
-					'ng-class' => '{disabled: sending}'
-				)
+				array('class' => 'btn btn-default btn-workflow', 'escape' => false)
 			);
 		}
 
 		//一時保存ボタン
 		$saveTempOptions = Hash::merge(array(
-			'class' => 'btn btn-info' . $this->getButtonSize() . ' btn-workflow',
+			'class' => 'btn btn-info btn-workflow',
 			'name' => 'save_' . WorkflowComponent::STATUS_IN_DRAFT,
 		), $saveTempOptions);
 
@@ -296,7 +238,7 @@ class ButtonHelper extends FormHelper {
 
 		//決定ボタン
 		$saveOptions = Hash::merge(array(
-			'class' => 'btn btn-primary' . $this->getButtonSize() . ' btn-workflow',
+			'class' => 'btn btn-primary btn-workflow',
 			'name' => 'save_' . WorkflowComponent::STATUS_PUBLISHED,
 		), $saveOptions);
 
@@ -328,7 +270,7 @@ class ButtonHelper extends FormHelper {
 
 		$defaultOptions = array(
 			'name' => 'search',
-			'class' => 'btn btn-info' . $this->getButtonSize() . ' btn-workflow',
+			'class' => 'btn btn-info btn-workflow',
 		);
 		$inputOptions = Hash::merge($defaultOptions, $options);
 
@@ -356,7 +298,7 @@ class ButtonHelper extends FormHelper {
 
 		$defaultOptions = array(
 			'name' => 'add',
-			'class' => 'btn' . $this->getButtonSize() . ' btn-success ' . Hash::get($options, 'iconSize'),
+			'class' => 'btn btn-success ' . Hash::get($options, 'iconSize'),
 		);
 		$options = Hash::remove($options, 'iconSize');
 

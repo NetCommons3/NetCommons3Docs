@@ -15,7 +15,7 @@ App::uses('CakeResponse', 'Network');
 App::uses('View', 'View');
 App::uses('NetCommonsCakeTestCase', 'NetCommons.TestSuite');
 App::uses('NetCommonsControllerTestCase', 'NetCommons.TestSuite');
-App::uses('CurrentSystem', 'NetCommons.Utility');
+App::uses('CurrentControlPanel', 'NetCommons.Utility');
 
 /**
  * NetCommonsHelperTestCase class
@@ -47,7 +47,7 @@ class NetCommonsHelperTestCase extends NetCommonsCakeTestCase {
  */
 	public function setUp() {
 		parent::setUp();
-		(new CurrentSystem())->setLanguage();
+		(new CurrentControlPanel())->setLanguage();
 
 		if ($this->_helperName) {
 			$this->loadHelper($this->_helperName);
@@ -76,8 +76,7 @@ class NetCommonsHelperTestCase extends NetCommonsCakeTestCase {
  * @param array $helpers ヘルパー配列
  * @return void
  */
-	public function loadHelper($helper, $viewVars = [],
-								$reqestData = [], $params = [], $helpers = []) {
+	public function loadHelper($helper, $viewVars = array(), $reqestData = array(), $params = array(), $helpers = array()) {
 		list($plugin, $helper) = pluginSplit($helper);
 		if (! $plugin) {
 			$plugin = $this->plugin;
