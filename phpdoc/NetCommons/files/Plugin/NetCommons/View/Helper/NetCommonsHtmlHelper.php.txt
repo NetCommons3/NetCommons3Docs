@@ -207,14 +207,16 @@ class NetCommonsHtmlHelper extends AppHelper {
 	public function blockTitle($text = '', $titleIcon = null, $options = array()) {
 		$output = '';
 
-		$escape = Hash::get($options, 'escape', true);
-		if ($escape) {
-			$text = h($text);
-		}
-		$options = Hash::insert($options, 'escape', false);
-
 		if ($titleIcon) {
-			$text = $this->titleIcon($titleIcon) . ' ' . $text;
+			$text = $this->titleIcon($titleIcon) . ' ' . h($text);
+
+			$options = Hash::merge(
+				array('escape' => false), $options
+			);
+		} else {
+			$options = Hash::merge(
+				array('escape' => true), $options
+			);
 		}
 
 		$output .= $this->Html->tag('h1', $text, $options);
