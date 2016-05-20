@@ -13,6 +13,7 @@ App::uses('Utility', 'Inflector');
 App::uses('Current', 'NetCommons.Utility');
 App::uses('NetCommonsUrl', 'NetCommons.Utility');
 App::uses('PermissionComponent', 'NetCommons.Controller/Component');
+App::uses('SiteSettingUtil', 'SiteManager.Utility');
 
 /**
  * NetCommonsApp Controller
@@ -42,6 +43,7 @@ class NetCommonsAppController extends Controller {
  * @var array
  */
 	public $components = array(
+		'NetCommons.AccessCtrl',
 		'Auth' => array(
 			'loginAction' => array(
 				'plugin' => 'auth',
@@ -61,8 +63,8 @@ class NetCommonsAppController extends Controller {
 		),
 		'DebugKit.Toolbar',
 		'Flash',
+		'MobileDetect.MobileDetect',
 		'NetCommons.Asset',
-		'NetCommons.NetCommons',
 		'NetCommons.Permission' => array(
 			//アクセスの権限
 			'allow' => array(
@@ -70,10 +72,11 @@ class NetCommonsAppController extends Controller {
 				'view' => null,
 			),
 		),
+		'NetCommons.NetCommons',
+		'NetCommons.NetCommonsTime',
 		'RequestHandler',
 		'Session',
 		'Workflow.Workflow',
-		'NetCommons.NetCommonsTime',
 	);
 
 /**
@@ -83,7 +86,6 @@ class NetCommonsAppController extends Controller {
  */
 	public $uses = [
 		'M17n.Language',
-		'SiteManager.SiteSetting', //後で使う予定
 	];
 
 /**
@@ -99,6 +101,7 @@ class NetCommonsAppController extends Controller {
 		'NetCommons.Button',
 		'NetCommons.LinkButton',
 		'NetCommons.Date',
+		'NetCommons.MessageFlash',
 		'NetCommons.NetCommonsForm',
 		'NetCommons.NetCommonsHtml',
 	);
@@ -126,9 +129,9 @@ class NetCommonsAppController extends Controller {
  */
 	public function beforeFilter() {
 		Security::setHash('sha512');
-		if (! Configure::read('NetCommons.installed') && $this->params['plugin'] === 'install') {
-			return;
-		}
+
+		//サイトの設定データセット
+		SiteSettingUtil::initialize();
 
 		//言語の取得
 		if (isset($this->request->query['language'])) {
@@ -141,22 +144,30 @@ class NetCommonsAppController extends Controller {
 		//カレントデータセット
 		Current::initialize($this->request);
 
+		if (! $this->AccessCtrl->allowAccess()) {
+			return;
+		}
+
+		if (Current::read('Block') &&
+				! $this->Components->loaded('NetCommons.Permission')) {
+			$this->Components->load('NetCommons.Permission');
+		}
+
 		//現在のテーマを取得
 		$theme = $this->Asset->getSiteTheme($this);
 		if ($theme) {
 			$this->theme = $theme;
 		}
 
-		Configure::write('Config.languageId', Current::read('Language.id')); //後で削除
-		$this->set('languageId', Current::read('Language.id')); //後で削除
-
-		$this->Auth->allow('index', 'view', 'emptyRender');
+		$this->Auth->allow('index', 'view', 'emptyRender', 'download');
 
 		if ($this->RequestHandler->accepts('json')) {
-			$this->NetCommons->renderJson();
+			$this->viewClass = 'Json';
+			$this->layout = false;
 		}
 
-		$this->set('userId', $this->Auth->user('id')); //後で削除
+		//モバイルかどうかの判定処理
+		Configure::write('isMobile', $this->MobileDetect->detect('isMobile'));
 	}
 
 /**
@@ -167,6 +178,15 @@ class NetCommonsAppController extends Controller {
 	public function beforeRender() {
 		//theme css指定
 		$this->set('bootstrapMinCss', $this->Asset->isThemeBootstrapMinCss($this));
+
+		$controller = Inflector::camelize($this->params['controller']);
+		$pluginPath = Hash::get(App::path('View', Inflector::camelize($this->params['plugin'])), '0');
+		$path = $pluginPath . $controller . DS . 'json' . DS . $this->view . '.ctp';
+
+		if ($this->viewClass === 'Json' &&
+				! isset($this->viewVars['_serialize']) && ! file_exists($path)) {
+			$this->NetCommons->renderJson();
+		}
 	}
 
 /**

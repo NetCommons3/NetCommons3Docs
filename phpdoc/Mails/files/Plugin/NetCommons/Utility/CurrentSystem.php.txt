@@ -1,6 +1,6 @@
 <?php
 /**
- * CurrentControlPanel Utility
+ * CurrentSystem Utility
  *
  * @author Noriko Arai <arai@nii.ac.jp>
  * @author Shohei Nakajima <nakajimashouhei@gmail.com>
@@ -9,13 +9,16 @@
  * @copyright Copyright 2014, NetCommons Project
  */
 
+App::uses('SiteSettingUtil', 'SiteManager.Utility');
+App::uses('NetCommonsSecurity', 'NetCommons.Utility');
+
 /**
- * CurrentControlPanel Utility
+ * CurrentSystem Utility
  *
  * @author Shohei Nakajima <nakajimashouhei@gmail.com>
  * @package NetCommons\NetCommons\Utility
  */
-class CurrentControlPanel {
+class CurrentSystem {
 
 /**
  * ControlPanelプラグイン名の定数
@@ -72,8 +75,8 @@ class CurrentControlPanel {
 			unset(Current::$current['Plugin']);
 		}
 
-		if (Current::$request->params['plugin'] === CurrentPage::PLUGIN_PAGES ||
-				Current::$request->params['plugin'] === CurrentControlPanel::PLUGIN_CONTROL_PANEL) {
+		if (Current::$request->params['plugin'] === Current::PLUGIN_PAGES ||
+				Current::$request->params['plugin'] === CurrentSystem::PLUGIN_CONTROL_PANEL) {
 			return;
 		}
 
@@ -103,6 +106,13 @@ class CurrentControlPanel {
 			return;
 		}
 
+		//IPアドレスによる制御
+		$netCommonsSecurity = new NetCommonsSecurity();
+		if (! $netCommonsSecurity->enableAllowSystemPluginIps()) {
+			Current::$current['PluginsRole'] = array();
+			return;
+		}
+
 		//PluginsRoleデータ取得
 		$this->PluginsRole = ClassRegistry::init('PluginManager.PluginsRole');
 		if (Current::$current['User']['role_key']) {
@@ -113,12 +123,11 @@ class CurrentControlPanel {
 				),
 			));
 		} else {
-			$result = false;
-		}
-		if (! $result) {
 			return;
 		}
-		Current::$current['PluginsRole'] = Hash::combine($result, '{n}.PluginsRole.id', '{n}.PluginsRole');
+		Current::$current['PluginsRole'] = Hash::combine(
+			$result, '{n}.PluginsRole.id', '{n}.PluginsRole'
+		);
 	}
 }
 

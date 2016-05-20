@@ -24,7 +24,7 @@ class NetCommonsComponent extends Component {
  *
  * @var string
  */
-	const ALERT_SUCCESS_INTERVAL = 1500,
+	const ALERT_SUCCESS_INTERVAL = 2000,
 		ALERT_VALIDATE_ERROR_INTERVAL = 4000;
 
 /**
@@ -114,13 +114,14 @@ class NetCommonsComponent extends Component {
 			'class' => 'danger',
 			'interval' => null,
 			'plugin' => 'NetCommons',
+			'ajax' => $this->controller->request->is('ajax'),
 		), $params);
 
 		if ($params['interval'] === null && $params['class'] !== 'danger') {
 			$params['interval'] = self::ALERT_SUCCESS_INTERVAL;
 		}
 
-		if ($this->controller->request->is('ajax')) {
+		if ($params['ajax']) {
 			$this->renderJson($params, $message, $status);
 		} else {
 			$this->controller->Session->setFlash($message, $element, $params);

@@ -24,7 +24,11 @@ class BackToHelper extends AppHelper {
  *
  * @var array
  */
-	public $helpers = array('Html', 'Form');
+	public $helpers = array(
+		'Html',
+		'Form',
+		'NetCommons.Button',
+	);
 
 /**
  * Creates a `<button>` tag. The type attribute defaults to `type="submit"`
@@ -54,28 +58,35 @@ class BackToHelper extends AppHelper {
 		if ($options['icon'] !== '') {
 			$iconElement = '<span class="glyphicon glyphicon-' . h($options['icon']) . '"></span> ';
 			unset($options['icon']);
+
+			$title = h($title);
+			$options['escape'] = false;
 		}
 		//ボタンサイズ
-		$sizeAttr = '';
-		if (isset($options['iconSize']) && $options['iconSize'] !== '') {
-			$sizeAttr = h('btn-' . $options['iconSize']);
-			unset($options['iconSize']);
+		if (Hash::get($options, 'iconSize')) {
+			$sizeAttr = h(' btn-' . $options['iconSize']);
+		} else {
+			$sizeAttr = $this->Button->getButtonSize();
 		}
+		$options = Hash::remove($options, 'iconSize');
 
-		$defaultOptions = array(
-			'type' => 'button',
-			'class' => 'btn btn-default btn-workflow ' . $sizeAttr,
-			'ng-disabled' => 'sending',
-		);
 		if ($url) {
-			$defaultOptions = Hash::merge($defaultOptions, array(
+			$inputOptions = Hash::merge(array(
+				'class' => 'btn btn-default btn-workflow' . $sizeAttr,
+				'ng-disabled' => 'sending',
 				'ng-click' => 'sending=true',
-				'onclick' => 'location.href = \'' . $this->Html->url($url) . '\''
-			));
-		}
-		$inputOptions = Hash::merge($defaultOptions, $options);
+			), $options);
 
-		return $this->Form->button($iconElement . $title, $inputOptions);
+			return $this->Html->link($iconElement . $title, $url, $inputOptions);
+		} else {
+			$inputOptions = Hash::merge(array(
+				'type' => 'button',
+				'class' => 'btn btn-default btn-workflow' . $sizeAttr,
+				'ng-disabled' => 'sending',
+			), $options);
+
+			return $this->Form->button($iconElement . $title, $inputOptions);
+		}
 	}
 
 /**
@@ -101,14 +112,27 @@ class BackToHelper extends AppHelper {
 		}
 
 		//ボタンサイズ
-		$sizeAttr = '';
-		if (isset($options['iconSize']) && $options['iconSize'] !== '') {
-			$sizeAttr = ' ' . h('btn-' . $options['iconSize']);
+		if (Hash::get($options, 'iconSize')) {
+			$sizeAttr = h('btn-' . $options['iconSize']);
+		} else {
+			$sizeAttr = trim($this->Button->getButtonSize());
 		}
 		$options = Hash::remove($options, 'iconSize');
 
+		//class属性
+		$class = Hash::get($options, 'class', array());
+		if (is_string($class)) {
+			$class = explode(' ', $class);
+		}
+		if ($sizeAttr) {
+			$class = array_merge(['btn', 'btn-default', $sizeAttr], $class);
+		} else {
+			$class = array_merge(['btn', 'btn-default'], $class);
+		}
+		$options = Hash::remove($options, 'class');
+
 		$inputOptions = Hash::merge(
-			array('class' => 'btn btn-default' . $sizeAttr),
+			array('class' => $class),
 			$options,
 			array('escapeTitle' => false)
 		);
@@ -141,6 +165,19 @@ class BackToHelper extends AppHelper {
 	public function indexLinkButton($title, $defaultField = 'default_action', $options = array()) {
 		$url = NetCommonsUrl::backToIndexUrl($defaultField);
 		return $this->linkButton($title, $url, $options);
+	}
+
+/**
+ * 一覧へボタンHTMLの出力
+ *
+ * @param array $options HTML属性オプション
+ * @return string HTMLタグ
+ */
+	public function listLinkButton($options = array()) {
+		$options = Hash::merge(['icon' => 'list'], $options);
+		$title = __d('net_commons', 'To list');
+
+		return $this->indexLinkButton($title, 'default_action', $options);
 	}
 
 }

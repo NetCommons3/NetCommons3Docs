@@ -14,11 +14,12 @@ CakeLog::drop('stderr');
 
 App::uses('TestAuthGeneral', 'AuthGeneral.TestSuite');
 App::uses('Current', 'NetCommons.Utility');
-App::uses('CurrentControlPanel', 'NetCommons.Utility');
+App::uses('CurrentSystem', 'NetCommons.Utility');
 App::uses('NetCommonsUrl', 'NetCommons.Utility');
 App::uses('NetCommonsTestSuite', 'NetCommons.TestSuite');
 App::uses('NetCommonsCakeTestCase', 'NetCommons.TestSuite');
 App::uses('Role', 'Roles.Model');
+App::uses('SiteSettingUtil', 'SiteManager.Utility');
 
 /**
  * NetCommonsControllerTestCase
@@ -67,6 +68,7 @@ class NetCommonsControllerBaseTestCase extends ControllerTestCase {
 		'plugin.blocks.block_role_permission',
 		'plugin.boxes.box',
 		'plugin.boxes.boxes_page',
+		'plugin.categories.category',
 		'plugin.containers.container',
 		'plugin.containers.containers_page',
 		'plugin.data_types.data_type',
@@ -75,7 +77,9 @@ class NetCommonsControllerBaseTestCase extends ControllerTestCase {
 		'plugin.files.upload_files_content',
 		'plugin.frames.frame',
 		'plugin.m17n.language',
-		'plugin.site_manager.site_setting',
+		'plugin.mails.mail_queue',
+		'plugin.mails.mail_queue_user',
+		'plugin.mails.mail_setting',
 		'plugin.pages.languages_page',
 		'plugin.pages.page',
 		'plugin.plugin_manager.plugin',
@@ -90,6 +94,10 @@ class NetCommonsControllerBaseTestCase extends ControllerTestCase {
 		'plugin.rooms.room_role_permission',
 		'plugin.rooms.rooms_language',
 		'plugin.rooms.space',
+		'plugin.site_manager.site_setting',
+		'plugin.topics.topic',
+		'plugin.topics.topic_readable',
+		'plugin.topics.topic_user_status',
 		'plugin.user_attributes.user_attribute',
 		'plugin.user_attributes.user_attribute_choice',
 		'plugin.user_attributes.user_attribute_setting',
@@ -132,7 +140,7 @@ class NetCommonsControllerBaseTestCase extends ControllerTestCase {
 
 		Configure::write('NetCommons.installed', true);
 		Configure::write('Config.language', 'ja');
-		(new CurrentControlPanel())->setLanguage();
+		(new CurrentSystem())->setLanguage();
 
 		if ($this->_controller) {
 			$this->generateNc(Inflector::camelize($this->_controller));
@@ -150,6 +158,7 @@ class NetCommonsControllerBaseTestCase extends ControllerTestCase {
 		CakeSession::write('Auth.User', null);
 
 		Current::$current = array();
+		SiteSettingUtil::reset();
 		parent::tearDown();
 	}
 

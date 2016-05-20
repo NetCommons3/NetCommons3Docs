@@ -12,31 +12,31 @@
 App::uses('FormHelper', 'View/Helper');
 
 /**
- * LinkButton Helper
+ * `<a>`のボタン Helper
  *
  * @package NetCommons\NetCommons\View\Helper
  */
 class LinkButtonHelper extends FormHelper {
 
 /**
- * Other helpers used by FormHelper
+ * 使用するヘルパ
  *
  * @var array
  */
 	public $helpers = array(
 		'Form',
 		'Html',
+		'NetCommons.Button',
 		'NetCommons.NetCommonsHtml',
 	);
 
 /**
- * Creates a `<a>` tag for add link. The type attribute defaults
+ * 追加ボタンHTMLの出力
  *
- * @param string $title The button's caption. Not automatically HTML encoded
- * @param mixed $url Link url
- * @param array $options Array of options and HTML attributes.
- * @return string A HTML button tag.
- * @link http://book.cakephp.org/2.0/en/core-libraries/helpers/form.html#FormHelper::button
+ * @param string $title タイトル
+ * @param mixed $url URL
+ * @param array $options HTML属性オプション
+ * @return string HTMLタグ
  */
 	public function add($title = '', $url = null, $options = array()) {
 		$output = '';
@@ -58,11 +58,12 @@ class LinkButtonHelper extends FormHelper {
 			}
 			$url = NetCommonsUrl::actionUrl(Hash::merge($defaultUrl, $url));
 		}
+
 		//Linkオプションの設定
 		$inputOptions = Hash::merge(array(
 			'icon' => 'plus',
-			'iconSize' => '',
-			'class' => 'btn btn-success',
+			'iconSize' => $this->Button->getButtonSize(),
+			'class' => 'btn btn-success nc-btn-style',
 		), $options, array('escapeTitle' => false));
 		if (Hash::get($options, 'escapeTitle', true)) {
 			$title = h($title);
@@ -72,7 +73,7 @@ class LinkButtonHelper extends FormHelper {
 		unset($inputOptions['icon']);
 		//ボタンサイズ
 		if ($inputOptions['iconSize']) {
-			$inputOptions['class'] .= ' ' . h($inputOptions['iconSize']);
+			$inputOptions['class'] .= ' ' . trim(h($inputOptions['iconSize']));
 		}
 		unset($inputOptions['iconSize']);
 
@@ -94,13 +95,12 @@ class LinkButtonHelper extends FormHelper {
 	}
 
 /**
- * Creates a `<a>` tag for edit link link. The type attribute defaults
+ * 編集ボタンHTMLの出力
  *
- * @param string $title The button's caption. Not automatically HTML encoded
- * @param mixed $url Link url
- * @param array $options Array of options and HTML attributes.
- * @return string A HTML button tag.
- * @link http://book.cakephp.org/2.0/en/core-libraries/helpers/form.html#FormHelper::button
+ * @param string $title タイトル
+ * @param mixed $url URL
+ * @param array $options HTML属性オプション
+ * @return string HTMLタグ
  */
 	public function edit($title = '', $url = null, $options = array()) {
 		$output = '';
@@ -108,8 +108,8 @@ class LinkButtonHelper extends FormHelper {
 		//Linkオプションの設定
 		$inputOptions = Hash::merge(array(
 			'icon' => 'edit',
-			'iconSize' => '',
-			'class' => 'btn btn-primary'
+			'iconSize' => $this->Button->getButtonSize(),
+			'class' => 'btn btn-primary nc-btn-style'
 		), $options, array('escapeTitle' => false));
 
 		if (Hash::get($options, 'escapeTitle', true)) {
@@ -121,11 +121,14 @@ class LinkButtonHelper extends FormHelper {
 		unset($inputOptions['icon']);
 
 		//ボタンサイズ
-		$inputOptions['class'] .= ' ' . h($inputOptions['iconSize']);
+		if ($inputOptions['iconSize']) {
+			$inputOptions['class'] .= ' ' . trim(h($inputOptions['iconSize']));
+		}
 		unset($inputOptions['iconSize']);
 
 		//span tooltipタグの出力
-		if (isset($options['tooltip']) && $options['tooltip']) {
+		$tooltip = Hash::get($options, 'tooltip', false);
+		if ($tooltip) {
 			if (is_string($options['tooltip'])) {
 				$tooltip = $options['tooltip'];
 			} else {
@@ -134,7 +137,19 @@ class LinkButtonHelper extends FormHelper {
 			$output .= '<span class="nc-tooltip" tooltip="' . $tooltip . '">';
 			unset($inputOptions['tooltip']);
 		}
-		$output .= $this->NetCommonsHtml->editLink($iconElement . $title, $url, $inputOptions);
+
+		if (! isset($url)) {
+			$url = array();
+		}
+		if (is_array($url)) {
+			$defaultAction = Hash::get(
+				$this->_View->viewVars, 'editActionController', $this->_View->request->params['controller']
+			);
+			$url['controller'] = Hash::get($url, 'controller', $defaultAction);
+			$url['action'] = Hash::get($url, 'action', 'edit');
+		}
+
+		$output .= $this->NetCommonsHtml->link($iconElement . $title, $url, $inputOptions);
 		if (isset($options['tooltip']) && $options['tooltip']) {
 			$output .= '</span>';
 		}
@@ -148,7 +163,6 @@ class LinkButtonHelper extends FormHelper {
  * @param mixed $url URL
  * @param array $options HTML属性オプション
  * @return string HTMLタグ
- * @link http://book.cakephp.org/2.0/en/core-libraries/helpers/form.html#FormHelper::button
  */
 	public function search($title = '', $url = null, $options = array()) {
 		$output = '';
@@ -156,8 +170,8 @@ class LinkButtonHelper extends FormHelper {
 		//Linkオプションの設定
 		$inputOptions = Hash::merge(array(
 			'icon' => 'search',
-			'iconSize' => '',
-			'class' => 'btn btn-info'
+			'iconSize' => $this->Button->getButtonSize(),
+			'class' => 'btn btn-info nc-btn-style',
 		), $options, array('escapeTitle' => false));
 
 		if (Hash::get($options, 'escapeTitle', true)) {
@@ -169,11 +183,13 @@ class LinkButtonHelper extends FormHelper {
 		unset($inputOptions['icon']);
 
 		//ボタンサイズ
-		$inputOptions['class'] .= ' ' . h($inputOptions['iconSize']);
+		if ($inputOptions['iconSize']) {
+			$inputOptions['class'] .= ' ' . trim(h($inputOptions['iconSize']));
+		}
 		unset($inputOptions['iconSize']);
 
 		//span tooltipタグの出力
-		if (isset($options['tooltip']) && $options['tooltip']) {
+		if (Hash::get($options, 'tooltip', false)) {
 			if (is_string($options['tooltip'])) {
 				$tooltip = $options['tooltip'];
 			} else {
@@ -204,7 +220,6 @@ class LinkButtonHelper extends FormHelper {
  * @param mixed $url URL
  * @param array $options HTML属性オプション
  * @return string HTMLタグ
- * @link http://book.cakephp.org/2.0/en/core-libraries/helpers/form.html#FormHelper::button
  */
 	public function sort($title = '', $url = null, $options = array()) {
 		$output = '';
@@ -212,8 +227,8 @@ class LinkButtonHelper extends FormHelper {
 		//Linkオプションの設定
 		$inputOptions = Hash::merge(array(
 			'icon' => 'sort',
-			'iconSize' => '',
-			'class' => 'btn btn-default'
+			'iconSize' => $this->Button->getButtonSize(),
+			'class' => 'btn btn-default nc-btn-style',
 		), $options, array('escapeTitle' => false));
 
 		if (Hash::get($options, 'escapeTitle', true)) {
@@ -225,11 +240,13 @@ class LinkButtonHelper extends FormHelper {
 		unset($inputOptions['icon']);
 
 		//ボタンサイズ
-		$inputOptions['class'] .= ' ' . h($inputOptions['iconSize']);
+		if ($inputOptions['iconSize']) {
+			$inputOptions['class'] .= ' ' . trim(h($inputOptions['iconSize']));
+		}
 		unset($inputOptions['iconSize']);
 
 		//span tooltipタグの出力
-		if (isset($options['tooltip']) && $options['tooltip']) {
+		if (Hash::get($options, 'tooltip', false)) {
 			if (is_string($options['tooltip'])) {
 				$tooltip = $options['tooltip'];
 			} else {

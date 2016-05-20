@@ -56,8 +56,8 @@ class TitleIconHelper extends AppHelper {
  * @var array
  */
 	public $helpers = array(
-		'NetCommonsForm',
-		'NetCommonsHtml',
+		'NetCommons.NetCommonsForm',
+		'NetCommons.NetCommonsHtml',
 		'Form',
 		'Html'
 	);
@@ -84,7 +84,12 @@ class TitleIconHelper extends AppHelper {
  * @return string input and title icon picker button
  */
 	public function inputWithTitleIcon($fieldName, $titleIconFieldName, $options = array()) {
-		$options['between'] = $this->titleIconPicker($titleIconFieldName);
+		if (isset($options) && isset($options['titleIcon'])) {
+			$titleIcon = $options['titleIcon'];
+		} else {
+			$titleIcon = null;
+		}
+		$options['between'] = $this->titleIconPicker($titleIconFieldName, $titleIcon);
 		$options['after'] = '</div>';
 		$html = $this->NetCommonsForm->input($fieldName, $options);
 		return $html;
@@ -147,7 +152,9 @@ class TitleIconHelper extends AppHelper {
 			return '';
 		}
 		$alt = $this->_getAltName($fileName);
-		$output = $this->Html->image($filePath, array('alt' => $alt, 'title' => $alt, 'class' => 'nc-title-icon'));
+		$output = $this->Html->image(
+			$filePath, array('alt' => $alt, 'title' => $alt, 'class' => 'nc-title-icon')
+		);
 		return $output;
 	}
 
@@ -160,8 +167,16 @@ class TitleIconHelper extends AppHelper {
  */
 	protected function _getTitleIconPickerOpenTag($titleIcon, $ngModelAttribute = '') {
 		$icons = $this->getIconFiles();
-		$html = '<div class="input-group" ng-controller="ncTitleIconPickerCtrl" title-icon="' . $titleIcon . '">';
-		$html .= '<nc-title-icon-picker class="input-group-btn" title-icon="' . $titleIcon . '" ' . $ngModelAttribute . ' icons="' . str_replace('"', '\'', $icons) . '">';
+		$html = '<div class="input-group"' .
+					' ng-controller="ncTitleIconPickerCtrl"' .
+					' title-icon="' . $titleIcon . '"' .
+				'>';
+		$html .= '<nc-title-icon-picker' .
+					' class="input-group-btn"' .
+					' title-icon="' . $titleIcon . '"' .
+					' ' . $ngModelAttribute .
+					' icons="' . str_replace('"', '\'', $icons) . '"' .
+				'>';
 		return $html;
 	}
 /**
@@ -176,19 +191,23 @@ class TitleIconHelper extends AppHelper {
 /**
  * getIconFiles
  *
+ * @param bool $isCancel cancel icon を必要とするか否か
  * @return string icon file paths
+ * @SuppressWarnings(PHPMD.BooleanArgumentFlag)
  */
-	public function getIconFiles() {
+	public function getIconFiles($isCancel = true) {
 		// アイコンフォルダー
 		$dir = new Folder(APP . 'Plugin/NetCommons/webroot/img/title_icon');
 		// アイコンファイル名取り出し
 		$iconFileNames = $dir->find('.*\.svg', true);
 
 		$icons = array();
-		$icons[] = array(
-			'path' => '',
-			'alt' => __d('net_commons', 'icon_cancel')
-		);
+		if ($isCancel) {
+			$icons[] = array(
+				'path' => '',
+				'alt' => __d('net_commons', 'icon_cancel')
+			);
+		}
 		foreach ($iconFileNames as $file) {
 			$path = '/net_commons/img/title_icon/' . $file;
 			$alt = $this->_getAltName($file);
@@ -207,7 +226,9 @@ class TitleIconHelper extends AppHelper {
  * @return string icon file alts
  */
 	protected function _getAltName($file) {
-		return __d('net_commons', preg_replace('/^[0-9]{2}_[0-9]{3}_/', '', pathinfo($file, PATHINFO_FILENAME)));
+		return __d('net_commons',
+			preg_replace('/^[0-9]{2}_[0-9]{3}_/', '', pathinfo($file, PATHINFO_FILENAME))
+		);
 	}
 }
 
