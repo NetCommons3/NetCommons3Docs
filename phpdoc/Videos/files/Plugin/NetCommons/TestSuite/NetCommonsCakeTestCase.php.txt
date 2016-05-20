@@ -14,6 +14,7 @@ CakeLog::drop('stderr');
 
 App::uses('Current', 'NetCommons.Utility');
 App::uses('NetCommonsTestSuite', 'NetCommons.TestSuite');
+App::uses('SiteSettingUtil', 'SiteManager.Utility');
 
 /**
  * NetCommonsCakeTestCase class
@@ -69,6 +70,9 @@ class NetCommonsCakeTestCase extends CakeTestCase {
 		'plugin.files.upload_files_content',
 		'plugin.frames.frame',
 		'plugin.m17n.language',
+		'plugin.mails.mail_queue',
+		'plugin.mails.mail_queue_user',
+		'plugin.mails.mail_setting',
 		'plugin.pages.page',
 		'plugin.plugin_manager.plugin',
 		//'plugin.plugin_manager.plugins_role',
@@ -81,6 +85,9 @@ class NetCommonsCakeTestCase extends CakeTestCase {
 		//'plugin.rooms.room_role',
 		//'plugin.rooms.room_role_permission',
 		'plugin.rooms.space',
+		'plugin.topics.topic',
+		'plugin.topics.topic_readable',
+		'plugin.topics.topic_user_status',
 		'plugin.user_attributes.user_attribute',
 		'plugin.user_attributes.user_attribute_choice',
 		'plugin.user_attributes.user_attribute_setting',
@@ -138,6 +145,7 @@ class NetCommonsCakeTestCase extends CakeTestCase {
 
 		Configure::write('NetCommons.installed', false);
 		Configure::write('Config.language', null);
+		SiteSettingUtil::reset();
 
 		parent::tearDown();
 	}

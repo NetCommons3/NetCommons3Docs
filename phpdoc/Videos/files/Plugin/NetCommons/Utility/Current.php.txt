@@ -9,7 +9,7 @@
  * @copyright Copyright 2014, NetCommons Project
  */
 
-App::uses('CurrentControlPanel', 'NetCommons.Utility');
+App::uses('CurrentSystem', 'NetCommons.Utility');
 App::uses('CurrentFrame', 'NetCommons.Utility');
 App::uses('CurrentPage', 'NetCommons.Utility');
 App::uses('UserRole', 'UserRoles.Model');
@@ -19,10 +19,10 @@ App::uses('Plugin', 'PluginManager.Model');
  * Current Utility
  *
  * NetCommonsの機能として必要な情報を保持します。<br>
- * [NetCommonsAppController::beforeFilter](https://github.com/NetCommons3/NetCommons3Docs/blob/master/phpdocMd/NetCommons/NetCommonsAppController.md#beforefilter)
+ * [NetCommonsAppController::beforeFilter](./NetCommonsAppController.html#method_beforeFilter)
  * で初期処理が呼び出され、値が設定されます。<br>
- * 値を取得する時は、[readメソッド](#read)を使用します。<br>
- * 権限を取得する時は、[permissionメソッド](#permission)を使用します。<br>
+ * 値を取得する時は、[readメソッド](#method_read)を使用します。<br>
+ * 権限を取得する時は、[permissionメソッド](#method_permission)を使用します。<br>
  *
  * #### 保持データ
  * ```
@@ -230,43 +230,7 @@ App::uses('Plugin', 'PluginManager.Model');
  * @author Shohei Nakajima <nakajimashouhei@gmail.com>
  * @package NetCommons\NetCommons\Utility
  */
-class Current {
-
-/**
- * Constant setting mode value
- */
-	const SETTING_MODE_WORD = 'setting';
-
-/**
- * Usersプラグイン名の定数
- */
-	const PLUGIN_USERS = 'users';
-
-/**
- * Groupsプラグイン名の定数
- */
-	const PLUGIN_GROUPS = 'groups';
-
-/**
- * is setting mode true
- *
- * @var bool
- */
-	private static $__isSettingMode = null;
-
-/**
- * Request object
- *
- * @var mixed
- */
-	public static $request;
-
-/**
- * Instance object
- *
- * @var mixed
- */
-	private static $__instance;
+class CurrentBase {
 
 /**
  * Current data
@@ -274,35 +238,6 @@ class Current {
  * @var array
  */
 	public static $current = array();
-
-/**
- * M17n data
- *
- * @var array
- */
-	public static $m17n = array();
-
-/**
- * setup current data
- *
- * @param CakeRequest $request CakeRequest
- * @return void
- */
-	public static function initialize(CakeRequest $request) {
-		if (! self::$__instance) {
-			self::$__instance = new Current();
-		}
-
-		self::$request = clone $request;
-
-		self::$current['User'] = AuthComponent::user();
-
-		(new CurrentControlPanel())->initialize();
-
-		if (! self::isControlPanel()) {
-			(new CurrentFrame())->initialize();
-		}
-	}
 
 /**
  * 指定された$keyの値を返します。
@@ -313,9 +248,10 @@ class Current {
  * ```
  *
  * @param string|null $key Hashクラスのpath
+ * @param mixed $default デフォルト値
  * @return array|null Current data.
  */
-	public static function read($key = null) {
+	public static function read($key = null, $default = null) {
 		if (! isset(self::$current)) {
 			return self::$current;
 		}
@@ -323,43 +259,49 @@ class Current {
 		if (! isset($key)) {
 			return self::$current;
 		}
-		return Hash::get(self::$current, $key);
+		return Hash::get(self::$current, $key, $default);
 	}
 
 /**
- * 多言語のデータ取得
+ * 指定された$keyの値をセットします
  *
- * @param string|null $languageId 言語ID
- * @param string|null $model モデル名
- * @param string|null $field フィールド名
- * @return mixed Current data.
+ * 現在のBlockKeyをセットしたい場合
+ * ```
+ * Cuurent::write('Block.key', 'block_key)
+ * ```
+ *
+ * @param string|null $key Hashクラスのpath、nullの場合、Hash::mergeする
+ * @param mixted $value セットする値
+ * @return void
  */
-	public static function readM17n($languageId, $model = null, $field = null) {
-		if (! isset(self::$m17n)) {
-			return self::$m17n;
+	public static function write($key, $value) {
+		if (! isset(self::$current)) {
+			self::$current = array();
 		}
-
-		if (! isset($model)) {
-			return self::$m17n;
-		}
-
-		if (! isset(self::$m17n[$model])) {
-			return null;
-		}
-		if (! isset($languageId)) {
-			return self::$m17n[$model];
-		}
-
-		$result = Hash::extract(self::$m17n, $model . '.{n}.' . $model . '[language_id=' . $languageId . ']');
-		if (! $result) {
-			return null;
-		}
-
-		if (! isset($field)) {
-			return array($model => $result[0]);
+		if (! isset($key)) {
+			self::$current = Hash::merge(self::$current, $value);
 		} else {
-			return $result[0][$field];
+			self::$current = Hash::insert(self::$current, $key, $value);
 		}
+	}
+
+/**
+ * 指定された$keyの値を削除します。
+ *
+ * 現在のBlockKeyを削除したい場合
+ * ```
+ * Cuurent::remove('Block.key')
+ * ```
+ *
+ * @param string|null $key Hashクラスのpath
+ * @return array|null Current data.
+ */
+	public static function remove($key = null) {
+		if (! isset(self::$current) || ! isset($key)) {
+			self::$current = array();
+		}
+
+		self::$current = Hash::remove(self::$current, $key);
 	}
 
 /**
@@ -380,6 +322,129 @@ class Current {
 		return (bool)Hash::get(self::$current, $path);
 	}
 
+}
+
+
+/**
+ * Current Utilityチェック
+ *
+ * @author Shohei Nakajima <nakajimashouhei@gmail.com>
+ * @package NetCommons\NetCommons\Utility
+ */
+class Current extends CurrentBase {
+
+/**
+ * Constant setting mode value
+ */
+	const SETTING_MODE_WORD = 'setting';
+
+/**
+ * Usersプラグイン名の定数
+ */
+	const PLUGIN_USERS = 'users';
+
+/**
+ * Groupsプラグイン名の定数
+ */
+	const PLUGIN_GROUPS = 'groups';
+
+/**
+ * Wysiwygプラグイン名の定数
+ */
+	const PLUGIN_WYSIWYG = 'wysiwyg';
+
+/**
+ * Pagesプラグイン名の定数
+ */
+	const PLUGIN_PAGES = 'pages';
+
+/**
+ * is setting mode true
+ *
+ * @var bool
+ */
+	protected static $_isSettingMode = null;
+
+/**
+ * Request object
+ *
+ * @var mixed
+ */
+	public static $request;
+
+/**
+ * Instance object
+ *
+ * @var mixed
+ */
+	protected static $_instance;
+
+/**
+ * M17n data
+ *
+ * @var array
+ */
+	public static $m17n = array();
+
+/**
+ * setup current data
+ *
+ * @param CakeRequest $request CakeRequest
+ * @return void
+ */
+	public static function initialize(CakeRequest $request) {
+		if (! self::$_instance) {
+			self::$_instance = new Current();
+		}
+
+		self::$request = clone $request;
+
+		self::$current['User'] = AuthComponent::user();
+
+		(new CurrentSystem())->initialize();
+
+		if (! self::isControlPanel()) {
+			(new CurrentFrame())->initialize();
+		}
+	}
+
+/**
+ * 多言語のデータ取得
+ *
+ * @param string|null $languageId 言語ID
+ * @param string|null $model モデル名
+ * @param string|null $field フィールド名
+ * @return mixed Currentデータ
+ */
+	public static function readM17n($languageId, $model = null, $field = null) {
+		if (! isset(self::$m17n)) {
+			return self::$m17n;
+		}
+
+		if (! isset($model)) {
+			return self::$m17n;
+		}
+
+		if (! isset(self::$m17n[$model])) {
+			return null;
+		}
+		if (! isset($languageId)) {
+			return self::$m17n[$model];
+		}
+
+		$pathKey = $model . '.{n}.' . $model . '[language_id=' . $languageId . ']';
+		$result = Hash::extract(self::$m17n, $pathKey);
+		if (! $result) {
+			return null;
+		}
+
+		if (! isset($field)) {
+			return array($model => $result[0]);
+		} else {
+			return $result[0][$field];
+		}
+	}
+
 /**
  * ログインチェック
  *
@@ -397,21 +462,21 @@ class Current {
  */
 	public static function isSettingMode($settingMode = null) {
 		if (isset($settingMode)) {
-			self::$__isSettingMode = $settingMode;
+			self::$_isSettingMode = $settingMode;
 		}
 
-		if (isset(self::$__isSettingMode)) {
-			return self::$__isSettingMode;
+		if (isset(self::$_isSettingMode)) {
+			return self::$_isSettingMode;
 		}
 
 		$pattern = preg_quote('/' . self::SETTING_MODE_WORD . '/', '/');
 		if (preg_match('/' . $pattern . '/', Router::url())) {
-			self::$__isSettingMode = true;
+			self::$_isSettingMode = true;
 		} else {
-			self::$__isSettingMode = false;
+			self::$_isSettingMode = false;
 		}
 
-		return self::$__isSettingMode;
+		return self::$_isSettingMode;
 	}
 
 /**
@@ -429,7 +494,7 @@ class Current {
  * @return bool
  */
 	public static function isControlPanel() {
-		if (self::$request->params['plugin'] === CurrentControlPanel::PLUGIN_CONTROL_PANEL) {
+		if (self::$request->params['plugin'] === CurrentSystem::PLUGIN_CONTROL_PANEL) {
 			return true;
 		}
 
@@ -437,7 +502,10 @@ class Current {
 			return false;
 		}
 
-		if (in_array(self::$current['Plugin']['type'], array(Plugin::PLUGIN_TYPE_FOR_SITE_MANAGER, Plugin::PLUGIN_TYPE_FOR_SYSTEM_MANGER), true)) {
+		$controlPanelKeys = array(
+			Plugin::PLUGIN_TYPE_FOR_SITE_MANAGER, Plugin::PLUGIN_TYPE_FOR_SYSTEM_MANGER
+		);
+		if (in_array(self::$current['Plugin']['type'], $controlPanelKeys, true)) {
 			return true;
 		} else {
 			return false;
@@ -467,10 +535,9 @@ class Current {
 		if (! isset(self::$current['PluginsRole'])) {
 			return false;
 		}
-		if (self::read('User.role_key') === UserRole::USER_ROLE_KEY_SYSTEM_ADMINISTRATOR) {
-			return true;
-		}
-
+		//if (self::read('User.role_key') === UserRole::USER_ROLE_KEY_SYSTEM_ADMINISTRATOR) {
+		//	return true;
+		//}
 		return Hash::check(Current::$current['PluginsRole'], '{n}[plugin_key=' . $pluginKey . ']');
 	}
 
