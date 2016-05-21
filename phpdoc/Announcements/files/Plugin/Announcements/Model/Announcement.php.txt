@@ -31,9 +31,13 @@ class Announcement extends AnnouncementsAppModel {
 			'name' => 'Announcement.content',
 		),
 		'NetCommons.OriginalKey',
-		//'M17n.M17n',
 		'Workflow.WorkflowComment',
 		'Workflow.Workflow',
+		'Mails.MailQueue' => array(
+			'embedTags' => array(
+				'X-BODY' => 'Announcement.content',
+			),
+		),
 		'Topics.Topics' => array(
 			'fields' => array(
 				'title' => 'Announcement.content',

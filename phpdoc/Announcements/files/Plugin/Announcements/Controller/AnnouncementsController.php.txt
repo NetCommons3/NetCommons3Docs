@@ -10,6 +10,7 @@
  */
 
 App::uses('AnnouncementsAppController', 'Announcements.Controller');
+App::uses('MailSend', 'Mails.Utility');
 
 /**
  * Announcements Controller
@@ -83,6 +84,9 @@ class AnnouncementsController extends AnnouncementsAppController {
 			unset($data['Announcement']['id']);
 
 			if ($this->Announcement->saveAnnouncement($data)) {
+				// キューからメール送信
+				MailSend::send();
+
 				return $this->redirect(NetCommonsUrl::backToPageUrl());
 			}
 			$this->NetCommons->handleValidationError($this->Announcement->validationErrors);
