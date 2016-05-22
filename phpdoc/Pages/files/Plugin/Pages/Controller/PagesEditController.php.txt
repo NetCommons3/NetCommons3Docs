@@ -35,6 +35,7 @@ class PagesEditController extends PagesAppController {
 		'Pages.LanguagesPage',
 		'Pages.Page',
 		'Rooms.Room',
+		'SiteManager.SiteSetting',
 	);
 
 /**
