@@ -152,7 +152,7 @@ class LikeHelper extends AppHelper {
 			$element = '<span class="glyphicon glyphicon-thumbs-up"></span> ';
 			$element .= (int)Hash::get($content, 'Like.like_count');
 			$output .= $this->Html->div(
-						array('inline-block', 'like-icon', 'text-muted'), $element, $attributes
+						array('like-icon', 'text-muted'), $element, $attributes
 					);
 		}
 
@@ -161,7 +161,7 @@ class LikeHelper extends AppHelper {
 			$element = '<span class="glyphicon glyphicon-thumbs-down"></span> ';
 			$element .= (int)Hash::get($content, 'Like.unlike_count');
 			$output .= $this->Html->div(
-						array('inline-block', 'like-icon', 'text-muted'), $element, $attributes
+						array('like-icon', 'text-muted'), $element, $attributes
 					);
 		}
 
@@ -239,18 +239,18 @@ class LikeHelper extends AppHelper {
 		$tokens = $this->Token->getToken('Like', '/likes/likes/like.json', $tokenFields, $hiddenFields);
 		$data += $tokens;
 
-		$output .= '<div class="form-inline" ng-controller="Likes" ' .
+		$output .= '<div class="like-icon" ng-controller="Likes" ' .
 						'ng-init="initialize(' . h(json_encode($data)) . ', ' . h(json_encode($options)) . ')">';
 
 		//いいね
 		if (isset($setting['use_like']) && $setting['use_like']) {
-			$output .= $this->Html->div(array('inline-block', 'like-icon'),
+			$output .= $this->Html->div(array('like-icon'),
 					$this->_View->element('Likes.like_button', ['isLiked' => Like::IS_LIKE]), $attributes);
 		}
 
 		//わるいね
 		if (isset($setting['use_unlike']) && $setting['use_unlike']) {
-			$output .= $this->Html->div(array('inline-block', 'like-icon'),
+			$output .= $this->Html->div(array('like-icon'),
 					$this->_View->element('Likes.like_button', ['isLiked' => Like::IS_UNLIKE]), $attributes);
 		}
 
