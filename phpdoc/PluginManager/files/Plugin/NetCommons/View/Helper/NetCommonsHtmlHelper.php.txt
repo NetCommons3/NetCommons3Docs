@@ -57,6 +57,7 @@ class NetCommonsHtmlHelper extends AppHelper {
 			$helper = $this->MailsHtml;
 			$method = 'help';
 		} elseif ($method === 'titleIcon') {
+			$this->script('/net_commons/js/title_icon_picker.js');
 			$helper = $this->_View->loadHelper('NetCommons.TitleIcon');
 		} elseif ($method === 'dateFormat') {
 			$helper = $this->Date;
@@ -199,15 +200,22 @@ class NetCommonsHtmlHelper extends AppHelper {
  * ```
  *
  * @param string $text タイトル
+ * @param string $titleIcon タイトルアイコン
  * @param array $options HTML属性オプション
  * @return string `<h1>`タグ
  */
-	public function blockTitle($text = '', $options = array()) {
+	public function blockTitle($text = '', $titleIcon = null, $options = array()) {
 		$output = '';
 
-		$options = Hash::merge(
-			array('escape' => true), $options
-		);
+		$escape = Hash::get($options, 'escape', true);
+		if ($escape) {
+			$text = h($text);
+		}
+		$options = Hash::insert($options, 'escape', false);
+
+		if ($titleIcon) {
+			$text = $this->titleIcon($titleIcon) . ' ' . $text;
+		}
 
 		$output .= $this->Html->tag('h1', $text, $options);
 		return $output;
