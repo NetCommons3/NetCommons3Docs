@@ -136,10 +136,10 @@
                                 <div class="accordion" style="margin-bottom: 0">
         <div class="accordion-group">
             <div class="accordion-heading">
-                                    <a class="accordion-toggle " data-toggle="collapse" data-target="#namespace-59544486"></a>
+                                    <a class="accordion-toggle " data-toggle="collapse" data-target="#namespace-160274323"></a>
                                 <a href="../namespaces/default.html" style="margin-left: 30px; padding-left: 0">\</a>
             </div>
-            <div id="namespace-59544486" class="accordion-body collapse in">
+            <div id="namespace-160274323" class="accordion-body collapse in">
                 <div class="accordion-inner">
 
                     
@@ -273,7 +273,7 @@ will inherit them.</p>
                                                                     <a href="../classes/MailQueueUser.html#method_saveMailQueueUser" class="">saveMailQueueUser()</a><br />
                                                                     <a href="../classes/MailQueueUser.html#method_getRolesRoomsUsersByPermission" class="">getRolesRoomsUsersByPermission()</a><br />
                                                                     <a href="../classes/MailQueueUser.html#method_addMailQueueUserInCreatedUser" class="">addMailQueueUserInCreatedUser()</a><br />
-                                                                    <a href="../classes/MailQueueUser.html#method_addMailQueueUserInRoomAuthorizers" class="">addMailQueueUserInRoomAuthorizers()</a><br />
+                                                                    <a href="../classes/MailQueueUser.html#method_addMailQueueUserInRoomByPermission" class="">addMailQueueUserInRoomByPermission()</a><br />
                                                                     <a href="../classes/MailQueueUser.html#method_addMailQueueUserInRoom" class="">addMailQueueUserInRoom()</a><br />
                                                             </section>
                             <section class="span4">
@@ -1392,12 +1392,12 @@ schema data defaults are not merged.</p></td>
 
                                     <div class="row-fluid">
         <div class="span8 content class">
-            <a id="method_addMailQueueUserInRoomAuthorizers" name="method_addMailQueueUserInRoomAuthorizers" class="anchor"></a>
+            <a id="method_addMailQueueUserInRoomByPermission" name="method_addMailQueueUserInRoomByPermission" class="anchor"></a>
             <article class="method">
-                <h3 class="public ">addMailQueueUserInRoomAuthorizers()</h3>
+                <h3 class="public ">addMailQueueUserInRoomByPermission()</h3>
                 <a href="#source-view" role="button" class="pull-right btn" data-toggle="modal" style="font-size: 1.1em; padding: 9px 14px"><i class="icon-code"></i></a>
-                <pre class="signature" style="margin-right: 54px;">addMailQueueUserInRoomAuthorizers(integer  <span class="argument">$mailQueueId</span>, string  <span class="argument">$contentKey</span>, string  <span class="argument">$pluginKey = null</span>, string  <span class="argument">$permissionKey = &#039;content_publishable&#039;</span>) : array</pre>
-                <p><em>ルーム内の承認者達に配信 登録</em></p>
+                <pre class="signature" style="margin-right: 54px;">addMailQueueUserInRoomByPermission(integer  <span class="argument">$mailQueueId</span>, string  <span class="argument">$contentKey</span>, string  <span class="argument">$pluginKey = null</span>, string  <span class="argument">$permissionKey = &#039;content_publishable&#039;</span>, array  <span class="argument">$notSendUserIds = array()</span>) : array</pre>
+                <p><em>ルーム内のパーミッションを持っているユーザ（例えば承認者達）に配信 登録</em></p>
                 
 
                                     <h4>Parameters</h4>
@@ -1422,6 +1422,11 @@ schema data defaults are not merged.</p></td>
                                 <td>$permissionKey </td>
                                 <td><p>パーミッションキー</p></td>
                             </tr>
+                                                    <tr>
+                                <td>array</td>
+                                <td>$notSendUserIds </td>
+                                <td><p>送らないユーザID</p></td>
+                            </tr>
                                             </table>
                 
                                     <h4>Throws</h4>
@@ -1432,7 +1437,7 @@ schema data defaults are not merged.</p></td>
                 
                                     <h4>Returns</h4>
                     array
-                                            &mdash; <p>ユーザID</p>
+                                            &mdash; <p>ルーム配信で送らないユーザID</p>
                                     				
                             </article>
         </div>
@@ -1687,7 +1692,7 @@ schema data defaults are not merged.</p></td>
                 <section class="span10 offset1">
                     <hr />
                     Documentation is powered by <a href="http://www.phpdoc.org/">phpDocumentor </a> and authored
-                    on May 23rd, 2016 at 05:35.
+                    on May 23rd, 2016 at 08:49.
                 </section>
             </section>
         </section>
