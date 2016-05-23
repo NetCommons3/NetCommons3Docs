@@ -136,10 +136,10 @@
                                 <div class="accordion" style="margin-bottom: 0">
         <div class="accordion-group">
             <div class="accordion-heading">
-                                    <a class="accordion-toggle " data-toggle="collapse" data-target="#namespace-344126427"></a>
+                                    <a class="accordion-toggle " data-toggle="collapse" data-target="#namespace-1927163179"></a>
                                 <a href="../namespaces/default.html" style="margin-left: 30px; padding-left: 0">\</a>
             </div>
-            <div id="namespace-344126427" class="accordion-body collapse in">
+            <div id="namespace-1927163179" class="accordion-body collapse in">
                 <div class="accordion-inner">
 
                     
@@ -226,47 +226,9 @@
                                             </nav>
                     <a href="#source-view" role="button" class="pull-right btn" data-toggle="modal"><i class="icon-code"></i></a>
 
-                    <h1><small>\</small>WizardHelper</h1>
-                    <p><em>ウィザードHelper</em></p>
-                    <h4>コントローラの定義(helpersのサンプル)</h4>
-<p><a href="https://github.com/NetCommons3/Rooms/blob/master/Controller/RoomsAppController.php#L73-L98">https://github.com/NetCommons3/Rooms/blob/master/Controller/RoomsAppController.php#L73-L98</a></p>
-<pre><code>    public $helpers = array(
-        'NetCommons.Wizard' =&gt; array(
-            'navibar' =&gt; array(
-                self::WIZARD_ROOMS =&gt; array(
-                    'url' =&gt; array(
-                        'controller' =&gt; 'rooms',
-                        'action' =&gt; 'add',
-                    ),
-                    'label' =&gt; array('rooms', 'General setting'),
-                ),
-                self::WIZARD_ROOMS_ROLES_USERS =&gt; array(
-                    'url' =&gt; array(
-                        'controller' =&gt; 'rooms_roles_users',
-                        'action' =&gt; 'edit',
-                    ),
-                    'label' =&gt; array('rooms', 'Edit the members to join'),
-                ),
-                self::WIZARD_PLUGINS_ROOMS =&gt; array(
-                    'url' =&gt; array(
-                        'controller' =&gt; 'plugins_rooms',
-                        'action' =&gt; 'edit',
-                    ),
-                    'label' =&gt; array('rooms', 'Select the plugins to join'),
-                ),
-            ),
-            'cancelUrl' =&gt; null
-        ),
-    );</code></pre>
-<h4>viewファイルのWizardバーサンプル</h4>
-<p><a href="https://github.com/NetCommons3/Rooms/blob/master/View/PluginsRooms/edit.ctp#L17">https://github.com/NetCommons3/Rooms/blob/master/View/PluginsRooms/edit.ctp#L17</a></p>
-<pre><code>echo $this-&gt;Wizard-&gt;navibar(RoomsAppController::WIZARD_PLUGINS_ROOMS);</code></pre>
-<h5>viewファイルのボタンサンプル</h5>
-<p>(ワークフローなし)<br>
-<a href="https://github.com/NetCommons3/Rooms/blob/master/View/PluginsRooms/edit.ctp#L17">https://github.com/NetCommons3/Rooms/blob/master/View/PluginsRooms/edit.ctp#L17</a></p>
-<pre><code>echo $this-&gt;Wizard-&gt;buttons(RoomsAppController::WIZARD_PLUGINS_ROOMS);</code></pre>
-<p>(ワークフローあり)</p>
-<pre><code>echo $this-&gt;Wizard-&gt;workflowButtons('Questionnaire.status');</code></pre>
+                    <h1><small>\</small>NetCommonsSecurity</h1>
+                    <p><em>NetCommonsセキュリティ Utility</em></p>
+                    
                     
                                         
                     <section id="summary">
@@ -284,14 +246,14 @@
                         </section>
                         <section class="row-fluid public">
                             <section class="span4">
-                                                                    <a href="../classes/WizardHelper.html#method_beforeRender" class="">beforeRender()</a><br />
-                                                                    <a href="../classes/WizardHelper.html#method_navibar" class="">navibar()</a><br />
-                                                                    <a href="../classes/WizardHelper.html#method_naviUrl" class="">naviUrl()</a><br />
-                                                                    <a href="../classes/WizardHelper.html#method_buttons" class="">buttons()</a><br />
-                                                                    <a href="../classes/WizardHelper.html#method_workflowButtons" class="">workflowButtons()</a><br />
+                                                                    <a href="../classes/NetCommonsSecurity.html#method___construct" class="">__construct()</a><br />
+                                                                    <a href="../classes/NetCommonsSecurity.html#method_denyIpMove" class="">denyIpMove()</a><br />
+                                                                    <a href="../classes/NetCommonsSecurity.html#method_enableBadIps" class="">enableBadIps()</a><br />
+                                                                    <a href="../classes/NetCommonsSecurity.html#method_enableAllowSystemPluginIps" class="">enableAllowSystemPluginIps()</a><br />
+                                                                    <a href="../classes/NetCommonsSecurity.html#method_isCloseSite" class="">isCloseSite()</a><br />
                                                             </section>
                             <section class="span4">
-                                                                    <a href="../classes/WizardHelper.html#property_helpers" class="">$helpers</a><br />
+                                                                    <em>No public properties found</em>
                                                             </section>
                             <section class="span4">
                                                                     <em>No constants found</em>
@@ -310,7 +272,7 @@
                         </section>
                         <section class="row-fluid private">
                             <section class="span4">
-                                                                    <a href="../classes/WizardHelper.html#method___wizardStep" class="">__wizardStep()</a><br />
+                                                                    <em>No private methods found</em>
                                                             </section>
                             <section class="span4">
                                                                     <em>No private properties found</em>
@@ -326,16 +288,12 @@
                     
                     <dl>
                         <dt>File</dt>
-                            <dd><a href="../files/Plugin.NetCommons.View.Helper.WizardHelper.html"><div class="path-wrapper">Plugin/NetCommons/View/Helper/WizardHelper.php</div></a></dd>
+                            <dd><a href="../files/Plugin.NetCommons.Utility.NetCommonsSecurity.html"><div class="path-wrapper">Plugin/NetCommons/Utility/NetCommonsSecurity.php</div></a></dd>
                                                 <dt>Package</dt>
-                            <dd><div class="namespace-wrapper">View\Helper</div></dd>
+                            <dd><div class="namespace-wrapper">NetCommons\Utility</div></dd>
                                                 <dt>Class hierarchy</dt>
                             <dd class="hierarchy">
-                                                                                                                                                                                                                                                                                                                                                                                                                                                            
-                                        <div class="namespace-wrapper">\Helper</div>
-                                                                    
-                                        <div class="namespace-wrapper"><a href="../classes/AppHelper.html">\AppHelper</a></div>
-                                                                                                    <div class="namespace-wrapper">\WizardHelper</div>
+                                                                                                                                                                    <div class="namespace-wrapper">\NetCommonsSecurity</div>
                             </dd>
 
                         
@@ -345,45 +303,20 @@
                                                                         </dl>
                     <h2>Tags</h2>
                     <table class="table table-condensed">
-                                            <tr><td colspan="2"><em>None found</em></td></tr>
+                                            <tr>
+                            <th>
+                                author
+                            </th>
+                            <td>
+                                                                    <p>Shohei Nakajima <a href="mailto:nakajimashouhei@gmail.com">nakajimashouhei@gmail.com</a></p>
+                                                            </td>
+                        </tr>
                                         </table>
                 </aside>
             </div>
 
                         
-                                    <a id="properties" name="properties"></a>
-            <div class="row-fluid">
-                <div class="span8 content class">
-                    <h2>Properties</h2>
-                </div>
-                <aside class="span4 detailsbar"></aside>
-            </div>
-
-                                    <div class="row-fluid">
-        <div class="span8 content class">
-            <a id="property_helpers" name="property_helpers" class="anchor"></a>
-            <article class="property">
-                <h3 class="public ">$helpers</h3>
-                <pre class="signature">$helpers : array</pre>
-                <p><em>ヘルパー</em></p>
-                
-
-                                <h4>Type</h4>
-                array
-                                            </article>
-        </div>
-        <aside class="span4 detailsbar">
-            <h1><i class="icon-arrow-down"></i></h1>
-                        <dl>
-                                                            </dl>
-            <h2>Tags</h2>
-            <table class="table table-condensed">
-                                    <tr><td colspan="2"><em>None found</em></td></tr>
-                            </table>
-        </aside>
-    </div>
-
-                                                            
+                        
                                     <a id="methods" name="methods"></a>
             <div class="row-fluid">
                 <div class="span8 content class"><h2>Methods</h2></div>
@@ -392,22 +325,14 @@
 
                                     <div class="row-fluid">
         <div class="span8 content class">
-            <a id="method_beforeRender" name="method_beforeRender" class="anchor"></a>
+            <a id="method___construct" name="method___construct" class="anchor"></a>
             <article class="method">
-                <h3 class="public ">beforeRender()</h3>
+                <h3 class="public ">__construct()</h3>
                 <a href="#source-view" role="button" class="pull-right btn" data-toggle="modal" style="font-size: 1.1em; padding: 9px 14px"><i class="icon-code"></i></a>
-                <pre class="signature" style="margin-right: 54px;">beforeRender(string  <span class="argument">$viewFile</span>) : void</pre>
-                <p><em>Before render callback. beforeRender is called before the view file is rendered.</em></p>
-                <p>Overridden in subclasses.</p>
+                <pre class="signature" style="margin-right: 54px;">__construct() : void</pre>
+                <p><em>コンストラクタ</em></p>
+                <p>セキュリティチェックで使用するモデルをセットする</p>
 
-                                    <h4>Parameters</h4>
-                    <table class="table table-condensed table-hover">
-                                                    <tr>
-                                <td>string</td>
-                                <td>$viewFile </td>
-                                <td><p>The view file that is going to be rendered</p></td>
-                            </tr>
-                                            </table>
                 
                 
                 				
@@ -426,76 +351,18 @@
 
                                     <div class="row-fluid">
         <div class="span8 content class">
-            <a id="method_navibar" name="method_navibar" class="anchor"></a>
+            <a id="method_denyIpMove" name="method_denyIpMove" class="anchor"></a>
             <article class="method">
-                <h3 class="public ">navibar()</h3>
+                <h3 class="public ">denyIpMove()</h3>
                 <a href="#source-view" role="button" class="pull-right btn" data-toggle="modal" style="font-size: 1.1em; padding: 9px 14px"><i class="icon-code"></i></a>
-                <pre class="signature" style="margin-right: 54px;">navibar(string  <span class="argument">$activeKey</span>, boolean  <span class="argument">$small = false</span>) : string</pre>
-                <p><em>ウィザードバー出力</em></p>
+                <pre class="signature" style="margin-right: 54px;">denyIpMove() : boolean</pre>
+                <p><em>IP変動の禁止チェック</em></p>
                 
 
-                                    <h4>Parameters</h4>
-                    <table class="table table-condensed table-hover">
-                                                    <tr>
-                                <td>string</td>
-                                <td>$activeKey </td>
-                                <td><p>アクティブのキー</p></td>
-                            </tr>
-                                                    <tr>
-                                <td>boolean</td>
-                                <td>$small </td>
-                                <td><p>小さいバーフラグ</p></td>
-                            </tr>
-                                            </table>
                 
                 
                                     <h4>Returns</h4>
-                    string
-                                            &mdash; <p>HTML出力</p>
-                                    				
-                            </article>
-        </div>
-        <aside class="span4 detailsbar">
-            <h1><i class="icon-arrow-down"></i></h1>
-                                                            <dl>
-                                                                            </dl>
-            <h2>Tags</h2>
-            <table class="table table-condensed">
-                                    <tr>
-                        <th>
-                            SuppressWarnings
-                        </th>
-                        <td>
-                                                                                            <p>(PHPMD.BooleanArgumentFlag)</p>
-                                                    </td>
-                    </tr>
-                            </table>
-        </aside>
-    </div>
-
-                                    <div class="row-fluid">
-        <div class="span8 content class">
-            <a id="method_naviUrl" name="method_naviUrl" class="anchor"></a>
-            <article class="method">
-                <h3 class="public ">naviUrl()</h3>
-                <a href="#source-view" role="button" class="pull-right btn" data-toggle="modal" style="font-size: 1.1em; padding: 9px 14px"><i class="icon-code"></i></a>
-                <pre class="signature" style="margin-right: 54px;">naviUrl(string  <span class="argument">$activeKey</span>) : string</pre>
-                <p><em>URL出力</em></p>
-                
-
-                                    <h4>Parameters</h4>
-                    <table class="table table-condensed table-hover">
-                                                    <tr>
-                                <td>string</td>
-                                <td>$activeKey </td>
-                                <td><p>アクティブのキー</p></td>
-                            </tr>
-                                            </table>
-                
-                
-                                    <h4>Returns</h4>
-                    string
-                                            &mdash; <p>HTML出力</p>
+                    boolean
                                     				
                             </article>
         </div>
@@ -512,42 +379,18 @@
 
                                     <div class="row-fluid">
         <div class="span8 content class">
-            <a id="method_buttons" name="method_buttons" class="anchor"></a>
+            <a id="method_enableBadIps" name="method_enableBadIps" class="anchor"></a>
             <article class="method">
-                <h3 class="public ">buttons()</h3>
+                <h3 class="public ">enableBadIps()</h3>
                 <a href="#source-view" role="button" class="pull-right btn" data-toggle="modal" style="font-size: 1.1em; padding: 9px 14px"><i class="icon-code"></i></a>
-                <pre class="signature" style="margin-right: 54px;">buttons(string  <span class="argument">$activeKey</span>, array  <span class="argument">$cancelOpt = array()</span>, array  <span class="argument">$prevOpt = array()</span>, array  <span class="argument">$nextOpt = array()</span>) : string</pre>
-                <p><em>ウィザードボタン</em></p>
+                <pre class="signature" style="margin-right: 54px;">enableBadIps() : boolean</pre>
+                <p><em>IPアドレスの不正アクセスチェック</em></p>
                 
 
-                                    <h4>Parameters</h4>
-                    <table class="table table-condensed table-hover">
-                                                    <tr>
-                                <td>string</td>
-                                <td>$activeKey </td>
-                                <td><p>アクティブのキー</p></td>
-                            </tr>
-                                                    <tr>
-                                <td>array</td>
-                                <td>$cancelOpt </td>
-                                <td><p>キャンセルボタンのオプション</p></td>
-                            </tr>
-                                                    <tr>
-                                <td>array</td>
-                                <td>$prevOpt </td>
-                                <td><p>前へボタンのオプション</p></td>
-                            </tr>
-                                                    <tr>
-                                <td>array</td>
-                                <td>$nextOpt </td>
-                                <td><p>次へ、決定ボタンのオプション</p></td>
-                            </tr>
-                                            </table>
                 
                 
                                     <h4>Returns</h4>
-                    string
-                                            &mdash; <p>HTML</p>
+                    boolean
                                     				
                             </article>
         </div>
@@ -564,86 +407,18 @@
 
                                     <div class="row-fluid">
         <div class="span8 content class">
-            <a id="method_workflowButtons" name="method_workflowButtons" class="anchor"></a>
+            <a id="method_enableAllowSystemPluginIps" name="method_enableAllowSystemPluginIps" class="anchor"></a>
             <article class="method">
-                <h3 class="public ">workflowButtons()</h3>
+                <h3 class="public ">enableAllowSystemPluginIps()</h3>
                 <a href="#source-view" role="button" class="pull-right btn" data-toggle="modal" style="font-size: 1.1em; padding: 9px 14px"><i class="icon-code"></i></a>
-                <pre class="signature" style="margin-right: 54px;">workflowButtons(string  <span class="argument">$statusName</span>, array  <span class="argument">$cancelUrl = null</span>, array  <span class="argument">$prevUrl = null</span>, array  <span class="argument">$panel = false</span>) : string</pre>
-                <p><em>ウィザードボタン</em></p>
+                <pre class="signature" style="margin-right: 54px;">enableAllowSystemPluginIps() : boolean</pre>
+                <p><em>IPアドレスによる管理画面のアクセスチェック</em></p>
                 
 
-                                    <h4>Parameters</h4>
-                    <table class="table table-condensed table-hover">
-                                                    <tr>
-                                <td>string</td>
-                                <td>$statusName </td>
-                                <td><p>ステータスのフィールド名(&quot;Modelname.fieldname&quot;)</p></td>
-                            </tr>
-                                                    <tr>
-                                <td>array</td>
-                                <td>$cancelUrl </td>
-                                <td><p>キャンセルURL</p></td>
-                            </tr>
-                                                    <tr>
-                                <td>array</td>
-                                <td>$prevUrl </td>
-                                <td><p>前へURL</p></td>
-                            </tr>
-                                                    <tr>
-                                <td>array</td>
-                                <td>$panel </td>
-                                <td><p>panel-footerを表示するかどうか</p></td>
-                            </tr>
-                                            </table>
                 
                 
                                     <h4>Returns</h4>
-                    string
-                                            &mdash; <p>HTML</p>
-                                    				
-                            </article>
-        </div>
-        <aside class="span4 detailsbar">
-            <h1><i class="icon-arrow-down"></i></h1>
-                                                            <dl>
-                                                                            </dl>
-            <h2>Tags</h2>
-            <table class="table table-condensed">
-                                    <tr>
-                        <th>
-                            SuppressWarnings
-                        </th>
-                        <td>
-                                                                                            <p>(PHPMD.BooleanArgumentFlag)</p>
-                                                    </td>
-                    </tr>
-                            </table>
-        </aside>
-    </div>
-
-                                                                    <div class="row-fluid">
-        <div class="span8 content class">
-            <a id="method___wizardStep" name="method___wizardStep" class="anchor"></a>
-            <article class="method">
-                <h3 class="private ">__wizardStep()</h3>
-                <a href="#source-view" role="button" class="pull-right btn" data-toggle="modal" style="font-size: 1.1em; padding: 9px 14px"><i class="icon-code"></i></a>
-                <pre class="signature" style="margin-right: 54px;">__wizardStep(string  <span class="argument">$activeKey</span>) : array</pre>
-                <p><em>ウィザードの状態取得</em></p>
-                
-
-                                    <h4>Parameters</h4>
-                    <table class="table table-condensed table-hover">
-                                                    <tr>
-                                <td>string</td>
-                                <td>$activeKey </td>
-                                <td><p>アクティブのキー</p></td>
-                            </tr>
-                                            </table>
-                
-                
-                                    <h4>Returns</h4>
-                    array
-                                            &mdash; <p>$activeKeyがnullの場合、$nextは最後の</p>
+                    boolean
                                     				
                             </article>
         </div>
@@ -658,16 +433,52 @@
         </aside>
     </div>
 
-                                    </div>
+                                    <div class="row-fluid">
+        <div class="span8 content class">
+            <a id="method_isCloseSite" name="method_isCloseSite" class="anchor"></a>
+            <article class="method">
+                <h3 class="public ">isCloseSite()</h3>
+                <a href="#source-view" role="button" class="pull-right btn" data-toggle="modal" style="font-size: 1.1em; padding: 9px 14px"><i class="icon-code"></i></a>
+                <pre class="signature" style="margin-right: 54px;">isCloseSite(\CakeRequest  <span class="argument">$request</span>) : boolean</pre>
+                <p><em>サイト停止チェック</em></p>
+                
+
+                                    <h4>Parameters</h4>
+                    <table class="table table-condensed table-hover">
+                                                    <tr>
+                                <td>\CakeRequest</td>
+                                <td>$request </td>
+                                <td><p>CakeRequest</p></td>
+                            </tr>
+                                            </table>
+                
+                
+                                    <h4>Returns</h4>
+                    boolean
+                                    				
+                            </article>
+        </div>
+        <aside class="span4 detailsbar">
+            <h1><i class="icon-arrow-down"></i></h1>
+                                                            <dl>
+                                                                            </dl>
+            <h2>Tags</h2>
+            <table class="table table-condensed">
+                                    <tr><td colspan="2"><em>None found</em></td></tr>
+                            </table>
+        </aside>
+    </div>
+
+                                                                    </div>
     </section>
 
     <div id="source-view" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="source-view-label" aria-hidden="true">
         <div class="modal-header">
             <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
-            <h3 id="source-view-label">WizardHelper.php</h3>
+            <h3 id="source-view-label">NetCommonsSecurity.php</h3>
         </div>
         <div class="modal-body">
-            <pre data-src="../files/Plugin/NetCommons/View/Helper/WizardHelper.php.txt" class="language-php line-numbers"></pre>
+            <pre data-src="../files/Plugin/NetCommons/Utility/NetCommonsSecurity.php.txt" class="language-php line-numbers"></pre>
         </div>
     </div>
 
