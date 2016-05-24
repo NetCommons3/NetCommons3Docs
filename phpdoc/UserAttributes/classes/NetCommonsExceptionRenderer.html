@@ -136,10 +136,10 @@
                                 <div class="accordion" style="margin-bottom: 0">
         <div class="accordion-group">
             <div class="accordion-heading">
-                                    <a class="accordion-toggle " data-toggle="collapse" data-target="#namespace-1898071960"></a>
+                                    <a class="accordion-toggle " data-toggle="collapse" data-target="#namespace-701119887"></a>
                                 <a href="../namespaces/default.html" style="margin-left: 30px; padding-left: 0">\</a>
             </div>
-            <div id="namespace-1898071960" class="accordion-body collapse in">
+            <div id="namespace-701119887" class="accordion-body collapse in">
                 <div class="accordion-inner">
 
                     
@@ -234,11 +234,24 @@
                                             </nav>
                     <a href="#source-view" role="button" class="pull-right btn" data-toggle="modal"><i class="icon-code"></i></a>
 
-                    <h1><small>\</small>UserAttributeHelper</h1>
-                    <p><em>会員項目設定で使用するヘルパー</em></p>
-                    <p>このHelperを使う場合、
-<a href="./UserAttributeLayoutComponent.html">UserAttributes.UserAttributeLayoutComponent</a>
-が読み込まれている必要がある。</p>
+                    <h1><small>\</small>NetCommonsExceptionRenderer</h1>
+                    <p><em>Exception Renderer.</em></p>
+                    <p>Captures and handles all unhandled exceptions. Displays helpful framework errors when debug &gt; 1.
+When debug &lt; 1 a CakeException will render 404 or 500 errors. If an uncaught exception is thrown
+and it is a type that ExceptionHandler does not know about it will be treated as a 500 error.</p>
+<h3>Implementing application specific exception rendering</h3>
+<p>You can implement application specific exception handling in one of a few ways:</p>
+<ul>
+<li>Create a AppController::appError();</li>
+<li>Create a subclass of YAExceptionRenderer and configure it to be the <code>Exception.renderer</code></li>
+</ul>
+<h4>Using AppController::appError();</h4>
+<p>This controller method is called instead of the default exception handling. It receives the
+thrown exception as its only argument. You should implement your error handling in that method.</p>
+<h4>Using a subclass of YAExceptionRenderer</h4>
+<p>Using a subclass of YAExceptionRenderer gives you full control over how Exceptions are rendered, you
+can configure your class in your core.php, with <code>Configure::write('Exception.renderer', 'MyClass');</code>
+You should place any custom exception renderers in <code>app/Lib/Error</code>.</p>
                     
                                         
                     <section id="summary">
@@ -256,17 +269,11 @@
                         </section>
                         <section class="row-fluid public">
                             <section class="span4">
-                                                                    <a href="../classes/UserAttributeHelper.html#method_editCol" class="">editCol()</a><br />
-                                                                    <a href="../classes/UserAttributeHelper.html#method_displaySetting" class="">displaySetting()</a><br />
-                                                                    <a href="../classes/UserAttributeHelper.html#method_moveSetting" class="">moveSetting()</a><br />
-                                                                    <a href="../classes/UserAttributeHelper.html#method_moveSettingTopMenu" class="">moveSettingTopMenu()</a><br />
-                                                                    <a href="../classes/UserAttributeHelper.html#method_moveSettingBottomMenu" class="">moveSettingBottomMenu()</a><br />
-                                                                    <a href="../classes/UserAttributeHelper.html#method_moveSettingLeftMenu" class="">moveSettingLeftMenu()</a><br />
-                                                                    <a href="../classes/UserAttributeHelper.html#method_moveSettingRightMenu" class="">moveSettingRightMenu()</a><br />
-                                                                    <a href="../classes/UserAttributeHelper.html#method_moveSettingRowMenu" class="">moveSettingRowMenu()</a><br />
+                                                                    <a href="../classes/NetCommonsExceptionRenderer.html#method_error400" class="">error400()</a><br />
+                                                                    <a href="../classes/NetCommonsExceptionRenderer.html#method_error500" class="">error500()</a><br />
                                                             </section>
                             <section class="span4">
-                                                                    <a href="../classes/UserAttributeHelper.html#property_helpers" class="">$helpers</a><br />
+                                                                    <em>No public properties found</em>
                                                             </section>
                             <section class="span4">
                                                                     <em>No constants found</em>
@@ -285,7 +292,7 @@
                         </section>
                         <section class="row-fluid private">
                             <section class="span4">
-                                                                    <a href="../classes/UserAttributeHelper.html#method___moveSettingForm" class="">__moveSettingForm()</a><br />
+                                                                    <em>No private methods found</em>
                                                             </section>
                             <section class="span4">
                                                                     <em>No private properties found</em>
@@ -301,16 +308,14 @@
                     
                     <dl>
                         <dt>File</dt>
-                            <dd><a href="../files/Plugin.UserAttributes.View.Helper.UserAttributeHelper.html"><div class="path-wrapper">Plugin/UserAttributes/View/Helper/UserAttributeHelper.php</div></a></dd>
+                            <dd><a href="../files/Plugin.NetCommons.Error.NetCommonsExceptionRenderer.html"><div class="path-wrapper">Plugin/NetCommons/Error/NetCommonsExceptionRenderer.php</div></a></dd>
                                                 <dt>Package</dt>
-                            <dd><div class="namespace-wrapper">View\Helper</div></dd>
+                            <dd><div class="namespace-wrapper">NetCommons\Error</div></dd>
                                                 <dt>Class hierarchy</dt>
                             <dd class="hierarchy">
-                                                                                                                                                                                                                                                                                                                                                                                                                                                            
-                                        <div class="namespace-wrapper">\Helper</div>
-                                                                    
-                                        <div class="namespace-wrapper"><a href="../classes/AppHelper.html">\AppHelper</a></div>
-                                                                                                    <div class="namespace-wrapper">\UserAttributeHelper</div>
+                                                                                                                                                                                                                                                                                                
+                                        <div class="namespace-wrapper">\ExceptionRenderer</div>
+                                                                                                    <div class="namespace-wrapper">\NetCommonsExceptionRenderer</div>
                             </dd>
 
                         
@@ -320,56 +325,13 @@
                                                                         </dl>
                     <h2>Tags</h2>
                     <table class="table table-condensed">
-                                            <tr>
-                            <th>
-                                author
-                            </th>
-                            <td>
-                                                                    <p>Shohei Nakajima <a href="mailto:nakajimashouhei@gmail.com">nakajimashouhei@gmail.com</a></p>
-                                                            </td>
-                        </tr>
+                                            <tr><td colspan="2"><em>None found</em></td></tr>
                                         </table>
                 </aside>
             </div>
 
                         
-                                    <a id="properties" name="properties"></a>
-            <div class="row-fluid">
-                <div class="span8 content class">
-                    <h2>Properties</h2>
-                </div>
-                <aside class="span4 detailsbar"></aside>
-            </div>
-
-                                    <div class="row-fluid">
-        <div class="span8 content class">
-            <a id="property_helpers" name="property_helpers" class="anchor"></a>
-            <article class="property">
-                <h3 class="public ">$helpers</h3>
-                <pre class="signature">$helpers : array</pre>
-                <p><em>使用するHelpsers</em></p>
-                <ul>
-<li><a href="../../NetCommons/classes/ButtonHelper.html">NetCommons.ButtonHelper</a></li>
-<li><a href="../../NetCommons/classes/NetCommonsHtml.html">NetCommons.NetCommonsHtml</a></li>
-<li><a href="../../NetCommons/classes/NetCommonsForm.html">NetCommons.NetCommonsForm</a></li>
-</ul>
-
-                                <h4>Type</h4>
-                array
-                                            </article>
-        </div>
-        <aside class="span4 detailsbar">
-            <h1><i class="icon-arrow-down"></i></h1>
-                        <dl>
-                                                            </dl>
-            <h2>Tags</h2>
-            <table class="table table-condensed">
-                                    <tr><td colspan="2"><em>None found</em></td></tr>
-                            </table>
-        </aside>
-    </div>
-
-                                                            
+                        
                                     <a id="methods" name="methods"></a>
             <div class="row-fluid">
                 <div class="span8 content class"><h2>Methods</h2></div>
@@ -378,28 +340,25 @@
 
                                     <div class="row-fluid">
         <div class="span8 content class">
-            <a id="method_editCol" name="method_editCol" class="anchor"></a>
+            <a id="method_error400" name="method_error400" class="anchor"></a>
             <article class="method">
-                <h3 class="public ">editCol()</h3>
+                <h3 class="public ">error400()</h3>
                 <a href="#source-view" role="button" class="pull-right btn" data-toggle="modal" style="font-size: 1.1em; padding: 9px 14px"><i class="icon-code"></i></a>
-                <pre class="signature" style="margin-right: 54px;">editCol(array  <span class="argument">$layout</span>) : string</pre>
-                <p><em>表示列の変更HTMLを出力する</em></p>
+                <pre class="signature" style="margin-right: 54px;">error400(\Exception  <span class="argument">$error</span>) : void</pre>
+                <p><em>Convenience method to display a 400 series page.</em></p>
                 
 
                                     <h4>Parameters</h4>
                     <table class="table table-condensed table-hover">
                                                     <tr>
-                                <td>array</td>
-                                <td>$layout </td>
-                                <td><p>userAttributeLayoutデータ配列</p></td>
+                                <td>\Exception</td>
+                                <td>$error </td>
+                                <td><p>Exception</p></td>
                             </tr>
                                             </table>
                 
                 
-                                    <h4>Returns</h4>
-                    string
-                                            &mdash; <p>HTML</p>
-                                    				
+                				
                             </article>
         </div>
         <aside class="span4 detailsbar">
@@ -415,28 +374,25 @@
 
                                     <div class="row-fluid">
         <div class="span8 content class">
-            <a id="method_displaySetting" name="method_displaySetting" class="anchor"></a>
+            <a id="method_error500" name="method_error500" class="anchor"></a>
             <article class="method">
-                <h3 class="public ">displaySetting()</h3>
+                <h3 class="public ">error500()</h3>
                 <a href="#source-view" role="button" class="pull-right btn" data-toggle="modal" style="font-size: 1.1em; padding: 9px 14px"><i class="icon-code"></i></a>
-                <pre class="signature" style="margin-right: 54px;">displaySetting(array  <span class="argument">$userAttribute</span>) : string</pre>
-                <p><em>表示・非表示の変更HTMLを出力する</em></p>
+                <pre class="signature" style="margin-right: 54px;">error500(\Exception  <span class="argument">$error</span>) : void</pre>
+                <p><em>Convenience method to display a 500 page.</em></p>
                 
 
                                     <h4>Parameters</h4>
                     <table class="table table-condensed table-hover">
                                                     <tr>
-                                <td>array</td>
-                                <td>$userAttribute </td>
-                                <td><p>userAttributeデータ配列</p></td>
+                                <td>\Exception</td>
+                                <td>$error </td>
+                                <td><p>Exception</p></td>
                             </tr>
                                             </table>
                 
                 
-                                    <h4>Returns</h4>
-                    string
-                                            &mdash; <p>HTML</p>
-                                    				
+                				
                             </article>
         </div>
         <aside class="span4 detailsbar">
@@ -450,340 +406,16 @@
         </aside>
     </div>
 
-                                    <div class="row-fluid">
-        <div class="span8 content class">
-            <a id="method_moveSetting" name="method_moveSetting" class="anchor"></a>
-            <article class="method">
-                <h3 class="public ">moveSetting()</h3>
-                <a href="#source-view" role="button" class="pull-right btn" data-toggle="modal" style="font-size: 1.1em; padding: 9px 14px"><i class="icon-code"></i></a>
-                <pre class="signature" style="margin-right: 54px;">moveSetting(array  <span class="argument">$layout</span>, array  <span class="argument">$userAttribute</span>) : string</pre>
-                <p><em>項目の移動HTMLを出力する</em></p>
-                
-
-                                    <h4>Parameters</h4>
-                    <table class="table table-condensed table-hover">
-                                                    <tr>
-                                <td>array</td>
-                                <td>$layout </td>
-                                <td><p>userAttributeLayoutデータ配列</p></td>
-                            </tr>
-                                                    <tr>
-                                <td>array</td>
-                                <td>$userAttribute </td>
-                                <td><p>userAttributeデータ配列</p></td>
-                            </tr>
-                                            </table>
-                
-                
-                                    <h4>Returns</h4>
-                    string
-                                            &mdash; <p>HTML</p>
-                                    				
-                            </article>
-        </div>
-        <aside class="span4 detailsbar">
-            <h1><i class="icon-arrow-down"></i></h1>
-                                                            <dl>
-                                                                            </dl>
-            <h2>Tags</h2>
-            <table class="table table-condensed">
-                                    <tr><td colspan="2"><em>None found</em></td></tr>
-                            </table>
-        </aside>
-    </div>
-
-                                    <div class="row-fluid">
-        <div class="span8 content class">
-            <a id="method_moveSettingTopMenu" name="method_moveSettingTopMenu" class="anchor"></a>
-            <article class="method">
-                <h3 class="public ">moveSettingTopMenu()</h3>
-                <a href="#source-view" role="button" class="pull-right btn" data-toggle="modal" style="font-size: 1.1em; padding: 9px 14px"><i class="icon-code"></i></a>
-                <pre class="signature" style="margin-right: 54px;">moveSettingTopMenu(array  <span class="argument">$layout</span>, array  <span class="argument">$userAttribute</span>) : string</pre>
-                <p><em>項目の移動メニューHTMLを出力する(上へ)</em></p>
-                
-
-                                    <h4>Parameters</h4>
-                    <table class="table table-condensed table-hover">
-                                                    <tr>
-                                <td>array</td>
-                                <td>$layout </td>
-                                <td><p>userAttributeLayoutデータ配列</p></td>
-                            </tr>
-                                                    <tr>
-                                <td>array</td>
-                                <td>$userAttribute </td>
-                                <td><p>userAttributeデータ配列</p></td>
-                            </tr>
-                                            </table>
-                
-                
-                                    <h4>Returns</h4>
-                    string
-                                            &mdash; <p>HTML</p>
-                                    				
-                            </article>
-        </div>
-        <aside class="span4 detailsbar">
-            <h1><i class="icon-arrow-down"></i></h1>
-                                                            <dl>
-                                                                            </dl>
-            <h2>Tags</h2>
-            <table class="table table-condensed">
-                                    <tr><td colspan="2"><em>None found</em></td></tr>
-                            </table>
-        </aside>
-    </div>
-
-                                    <div class="row-fluid">
-        <div class="span8 content class">
-            <a id="method_moveSettingBottomMenu" name="method_moveSettingBottomMenu" class="anchor"></a>
-            <article class="method">
-                <h3 class="public ">moveSettingBottomMenu()</h3>
-                <a href="#source-view" role="button" class="pull-right btn" data-toggle="modal" style="font-size: 1.1em; padding: 9px 14px"><i class="icon-code"></i></a>
-                <pre class="signature" style="margin-right: 54px;">moveSettingBottomMenu(array  <span class="argument">$layout</span>, array  <span class="argument">$userAttribute</span>) : string</pre>
-                <p><em>項目の移動メニューHTMLを出力する(下へ)</em></p>
-                
-
-                                    <h4>Parameters</h4>
-                    <table class="table table-condensed table-hover">
-                                                    <tr>
-                                <td>array</td>
-                                <td>$layout </td>
-                                <td><p>userAttributeLayoutデータ配列</p></td>
-                            </tr>
-                                                    <tr>
-                                <td>array</td>
-                                <td>$userAttribute </td>
-                                <td><p>userAttributeデータ配列</p></td>
-                            </tr>
-                                            </table>
-                
-                
-                                    <h4>Returns</h4>
-                    string
-                                            &mdash; <p>HTML</p>
-                                    				
-                            </article>
-        </div>
-        <aside class="span4 detailsbar">
-            <h1><i class="icon-arrow-down"></i></h1>
-                                                            <dl>
-                                                                            </dl>
-            <h2>Tags</h2>
-            <table class="table table-condensed">
-                                    <tr><td colspan="2"><em>None found</em></td></tr>
-                            </table>
-        </aside>
-    </div>
-
-                                    <div class="row-fluid">
-        <div class="span8 content class">
-            <a id="method_moveSettingLeftMenu" name="method_moveSettingLeftMenu" class="anchor"></a>
-            <article class="method">
-                <h3 class="public ">moveSettingLeftMenu()</h3>
-                <a href="#source-view" role="button" class="pull-right btn" data-toggle="modal" style="font-size: 1.1em; padding: 9px 14px"><i class="icon-code"></i></a>
-                <pre class="signature" style="margin-right: 54px;">moveSettingLeftMenu(array  <span class="argument">$layout</span>, array  <span class="argument">$userAttribute</span>) : string</pre>
-                <p><em>項目の移動メニューHTMLを出力する(左へ)</em></p>
-                
-
-                                    <h4>Parameters</h4>
-                    <table class="table table-condensed table-hover">
-                                                    <tr>
-                                <td>array</td>
-                                <td>$layout </td>
-                                <td><p>userAttributeLayoutデータ配列</p></td>
-                            </tr>
-                                                    <tr>
-                                <td>array</td>
-                                <td>$userAttribute </td>
-                                <td><p>userAttributeデータ配列</p></td>
-                            </tr>
-                                            </table>
-                
-                
-                                    <h4>Returns</h4>
-                    string
-                                            &mdash; <p>HTML</p>
-                                    				
-                            </article>
-        </div>
-        <aside class="span4 detailsbar">
-            <h1><i class="icon-arrow-down"></i></h1>
-                                                            <dl>
-                                                                            </dl>
-            <h2>Tags</h2>
-            <table class="table table-condensed">
-                                    <tr><td colspan="2"><em>None found</em></td></tr>
-                            </table>
-        </aside>
-    </div>
-
-                                    <div class="row-fluid">
-        <div class="span8 content class">
-            <a id="method_moveSettingRightMenu" name="method_moveSettingRightMenu" class="anchor"></a>
-            <article class="method">
-                <h3 class="public ">moveSettingRightMenu()</h3>
-                <a href="#source-view" role="button" class="pull-right btn" data-toggle="modal" style="font-size: 1.1em; padding: 9px 14px"><i class="icon-code"></i></a>
-                <pre class="signature" style="margin-right: 54px;">moveSettingRightMenu(array  <span class="argument">$layout</span>, array  <span class="argument">$userAttribute</span>) : string</pre>
-                <p><em>項目の移動メニューHTMLを出力する(右へ)</em></p>
-                
-
-                                    <h4>Parameters</h4>
-                    <table class="table table-condensed table-hover">
-                                                    <tr>
-                                <td>array</td>
-                                <td>$layout </td>
-                                <td><p>userAttributeLayoutデータ配列</p></td>
-                            </tr>
-                                                    <tr>
-                                <td>array</td>
-                                <td>$userAttribute </td>
-                                <td><p>userAttributeデータ配列</p></td>
-                            </tr>
-                                            </table>
-                
-                
-                                    <h4>Returns</h4>
-                    string
-                                            &mdash; <p>HTML</p>
-                                    				
-                            </article>
-        </div>
-        <aside class="span4 detailsbar">
-            <h1><i class="icon-arrow-down"></i></h1>
-                                                            <dl>
-                                                                            </dl>
-            <h2>Tags</h2>
-            <table class="table table-condensed">
-                                    <tr><td colspan="2"><em>None found</em></td></tr>
-                            </table>
-        </aside>
-    </div>
-
-                                    <div class="row-fluid">
-        <div class="span8 content class">
-            <a id="method_moveSettingRowMenu" name="method_moveSettingRowMenu" class="anchor"></a>
-            <article class="method">
-                <h3 class="public ">moveSettingRowMenu()</h3>
-                <a href="#source-view" role="button" class="pull-right btn" data-toggle="modal" style="font-size: 1.1em; padding: 9px 14px"><i class="icon-code"></i></a>
-                <pre class="signature" style="margin-right: 54px;">moveSettingRowMenu(array  <span class="argument">$layout</span>, array  <span class="argument">$userAttribute</span>) : string</pre>
-                <p><em>項目の移動メニューHTMLを出力する(○段へ)</em></p>
-                
-
-                                    <h4>Parameters</h4>
-                    <table class="table table-condensed table-hover">
-                                                    <tr>
-                                <td>array</td>
-                                <td>$layout </td>
-                                <td><p>userAttributeLayoutデータ配列</p></td>
-                            </tr>
-                                                    <tr>
-                                <td>array</td>
-                                <td>$userAttribute </td>
-                                <td><p>userAttributeデータ配列</p></td>
-                            </tr>
-                                            </table>
-                
-                
-                                    <h4>Returns</h4>
-                    string
-                                            &mdash; <p>HTML</p>
-                                    				
-                            </article>
-        </div>
-        <aside class="span4 detailsbar">
-            <h1><i class="icon-arrow-down"></i></h1>
-                                                            <dl>
-                                                                            </dl>
-            <h2>Tags</h2>
-            <table class="table table-condensed">
-                                    <tr><td colspan="2"><em>None found</em></td></tr>
-                            </table>
-        </aside>
-    </div>
-
-                                                                    <div class="row-fluid">
-        <div class="span8 content class">
-            <a id="method___moveSettingForm" name="method___moveSettingForm" class="anchor"></a>
-            <article class="method">
-                <h3 class="private ">__moveSettingForm()</h3>
-                <a href="#source-view" role="button" class="pull-right btn" data-toggle="modal" style="font-size: 1.1em; padding: 9px 14px"><i class="icon-code"></i></a>
-                <pre class="signature" style="margin-right: 54px;">__moveSettingForm(string  <span class="argument">$formName</span>, integer  <span class="argument">$userAttrSettingId</span>, integer  <span class="argument">$updWeight</span>, integer  <span class="argument">$updRow</span>, integer  <span class="argument">$updCol</span>, string  <span class="argument">$disabled</span>, string  <span class="argument">$class</span>, string  <span class="argument">$message</span>) : string</pre>
-                <p><em>項目の移動メニューHTMLを出力する</em></p>
-                
-
-                                    <h4>Parameters</h4>
-                    <table class="table table-condensed table-hover">
-                                                    <tr>
-                                <td>string</td>
-                                <td>$formName </td>
-                                <td><p>フォーム名</p></td>
-                            </tr>
-                                                    <tr>
-                                <td>integer</td>
-                                <td>$userAttrSettingId </td>
-                                <td><p>UserAttributeSetting.id</p></td>
-                            </tr>
-                                                    <tr>
-                                <td>integer</td>
-                                <td>$updWeight </td>
-                                <td><p>順序</p></td>
-                            </tr>
-                                                    <tr>
-                                <td>integer</td>
-                                <td>$updRow </td>
-                                <td><p>○段目</p></td>
-                            </tr>
-                                                    <tr>
-                                <td>integer</td>
-                                <td>$updCol </td>
-                                <td><p>行</p></td>
-                            </tr>
-                                                    <tr>
-                                <td>string</td>
-                                <td>$disabled </td>
-                                <td><p>disabledのCSS</p></td>
-                            </tr>
-                                                    <tr>
-                                <td>string</td>
-                                <td>$class </td>
-                                <td><p>ボタンのCSS</p></td>
-                            </tr>
-                                                    <tr>
-                                <td>string</td>
-                                <td>$message </td>
-                                <td><p>メッセージ</p></td>
-                            </tr>
-                                            </table>
-                
-                
-                                    <h4>Returns</h4>
-                    string
-                                            &mdash; <p>HTML</p>
-                                    				
-                            </article>
-        </div>
-        <aside class="span4 detailsbar">
-            <h1><i class="icon-arrow-down"></i></h1>
-                                                            <dl>
-                                                                            </dl>
-            <h2>Tags</h2>
-            <table class="table table-condensed">
-                                    <tr><td colspan="2"><em>None found</em></td></tr>
-                            </table>
-        </aside>
-    </div>
-
-                                    </div>
+                                                                    </div>
     </section>
 
     <div id="source-view" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="source-view-label" aria-hidden="true">
         <div class="modal-header">
             <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
-            <h3 id="source-view-label">UserAttributeHelper.php</h3>
+            <h3 id="source-view-label">NetCommonsExceptionRenderer.php</h3>
         </div>
         <div class="modal-body">
-            <pre data-src="../files/Plugin/UserAttributes/View/Helper/UserAttributeHelper.php.txt" class="language-php line-numbers"></pre>
+            <pre data-src="../files/Plugin/NetCommons/Error/NetCommonsExceptionRenderer.php.txt" class="language-php line-numbers"></pre>
         </div>
     </div>
 
