@@ -136,10 +136,10 @@
                                 <div class="accordion" style="margin-bottom: 0">
         <div class="accordion-group">
             <div class="accordion-heading">
-                                    <a class="accordion-toggle " data-toggle="collapse" data-target="#namespace-1695892720"></a>
+                                    <a class="accordion-toggle " data-toggle="collapse" data-target="#namespace-743020736"></a>
                                 <a href="../namespaces/default.html" style="margin-left: 30px; padding-left: 0">\</a>
             </div>
-            <div id="namespace-1695892720" class="accordion-body collapse in">
+            <div id="namespace-743020736" class="accordion-body collapse in">
                 <div class="accordion-inner">
 
                     
@@ -226,9 +226,24 @@
                                             </nav>
                     <a href="#source-view" role="button" class="pull-right btn" data-toggle="modal"><i class="icon-code"></i></a>
 
-                    <h1><small>\</small>CurrentPage</h1>
-                    <p><em>CurrentPage Utility</em></p>
-                    
+                    <h1><small>\</small>NetCommonsExceptionRenderer</h1>
+                    <p><em>Exception Renderer.</em></p>
+                    <p>Captures and handles all unhandled exceptions. Displays helpful framework errors when debug &gt; 1.
+When debug &lt; 1 a CakeException will render 404 or 500 errors. If an uncaught exception is thrown
+and it is a type that ExceptionHandler does not know about it will be treated as a 500 error.</p>
+<h3>Implementing application specific exception rendering</h3>
+<p>You can implement application specific exception handling in one of a few ways:</p>
+<ul>
+<li>Create a AppController::appError();</li>
+<li>Create a subclass of YAExceptionRenderer and configure it to be the <code>Exception.renderer</code></li>
+</ul>
+<h4>Using AppController::appError();</h4>
+<p>This controller method is called instead of the default exception handling. It receives the
+thrown exception as its only argument. You should implement your error handling in that method.</p>
+<h4>Using a subclass of YAExceptionRenderer</h4>
+<p>Using a subclass of YAExceptionRenderer gives you full control over how Exceptions are rendered, you
+can configure your class in your core.php, with <code>Configure::write('Exception.renderer', 'MyClass');</code>
+You should place any custom exception renderers in <code>app/Lib/Error</code>.</p>
                     
                                         
                     <section id="summary">
@@ -246,21 +261,14 @@
                         </section>
                         <section class="row-fluid public">
                             <section class="span4">
-                                                                    <a href="../classes/CurrentPage.html#method_initialize" class="">initialize()</a><br />
-                                                                    <a href="../classes/CurrentPage.html#method_setRolesRoomsUser" class="">setRolesRoomsUser()</a><br />
-                                                                    <a href="../classes/CurrentPage.html#method_setDefaultRolePermissions" class="">setDefaultRolePermissions()</a><br />
-                                                                    <a href="../classes/CurrentPage.html#method_setRoomRolePermissions" class="">setRoomRolePermissions()</a><br />
-                                                                    <a href="../classes/CurrentPage.html#method_setPage" class="">setPage()</a><br />
-                                                                    <a href="../classes/CurrentPage.html#method_setPageByRoomPageTopId" class="">setPageByRoomPageTopId()</a><br />
-                                                                    <a href="../classes/CurrentPage.html#method_setPluginsRoom" class="">setPluginsRoom()</a><br />
-                                                                    <a href="../classes/CurrentPage.html#method_setRoom" class="">setRoom()</a><br />
-                                                                    <a href="../classes/CurrentPage.html#method_setSpace" class="">setSpace()</a><br />
+                                                                    <a href="../classes/NetCommonsExceptionRenderer.html#method_error400" class="">error400()</a><br />
+                                                                    <a href="../classes/NetCommonsExceptionRenderer.html#method_error500" class="">error500()</a><br />
                                                             </section>
                             <section class="span4">
                                                                     <em>No public properties found</em>
                                                             </section>
                             <section class="span4">
-                                                                    <a href="../classes/CurrentPage.html#constant_DEFAULT_ROOM_ROLE_KEY" class="">DEFAULT_ROOM_ROLE_KEY</a><br />
+                                                                    <em>No constants found</em>
                                                             </section>
                         </section>
                         <section class="row-fluid protected">
@@ -276,7 +284,7 @@
                         </section>
                         <section class="row-fluid private">
                             <section class="span4">
-                                                                    <a href="../classes/CurrentPage.html#method___getPageConditions" class="">__getPageConditions()</a><br />
+                                                                    <em>No private methods found</em>
                                                             </section>
                             <section class="span4">
                                                                     <em>No private properties found</em>
@@ -292,12 +300,14 @@
                     
                     <dl>
                         <dt>File</dt>
-                            <dd><a href="../files/Plugin.NetCommons.Utility.CurrentPage.html"><div class="path-wrapper">Plugin/NetCommons/Utility/CurrentPage.php</div></a></dd>
+                            <dd><a href="../files/Plugin.NetCommons.Error.NetCommonsExceptionRenderer.html"><div class="path-wrapper">Plugin/NetCommons/Error/NetCommonsExceptionRenderer.php</div></a></dd>
                                                 <dt>Package</dt>
-                            <dd><div class="namespace-wrapper">NetCommons\Utility</div></dd>
+                            <dd><div class="namespace-wrapper">NetCommons\Error</div></dd>
                                                 <dt>Class hierarchy</dt>
                             <dd class="hierarchy">
-                                                                                                                                                                    <div class="namespace-wrapper">\CurrentPage</div>
+                                                                                                                                                                                                                                                                                                
+                                        <div class="namespace-wrapper">\ExceptionRenderer</div>
+                                                                                                    <div class="namespace-wrapper">\NetCommonsExceptionRenderer</div>
                             </dd>
 
                         
@@ -307,48 +317,12 @@
                                                                         </dl>
                     <h2>Tags</h2>
                     <table class="table table-condensed">
-                                            <tr>
-                            <th>
-                                author
-                            </th>
-                            <td>
-                                                                    <p>Shohei Nakajima <a href="mailto:nakajimashouhei@gmail.com">nakajimashouhei@gmail.com</a></p>
-                                                            </td>
-                        </tr>
+                                            <tr><td colspan="2"><em>None found</em></td></tr>
                                         </table>
                 </aside>
             </div>
 
-                                    <a id="constants" name="constants"></a>
-            <div class="row-fluid">
-                <div class="span8 content class">
-                    <h2>Constants</h2>
-                </div>
-                <aside class="span4 detailsbar"></aside>
-            </div>
-
-                                <div class="row-fluid">
-        <div class="span8 content class">
-            <a id="constant_DEFAULT_ROOM_ROLE_KEY" name="constant_DEFAULT_ROOM_ROLE_KEY" class="anchor"></a>
-            <article id="constant_DEFAULT_ROOM_ROLE_KEY" class="constant">
-                <h3 class="">DEFAULT_ROOM_ROLE_KEY</h3>
-                <pre class="signature">DEFAULT_ROOM_ROLE_KEY</pre>
-                <p><em>Constant default room_role_key</em></p>
-                
-            </article>
-        </div>
-        <aside class="span4 detailsbar">
-            <h1><i class="icon-arrow-down"></i></h1>
-                        <dl>
-                                                                            </dl>
-            <h2>Tags</h2>
-            <table class="table table-condensed">
-                                    <tr><td colspan="2"><em>None found</em></td></tr>
-                            </table>
-        </aside>
-    </div>
-
-                            
+                        
                         
                                     <a id="methods" name="methods"></a>
             <div class="row-fluid">
@@ -358,238 +332,22 @@
 
                                     <div class="row-fluid">
         <div class="span8 content class">
-            <a id="method_initialize" name="method_initialize" class="anchor"></a>
+            <a id="method_error400" name="method_error400" class="anchor"></a>
             <article class="method">
-                <h3 class="public ">initialize()</h3>
+                <h3 class="public ">error400()</h3>
                 <a href="#source-view" role="button" class="pull-right btn" data-toggle="modal" style="font-size: 1.1em; padding: 9px 14px"><i class="icon-code"></i></a>
-                <pre class="signature" style="margin-right: 54px;">initialize() : void</pre>
-                <p><em>setup current data</em></p>
-                
-
-                
-                
-                				
-                            </article>
-        </div>
-        <aside class="span4 detailsbar">
-            <h1><i class="icon-arrow-down"></i></h1>
-                                                            <dl>
-                                                                            </dl>
-            <h2>Tags</h2>
-            <table class="table table-condensed">
-                                    <tr><td colspan="2"><em>None found</em></td></tr>
-                            </table>
-        </aside>
-    </div>
-
-                                    <div class="row-fluid">
-        <div class="span8 content class">
-            <a id="method_setRolesRoomsUser" name="method_setRolesRoomsUser" class="anchor"></a>
-            <article class="method">
-                <h3 class="public ">setRolesRoomsUser()</h3>
-                <a href="#source-view" role="button" class="pull-right btn" data-toggle="modal" style="font-size: 1.1em; padding: 9px 14px"><i class="icon-code"></i></a>
-                <pre class="signature" style="margin-right: 54px;">setRolesRoomsUser() : void</pre>
-                <p><em>Set RolesRoomsUser</em></p>
-                
-
-                
-                
-                				
-                            </article>
-        </div>
-        <aside class="span4 detailsbar">
-            <h1><i class="icon-arrow-down"></i></h1>
-                                                            <dl>
-                                                                            </dl>
-            <h2>Tags</h2>
-            <table class="table table-condensed">
-                                    <tr><td colspan="2"><em>None found</em></td></tr>
-                            </table>
-        </aside>
-    </div>
-
-                                    <div class="row-fluid">
-        <div class="span8 content class">
-            <a id="method_setDefaultRolePermissions" name="method_setDefaultRolePermissions" class="anchor"></a>
-            <article class="method">
-                <h3 class="public ">setDefaultRolePermissions()</h3>
-                <a href="#source-view" role="button" class="pull-right btn" data-toggle="modal" style="font-size: 1.1em; padding: 9px 14px"><i class="icon-code"></i></a>
-                <pre class="signature" style="margin-right: 54px;">setDefaultRolePermissions() : void</pre>
-                <p><em>Set BlockRolePermissions</em></p>
-                
-
-                
-                
-                				
-                            </article>
-        </div>
-        <aside class="span4 detailsbar">
-            <h1><i class="icon-arrow-down"></i></h1>
-                                                            <dl>
-                                                                            </dl>
-            <h2>Tags</h2>
-            <table class="table table-condensed">
-                                    <tr><td colspan="2"><em>None found</em></td></tr>
-                            </table>
-        </aside>
-    </div>
-
-                                    <div class="row-fluid">
-        <div class="span8 content class">
-            <a id="method_setRoomRolePermissions" name="method_setRoomRolePermissions" class="anchor"></a>
-            <article class="method">
-                <h3 class="public ">setRoomRolePermissions()</h3>
-                <a href="#source-view" role="button" class="pull-right btn" data-toggle="modal" style="font-size: 1.1em; padding: 9px 14px"><i class="icon-code"></i></a>
-                <pre class="signature" style="margin-right: 54px;">setRoomRolePermissions() : void</pre>
-                <p><em>Set RoomRolePermissions</em></p>
-                
-
-                
-                
-                				
-                            </article>
-        </div>
-        <aside class="span4 detailsbar">
-            <h1><i class="icon-arrow-down"></i></h1>
-                                                            <dl>
-                                                                            </dl>
-            <h2>Tags</h2>
-            <table class="table table-condensed">
-                                    <tr><td colspan="2"><em>None found</em></td></tr>
-                            </table>
-        </aside>
-    </div>
-
-                                    <div class="row-fluid">
-        <div class="span8 content class">
-            <a id="method_setPage" name="method_setPage" class="anchor"></a>
-            <article class="method">
-                <h3 class="public ">setPage()</h3>
-                <a href="#source-view" role="button" class="pull-right btn" data-toggle="modal" style="font-size: 1.1em; padding: 9px 14px"><i class="icon-code"></i></a>
-                <pre class="signature" style="margin-right: 54px;">setPage() : boolean</pre>
-                <p><em>Set Page</em></p>
-                
-
-                
-                
-                                    <h4>Returns</h4>
-                    boolean
-                                    				
-                            </article>
-        </div>
-        <aside class="span4 detailsbar">
-            <h1><i class="icon-arrow-down"></i></h1>
-                                                            <dl>
-                                                                            </dl>
-            <h2>Tags</h2>
-            <table class="table table-condensed">
-                                    <tr><td colspan="2"><em>None found</em></td></tr>
-                            </table>
-        </aside>
-    </div>
-
-                                    <div class="row-fluid">
-        <div class="span8 content class">
-            <a id="method_setPageByRoomPageTopId" name="method_setPageByRoomPageTopId" class="anchor"></a>
-            <article class="method">
-                <h3 class="public ">setPageByRoomPageTopId()</h3>
-                <a href="#source-view" role="button" class="pull-right btn" data-toggle="modal" style="font-size: 1.1em; padding: 9px 14px"><i class="icon-code"></i></a>
-                <pre class="signature" style="margin-right: 54px;">setPageByRoomPageTopId() : boolean</pre>
-                <p><em>Set Page</em></p>
-                
-
-                
-                
-                                    <h4>Returns</h4>
-                    boolean
-                                    				
-                            </article>
-        </div>
-        <aside class="span4 detailsbar">
-            <h1><i class="icon-arrow-down"></i></h1>
-                                                            <dl>
-                                                                            </dl>
-            <h2>Tags</h2>
-            <table class="table table-condensed">
-                                    <tr><td colspan="2"><em>None found</em></td></tr>
-                            </table>
-        </aside>
-    </div>
-
-                                    <div class="row-fluid">
-        <div class="span8 content class">
-            <a id="method_setPluginsRoom" name="method_setPluginsRoom" class="anchor"></a>
-            <article class="method">
-                <h3 class="public ">setPluginsRoom()</h3>
-                <a href="#source-view" role="button" class="pull-right btn" data-toggle="modal" style="font-size: 1.1em; padding: 9px 14px"><i class="icon-code"></i></a>
-                <pre class="signature" style="margin-right: 54px;">setPluginsRoom() : boolean</pre>
-                <p><em>Set PluginsRoom</em></p>
-                
-
-                
-                
-                                    <h4>Returns</h4>
-                    boolean
-                                    				
-                            </article>
-        </div>
-        <aside class="span4 detailsbar">
-            <h1><i class="icon-arrow-down"></i></h1>
-                                                            <dl>
-                                                                            </dl>
-            <h2>Tags</h2>
-            <table class="table table-condensed">
-                                    <tr><td colspan="2"><em>None found</em></td></tr>
-                            </table>
-        </aside>
-    </div>
-
-                                    <div class="row-fluid">
-        <div class="span8 content class">
-            <a id="method_setRoom" name="method_setRoom" class="anchor"></a>
-            <article class="method">
-                <h3 class="public ">setRoom()</h3>
-                <a href="#source-view" role="button" class="pull-right btn" data-toggle="modal" style="font-size: 1.1em; padding: 9px 14px"><i class="icon-code"></i></a>
-                <pre class="signature" style="margin-right: 54px;">setRoom(integer  <span class="argument">$roomId</span>) : boolean</pre>
-                <p><em>Set Room</em></p>
+                <pre class="signature" style="margin-right: 54px;">error400(\Exception  <span class="argument">$error</span>) : void</pre>
+                <p><em>Convenience method to display a 400 series page.</em></p>
                 
 
                                     <h4>Parameters</h4>
                     <table class="table table-condensed table-hover">
                                                     <tr>
-                                <td>integer</td>
-                                <td>$roomId </td>
-                                <td><p>Rooms.id</p></td>
+                                <td>\Exception</td>
+                                <td>$error </td>
+                                <td><p>Exception</p></td>
                             </tr>
                                             </table>
-                
-                
-                                    <h4>Returns</h4>
-                    boolean
-                                    				
-                            </article>
-        </div>
-        <aside class="span4 detailsbar">
-            <h1><i class="icon-arrow-down"></i></h1>
-                                                            <dl>
-                                                                            </dl>
-            <h2>Tags</h2>
-            <table class="table table-condensed">
-                                    <tr><td colspan="2"><em>None found</em></td></tr>
-                            </table>
-        </aside>
-    </div>
-
-                                    <div class="row-fluid">
-        <div class="span8 content class">
-            <a id="method_setSpace" name="method_setSpace" class="anchor"></a>
-            <article class="method">
-                <h3 class="public ">setSpace()</h3>
-                <a href="#source-view" role="button" class="pull-right btn" data-toggle="modal" style="font-size: 1.1em; padding: 9px 14px"><i class="icon-code"></i></a>
-                <pre class="signature" style="margin-right: 54px;">setSpace() : void</pre>
-                <p><em>set Space</em></p>
-                
-
                 
                 
                 				
@@ -606,22 +364,27 @@
         </aside>
     </div>
 
-                                                                    <div class="row-fluid">
+                                    <div class="row-fluid">
         <div class="span8 content class">
-            <a id="method___getPageConditions" name="method___getPageConditions" class="anchor"></a>
+            <a id="method_error500" name="method_error500" class="anchor"></a>
             <article class="method">
-                <h3 class="private ">__getPageConditions()</h3>
+                <h3 class="public ">error500()</h3>
                 <a href="#source-view" role="button" class="pull-right btn" data-toggle="modal" style="font-size: 1.1em; padding: 9px 14px"><i class="icon-code"></i></a>
-                <pre class="signature" style="margin-right: 54px;">__getPageConditions() : array</pre>
-                <p><em>ページ取得の条件取得</em></p>
+                <pre class="signature" style="margin-right: 54px;">error500(\Exception  <span class="argument">$error</span>) : void</pre>
+                <p><em>Convenience method to display a 500 page.</em></p>
                 
 
+                                    <h4>Parameters</h4>
+                    <table class="table table-condensed table-hover">
+                                                    <tr>
+                                <td>\Exception</td>
+                                <td>$error </td>
+                                <td><p>Exception</p></td>
+                            </tr>
+                                            </table>
                 
                 
-                                    <h4>Returns</h4>
-                    array
-                                            &mdash; <p>条件配列</p>
-                                    				
+                				
                             </article>
         </div>
         <aside class="span4 detailsbar">
@@ -635,16 +398,16 @@
         </aside>
     </div>
 
-                                    </div>
+                                                                    </div>
     </section>
 
     <div id="source-view" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="source-view-label" aria-hidden="true">
         <div class="modal-header">
             <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
-            <h3 id="source-view-label">CurrentPage.php</h3>
+            <h3 id="source-view-label">NetCommonsExceptionRenderer.php</h3>
         </div>
         <div class="modal-body">
-            <pre data-src="../files/Plugin/NetCommons/Utility/CurrentPage.php.txt" class="language-php line-numbers"></pre>
+            <pre data-src="../files/Plugin/NetCommons/Error/NetCommonsExceptionRenderer.php.txt" class="language-php line-numbers"></pre>
         </div>
     </div>
 
