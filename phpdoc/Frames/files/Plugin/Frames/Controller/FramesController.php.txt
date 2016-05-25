@@ -143,7 +143,16 @@ class FramesController extends FramesAppController {
 			return $this->throwBadRequest();
 		}
 
-		$this->redirect(Hash::get($this->request->data, '_Frame.redirect', $this->request->referer()));
+		if (Hash::get($this->request->data, '_Frame.redirect')) {
+			$url = Hash::get($this->request->data, '_Frame.redirect');
+		} else {
+			$url = $this->request->referer();
+			$this->NetCommons->setFlashNotification(
+				__d('net_commons', 'Successfully saved.'), array('class' => 'success')
+			);
+		}
+
+		$this->redirect($url);
 	}
 
 /**
