@@ -3,8 +3,7 @@
 <head>
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0"/>
     <meta charset="utf-8"/>
-    <title>     &raquo; Deprecated elements
-</title>
+    <title>API Documentation</title>
     <meta name="author" content=""/>
     <meta name="description" content=""/>
 
@@ -22,7 +21,55 @@
     <script src="../js/jquery.smooth-scroll.js"></script>
     <script src="../js/prism.min.js"></script>
     <!-- TODO: Add http://jscrollpane.kelvinluck.com/ to style the scrollbars for browsers not using webkit-->
-    
+        <script type="text/javascript">
+        function loadExternalCodeSnippets() {
+            Array.prototype.slice.call(document.querySelectorAll('pre[data-src]')).forEach(function (pre) {
+                var src = pre.getAttribute('data-src');
+                var extension = (src.match(/\.(\w+)$/) || [, ''])[1];
+                var language = 'php';
+
+                var code = document.createElement('code');
+                code.className = 'language-' + language;
+
+                pre.textContent = '';
+
+                code.textContent = 'Loading…';
+
+                pre.appendChild(code);
+
+                var xhr = new XMLHttpRequest();
+
+                xhr.open('GET', src, true);
+
+                xhr.onreadystatechange = function () {
+                    if (xhr.readyState == 4) {
+
+                        if (xhr.status < 400 && xhr.responseText) {
+                            code.textContent = xhr.responseText;
+
+                            Prism.highlightElement(code);
+                        }
+                        else if (xhr.status >= 400) {
+                            code.textContent = '✖ Error ' + xhr.status + ' while fetching file: ' + xhr.statusText;
+                        }
+                        else {
+                            code.textContent = '✖ Error: File does not exist or is empty';
+                        }
+                    }
+                };
+
+                xhr.send(null);
+            });
+        }
+
+        $(document).ready(function(){
+            loadExternalCodeSnippets();
+        });
+        $('#source-view').on('shown', function () {
+            loadExternalCodeSnippets();
+        })
+    </script>
+
     <link rel="shortcut icon" href="../images/favicon.ico"/>
     <link rel="apple-touch-icon" href="../images/apple-touch-icon.png"/>
     <link rel="apple-touch-icon" sizes="72x72" href="../images/apple-touch-icon-72x72.png"/>
@@ -84,25 +131,178 @@
 </div>
 
 <div id="___" class="container-fluid">
-        <div class="row-fluid">
-
+        <section class="row-fluid">
         <div class="span2 sidebar">
-            <ul class="side-nav nav nav-list">
-                <li class="nav-header">Navigation</li>
-                            </ul>
-        </div>
+                                <div class="accordion" style="margin-bottom: 0">
+        <div class="accordion-group">
+            <div class="accordion-heading">
+                                    <a class="accordion-toggle " data-toggle="collapse" data-target="#namespace-1663550975"></a>
+                                <a href="../namespaces/default.html" style="margin-left: 30px; padding-left: 0">\</a>
+            </div>
+            <div id="namespace-1663550975" class="accordion-body collapse in">
+                <div class="accordion-inner">
 
-        <div class="span10 offset2">
-            <ul class="breadcrumb">
-                <li><a href="../"><i class="icon-remove-sign"></i></a><span class="divider">\</span></li>
-                <li>Deprecated elements</li>
-            </ul>
-
-            <div id="marker-accordion">
-                                    <div class="alert alert-info">No deprecated elements have been found in this project.</div>
-                                    </table>
+                    
+                    <ul>
+                                                                                                    <li class="class"><a href="../classes/AccessCtrlComponent.html">AccessCtrlComponent</a></li>
+                                                    <li class="class"><a href="../classes/AppController.html">AppController</a></li>
+                                                    <li class="class"><a href="../classes/AppController.html">AppController</a></li>
+                                                    <li class="class"><a href="../classes/AppHelper.html">AppHelper</a></li>
+                                                    <li class="class"><a href="../classes/AppModel.html">AppModel</a></li>
+                                                    <li class="class"><a href="../classes/AppSchema.html">AppSchema</a></li>
+                                                    <li class="class"><a href="../classes/AssetComponent.html">AssetComponent</a></li>
+                                                    <li class="class"><a href="../classes/BackToHelper.html">BackToHelper</a></li>
+                                                    <li class="class"><a href="../classes/ButtonHelper.html">ButtonHelper</a></li>
+                                                    <li class="class"><a href="../classes/ComposerHelper.html">ComposerHelper</a></li>
+                                                    <li class="class"><a href="../classes/Current.html">Current</a></li>
+                                                    <li class="class"><a href="../classes/CurrentBase.html">CurrentBase</a></li>
+                                                    <li class="class"><a href="../classes/CurrentFrame.html">CurrentFrame</a></li>
+                                                    <li class="class"><a href="../classes/CurrentPage.html">CurrentPage</a></li>
+                                                    <li class="class"><a href="../classes/CurrentSystem.html">CurrentSystem</a></li>
+                                                    <li class="class"><a href="../classes/DateHelper.html">DateHelper</a></li>
+                                                    <li class="class"><a href="../classes/DatetimePickerHelper.html">DatetimePickerHelper</a></li>
+                                                    <li class="class"><a href="../classes/DisplayNumberHelper.html">DisplayNumberHelper</a></li>
+                                                    <li class="class"><a href="../classes/Faq.html">Faq</a></li>
+                                                    <li class="class"><a href="../classes/FaqBlockRolePermissionsController.html">FaqBlockRolePermissionsController</a></li>
+                                                    <li class="class"><a href="../classes/FaqBlocksController.html">FaqBlocksController</a></li>
+                                                    <li class="class"><a href="../classes/FaqMailSettingRecords.html">FaqMailSettingRecords</a></li>
+                                                    <li class="class"><a href="../classes/FaqMailSettingsController.html">FaqMailSettingsController</a></li>
+                                                    <li class="class"><a href="../classes/FaqQuestion.html">FaqQuestion</a></li>
+                                                    <li class="class"><a href="../classes/FaqQuestionOrder.html">FaqQuestionOrder</a></li>
+                                                    <li class="class"><a href="../classes/FaqQuestionOrdersController.html">FaqQuestionOrdersController</a></li>
+                                                    <li class="class"><a href="../classes/FaqQuestionsController.html">FaqQuestionsController</a></li>
+                                                    <li class="class"><a href="../classes/FaqsAppController.html">FaqsAppController</a></li>
+                                                    <li class="class"><a href="../classes/FaqsAppModel.html">FaqsAppModel</a></li>
+                                                    <li class="class"><a href="../classes/FaqSetting.html">FaqSetting</a></li>
+                                                    <li class="class"><a href="../classes/FormInputHelper.html">FormInputHelper</a></li>
+                                                    <li class="class"><a href="../classes/Init.html">Init</a></li>
+                                                    <li class="class"><a href="../classes/LinkButtonHelper.html">LinkButtonHelper</a></li>
+                                                    <li class="class"><a href="../classes/MessageFlashHelper.html">MessageFlashHelper</a></li>
+                                                    <li class="class"><a href="../classes/NetCommonsAppController.html">NetCommonsAppController</a></li>
+                                                    <li class="class"><a href="../classes/NetCommonsAppModel.html">NetCommonsAppModel</a></li>
+                                                    <li class="class"><a href="../classes/NetCommonsCakeTestCase.html">NetCommonsCakeTestCase</a></li>
+                                                    <li class="class"><a href="../classes/NetCommonsComponent.html">NetCommonsComponent</a></li>
+                                                    <li class="class"><a href="../classes/NetCommonsConsoleTestCase.html">NetCommonsConsoleTestCase</a></li>
+                                                    <li class="class"><a href="../classes/NetCommonsController.html">NetCommonsController</a></li>
+                                                    <li class="class"><a href="../classes/NetCommonsControllerBaseTestCase.html">NetCommonsControllerBaseTestCase</a></li>
+                                                    <li class="class"><a href="../classes/NetCommonsControllerTestCase.html">NetCommonsControllerTestCase</a></li>
+                                                    <li class="class"><a href="../classes/NetCommonsDeleteTest.html">NetCommonsDeleteTest</a></li>
+                                                    <li class="class"><a href="../classes/NetCommonsExceptionRenderer.html">NetCommonsExceptionRenderer</a></li>
+                                                    <li class="class"><a href="../classes/NetCommonsFormHelper.html">NetCommonsFormHelper</a></li>
+                                                    <li class="class"><a href="../classes/NetCommonsGetTest.html">NetCommonsGetTest</a></li>
+                                                    <li class="class"><a href="../classes/NetCommonsHelperTestCase.html">NetCommonsHelperTestCase</a></li>
+                                                    <li class="class"><a href="../classes/NetCommonsHtmlHelper.html">NetCommonsHtmlHelper</a></li>
+                                                    <li class="class"><a href="../classes/NetCommonsMigration.html">NetCommonsMigration</a></li>
+                                                    <li class="class"><a href="../classes/NetCommonsModelTestCase.html">NetCommonsModelTestCase</a></li>
+                                                    <li class="class"><a href="../classes/NetCommonsSaveTest.html">NetCommonsSaveTest</a></li>
+                                                    <li class="class"><a href="../classes/NetCommonsSecurity.html">NetCommonsSecurity</a></li>
+                                                    <li class="class"><a href="../classes/NetCommonsTestSuite.html">NetCommonsTestSuite</a></li>
+                                                    <li class="class"><a href="../classes/NetCommonsTime.html">NetCommonsTime</a></li>
+                                                    <li class="class"><a href="../classes/NetCommonsTimeComponent.html">NetCommonsTimeComponent</a></li>
+                                                    <li class="class"><a href="../classes/NetCommonsTimeHelper.html">NetCommonsTimeHelper</a></li>
+                                                    <li class="class"><a href="../classes/NetCommonsUrl.html">NetCommonsUrl</a></li>
+                                                    <li class="class"><a href="../classes/NetCommonsValidateTest.html">NetCommonsValidateTest</a></li>
+                                                    <li class="class"><a href="../classes/OriginalKeyBehavior.html">OriginalKeyBehavior</a></li>
+                                                    <li class="class"><a href="../classes/PermissionComponent.html">PermissionComponent</a></li>
+                                                    <li class="class"><a href="../classes/PluginRecords.html">PluginRecords</a></li>
+                                                    <li class="class"><a href="../classes/SingletonViewBlockHtmlHelper.html">SingletonViewBlockHtmlHelper</a></li>
+                                                    <li class="class"><a href="../classes/SiteCloseController.html">SiteCloseController</a></li>
+                                                    <li class="class"><a href="../classes/SnsButtonHelper.html">SnsButtonHelper</a></li>
+                                                    <li class="class"><a href="../classes/TableListHelper.html">TableListHelper</a></li>
+                                                    <li class="class"><a href="../classes/TitleIconHelper.html">TitleIconHelper</a></li>
+                                                    <li class="class"><a href="../classes/TokenHelper.html">TokenHelper</a></li>
+                                                    <li class="class"><a href="../classes/TrackableBehavior.html">TrackableBehavior</a></li>
+                                                    <li class="class"><a href="../classes/WizardHelper.html">WizardHelper</a></li>
+                                                    <li class="class"><a href="../classes/YAExceptionRenderer.html">YAExceptionRenderer</a></li>
+                                            </ul>
                 </div>
             </div>
+        </div>
+    </div>
+
+        </div>
+    </section>
+    <section class="row-fluid">
+        <div class="span10 offset2">
+            <div class="row-fluid">
+                <div class="span8 content file">
+                    <nav>
+                                                                    </nav>
+
+                    <a href="#source-view" role="button" class="pull-right btn" data-toggle="modal"><i class="icon-code"></i></a>
+                    <h1><small>Plugin/NetCommons/Error</small>NetCommonsExceptionRenderer.php</h1>
+                    <p><em>Exception Renderer</em></p>
+                    <p>Provides Exception rendering features. Which allow exceptions to be rendered
+as HTML pages.</p>
+<p>CakePHP(tm) : Rapid Development Framework (<a href="http://cakephp.org">http://cakephp.org</a>)
+Copyright (c) Cake Software Foundation, Inc. (<a href="http://cakefoundation.org">http://cakefoundation.org</a>)</p>
+<p>Licensed under The MIT License
+For full copyright and license information, please see the LICENSE.txt
+Redistributions of files must retain the above copyright notice.</p>
+
+                    
+                    
+                                        <h2>Classes</h2>
+                    <table class="table table-hover">
+                                            <tr>
+                            <td><a href="../classes/NetCommonsExceptionRenderer.html">NetCommonsExceptionRenderer</a></td>
+                            <td><em>Exception Renderer.</em></td>
+                        </tr>
+                                        </table>
+                                    </div>
+
+                <aside class="span4 detailsbar">
+                    <dl>
+                                                    <dt>Package</dt>
+                            <dd><div class="namespace-wrapper">\Default</div></dd>
+                        
+                                                                                    <dt>See also</dt>
+                                                                                        <dd><a href="http://cakephp.org"><div class="namespace-wrapper">CakePHP(tm) Project</div></a></dd>
+                                                    
+                    </dl>
+                    <h2>Tags</h2>
+                    <table class="table table-condensed">
+                                                    <tr>
+                                <th>
+                                    copyright
+                                </th>
+                                <td>
+                                                                            <p>Copyright (c) Cake Software Foundation, Inc. (<a href="http://cakefoundation.org">http://cakefoundation.org</a>)</p>
+                                                                    </td>
+                            </tr>
+                                                    <tr>
+                                <th>
+                                    since
+                                </th>
+                                <td>
+                                                                            <p>CakePHP(tm) v 2.0</p>
+                                                                    </td>
+                            </tr>
+                                                    <tr>
+                                <th>
+                                    license
+                                </th>
+                                <td>
+                                                                            <p><a href="http://www.opensource.org/licenses/mit-license.php">http://www.opensource.org/licenses/mit-license.php</a> MIT License</p>
+                                                                    </td>
+                            </tr>
+                                            </table>
+
+                </aside>
+            </div>
+
+            
+            
+        </div>
+    </section>
+
+    <div id="source-view" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="source-view-label" aria-hidden="true">
+        <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+            <h3 id="source-view-label"></h3>
+        </div>
+        <div class="modal-body">
+            <pre data-src="../files/Plugin/NetCommons/Error/NetCommonsExceptionRenderer.php.txt" class="language-php line-numbers"></pre>
         </div>
     </div>
 
