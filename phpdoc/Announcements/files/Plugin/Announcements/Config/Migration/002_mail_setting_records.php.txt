@@ -63,7 +63,7 @@ class BbsMailSettingRecords extends MailsMigration {
 				'plugin_key' => self::PLUGIN_KEY,
 				'block_key' => null,
 				'type_key' => 'contents',
-				'mail_fixed_phrase_subject' => '[{X-SITE_NAME}-{X-PLUGIN_NAME}]{X-BLOCK_NAME}({X-ROOM})',
+				'mail_fixed_phrase_subject' => '[{X-SITE_NAME}-{X-PLUGIN_NAME}]({X-ROOM})',
 				'mail_fixed_phrase_body' => 'You are receiving this email because a message was posted to Announcement.
 Room\'s name:{X-ROOM}
 user:{X-USER}
@@ -80,7 +80,7 @@ Click on the link below to reply to this article.
 				'plugin_key' => self::PLUGIN_KEY,
 				'block_key' => null,
 				'type_key' => 'contents',
-				'mail_fixed_phrase_subject' => '[{X-SITE_NAME}-{X-PLUGIN_NAME}]{X-BLOCK_NAME}({X-ROOM})',
+				'mail_fixed_phrase_subject' => '[{X-SITE_NAME}-{X-PLUGIN_NAME}]({X-ROOM})',
 				'mail_fixed_phrase_body' => '{X-PLUGIN_NAME}に投稿されたのでお知らせします。
 ルーム名:{X-ROOM}
 投稿者:{X-USER}
