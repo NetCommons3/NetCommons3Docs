@@ -133,6 +133,7 @@ class NetCommonsFormHelper extends AppHelper {
 		} elseif (in_array($method,
 						['inputWithTitleIcon', 'titleIconPicker', 'ngTitleIconPicker'], true)) {
 			//タイトルアイコン
+			$this->NetCommonsHtml->script('/net_commons/js/title_icon_picker.js');
 			$helper = $this->_View->loadHelper('NetCommons.TitleIcon');
 
 		} elseif ($method === 'selectNumber') {
@@ -529,7 +530,10 @@ class NetCommonsFormHelper extends AppHelper {
 
 		} elseif ($type === 'checkbox') {
 			//チェックボックス
-			$label = '';
+			$options = Hash::remove($options, 'required');
+			$options = Hash::insert($options, 'label', false);
+			$options['outer'] = (bool)$label;
+
 			$input = $this->FormInput->$type($fieldName, $options);
 
 		} elseif (in_array($type, ['password', 'email', 'label', 'handle'], true)) {
