@@ -10,7 +10,6 @@
  */
 
 App::uses('AnnouncementsAppController', 'Announcements.Controller');
-App::uses('MailSend', 'Mails.Utility');
 
 /**
  * AnnouncementBlocks Controller
@@ -96,9 +95,6 @@ class AnnouncementBlocksController extends AnnouncementsAppController {
 			$data['Announcement']['status'] = $this->Workflow->parseStatus();
 
 			if ($this->Announcement->saveAnnouncement($data)) {
-				// キューからメール送信
-				MailSend::send();
-
 				return $this->redirect(NetCommonsUrl::backToIndexUrl('default_setting_action'));
 			}
 			$this->NetCommons->handleValidationError($this->Announcement->validationErrors);
@@ -122,9 +118,6 @@ class AnnouncementBlocksController extends AnnouncementsAppController {
 			unset($data['Announcement']['id']);
 
 			if ($this->Announcement->saveAnnouncement($data)) {
-				// キューからメール送信
-				MailSend::send();
-
 				return $this->redirect(NetCommonsUrl::backToIndexUrl('default_setting_action'));
 			}
 			$this->NetCommons->handleValidationError($this->Announcement->validationErrors);
