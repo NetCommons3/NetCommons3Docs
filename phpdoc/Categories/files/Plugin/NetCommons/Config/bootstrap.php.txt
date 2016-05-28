@@ -8,20 +8,6 @@
  * @copyright Copyright 2014, NetCommons Project
  */
 
-// phpDocumentor Settings
-// Put author name to netcommons.php or netcommons.yaml
-/* $author = 'Noriko Arai, Ryuji Masukawa'; */
-$author = 'Your Name <yourname@domain.com>';
-$header = <<<EOF
- * @author Noriko Arai <arai@nii.ac.jp>
- * @author $author
- * @link http://www.netcommons.org NetCommons Project
- * @license http://www.netcommons.org/license.txt NetCommons License
- * @copyright Copyright 2014, NetCommons Project
-EOF;
-
-Configure::write('PhpDocumentor.classHeader', $header);
-
 // 多数ファイルをインクルードしていて、xdebugの制限に引っかかるため
 if (ini_get('xdebug.max_nesting_level')) {
 	ini_set('xdebug.max_nesting_level', 200);
@@ -52,17 +38,4 @@ foreach ($files as $file) {
 
 App::uses('Router', 'Routing');
 Router::parseExtensions();
-
-if (Configure::read('NetCommons.installed')) {
-	return;
-}
-
-// Initialize application configurations
-if (Configure::read('Security.salt') === 'DYhG93b0qyJfIxfs2guVoUubWwvniR2G0FgaC9mi' ||
-	Configure::read('Security.cipherSeed') === '76859309657453542496749683645') {
-	App::uses('File', 'Utility');
-	App::uses('Security', 'Utility');
-	Configure::write('Security.salt', Security::generateAuthKey());
-	Configure::write('Security.cipherSeed', mt_rand() . mt_rand());
-}
 
