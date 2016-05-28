@@ -35,7 +35,11 @@ class RoomsController extends RoomsAppController {
  * @var array
  */
 	public $components = array(
-		'M17n.SwitchLanguage',
+		'M17n.SwitchLanguage' => array(
+			'fields' => array(
+				'RoomsLanguage.name'
+			)
+		),
 		'Paginator',
 		'Rooms.RoomsRolesForm' => array(
 			'permissions' => array('content_publishable', 'html_not_limited')
@@ -69,6 +73,9 @@ class RoomsController extends RoomsAppController {
 		if ($this->request->is('post')) {
 			//不要パラメータ除去
 			unset($this->request->data['save'], $this->request->data['active_lang_id']);
+
+			//他言語が入力されていない場合、Currentの言語データをセット
+			$this->SwitchLanguage->setM17nRequestValue();
 
 			//登録処理
 			if ($room = $this->Room->saveRoom($this->request->data)) {
@@ -133,6 +140,9 @@ class RoomsController extends RoomsAppController {
 		if ($this->request->is('put')) {
 			//不要パラメータ除去
 			unset($this->request->data['save'], $this->request->data['active_lang_id']);
+
+			//他言語が入力されていない場合、Currentの言語データをセット
+			$this->SwitchLanguage->setM17nRequestValue();
 
 			//登録処理
 			$room = $this->Room->saveRoom($this->request->data);

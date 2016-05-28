@@ -136,10 +136,10 @@
                                 <div class="accordion" style="margin-bottom: 0">
         <div class="accordion-group">
             <div class="accordion-heading">
-                                    <a class="accordion-toggle " data-toggle="collapse" data-target="#namespace-112739076"></a>
+                                    <a class="accordion-toggle " data-toggle="collapse" data-target="#namespace-367630232"></a>
                                 <a href="../namespaces/default.html" style="margin-left: 30px; padding-left: 0">\</a>
             </div>
-            <div id="namespace-112739076" class="accordion-body collapse in">
+            <div id="namespace-367630232" class="accordion-body collapse in">
                 <div class="accordion-inner">
 
                     
@@ -158,7 +158,6 @@
                                                     <li class="class"><a href="../classes/CurrentFrame.html">CurrentFrame</a></li>
                                                     <li class="class"><a href="../classes/CurrentPage.html">CurrentPage</a></li>
                                                     <li class="class"><a href="../classes/CurrentSystem.html">CurrentSystem</a></li>
-                                                    <li class="class"><a href="../classes/DatabaseConfiguration.html">DatabaseConfiguration</a></li>
                                                     <li class="class"><a href="../classes/DateHelper.html">DateHelper</a></li>
                                                     <li class="class"><a href="../classes/DatetimePickerHelper.html">DatetimePickerHelper</a></li>
                                                     <li class="class"><a href="../classes/DeleteRoomAssociationsBehavior.html">DeleteRoomAssociationsBehavior</a></li>
@@ -176,6 +175,7 @@
                                                     <li class="class"><a href="../classes/NetCommonsControllerBaseTestCase.html">NetCommonsControllerBaseTestCase</a></li>
                                                     <li class="class"><a href="../classes/NetCommonsControllerTestCase.html">NetCommonsControllerTestCase</a></li>
                                                     <li class="class"><a href="../classes/NetCommonsDeleteTest.html">NetCommonsDeleteTest</a></li>
+                                                    <li class="class"><a href="../classes/NetCommonsExceptionRenderer.html">NetCommonsExceptionRenderer</a></li>
                                                     <li class="class"><a href="../classes/NetCommonsFormHelper.html">NetCommonsFormHelper</a></li>
                                                     <li class="class"><a href="../classes/NetCommonsGetTest.html">NetCommonsGetTest</a></li>
                                                     <li class="class"><a href="../classes/NetCommonsHelperTestCase.html">NetCommonsHelperTestCase</a></li>
@@ -534,7 +534,7 @@ will inherit them.</p>
             <article class="method">
                 <h3 class="public ">roomsRender()</h3>
                 <a href="#source-view" role="button" class="pull-right btn" data-toggle="modal" style="font-size: 1.1em; padding: 9px 14px"><i class="icon-code"></i></a>
-                <pre class="signature" style="margin-right: 54px;">roomsRender(integer  <span class="argument">$activeSpaceId</span>, string  <span class="argument">$dataElementPath</span>, string|null  <span class="argument">$headElementPath = null</span>, array|null  <span class="argument">$roomTreeList = null</span>, boolean  <span class="argument">$paginator = true</span>) : string</pre>
+                <pre class="signature" style="margin-right: 54px;">roomsRender(integer  <span class="argument">$activeSpaceId</span>, array  <span class="argument">$element</span>, array|null  <span class="argument">$roomTreeList = null</span>, array  <span class="argument">$options = array()</span>) : string</pre>
                 <p><em>ルーム一覧の出力</em></p>
                 
 
@@ -546,14 +546,13 @@ will inherit them.</p>
                                 <td><p>スペースID</p></td>
                             </tr>
                                                     <tr>
-                                <td>string</td>
-                                <td>$dataElementPath </td>
-                                <td><p>データ表示エレメント</p></td>
-                            </tr>
-                                                    <tr>
-                                <td>string|null</td>
-                                <td>$headElementPath </td>
-                                <td><p>ヘッダ表示エレメント</p></td>
+                                <td>array</td>
+                                <td>$element </td>
+                                <td><p>データ表示エレメント</p>
+<pre><code>array(
+    'headElement' =&gt; ヘッダ表示エレメント,
+    'dataElemen' =&gt; データ表示エレメント,
+)</code></pre></td>
                             </tr>
                                                     <tr>
                                 <td>array|null</td>
@@ -561,9 +560,13 @@ will inherit them.</p>
                                 <td><p>ルームのTreeリスト</p></td>
                             </tr>
                                                     <tr>
-                                <td>boolean</td>
-                                <td>$paginator </td>
-                                <td><p>ページネーションの有無</p></td>
+                                <td>array</td>
+                                <td>$options </td>
+                                <td><p>オプション</p>
+<pre><code>array(
+    'paginator' =&gt; ページネーションの有無 デフォルト：true,
+    'displaySpace' =&gt; スペース表示,
+)</code></pre></td>
                             </tr>
                                             </table>
                 
@@ -580,14 +583,7 @@ will inherit them.</p>
                                                                             </dl>
             <h2>Tags</h2>
             <table class="table table-condensed">
-                                    <tr>
-                        <th>
-                            SuppressWarnings
-                        </th>
-                        <td>
-                                                                                            <p>(PHPMD.BooleanArgumentFlag)</p>
-                                                    </td>
-                    </tr>
+                                    <tr><td colspan="2"><em>None found</em></td></tr>
                             </table>
         </aside>
     </div>
@@ -895,7 +891,7 @@ will inherit them.</p>
                 <section class="span10 offset1">
                     <hr />
                     Documentation is powered by <a href="http://www.phpdoc.org/">phpDocumentor </a> and authored
-                    on May 23rd, 2016 at 05:13.
+                    on May 28th, 2016 at 11:34.
                 </section>
             </section>
         </section>

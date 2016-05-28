@@ -37,6 +37,7 @@ class RoomsRolesFormHelper extends AppHelper {
  * @return void
  */
 	public function beforeRender($viewFile) {
+		$this->NetCommonsHtml->css('/rooms/css/style.css');
 		$this->NetCommonsHtml->script(array(
 			'/rooms/js/role_permissions.js',
 			'/rooms/js/room_role_permissions.js'
@@ -68,25 +69,25 @@ class RoomsRolesFormHelper extends AppHelper {
 		$initialize = NetCommonsAppController::camelizeKeyRecursive(
 			array('roles' => $this->_View->viewVars['roles'])
 		);
-		$html .= '<div ng-controller="RoomRolePermissions" ' .
+		$html .= '<div class="form-checkbox-outer" ng-controller="RoomRolePermissions" ' .
 					'ng-init="RolePermission.initialize(' .
 						h(json_encode($initialize, JSON_FORCE_OBJECT)) .
 					')' .
 				'">';
 
 		//権限のチェックボックス
-		$html .= '<div class="form-inline">';
+		$hidden = '';
 		foreach ($this->_View->request->data[$model][$permission] as $roleKey => $role) {
 			if (! $role['value'] && $role['fixed']) {
 				continue;
 			}
 
-			$html .= '<div class="checkbox checkbox-inline">';
-			$html .= $this->NetCommonsForm->hidden($fieldName . '.' . $roleKey . '.id');
+			$hidden .= $this->NetCommonsForm->hidden($fieldName . '.' . $roleKey . '.id');
 
 			$options = Hash::merge(array(
 				'div' => false,
 				'disabled' => (bool)$role['fixed'],
+				'inline' => true,
 			), $attributes);
 			if (! $options['disabled']) {
 				$options['ng-click'] = 'RolePermission.clickRole(' . '$event, \'' .
@@ -95,17 +96,14 @@ class RoomsRolesFormHelper extends AppHelper {
 
 			$options['label'] = $this->_View->request->data['Role'][$roleKey]['name'];
 			$html .= $this->NetCommonsForm->checkbox($fieldName . '.' . $roleKey . '.value', $options);
-
-			$html .= '</div>';
 		}
+		$html .= $hidden;
 
 		$html .= '</div>';
 
 		if (Hash::get($attributes, 'help')) {
 			$html .= $this->NetCommonsForm->help(Hash::get($attributes, 'help'));
 		}
-		$html .= '</div>';
-
 		$html .= '</div>';
 
 		return $html;
@@ -121,10 +119,7 @@ class RoomsRolesFormHelper extends AppHelper {
  */
 	public function selectDefaultRoomRoles($fieldName, $attributes = array()) {
 		//Option
-		$defaultRoles = Hash::merge(
-			array(' ' => $this->_View->viewVars['defaultRoles']),
-			Hash::get($attributes, 'options', array())
-		);
+		$defaultRoles = Hash::get($attributes, 'options', array());
 		$attributes = Hash::remove($attributes, 'options');
 
 		//OptionのFormat
@@ -132,11 +127,15 @@ class RoomsRolesFormHelper extends AppHelper {
 		$attributes = Hash::remove($attributes, 'optionFormat');
 
 		//OptionのFormat変換
-		$flatten = Hash::flatten($defaultRoles);
-		foreach ($flatten as $key => $value) {
-			$flatten[$key] = sprintf($optionFormat, $value);
+		foreach ($defaultRoles as $optkey => $optgroup) {
+			if (is_array($optgroup)) {
+				foreach ($optgroup as $key => $text) {
+					$defaultRoles[$optkey][$key] = sprintf($optionFormat, $text);
+				}
+			} else {
+				$defaultRoles[$optkey] = sprintf($optionFormat, $optgroup);
+			}
 		}
-		$defaultRoles = Hash::expand($flatten);
 
 		$html = '';
 

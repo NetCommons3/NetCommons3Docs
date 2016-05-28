@@ -126,15 +126,24 @@ class RoomsHelper extends AppHelper {
  * ルーム一覧の出力
  *
  * @param int $activeSpaceId スペースID
- * @param string $dataElementPath データ表示エレメント
- * @param string|null $headElementPath ヘッダ表示エレメント
+ * @param array $element データ表示エレメント
+ * ```
+ * array(
+ *		'headElement' => ヘッダ表示エレメント,
+ *		'dataElemen' => データ表示エレメント,
+ * )
+ * ```
  * @param array|null $roomTreeList ルームのTreeリスト
- * @param bool $paginator ページネーションの有無
+ * @param array $options オプション
+ * ```
+ * array(
+ *		'paginator' => ページネーションの有無 デフォルト：true,
+ *		'displaySpace' => スペース表示,
+ * )
+ * ```
  * @return string HTML
- * @SuppressWarnings(PHPMD.BooleanArgumentFlag)
  */
-	public function roomsRender($activeSpaceId, $dataElementPath,
-								$headElementPath = null, $roomTreeList = null, $paginator = true) {
+	public function roomsRender($activeSpaceId, $element, $roomTreeList = null, $options = []) {
 		$output = '';
 
 		if (! isset($roomTreeList)) {
@@ -142,11 +151,12 @@ class RoomsHelper extends AppHelper {
 		}
 
 		$output .= $this->_View->element('Rooms.Rooms/render_index', array(
-			'headElementPath' => $headElementPath,
-			'dataElementPath' => $dataElementPath,
+			'headElementPath' => Hash::get($element, 'headElement'),
+			'dataElementPath' => Hash::get($element, 'dataElemen'),
 			'roomTreeList' => $roomTreeList,
 			'space' => $this->_View->viewVars['spaces'][$activeSpaceId],
-			'paginator' => $paginator
+			'paginator' => Hash::get($options, 'paginator', true),
+			'displaySpace' => Hash::get($options, 'displaySpace', false),
 		));
 
 		return $output;
