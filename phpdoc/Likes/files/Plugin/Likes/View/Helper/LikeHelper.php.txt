@@ -225,8 +225,8 @@ class LikeHelper extends AppHelper {
 			),
 		);
 		$options = array(
-			'likeCount' => (int)Hash::get($content, 'LikesUser.like_count'),
-			'unlikeCount' => (int)Hash::get($content, 'LikesUser.unlike_count'),
+			'likeCount' => (int)Hash::get($content, 'Like.like_count'),
+			'unlikeCount' => (int)Hash::get($content, 'Like.unlike_count'),
 			'disabled' => false
 		);
 
