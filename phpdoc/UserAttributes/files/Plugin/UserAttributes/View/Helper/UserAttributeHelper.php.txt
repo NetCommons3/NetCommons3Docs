@@ -108,14 +108,19 @@ class UserAttributeHelper extends AppHelper {
 			$output .= $this->NetCommonsForm->hidden('UserAttributeSetting.display', array('value' => '0'));
 			$buttonIcon = 'glyphicon-eye-open';
 			$active = ' active';
+			$label = __d('user_attributes', 'Display');
 		} else {
 			$output .= $this->NetCommonsForm->hidden('UserAttributeSetting.display', array('value' => '1'));
-			$buttonIcon = 'glyphicon-eye-close';
+			$buttonIcon = 'glyphicon-minus';
 			$active = '';
+			$label = __d('user_attributes', 'Non display');
 		}
-		$output .= $this->Button->save('<span class="glyphicon ' . $buttonIcon . '"> </span>', array(
-			'class' => 'btn btn-xs btn-default' . $active
-		));
+		$output .= $this->Button->save(
+			'<span class="glyphicon ' . $buttonIcon . '" aria-hidden="true"></span> ' . $label,
+			array(
+				'class' => 'btn btn-xs btn-default user-attributes-display-btn' . $active,
+			)
+		);
 
 		$output .= $this->NetCommonsForm->end();
 		return $output;
