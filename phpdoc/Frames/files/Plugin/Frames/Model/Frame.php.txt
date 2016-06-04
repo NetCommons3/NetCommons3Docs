@@ -159,7 +159,7 @@ class Frame extends FramesAppModel {
 				$data['Frame']['weight'] = null;
 			} elseif (! isset($data['Frame']['id']) || ! $data['Frame']['id']) {
 				//カウントUp
-				$data['Frame']['weight'] = $this->getMaxWeight($data['Frame']['box_id']) + 1;
+				$data['Frame']['weight'] = 1;
 				$this->__saveWeight($data, 1);
 			}
 
