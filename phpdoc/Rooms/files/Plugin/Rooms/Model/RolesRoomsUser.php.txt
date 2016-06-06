@@ -179,26 +179,68 @@ class RolesRoomsUser extends RoomsAppModel {
 	}
 
 /**
- * RolesRoomsUserの登録処理
+ * RolesRoomsUserの登録処理(ユーザー管理用)
+ *
+ * ### $dataサンプル
+ * ```
+ * 	array (
+ * 		'User' => array (
+ * 			'id' => '14',
+ * 		),
+ * 		'RolesRoomsUser' => array (
+ * 			1 => array (
+ * 				'id' => '57',
+ * 				'room_id' => '1',
+ * 				'user_id' => '14',
+ * 				'roles_room_id' => '5',
+ * 			),
+ * 			9 => array (
+ * 				'id' => '58',
+ * 				'room_id' => '9',
+ * 				'user_id' => '14',
+ * 				'roles_room_id' => '0',
+ * 			),
+ * 			10 => array (
+ * 				'id' => '',
+ * 				'room_id' => '10',
+ * 				'user_id' => '14',
+ * 				'roles_room_id' => '0',
+ * 			),
+ * 			11 => array (
+ * 				'id' => '',
+ * 				'room_id' => '11',
+ * 				'user_id' => '14',
+ * 				'roles_room_id' => '35',
+ * 			),
+ * 		),
+ * 	)
+ * ```
  *
  * @param array $data リクエストデータ
  * @return bool True on success, false on validation errors
  * @throws InternalErrorException
  */
-	public function saveRolesRoomsUser($data) {
+	public function saveRolesRoomsUsersForUsers($data) {
 		//トランザクションBegin
 		$this->begin();
 
+		$deleteIds = Hash::extract($data, 'RolesRoomsUser.{n}[roles_room_id=0][id>0].id');
+		$data['RolesRoomsUser'] = Hash::remove($data['RolesRoomsUser'], '{n}[roles_room_id=0]');
+
 		//バリデーション
-		$this->set($data['RolesRoomsUser']);
-		if (! $this->validates()) {
+		if (! $this->validateMany($data['RolesRoomsUser'])) {
 			return false;
 		}
 
 		try {
-			//Roomデータの登録
-			$rolesRoomsUser = $this->save($data['RolesRoomsUser'], false, false);
-			if (! $rolesRoomsUser) {
+			if ($deleteIds) {
+				if (! $this->deleteAll(array($this->alias . '.id' => $deleteIds), false)) {
+					throw new InternalErrorException(__d('net_commons', 'Internal Server Error'));
+				}
+			}
+
+			//RolesRoomsUserデータの登録
+			if (! $this->saveMany($data['RolesRoomsUser'], ['validate' => false])) {
 				throw new InternalErrorException(__d('net_commons', 'Internal Server Error'));
 			}
 
@@ -210,17 +252,113 @@ class RolesRoomsUser extends RoomsAppModel {
 			$this->rollback($ex);
 		}
 
-		return $rolesRoomsUser;
+		return true;
 	}
 
 /**
- * RolesRoomsUserの一括登録
+ * RolesRoomsUserの一括登録(ルーム管理用)
+ *
+ * ### $dataのサンプル１（一括で変更）
+ * ```
+ * 	array (
+ * 		'Room' => array (
+ * 			'id' => '11',
+ * 		),
+ * 		'Role' => array (
+ * 			'key' => 'visitor',
+ * 		),
+ * 		'RolesRoomsUser' => array (
+ * 			13 => array (
+ * 				'id' => '55',
+ * 				'user_id' => '13',
+ * 				'room_id' => '11',
+ * 				'roles_room_id' => '35',
+ * 			),
+ * 			14 => array (
+ * 				'id' => '59',
+ * 				'user_id' => '14',
+ * 				'room_id' => '11',
+ * 				'roles_room_id' => '35',
+ * 			),
+ * 		),
+ * 		'User' => array (
+ * 			'id' => array (
+ * 				1 => '0',
+ * 				2 => '0',
+ * 				・・・
+ * 				13 => '1',
+ * 				14 => '1',
+ * 				・・・
+ * 			),
+ * 		),
+ * 		'RolesRoom' => array (
+ * 			1 => array (
+ * 				'role_key' => 'room_administrator',
+ * 			),
+ * 			2 => array (
+ * 				'role_key' => 'general_user',
+ * 			),
+ * 			・・・
+ * 			13 => array (
+ * 				'role_key' => 'general_user',
+ * 			),
+ * 			14 => array (
+ * 				'role_key' => 'general_user',
+ * 			),
+ * 			・・・
+ * 		),
+ * 	)
+ * ```
+ *
+ * ### $dataのサンプル２（個別で変更）
+ * ```
+ * 	array (
+ * 		'RolesRoom' => array (
+ * 			1 => array (
+ * 				'role_key' => 'room_administrator',
+ * 			),
+ * 			2 => array (
+ * 				'role_key' => 'general_user',
+ * 			),
+ * 			・・・
+ * 			16 => array (
+ * 				'role_key' => 'general_user',
+ * 			),
+ * 			17 => array (
+ * 				'role_key' => 'visitor',
+ * 			),
+ * 		),
+ * 		'RolesRoomsUser' => array (
+ * 			17 => array (
+ * 				'id' => '71',
+ * 				'user_id' => '17',
+ * 				'room_id' => '11',
+ * 				'roles_room_id' => '35',
+ * 			),
+ * 		),
+ * 		'User' => array (
+ * 			'id' => array (
+ * 				1 => '0',
+ * 				2 => '0',
+ * 				・・・
+ * 				16 => '0',
+ * 				17 => '1',
+ * 			),
+ * 		),
+ * 		'Room' => array (
+ * 			'id' => '11',
+ * 		),
+ * 		'Role' => array (
+ * 			'key' => 'visitor',
+ * 		),
+ * 	)
+ * ```
  *
  * @param array $data リクエストデータ
  * @return bool True on success, false on validation errors
  * @throws InternalErrorException
  */
-	public function saveRolesRoomsUsers($data) {
+	public function saveRolesRoomsUsersForRooms($data) {
 		//トランザクションBegin
 		$this->begin();
 
@@ -287,41 +425,100 @@ class RolesRoomsUser extends RoomsAppModel {
 	}
 
 /**
- * RolesRoomsUserの削除処理
+ * RolesRoomsUserの一括削除処理(ルーム管理用)
+ *
+ * ### $dataサンプル１（一括削除）
+ * ```
+ * 	array (
+ * 		'Room' => array (
+ * 			'id' => '11',
+ * 		),
+ * 		'Role' => array (
+ * 			'key' => 'delete',
+ * 		),
+ * 		'RolesRoomsUser' => array (
+ * 			13 => array (
+ * 				'id' => '55',
+ * 				'user_id' => '13',
+ * 				'room_id' => '11',
+ * 			),
+ * 			14 => array (
+ * 				'id' => '59',
+ * 				'user_id' => '14',
+ * 				'room_id' => '11',
+ * 			),
+ * 		),
+ * 		'User' => array (
+ * 			'id' => array (
+ * 				1 => '0',
+ * 				2 => '0',
+ * 				・・・
+ * 				13 => '1',
+ * 				14 => '1',
+ * 			),
+ * 		),
+ * 		'RolesRoom' => array (
+ * 			1 => array (
+ * 				'role_key' => 'room_administrator',
+ * 			),
+ * 			2 => array (
+ * 				'role_key' => 'general_user',
+ * 			),
+ * 			・・・
+ * 			13 => array (
+ * 				'role_key' => 'visitor',
+ * 			),
+ * 			14 => array (
+ * 				'role_key' => 'visitor',
+ * 			),
+ * 		),
+ * 	)
+ * ```
+ *
+ * ### $dataサンプル２（個別で削除）
+ * ```
+ * 	array (
+ * 		'RolesRoom' => array (
+ * 			1 => array (
+ * 				'role_key' => 'room_administrator',
+ * 			),
+ * 			2 => array (
+ * 				'role_key' => 'general_user',
+ * 			),
+ * 			・・・
+ * 			5 => array (
+ * 				'role_key' => '',
+ * 			),
+ * 		),
+ * 		'RolesRoomsUser' => array (
+ * 			5 => array (
+ * 				'id' => '38',
+ * 				'user_id' => '5',
+ * 				'room_id' => '11',
+ * 			),
+ * 		),
+ * 		'User' => array (
+ * 			'id' => array (
+ * 				1 => '0',
+ * 				2 => '0',
+ * 				・・・
+ * 				5 => '1',
+ * 			),
+ * 		),
+ * 		'Room' => array (
+ * 			'id' => '11',
+ * 		),
+ * 		'Role' => array (
+ * 			'key' => 'delete',
+ * 		),
+ * 	)
+ * ```
  *
  * @param array $data リクエストデータ
  * @return mixed On success Model::$data if its not empty or true, false on failure
  * @throws InternalErrorException
  */
-	public function deleteRolesRoomsUser($data) {
-		//トランザクションBegin
-		$this->begin();
-
-		try {
-			//RolesRoomsUserデータの削除
-			if (! $this->delete($data['RolesRoomsUser']['id'], false)) {
-				throw new InternalErrorException(__d('net_commons', 'Internal Server Error'));
-			}
-
-			//トランザクションCommit
-			$this->commit();
-
-		} catch (Exception $ex) {
-			//トランザクションRollback
-			$this->rollback($ex);
-		}
-
-		return true;
-	}
-
-/**
- * RolesRoomsUserの一括削除処理
- *
- * @param array $data リクエストデータ
- * @return mixed On success Model::$data if its not empty or true, false on failure
- * @throws InternalErrorException
- */
-	public function deleteRolesRoomsUsers($data) {
+	public function deleteRolesRoomsUsersForRooms($data) {
 		//トランザクションBegin
 		$this->begin();
 

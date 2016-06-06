@@ -136,10 +136,10 @@
                                 <div class="accordion" style="margin-bottom: 0">
         <div class="accordion-group">
             <div class="accordion-heading">
-                                    <a class="accordion-toggle " data-toggle="collapse" data-target="#namespace-1742389850"></a>
+                                    <a class="accordion-toggle " data-toggle="collapse" data-target="#namespace-1613690927"></a>
                                 <a href="../namespaces/default.html" style="margin-left: 30px; padding-left: 0">\</a>
             </div>
-            <div id="namespace-1742389850" class="accordion-body collapse in">
+            <div id="namespace-1613690927" class="accordion-body collapse in">
                 <div class="accordion-inner">
 
                     
@@ -275,11 +275,10 @@ will inherit them.</p>
                                                                     <a href="../classes/NetCommonsAppModel.html#method_loadModels" class="">loadModels()</a><br />
                                                                     <a href="../classes/RolesRoomsUser.html#method_beforeValidate" class="">beforeValidate()</a><br />
                                                                     <a href="../classes/RolesRoomsUser.html#method_getRolesRoomsUsers" class="">getRolesRoomsUsers()</a><br />
-                                                                    <a href="../classes/RolesRoomsUser.html#method_saveRolesRoomsUser" class="">saveRolesRoomsUser()</a><br />
-                                                                    <a href="../classes/RolesRoomsUser.html#method_saveRolesRoomsUsers" class="">saveRolesRoomsUsers()</a><br />
+                                                                    <a href="../classes/RolesRoomsUser.html#method_saveRolesRoomsUsersForUsers" class="">saveRolesRoomsUsersForUsers()</a><br />
+                                                                    <a href="../classes/RolesRoomsUser.html#method_saveRolesRoomsUsersForRooms" class="">saveRolesRoomsUsersForRooms()</a><br />
                                                                     <a href="../classes/RolesRoomsUser.html#method_saveAccessed" class="">saveAccessed()</a><br />
-                                                                    <a href="../classes/RolesRoomsUser.html#method_deleteRolesRoomsUser" class="">deleteRolesRoomsUser()</a><br />
-                                                                    <a href="../classes/RolesRoomsUser.html#method_deleteRolesRoomsUsers" class="">deleteRolesRoomsUsers()</a><br />
+                                                                    <a href="../classes/RolesRoomsUser.html#method_deleteRolesRoomsUsersForRooms" class="">deleteRolesRoomsUsersForRooms()</a><br />
                                                             </section>
                             <section class="span4">
                                                                     <a href="../classes/NetCommonsAppModel.html#property_actsAs" class="">$actsAs</a><br />
@@ -1086,13 +1085,44 @@ validation rules can be defined in $validate.</em></p>
 
                                     <div class="row-fluid">
         <div class="span8 content class">
-            <a id="method_saveRolesRoomsUser" name="method_saveRolesRoomsUser" class="anchor"></a>
+            <a id="method_saveRolesRoomsUsersForUsers" name="method_saveRolesRoomsUsersForUsers" class="anchor"></a>
             <article class="method">
-                <h3 class="public ">saveRolesRoomsUser()</h3>
+                <h3 class="public ">saveRolesRoomsUsersForUsers()</h3>
                 <a href="#source-view" role="button" class="pull-right btn" data-toggle="modal" style="font-size: 1.1em; padding: 9px 14px"><i class="icon-code"></i></a>
-                <pre class="signature" style="margin-right: 54px;">saveRolesRoomsUser(array  <span class="argument">$data</span>) : boolean</pre>
-                <p><em>RolesRoomsUserの登録処理</em></p>
-                
+                <pre class="signature" style="margin-right: 54px;">saveRolesRoomsUsersForUsers(array  <span class="argument">$data</span>) : boolean</pre>
+                <p><em>RolesRoomsUserの登録処理(ユーザー管理用)</em></p>
+                <h3>$dataサンプル</h3>
+<pre><code>    array (
+        'User' =&gt; array (
+            'id' =&gt; '14',
+        ),
+        'RolesRoomsUser' =&gt; array (
+            1 =&gt; array (
+                'id' =&gt; '57',
+                'room_id' =&gt; '1',
+                'user_id' =&gt; '14',
+                'roles_room_id' =&gt; '5',
+            ),
+            9 =&gt; array (
+                'id' =&gt; '58',
+                'room_id' =&gt; '9',
+                'user_id' =&gt; '14',
+                'roles_room_id' =&gt; '0',
+            ),
+            10 =&gt; array (
+                'id' =&gt; '',
+                'room_id' =&gt; '10',
+                'user_id' =&gt; '14',
+                'roles_room_id' =&gt; '0',
+            ),
+            11 =&gt; array (
+                'id' =&gt; '',
+                'room_id' =&gt; '11',
+                'user_id' =&gt; '14',
+                'roles_room_id' =&gt; '35',
+            ),
+        ),
+    )</code></pre>
 
                                     <h4>Parameters</h4>
                     <table class="table table-condensed table-hover">
@@ -1128,13 +1158,102 @@ validation rules can be defined in $validate.</em></p>
 
                                     <div class="row-fluid">
         <div class="span8 content class">
-            <a id="method_saveRolesRoomsUsers" name="method_saveRolesRoomsUsers" class="anchor"></a>
+            <a id="method_saveRolesRoomsUsersForRooms" name="method_saveRolesRoomsUsersForRooms" class="anchor"></a>
             <article class="method">
-                <h3 class="public ">saveRolesRoomsUsers()</h3>
+                <h3 class="public ">saveRolesRoomsUsersForRooms()</h3>
                 <a href="#source-view" role="button" class="pull-right btn" data-toggle="modal" style="font-size: 1.1em; padding: 9px 14px"><i class="icon-code"></i></a>
-                <pre class="signature" style="margin-right: 54px;">saveRolesRoomsUsers(array  <span class="argument">$data</span>) : boolean</pre>
-                <p><em>RolesRoomsUserの一括登録</em></p>
-                
+                <pre class="signature" style="margin-right: 54px;">saveRolesRoomsUsersForRooms(array  <span class="argument">$data</span>) : boolean</pre>
+                <p><em>RolesRoomsUserの一括登録(ルーム管理用)</em></p>
+                <h3>$dataのサンプル１（一括で変更）</h3>
+<pre><code>    array (
+        'Room' =&gt; array (
+            'id' =&gt; '11',
+        ),
+        'Role' =&gt; array (
+            'key' =&gt; 'visitor',
+        ),
+        'RolesRoomsUser' =&gt; array (
+            13 =&gt; array (
+                'id' =&gt; '55',
+                'user_id' =&gt; '13',
+                'room_id' =&gt; '11',
+                'roles_room_id' =&gt; '35',
+            ),
+            14 =&gt; array (
+                'id' =&gt; '59',
+                'user_id' =&gt; '14',
+                'room_id' =&gt; '11',
+                'roles_room_id' =&gt; '35',
+            ),
+        ),
+        'User' =&gt; array (
+            'id' =&gt; array (
+                1 =&gt; '0',
+                2 =&gt; '0',
+                ・・・
+                13 =&gt; '1',
+                14 =&gt; '1',
+                ・・・
+            ),
+        ),
+        'RolesRoom' =&gt; array (
+            1 =&gt; array (
+                'role_key' =&gt; 'room_administrator',
+            ),
+            2 =&gt; array (
+                'role_key' =&gt; 'general_user',
+            ),
+            ・・・
+            13 =&gt; array (
+                'role_key' =&gt; 'general_user',
+            ),
+            14 =&gt; array (
+                'role_key' =&gt; 'general_user',
+            ),
+            ・・・
+        ),
+    )</code></pre>
+<h3>$dataのサンプル２（個別で変更）</h3>
+<pre><code>    array (
+        'RolesRoom' =&gt; array (
+            1 =&gt; array (
+                'role_key' =&gt; 'room_administrator',
+            ),
+            2 =&gt; array (
+                'role_key' =&gt; 'general_user',
+            ),
+            ・・・
+            16 =&gt; array (
+                'role_key' =&gt; 'general_user',
+            ),
+            17 =&gt; array (
+                'role_key' =&gt; 'visitor',
+            ),
+        ),
+        'RolesRoomsUser' =&gt; array (
+            17 =&gt; array (
+                'id' =&gt; '71',
+                'user_id' =&gt; '17',
+                'room_id' =&gt; '11',
+                'roles_room_id' =&gt; '35',
+            ),
+        ),
+        'User' =&gt; array (
+            'id' =&gt; array (
+                1 =&gt; '0',
+                2 =&gt; '0',
+                ・・・
+                16 =&gt; '0',
+                17 =&gt; '1',
+            ),
+        ),
+        'Room' =&gt; array (
+            'id' =&gt; '11',
+        ),
+        'Role' =&gt; array (
+            'key' =&gt; 'visitor',
+        ),
+    )</code></pre>
 
                                     <h4>Parameters</h4>
                     <table class="table table-condensed table-hover">
@@ -1212,55 +1331,93 @@ validation rules can be defined in $validate.</em></p>
 
                                     <div class="row-fluid">
         <div class="span8 content class">
-            <a id="method_deleteRolesRoomsUser" name="method_deleteRolesRoomsUser" class="anchor"></a>
+            <a id="method_deleteRolesRoomsUsersForRooms" name="method_deleteRolesRoomsUsersForRooms" class="anchor"></a>
             <article class="method">
-                <h3 class="public ">deleteRolesRoomsUser()</h3>
+                <h3 class="public ">deleteRolesRoomsUsersForRooms()</h3>
                 <a href="#source-view" role="button" class="pull-right btn" data-toggle="modal" style="font-size: 1.1em; padding: 9px 14px"><i class="icon-code"></i></a>
-                <pre class="signature" style="margin-right: 54px;">deleteRolesRoomsUser(array  <span class="argument">$data</span>) : mixed</pre>
-                <p><em>RolesRoomsUserの削除処理</em></p>
-                
-
-                                    <h4>Parameters</h4>
-                    <table class="table table-condensed table-hover">
-                                                    <tr>
-                                <td>array</td>
-                                <td>$data </td>
-                                <td><p>リクエストデータ</p></td>
-                            </tr>
-                                            </table>
-                
-                                    <h4>Throws</h4>
-                    <dl>
-                                                    <dt>\InternalErrorException</dt>
-                            <dd></dd>
-                                                                    </dl>
-                
-                                    <h4>Returns</h4>
-                    mixed
-                                            &mdash; <p>On success Model::$data if its not empty or true, false on failure</p>
-                                    				
-                            </article>
-        </div>
-        <aside class="span4 detailsbar">
-            <h1><i class="icon-arrow-down"></i></h1>
-                                                            <dl>
-                                                                            </dl>
-            <h2>Tags</h2>
-            <table class="table table-condensed">
-                                    <tr><td colspan="2"><em>None found</em></td></tr>
-                            </table>
-        </aside>
-    </div>
-
-                                    <div class="row-fluid">
-        <div class="span8 content class">
-            <a id="method_deleteRolesRoomsUsers" name="method_deleteRolesRoomsUsers" class="anchor"></a>
-            <article class="method">
-                <h3 class="public ">deleteRolesRoomsUsers()</h3>
-                <a href="#source-view" role="button" class="pull-right btn" data-toggle="modal" style="font-size: 1.1em; padding: 9px 14px"><i class="icon-code"></i></a>
-                <pre class="signature" style="margin-right: 54px;">deleteRolesRoomsUsers(array  <span class="argument">$data</span>) : mixed</pre>
-                <p><em>RolesRoomsUserの一括削除処理</em></p>
-                
+                <pre class="signature" style="margin-right: 54px;">deleteRolesRoomsUsersForRooms(array  <span class="argument">$data</span>) : mixed</pre>
+                <p><em>RolesRoomsUserの一括削除処理(ルーム管理用)</em></p>
+                <h3>$dataサンプル１（一括削除）</h3>
+<pre><code>    array (
+        'Room' =&gt; array (
+            'id' =&gt; '11',
+        ),
+        'Role' =&gt; array (
+            'key' =&gt; 'delete',
+        ),
+        'RolesRoomsUser' =&gt; array (
+            13 =&gt; array (
+                'id' =&gt; '55',
+                'user_id' =&gt; '13',
+                'room_id' =&gt; '11',
+            ),
+            14 =&gt; array (
+                'id' =&gt; '59',
+                'user_id' =&gt; '14',
+                'room_id' =&gt; '11',
+            ),
+        ),
+        'User' =&gt; array (
+            'id' =&gt; array (
+                1 =&gt; '0',
+                2 =&gt; '0',
+                ・・・
+                13 =&gt; '1',
+                14 =&gt; '1',
+            ),
+        ),
+        'RolesRoom' =&gt; array (
+            1 =&gt; array (
+                'role_key' =&gt; 'room_administrator',
+            ),
+            2 =&gt; array (
+                'role_key' =&gt; 'general_user',
+            ),
+            ・・・
+            13 =&gt; array (
+                'role_key' =&gt; 'visitor',
+            ),
+            14 =&gt; array (
+                'role_key' =&gt; 'visitor',
+            ),
+        ),
+    )</code></pre>
+<h3>$dataサンプル２（個別で削除）</h3>
+<pre><code>    array (
+        'RolesRoom' =&gt; array (
+            1 =&gt; array (
+                'role_key' =&gt; 'room_administrator',
+            ),
+            2 =&gt; array (
+                'role_key' =&gt; 'general_user',
+            ),
+            ・・・
+            5 =&gt; array (
+                'role_key' =&gt; '',
+            ),
+        ),
+        'RolesRoomsUser' =&gt; array (
+            5 =&gt; array (
+                'id' =&gt; '38',
+                'user_id' =&gt; '5',
+                'room_id' =&gt; '11',
+            ),
+        ),
+        'User' =&gt; array (
+            'id' =&gt; array (
+                1 =&gt; '0',
+                2 =&gt; '0',
+                ・・・
+                5 =&gt; '1',
+            ),
+        ),
+        'Room' =&gt; array (
+            'id' =&gt; '11',
+        ),
+        'Role' =&gt; array (
+            'key' =&gt; 'delete',
+        ),
+    )</code></pre>
 
                                     <h4>Parameters</h4>
                     <table class="table table-condensed table-hover">
@@ -1433,7 +1590,7 @@ validation rules can be defined in $validate.</em></p>
                 <section class="span10 offset1">
                     <hr />
                     Documentation is powered by <a href="http://www.phpdoc.org/">phpDocumentor </a> and authored
-                    on May 28th, 2016 at 11:34.
+                    on June 6th, 2016 at 14:53.
                 </section>
             </section>
         </section>

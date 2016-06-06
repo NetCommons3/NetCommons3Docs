@@ -133,27 +133,35 @@ class RoomsHelper extends AppHelper {
  *		'dataElemen' => データ表示エレメント,
  * )
  * ```
- * @param array|null $roomTreeList ルームのTreeリスト
  * @param array $options オプション
  * ```
  * array(
  *		'paginator' => ページネーションの有無 デフォルト：true,
  *		'displaySpace' => スペース表示,
+ *		'roomTreeList' => ルームのTreeリスト
+ *		'rooms' => ルームリスト
  * )
  * ```
  * @return string HTML
  */
-	public function roomsRender($activeSpaceId, $element, $roomTreeList = null, $options = []) {
+	public function roomsRender($activeSpaceId, $element, $options = []) {
 		$output = '';
 
+		$roomTreeList = Hash::get($options, 'roomTreeList');
 		if (! isset($roomTreeList)) {
 			$roomTreeList = Hash::get($this->_View->viewVars, 'roomTreeList');
+		}
+
+		$rooms = Hash::get($options, 'rooms');
+		if (! isset($rooms)) {
+			$rooms = Hash::get($this->_View->viewVars, 'rooms');
 		}
 
 		$output .= $this->_View->element('Rooms.Rooms/render_index', array(
 			'headElementPath' => Hash::get($element, 'headElement'),
 			'dataElementPath' => Hash::get($element, 'dataElemen'),
 			'roomTreeList' => $roomTreeList,
+			'rooms' => $rooms,
 			'space' => $this->_View->viewVars['spaces'][$activeSpaceId],
 			'paginator' => Hash::get($options, 'paginator', true),
 			'displaySpace' => Hash::get($options, 'displaySpace', false),

@@ -62,6 +62,8 @@ class RoomBehavior extends ModelBehavior {
 				$model->Room->alias . '.page_id_top NOT' => null,
 			),
 			'order' => 'Room.lft',
+			'limit' => 1000,
+			'maxLimit' => 1000,
 		), array('conditions' => $conditions));
 
 		return $options;

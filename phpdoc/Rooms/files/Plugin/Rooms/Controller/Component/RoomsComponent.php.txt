@@ -78,45 +78,42 @@ class RoomsComponent extends Component {
  * @param int $spaceId スペースID
  * @return void
  */
-	public function setRoomsForPaginator($spaceId) {
+	public function setRoomsForPaginator($spaceId = null) {
 		$controller = $this->controller;
 
-		//ルームデータ取得
-		$spaces = $controller->viewVars['spaces'];
-		$controller->Paginator->settings = $controller->Room->getRoomsCondtions($spaceId);
-		$rooms = $controller->Paginator->paginate('Room');
-		$rooms = Hash::combine($rooms, '{n}.Room.id', '{n}');
-		$controller->set('rooms', $rooms);
-
-		$roomIds = array_keys($rooms);
-
-		//Treeリスト取得
-		$roomTreeList = $controller->Room->generateTreeList(
-			array('Room.id' => array_merge(array($spaces[$spaceId]['Room']['id']), $roomIds)),
-			null,
-			null,
-			Room::$treeParser
-		);
-		$controller->set('roomTreeList', $roomTreeList);
-
-		//参加者リスト取得
-		$rolesRoomsUsers = array();
-		foreach ($roomIds as $roomId) {
-			$result = $controller->RolesRoomsUser->getRolesRoomsUsers(
-				array('Room.id' => $roomId),
-				array(
-					'fields' => array(
-						'User.id', 'User.handlename'
-					),
-					'order' => array(
-						'RoomRole.weight' => 'asc'
-					),
-					'limit' => self::LIST_LIMIT_ROOMS_USERS + 1
-				)
-			);
-			$rolesRoomsUsers[$roomId] = $result;
+		if (! $spaceId) {
+			$getSpaces = [Space::PUBLIC_SPACE_ID, Space::ROOM_SPACE_ID];
+		} else {
+			$getSpaces = [$spaceId];
 		}
-		$controller->set('rolesRoomsUsers', $rolesRoomsUsers);
+		$spaces = $controller->viewVars['spaces'];
+
+		$result = array();
+		foreach ($getSpaces as $spaceId) {
+			//ルームデータ取得
+			$controller->Paginator->settings = $controller->Room->getRoomsCondtions($spaceId);
+			$rooms = $controller->Paginator->paginate('Room');
+			$rooms = Hash::combine($rooms, '{n}.Room.id', '{n}');
+			$roomIds = array_keys($rooms);
+
+			//Treeリスト取得
+			$roomTreeList = $controller->Room->generateTreeList(
+				array('Room.id' => array_merge(array($spaces[$spaceId]['Room']['id']), $roomIds)),
+				null,
+				null,
+				Room::$treeParser
+			);
+
+			$result[$spaceId]['rooms'] = $rooms;
+			$result[$spaceId]['roomTreeList'] = $roomTreeList;
+		}
+
+		if (count($getSpaces) > 1) {
+			$controller->set('rooms', $result);
+		} else {
+			$controller->set('rooms', $result[$spaceId]['rooms']);
+			$controller->set('roomTreeList', $result[$spaceId]['roomTreeList']);
+		}
 	}
 
 }

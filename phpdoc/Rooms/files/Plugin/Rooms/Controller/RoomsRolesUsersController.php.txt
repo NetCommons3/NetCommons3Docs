@@ -102,9 +102,9 @@ class RoomsRolesUsersController extends RoomsAppController {
 					'{n}.roles_room_id',
 					$rolesRoomId
 				);
-				$result = $this->RolesRoomsUser->saveRolesRoomsUsers($this->request->data);
+				$result = $this->RolesRoomsUser->saveRolesRoomsUsersForRooms($this->request->data);
 			} else {
-				$result = $this->RolesRoomsUser->deleteRolesRoomsUsers($this->request->data);
+				$result = $this->RolesRoomsUser->deleteRolesRoomsUsersForRooms($this->request->data);
 			}
 
 			//登録処理

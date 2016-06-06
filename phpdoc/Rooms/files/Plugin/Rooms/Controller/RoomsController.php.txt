@@ -54,6 +54,27 @@ class RoomsController extends RoomsAppController {
 	public function index() {
 		//ルームデータセット
 		$this->Rooms->setRoomsForPaginator($this->viewVars['activeSpaceId']);
+
+		$roomIds = array_keys($this->viewVars['rooms']);
+
+		//参加者リスト取得
+		$rolesRoomsUsers = array();
+		foreach ($roomIds as $roomId) {
+			$result = $this->RolesRoomsUser->getRolesRoomsUsers(
+				array('Room.id' => $roomId),
+				array(
+					'fields' => array(
+						'User.id', 'User.handlename'
+					),
+					'order' => array(
+						'RoomRole.weight' => 'asc'
+					),
+					'limit' => RoomsComponent::LIST_LIMIT_ROOMS_USERS + 1
+				)
+			);
+			$rolesRoomsUsers[$roomId] = $result;
+		}
+		$this->set('rolesRoomsUsers', $rolesRoomsUsers);
 	}
 
 /**

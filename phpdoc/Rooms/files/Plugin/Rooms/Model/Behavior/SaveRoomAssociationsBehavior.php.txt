@@ -420,5 +420,60 @@ class SaveRoomAssociationsBehavior extends ModelBehavior {
 		return $sql;
 	}
 
+/**
+ * RolesRoomsUserのデフォルトデータ登録処理
+ *
+ * @param Model $model 呼び出し元のモデル
+ * @return array
+ */
+	public function getDefaultRolesRoomsUser(Model $model) {
+		$model->loadModels([
+			'Room' => 'Rooms.Room',
+			'RolesRoom' => 'Rooms.RolesRoom',
+			'RolesRoomsUser' => 'Rooms.RolesRoomsUser',
+		]);
+
+		$rooms = $model->Room->find('all', array(
+			'recursive' => -1,
+			'conditions' => array(
+				'OR' => array(
+					'default_participation' => true,
+					'root_id' => null
+				)
+			),
+		));
+		if (! Configure::read('NetCommons.installed')) {
+			$rooms = Hash::insert(
+				$rooms, '{n}.Room.default_role_key', Role::ROOM_ROLE_KEY_ROOM_ADMINISTRATOR
+			);
+		}
+
+		$roomIds = Hash::extract($rooms, '{n}.Room.id');
+
+		$rolesRooms = $model->RolesRoom->find('list', array(
+			'recursive' => -1,
+			'fields' => array('role_key', 'id', 'room_id'),
+			'conditions' => array(
+				'room_id' => $roomIds,
+			)
+		));
+
+		$rolesRoomsUsers = array();
+		foreach ($rooms as $room) {
+			$roomId = $room['Room']['id'];
+			$rolesRoomsUsers[$roomId] = $model->RolesRoomsUser->create([
+				'id' => null,
+				'roles_room_id' => Hash::get($rolesRooms, $roomId . '.' . $room['Room']['default_role_key']),
+				'user_id' => null,
+				'room_id' => $roomId,
+			]);
+		}
+		$rolesRoomsUsers = Hash::combine(
+			$rolesRoomsUsers, '{n}.RolesRoomsUser.room_id', '{n}.RolesRoomsUser'
+		);
+
+		return $rolesRoomsUsers;
+	}
+
 }
 
