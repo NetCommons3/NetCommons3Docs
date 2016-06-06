@@ -136,10 +136,10 @@
                                 <div class="accordion" style="margin-bottom: 0">
         <div class="accordion-group">
             <div class="accordion-heading">
-                                    <a class="accordion-toggle " data-toggle="collapse" data-target="#namespace-1726372854"></a>
+                                    <a class="accordion-toggle " data-toggle="collapse" data-target="#namespace-408986162"></a>
                                 <a href="../namespaces/default.html" style="margin-left: 30px; padding-left: 0">\</a>
             </div>
-            <div id="namespace-1726372854" class="accordion-body collapse in">
+            <div id="namespace-408986162" class="accordion-body collapse in">
                 <div class="accordion-inner">
 
                     
@@ -198,8 +198,8 @@
                                                     <li class="class"><a href="../classes/TitleIconHelper.html">TitleIconHelper</a></li>
                                                     <li class="class"><a href="../classes/TokenHelper.html">TokenHelper</a></li>
                                                     <li class="class"><a href="../classes/TrackableBehavior.html">TrackableBehavior</a></li>
+                                                    <li class="class"><a href="../classes/UserAddController.html">UserAddController</a></li>
                                                     <li class="class"><a href="../classes/UserMail.html">UserMail</a></li>
-                                                    <li class="class"><a href="../classes/UserMailController.html">UserMailController</a></li>
                                                     <li class="class"><a href="../classes/UserManagerAppController.html">UserManagerAppController</a></li>
                                                     <li class="class"><a href="../classes/UserManagerAppModel.html">UserManagerAppModel</a></li>
                                                     <li class="class"><a href="../classes/UserManagerController.html">UserManagerController</a></li>
@@ -224,8 +224,8 @@
                                             </nav>
                     <a href="#source-view" role="button" class="pull-right btn" data-toggle="modal"><i class="icon-code"></i></a>
 
-                    <h1><small>\</small>UserMailController</h1>
-                    <p><em>UserMail Controller</em></p>
+                    <h1><small>\</small>UserAddController</h1>
+                    <p><em>UserManagerApp Controller</em></p>
                     <p>Add your application-wide methods in the class below, your controllers
 will inherit them.</p>
                     
@@ -245,14 +245,15 @@ will inherit them.</p>
                         </section>
                         <section class="row-fluid public">
                             <section class="span4">
-                                                                    <a href="../classes/UserMailController.html#method_beforeFilter" class="">beforeFilter()</a><br />
-                                                                    <a href="../classes/UserMailController.html#method_notify" class="">notify()</a><br />
-                                                                    <a href="../classes/UserMailController.html#method_save_notify" class="">save_notify()</a><br />
+                                                                    <a href="../classes/UserAddController.html#method_beforeFilter" class="">beforeFilter()</a><br />
+                                                                    <a href="../classes/UserAddController.html#method_basic" class="">basic()</a><br />
+                                                                    <a href="../classes/UserAddController.html#method_user_roles_rooms" class="">user_roles_rooms()</a><br />
+                                                                    <a href="../classes/UserAddController.html#method_notify" class="">notify()</a><br />
                                                             </section>
                             <section class="span4">
-                                                                    <a href="../classes/UserMailController.html#property_components" class="">$components</a><br />
-                                                                    <a href="../classes/UserManagerAppController.html#property_helpers" class="">$helpers</a><br />
-                                                                    <a href="../classes/UserMailController.html#property_uses" class="">$uses</a><br />
+                                                                    <a href="../classes/UserAddController.html#property_components" class="">$components</a><br />
+                                                                    <a href="../classes/UserAddController.html#property_uses" class="">$uses</a><br />
+                                                                    <a href="../classes/UserAddController.html#property_helpers" class="">$helpers</a><br />
                                                             </section>
                             <section class="span4">
                                                                     <a href="../classes/UserManagerAppController.html#constant_WIZARD_USERS" class="">WIZARD_USERS</a><br />
@@ -262,7 +263,7 @@ will inherit them.</p>
                         </section>
                         <section class="row-fluid protected">
                             <section class="span4">
-                                                                    <em>No protected methods found</em>
+                                                                    <a href="../classes/UserManagerAppController.html#method__prepareSave" class="">_prepareSave()</a><br />
                                                             </section>
                             <section class="span4">
                                                                     <em>No protected properties found</em>
@@ -289,7 +290,7 @@ will inherit them.</p>
                     
                     <dl>
                         <dt>File</dt>
-                            <dd><a href="../files/Plugin.UserManager.Controller.UserMailController.html"><div class="path-wrapper">Plugin/UserManager/Controller/UserMailController.php</div></a></dd>
+                            <dd><a href="../files/Plugin.UserManager.Controller.UserAddController.html"><div class="path-wrapper">Plugin/UserManager/Controller/UserAddController.php</div></a></dd>
                                                 <dt>Package</dt>
                             <dd><div class="namespace-wrapper">UserManager\Controller</div></dd>
                                                 <dt>Class hierarchy</dt>
@@ -300,7 +301,7 @@ will inherit them.</p>
                                         <div class="namespace-wrapper"><a href="../classes/AppController.html">\AppController</a></div>
                                                                     
                                         <div class="namespace-wrapper"><a href="../classes/UserManagerAppController.html">\UserManagerAppController</a></div>
-                                                                                                    <div class="namespace-wrapper">\UserMailController</div>
+                                                                                                    <div class="namespace-wrapper">\UserAddController</div>
                             </dd>
 
                         
@@ -434,11 +435,11 @@ will inherit them.</p>
 
                                     <div class="row-fluid">
         <div class="span8 content class">
-            <a id="property_helpers" name="property_helpers" class="anchor"></a>
+            <a id="property_uses" name="property_uses" class="anchor"></a>
             <article class="property">
-                <h3 class="public ">$helpers</h3>
-                <pre class="signature">$helpers : array</pre>
-                <p><em>use helpers</em></p>
+                <h3 class="public ">$uses</h3>
+                <pre class="signature">$uses : array</pre>
+                <p><em>use model</em></p>
                 
 
                                 <h4>Type</h4>
@@ -448,8 +449,6 @@ will inherit them.</p>
         <aside class="span4 detailsbar">
             <h1><i class="icon-arrow-down"></i></h1>
                         <dl>
-                                    <dt>Inherited from</dt>
-                    <dd><a href="../classes/UserManagerAppController.html"><div class="path-wrapper">\UserManagerAppController</div></a></dd>
                                                             </dl>
             <h2>Tags</h2>
             <table class="table table-condensed">
@@ -460,11 +459,11 @@ will inherit them.</p>
 
                                     <div class="row-fluid">
         <div class="span8 content class">
-            <a id="property_uses" name="property_uses" class="anchor"></a>
+            <a id="property_helpers" name="property_helpers" class="anchor"></a>
             <article class="property">
-                <h3 class="public ">$uses</h3>
-                <pre class="signature">$uses : array</pre>
-                <p><em>use model</em></p>
+                <h3 class="public ">$helpers</h3>
+                <pre class="signature">$helpers : array</pre>
+                <p><em>use helpers</em></p>
                 
 
                                 <h4>Type</h4>
@@ -517,12 +516,12 @@ will inherit them.</p>
 
                                     <div class="row-fluid">
         <div class="span8 content class">
-            <a id="method_notify" name="method_notify" class="anchor"></a>
+            <a id="method_basic" name="method_basic" class="anchor"></a>
             <article class="method">
-                <h3 class="public ">notify()</h3>
+                <h3 class="public ">basic()</h3>
                 <a href="#source-view" role="button" class="pull-right btn" data-toggle="modal" style="font-size: 1.1em; padding: 9px 14px"><i class="icon-code"></i></a>
-                <pre class="signature" style="margin-right: 54px;">notify() : void</pre>
-                <p><em>メール通知</em></p>
+                <pre class="signature" style="margin-right: 54px;">basic() : void</pre>
+                <p><em>基本項目を登録</em></p>
                 
 
                 
@@ -543,11 +542,37 @@ will inherit them.</p>
 
                                     <div class="row-fluid">
         <div class="span8 content class">
-            <a id="method_save_notify" name="method_save_notify" class="anchor"></a>
+            <a id="method_user_roles_rooms" name="method_user_roles_rooms" class="anchor"></a>
             <article class="method">
-                <h3 class="public ">save_notify()</h3>
+                <h3 class="public ">user_roles_rooms()</h3>
                 <a href="#source-view" role="button" class="pull-right btn" data-toggle="modal" style="font-size: 1.1em; padding: 9px 14px"><i class="icon-code"></i></a>
-                <pre class="signature" style="margin-right: 54px;">save_notify() : void</pre>
+                <pre class="signature" style="margin-right: 54px;">user_roles_rooms() : void</pre>
+                <p><em>参加ルームの選択</em></p>
+                
+
+                
+                
+                				
+                            </article>
+        </div>
+        <aside class="span4 detailsbar">
+            <h1><i class="icon-arrow-down"></i></h1>
+                                                            <dl>
+                                                                            </dl>
+            <h2>Tags</h2>
+            <table class="table table-condensed">
+                                    <tr><td colspan="2"><em>None found</em></td></tr>
+                            </table>
+        </aside>
+    </div>
+
+                                    <div class="row-fluid">
+        <div class="span8 content class">
+            <a id="method_notify" name="method_notify" class="anchor"></a>
+            <article class="method">
+                <h3 class="public ">notify()</h3>
+                <a href="#source-view" role="button" class="pull-right btn" data-toggle="modal" style="font-size: 1.1em; padding: 9px 14px"><i class="icon-code"></i></a>
+                <pre class="signature" style="margin-right: 54px;">notify() : void</pre>
                 <p><em>登録メール通知</em></p>
                 
 
@@ -567,16 +592,44 @@ will inherit them.</p>
         </aside>
     </div>
 
-                                                                    </div>
+                                                    <div class="row-fluid">
+        <div class="span8 content class">
+            <a id="method__prepareSave" name="method__prepareSave" class="anchor"></a>
+            <article class="method">
+                <h3 class="protected ">_prepareSave()</h3>
+                <a href="#source-view" role="button" class="pull-right btn" data-toggle="modal" style="font-size: 1.1em; padding: 9px 14px"><i class="icon-code"></i></a>
+                <pre class="signature" style="margin-right: 54px;">_prepareSave() : void</pre>
+                <p><em>登録処理の前準備</em></p>
+                
+
+                
+                
+                				
+                            </article>
+        </div>
+        <aside class="span4 detailsbar">
+            <h1><i class="icon-arrow-down"></i></h1>
+                                                            <dl>
+                                                    <dt>Inherited from</dt>
+                    <dd><a href="../classes/UserManagerAppController.html"><div class="path-wrapper">\UserManagerAppController</div></a></dd>
+                                                            </dl>
+            <h2>Tags</h2>
+            <table class="table table-condensed">
+                                    <tr><td colspan="2"><em>None found</em></td></tr>
+                            </table>
+        </aside>
+    </div>
+
+                                                    </div>
     </section>
 
     <div id="source-view" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="source-view-label" aria-hidden="true">
         <div class="modal-header">
             <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
-            <h3 id="source-view-label">UserMailController.php</h3>
+            <h3 id="source-view-label">UserAddController.php</h3>
         </div>
         <div class="modal-body">
-            <pre data-src="../files/Plugin/UserManager/Controller/UserMailController.php.txt" class="language-php line-numbers"></pre>
+            <pre data-src="../files/Plugin/UserManager/Controller/UserAddController.php.txt" class="language-php line-numbers"></pre>
         </div>
     </div>
 
@@ -616,7 +669,7 @@ will inherit them.</p>
                 <section class="span10 offset1">
                     <hr />
                     Documentation is powered by <a href="http://www.phpdoc.org/">phpDocumentor </a> and authored
-                    on May 28th, 2016 at 11:49.
+                    on June 6th, 2016 at 15:08.
                 </section>
             </section>
         </section>
