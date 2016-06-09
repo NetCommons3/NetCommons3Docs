@@ -269,22 +269,39 @@ class Room extends RoomsAppModel {
  * @return bool True if the operation should continue, false if it should abort
  * @link http://book.cakephp.org/2.0/en/models/callback-methods.html#beforesave
  * @see Model::save()
+ * @throws InternalErrorException
  */
 	public function beforeSave($options = array()) {
-		if (Hash::get($this->data, 'Room.id') && Hash::check($this->data, 'Room.need_approval')) {
+		$room = Hash::get($this->data, 'Room');
+
+		if (Hash::get($room, 'id') && Hash::check($room, 'need_approval')) {
 			$this->changeNeedApproval($this->data);
 		}
+
+		if (Hash::get($room, 'id') && Hash::get($room, 'in_draft') &&
+			Hash::get($room, 'default_participation') !== Hash::get($options, 'preUpdate.Room.in_draft')) {
+
+			$this->loadModels([
+				'RolesRoomsUser' => 'Rooms.RolesRoomsUser',
+			]);
+
+			$conditions = array($this->RolesRoomsUser->alias . '.room_id' => Hash::get($room, 'id'));
+			if (! $this->RolesRoomsUser->deleteAll($conditions, false)) {
+				throw new InternalErrorException(__d('net_commons', 'Internal Server Error'));
+			}
+		}
+
 		return true;
 	}
 
 /**
  * Called after each successful save operation.
  *
- * @param bool $created True if this save created a new record
- * @param array $options Options passed from Model::save().
+ * @param bool $created 作成フラグ
+ * @param array $options Model::save()のoptions.
  * @return void
  * @throws InternalErrorException
- * @link http://book.cakephp.org/2.0/en/models/callback-methods.html#aftersave
+ * @link http://book.cakephp.org/2.0/ja/models/callback-methods.html#aftersave
  * @see Model::save()
  */
 	public function afterSave($created, $options = array()) {
@@ -297,22 +314,20 @@ class Room extends RoomsAppModel {
 				if (! $result = $this->RoomsLanguage->save($roomsLanguage, false, false)) {
 					throw new InternalErrorException(__d('net_commons', 'Internal Server Error'));
 				}
-				$this->data['RoomsLanguage'][$index] = $result;
+				$this->data['RoomsLanguage'][$index] = $result['RoomsLanguage'];
 			}
 		}
 
 		//デフォルトデータ登録処理
-		$room = $this->data;
-		if ($created) {
-			$this->saveDefaultRolesRoom($room);
-			$this->saveDefaultRolesRoomsUser($room, true);
-			$this->saveDefaultRolesPluginsRoom($room);
-			$this->saveDefaultRoomRolePermission($room);
-			$page = $this->saveDefaultPage($room);
-			$this->data = Hash::merge($room, $page);
-		}
+		$this->__saveDefaultAssociations($created, $options);
 
+		//パーミッションデータ登録処理
+		$room = $this->data;
 		if (isset($room['RoomRolePermission'])) {
+			$this->loadModels([
+				'RoomRolePermission' => 'Rooms.RoomRolePermission'
+			]);
+
 			if ($created) {
 				$roomRolePermissions = $this->RoomRolePermission->find('all', array(
 					'recursive' => 0,
@@ -338,7 +353,47 @@ class Room extends RoomsAppModel {
 			}
 		}
 
+		//使用できるプラグインデータの登録
+		if (isset($this->data['PluginsRoom'])) {
+			$this->loadModels([
+				'PluginsRoom' => 'PluginManager.PluginsRoom'
+			]);
+
+			//エラーの場合、throwになる
+			$this->PluginsRoom->savePluginsRoomsByRoomId(
+				$this->data['Room']['id'],
+				$this->data['PluginsRoom']['plugin_key']
+			);
+		}
+
 		parent::afterSave($created, $options);
+	}
+
+/**
+ * 関連テーブルの初期値の登録処理
+ *
+ * @param bool $created 作成フラグ
+ * @param array $options Model::save()のoptions.
+ * @return void
+ */
+	private function __saveDefaultAssociations($created, $options) {
+		//デフォルトデータ登録処理
+		$room = $this->data;
+		if ($created) {
+			$this->saveDefaultRolesRoom($room);
+			$this->saveDefaultRoomRolePermission($room);
+		}
+
+		if ($created || Hash::get($room, 'Room.in_draft')) {
+			$this->saveDefaultRolesRoomsUser($room, true);
+			$this->saveDefaultRolesPluginsRoom($room);
+		}
+
+		if (! Hash::get($room, 'Room.in_draft') &&
+				($created || Hash::get($options, 'preUpdate.Room.in_draft'))) {
+			$page = $this->saveDefaultPage($room);
+			$this->data = Hash::merge($room, $page);
+		}
 	}
 
 /**
@@ -413,9 +468,18 @@ class Room extends RoomsAppModel {
 			return false;
 		}
 
+		if (Hash::get($data, 'Room.id')) {
+			$preUpdate = $this->find('first', array(
+				'recursive' => -1,
+				'conditions' => array('id' => Hash::get($data, 'Room.id'))
+			));
+		} else {
+			$preUpdate = null;
+		}
+
 		try {
 			//登録処理
-			$room = $this->save(null, false);
+			$room = $this->save(null, ['validate' => false, 'preUpdate' => $preUpdate]);
 			if (! $room) {
 				throw new InternalErrorException(__d('net_commons', 'Internal Server Error'));
 			}

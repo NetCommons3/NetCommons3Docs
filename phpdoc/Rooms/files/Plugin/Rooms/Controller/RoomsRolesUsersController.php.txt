@@ -20,25 +20,6 @@ App::uses('RoomsAppController', 'Rooms.Controller');
 class RoomsRolesUsersController extends RoomsAppController {
 
 /**
- * Limit定数
- *
- * @var const
- */
-	const DEFAULT_LIMIT = 30;
-
-/**
- * 会員一覧の表示する項目
- *
- * @var const
- */
-	public static $displaFields = array(
-		//'room_role_key',
-		'handlename',
-		'name',
-		'role_key',
-	);
-
-/**
  * use model
  *
  * @var array
@@ -76,73 +57,15 @@ class RoomsRolesUsersController extends RoomsAppController {
  * @return void
  */
 	public function edit() {
-		//ルームデータチェック
-		$room = $this->viewVars['room'];
-
-		//登録処理
-		if ($this->request->is('put')) {
-			foreach ($this->request->data['User']['id'] as $userId => $checked) {
-				if (! $checked) {
-					unset($this->request->data['RolesRoomsUser'][$userId]);
-					continue;
-				}
-			}
-
-			if (! $this->request->data['RolesRoomsUser']) {
-				//未選択の場合、
-				$result = null;
-			} elseif ($this->request->data['Role']['key'] !== 'delete') {
-				$rolesRooms = $this->Room->getRolesRooms(array(
-					'Room.id' => $room['Room']['id'],
-					'RolesRoom.role_key' => $this->request->data['Role']['key']
-				));
-				$rolesRoomId = Hash::get($rolesRooms, '0.RolesRoom.id');
-				$this->request->data['RolesRoomsUser'] = Hash::insert(
-					$this->request->data['RolesRoomsUser'],
-					'{n}.roles_room_id',
-					$rolesRoomId
-				);
-				$result = $this->RolesRoomsUser->saveRolesRoomsUsersForRooms($this->request->data);
-			} else {
-				$result = $this->RolesRoomsUser->deleteRolesRoomsUsersForRooms($this->request->data);
-			}
-
-			//登録処理
-			if ($result === true) {
-				//正常の場合
-				$this->NetCommons->setFlashNotification(__d('net_commons', 'Successfully saved.'), array(
-					'class' => 'success',
-				));
-			} elseif ($result === false) {
-				$this->NetCommons->handleValidationError($this->RolesRoomsUser->validationErrors);
-			}
+		$result = $this->RoomsRolesForm->actionRoomsRolesUser($this, true);
+		if ($result === true) {
+			//正常の場合
+			$this->NetCommons->setFlashNotification(__d('net_commons', 'Successfully saved.'), array(
+				'class' => 'success',
+			));
+		} elseif ($result === false) {
+			$this->NetCommons->handleValidationError($this->RolesRoomsUser->validationErrors);
 		}
-
-		if (! $this->request->query) {
-			$type = 'INNER';
-		} else {
-			$type = 'LEFT';
-		}
-
-		$this->UserSearch->search(
-			array(),
-			array('RolesRoomsUser' => array(
-				'type' => $type,
-				'conditions' => array(
-					'RolesRoomsUser.room_id' => $room['Room']['id'],
-				)
-			)),
-			array('RoomRole.level' => 'desc'),
-			self::DEFAULT_LIMIT
-		);
-
-		$fields = array_combine(self::$displaFields, self::$displaFields);
-		$this->set('displayFields', $this->User->cleanSearchFields($fields));
-
-		$this->request->data = $room;
-		$this->request->data['RolesRoomsUser'] = Hash::combine(
-			$this->viewVars['users'], '{n}.User.id', '{n}.RolesRoomsUser'
-		);
 	}
 
 /**

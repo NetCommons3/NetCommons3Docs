@@ -47,11 +47,49 @@ class RoomsController extends RoomsAppController {
 	);
 
 /**
+ * 不要なデータ削除
+ *
+ * @return void
+ */
+	private function __prepare() {
+		//もし、不要なルーム作成ウィザード用のデータが残っている場合、削除する
+		if ($this->Session->read('RoomAdd.Room.id')) {
+			//削除処理
+			$this->Room->deleteRoom($this->Session->read('RoomAdd'));
+			$this->Session->delete('RoomAdd');
+		}
+
+		//キャンセルボタンを押さずにルーム作成ウィザードを終了したときのごみデータ削除
+		$date = new DateTime();
+		$date->sub(new DateInterval('P1D'));
+		$modified = $date->format('Y-m-d H:i:s');
+
+		$query = array(
+			'recursive' => -1,
+			'fields' => array('id'),
+			'conditions' => array(
+				'in_draft' => true,
+				'modified <' => $modified
+			),
+		);
+		$count = $this->Room->find('count', $query);
+
+		if ($count > 0) {
+			$rooms = $this->Room->find('all', $query);
+			foreach ($rooms as $room) {
+				$this->Room->deleteRoom($room);
+			}
+		}
+	}
+
+/**
  * indexアクション
  *
  * @return void
  */
 	public function index() {
+		$this->__prepare();
+
 		//ルームデータセット
 		$this->Rooms->setRoomsForPaginator($this->viewVars['activeSpaceId']);
 
@@ -75,75 +113,6 @@ class RoomsController extends RoomsAppController {
 			$rolesRoomsUsers[$roomId] = $result;
 		}
 		$this->set('rolesRoomsUsers', $rolesRoomsUsers);
-	}
-
-/**
- * 追加アクション
- *
- * @return void
- */
-	public function add() {
-		$this->view = 'edit';
-
-		//スペースModel
-		$activeSpaceId = $this->viewVars['activeSpaceId'];
-		$model = Inflector::camelize($this->viewVars['spaces'][$activeSpaceId]['Space']['plugin_key']);
-		$this->$model = ClassRegistry::init($model . '.' . $model);
-		$this->set('participationFixed', $this->$model->participationFixed);
-
-		if ($this->request->is('post')) {
-			//不要パラメータ除去
-			unset($this->request->data['save'], $this->request->data['active_lang_id']);
-
-			//他言語が入力されていない場合、Currentの言語データをセット
-			$this->SwitchLanguage->setM17nRequestValue();
-
-			//登録処理
-			if ($room = $this->Room->saveRoom($this->request->data)) {
-				//正常の場合
-				$this->NetCommons->setFlashNotification(
-					__d('net_commons', 'Successfully saved.'), array('class' => 'success')
-				);
-				return $this->redirect(
-					'/rooms/rooms_roles_users/edit/' . $activeSpaceId . '/' . $room['Room']['id'] . '/'
-				);
-			}
-			$this->NetCommons->handleValidationError($this->Room->validationErrors);
-
-		} else {
-			//表示処理
-			//--初期値セット
-			$roomId = $this->viewVars['activeRoomId'];
-			$room = $this->viewVars['room'];
-
-			if (isset($room['Room']['page_id_top'])) {
-				$pageId = $this->viewVars['room']['Room']['page_id_top'];
-			} else {
-				$pageId = null;
-			}
-			if (isset($room['Room']['root_id'])) {
-				$rootId = $room['Room']['root_id'];
-			} else {
-				$rootId = $roomId;
-			}
-			$this->request->data = Hash::merge($this->request->data,
-				$this->$model->createRoom(array(
-					'space_id' => $activeSpaceId,
-					'root_id' => $rootId,
-					'parent_id' => $roomId,
-					'default_role_key' => $room['Room']['default_role_key'],
-				))
-			);
-			$this->request->data = Hash::merge($this->request->data,
-				$this->Page->create(array(
-					'parent_id' => $pageId,
-				))
-			);
-		}
-
-		//RoomsRolesFormのセット
-		$this->RoomsRolesForm->settings['room_id'] = null;
-		$this->RoomsRolesForm->settings['type'] = DefaultRolePermission::TYPE_ROOM_ROLE;
 	}
 
 /**

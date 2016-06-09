@@ -102,9 +102,24 @@ class RoomsHelper extends AppHelper {
 		$output .= '<ul class="nav nav-' . $tabType . '" role="tablist">';
 		foreach ($this->_View->viewVars['spaces'] as $space) {
 			if ($space['Space']['default_setting_action']) {
-				$output .= '<li class="' . ($space['Space']['id'] === $activeSpaceId ? 'active' : '') . '">';
+				if ($space['Space']['id'] === $activeSpaceId) {
+					$listClass = ' class="active"';
+				} elseif ($urls === false) {
+					$listClass = ' class="disabled"';
+				} else {
+					$listClass = '';
+				}
+
+				if ($urls === false) {
+					$output .= '<li' . $listClass . '>';
+					$output .= '<a href="">' . $this->roomName($space) . '</a>';
+					$output .= '</li>';
+					continue;
+				}
 
 				$attributes = array();
+
+				$output .= '<li' . $listClass . '>';
 				if (! isset($urls)) {
 					$url = '/rooms/' . $space['Space']['default_setting_action'];
 				} elseif (is_string($urls)) {

@@ -20,6 +20,25 @@ App::uses('Component', 'Controller');
 class RoomsRolesFormComponent extends Component {
 
 /**
+ * Limit定数
+ *
+ * @var const
+ */
+	const DEFAULT_LIMIT = 30;
+
+/**
+ * 会員一覧の表示する項目
+ *
+ * @var const
+ */
+	public static $displaFields = array(
+		//'room_role_key',
+		'handlename',
+		'name',
+		'role_key',
+	);
+
+/**
  * use components
  *
  * @var array
@@ -75,6 +94,77 @@ class RoomsRolesFormComponent extends Component {
 			$controller->request->data = Hash::merge($controller->request->data, $results);
 			$controller->set('roles', $results['RoomRole']);
 		}
+	}
+
+/**
+ * RoomsRolesUserの登録のアクション
+ *
+ * @param Controller $controller コントローラ
+ * @return null|bool
+ */
+	public function actionRoomsRolesUser(Controller $controller) {
+		//ルームデータチェック
+		$room = $controller->viewVars['room'];
+
+		//登録処理
+		$result = null;
+		if ($controller->request->is('put')) {
+			$data = $controller->request->data;
+			foreach ($data['User']['id'] as $userId => $checked) {
+				if (! $checked) {
+					unset($data['RolesRoomsUser'][$userId]);
+					continue;
+				}
+			}
+
+			if (! $data['RolesRoomsUser']) {
+				//未選択の場合、
+				$result = null;
+			} elseif ($data['Role']['key'] !== 'delete') {
+				$rolesRooms = $controller->Room->getRolesRooms(array(
+					'Room.id' => $room['Room']['id'],
+					'RolesRoom.role_key' => $data['Role']['key']
+				));
+				$rolesRoomId = Hash::get($rolesRooms, '0.RolesRoom.id');
+				$data['RolesRoomsUser'] = Hash::insert(
+					$data['RolesRoomsUser'],
+					'{n}.roles_room_id',
+					$rolesRoomId
+				);
+
+				$result = $controller->RolesRoomsUser->saveRolesRoomsUsersForRooms($data);
+			} else {
+				$result = $controller->RolesRoomsUser->deleteRolesRoomsUsersForRooms($data);
+			}
+		}
+
+		if (! $controller->request->query) {
+			$type = 'INNER';
+		} else {
+			$type = 'LEFT';
+		}
+
+		$controller->UserSearch->search(
+			array(),
+			array('RolesRoomsUser' => array(
+				'type' => $type,
+				'conditions' => array(
+					'RolesRoomsUser.room_id' => $room['Room']['id'],
+				)
+			)),
+			array('RoomRole.level' => 'desc'),
+			self::DEFAULT_LIMIT
+		);
+
+		$fields = array_combine(self::$displaFields, self::$displaFields);
+		$controller->set('displayFields', $controller->User->cleanSearchFields($fields));
+
+		$controller->request->data = $room;
+		$controller->request->data['RolesRoomsUser'] = Hash::combine(
+			$controller->viewVars['users'], '{n}.User.id', '{n}.RolesRoomsUser'
+		);
+
+		return $result;
 	}
 
 }

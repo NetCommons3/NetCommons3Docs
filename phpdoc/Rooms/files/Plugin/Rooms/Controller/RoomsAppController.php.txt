@@ -20,27 +20,6 @@ App::uses('AppController', 'Controller');
 class RoomsAppController extends AppController {
 
 /**
- * ウィザード定数(一般設定)
- *
- * @var string
- */
-	const WIZARD_ROOMS = 'rooms';
-
-/**
- * ウィザード定数(参加者の管理)
- *
- * @var string
- */
-	const WIZARD_ROOMS_ROLES_USERS = 'rooms_roles_users';
-
-/**
- * ウィザード定数(プラグイン選択)
- *
- * @var string
- */
-	const WIZARD_PLUGINS_ROOMS = 'plugins_rooms';
-
-/**
  * use model
  *
  * @var array
@@ -70,32 +49,6 @@ class RoomsAppController extends AppController {
  * @var array
  */
 	public $helpers = array(
-		'NetCommons.Wizard' => array(
-			'navibar' => array(
-				self::WIZARD_ROOMS => array(
-					'url' => array(
-						'controller' => 'rooms',
-						'action' => 'add',
-					),
-					'label' => array('rooms', 'General setting'),
-				),
-				self::WIZARD_ROOMS_ROLES_USERS => array(
-					'url' => array(
-						'controller' => 'rooms_roles_users',
-						'action' => 'edit',
-					),
-					'label' => array('rooms', 'Edit the members to join'),
-				),
-				self::WIZARD_PLUGINS_ROOMS => array(
-					'url' => array(
-						'controller' => 'plugins_rooms',
-						'action' => 'edit',
-					),
-					'label' => array('rooms', 'Select the plugins to join'),
-				),
-			),
-			'cancelUrl' => null
-		),
 		'Rooms.RoomForm',
 	);
 
@@ -118,7 +71,9 @@ class RoomsAppController extends AppController {
 
 		//ルームデータチェック＆セット
 		if ($this->params['action'] !== 'index') {
-			if ($this->request->is('post')) {
+			if ($this->Session->read('RoomAdd.Room.id')) {
+				$roomId = $this->Session->read('RoomAdd.Room.parent_id');
+			} elseif ($this->request->is('post')) {
 				$roomId = Hash::get($this->data, 'Room.parent_id');
 			} elseif ($this->request->is('put') || $this->request->is('delete')) {
 				$roomId = Hash::get($this->data, 'Room.id');
@@ -135,21 +90,6 @@ class RoomsAppController extends AppController {
 
 			$parentRooms = $this->Room->getPath($roomId, null, 1);
 			$this->set('parentRooms', $parentRooms);
-		}
-
-		//ウィザードの設定
-		if ($this->params['action'] === 'edit') {
-			$navibar = $this->helpers['NetCommons.Wizard']['navibar'];
-			$navibar = Hash::insert($navibar, '{s}.url.key', $this->params['pass'][0]);
-			$navibar = Hash::insert($navibar, '{s}.url.key2', $this->params['pass'][1]);
-			$this->helpers['NetCommons.Wizard']['navibar'] = $navibar;
-			$this->helpers['NetCommons.Wizard']['navibar'][self::WIZARD_ROOMS]['url']['action'] = 'edit';
-		}
-		if ($this->params['action'] !== 'index') {
-			$spaces = $this->viewVars['spaces'];
-			$activeSpaceId = $this->viewVars['activeSpaceId'];
-			$this->helpers['NetCommons.Wizard']['cancelUrl'] =
-					'/rooms/' . $spaces[$activeSpaceId]['Space']['default_setting_action'];
 		}
 	}
 

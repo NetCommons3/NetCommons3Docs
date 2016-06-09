@@ -58,8 +58,9 @@ class RoomBehavior extends ModelBehavior {
 		$options = Hash::merge(array(
 			'recursive' => 1,
 			'conditions' => array(
-				'Room.space_id' => $spaceId,
+				$model->Room->alias . '.space_id' => $spaceId,
 				$model->Room->alias . '.page_id_top NOT' => null,
+				$model->Room->alias . '.in_draft' => false
 			),
 			'order' => 'Room.lft',
 			'limit' => 1000,
@@ -89,7 +90,7 @@ class RoomBehavior extends ModelBehavior {
 			$spaceIds[] = Space::PRIVATE_SPACE_ID;
 		}
 		if (! Current::allowSystemPlugin('rooms')) {
-			$conditions = Hash::merge(array('Room.active' => true), $conditions);
+			$conditions = Hash::merge(array('Room.active' => true, 'Room.in_draft' => false), $conditions);
 		}
 
 		$options = Hash::merge(array(
@@ -191,7 +192,7 @@ class RoomBehavior extends ModelBehavior {
  */
 	public function getRolesRooms(Model $model, $conditions = array()) {
 		$conditions = Hash::merge(array(
-			'Room.page_id_top NOT' => null,
+			'OR' => ['Room.page_id_top NOT' => null, 'Room.in_draft' => true]
 		), $conditions);
 
 		$rolesRooms = $model->RolesRoom->find('all', array(
