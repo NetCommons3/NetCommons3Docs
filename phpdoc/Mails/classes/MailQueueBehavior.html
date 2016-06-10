@@ -136,10 +136,10 @@
                                 <div class="accordion" style="margin-bottom: 0">
         <div class="accordion-group">
             <div class="accordion-heading">
-                                    <a class="accordion-toggle " data-toggle="collapse" data-target="#namespace-919808357"></a>
+                                    <a class="accordion-toggle " data-toggle="collapse" data-target="#namespace-1498565140"></a>
                                 <a href="../namespaces/default.html" style="margin-left: 30px; padding-left: 0">\</a>
             </div>
-            <div id="namespace-919808357" class="accordion-body collapse in">
+            <div id="namespace-1498565140" class="accordion-body collapse in">
                 <div class="accordion-inner">
 
                     
@@ -288,6 +288,7 @@
                                                             </section>
                             <section class="span4">
                                                                     <a href="../classes/MailQueueBehavior.html#property__defaultSettings" class="">$_defaultSettings</a><br />
+                                                                    <a href="../classes/MailQueueBehavior.html#property__mailSettingPlugin" class="">$_mailSettingPlugin</a><br />
                                                             </section>
                             <section class="span4">
                                 <em>N/A</em>
@@ -297,7 +298,7 @@
                             <section class="span4">
                                                                     <a href="../classes/MailQueueBehavior.html#method___getSendTimePublish" class="">__getSendTimePublish()</a><br />
                                                                     <a href="../classes/MailQueueBehavior.html#method___getSaveSendTime" class="">__getSaveSendTime()</a><br />
-                                                                    <a href="../classes/MailQueueBehavior.html#method___getUseWorkflow" class="">__getUseWorkflow()</a><br />
+                                                                    <a href="../classes/MailQueueBehavior.html#method___getMailSettingPlugin" class="">__getMailSettingPlugin()</a><br />
                                                                     <a href="../classes/MailQueueBehavior.html#method___getContentKey" class="">__getContentKey()</a><br />
                                                                     <a href="../classes/MailQueueBehavior.html#method___getSettingPluginKey" class="">__getSettingPluginKey()</a><br />
                                                                     <a href="../classes/MailQueueBehavior.html#method___getSendRoomPermission" class="">__getSendRoomPermission()</a><br />
@@ -609,6 +610,30 @@
                                 <h4>Type</h4>
                 array
                                             </article>
+        </div>
+        <aside class="span4 detailsbar">
+            <h1><i class="icon-arrow-down"></i></h1>
+                        <dl>
+                                                            </dl>
+            <h2>Tags</h2>
+            <table class="table table-condensed">
+                                    <tr><td colspan="2"><em>None found</em></td></tr>
+                            </table>
+        </aside>
+    </div>
+
+                                    <div class="row-fluid">
+        <div class="span8 content class">
+            <a id="property__mailSettingPlugin" name="property__mailSettingPlugin" class="anchor"></a>
+            <article class="property">
+                <h3 class="protected ">$_mailSettingPlugin</h3>
+                <pre class="signature">$_mailSettingPlugin : array</pre>
+                <p><em></em></p>
+                
+
+                                <h4>Type</h4>
+                array
+                &mdash; メール設定データ配列                            </article>
         </div>
         <aside class="span4 detailsbar">
             <h1><i class="icon-arrow-down"></i></h1>
@@ -949,7 +974,7 @@
             <article class="method">
                 <h3 class="public ">saveQueue()</h3>
                 <a href="#source-view" role="button" class="pull-right btn" data-toggle="modal" style="font-size: 1.1em; padding: 9px 14px"><i class="icon-code"></i></a>
-                <pre class="signature" style="margin-right: 54px;">saveQueue(\Model  <span class="argument">$model</span>, array  <span class="argument">$sendTimes = null</span>, string  <span class="argument">$typeKey = \MailSettingFixedPhrase::DEFAULT_TYPE</span>) : boolean</pre>
+                <pre class="signature" style="margin-right: 54px;">saveQueue(\Model  <span class="argument">$model</span>, array  <span class="argument">$sendTimes = null</span>, string  <span class="argument">$typeKey = \MailSettingFixedPhrase::DEFAULT_TYPE</span>) : void</pre>
                 <p><em>キュー保存</em></p>
                 
 
@@ -973,9 +998,7 @@
                                             </table>
                 
                 
-                                    <h4>Returns</h4>
-                    boolean
-                                    				
+                				
                             </article>
         </div>
         <aside class="span4 detailsbar">
@@ -1135,12 +1158,12 @@
 
                                     <div class="row-fluid">
         <div class="span8 content class">
-            <a id="method___getUseWorkflow" name="method___getUseWorkflow" class="anchor"></a>
+            <a id="method___getMailSettingPlugin" name="method___getMailSettingPlugin" class="anchor"></a>
             <article class="method">
-                <h3 class="private ">__getUseWorkflow()</h3>
+                <h3 class="private ">__getMailSettingPlugin()</h3>
                 <a href="#source-view" role="button" class="pull-right btn" data-toggle="modal" style="font-size: 1.1em; padding: 9px 14px"><i class="icon-code"></i></a>
-                <pre class="signature" style="margin-right: 54px;">__getUseWorkflow(\Model  <span class="argument">$model</span>) : integer</pre>
-                <p><em>承認つかうフラグ ゲット</em></p>
+                <pre class="signature" style="margin-right: 54px;">__getMailSettingPlugin(\Model  <span class="argument">$model</span>, integer  <span class="argument">$languageId</span>, string  <span class="argument">$typeKey = \MailSettingFixedPhrase::DEFAULT_TYPE</span>) : array</pre>
+                <p><em>プラグインのメール設定(定型文等) 取得</em></p>
                 
 
                                     <h4>Parameters</h4>
@@ -1150,12 +1173,22 @@
                                 <td>$model </td>
                                 <td><p>モデル</p></td>
                             </tr>
+                                                    <tr>
+                                <td>integer</td>
+                                <td>$languageId </td>
+                                <td><p>言語ID</p></td>
+                            </tr>
+                                                    <tr>
+                                <td>string</td>
+                                <td>$typeKey </td>
+                                <td><p>メールの種類</p></td>
+                            </tr>
                                             </table>
                 
                 
                                     <h4>Returns</h4>
-                    integer
-                                            &mdash; <p>承認つかうフラグ</p>
+                    array
+                                            &mdash; <p>メール設定データ配列</p>
                                     				
                             </article>
         </div>
@@ -1512,7 +1545,7 @@
                 <section class="span10 offset1">
                     <hr />
                     Documentation is powered by <a href="http://www.phpdoc.org/">phpDocumentor </a> and authored
-                    on June 8th, 2016 at 07:35.
+                    on June 10th, 2016 at 11:39.
                 </section>
             </section>
         </section>
