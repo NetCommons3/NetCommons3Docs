@@ -138,13 +138,9 @@ class RoomsController extends RoomsAppController {
 			$room = $this->Room->saveRoom($this->request->data);
 			if ($room) {
 				//正常の場合
-				if ($room['Room']['id'] === Room::ROOM_PARENT_ID) {
-					return $this->redirect('/rooms/rooms/index/' . $activeSpaceId);
-				} else {
-					return $this->redirect(
-						'/rooms/rooms_roles_users/edit/' . $activeSpaceId . '/' . $room['Room']['id'] . '/'
-					);
-				}
+				$this->redirect(
+					'/rooms/' . $this->viewVars['spaces'][$activeSpaceId]['Space']['default_setting_action']
+				);
 			}
 			$this->NetCommons->handleValidationError($this->Room->validationErrors);
 
