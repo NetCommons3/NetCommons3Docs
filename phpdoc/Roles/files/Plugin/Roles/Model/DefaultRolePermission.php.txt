@@ -20,11 +20,18 @@ App::uses('RolesAppModel', 'Roles.Model');
 class DefaultRolePermission extends RolesAppModel {
 
 /**
- * Type
+ * ルーム権限Type
  *
  * @var const
  */
 	const TYPE_ROOM_ROLE = 'room_role';
+
+/**
+ * 会員権限Type
+ *
+ * @var const
+ */
+	const TYPE_USER_ROLE = 'user_role';
 
 /**
  * Validation rules
@@ -77,6 +84,33 @@ class DefaultRolePermission extends RolesAppModel {
 		));
 
 		return parent::beforeValidate($options);
+	}
+
+/**
+ * デフォルトパーミッションデータ取得
+ *
+ * @param string $roleKey ロールキー
+ * @param string|array $permission パーミッション
+ * @param string $type タイプ
+ * @return array
+ */
+	public function getDefaultRolePermissions($roleKey, $permission, $type = self::TYPE_ROOM_ROLE) {
+		$result = $this->find('all', array(
+			'recursive' => -1,
+			'conditions' => array(
+				'permission' => $permission,
+				'role_key' => $roleKey,
+				'type' => $type
+			)
+		));
+
+		if (! $result) {
+			return $result;
+		}
+
+		return Hash::combine(
+			$result, '{n}.DefaultRolePermission.permission', '{n}.DefaultRolePermission'
+		);
 	}
 
 }

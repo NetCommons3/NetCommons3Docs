@@ -483,6 +483,17 @@ class Records extends NetCommonsMigration {
 			array('role_key' => 'editor', 'type' => 'room_role', 'permission' => 'mail_editable', 'value' => '0', 'fixed' => '1', ),
 			array('role_key' => 'general_user', 'type' => 'room_role', 'permission' => 'mail_editable', 'value' => '0', 'fixed' => '1', ),
 			array('role_key' => 'visitor', 'type' => 'room_role', 'permission' => 'mail_editable', 'value' => '0', 'fixed' => '1', ),
+
+			//グループの作成権限(会員権限ごとに設定)
+			array(
+				'role_key' => 'system_administrator', 'type' => 'user_role', 'permission' => 'group_creatable', 'value' => 1, 'fixed' => 0,
+			),
+			array(
+				'role_key' => 'administrator', 'type' => 'user_role', 'permission' => 'group_creatable', 'value' => 1, 'fixed' => 0,
+			),
+			array(
+				'role_key' => 'common_user', 'type' => 'user_role', 'permission' => 'group_creatable', 'value' => 1, 'fixed' => 0,
+			),
 		),
 	);
 
