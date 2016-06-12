@@ -37,7 +37,11 @@ class UserAttributesController extends UserAttributesAppController {
  */
 	public $components = array(
 		'ControlPanel.ControlPanelLayout',
-		'M17n.SwitchLanguage',
+		'M17n.SwitchLanguage' => array(
+			'fields' => array(
+				'UserAttribute.name', 'UserAttribute.description',
+			)
+		),
 		'UserAttributes.UserAttributeLayout',
 		'DataTypes.DataTypeForm',
 	);
@@ -74,6 +78,9 @@ class UserAttributesController extends UserAttributesAppController {
 		if ($this->request->is('post')) {
 			//不要パラメータ除去
 			unset($this->request->data['save'], $this->request->data['active_lang_id']);
+
+			//他言語が入力されていない場合、表示されている言語データをセット
+			$this->SwitchLanguage->setM17nRequestValue();
 
 			//登録処理
 			$row = $this->request->data['UserAttributeSetting']['row'];
@@ -136,6 +143,9 @@ class UserAttributesController extends UserAttributesAppController {
 				return;
 			}
 			$this->request->data['UserAttributeChoice'] = $result;
+
+			//他言語が入力されていない場合、表示されている言語データをセット
+			$this->SwitchLanguage->setM17nRequestValue();
 
 			//登録処理
 			if ($this->UserAttribute->saveUserAttribute($this->request->data)) {
