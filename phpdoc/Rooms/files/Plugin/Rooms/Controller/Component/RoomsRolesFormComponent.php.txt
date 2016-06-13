@@ -27,6 +27,13 @@ class RoomsRolesFormComponent extends Component {
 	const DEFAULT_LIMIT = 30;
 
 /**
+ * 取得件数
+ *
+ * @var string
+ */
+	public $limit = self::DEFAULT_LIMIT;
+
+/**
  * 会員一覧の表示する項目
  *
  * @var const
@@ -166,7 +173,7 @@ class RoomsRolesFormComponent extends Component {
 				)
 			)),
 			array('RoomRole.level' => 'desc'),
-			self::DEFAULT_LIMIT
+			$this->limit
 		);
 
 		$fields = array_combine(self::$displaFields, self::$displaFields);
