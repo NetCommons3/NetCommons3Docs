@@ -21,27 +21,6 @@ App::uses('RoomsRolesUsersController', 'Rooms.Controller');
 class RoomAddController extends RoomsAppController {
 
 /**
- * ウィザード定数(一般設定)
- *
- * @var string
- */
-	const WIZARD_ROOMS = 'rooms';
-
-/**
- * ウィザード定数(参加者の管理)
- *
- * @var string
- */
-	const WIZARD_ROOMS_ROLES_USERS = 'rooms_roles_users';
-
-/**
- * ウィザード定数(プラグイン選択)
- *
- * @var string
- */
-	const WIZARD_PLUGINS_ROOMS = 'plugins_rooms';
-
-/**
  * use component
  *
  * @var array
@@ -80,21 +59,21 @@ class RoomAddController extends RoomsAppController {
 	public $helpers = array(
 		'NetCommons.Wizard' => array(
 			'navibar' => array(
-				self::WIZARD_ROOMS => array(
+				parent::WIZARD_ROOMS => array(
 					'url' => array(
 						'controller' => 'room_add',
 						'action' => 'basic',
 					),
 					'label' => array('rooms', 'General setting'),
 				),
-				self::WIZARD_ROOMS_ROLES_USERS => array(
+				parent::WIZARD_ROOMS_ROLES_USERS => array(
 					'url' => array(
 						'controller' => 'room_add',
 						'action' => 'rooms_roles_users',
 					),
 					'label' => array('rooms', 'Edit the members to join'),
 				),
-				self::WIZARD_PLUGINS_ROOMS => array(
+				parent::WIZARD_PLUGINS_ROOMS => array(
 					'url' => array(
 						'controller' => 'room_add',
 						'action' => 'plugins_rooms',

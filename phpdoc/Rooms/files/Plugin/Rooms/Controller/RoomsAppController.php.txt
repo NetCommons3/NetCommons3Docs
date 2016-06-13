@@ -20,6 +20,27 @@ App::uses('AppController', 'Controller');
 class RoomsAppController extends AppController {
 
 /**
+ * ウィザード定数(一般設定)
+ *
+ * @var string
+ */
+	const WIZARD_ROOMS = 'rooms';
+
+/**
+ * ウィザード定数(参加者の管理)
+ *
+ * @var string
+ */
+	const WIZARD_ROOMS_ROLES_USERS = 'rooms_roles_users';
+
+/**
+ * ウィザード定数(プラグイン選択)
+ *
+ * @var string
+ */
+	const WIZARD_PLUGINS_ROOMS = 'plugins_rooms';
+
+/**
  * use model
  *
  * @var array

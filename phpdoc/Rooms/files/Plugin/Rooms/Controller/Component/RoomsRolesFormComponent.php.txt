@@ -115,26 +115,39 @@ class RoomsRolesFormComponent extends Component {
 					unset($data['RolesRoomsUser'][$userId]);
 					continue;
 				}
+				if (! $data['RolesRoomsUser'][$userId]['id']) {
+					$id = $controller->RolesRoomsUser->find('first', array(
+						'recursive' => -1,
+						'fields' => array('id'),
+						'conditions' => array(
+							'room_id' => $room['Room']['id'],
+							'user_id' => $userId
+						)
+					));
+					$data['RolesRoomsUser'][$userId]['id'] = Hash::get($id, 'RolesRoomsUser.id');
+				}
 			}
 
 			if (! $data['RolesRoomsUser']) {
 				//未選択の場合、
 				$result = null;
-			} elseif ($data['Role']['key'] !== 'delete') {
-				$rolesRooms = $controller->Room->getRolesRooms(array(
-					'Room.id' => $room['Room']['id'],
-					'RolesRoom.role_key' => $data['Role']['key']
-				));
-				$rolesRoomId = Hash::get($rolesRooms, '0.RolesRoom.id');
-				$data['RolesRoomsUser'] = Hash::insert(
-					$data['RolesRoomsUser'],
-					'{n}.roles_room_id',
-					$rolesRoomId
-				);
-
-				$result = $controller->RolesRoomsUser->saveRolesRoomsUsersForRooms($data);
 			} else {
-				$result = $controller->RolesRoomsUser->deleteRolesRoomsUsersForRooms($data);
+				if ($data['Role']['key'] !== 'delete') {
+					$rolesRooms = $controller->Room->getRolesRooms(array(
+						'Room.id' => $room['Room']['id'],
+						'RolesRoom.role_key' => $data['Role']['key']
+					));
+					$rolesRoomId = Hash::get($rolesRooms, '0.RolesRoom.id');
+					$data['RolesRoomsUser'] = Hash::insert(
+						$data['RolesRoomsUser'],
+						'{n}.roles_room_id',
+						$rolesRoomId
+					);
+
+					$result = $controller->RolesRoomsUser->saveRolesRoomsUsersForRooms($data);
+				} else {
+					$result = $controller->RolesRoomsUser->deleteRolesRoomsUsersForRooms($data);
+				}
 			}
 		}
 

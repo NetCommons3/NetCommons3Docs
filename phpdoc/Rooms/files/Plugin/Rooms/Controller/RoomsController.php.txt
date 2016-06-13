@@ -20,16 +20,6 @@ App::uses('RoomsAppController', 'Rooms.Controller');
 class RoomsController extends RoomsAppController {
 
 /**
- * use model
- *
- * @var array
- */
-	public $uses = array(
-		'Pages.Page',
-		'Rooms.Room',
-	);
-
-/**
  * use component
  *
  * @var array
@@ -41,9 +31,34 @@ class RoomsController extends RoomsAppController {
 			)
 		),
 		'Paginator',
+		'PluginManager.PluginsForm',
 		'Rooms.RoomsRolesForm' => array(
 			'permissions' => array('content_publishable', 'html_not_limited')
 		),
+		'UserAttributes.UserAttributeLayout',
+		'Users.UserSearch',
+	);
+
+/**
+ * use model
+ *
+ * @var array
+ */
+	public $uses = array(
+		'Pages.Page',
+		'PluginManager.PluginsRoom',
+		'Rooms.Room',
+	);
+
+/**
+ * use helpers
+ *
+ * @var array
+ */
+	public $helpers = array(
+		'UserAttributes.UserAttributeLayout',
+		'Users.UserSearchForm',
+		'Users.UserSearch',
 	);
 
 /**
@@ -99,7 +114,7 @@ class RoomsController extends RoomsAppController {
 		$rolesRoomsUsers = array();
 		foreach ($roomIds as $roomId) {
 			$result = $this->RolesRoomsUser->getRolesRoomsUsers(
-				array('Room.id' => $roomId),
+				array('RolesRoomsUser.room_id' => $roomId),
 				array(
 					'fields' => array(
 						'User.id', 'User.handlename'
@@ -113,6 +128,36 @@ class RoomsController extends RoomsAppController {
 			$rolesRoomsUsers[$roomId] = $result;
 		}
 		$this->set('rolesRoomsUsers', $rolesRoomsUsers);
+	}
+
+/**
+ * 編集アクション
+ *
+ * @return void
+ */
+	public function view() {
+		$this->viewClass = 'View';
+		$this->layout = 'NetCommons.modal';
+
+		//表示処理
+		$this->request->data = $this->viewVars['room'];
+		$this->request->data = Hash::merge($this->request->data,
+			$this->Page->find('first', array(
+				'recursive' => -1,
+				'conditions' => array('id' => $this->viewVars['room']['Room']['page_id_top'])
+			))
+		);
+
+		$roomName = Hash::extract(
+			$this->viewVars['room'],
+			'RoomsLanguage.{n}[language_id=' . Current::read('Language.id') . '].name'
+		);
+		$this->set('roomName', $roomName[0]);
+
+		$this->RoomsRolesForm->settings['room_id'] = $this->viewVars['activeRoomId'];
+		$this->RoomsRolesForm->settings['type'] = DefaultRolePermission::TYPE_ROOM_ROLE;
+		$this->PluginsForm->roomId = $this->viewVars['activeRoomId'];
+		$this->RoomsRolesForm->actionRoomsRolesUser($this, true);
 	}
 
 /**

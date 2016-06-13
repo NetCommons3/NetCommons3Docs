@@ -85,7 +85,7 @@ class RoomFormHelper extends AppHelper {
 			$output .= '</li>';
 		}
 
-		if (isset($this->_View->request->data['Room']['parent_id'])) {
+		if (Hash::get($this->_View->request->data, 'Room.id') !== Room::ROOM_PARENT_ID) {
 			if ($this->_View->params['controller'] === 'plugins_rooms') {
 				$class = 'active';
 			} else {
