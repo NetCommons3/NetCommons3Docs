@@ -75,9 +75,14 @@ class RoomBehavior extends ModelBehavior {
  *
  * @param Model $model ビヘイビア呼び出し元モデル
  * @param array $conditions 条件配列
+ * @param int|null $userId ユーザID。nullの場合、`Current::read('User.id')`。
  * @return array ルームデータ取得条件
  */
-	public function getReadableRoomsConditions(Model $model, $conditions = array()) {
+	public function getReadableRoomsConditions(Model $model, $conditions = [], $userId = null) {
+		if (! $userId) {
+			$userId = Current::read('User.id');
+		}
+
 		$spaceIds = array();
 		$spaceIds[] = Space::PUBLIC_SPACE_ID;
 		if (Current::read('User.id')) {
@@ -113,7 +118,7 @@ class RoomBehavior extends ModelBehavior {
 					'type' => $joinType,
 					'conditions' => array(
 						$model->RolesRoomsUser->alias . '.room_id' . ' = ' . $model->Room->alias . ' .id',
-						$model->RolesRoomsUser->alias . '.user_id' => Current::read('User.id'),
+						$model->RolesRoomsUser->alias . '.user_id' => $userId,
 					),
 				),
 				array(

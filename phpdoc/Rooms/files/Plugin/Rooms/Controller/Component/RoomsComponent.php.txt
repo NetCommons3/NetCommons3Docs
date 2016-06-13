@@ -116,5 +116,37 @@ class RoomsComponent extends Component {
 		}
 	}
 
+/**
+ * ユーザIDが閲覧できるルームデータ取得
+ *
+ * @param int $userId ユーザID
+ * @return void
+ */
+	public function setReadableRooms($userId = null) {
+		$controller = $this->controller;
+
+		//ルームデータ取得
+		$options = $controller->Room->getReadableRoomsConditions([], $userId);
+		$result = $controller->Room->find('all', $options);
+		$controller->set('rooms', Hash::combine($result, '{n}.Room.id', '{n}'));
+
+		//ルームのTreeリスト取得
+		$roomTreeLists[Space::PUBLIC_SPACE_ID] = $controller->Room->generateTreeList(
+				array('Room.space_id' => Space::PUBLIC_SPACE_ID), null, null, Room::$treeParser);
+
+		$roomTreeLists[Space::ROOM_SPACE_ID] = $controller->Room->generateTreeList(
+				array('Room.space_id' => Space::ROOM_SPACE_ID), null, null, Room::$treeParser);
+		$controller->set('roomTreeLists', $roomTreeLists);
+
+		//** ロールルームユーザデータ取得
+		$rolesRoomsUsers = $controller->RolesRoomsUser->getRolesRoomsUsers(array(
+			'RolesRoomsUser.user_id' => $userId,
+		));
+		$rolesRoomsUsers = Hash::combine(
+			$rolesRoomsUsers, '{n}.RolesRoomsUser.room_id', '{n}'
+		);
+		$controller->set('rolesRoomsUsers', $rolesRoomsUsers);
+	}
+
 }
 
