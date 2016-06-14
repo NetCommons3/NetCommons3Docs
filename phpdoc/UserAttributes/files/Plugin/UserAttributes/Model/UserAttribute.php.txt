@@ -299,11 +299,15 @@ class UserAttribute extends UserAttributesAppModel {
 			if ($userAttribute['UserAttribute']['key'] === 'role_key') {
 				//権限の設定
 				$result['UserAttributeChoice'] = $userRoles;
+				$result['UserAttributeChoice'] =
+						Hash::insert($result['UserAttributeChoice'], '{n}.user_attribute_id', $userAttributeId);
 
 			} elseif (isset($dataTypes[$dataTypeKey]['DataTypeChoice'])) {
 				//DataTypeChoiceにデータがある場合
 				$result['UserAttributeSetting']['data_type_key'] = DataType::DATA_TYPE_SELECT;
 				$result['UserAttributeChoice'] = $dataTypes[$dataTypeKey]['DataTypeChoice'];
+				$result['UserAttributeChoice'] =
+						Hash::insert($result['UserAttributeChoice'], '{n}.user_attribute_id', $userAttributeId);
 
 			} elseif (isset($userAttributeChoices[$userAttributeId])) {
 				//UserAttributeChoiceにデータがある場合
