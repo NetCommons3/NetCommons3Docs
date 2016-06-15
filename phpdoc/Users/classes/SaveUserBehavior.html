@@ -136,10 +136,10 @@
                                 <div class="accordion" style="margin-bottom: 0">
         <div class="accordion-group">
             <div class="accordion-heading">
-                                    <a class="accordion-toggle " data-toggle="collapse" data-target="#namespace-893806426"></a>
+                                    <a class="accordion-toggle " data-toggle="collapse" data-target="#namespace-1516533528"></a>
                                 <a href="../namespaces/default.html" style="margin-left: 30px; padding-left: 0">\</a>
             </div>
-            <div id="namespace-893806426" class="accordion-body collapse in">
+            <div id="namespace-1516533528" class="accordion-body collapse in">
                 <div class="accordion-inner">
 
                     
@@ -260,6 +260,8 @@
                                                                     <a href="../classes/SaveUserBehavior.html#method_beforeValidate" class="">beforeValidate()</a><br />
                                                                     <a href="../classes/SaveUserBehavior.html#method_beforeSave" class="">beforeSave()</a><br />
                                                                     <a href="../classes/SaveUserBehavior.html#method_afterSave" class="">afterSave()</a><br />
+                                                                    <a href="../classes/SaveUserBehavior.html#method_canUserEdit" class="">canUserEdit()</a><br />
+                                                                    <a href="../classes/SaveUserBehavior.html#method_validateUser" class="">validateUser()</a><br />
                                                                     <a href="../classes/SaveUserBehavior.html#method_updateLoginTime" class="">updateLoginTime()</a><br />
                                                                     <a href="../classes/SaveUserBehavior.html#method_equalToField" class="">equalToField()</a><br />
                                                                     <a href="../classes/SaveUserBehavior.html#method_notDuplicate" class="">notDuplicate()</a><br />
@@ -477,6 +479,89 @@ will abort the save operation.</em></p>
                                                                                             <dt>See also</dt>
                                                                 <dd><a href=""><span class="namespace-wrapper">\Model::save()</span></a></dd>
                                                                 </dl>
+            <h2>Tags</h2>
+            <table class="table table-condensed">
+                                    <tr><td colspan="2"><em>None found</em></td></tr>
+                            </table>
+        </aside>
+    </div>
+
+                                    <div class="row-fluid">
+        <div class="span8 content class">
+            <a id="method_canUserEdit" name="method_canUserEdit" class="anchor"></a>
+            <article class="method">
+                <h3 class="public ">canUserEdit()</h3>
+                <a href="#source-view" role="button" class="pull-right btn" data-toggle="modal" style="font-size: 1.1em; padding: 9px 14px"><i class="icon-code"></i></a>
+                <pre class="signature" style="margin-right: 54px;">canUserEdit(\Model  <span class="argument">$model</span>, array  <span class="argument">$user</span>) : boolean</pre>
+                <p><em>ユーザの削除出来るかどうか</em></p>
+                
+
+                                    <h4>Parameters</h4>
+                    <table class="table table-condensed table-hover">
+                                                    <tr>
+                                <td>\Model</td>
+                                <td>$model </td>
+                                <td><p>ビヘイビア呼び出し元モデル</p></td>
+                            </tr>
+                                                    <tr>
+                                <td>array</td>
+                                <td>$user </td>
+                                <td><p>ユーザデータ</p></td>
+                            </tr>
+                                            </table>
+                
+                
+                                    <h4>Returns</h4>
+                    boolean
+                                    				
+                            </article>
+        </div>
+        <aside class="span4 detailsbar">
+            <h1><i class="icon-arrow-down"></i></h1>
+                                                            <dl>
+                                                                            </dl>
+            <h2>Tags</h2>
+            <table class="table table-condensed">
+                                    <tr><td colspan="2"><em>None found</em></td></tr>
+                            </table>
+        </aside>
+    </div>
+
+                                    <div class="row-fluid">
+        <div class="span8 content class">
+            <a id="method_validateUser" name="method_validateUser" class="anchor"></a>
+            <article class="method">
+                <h3 class="public ">validateUser()</h3>
+                <a href="#source-view" role="button" class="pull-right btn" data-toggle="modal" style="font-size: 1.1em; padding: 9px 14px"><i class="icon-code"></i></a>
+                <pre class="signature" style="margin-right: 54px;">validateUser(\Model  <span class="argument">$model</span>, array  <span class="argument">$data</span>) : boolean</pre>
+                <p><em>UserのValidateチェック</em></p>
+                
+
+                                    <h4>Parameters</h4>
+                    <table class="table table-condensed table-hover">
+                                                    <tr>
+                                <td>\Model</td>
+                                <td>$model </td>
+                                <td><p>ビヘイビア呼び出し元モデル</p></td>
+                            </tr>
+                                                    <tr>
+                                <td>array</td>
+                                <td>$data </td>
+                                <td><p>data</p></td>
+                            </tr>
+                                            </table>
+                
+                
+                                    <h4>Returns</h4>
+                    boolean
+                                            &mdash; <p>True:正常、False:不正</p>
+                                    				
+                            </article>
+        </div>
+        <aside class="span4 detailsbar">
+            <h1><i class="icon-arrow-down"></i></h1>
+                                                            <dl>
+                                                                            </dl>
             <h2>Tags</h2>
             <table class="table table-condensed">
                                     <tr><td colspan="2"><em>None found</em></td></tr>
@@ -837,7 +922,7 @@ will abort the save operation.</em></p>
                 <section class="span10 offset1">
                     <hr />
                     Documentation is powered by <a href="http://www.phpdoc.org/">phpDocumentor </a> and authored
-                    on June 15th, 2016 at 07:00.
+                    on June 15th, 2016 at 08:40.
                 </section>
             </section>
         </section>
