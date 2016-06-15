@@ -139,6 +139,7 @@ class RoomsController extends RoomsAppController {
 		$this->viewClass = 'View';
 		$this->layout = 'NetCommons.modal';
 		$this->set('activeTab', Hash::get($this->request->query, 'tab', parent::WIZARD_ROOMS));
+		$this->set('isEdit', Hash::get($this->request->query, 'isEdit', true));
 
 		//表示処理
 		$this->request->data = $this->viewVars['room'];
@@ -154,6 +155,7 @@ class RoomsController extends RoomsAppController {
 		$this->PluginsForm->roomId = $this->viewVars['activeRoomId'];
 
 		$this->RoomsRolesForm->limit = 10;
+		$this->request->query = array();
 		$this->RoomsRolesForm->actionRoomsRolesUser($this, true);
 	}
 
