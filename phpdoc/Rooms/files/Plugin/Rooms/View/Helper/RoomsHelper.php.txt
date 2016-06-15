@@ -154,8 +154,9 @@ class RoomsHelper extends AppHelper {
  * array(
  *		'paginator' => ページネーションの有無 デフォルト：true,
  *		'displaySpace' => スペース表示,
- *		'roomTreeList' => ルームのTreeリスト
- *		'rooms' => ルームリスト
+ *		'roomTreeList' => ルームのTreeリスト,
+ *		'rooms' => ルームリスト,
+ *		'tableClass' => テーブルタグのclass属性,
  * )
  * ```
  * @return string HTML
@@ -181,6 +182,7 @@ class RoomsHelper extends AppHelper {
 			'space' => $this->_View->viewVars['spaces'][$activeSpaceId],
 			'paginator' => Hash::get($options, 'paginator', true),
 			'displaySpace' => Hash::get($options, 'displaySpace', false),
+			'tableClass' => Hash::get($options, 'tableClass', 'table'),
 		));
 
 		return $output;
