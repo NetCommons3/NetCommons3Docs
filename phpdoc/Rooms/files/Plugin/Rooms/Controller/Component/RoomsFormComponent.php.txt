@@ -38,7 +38,7 @@ class RoomsFormComponent extends Component {
 	}
 
 /**
- * RoomFormHelper::checkboxRooms()のためデータをセット
+ * RoomsFormHelper::checkboxRooms()のためデータをセット
  *
  * @param array $conditions findのconditionsオプション
  * @return void

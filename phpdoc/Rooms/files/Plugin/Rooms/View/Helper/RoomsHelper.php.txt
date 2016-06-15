@@ -68,26 +68,19 @@ class RoomsHelper extends AppHelper {
 		}
 
 		if (isset($roomNames)) {
-			$element = implode(self::ROOM_NAME_PAUSE, array_map('h', $roomNames));
+			$output = implode(self::ROOM_NAME_PAUSE, array_map('h', $roomNames));
 		} else {
-			$element = $this->roomName($this->_View->viewVars['spaces'][$activeSpaceId]);
+			$output = $this->roomName($this->_View->viewVars['spaces'][$activeSpaceId]);
 		}
-		if ($this->_View->request->params['action'] === 'add') {
-			if (! $this->_View->viewVars['room']['Room']['parent_id']) {
-				$element .= self::ROOM_NAME_PAUSE .
-						'<span class="glyphicon glyphicon-plus"></span>' . __d('rooms', 'Add new room');
+		if ($this->_View->request->params['controller'] === 'room_add') {
+			if (count($roomNames) === 1) {
+				$output .= self::ROOM_NAME_PAUSE . __d('rooms', 'Add new room');
 			} else {
-				$element .= self::ROOM_NAME_PAUSE .
-						'<span class="glyphicon glyphicon-plus"></span>' . __d('rooms', 'Add new subroom');
+				$output .= self::ROOM_NAME_PAUSE . __d('rooms', 'Add new subroom');
 			}
 		}
-		$output .= $this->NetCommonsHtml->div(array(
-			'text-muted', 'small',
-			'visible-xs-inline-block', 'visible-sm-inline-block',
-			'visible-md-inline-block', 'visible-lg-inline-block'
-		), $element);
 
-		return '(' . $output . ')';
+		return $output;
 	}
 
 /**

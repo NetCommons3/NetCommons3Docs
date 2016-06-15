@@ -70,7 +70,7 @@ class RoomsAppController extends AppController {
  * @var array
  */
 	public $helpers = array(
-		'Rooms.RoomForm',
+		'Rooms.RoomsForm',
 	);
 
 /**

@@ -244,6 +244,9 @@ class RoomAddController extends RoomsAppController {
 				//正常の場合
 				$this->Session->delete('RoomAdd');
 
+				$this->NetCommons->setFlashNotification(__d('net_commons', 'Successfully saved.'), array(
+					'class' => 'success',
+				));
 				$spaces = $this->viewVars['spaces'];
 				$activeSpaceId = $this->viewVars['activeSpaceId'];
 				return $this->redirect('/rooms/' . $spaces[$activeSpaceId]['Space']['default_setting_action']);
