@@ -329,5 +329,52 @@ class RoomsFormHelper extends AppHelper {
 		return $this->MessageFlash->description($output);
 	}
 
+/**
+ * すべての会員をデフォルトで参加させる
+ *
+ * @return string HTML
+ */
+	public function inputDefaultParticipation() {
+		$output = '';
+
+		$roomNames = [];
+
+		if (isset($this->_View->viewVars['parentRooms'])) {
+			$pathName = '{n}.RoomsLanguage.{n}[language_id=' . Current::read('Language.id') . '].name';
+			$roomNames = Hash::extract($this->_View->viewVars['parentRooms'], $pathName);
+		}
+		if ($this->_View->request->params['controller'] === 'room_add') {
+			if (count($roomNames) === 1) {
+				$label = __d('rooms', 'Open for all members');
+			} else {
+				$label = sprintf(
+					__d('rooms', 'Open for %s room\'s members'),
+					implode(RoomsHelper::ROOM_NAME_PAUSE, array_map('h', $roomNames))
+				);
+			}
+		} else {
+			if (count($roomNames) <= 2) {
+				$label = __d('rooms', 'Open for all members');
+			} else {
+				array_pop($roomNames);
+				$label = sprintf(
+					__d('rooms', 'Open for %s room\'s members'),
+					implode(RoomsHelper::ROOM_NAME_PAUSE, array_map('h', $roomNames))
+				);
+			}
+		}
+
+		if ($this->_View->viewVars['participationFixed']) {
+			$output .= $this->NetCommonsForm->hidden('Room.default_participation');
+		}
+
+		$output .= $this->NetCommonsForm->inlineCheckbox('Room.default_participation', array(
+			'label' => $label,
+			'disabled' => $this->_View->viewVars['participationFixed'],
+		));
+
+		return $output;
+	}
+
 }
 

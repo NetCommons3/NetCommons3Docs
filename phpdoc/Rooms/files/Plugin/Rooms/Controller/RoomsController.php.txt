@@ -138,6 +138,7 @@ class RoomsController extends RoomsAppController {
 	public function view() {
 		$this->viewClass = 'View';
 		$this->layout = 'NetCommons.modal';
+		$this->set('activeTab', Hash::get($this->request->query, 'tab', parent::WIZARD_ROOMS));
 
 		//表示処理
 		$this->request->data = $this->viewVars['room'];
@@ -148,20 +149,12 @@ class RoomsController extends RoomsAppController {
 			))
 		);
 
-		$roomName = Hash::extract(
-			$this->viewVars['room'],
-			'RoomsLanguage.{n}[language_id=' . Current::read('Language.id') . '].name'
-		);
-		$this->set('roomName', $roomName[0]);
-
 		$this->RoomsRolesForm->settings['room_id'] = $this->viewVars['activeRoomId'];
 		$this->RoomsRolesForm->settings['type'] = DefaultRolePermission::TYPE_ROOM_ROLE;
 		$this->PluginsForm->roomId = $this->viewVars['activeRoomId'];
 
 		$this->RoomsRolesForm->limit = 10;
 		$this->RoomsRolesForm->actionRoomsRolesUser($this, true);
-
-		$this->set('activeTab', Hash::get($this->request->query, 'tab', parent::WIZARD_ROOMS));
 	}
 
 /**
