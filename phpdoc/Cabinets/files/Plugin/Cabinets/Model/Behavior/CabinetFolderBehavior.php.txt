@@ -66,12 +66,16 @@ class CabinetFolderBehavior extends ModelBehavior {
  * @throws Exception
  */
 	public function syncRootFolder(Model $model, $cabinet) {
-		if ($this->rootFolderExist($cabinet)) {
+		if ($this->rootFolderExist($model, $cabinet)) {
 			// ファイル名同期
 			$options = [
 				'conditions' => $this->_getRootFolderConditions($cabinet)
 			];
 			$rootFolder = $model->find('first', $options);
+			if ($rootFolder['CabinetFile']['filename'] == $cabinet['Cabinet']['name']) {
+				// ファイル名が同じならupdate不要
+				return true;
+			}
 			$rootFolder['CabinetFile']['filename'] = $cabinet['Cabinet']['name'];
 			return ($model->save($rootFolder)) ? true : false;
 		} else {
@@ -87,10 +91,12 @@ class CabinetFolderBehavior extends ModelBehavior {
  * @return bool
  */
 	public function makeRootFolder(Model $model, $cabinet) {
-		if ($this->rootFolderExist($cabinet)) {
+		if ($this->rootFolderExist($model, $cabinet)) {
 			return true;
 		}
 		//
+		// $modelのTopicビヘイビアを停止
+		$model->Behaviors->disable('Topics');
 		$model->create();
 		$rootFolder = [
 			'CabinetFile' => [
@@ -110,10 +116,13 @@ class CabinetFolderBehavior extends ModelBehavior {
 				]
 			];
 			$result = $model->CabinetFileTree->save($tree);
-			return ($result) ? true : false;
+			$result = ($result) ? true : false;
 		} else {
-			return false;
+			$result = false;
 		}
+		// $modelのTopicビヘイビアを復帰
+		$model->Behaviors->enable('Topics');
+		return $result;
 	}
 
 /**
@@ -170,6 +179,26 @@ class CabinetFolderBehavior extends ModelBehavior {
 			'parent_id' => null,
 		];
 		return $conditions;
+	}
+
+/**
+ * Cabinet.total_sizeに容量をキャッシュする
+ *
+ * @param Model $model モデル
+ * @param int $cabinetId キャビネットID
+ * @return void
+ */
+	public function updateCabinetTotalSize(Model $model, $cabinetId) {
+		$cabinet = $model->Cabinet->findById($cabinetId);
+		// トータルサイズ取得
+		$rootFolder = $model->getRootFolder($cabinet);
+		$totalSize = $model->getTotalSizeByFolder(
+			$rootFolder
+		);
+		// キャビネット更新
+		//$model->Cabinet->save($cabinet);
+		$model->Cabinet->id = $cabinetId;
+		$model->Cabinet->saveField('total_size', $totalSize, ['callbacks' => false]);
 	}
 
 }

@@ -1,6 +1,6 @@
 <?php
 /**
- * DropOriginId
+ * AlterCabinetsTotalSize
  *
  * @author   Ryuji AMANO <ryuji@ryus.co.jp>
  * @link http://www.netcommons.org NetCommons Project
@@ -8,16 +8,16 @@
  */
 
 /**
- * Class DropOriginId
+ * Class AlterCabinetsTotalSize
  */
-class DropOriginId extends CakeMigration {
+class AlterCabinetsTotalSize extends CakeMigration {
 
 /**
  * Migration description
  *
  * @var string
  */
-	public $description = 'drop_origin_id';
+	public $description = 'alter_cabinets_total_size';
 
 /**
  * Actions to be performed
@@ -26,21 +26,16 @@ class DropOriginId extends CakeMigration {
  */
 	public $migration = array(
 		'up' => array(
-			'drop_field' => array(
-				'cabinet_files' => array('origin_id'),
+			'alter_field' => array(
+				'cabinets' => array(
+					'total_size' => array('type' => 'float', 'null' => false, 'default' => '0', 'unsigned' => false),
+				),
 			),
 		),
 		'down' => array(
-			'create_field' => array(
-				'cabinet_files' => array(
-					'origin_id' => array(
-						'type' => 'string',
-						'null' => false,
-						'default' => null,
-						'collate' => 'utf8_general_ci',
-						'comment' => 'file key | エントリーキー | Hash値 | ',
-						'charset' => 'utf8'
-					),
+			'alter_field' => array(
+				'cabinets' => array(
+					'total_size' => array('type' => 'float', 'null' => true, 'default' => null, 'unsigned' => false),
 				),
 			),
 		),
