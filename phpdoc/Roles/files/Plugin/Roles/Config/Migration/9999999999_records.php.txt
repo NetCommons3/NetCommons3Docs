@@ -463,7 +463,7 @@ class Records extends NetCommonsMigration {
 			array('role_key' => 'room_administrator', 'type' => 'room_role', 'permission' => 'html_not_limited', 'value' => '0', 'fixed' => '0', ),
 			array('role_key' => 'chief_editor', 'type' => 'room_role', 'permission' => 'html_not_limited', 'value' => '0', 'fixed' => '0', ),
 			array('role_key' => 'editor', 'type' => 'room_role', 'permission' => 'html_not_limited', 'value' => '0', 'fixed' => '0', ),
-			array('role_key' => 'general_user', 'type' => 'room_role', 'permission' => 'html_not_limited', 'value' => '0', 'fixed' => '0', ),
+			array('role_key' => 'general_user', 'type' => 'room_role', 'permission' => 'html_not_limited', 'value' => '0', 'fixed' => '1', ),
 			array('role_key' => 'visitor', 'type' => 'room_role', 'permission' => 'html_not_limited', 'value' => '0', 'fixed' => '1', ),
 			//投稿をメール通知する権限
 			array('role_key' => 'room_administrator', 'type' => 'room_role', 'permission' => 'mail_content_receivable', 'value' => '1', 'fixed' => '1', ),
