@@ -102,7 +102,10 @@ class RoomsRolesFormHelper extends AppHelper {
 		$html .= '</div>';
 
 		if (Hash::get($attributes, 'help')) {
-			$html .= $this->NetCommonsForm->help(Hash::get($attributes, 'help'));
+			$html .= $this->NetCommonsForm->help(
+				Hash::get($attributes, 'help'),
+				Hash::get($attributes, 'helpOptions')
+			);
 		}
 		$html .= '</div>';
 
