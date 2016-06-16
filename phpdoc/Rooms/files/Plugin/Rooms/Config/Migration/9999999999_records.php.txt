@@ -90,7 +90,7 @@ class Records extends NetCommonsMigration {
 			array('id' => '5', 'room_id' => '1', 'role_key' => 'visitor'),
 			//プライベートスペース
 			array('id' => '6', 'room_id' => '2', 'role_key' => 'room_administrator'),
-			//グループスペース
+			//コミュニティスペース
 			array('id' => '7', 'room_id' => '3', 'role_key' => 'room_administrator'),
 			array('id' => '8', 'room_id' => '3', 'role_key' => 'chief_editor'),
 			array('id' => '9', 'room_id' => '3', 'role_key' => 'editor'),
@@ -102,7 +102,7 @@ class Records extends NetCommonsMigration {
 		//	array('id' => '1', 'roles_room_id' => '1', 'user_id' => '1', 'room_id' => '1'),
 		//	//プライベートスペース
 		//	array('id' => '2', 'roles_room_id' => '6', 'user_id' => '1', 'room_id' => '2'),
-		//	//グループスペース
+		//	//コミュニティスペース
 		//	array('id' => '3', 'roles_room_id' => '7', 'user_id' => '1', 'room_id' => '3'),
 		//),
 		'RoomRolePermission' => array(
@@ -192,7 +192,7 @@ class Records extends NetCommonsMigration {
 			array('roles_room_id' => '6', 'permission' => 'mail_content_receivable', 'value' => '1'),
 			array('roles_room_id' => '6', 'permission' => 'mail_answer_receivable', 'value' => '1'),
 			array('roles_room_id' => '6', 'permission' => 'mail_editable', 'value' => '1'),
-			//グループスペース
+			//コミュニティスペース
 			//--ルーム管理者
 			array('roles_room_id' => '7', 'permission' => 'block_editable', 'value' => '1'),
 			array('roles_room_id' => '7', 'permission' => 'content_comment_creatable', 'value' => '1'),
@@ -302,7 +302,7 @@ class Records extends NetCommonsMigration {
 				'page_layout_permitted' => '0',
 				'theme' => 'Default',
 			),
-			//グループスペース
+			//コミュニティスペース
 			array(
 				'id' => '3',
 				'space_id' => '4',
@@ -329,11 +329,11 @@ class Records extends NetCommonsMigration {
 			array('language_id' => '2', 'room_id' => '2', 'name' => 'プライベート'),
 			//--英語
 			array('language_id' => '1', 'room_id' => '2', 'name' => 'Private'),
-			//グループスペース
+			//コミュニティスペース
 			//--日本語
-			array('language_id' => '2', 'room_id' => '3', 'name' => 'グループ'),
+			array('language_id' => '2', 'room_id' => '3', 'name' => 'コミュニティ'),
 			//--英語
-			array('language_id' => '1', 'room_id' => '3', 'name' => 'Group'),
+			array('language_id' => '1', 'room_id' => '3', 'name' => 'Community'),
 		),
 	);
 
