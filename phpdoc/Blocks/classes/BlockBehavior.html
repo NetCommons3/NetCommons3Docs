@@ -136,10 +136,10 @@
                                 <div class="accordion" style="margin-bottom: 0">
         <div class="accordion-group">
             <div class="accordion-heading">
-                                    <a class="accordion-toggle " data-toggle="collapse" data-target="#namespace-1257827619"></a>
+                                    <a class="accordion-toggle " data-toggle="collapse" data-target="#namespace-1726317872"></a>
                                 <a href="../namespaces/default.html" style="margin-left: 30px; padding-left: 0">\</a>
             </div>
-            <div id="namespace-1257827619" class="accordion-body collapse in">
+            <div id="namespace-1726317872" class="accordion-body collapse in">
                 <div class="accordion-inner">
 
                     
@@ -283,6 +283,7 @@
                                                                     <a href="../classes/BlockBehavior.html#method_beforeValidate" class="">beforeValidate()</a><br />
                                                                     <a href="../classes/BlockBehavior.html#method_beforeSave" class="">beforeSave()</a><br />
                                                                     <a href="../classes/BlockBehavior.html#method_getBlockConditions" class="">getBlockConditions()</a><br />
+                                                                    <a href="../classes/BlockBehavior.html#method_getBlockIndexSettings" class="">getBlockIndexSettings()</a><br />
                                                                     <a href="../classes/BlockBehavior.html#method_getBlockConditionById" class="">getBlockConditionById()</a><br />
                                                                     <a href="../classes/BlockBehavior.html#method_deleteBlock" class="">deleteBlock()</a><br />
                                                             </section>
@@ -609,6 +610,50 @@ will abort the save operation.</em></p>
 
                                     <div class="row-fluid">
         <div class="span8 content class">
+            <a id="method_getBlockIndexSettings" name="method_getBlockIndexSettings" class="anchor"></a>
+            <article class="method">
+                <h3 class="public ">getBlockIndexSettings()</h3>
+                <a href="#source-view" role="button" class="pull-right btn" data-toggle="modal" style="font-size: 1.1em; padding: 9px 14px"><i class="icon-code"></i></a>
+                <pre class="signature" style="margin-right: 54px;">getBlockIndexSettings(\Model  <span class="argument">$model</span>, array  <span class="argument">$options = array()</span>) : array</pre>
+                <p><em>ブロック一覧データを取得するsettingsを返す。</em></p>
+                <h4>サンプルコード（Faqモデル）</h4>
+<pre><code>$this-&gt;Paginator-&gt;settings = array(
+    'Faq' =&gt; $this-&gt;Faq-&gt;getBlockIndexSettings();</code></pre>
+
+                                    <h4>Parameters</h4>
+                    <table class="table table-condensed table-hover">
+                                                    <tr>
+                                <td>\Model</td>
+                                <td>$model </td>
+                                <td><p>ビヘイビアの呼び出しのモデル</p></td>
+                            </tr>
+                                                    <tr>
+                                <td>array</td>
+                                <td>$options </td>
+                                <td><p>Model::find conditions default value</p></td>
+                            </tr>
+                                            </table>
+                
+                
+                                    <h4>Returns</h4>
+                    array
+                                            &mdash; <p>Conditions data</p>
+                                    				
+                            </article>
+        </div>
+        <aside class="span4 detailsbar">
+            <h1><i class="icon-arrow-down"></i></h1>
+                                                            <dl>
+                                                                            </dl>
+            <h2>Tags</h2>
+            <table class="table table-condensed">
+                                    <tr><td colspan="2"><em>None found</em></td></tr>
+                            </table>
+        </aside>
+    </div>
+
+                                    <div class="row-fluid">
+        <div class="span8 content class">
             <a id="method_getBlockConditionById" name="method_getBlockConditionById" class="anchor"></a>
             <article class="method">
                 <h3 class="public ">getBlockConditionById()</h3>
@@ -895,7 +940,7 @@ will abort the save operation.</em></p>
                 <section class="span10 offset1">
                     <hr />
                     Documentation is powered by <a href="http://www.phpdoc.org/">phpDocumentor </a> and authored
-                    on June 8th, 2016 at 02:53.
+                    on June 17th, 2016 at 08:07.
                 </section>
             </section>
         </section>
