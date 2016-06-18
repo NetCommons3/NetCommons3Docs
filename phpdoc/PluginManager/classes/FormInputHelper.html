@@ -136,10 +136,10 @@
                                 <div class="accordion" style="margin-bottom: 0">
         <div class="accordion-group">
             <div class="accordion-heading">
-                                    <a class="accordion-toggle " data-toggle="collapse" data-target="#namespace-478078678"></a>
+                                    <a class="accordion-toggle " data-toggle="collapse" data-target="#namespace-502058140"></a>
                                 <a href="../namespaces/default.html" style="margin-left: 30px; padding-left: 0">\</a>
             </div>
-            <div id="namespace-478078678" class="accordion-body collapse in">
+            <div id="namespace-502058140" class="accordion-body collapse in">
                 <div class="accordion-inner">
 
                     
@@ -284,7 +284,7 @@ will inherit them.</p>
                         </section>
                         <section class="row-fluid private">
                             <section class="span4">
-                                                                    <em>No private methods found</em>
+                                                                    <a href="../classes/FormInputHelper.html#method___bootstrapCheckbox" class="">__bootstrapCheckbox()</a><br />
                                                             </section>
                             <section class="span4">
                                                                     <em>No private properties found</em>
@@ -784,7 +784,7 @@ will inherit them.</p>
             <article class="method">
                 <h3 class="public ">label()</h3>
                 <a href="#source-view" role="button" class="pull-right btn" data-toggle="modal" style="font-size: 1.1em; padding: 9px 14px"><i class="icon-code"></i></a>
-                <pre class="signature" style="margin-right: 54px;">label(string  <span class="argument">$fieldName</span>) : string</pre>
+                <pre class="signature" style="margin-right: 54px;">label(string  <span class="argument">$fieldName</span>, array  <span class="argument">$options = array()</span>) : string</pre>
                 <p><em>ラベルの出力</em></p>
                 <h4>サンプル</h4>
 <ul>
@@ -800,6 +800,11 @@ will inherit them.</p>
                                 <td>string</td>
                                 <td>$fieldName </td>
                                 <td><p>フィールド名(&quot;Modelname.fieldname&quot;形式)</p></td>
+                            </tr>
+                                                    <tr>
+                                <td>array</td>
+                                <td>$options </td>
+                                <td><p>label型のオプション</p></td>
                             </tr>
                                             </table>
                 
@@ -872,7 +877,63 @@ will inherit them.</p>
         </aside>
     </div>
 
-                                                                    </div>
+                                                                    <div class="row-fluid">
+        <div class="span8 content class">
+            <a id="method___bootstrapCheckbox" name="method___bootstrapCheckbox" class="anchor"></a>
+            <article class="method">
+                <h3 class="private ">__bootstrapCheckbox()</h3>
+                <a href="#source-view" role="button" class="pull-right btn" data-toggle="modal" style="font-size: 1.1em; padding: 9px 14px"><i class="icon-code"></i></a>
+                <pre class="signature" style="margin-right: 54px;">__bootstrapCheckbox(string  <span class="argument">$fieldName</span>, string  <span class="argument">$checkboxClass</span>, string  <span class="argument">$label</span>, boolean  <span class="argument">$escape</span>, array  <span class="argument">$inputOptions</span>) : string</pre>
+                <p><em>Bootstrapのチェックボックスを出力する</em></p>
+                
+
+                                    <h4>Parameters</h4>
+                    <table class="table table-condensed table-hover">
+                                                    <tr>
+                                <td>string</td>
+                                <td>$fieldName </td>
+                                <td><p>フィールド名</p></td>
+                            </tr>
+                                                    <tr>
+                                <td>string</td>
+                                <td>$checkboxClass </td>
+                                <td><p>チェックボックスclass属性</p></td>
+                            </tr>
+                                                    <tr>
+                                <td>string</td>
+                                <td>$label </td>
+                                <td><p>ラベル</p></td>
+                            </tr>
+                                                    <tr>
+                                <td>boolean</td>
+                                <td>$escape </td>
+                                <td><p>エスケープフラグ</p></td>
+                            </tr>
+                                                    <tr>
+                                <td>array</td>
+                                <td>$inputOptions </td>
+                                <td><p>HTMLの属性オプション</p></td>
+                            </tr>
+                                            </table>
+                
+                
+                                    <h4>Returns</h4>
+                    string
+                                    				
+                            </article>
+        </div>
+        <aside class="span4 detailsbar">
+            <h1><i class="icon-arrow-down"></i></h1>
+                                                            <dl>
+                                                                            </dl>
+            <h2>Tags</h2>
+            <table class="table table-condensed">
+                                    <tr><td colspan="2"><em>None found</em></td></tr>
+                            </table>
+        </aside>
+    </div>
+
+                                    </div>
     </section>
 
     <div id="source-view" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="source-view-label" aria-hidden="true">
@@ -921,7 +982,7 @@ will inherit them.</p>
                 <section class="span10 offset1">
                     <hr />
                     Documentation is powered by <a href="http://www.phpdoc.org/">phpDocumentor </a> and authored
-                    on May 27th, 2016 at 08:57.
+                    on June 18th, 2016 at 23:28.
                 </section>
             </section>
         </section>
