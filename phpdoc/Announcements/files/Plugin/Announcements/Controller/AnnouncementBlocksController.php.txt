@@ -63,12 +63,9 @@ class AnnouncementBlocksController extends AnnouncementsAppController {
  */
 	public function index() {
 		$this->Paginator->settings = array(
-			'Announcement' => array(
-				'order' => array('Announcement.id' => 'desc'),
-				'conditions' => $this->Announcement->getBlockConditions(array(
-					'Announcement.is_latest' => true,
-				)),
-			)
+			'Announcement' => $this->Announcement->getBlockIndexSettings([
+				'conditions' => array('Announcement.is_latest' => true)
+			])
 		);
 
 		$announcements = $this->Paginator->paginate('Announcement');
