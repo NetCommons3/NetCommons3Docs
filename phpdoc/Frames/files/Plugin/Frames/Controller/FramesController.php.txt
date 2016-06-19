@@ -94,7 +94,10 @@ class FramesController extends FramesAppController {
 		}
 
 		if ($plugin = $this->Plugin->findByKey($data['Frame']['plugin_key'])) {
-			if ($plugin['Plugin']['default_setting_action']) {
+			if (Hash::get($plugin, 'Plugin.frame_add_action')) {
+				$url = '/' . $data['Frame']['plugin_key'] . '/' . $plugin['Plugin']['frame_add_action'];
+				return $this->redirect($url . '?frame_id=' . $frame['Frame']['id']);
+			} elseif (Hash::get($plugin, 'Plugin.default_setting_action')) {
 				$url = '/' . $data['Frame']['plugin_key'] . '/' . $plugin['Plugin']['default_setting_action'];
 				return $this->redirect($url . '?frame_id=' . $frame['Frame']['id']);
 			}
