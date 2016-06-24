@@ -36,7 +36,7 @@ class RoomSpace extends Space {
  */
 	public function createRoom($data = array()) {
 		$data = Hash::merge(array(
-			'need_approval' => true,
+			'need_approval' => false,
 			'default_participation' => false,
 		), $data);
 
