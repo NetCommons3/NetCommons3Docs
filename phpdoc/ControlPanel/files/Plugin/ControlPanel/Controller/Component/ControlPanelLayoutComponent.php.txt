@@ -42,10 +42,19 @@ class ControlPanelLayoutComponent extends Component {
 		//Pluginデータ取得
 		$controller->Plugin = ClassRegistry::init('PluginManager.Plugin', true);
 		$controller->PluginsRole = ClassRegistry::init('PluginManager.PluginsRole', true);
+
+		$controlPanel = $controller->Plugin->create(array(
+			'key' => 'control_panel',
+			'name' => __d('control_panel', 'Control Panel Top'),
+			'default_action' => 'control_panel/index'
+		));
+
 		$this->plugins = $controller->PluginsRole->getPlugins(
 			array(Plugin::PLUGIN_TYPE_FOR_SITE_MANAGER, Plugin::PLUGIN_TYPE_FOR_SYSTEM_MANGER),
 			Current::read('User.role_key'), 'INNER'
 		);
+
+		array_unshift($this->plugins, $controlPanel);
 
 		//Layoutのセット
 		$controller->layout = 'ControlPanel.default';
