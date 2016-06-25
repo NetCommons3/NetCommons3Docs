@@ -76,7 +76,7 @@ class Records extends NetCommonsMigration {
 				'lft' => '6',
 				'rght' => '7',
 				'type' => '4',
-				'plugin_key' => 'room_space',
+				'plugin_key' => 'community_space',
 				'default_setting_action' => 'rooms/index/4',
 				'room_disk_size' => '524288000',
 			),
