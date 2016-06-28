@@ -51,7 +51,7 @@ class AnnouncementBlocksController extends AnnouncementsAppController {
 		'Blocks.BlockIndex',
 		'Blocks.BlockTabs' => array(
 			'mainTabs' => array('block_index'),
-			'blockTabs' => array('block_settings', 'mail_settings'),
+			'blockTabs' => array('block_settings', 'mail_settings', 'role_permissions'),
 		),
 		'Workflow.Workflow',
 	);

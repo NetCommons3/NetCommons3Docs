@@ -36,6 +36,7 @@ class AnnouncementsAppController extends AppController {
  */
 	public $uses = array(
 		'Announcements.Announcement',
+		'Announcements.AnnouncementSetting'
 	);
 
 }

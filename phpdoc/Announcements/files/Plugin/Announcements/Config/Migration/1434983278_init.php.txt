@@ -83,7 +83,6 @@ class Init extends NetCommonsMigration {
 				'modified_user' => '1',
 			),
 		),
-
 	);
 
 /**

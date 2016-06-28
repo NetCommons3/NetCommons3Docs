@@ -108,11 +108,44 @@ class Announcement extends AnnouncementsAppModel {
 	}
 
 /**
+ * Called after each successful save operation.
+ *
+ * @param bool $created True if this save created a new record
+ * @param array $options Options passed from Model::save().
+ * @return void
+ * @throws InternalErrorException
+ * @link http://book.cakephp.org/2.0/en/models/callback-methods.html#aftersave
+ * @see Model::save()
+ */
+	public function afterSave($created, $options = array()) {
+		$this->loadModels([
+			'AnnouncementSetting' => 'Announcements.AnnouncementSetting',
+		]);
+
+		//AnnouncementSetting登録
+		if (isset($this->data['AnnouncementSetting'])) {
+			if (! $this->data['AnnouncementSetting']['block_key']) {
+				$this->data['AnnouncementSetting']['block_key'] = $this->data['Block']['key'];
+			}
+			$this->AnnouncementSetting->set($this->data['AnnouncementSetting']);
+			if (! $this->AnnouncementSetting->save(null, false)) {
+				throw new InternalErrorException(__d('net_commons', 'Internal Server Error'));
+			}
+		}
+
+		parent::afterSave($created, $options);
+	}
+
+/**
  * Get announcement data
  *
  * @return array
  */
 	public function getAnnouncement() {
+		$this->loadModels([
+			'AnnouncementSetting' => 'Announcements.AnnouncementSetting',
+		]);
+
 		if (Current::permission('content_editable')) {
 			$conditions[$this->alias . '.is_latest'] = true;
 		} else {
@@ -123,7 +156,7 @@ class Announcement extends AnnouncementsAppModel {
 			'conditions' => $this->getBlockConditionById($conditions),
 		));
 
-		return $announcement;
+		return Hash::merge($announcement, $this->AnnouncementSetting->getAnnouncementSetting());
 	}
 
 /**
