@@ -346,11 +346,13 @@ class Room extends RoomsAppModel {
 					$roomRolePermissions, $room['RoomRolePermission']
 				);
 			}
+
 			foreach ($room['RoomRolePermission'] as $permission) {
 				if (! $this->RoomRolePermission->saveMany($permission, ['validate' => false])) {
 					throw new InternalErrorException(__d('net_commons', 'Internal Server Error'));
 				}
 			}
+			$this->data['RoomRolePermission'] = $room['RoomRolePermission'];
 		}
 
 		//使用できるプラグインデータの登録
