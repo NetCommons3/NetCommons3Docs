@@ -52,13 +52,6 @@ class Category extends CategoriesAppModel {
 			'fields' => '',
 			'order' => ''
 		),
-		'CategoryOrder' => array(
-			'className' => 'Categories.CategoryOrder',
-			'foreignKey' => false,
-			'conditions' => 'CategoryOrder.category_key=Category.key',
-			'fields' => '',
-			'order' => array('CategoryOrder.weight' => 'ASC')
-		),
 	);
 
 /**
@@ -122,6 +115,19 @@ class Category extends CategoriesAppModel {
 			'Block.id' => $blockId,
 			'Block.room_id' => $roomId,
 		);
+
+		$this->bindModel(array(
+			'belongsTo' => array(
+				'CategoryOrder' => array(
+					'className' => 'Categories.CategoryOrder',
+					'foreignKey' => false,
+					'conditions' => 'CategoryOrder.category_key=Category.key',
+					'fields' => '',
+					'order' => array('CategoryOrder.weight' => 'ASC')
+				),
+			)
+		), false);
+
 		$categories = $this->find('all', array(
 			'recursive' => 0,
 			'fields' => array(
