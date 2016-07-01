@@ -376,5 +376,43 @@ class RoomsFormHelper extends AppHelper {
 		return $output;
 	}
 
+/**
+ * Roomに対するセレクトボックス
+ *
+ * @param string $fieldName フィールド名
+ * @param array $attributes HTMLの属性オプション
+ * @return string HTML
+ */
+	public function selectRooms($fieldName, $attributes = array()) {
+		$html = '';
+
+		$roomTreeList = $this->_View->viewVars['roomTreeList'];
+		$rooms = $this->_View->viewVars['rooms'];
+
+		if (! $roomTreeList) {
+			return $html;
+		}
+
+		$options = array();
+		foreach ($roomTreeList as $roomId => $tree) {
+			$room = Hash::get($rooms, $roomId);
+
+			$nest = substr_count($tree, Room::$treeParser);
+			$options[$roomId] = str_repeat('&nbsp;&nbsp;', $nest) . $this->Rooms->roomName($room);
+		}
+
+		$html .= $this->NetCommonsForm->input($fieldName,
+			Hash::merge(array(
+			'type' => 'select',
+			'options' => $options,
+			'label' => false,
+			'div' => false,
+			'error' => false,
+			), $attributes)
+		);
+
+		return $html;
+	}
+
 }
 
