@@ -13,12 +13,9 @@
  */
 
 App::uses('RegistrationsAppModel', 'Registrations.Model');
-App::uses('RegistrationsComponent', 'Registrations.Controller/Component');
 
 /**
  * Summary for RegistrationFrameSetting Model
- *
- * @property RegistrationFrameDisplayRegistration RegistrationFrameDisplayRegistration
  */
 class RegistrationFrameSetting extends RegistrationsAppModel {
 
@@ -71,13 +68,20 @@ class RegistrationFrameSetting extends RegistrationsAppModel {
 			),
 			'display_type' => array(
 				'inList' => array(
-					'rule' => array('inList', array(RegistrationsComponent::DISPLAY_TYPE_SINGLE, RegistrationsComponent::DISPLAY_TYPE_LIST)),
+					'rule' => array('inList', array(
+						RegistrationsComponent::DISPLAY_TYPE_SINGLE,
+						RegistrationsComponent::DISPLAY_TYPE_LIST
+					)),
 					'message' => __d('net_commons', 'Invalid request.'),
 				),
 			),
 			//'display_num_per_page' => array(
+			//	'number' => array(
+			//		'rule' => array('numeric'),
+			//		'message' => __d('net_commons', 'Invalid request.'),
+			//	),
 			//	'inList' => array(
-			//		'rule' => array('inList', array_keys(RegistrationsComponent::getDisplayNumberOptions())),
+			//		'rule' => array('inList', array(1, 5, 10, 20, 50, 100)),
 			//		'message' => __d('net_commons', 'Invalid request.'),
 			//	),
 			//),
@@ -94,19 +98,6 @@ class RegistrationFrameSetting extends RegistrationsAppModel {
 		return true;
 	}
 
-/**
- * getRegistrationFrameSettingConditions 指定されたframe_keyの設定要件をSQL検索用の配列で取り出す
- *
- * @param string $frameKey frame key
- * @return array ... displayNum sortField sortDirection
- */
-	public function getRegistrationFrameSettingConditions($frameKey) {
-		list(, $limit, $sort, $dir) = $this->getRegistrationFrameSetting($frameKey);
-		return array(
-			'offset' => 0,
-			'limit' => $limit,
-			'order' => 'Registration.' . $sort . ' ' . $dir);
-	}
 /**
  * getFrameSetting 指定されたframe_keyの設定要件を取り出す
  *
@@ -130,19 +121,7 @@ class RegistrationFrameSetting extends RegistrationsAppModel {
 		$setting = $frameSetting['RegistrationFrameSetting'];
 		$displayType = $setting['display_type'];
 		$displayNum = $setting['display_num_per_page'];
-		if ($setting['sort_type'] == RegistrationsComponent::REGISTRATION_SORT_MODIFIED) {
-			$sort = 'modified';
-			$dir = 'DESC';
-		} elseif ($setting['sort_type'] == RegistrationsComponent::REGISTRATION_SORT_CREATED) {
-			$sort = 'created';
-			$dir = 'ASC';
-		} elseif ($setting['sort_type'] == RegistrationsComponent::REGISTRATION_SORT_TITLE) {
-			$sort = 'title';
-			$dir = 'ASC';
-		} elseif ($setting['sort_type'] == RegistrationsComponent::REGISTRATION_SORT_END) {
-			$sort = 'publish_end';
-			$dir = 'ASC';
-		}
+		list($sort, $dir) = explode(' ', $setting['sort_type']);
 		return array($displayType, $displayNum, $sort, $dir);
 	}
 
@@ -158,7 +137,7 @@ class RegistrationFrameSetting extends RegistrationsAppModel {
 				//'id' => '',
 				'display_type' => RegistrationsComponent::DISPLAY_TYPE_SINGLE,
 				'display_num_per_page' => RegistrationsComponent::REGISTRATION_DEFAULT_DISPLAY_NUM_PER_PAGE,
-				'sort_type' => RegistrationsComponent::DISPLAY_SORT_TYPE_NEW_ARRIVALS,
+				'sort_type' => 'Registration.modified DESC',
 				'frame_key' => Current::read('Frame.key'),
 			)
 		);
@@ -174,12 +153,19 @@ class RegistrationFrameSetting extends RegistrationsAppModel {
  */
 	public function saveFrameSettings($data) {
 		$this->loadModels([
-			'RegistrationFrameDisplayRegistration' => 'Registrations.RegistrationFrameDisplayRegistration',
+			'Registration' =>
+				'Registrations.Registration',
+			'RegistrationFrameDisplayRegistration' =>
+				'Registrations.RegistrationFrameDisplayRegistration',
 		]);
 
 		//トランザクションBegin
 		$this->begin();
 		try {
+			// 現在の登録フォーム確認
+			$registrationCount = $this->Registration->find('count', array(
+				'conditions' => $this->Registration->getBaseCondition()
+			));
 			// フレーム設定のバリデート
 			$this->create();
 			$this->set($data);
@@ -187,22 +173,27 @@ class RegistrationFrameSetting extends RegistrationsAppModel {
 				return false;
 			}
 
-			// フレームに表示する登録フォーム一覧設定のバリデート
-			// 一覧表示タイプと単独表示タイプ
-			if (isset($data['RegistrationFrameDisplayRegistrations'])) {
+			// 登録フォームが存在する場合は
+			if ($registrationCount > 0) {
+				// フレームに表示する登録フォーム一覧設定のバリデート
+				// 一覧表示タイプと単独表示タイプ
 				$ret = $this->RegistrationFrameDisplayRegistration->validateFrameDisplayRegistration($data);
 				if ($ret === false) {
+					$this->validationErrors['RegistrationFrameDisplayRegistration'] =
+						$this->RegistrationFrameDisplayRegistration->validationErrors;
 					return false;
 				}
 			}
+
 			// フレーム設定の登録
 			if (! $this->save($data, false)) {
 				throw new InternalErrorException(__d('net_commons', 'Internal Server Error'));
 			}
 
-			// フレームに表示する登録フォーム一覧設定の登録
-			// 一覧表示タイプと単独表示タイプ
-			if (isset($data['RegistrationFrameDisplayRegistrations'])) {
+			// 登録フォームが存在する場合は
+			if ($registrationCount > 0) {
+				// フレームに表示する登録フォーム一覧設定の登録
+				// 一覧表示タイプと単独表示タイプ
 				$ret = $this->RegistrationFrameDisplayRegistration->saveFrameDisplayRegistration($data);
 				if ($ret === false) {
 					throw new InternalErrorException(__d('net_commons', 'Internal Server Error'));

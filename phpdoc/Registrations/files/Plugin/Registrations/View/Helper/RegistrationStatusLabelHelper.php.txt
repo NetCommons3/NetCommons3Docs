@@ -43,11 +43,12 @@ class RegistrationStatusLabelHelper extends AppHelper {
 			$lblColor = 'danger';
 			$lblMsg = __d('net_commons', 'Disapproving');
 		} else {
-			if ($registration['Registration']['period_range_stat'] == RegistrationsComponent::REGISTRATION_PERIOD_STAT_BEFORE) {
+			$rangeStat = $registration['Registration']['period_range_stat'];
+			if ($rangeStat == RegistrationsComponent::REGISTRATION_PERIOD_STAT_BEFORE) {
 				//未実施
 				$lblColor = 'default';
 				$lblMsg = __d('registrations', 'Before public');
-			} elseif ($registration['Registration']['period_range_stat'] == RegistrationsComponent::REGISTRATION_PERIOD_STAT_END) {
+			} elseif ($rangeStat == RegistrationsComponent::REGISTRATION_PERIOD_STAT_END) {
 				//終了
 				$lblColor = 'default';
 				$lblMsg = __d('registrations', 'End');

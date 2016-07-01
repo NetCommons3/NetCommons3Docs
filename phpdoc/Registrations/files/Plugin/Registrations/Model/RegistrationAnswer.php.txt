@@ -13,7 +13,6 @@
  */
 
 App::uses('RegistrationsAppModel', 'Registrations.Model');
-App::uses('RegistrationsComponent', 'Registrations.Controller/Component');
 
 /**
  * Summary for RegistrationAnswer Model
@@ -35,6 +34,13 @@ class RegistrationAnswer extends RegistrationsAppModel {
 		'Registrations.RegistrationAnswerMatrixMultipleChoice',
 		'Registrations.RegistrationAnswerDatetime',
 		'Registrations.RegistrationAnswerEmail',
+		'NetCommons.OriginalKey',
+		'Files.Attachment' => [
+			'answer_value_file' => [
+				'contentKeyFieldName' => 'id',
+				'fileNameFieldName' => 'answer_value'
+			]
+		],
 	);
 
 /**
@@ -120,24 +126,45 @@ class RegistrationAnswer extends RegistrationsAppModel {
 					'message' => __d('registrations', 'Input required'),
 				),
 				'answerMaxLength' => array(
-					'rule' => array('answerMaxLength', $question, RegistrationsComponent::REGISTRATION_MAX_ANSWER_LENGTH),
-					'message' => sprintf(__d('registrations', 'the answer is too long. Please enter under %d letters.', RegistrationsComponent::REGISTRATION_MAX_ANSWER_LENGTH)),
+					'rule' => array(
+						'answerMaxLength',
+						$question, RegistrationsComponent::REGISTRATION_MAX_ANSWER_LENGTH
+					),
+					'message' => sprintf(
+						__d('registrations', 'the answer is too long. Please enter under %d letters.',
+							RegistrationsComponent::REGISTRATION_MAX_ANSWER_LENGTH)),
 				),
-				'answerValidation' => array(
-					'rule' => array('answerValidation', $question, $allAnswers),
+				'answerChoiceValidation' => array(
+					'rule' => array('answerChoiceValidation', $question, $allAnswers),
+					'last' => true,
+					'message' => ''
+				),
+				'answerTextValidation' => array(
+					'rule' => array('answerTextValidation', $question, $allAnswers),
+					'last' => true,
+					'message' => ''
+				),
+				'answerDatetimeValidation' => array(
+					'rule' => array('answerDatetimeValidation', $question, $allAnswers),
+					'last' => true,
+					'message' => ''
+				),
+				'answerMatrixValidation' => array(
+					'rule' => array('answerMatrixValidation', $question, $allAnswers),
 					'last' => true,
 					'message' => ''
 				),
 				'answerEmailValidation' => array(
 					'rule' => array('answerEmailValidation', $question, $allAnswers),
 					'last' => true,
-					'message' => __d('registrations', 'メールアドレスを正しく入力してください'),
+					'message' => __d('net_commons', 'Failed on validation errors. Please check the input data.'),
 				),
 				'answerEmailConfirmValidation' => array(
 					'rule' => array('answerEmailConfirmValidation', $question, $allAnswers),
 					'last' => true,
-					'message' => __d('registrations', 'メールアドレスが確認用と一致しません'),
+					'message' => __d('net_commons', 'The input data does not match. Please try again.'),
 				),
+
 			),
 		);
 		parent::beforeValidate($options);
@@ -148,23 +175,38 @@ class RegistrationAnswer extends RegistrationsAppModel {
 /**
  * getProgressiveAnswerOfThisSummary
  *
+ * @param array $registration registration data
  * @param array $summary registration summary ( one record )
  * @return array
  */
-	public function getProgressiveAnswerOfThisSummary($summary) {
+	public function getProgressiveAnswerOfThisSummary($registration, $summary) {
 		$answers = array();
 		if (empty($summary)) {
 			return $answers;
 		}
+		// 指定のサマリに該当する登録フォームの項目ID配列を取得
+		$questionIds = Hash::extract(
+			$registration,
+			'RegistrationPage.{n}.RegistrationQuestion.{n}.id');
+		$choiceIds = Hash::extract(
+			$registration,
+			'RegistrationPage.{n}.RegistrationQuestion.{n}.RegistrationChoice.{n}.id');
+		// その項目配列を取得条件に加える（間違った項目が入らないよう）
 		$answer = $this->find('all', array(
 			'conditions' => array(
-				'registration_answer_summary_id' => $summary['RegistrationAnswerSummary']['id']
+				'registration_answer_summary_id' => $summary['RegistrationAnswerSummary']['id'],
+				'RegistrationQuestion.id' => $questionIds,
+				'OR' => array(
+					array('RegistrationChoice.id' => $choiceIds),
+					array('RegistrationChoice.id' => null),
+				)
 			),
-			'recursive' => 0
+			//'recursive' => 1
 		));
 		if (!empty($answer)) {
 			foreach ($answer as $ans) {
-				$answers[$ans['RegistrationAnswer']['registration_question_key']][] = $ans['RegistrationAnswer'];
+				$answerIndex = $ans['RegistrationAnswer']['registration_question_key'];
+				$answers[$answerIndex][] = $ans['RegistrationAnswer'];
 			}
 		}
 		return $answers;
@@ -179,6 +221,17 @@ class RegistrationAnswer extends RegistrationsAppModel {
 	public function getAnswerCount($conditions) {
 		$cnt = $this->find('count', array(
 			'conditions' => $conditions,
+			'recursive' => -1,
+			'joins' => array(
+				array(
+					'table' => 'registration_answer_summaries',
+					'alias' => 'RegistrationAnswerSummary',
+					'type' => 'LEFT',
+					'conditions' => array(
+						'RegistrationAnswerSummary.id = RegistrationAnswer.registration_answer_summary_id',
+					)
+				)
+			)
 		));
 		return $cnt;
 	}
@@ -190,7 +243,7 @@ class RegistrationAnswer extends RegistrationsAppModel {
  * @param array $data Postされた登録データ
  * @param array $registration registration data
  * @param array $summary answer summary data
- * @throws $ex
+ * @throws InternalErrorException
  * @return bool
  */
 	public function saveAnswer($data, $registration, $summary) {
@@ -203,15 +256,27 @@ class RegistrationAnswer extends RegistrationsAppModel {
 			$validationErrors = array();
 			foreach ($data['RegistrationAnswer'] as $answer) {
 				$targetQuestionKey = $answer[0]['registration_question_key'];
-				$targetQuestion = Hash::extract($registration['RegistrationPage'], '{n}.RegistrationQuestion.{n}[key=' . $targetQuestionKey . ']');
+				$targetQuestion = Hash::extract(
+					$registration['RegistrationPage'],
+					'{n}.RegistrationQuestion.{n}[key=' . $targetQuestionKey . ']');
+				if (! $targetQuestion) {
+					throw new InternalErrorException(__d('net_commons', 'Internal Server Error'));
+				}
 				// データ保存
 				// Matrixタイプの場合はanswerが配列になっているがsaveでかまわない
-				$this->oneTimeValidateFlag = false;	// saveMany中で１回しかValidateしなくてよい関数のためのフラグ
-				if (!$this->saveMany($answer, array(
+				// saveMany中で１回しかValidateしなくてよい関数のためのフラグ
+				$this->oneTimeValidateFlag = false;
+				// Validate、Saveで使用するオプションデータ
+				$options = array(
 					'registration_answer_summary_id' => $summaryId,
 					'question' => $targetQuestion[0],
-					'allAnswers' => $data['RegistrationAnswer']))) {
-					$validationErrors[$targetQuestionKey] = Hash::filter($this->validationErrors);
+					'allAnswers' => $data['RegistrationAnswer'],
+				);
+
+				if (! $this->saveMany($answer, $options)) {
+					$validationErrors[$targetQuestionKey] = $this->__errorMessageUnique(
+						$targetQuestion[0],
+						Hash::filter($this->validationErrors));
 				}
 			}
 			if (! empty($validationErrors)) {
@@ -227,4 +292,25 @@ class RegistrationAnswer extends RegistrationsAppModel {
 		}
 		return true;
 	}
+/**
+ * __errorMessageUnique
+ * マトリクスの同じエラーメッセージをまとめる
+ *
+ * @param array $question question
+ * @param array $errors error message
+ * @return array
+ */
+	private function __errorMessageUnique($question, $errors) {
+		if (! RegistrationsComponent::isMatrixInputType($question['question_type'])) {
+			return $errors;
+		}
+		$ret = array();
+		foreach ($errors as $err) {
+			if (! in_array($err, $ret)) {
+				$ret[] = $err;
+			}
+		}
+		return $ret;
+	}
 }
+

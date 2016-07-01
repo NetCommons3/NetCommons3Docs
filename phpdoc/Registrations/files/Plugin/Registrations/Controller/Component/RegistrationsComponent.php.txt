@@ -134,13 +134,8 @@ class RegistrationsComponent extends Component {
  * @var string
  */
 	const ACTION_NOT_ACT = '0';
-
-/**
- * action. act
- *
- * @var string
- */
-	const ACTION_ACT = '1';
+	const ACTION_BEFORE_ACT = '1';
+	const ACTION_ACT = '2';
 
 /**
  * type. selection
@@ -198,7 +193,18 @@ class RegistrationsComponent extends Component {
  */
 	const TYPE_SINGLE_SELECT_BOX = '8';
 
+/**
+ * type. Email
+ *
+ * @var string
+ */
 	const TYPE_EMAIL = '9';
+
+/**
+ * type. File
+ *
+ * @var string
+ */
 	const TYPE_FILE = '10';
 
 /**
@@ -216,7 +222,7 @@ class RegistrationsComponent extends Component {
 		self::TYPE_DATE_AND_TIME,
 		self::TYPE_SINGLE_SELECT_BOX,
 		self::TYPE_EMAIL,
-		self::TYPE_FILE
+		self::TYPE_FILE,
 	);
 
 /**
@@ -293,7 +299,7 @@ class RegistrationsComponent extends Component {
 		self::TYPE_OPTION_TIME,
 		self::TYPE_OPTION_EMAIL,
 		self::TYPE_OPTION_URL,
-		self::TYPE_OPTION_PHONE_NUMBER
+		self::TYPE_OPTION_PHONE_NUMBER,
 	);
 
 /**
@@ -378,46 +384,6 @@ class RegistrationsComponent extends Component {
 	const DISPLAY_TYPE_LIST = '1';
 
 /**
- * display_sort_type. new arrivals
- *
- * @var string
- */
-	const DISPLAY_SORT_TYPE_NEW_ARRIVALS = '0';
-
-/**
- * display_sort_type. response time (descending)
- *
- * @var string
- */
-	const DISPLAY_SORT_TYPE_RESPONSE_TIME_DESC = '1';
-
-/**
- * display_sort_type. survey status order (ascending)
- *
- * @var string
- */
-	const DISPLAY_SORT_TYPE_SURVEY_STATUS_ORDER_ASC = '2';
-
-/**
- * display_sort_type. by title (ascending order)
- *
- * @var string
- */
-	const DISPLAY_SORT_TYPE_BY_TITLE_ASC = '3';
-
-/**
- * display_sort_types list
- *
- * @var array
- */
-	static public $displaySortTypesList = array(
-		self::DISPLAY_SORT_TYPE_NEW_ARRIVALS,
-		self::DISPLAY_SORT_TYPE_RESPONSE_TIME_DESC,
-		self::DISPLAY_SORT_TYPE_SURVEY_STATUS_ORDER_ASC,
-		self::DISPLAY_SORT_TYPE_BY_TITLE_ASC
-	);
-
-/**
  * skip_flag. no_skip
  *
  * @var string
@@ -488,16 +454,6 @@ class RegistrationsComponent extends Component {
 	const REGISTRATION_PERIOD_STAT_END = 3;
 
 /**
- * registration sort type
- *
- * @var integer
- */
-	const REGISTRATION_SORT_MODIFIED = 0;
-	const REGISTRATION_SORT_CREATED = 1;
-	const REGISTRATION_SORT_TITLE = 2;
-	const REGISTRATION_SORT_END = 3;
-
-/**
  * registration template exoprt file name
  *
  * @var string
@@ -508,38 +464,23 @@ class RegistrationsComponent extends Component {
 	const REGISTRATION_FINGER_PRINT_FILENAME = 'finger_print.txt';
 
 /**
- * getDisplayNumberOptions
- *
- * @return array
- */
-	public static function getDisplayNumberOptions() {
-		return array(
-			5 => 5 . __d('registrations', 'item'),
-			10 => 10 . __d('registrations', 'item'),
-			20 => 20 . __d('registrations', 'item'),
-			50 => 50 . __d('registrations', 'item'),
-			100 => 100 . __d('registrations', 'item'),
-		);
-	}
-
-/**
  * getSortOrders
  *
  * @return array
  */
 	public static function getSortOrders() {
 		return array(
-			self::REGISTRATION_SORT_MODIFIED => __d('registrations', 'New Modified'),
-			self::REGISTRATION_SORT_CREATED => __d('registrations', 'Registration order'),
-			self::REGISTRATION_SORT_TITLE => __d('registrations', 'Title'),
-			self::REGISTRATION_SORT_END => __d('registrations', 'End period'),
+			'Registration.modified DESC' => __d('net_commons', 'Newest'),
+			'Registration.created ASC' => __d('net_commons', 'Oldest'),
+			'Registration.title ASC' => __d('net_commons', 'Title'),
+			'Registration.answer_end_period ASC' => __d('registrations', 'End period'),
 		);
 	}
 
 /**
- * 登録フォーム質問タイプのデータ配列を返す
+ * 登録フォーム項目タイプのデータ配列を返す
  *
- * @return array 質問タイプの定値とそれに相応するラベル
+ * @return array 項目タイプの定値とそれに相応するラベル
  */
 	public function getQuestionTypeOptionsWithLabel() {
 		return array(
@@ -551,9 +492,8 @@ class RegistrationsComponent extends Component {
 			//self::TYPE_MATRIX_MULTIPLE => __d('registrations', 'Multiple choice matrix'),
 			self::TYPE_DATE_AND_TIME => __d('registrations', 'Date and time'),
 			self::TYPE_SINGLE_SELECT_BOX => __d('registrations', 'List select'),
-			//self::TYPE_FROM_EMAIL => __d('registrations', '送信者メールアドレス'),
-			self::TYPE_EMAIL => __d('registrations', 'メールアドレス'),
-			self::TYPE_FILE => __d('registrations', 'ファイル'),
+			self::TYPE_EMAIL => __d('registrations', 'Email'),
+			self::TYPE_FILE => __d('registrations', 'File'),
 		);
 	}
 
@@ -575,6 +515,9 @@ class RegistrationsComponent extends Component {
 			return true;
 		}
 		if ($type == self::TYPE_EMAIL) {
+			return true;
+		}
+		if ($type == self::TYPE_FILE) {
 			return true;
 		}
 		return false;

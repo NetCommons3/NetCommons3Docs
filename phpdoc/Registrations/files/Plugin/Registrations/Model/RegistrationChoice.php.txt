@@ -11,7 +11,6 @@
  */
 
 App::uses('RegistrationsAppModel', 'Registrations.Model');
-App::uses('RegistrationsComponent', 'Registrations.Controller/Component');
 
 /**
  * Summary for RegistrationChoice Model
@@ -104,22 +103,16 @@ class RegistrationChoice extends RegistrationsAppModel {
 			),
 			'graph_color' => array(
 				'rule' => '/^#[a-f0-9]{6}$/i',
-				'message' => __d('registrations', 'First character is "#". And input the hexadecimal numbers by six digits.'),
+				'message' =>
+					__d('registrations',
+						'First character is "#". And input the hexadecimal numbers by six digits.'),
 				//'allowEmpty' => false,
 				//'required' => false,
 			),
 		);
-		// ウィザード画面でのセットアップ中の場合はまだ親ページIDの正当性についてのチェックは行わない
-		if (! (isset($options['validate']) && $options['validate'] == RegistrationsComponent::REGISTRATION_VALIDATE_TYPE)) {
-			$this->validate = Hash::merge($this->validate, array(
-				'registration_question_id' => array(
-					'numeric' => array(
-						'rule' => array('numeric'),
-						'message' => __d('net_commons', 'Invalid request.'),
-					),
-				),
-			));
-		}
+		// validates時にはまだregistration_question_idの設定ができないのでチェックしないことにする
+		// registration_question_idの設定は上位のRegistrationQuestionクラスで責任を持って行われるものとする
+
 		$this->_checkSkip($options['isSkip'], $options['pageIndex'], $options['maxPageIndex']);
 
 		return parent::beforeValidate($options);
@@ -179,20 +172,23 @@ class RegistrationChoice extends RegistrationsAppModel {
 		if ($isSkip != RegistrationsComponent::SKIP_FLAGS_SKIP) {
 			return;
 		}
-		// 質問がスキップ質問である場合
+		// 項目がスキップ項目である場合
 		// 未設定時はデフォルトの次ページ移動となります
 		if (! isset($this->data['RegistrationChoice']['skip_page_sequence'])) {
 			$this->data['RegistrationChoice']['skip_page_sequence'] = $pageIndex + 1;
 		}
+		$skipPage = $this->data['RegistrationChoice']['skip_page_sequence'];
 		// 最後ページへの指定ではない場合
-		if ($this->data['RegistrationChoice']['skip_page_sequence'] != RegistrationsComponent::SKIP_GO_TO_END) {
+		if ($skipPage != RegistrationsComponent::SKIP_GO_TO_END) {
 			// そのジャンプ先は現在ページから戻っていないか
-			if ($this->data['RegistrationChoice']['skip_page_sequence'] <= $pageIndex) {
-				$this->validationErrors['skip_page_sequence'][] = __d('registrations', 'Invalid skip page. Please set forward page.');
+			if ($skipPage <= $pageIndex) {
+				$this->validationErrors['skip_page_sequence'][] =
+					__d('registrations', 'Invalid skip page. Please set forward page.');
 			}
 			// そのジャンプ先は存在するページシーケンスか
-			if ($this->data['RegistrationChoice']['skip_page_sequence'] > $maxPageIndex) {
-				$this->validationErrors['skip_page_sequence'][] = __d('registrations', 'Invalid skip page. page does not exist.');
+			if ($skipPage > $maxPageIndex) {
+				$this->validationErrors['skip_page_sequence'][] =
+					__d('registrations', 'Invalid skip page. page does not exist.');
 			}
 		}
 	}

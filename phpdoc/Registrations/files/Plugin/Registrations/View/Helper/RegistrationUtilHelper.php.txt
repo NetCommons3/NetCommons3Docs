@@ -24,7 +24,7 @@ class RegistrationUtilHelper extends AppHelper {
  * @var array
  */
 	public $helpers = array(
-		'NetCommonsHtml',
+		'NetCommons.NetCommonsHtml',
 		'Html'
 	);
 
@@ -99,19 +99,21 @@ class RegistrationUtilHelper extends AppHelper {
 		$answerButtonClass = 'success';
 		$answerButtonDisabled = '';
 
+		$rangeStat = $registration['Registration']['period_range_stat'];
+		$isRepeat = $registration['Registration']['is_repeat_allow'];
 		// 操作できるかできないかの決定
 		// 期間外だったら操作不可能
 		// 繰り返し登録不可で登録済なら操作不可能
-		if ($registration['Registration']['period_range_stat'] != RegistrationsComponent::REGISTRATION_PERIOD_STAT_IN
-			|| (in_array($key, $this->_View->viewVars['ownAnsweredKeys'])
-				&& $registration['Registration']['is_repeat_allow'] == RegistrationsComponent::PERMISSION_NOT_PERMIT)) {
+		if ($rangeStat != RegistrationsComponent::REGISTRATION_PERIOD_STAT_IN ||
+				(in_array($key, $this->_View->viewVars['ownAnsweredKeys'])
+					&& $isRepeat == RegistrationsComponent::PERMISSION_NOT_PERMIT)) {
 			$answerButtonClass = 'default';
 			$answerButtonDisabled = 'disabled';
 			$buttonStr = $disabledButtonStr;
 		}
 
 		// ラベル名の決定
-		if ($registration['Registration']['period_range_stat'] == RegistrationsComponent::REGISTRATION_PERIOD_STAT_BEFORE) {
+		if ($rangeStat == RegistrationsComponent::REGISTRATION_PERIOD_STAT_BEFORE) {
 			// 未公開
 			$answerButtonLabel = __d('registrations', 'Unpublished');
 		}
@@ -120,7 +122,12 @@ class RegistrationUtilHelper extends AppHelper {
 			$answerButtonLabel = __d('registrations', 'Finished');
 		}
 
-		return sprintf($buttonStr, $answerButtonClass, '', $answerButtonDisabled, $url, $answerButtonLabel);
+		return sprintf($buttonStr,
+			$answerButtonClass,
+			'',
+			$answerButtonDisabled,
+			$url,
+			$answerButtonLabel);
 	}
 
 /**
@@ -139,14 +146,16 @@ class RegistrationUtilHelper extends AppHelper {
 		//			     未登録＆登録期間内　　　　　　　集計ボタン（disabled）
 		$key = $registration['Registration']['key'];
 
-		if ($registration['Registration']['is_total_show'] == RegistrationsComponent::EXPRESSION_NOT_SHOW) {
+		if ($registration['Registration']['is_total_show'] ==
+			RegistrationsComponent::EXPRESSION_NOT_SHOW) {
 			return '';
 		}
 
 		$disabled = '';
 
 		// 登録フォーム本体が始まってない
-		if ($registration['Registration']['period_range_stat'] == RegistrationsComponent::REGISTRATION_PERIOD_STAT_BEFORE) {
+		if ($registration['Registration']['period_range_stat'] ==
+			RegistrationsComponent::REGISTRATION_PERIOD_STAT_BEFORE) {
 			$disabled = 'disabled';
 		} else {
 			// 始まっている

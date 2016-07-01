@@ -9,8 +9,7 @@
  */
 
 App::uses('RegistrationsAppModel', 'Registrations.Model');
-App::uses('WysIsWygDownloader', 'Registrations.Utility');
-App::uses('RegistrationsComponent', 'Registrations.Controller/Component');
+App::uses('WysiwygZip', 'Wysiwyg.Utility');
 
 /**
  * Summary for Registration Model
@@ -41,6 +40,26 @@ class RegistrationExport extends RegistrationsAppModel {
 	public $validate = array();
 
 /**
+ * Constructor. Binds the model's database table to the object.
+ *
+ * @param bool|int|string|array $id Set this ID for this model on startup,
+ * can also be an array of options, see above.
+ * @param string $table Name of database table to use.
+ * @param string $ds DataSource connection name.
+ * @see Model::__construct()
+ * @SuppressWarnings(PHPMD.BooleanArgumentFlag)
+ */
+	public function __construct($id = false, $table = null, $ds = null) {
+		parent::__construct($id, $table, $ds);
+
+		$this->loadModels([
+			'Registration' => 'Registrations.Registration',
+			'RegistrationPage' => 'Registrations.RegistrationPage',
+			'RegistrationQuestion' => 'Registrations.RegistrationQuestion',
+		]);
+	}
+
+/**
  * getExportData
  *
  * @param string $registrationKey 登録フォームキー
@@ -51,21 +70,20 @@ class RegistrationExport extends RegistrationsAppModel {
 		$zipData = array();
 
 		// バージョン情報を取得するためComposer情報を得る
-		$Plugin = ClassRegistry::init('Plugins.Plugin');
+		$Plugin = ClassRegistry::init('PluginManager.Plugin');
 		$composer = $Plugin->getComposer('netcommons/registrations');
 		// 最初のデータは登録フォームプラグインのバージョン
 		$zipData['version'] = $composer['version'];
 
 		// 言語数分
-		$Language = ClassRegistry::init('Languages.Language');
+		$Language = ClassRegistry::init('M17n.Language');
 		$languages = $Language->find('all', array(
 			'recursive' => -1
 		));
-		$Registration = ClassRegistry::init('Registrations.Registration');
 		$registrations = array();
 		foreach ($languages as $lang) {
 			// 指定の登録フォームデータを取得
-			$registration = $Registration->find('first', array(
+			$registration = $this->Registration->find('first', array(
 				'conditions' => array(
 					'Registration.key' => $registrationKey,
 					'Registration.is_active' => true,
@@ -81,8 +99,12 @@ class RegistrationExport extends RegistrationsAppModel {
 			$registration = Hash::remove($registration, 'Block');
 			$registration = Hash::remove($registration, 'TrackableCreator');
 			$registration = Hash::remove($registration, 'TrackableUpdater');
-			$Registration->clearRegistrationId($registration);
+			$this->Registration->clearRegistrationId($registration);
 			$registrations[] = $registration;
+		}
+		// Exportするデータが一つも見つからないって
+		if (empty($registration)) {
+			return false;
 		}
 		$zipData['Registrations'] = $registrations;
 		return $zipData;
@@ -95,11 +117,7 @@ class RegistrationExport extends RegistrationsAppModel {
  * @return void
  */
 	public function putToZip($zipFile, $zipData) {
-		$this->Registration = ClassRegistry::init('Registrations.Registration');
-		$this->RegistrationPage = ClassRegistry::init('Registrations.RegistrationPage');
-		$this->RegistrationQuestion = ClassRegistry::init('Registrations.RegistrationQuestion');
-
-		$wysiswyg = new WysIsWygDownloader();
+		$wysiswyg = new WysiwygZip();
 
 		// 登録フォームデータの中でもWYSISWYGデータのものについては
 		// フォルダ別に確保(フォルダの中にZIPがある）
@@ -119,7 +137,7 @@ class RegistrationExport extends RegistrationsAppModel {
 			$columnName = substr($key, strrpos($key, '.') + 1);
 			if ($model->hasField($columnName)) {
 				if ($model->getColumnType($columnName) == 'text') {
-					$wysiswygZipFile = $wysiswyg->createWysIsWygZIP($model->alias . '.' . $columnName, $value);
+					$wysiswygZipFile = $wysiswyg->createWysiwygZip($value, $model->alias . '.' . $columnName);
 					$wysiswygFileName = $key . '.zip';
 					$zipFile->addFile($wysiswygZipFile, $wysiswygFileName);
 					$value = $wysiswygFileName;
@@ -128,7 +146,9 @@ class RegistrationExport extends RegistrationsAppModel {
 		}
 		$registration = Hash::expand($flatRegistration);
 		// jsonデータにして書き込み
-		$zipFile->addFromString(RegistrationsComponent::REGISTRATION_JSON_FILENAME, json_encode($registration));
+		$zipFile->addFromString(
+			RegistrationsComponent::REGISTRATION_JSON_FILENAME,
+			json_encode($registration));
 	}
 }
 

@@ -3,7 +3,7 @@
  * RegistrationBlocksController
  *
  * @author Noriko Arai <arai@nii.ac.jp>
- * @author Ryo Ozawa <ozawa.ryo@withone.co.jp>
+ * @author Allcreator <info@allcreator.net>
  * @link http://www.netcommons.org NetCommons Project
  * @license http://www.netcommons.org/license.txt NetCommons License
  * @copyright Copyright 2014, NetCommons Project
@@ -17,7 +17,7 @@ App::uses('ZipDownloader', 'Files.Utility');
 /**
  * BlocksController
  *
- * @author Ryo Ozawa <ozawa.ryo@withone.co.jp>
+ * @author AllCreator <info@allcreator.net>
  * @package NetCommons\Registrations\Controller
  */
 class RegistrationBlocksController extends RegistrationsAppController {
@@ -59,7 +59,7 @@ class RegistrationBlocksController extends RegistrationsAppController {
 		'NetCommons.Permission' => array(
 			//アクセスの権限
 			'allow' => array(
-				'index,add,edit,delete' => 'block_editable',
+				'index,download,export' => 'block_editable',
 			),
 		),
 		'Paginator',
@@ -73,15 +73,27 @@ class RegistrationBlocksController extends RegistrationsAppController {
 	public $helpers = array(
 		'Session',
 		'Blocks.BlockForm',
-		'NetCommons.NetCommonsForm',
-		'NetCommons.Date',
 		'Blocks.BlockTabs' => array(
 			'mainTabs' => array(
-				'block_index' => array('url' => array('controller' => 'registration_blocks')),
-				'role_permissions' => array('url' => array('controller' => 'registration_block_role_permissions')),
-				'frame_settings' => array('url' => array('controller' => 'registration_frame_settings')),
+				'block_index' => array(
+					'url' => array('controller' => 'registration_blocks')
+				),
+				'role_permissions' => array(
+					'url' => array('controller' => 'registration_block_role_permissions')
+				),
+				'frame_settings' => array(
+					'url' => array('controller' => 'registration_frame_settings')
+				),
+				'mail_settings' => array(
+					'url' => array('controller' => 'registration_mail_settings')
+				),
 			),
 		),
+		'Blocks.BlockIndex',
+		'NetCommons.NetCommonsForm',
+		'NetCommons.Date',
+		'NetCommons.TitleIcon',
+		'AuthorizationKeys.AuthKeyPopupButton',
 	);
 
 /**
@@ -92,6 +104,11 @@ class RegistrationBlocksController extends RegistrationsAppController {
 	public function beforeFilter() {
 		parent::beforeFilter();
 		$this->Auth->deny('index');
+		// 設定画面を表示する前にこのルームの登録フォームブロックがあるか確認
+		// 万が一、まだ存在しない場合には作成しておく
+		// afterFrameSaveが呼ばれないような状況の想定
+		$frame['Frame'] = Current::read('Frame');
+		$this->Registration->afterFrameSave($frame);
 	}
 
 /**
@@ -108,9 +125,8 @@ class RegistrationBlocksController extends RegistrationsAppController {
 		$this->paginate = array(
 			'conditions' => $conditions,
 			'page' => 1,
-			'sort' => RegistrationsComponent::DISPLAY_SORT_TYPE_NEW_ARRIVALS,
-			'limit' => RegistrationsComponent::REGISTRATION_DEFAULT_DISPLAY_NUM_PER_PAGE,
-			'direction' => 'desc',
+			'order' => array('Registration.modified' => 'DESC'),
+			//'limit' => RegistrationsComponent::REGISTRATION_DEFAULT_DISPLAY_NUM_PER_PAGE,
 			'recursive' => 0,
 		);
 		$registration = $this->paginate('Registration');
@@ -134,21 +150,19 @@ class RegistrationBlocksController extends RegistrationsAppController {
 		// 登録フォームキー
 		$registrationKey = $this->_getRegistrationKeyFromPass();
 		// キー情報をもとにデータを取り出す
-		$registration = $this->RegistrationAnswerSummaryCsv->getRegistrationForAnswerCsv($registrationKey);
+		$registration = $this->RegistrationAnswerSummaryCsv->getRegistrationForAnswerCsv(
+			$registrationKey);
 		if (! $registration) {
-			$this->setAction('throwBadRequest');
+			$this->_setFlashMessageAndRedirect(
+				__d('registrations', 'Designation of the registration does not exist.'));
 			return;
 		}
 		// 圧縮用パスワードキーを求める
 		if (! empty($this->request->data['AuthorizationKey']['authorization_key'])) {
 			$zipPassword = $this->request->data['AuthorizationKey']['authorization_key'];
 		} else {
-			$this->NetCommons->setFlashNotification(__d('registrations', 'Setting of password is required always to download answers.'),
-				array('interval' => NetCommonsComponent::ALERT_VALIDATE_ERROR_INTERVAL));
-			$this->redirect(NetCommonsUrl::actionUrl(array(
-				'controller' => 'registration_blocks',
-				'action' => 'index',
-				'frame_id' => Current::read('Frame.id'))));
+			$this->_setFlashMessageAndRedirect(
+				__d('registrations', 'Setting of password is required always to download answers.'));
 			return;
 		}
 
@@ -161,7 +175,9 @@ class RegistrationBlocksController extends RegistrationsAppController {
 			// REGISTRATION_CSV_UNIT_NUMBER分に制限して取得する
 			$offset = 0;
 			do {
-				$datas = $this->RegistrationAnswerSummaryCsv->getAnswerSummaryCsv($registration, self::REGISTRATION_CSV_UNIT_NUMBER, $offset);
+				$datas = $this->RegistrationAnswerSummaryCsv->getAnswerSummaryCsv(
+					$registration,
+					self::REGISTRATION_CSV_UNIT_NUMBER, $offset);
 				// CSV形式で書きこみ
 				foreach ($datas as $data) {
 					$csvFile->add($data);
@@ -173,12 +189,7 @@ class RegistrationBlocksController extends RegistrationsAppController {
 
 		} catch (Exception $e) {
 			// NetCommonsお約束:エラーメッセージのFlash表示
-			$this->NetCommons->setFlashNotification(__d('registrations', 'download error'),
-				array('interval' => NetCommonsComponent::ALERT_VALIDATE_ERROR_INTERVAL));
-			$this->redirect(NetCommonsUrl::actionUrl(array(
-				'controller' => 'registration_blocks',
-				'action' => 'index',
-				'frame_id' => Current::read('Frame.id'))));
+			$this->_setFlashMessageAndRedirect(__d('registrations', 'download error'));
 			return;
 		}
 		// Downloadの時はviewを使用しない
@@ -191,63 +202,22 @@ class RegistrationBlocksController extends RegistrationsAppController {
 	}
 
 /**
- * export
+ * _setFlashMessageAndRedirect
  *
- * template file about registration export action
+ * @param string $message flash error message
  *
  * @return void
  */
-	public function export() {
-		// NetCommonsお約束：コンテンツ操作のためのURLには対象のコンテンツキーが必ず含まれている
-		// まずは、そのキーを取り出す
-		// 登録フォームキー
-		$registrationKey = $this->_getRegistrationKeyFromPass();
-		// キー情報をもとにデータを取り出す
-		$registration = $this->RegistrationAnswerSummaryCsv->getRegistrationForAnswerCsv($registrationKey);
-		if (! $registration) {
-			$this->setAction('throwBadRequest');
-			return;
-		}
-
-		try {
-			// zipファイル準備
-			$zipFile = new ZipDownloader();
-
-			// Export用のデータ配列を取得する
-			$zipData = $this->RegistrationExport->getExportData($registrationKey);
-
-			// Export用ファイルデータをZIPファイルに出力する
-			// ※この中でWYSISWYGエディタデータは適宜処理されている
-			$this->RegistrationExport->putToZip($zipFile, $zipData);
-
-			// アーカイブ閉じる
-			$zipFile->close();
-		} catch(Exception $e) {
-			$this->Session->setFlash(__d('registrations', 'export error') . $e->getMessage(),
-				array('interval' => NetCommonsComponent::ALERT_VALIDATE_ERROR_INTERVAL));
-			$this->redirect(NetCommonsUrl::actionUrl(array(
-				'controller' => 'registration_blocks',
-				'action' => 'index',
-				'frame_id' => Current::read('Frame.id'))));
-			return;
-		}
-		// 大外枠zipファイル準備
-		$zipWrapperFile = new ZipDownloader();
-		// 登録フォームデータファイルのフィンガープリントを得る
-		$fingerPrint = sha1_file($zipFile->path, false);
-		// フィンガープリントをアーカイブに加える
-		$zipWrapperFile->addFromString(RegistrationsComponent::REGISTRATION_FINGER_PRINT_FILENAME, $fingerPrint);
-		// 本体ファイルを
-		$zipWrapperFile->addFile($zipFile->path, RegistrationsComponent::REGISTRATION_TEMPLATE_FILENAME);
-		// export-key 設定
-		$this->Registration->saveExportKey($registration['Registration']['id'], $fingerPrint);
-
-		// viewを使用しない
-		$this->autoRender = false;
-
-		// ダウンロード出力ファイル名確定
-		$exportFileName = $registration['Registration']['title'] . '.zip';
-		// 出力
-		return $zipWrapperFile->download(rawurlencode($exportFileName));
+	protected function _setFlashMessageAndRedirect($message) {
+		$this->NetCommons->setFlashNotification(
+			$message,
+			array(
+				'interval' => NetCommonsComponent::ALERT_VALIDATE_ERROR_INTERVAL
+			));
+		$this->redirect(NetCommonsUrl::actionUrl(array(
+			'controller' => 'registration_blocks',
+			'action' => 'index',
+			'frame_id' => Current::read('Frame.id')
+		)));
 	}
 }

@@ -12,7 +12,6 @@
  */
 
 App::uses('RegistrationsAppModel', 'Registrations.Model');
-App::uses('RegistrationsComponent', 'Registrations.Controller/Component');
 
 /**
  * Summary for RegistrationFrameDisplayRegistration Model
@@ -51,6 +50,30 @@ class RegistrationFrameDisplayRegistration extends RegistrationsAppModel {
 	);
 
 /**
+ * Registration list for check
+ *
+ * @var array
+ */
+	public $chkRegistrationList = array();
+
+/**
+ * Constructor. Binds the model's database table to the object.
+ *
+ * @param bool|int|string|array $id Set this ID for this model on startup,
+ * can also be an array of options, see above.
+ * @param string $table Name of database table to use.
+ * @param string $ds DataSource connection name.
+ * @see Model::__construct()
+ * @SuppressWarnings(PHPMD.BooleanArgumentFlag)
+ */
+	public function __construct($id = false, $table = null, $ds = null) {
+		parent::__construct($id, $table, $ds);
+
+		$this->loadModels([
+			'Registration' => 'Registrations.Registration',
+		]);
+	}
+/**
  * Called during validation operations, before validation. Please note that custom
  * validation rules can be defined in $validate.
  *
@@ -61,6 +84,15 @@ class RegistrationFrameDisplayRegistration extends RegistrationsAppModel {
  * @SuppressWarnings(PHPMD.ExcessiveMethodLength)
  */
 	public function beforeValidate($options = array()) {
+		// チェック用の登録フォームリストを確保しておく
+		$conditions = $this->Registration->getBaseCondition();
+		$registrations = $this->Registration->find('all', array(
+			'conditions' => $conditions,
+			'recursive' => -1
+		));
+		$this->chkRegistrationList = Hash::combine(
+			$registrations, '{n}.Registration.id', '{n}.Registration.key');
+
 		$this->validate = Hash::merge($this->validate, array(
 			'registration_key' => array(
 				'notBlank' => array(
@@ -70,6 +102,10 @@ class RegistrationFrameDisplayRegistration extends RegistrationsAppModel {
 					'required' => true,
 					//'last' => false, // Stop validation after this rule
 					//'on' => 'create', // Limit validation to 'create' or 'update' operations
+				),
+				'inList' => array(
+					'rule' => array('inList', $this->chkRegistrationList),
+					'message' => __d('net_commons', 'Invalid request.'),
 				),
 			),
 		));
@@ -85,12 +121,17 @@ class RegistrationFrameDisplayRegistration extends RegistrationsAppModel {
  * @return bool
  */
 	public function validateFrameDisplayRegistration($data) {
-		if ($data['RegistrationFrameSetting']['display_type'] == RegistrationsComponent::DISPLAY_TYPE_SINGLE) {
-			$saveData = Hash::extract($data, 'Single.RegistrationFrameDisplayRegistrations');
+		$frameSetting = $data['RegistrationFrameSetting'];
+
+		if ($frameSetting['display_type'] == RegistrationsComponent::DISPLAY_TYPE_SINGLE) {
+			$saveData = Hash::extract($data, 'Single.RegistrationFrameDisplayRegistration');
+			if (! $saveData) {
+				return false;
+			}
 			$this->set($saveData);
 			$ret = $this->validates();
 		} else {
-			$saveData = $data['RegistrationFrameDisplayRegistrations'];
+			$saveData = Hash::extract($data, 'List.RegistrationFrameDisplayRegistration');
 			$ret = $this->saveAll($saveData, array('validate' => 'only'));
 		}
 		return $ret;
@@ -101,18 +142,34 @@ class RegistrationFrameDisplayRegistration extends RegistrationsAppModel {
  *
  * @param mix $data PostData
  * @return bool
+ * @throws $ex
  */
 	public function saveFrameDisplayRegistration($data) {
-		//トランザクションは親元のRegistrationFrameSettingでやっているので不要
-		//if ($data['RegistrationFrameSetting']['display_type'] == RegistrationsComponent::DISPLAY_TYPE_SINGLE) {
-		//	// このフレームに設定されている全てのレコードを消す
-		//	// POSTされた登録フォームのレコードのみ作成する
-			$ret = $this->saveDisplayRegistrationForSingle($data);
-		//} else {
-			// hiddenでPOSTされたレコードについて全て処理する
-			// POSTのis_displayが０，１によってdeleteかinsertで処理する
-			//$ret = $this->saveDisplayRegistrationForList($data);
-		//}
+		if (! $this->validateFrameDisplayRegistration($data)) {
+			return false;
+		}
+		//$frameSetting = $data['RegistrationFrameSetting'];
+
+		//トランザクションBegin
+		$this->begin();
+		try {
+			//if ($frameSetting['display_type'] == RegistrationsComponent::DISPLAY_TYPE_SINGLE) {
+			//	// このフレームに設定されている全てのレコードを消す
+			//	// POSTされた登録フォームのレコードのみ作成する
+				$ret = $this->saveDisplayRegistrationForSingle($data);
+			//} else {
+				// hiddenでPOSTされたレコードについて全て処理する
+				// POSTのis_displayが０，１によってdeleteかinsertで処理する
+				//$ret = $this->saveDisplayRegistrationForList($data);
+			//}
+			//トランザクションCommit
+			$this->commit();
+		} catch (Exception $ex) {
+			//トランザクションRollback
+			$this->rollback();
+			CakeLog::error($ex);
+			throw $ex;
+		}
 		return $ret;
 	}
 
@@ -121,30 +178,30 @@ class RegistrationFrameDisplayRegistration extends RegistrationsAppModel {
  *
  * @param mix $data PostData
  * @return bool
+ * @throws InternalErrorException
  */
 	public function saveDisplayRegistrationForList($data) {
 		$frameKey = Current::read('Frame.key');
 
-		foreach ($data['RegistrationFrameDisplayRegistrations'] as $index => $value) {
+		foreach ($data['List']['RegistrationFrameDisplayRegistration'] as $value) {
 			$registrationKey = $value['registration_key'];
-			$isDisplay = $data['List']['RegistrationFrameDisplayRegistrations'][$index]['is_display'];
+			$isDisplay = $value['is_display'];
 			$saveQs = array(
 				'frame_key' => $frameKey,
 				'registration_key' => $registrationKey
 			);
 			if ($isDisplay != 0) {
-				if (!$this->saveDisplayRegistration($saveQs)) {
-					return false;
-				}
+				// この関数内部でエラーがあった時は、Exceptionなので戻りは見ない
+				$this->saveDisplayRegistration($saveQs);
 			} else {
-				if (!$this->deleteAll($saveQs, false)) {
-					return false;
+				if (! $this->deleteAll($saveQs, false)) {
+					throw new InternalErrorException(__d('net_commons', 'Internal Server Error'));
 				}
 			}
 		}
-		if (!$this->updateFrameDefaultAction("''")) {
-			return false;
-		}
+		// この関数内部でエラーがあった時は、Exceptionなので戻りは見ない
+		$this->updateFrameDefaultAction("''");
+
 		return true;
 	}
 
@@ -161,15 +218,16 @@ class RegistrationFrameDisplayRegistration extends RegistrationsAppModel {
 		);
 		$this->deleteAll($deleteQs, false);
 
-		$saveData = Hash::extract($data, 'Single.RegistrationFrameDisplayRegistrations');
+		$saveData = Hash::extract($data, 'Single.RegistrationFrameDisplayRegistration');
 		$saveData['frame_key'] = $frameKey;
-		if (!$this->saveDisplayRegistration($saveData)) {
-			return false;
-		}
-		$action = "'" . 'registration_answers/view/' . Current::read('Block.id') . '/' . $saveData['registration_key'] . "'";
-		if (!$this->updateFrameDefaultAction($action)) {
-			return false;
-		}
+		// この関数内部でエラーがあった時は、Exceptionなので戻りは見ない
+		$this->saveDisplayRegistration($saveData);
+		$action = sprintf('\'registration_answers/view/%s/%s\'',
+			Current::read('Block.id'),
+			$saveData['registration_key']);
+		// この関数内部でエラーがあった時は、Exceptionなので戻りは見ない
+		$this->updateFrameDefaultAction($action);
+
 		return true;
 	}
 
@@ -179,6 +237,7 @@ class RegistrationFrameDisplayRegistration extends RegistrationsAppModel {
  *
  * @param array $data save data
  * @return bool
+ * @throws InternalErrorException
  */
 	public function saveDisplayRegistration($data) {
 		// 該当データを検索して
@@ -189,16 +248,19 @@ class RegistrationFrameDisplayRegistration extends RegistrationsAppModel {
 			// あるならもう作らない
 			return true;
 		}
-		$this->create();
-		if (!$this->save($data)) {
-			return false;
-		}
-		// フレームのデフォルトにする
 
-		$action = "'" . 'registration_answers/view/' . Current::read('Block.id') . '/' . $data['registration_key'] . "'";
-		if (!$this->updateFrameDefaultAction($action)) {
-			return false;
+		$this->create();
+		if (!$this->save($data, false)) {
+			throw new InternalErrorException(__d('net_commons', 'Internal Server Error'));
 		}
+
+		// フレームのデフォルトにする
+		$action = "'" . 'registration_answers/view/' . Current::read('Block.id') .
+			'/' . $data['registration_key'] . "'";
+		if (!$this->updateFrameDefaultAction($action)) {
+			throw new InternalErrorException(__d('net_commons', 'Internal Server Error'));
+		}
+
 		return true;
 	}
 /**
@@ -207,6 +269,7 @@ class RegistrationFrameDisplayRegistration extends RegistrationsAppModel {
  *
  * @param string $action default_action
  * @return bool
+ * @throws InternalErrorException
  */
 	public function updateFrameDefaultAction($action) {
 		// frameのdefault_actionを変更しておく
@@ -220,7 +283,7 @@ class RegistrationFrameDisplayRegistration extends RegistrationsAppModel {
 			'default_action' => $action
 		);
 		if (! $this->Frame->updateAll($frameData, $conditions)) {
-			return false;
+			throw new InternalErrorException(__d('net_commons', 'Internal Server Error'));
 		}
 		return true;
 	}

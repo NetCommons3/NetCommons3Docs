@@ -145,8 +145,7 @@ class NetCommonsAppController extends Controller {
 		Current::initialize($this->request);
 
 		if (! $this->AccessCtrl->allowAccess()) {
-			$this->Auth->logout();
-			return $this->redirect('/net_commons/site_close/index');
+			return;
 		}
 
 		if (Current::read('Block') &&
@@ -218,17 +217,6 @@ class NetCommonsAppController extends Controller {
 			throw new Exception(__d('net_commons', $error[$status]), $status);
 		}
 		return parent::beforeRedirect($url, $status, $exit);
-	}
-
-/**
- * Keep connection alive
- *
- * @author Jun Nishikawa <topaz2@m0n0m0n0.com>
- * @return void
- **/
-	public function ping() {
-		$this->set('result', array('message' => 'OK'));
-		$this->set('_serialize', array('result'));
 	}
 
 /**

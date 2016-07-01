@@ -17,7 +17,8 @@ App::uses('RegistrationAnswerBehavior', 'Registrations.Model/Behavior');
  * @package  Registrations\Registrations\Model\Befavior\Answer
  * @author Allcreator <info@allcreator.net>
  */
-class RegistrationAnswerMatrixMultipleChoiceBehavior extends RegistrationAnswerMatrixSingleChoiceBehavior {
+class RegistrationAnswerMatrixMultipleChoiceBehavior
+	extends RegistrationAnswerMatrixSingleChoiceBehavior {
 
 /**
  * this answer type
@@ -62,7 +63,9 @@ class RegistrationAnswerMatrixMultipleChoiceBehavior extends RegistrationAnswerM
 		$matrixChoiceId = $model->data['RegistrationAnswer']['matrix_choice_key'];
 		if (is_array($model->data['RegistrationAnswer']['answer_value'])) {
 			foreach ($model->data['RegistrationAnswer']['answer_value'] as $ans) {
-				$this->_decomposeAnswerValue($model->data['RegistrationAnswer']['matrix_answer_values'][$matrixChoiceId], $ans);
+				$this->_decomposeAnswerValue(
+					$model->data['RegistrationAnswer']['matrix_answer_values'][$matrixChoiceId],
+					$ans);
 				$model->data['RegistrationAnswer']['multi_answer_values'] .= $ans;
 			}
 		}

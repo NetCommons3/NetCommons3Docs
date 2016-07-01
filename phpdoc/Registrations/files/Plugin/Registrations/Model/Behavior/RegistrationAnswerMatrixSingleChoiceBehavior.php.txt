@@ -43,6 +43,16 @@ class RegistrationAnswerMatrixSingleChoiceBehavior extends RegistrationAnswerBeh
 	protected $_isTypeAnsArrShiftUp = true;
 
 /**
+ * matrix validate check type
+ *
+ * @var array
+ */
+	protected $_matrixValidateType = array(
+		RegistrationsComponent::TYPE_MATRIX_SELECTION_LIST,
+		RegistrationsComponent::TYPE_MATRIX_MULTIPLE,
+	);
+
+/**
  * beforeValidate is called before a model is validated, you can use this callback to
  * add behavior validation rules into a models validate array. Returning false
  * will allow you to make the validation fail.
@@ -59,10 +69,13 @@ class RegistrationAnswerMatrixSingleChoiceBehavior extends RegistrationAnswerBeh
 		}
 		$model->data['RegistrationAnswer']['matrix_answer_values'] = array();
 		$matrixChoiceId = $model->data['RegistrationAnswer']['matrix_choice_key'];
+
 		if (isset($model->data['RegistrationAnswer']['answer_value'])) {
-			$this->_decomposeAnswerValue($model->data['RegistrationAnswer']['answer_values'],
+			$this->_decomposeAnswerValue(
+				$model->data['RegistrationAnswer']['answer_values'],
 				$model->data['RegistrationAnswer']['answer_value']);
-			$this->_decomposeAnswerValue($model->data['RegistrationAnswer']['matrix_answer_values'][$matrixChoiceId],
+			$this->_decomposeAnswerValue(
+				$model->data['RegistrationAnswer']['matrix_answer_values'][$matrixChoiceId],
 				$model->data['RegistrationAnswer']['answer_value']);
 		}
 		$this->_setupOtherAnswerValue($model, $question);
@@ -73,24 +86,35 @@ class RegistrationAnswerMatrixSingleChoiceBehavior extends RegistrationAnswerBeh
  *
  * @param object &$model use model
  * @param array $data Validation対象データ
- * @param array $question 登録データに対応する質問
+ * @param array $question 登録データに対応する項目
  * @param array $allAnswers 入力された登録すべて
  * @return bool
  */
-	public function answerValidation(&$model, $data, $question, $allAnswers) {
-		if ($question['question_type'] != $this->_myType) {
+	public function answerMatrixValidation(&$model, $data, $question, $allAnswers) {
+		if (! in_array($question['question_type'], $this->_matrixValidateType)) {
 			return true;
 		}
 		$ret = true;
 		if (isset($model->data['RegistrationAnswer']['matrix_answer_values'])) {
 			$list = Hash::combine($question['RegistrationChoice'], '{n}.key', '{n}.key');
-			if (! $this->checkMatrixAnswerInList($model, $model->data['RegistrationAnswer']['matrix_answer_values'], $list)) {
+			if (! $this->checkMatrixAnswerInList(
+				$model,
+				$model->data['RegistrationAnswer']['matrix_answer_values'],
+				$list)) {
 				$ret = false;
 			}
-			if (! $this->checkMatrixOtherAnswer($model, $question, $model->data['RegistrationAnswer']['matrix_answer_values'], $model->data['RegistrationAnswer'])) {
+			if (! $this->checkMatrixOtherAnswer(
+				$model,
+				$question,
+				$model->data['RegistrationAnswer']['matrix_answer_values'],
+				$model->data['RegistrationAnswer'])) {
 				$ret = false;
 			}
-			if (! $this->checkMatrixAnswerFill($model, $question, $model->data['RegistrationAnswer'], $allAnswers)) {
+			if (! $this->checkMatrixAnswerFill(
+				$model,
+				$question,
+				$model->data['RegistrationAnswer'],
+				$allAnswers)) {
 				$ret = false;
 			}
 		}
@@ -136,11 +160,18 @@ class RegistrationAnswerMatrixSingleChoiceBehavior extends RegistrationAnswerBeh
 		// このやり方だと、「その他」行がマトリクスにある時は必ず入力しなきゃいけなくなる？
 		// 選択肢を何も選択しなかったらAnswerデータが飛んでこないからチェックにかからないか？
 		$rowIds = array_keys($answers);
+
 		foreach ($rowIds as $matrixRowId) {
-			$results = Hash::extract($question['RegistrationChoice'], '{n}[key=' . $matrixRowId . ']');
-			if ($results && $results[0]['other_choice_type'] != RegistrationsComponent::OTHER_CHOICE_TYPE_NO_OTHER_FILED) {
+
+			$results = Hash::extract(
+				$question['RegistrationChoice'],
+				'{n}[key=' . $matrixRowId . ']');
+
+			if ($results &&
+				$results[0]['other_choice_type'] != RegistrationsComponent::OTHER_CHOICE_TYPE_NO_OTHER_FILED) {
 				if (empty($otherAnswer['other_answer_value'])) {
-					$model->validationErrors['answer_value'][] = __d('registrations', 'Please enter something in other item');
+					$model->validationErrors['answer_value'][] =
+						__d('registrations', 'Please enter something in other item');
 					return false;
 				}
 			}
@@ -178,7 +209,8 @@ class RegistrationAnswerMatrixSingleChoiceBehavior extends RegistrationAnswerBeh
 		}
 		$model->oneTimeValidateFlag = true;	// チェックした
 		if ($noAnswerCount > 0 && $noAnswerCount < $answerCount) {
-			$model->validationErrors['answer_value'][] = __d('registrations', 'Please answer about all rows.');
+			$model->validationErrors['answer_value'][] =
+				__d('registrations', 'Please answer about all rows.');
 			return false;
 		}
 		return true;

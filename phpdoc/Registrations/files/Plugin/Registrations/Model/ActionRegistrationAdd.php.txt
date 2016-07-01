@@ -11,9 +11,7 @@
 App::uses('RegistrationsAppModel', 'Registrations.Model');
 App::uses('TemporaryUploadFile', 'Files.Utility');
 App::uses('UnZip', 'Files.Utility');
-App::uses('WysIsWygDownloader', 'Registrations.Utility');
-
-App::uses('RegistrationsComponent', 'Registrations.Controller/Component');
+App::uses('WysiwygZip', 'Wysiwyg.Utility');
 
 /**
  * Summary for ActionRegistrationAdd Model
@@ -58,13 +56,18 @@ class ActionRegistrationAdd extends RegistrationsAppModel {
 			),
 			'title' => array(
 				'rule' => array(
-					'requireWhen', 'create_option', RegistrationsComponent::REGISTRATION_CREATE_OPT_NEW),
+					'requireWhen',
+					'create_option',
+					RegistrationsComponent::REGISTRATION_CREATE_OPT_NEW),
 				'message' => sprintf(__d('net_commons', 'Please input %s.'), __d('registrations', 'Title')),
 				'required' => false,
 			),
 			'past_registration_id' => array(
 				'requireWhen' => array(
-					'rule' => array('requireWhen', 'create_option', RegistrationsComponent::REGISTRATION_CREATE_OPT_REUSE),
+					'rule' => array(
+						'requireWhen',
+						'create_option',
+						RegistrationsComponent::REGISTRATION_CREATE_OPT_REUSE),
 					'message' => __d('registrations', 'Please select past registration.'),
 				),
 				'checkPastRegistration' => array(
@@ -127,11 +130,18 @@ class ActionRegistrationAdd extends RegistrationsAppModel {
  * @return bool
  */
 	public function checkPastRegistration($check) {
-		if ($this->data['ActionRegistrationAdd']['create_option'] != RegistrationsComponent::REGISTRATION_CREATE_OPT_REUSE) {
+		if ($this->data['ActionRegistrationAdd']['create_option'] !=
+			RegistrationsComponent::REGISTRATION_CREATE_OPT_REUSE) {
 			return true;
 		}
 		$this->Registration = ClassRegistry::init('Registrations.Registration', true);
-		$cnt = $this->Registration->find('count', array('id' => $check));
+		$baseCondition = $this->Registration->getBaseCondition(array(
+			'Registration.id' => $check['past_registration_id']
+		));
+		$cnt = $this->Registration->find('count', array(
+			'conditions' => $baseCondition,
+			'recursive' => -1
+		));
 		if ($cnt == 0) {
 			return false;
 		}
@@ -191,7 +201,8 @@ class ActionRegistrationAdd extends RegistrationsAppModel {
 		// そのデータから今回作成する登録フォームデータ基本構成を作成し返す
 
 		// 過去の登録フォームのコピー・クローンで作成
-		$registration = $this->_getRegistrationCloneById($this->data['ActionRegistrationAdd']['past_registration_id']);
+		$registrationId = $this->data['ActionRegistrationAdd']['past_registration_id'];
+		$registration = $this->_getRegistrationCloneById($registrationId);
 		return $registration;
 	}
 /**
@@ -210,7 +221,7 @@ class ActionRegistrationAdd extends RegistrationsAppModel {
 				'key' => '',
 				'status' => WorkflowComponent::STATUS_IN_DRAFT,
 				'is_total_show' => RegistrationsComponent::EXPRESSION_SHOW,
-				'public_type' => WorkflowBehavior::PUBLIC_TYPE_PUBLIC,
+				'answer_timing' => RegistrationsComponent::USES_NOT_USE,
 				'is_key_pass_use' => RegistrationsComponent::USES_NOT_USE,
 				'total_show_timing' => RegistrationsComponent::USES_NOT_USE,
 			),
@@ -226,13 +237,12 @@ class ActionRegistrationAdd extends RegistrationsAppModel {
  * @return array
  */
 	protected function _getRegistrationCloneById($registrationId) {
+		// 前もってValidate処理で存在確認されている場合しか
+		// この関数が呼ばれないので$registrationの判断は不要
 		$registration = $this->Registration->find('first', array(
 			'conditions' => array('Registration.id' => $registrationId),
+			'recursive' => 1
 		));
-
-		if (!$registration) {
-			return $this->getDefaultRegistration(array('title' => ''));
-		}
 		// ID値のみクリア
 		$this->Registration->clearRegistrationId($registration);
 
@@ -249,47 +259,57 @@ class ActionRegistrationAdd extends RegistrationsAppModel {
 		// アップされたファイルをもとに、登録フォームデータを解凍、取得し、
 		// そのデータから今回作成する登録フォームデータ基本構成を作成し返す
 
-		// アップロードファイルを受け取り、
-		$uploadFile = new TemporaryUploadFile(Hash::get($this->data, 'ActionRegistrationAdd.template_file'));
-		// エラーチェック
-		if (! $uploadFile) {
-			$this->validationErrors['Registration']['template_file'] = __d('registrations', 'file upload error.');
+		if (empty($this->data['ActionRegistrationAdd']['template_file']['name'])) {
+			$this->validationErrors['template_file'][] =
+				__d('registrations', 'Please input template file.');
 			return null;
 		}
 
-		// アップロードファイル解凍
-		$unZip = new UnZip($uploadFile->path);
-		$temporaryFolder = $unZip->extract();
-		// エラーチェック
-		if (! $temporaryFolder) {
-			$this->validationErrors['Registration']['template_file'] = __d('registrations', 'illegal import file.');
+		try {
+			// アップロードファイルを受け取り、
+			// エラーチェックはない。ここでのエラー時はInternalErrorExceptionとなる
+			$uploadFile = new TemporaryUploadFile($this->data['ActionRegistrationAdd']['template_file']);
+
+			// アップロードファイル解凍
+			$unZip = new UnZip($uploadFile->path);
+			$temporaryFolder = $unZip->extract();
+			// エラーチェック
+			if (! $temporaryFolder) {
+				$this->validationErrors['template_file'][] = __d('registrations', 'illegal import file.');
+				return null;
+			}
+
+			// フィンガープリント確認
+			$fingerPrint = $this->__checkFingerPrint($temporaryFolder->path);
+			if ($fingerPrint === false) {
+				$this->validationErrors['template_file'][] = __d('registrations', 'illegal import file.');
+				return null;
+			}
+
+			// 登録フォームテンプレートファイル本体をテンポラリフォルダに展開する。
+			$registrationZip = new UnZip(
+				$temporaryFolder->path . DS . RegistrationsComponent::REGISTRATION_TEMPLATE_FILENAME);
+			if (! $registrationZip->extract()) {
+				$this->validationErrors['template_file'][] =
+					__d('registrations', 'illegal import file.');
+				return null;
+			}
+
+			// jsonファイルを読み取り、PHPオブジェクトに変換
+			$jsonFilePath =
+				$registrationZip->path . DS . RegistrationsComponent::REGISTRATION_JSON_FILENAME;
+			$jsonFile = new File($jsonFilePath);
+			$jsonData = $jsonFile->read();
+			$jsonRegistration = json_decode($jsonData, true);
+		} catch (Exception $ex) {
+			$this->validationErrors['template_file'][] = __d('registrations', 'file upload error.');
 			return null;
 		}
-
-		// フィンガープリント確認
-		$fingerPrint = $this->__checkFingerPrint($temporaryFolder->path);
-		if ($fingerPrint === false) {
-			$this->validationErrors['Registration']['template_file'] = __d('registrations', 'illegal import file.');
-			return null;
-		}
-
-		// 登録フォームテンプレートファイル本体をテンポラリフォルダに展開する。
-		$registrationZip = new UnZip($temporaryFolder->path . DS . RegistrationsComponent::REGISTRATION_TEMPLATE_FILENAME);
-		if (! $registrationZip->extract()) {
-			$this->validationErrors['Registration']['template_file'] = __d('registrations', 'illegal import file.');
-			return null;
-		}
-
-		// jsonファイルを読み取り、PHPオブジェクトに変換
-		$jsonFilePath = $registrationZip->path . DS . RegistrationsComponent::REGISTRATION_JSON_FILENAME;
-		$jsonFile = new File($jsonFilePath);
-		$jsonData = $jsonFile->read();
-		$jsonRegistration = json_decode($jsonData, true);
 
 		// 初めにファイルに記載されている登録フォームプラグインのバージョンと
 		// 現サイトの登録フォームプラグインのバージョンを突合し、差分がある場合はインポート処理を中断する。
-		if ($this->__checkVersion($jsonRegistration) === false) {
-			$this->validationErrors['Registration']['template_file'] = __d('registrations', 'version is different.');
+		if ($this->_checkVersion($jsonRegistration) === false) {
+			$this->validationErrors['template_file'][] = __d('registrations', 'version is different.');
 			return null;
 		}
 
@@ -312,7 +332,7 @@ class ActionRegistrationAdd extends RegistrationsAppModel {
  * @return array RegistrationData
  */
 	protected function _getRegistrations($folderPath, $registrations, $importKey) {
-		$wysiswyg = new WysIsWygDownloader();
+		$wysiswyg = new WysiwygZip();
 
 		foreach ($registrations as &$q) {
 			// WysIsWygのデータを入れなおす
@@ -335,7 +355,9 @@ class ActionRegistrationAdd extends RegistrationsAppModel {
 					if ($model->getColumnType($columnName) == 'text') {
 						// keyと同じ名前のフォルダの下にあるkeyの名前のZIPファイルを渡して
 						// その返ってきた値をこのカラムに設定
-						$value = $wysiswyg->getFromWysIsWygZIP($folderPath . DS . $value, $model->alias . '.' . $columnName);
+						$value =
+							$wysiswyg->getFromWysiwygZip(
+								$folderPath . DS . $value, $model->alias . '.' . $columnName);
 					}
 				}
 			}
@@ -352,12 +374,15 @@ class ActionRegistrationAdd extends RegistrationsAppModel {
  */
 	private function __checkFingerPrint($folderPath) {
 		// フィンガープリントファイルを取得
-		$file = new File($folderPath . DS . RegistrationsComponent::REGISTRATION_FINGER_PRINT_FILENAME, false);
+		$file = new File(
+				$folderPath . DS . RegistrationsComponent::REGISTRATION_FINGER_PRINT_FILENAME,
+				false);
 		$fingerPrint = $file->read();
 
 		// ファイル内容から算出されるハッシュ値と指定されたフットプリント値を比較し
 		// 同一であれば正当性が保証されたと判断する（フォーマットチェックなどは行わない）
-		$registrationZipFile = $folderPath . DS . RegistrationsComponent::REGISTRATION_TEMPLATE_FILENAME;
+		$registrationZipFile =
+			$folderPath . DS . RegistrationsComponent::REGISTRATION_TEMPLATE_FILENAME;
 		if (sha1_file($registrationZipFile, false) != $fingerPrint) {
 			return false;
 		}
@@ -365,14 +390,14 @@ class ActionRegistrationAdd extends RegistrationsAppModel {
 		return $fingerPrint;
 	}
 /**
- * __checkVersion
+ * _checkVersion
  *
  * @param array $jsonData バージョンが含まれたJson
  * @return bool
  */
-	private function __checkVersion($jsonData) {
+	protected function _checkVersion($jsonData) {
 		// バージョン情報を取得するためComposer情報を得る
-		$Plugin = ClassRegistry::init('Plugins.Plugin');
+		$Plugin = ClassRegistry::init('PluginManager.Plugin');
 		$composer = $Plugin->getComposer('netcommons/registrations');
 		if (!$composer) {
 			return false;
