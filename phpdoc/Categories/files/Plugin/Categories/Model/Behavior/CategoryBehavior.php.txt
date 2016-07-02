@@ -29,16 +29,13 @@ App::uses('ModelBehavior', 'Model');
 class CategoryBehavior extends ModelBehavior {
 
 /**
- * beforeValidate is called before a model is validated, you can use this callback to
- * add behavior validation rules into a models validate array. Returning false
- * will allow you to make the validation fail.
+ * afterValidate is called just after model data was validated, you can use this callback
+ * to perform any data cleanup or preparation if needed
  *
  * @param Model $model Model using this behavior
- * @param array $options Options passed from Model::save().
- * @return mixed False or null will abort the operation. Any other result will continue.
- * @see Model::save()
+ * @return mixed False will stop this event from being passed to other behaviors
  */
-	public function beforeValidate(Model $model, $options = array()) {
+	public function afterValidate(Model $model) {
 		if (! isset($model->data['Categories'])) {
 			return true;
 		}
@@ -50,9 +47,7 @@ class CategoryBehavior extends ModelBehavior {
 		foreach ($model->data['Categories'] as $category) {
 			$model->Category->set($category['Category']);
 			if (! $model->Category->validates()) {
-				$model->validationErrors = Hash::merge(
-					$model->validationErrors, $model->Category->validationErrors
-				);
+				$model->validationErrors['category_name'] = $model->Category->validationErrors['name'];
 				return false;
 			}
 
@@ -64,6 +59,7 @@ class CategoryBehavior extends ModelBehavior {
 				return false;
 			}
 		}
+
 		return true;
 	}
 
