@@ -22,7 +22,7 @@ class UserAttributeSetting extends UserAttributesAppModel {
  */
 	public $addDataTypes = array(
 		'text', 'textarea', 'radio', 'checkbox',
-		'select', 'email', 'img', 'prefecture',
+		'select', 'email', 'prefecture',
 	);
 
 /**
