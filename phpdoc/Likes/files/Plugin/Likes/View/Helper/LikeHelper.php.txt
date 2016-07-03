@@ -191,6 +191,10 @@ class LikeHelper extends AppHelper {
 	public function buttons($model, $setting, $content, $attributes = array()) {
 		$output = '';
 
+		if (! Hash::get($setting, 'use_like') && ! Hash::get($setting, 'use_like')) {
+			return $output;
+		}
+
 		if (isset($content['LikesUser']['id']) ||
 				$content[$model]['status'] !== WorkflowComponent::STATUS_PUBLISHED) {
 			return $this->display($setting, $content, $attributes);
@@ -243,13 +247,13 @@ class LikeHelper extends AppHelper {
 						'ng-init="initialize(' . h(json_encode($data)) . ', ' . h(json_encode($options)) . ')">';
 
 		//いいね
-		if (isset($setting['use_like']) && $setting['use_like']) {
+		if (Hash::get($setting, 'use_like')) {
 			$output .= $this->Html->div(array('like-icon'),
 					$this->_View->element('Likes.like_button', ['isLiked' => Like::IS_LIKE]), $attributes);
 		}
 
 		//わるいね
-		if (isset($setting['use_unlike']) && $setting['use_unlike']) {
+		if (Hash::get($setting, 'use_unlike')) {
 			$output .= $this->Html->div(array('like-icon'),
 					$this->_View->element('Likes.like_button', ['isLiked' => Like::IS_UNLIKE]), $attributes);
 		}
