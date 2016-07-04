@@ -136,7 +136,7 @@ class LikeHelper extends AppHelper {
  * #### Sample code
  * ##### template file(ctp file)
  * ```
- * <?php echo $this->Like->buttons($bbsSetting, $bbsArticle); ?>
+ * <?php echo $this->Like->display($bbsSetting, $bbsArticle); ?>
  * ```
  *
  * @param array $setting Array of use like setting data.
