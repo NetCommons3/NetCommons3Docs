@@ -20,13 +20,39 @@ App::uses('AppHelper', 'View/Helper');
 class ThemeSettingsHelper extends AppHelper {
 
 /**
+ * 使用するヘルパー
+ *
+ * @var array
+ */
+	public $helpers = array(
+		'NetCommons.NetCommonsHtml',
+	);
+
+/**
+ * Before render callback. beforeRender is called before the view file is rendered.
+ *
+ * Overridden in subclasses.
+ *
+ * @param string $viewFile The view file that is going to be rendered
+ * @return void
+ */
+	public function beforeRender($viewFile) {
+		$this->NetCommonsHtml->css(array(
+			'/theme_settings/css/style.css'
+		));
+		parent::beforeRender($viewFile);
+	}
+
+/**
  * テーマ設定のレンダー
  *
  * @param string $callback callbackのパス
  * @return string HTML
  */
 	public function render($callback) {
-		return $this->_View->element('ThemeSettings.render_index', array('callback' => $callback));
+		return $this->_View->element(
+			'ThemeSettings.render_index', ['callback' => $callback, 'activeTheme' => $this->_View->theme]
+		);
 	}
 
 }
