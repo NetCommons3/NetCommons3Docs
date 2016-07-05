@@ -136,10 +136,10 @@
                                 <div class="accordion" style="margin-bottom: 0">
         <div class="accordion-group">
             <div class="accordion-heading">
-                                    <a class="accordion-toggle " data-toggle="collapse" data-target="#namespace-291016161"></a>
+                                    <a class="accordion-toggle " data-toggle="collapse" data-target="#namespace-457439930"></a>
                                 <a href="../namespaces/default.html" style="margin-left: 30px; padding-left: 0">\</a>
             </div>
-            <div id="namespace-291016161" class="accordion-body collapse in">
+            <div id="namespace-457439930" class="accordion-body collapse in">
                 <div class="accordion-inner">
 
                     
@@ -234,8 +234,8 @@
                                             </nav>
                     <a href="#source-view" role="button" class="pull-right btn" data-toggle="modal"><i class="icon-code"></i></a>
 
-                    <h1><small>\</small>ButtonHelper</h1>
-                    <p><em>Button Helper</em></p>
+                    <h1><small>\</small>AddLanguageRecords</h1>
+                    <p><em>ユーザ項目に言語追加 migration</em></p>
                     
                     
                                         
@@ -254,19 +254,15 @@
                         </section>
                         <section class="row-fluid public">
                             <section class="span4">
-                                                                    <a href="../classes/ButtonHelper.html#method___call" class="">__call()</a><br />
-                                                                    <a href="../classes/ButtonHelper.html#method_getButtonSize" class="">getButtonSize()</a><br />
-                                                                    <a href="../classes/ButtonHelper.html#method_button" class="">button()</a><br />
-                                                                    <a href="../classes/ButtonHelper.html#method_delete" class="">delete()</a><br />
-                                                                    <a href="../classes/ButtonHelper.html#method_save" class="">save()</a><br />
-                                                                    <a href="../classes/ButtonHelper.html#method_cancel" class="">cancel()</a><br />
-                                                                    <a href="../classes/ButtonHelper.html#method_cancelAndSave" class="">cancelAndSave()</a><br />
-                                                                    <a href="../classes/ButtonHelper.html#method_cancelAndSaveAndSaveTemp" class="">cancelAndSaveAndSaveTemp()</a><br />
-                                                                    <a href="../classes/ButtonHelper.html#method_search" class="">search()</a><br />
-                                                                    <a href="../classes/ButtonHelper.html#method_add" class="">add()</a><br />
+                                                                    <a href="../classes/NetCommonsMigration.html#method_updateRecords" class="">updateRecords()</a><br />
+                                                                    <a href="../classes/NetCommonsMigration.html#method_loadModels" class="">loadModels()</a><br />
+                                                                    <a href="../classes/AddLanguageRecords.html#method_before" class="">before()</a><br />
+                                                                    <a href="../classes/AddLanguageRecords.html#method_after" class="">after()</a><br />
                                                             </section>
                             <section class="span4">
-                                                                    <a href="../classes/ButtonHelper.html#property_helpers" class="">$helpers</a><br />
+                                                                    <a href="../classes/AddLanguageRecords.html#property_description" class="">$description</a><br />
+                                                                    <a href="../classes/AddLanguageRecords.html#property_migration" class="">$migration</a><br />
+                                                                    <a href="../classes/AddLanguageRecords.html#property_records" class="">$records</a><br />
                                                             </section>
                             <section class="span4">
                                                                     <em>No constants found</em>
@@ -301,14 +297,16 @@
                     
                     <dl>
                         <dt>File</dt>
-                            <dd><a href="../files/Plugin.NetCommons.View.Helper.ButtonHelper.html"><div class="path-wrapper">Plugin/NetCommons/View/Helper/ButtonHelper.php</div></a></dd>
+                            <dd><a href="../files/Plugin.UserRoles.Config.Migration.2100000002_add_language_records.html"><div class="path-wrapper">Plugin/UserRoles/Config/Migration/2100000002_add_language_records.php</div></a></dd>
                                                 <dt>Package</dt>
-                            <dd><div class="namespace-wrapper">View\Helper</div></dd>
+                            <dd><div class="namespace-wrapper">Config\Migration</div></dd>
                                                 <dt>Class hierarchy</dt>
                             <dd class="hierarchy">
-                                                                                                                                                                                                                                                                                                
-                                        <div class="namespace-wrapper">\FormHelper</div>
-                                                                                                    <div class="namespace-wrapper">\ButtonHelper</div>
+                                                                                                                                                                                                                                                                                                                                                                                                                                                            
+                                        <div class="namespace-wrapper">\CakeMigration</div>
+                                                                    
+                                        <div class="namespace-wrapper"><a href="../classes/NetCommonsMigration.html">\NetCommonsMigration</a></div>
+                                                                                                    <div class="namespace-wrapper">\AddLanguageRecords</div>
                             </dd>
 
                         
@@ -334,11 +332,59 @@
 
                                     <div class="row-fluid">
         <div class="span8 content class">
-            <a id="property_helpers" name="property_helpers" class="anchor"></a>
+            <a id="property_description" name="property_description" class="anchor"></a>
             <article class="property">
-                <h3 class="public ">$helpers</h3>
-                <pre class="signature">$helpers : array</pre>
-                <p><em>Other helpers used by FormHelper</em></p>
+                <h3 class="public ">$description</h3>
+                <pre class="signature">$description : string</pre>
+                <p><em>Migration description</em></p>
+                
+
+                                <h4>Type</h4>
+                string
+                                            </article>
+        </div>
+        <aside class="span4 detailsbar">
+            <h1><i class="icon-arrow-down"></i></h1>
+                        <dl>
+                                                            </dl>
+            <h2>Tags</h2>
+            <table class="table table-condensed">
+                                    <tr><td colspan="2"><em>None found</em></td></tr>
+                            </table>
+        </aside>
+    </div>
+
+                                    <div class="row-fluid">
+        <div class="span8 content class">
+            <a id="property_migration" name="property_migration" class="anchor"></a>
+            <article class="property">
+                <h3 class="public ">$migration</h3>
+                <pre class="signature">$migration : array</pre>
+                <p><em>Actions to be performed</em></p>
+                
+
+                                <h4>Type</h4>
+                array
+                                            </article>
+        </div>
+        <aside class="span4 detailsbar">
+            <h1><i class="icon-arrow-down"></i></h1>
+                        <dl>
+                                                            </dl>
+            <h2>Tags</h2>
+            <table class="table table-condensed">
+                                    <tr><td colspan="2"><em>None found</em></td></tr>
+                            </table>
+        </aside>
+    </div>
+
+                                    <div class="row-fluid">
+        <div class="span8 content class">
+            <a id="property_records" name="property_records" class="anchor"></a>
+            <article class="property">
+                <h3 class="public ">$records</h3>
+                <pre class="signature">$records : array</pre>
+                <p><em>Insert records</em></p>
                 
 
                                 <h4>Type</h4>
@@ -365,31 +411,124 @@
 
                                     <div class="row-fluid">
         <div class="span8 content class">
-            <a id="method___call" name="method___call" class="anchor"></a>
+            <a id="method_updateRecords" name="method_updateRecords" class="anchor"></a>
             <article class="method">
-                <h3 class="public ">__call()</h3>
+                <h3 class="public ">updateRecords()</h3>
                 <a href="#source-view" role="button" class="pull-right btn" data-toggle="modal" style="font-size: 1.1em; padding: 9px 14px"><i class="icon-code"></i></a>
-                <pre class="signature" style="margin-right: 54px;">__call(string  <span class="argument">$method</span>, array  <span class="argument">$params</span>) : mixed</pre>
-                <p><em>LinkButtonHelperラップ用マジックメソッド。</em></p>
+                <pre class="signature" style="margin-right: 54px;">updateRecords(string  <span class="argument">$model</span>, string  <span class="argument">$records</span>, string  <span class="argument">$clear = true</span>) : boolean</pre>
+                <p><em>Update model records</em></p>
                 
 
                                     <h4>Parameters</h4>
                     <table class="table table-condensed table-hover">
                                                     <tr>
                                 <td>string</td>
-                                <td>$method </td>
-                                <td><p>メソッド</p></td>
+                                <td>$model </td>
+                                <td><p>model name to update</p></td>
                             </tr>
                                                     <tr>
-                                <td>array</td>
-                                <td>$params </td>
-                                <td><p>パラメータ</p></td>
+                                <td>string</td>
+                                <td>$records </td>
+                                <td><p>records to be stored</p></td>
+                            </tr>
+                                                    <tr>
+                                <td>string</td>
+                                <td>$clear </td>
+                                <td><p>初期化するかどうか</p></td>
                             </tr>
                                             </table>
                 
                 
                                     <h4>Returns</h4>
-                    mixed
+                    boolean
+                                            &mdash; <p>Should process continue</p>
+                                    				
+                            </article>
+        </div>
+        <aside class="span4 detailsbar">
+            <h1><i class="icon-arrow-down"></i></h1>
+                                                            <dl>
+                                                    <dt>Inherited from</dt>
+                    <dd><a href="../classes/NetCommonsMigration.html"><div class="path-wrapper">\NetCommonsMigration</div></a></dd>
+                                                            </dl>
+            <h2>Tags</h2>
+            <table class="table table-condensed">
+                                    <tr>
+                        <th>
+                            SuppressWarnings
+                        </th>
+                        <td>
+                                                                                            <p>(PHPMD.BooleanArgumentFlag)</p>
+                                                    </td>
+                    </tr>
+                            </table>
+        </aside>
+    </div>
+
+                                    <div class="row-fluid">
+        <div class="span8 content class">
+            <a id="method_loadModels" name="method_loadModels" class="anchor"></a>
+            <article class="method">
+                <h3 class="public ">loadModels()</h3>
+                <a href="#source-view" role="button" class="pull-right btn" data-toggle="modal" style="font-size: 1.1em; padding: 9px 14px"><i class="icon-code"></i></a>
+                <pre class="signature" style="margin-right: 54px;">loadModels(array  <span class="argument">$models = array()</span>, string  <span class="argument">$source = &#039;master&#039;</span>) : void</pre>
+                <p><em>Load models</em></p>
+                
+
+                                    <h4>Parameters</h4>
+                    <table class="table table-condensed table-hover">
+                                                    <tr>
+                                <td>array</td>
+                                <td>$models </td>
+                                <td><p>models to load</p></td>
+                            </tr>
+                                                    <tr>
+                                <td>string</td>
+                                <td>$source </td>
+                                <td><p>data source</p></td>
+                            </tr>
+                                            </table>
+                
+                
+                				
+                            </article>
+        </div>
+        <aside class="span4 detailsbar">
+            <h1><i class="icon-arrow-down"></i></h1>
+                                                            <dl>
+                                                    <dt>Inherited from</dt>
+                    <dd><a href="../classes/NetCommonsMigration.html"><div class="path-wrapper">\NetCommonsMigration</div></a></dd>
+                                                            </dl>
+            <h2>Tags</h2>
+            <table class="table table-condensed">
+                                    <tr><td colspan="2"><em>None found</em></td></tr>
+                            </table>
+        </aside>
+    </div>
+
+                                    <div class="row-fluid">
+        <div class="span8 content class">
+            <a id="method_before" name="method_before" class="anchor"></a>
+            <article class="method">
+                <h3 class="public ">before()</h3>
+                <a href="#source-view" role="button" class="pull-right btn" data-toggle="modal" style="font-size: 1.1em; padding: 9px 14px"><i class="icon-code"></i></a>
+                <pre class="signature" style="margin-right: 54px;">before(string  <span class="argument">$direction</span>) : boolean</pre>
+                <p><em>Before migration callback</em></p>
+                
+
+                                    <h4>Parameters</h4>
+                    <table class="table table-condensed table-hover">
+                                                    <tr>
+                                <td>string</td>
+                                <td>$direction </td>
+                                <td><p>Direction of migration process (up or down)</p></td>
+                            </tr>
+                                            </table>
+                
+                
+                                    <h4>Returns</h4>
+                    boolean
+                                            &mdash; <p>Should process continue</p>
                                     				
                             </article>
         </div>
@@ -406,427 +545,27 @@
 
                                     <div class="row-fluid">
         <div class="span8 content class">
-            <a id="method_getButtonSize" name="method_getButtonSize" class="anchor"></a>
+            <a id="method_after" name="method_after" class="anchor"></a>
             <article class="method">
-                <h3 class="public ">getButtonSize()</h3>
+                <h3 class="public ">after()</h3>
                 <a href="#source-view" role="button" class="pull-right btn" data-toggle="modal" style="font-size: 1.1em; padding: 9px 14px"><i class="icon-code"></i></a>
-                <pre class="signature" style="margin-right: 54px;">getButtonSize() : string</pre>
-                <p><em>ボタンサイズ取得</em></p>
-                
-
-                
-                
-                                    <h4>Returns</h4>
-                    string
-                                            &mdash; <p>A HTML button tag.</p>
-                                    				
-                            </article>
-        </div>
-        <aside class="span4 detailsbar">
-            <h1><i class="icon-arrow-down"></i></h1>
-                                                            <dl>
-                                                                            </dl>
-            <h2>Tags</h2>
-            <table class="table table-condensed">
-                                    <tr><td colspan="2"><em>None found</em></td></tr>
-                            </table>
-        </aside>
-    </div>
-
-                                    <div class="row-fluid">
-        <div class="span8 content class">
-            <a id="method_button" name="method_button" class="anchor"></a>
-            <article class="method">
-                <h3 class="public ">button()</h3>
-                <a href="#source-view" role="button" class="pull-right btn" data-toggle="modal" style="font-size: 1.1em; padding: 9px 14px"><i class="icon-code"></i></a>
-                <pre class="signature" style="margin-right: 54px;">button(string  <span class="argument">$title</span>, array  <span class="argument">$options = array()</span>) : string</pre>
-                <p><em>&lt;button&gt;タグの出力</em></p>
+                <pre class="signature" style="margin-right: 54px;">after(string  <span class="argument">$direction</span>) : boolean</pre>
+                <p><em>After migration callback</em></p>
                 
 
                                     <h4>Parameters</h4>
                     <table class="table table-condensed table-hover">
                                                     <tr>
                                 <td>string</td>
-                                <td>$title </td>
-                                <td><p>The button's caption. Not automatically HTML encoded</p></td>
-                            </tr>
-                                                    <tr>
-                                <td>array</td>
-                                <td>$options </td>
-                                <td><p>Array of options and HTML attributes.</p></td>
+                                <td>$direction </td>
+                                <td><p>Direction of migration process (up or down)</p></td>
                             </tr>
                                             </table>
                 
                 
                                     <h4>Returns</h4>
-                    string
-                                            &mdash; <button>タグ
-                                    				
-                            </article>
-        </div>
-        <aside class="span4 detailsbar">
-            <h1><i class="icon-arrow-down"></i></h1>
-                                                            <dl>
-                                                                            </dl>
-            <h2>Tags</h2>
-            <table class="table table-condensed">
-                                    <tr><td colspan="2"><em>None found</em></td></tr>
-                            </table>
-        </aside>
-    </div>
-
-                                    <div class="row-fluid">
-        <div class="span8 content class">
-            <a id="method_delete" name="method_delete" class="anchor"></a>
-            <article class="method">
-                <h3 class="public ">delete()</h3>
-                <a href="#source-view" role="button" class="pull-right btn" data-toggle="modal" style="font-size: 1.1em; padding: 9px 14px"><i class="icon-code"></i></a>
-                <pre class="signature" style="margin-right: 54px;">delete(string  <span class="argument">$title</span>, string  <span class="argument">$confirm</span>, array  <span class="argument">$options = array()</span>) : string</pre>
-                <p><em>Creates a `&lt;button&gt;` tag. The type attribute defaults to `type=&quot;submit&quot;`
-You can change it to a different value by using `$options[&#039;type&#039;]`.</em></p>
-                <h3>Options:</h3>
-<ul>
-<li><code>escape</code> - HTML entity encode the $title of the button. Defaults to false.</li>
-</ul>
-<h3>Original options</h3>
-<ul>
-<li><code>confirm</code> - Add javascript confirm in onclick attribute</li>
-</ul>
-
-                                    <h4>Parameters</h4>
-                    <table class="table table-condensed table-hover">
-                                                    <tr>
-                                <td>string</td>
-                                <td>$title </td>
-                                <td><p>The button's caption. Not automatically HTML encoded</p></td>
-                            </tr>
-                                                    <tr>
-                                <td>string</td>
-                                <td>$confirm </td>
-                                <td><p>Confirm message by button click</p></td>
-                            </tr>
-                                                    <tr>
-                                <td>array</td>
-                                <td>$options </td>
-                                <td><p>Array of options and HTML attributes.</p></td>
-                            </tr>
-                                            </table>
-                
-                
-                                    <h4>Returns</h4>
-                    string
-                                            &mdash; <p>A HTML button tag.</p>
-                                    				
-                            </article>
-        </div>
-        <aside class="span4 detailsbar">
-            <h1><i class="icon-arrow-down"></i></h1>
-                                                            <dl>
-                                                                                            <dt>See also</dt>
-                                                                <dd><a href="http://book.cakephp.org/2.0/en/core-libraries/helpers/form.html#FormHelper::button"><span class="namespace-wrapper">http://book.cakephp.org/2.0/en/core-libraries/helpers/form.html#FormHelper::button</span></a></dd>
-                                                                </dl>
-            <h2>Tags</h2>
-            <table class="table table-condensed">
-                                    <tr><td colspan="2"><em>None found</em></td></tr>
-                            </table>
-        </aside>
-    </div>
-
-                                    <div class="row-fluid">
-        <div class="span8 content class">
-            <a id="method_save" name="method_save" class="anchor"></a>
-            <article class="method">
-                <h3 class="public ">save()</h3>
-                <a href="#source-view" role="button" class="pull-right btn" data-toggle="modal" style="font-size: 1.1em; padding: 9px 14px"><i class="icon-code"></i></a>
-                <pre class="signature" style="margin-right: 54px;">save(string  <span class="argument">$title</span>, array  <span class="argument">$options = array()</span>) : string</pre>
-                <p><em>Creates a `&lt;button&gt;` tag. The type attribute defaults to `type=&quot;submit&quot;`
-You can change it to a different value by using `$options[&#039;type&#039;]`.</em></p>
-                <h3>Options:</h3>
-<ul>
-<li><code>escape</code> - HTML entity encode the $title of the button. Defaults to false.</li>
-</ul>
-<h3>Original options</h3>
-<ul>
-<li><code>confirm</code> - Add javascript confirm in onclick attribute</li>
-</ul>
-
-                                    <h4>Parameters</h4>
-                    <table class="table table-condensed table-hover">
-                                                    <tr>
-                                <td>string</td>
-                                <td>$title </td>
-                                <td><p>The button's caption. Not automatically HTML encoded</p></td>
-                            </tr>
-                                                    <tr>
-                                <td>array</td>
-                                <td>$options </td>
-                                <td><p>Array of options and HTML attributes.</p></td>
-                            </tr>
-                                            </table>
-                
-                
-                                    <h4>Returns</h4>
-                    string
-                                            &mdash; <p>A HTML button tag.</p>
-                                    				
-                            </article>
-        </div>
-        <aside class="span4 detailsbar">
-            <h1><i class="icon-arrow-down"></i></h1>
-                                                            <dl>
-                                                                                            <dt>See also</dt>
-                                                                <dd><a href="http://book.cakephp.org/2.0/en/core-libraries/helpers/form.html#FormHelper::button"><span class="namespace-wrapper">http://book.cakephp.org/2.0/en/core-libraries/helpers/form.html#FormHelper::button</span></a></dd>
-                                                                </dl>
-            <h2>Tags</h2>
-            <table class="table table-condensed">
-                                    <tr><td colspan="2"><em>None found</em></td></tr>
-                            </table>
-        </aside>
-    </div>
-
-                                    <div class="row-fluid">
-        <div class="span8 content class">
-            <a id="method_cancel" name="method_cancel" class="anchor"></a>
-            <article class="method">
-                <h3 class="public ">cancel()</h3>
-                <a href="#source-view" role="button" class="pull-right btn" data-toggle="modal" style="font-size: 1.1em; padding: 9px 14px"><i class="icon-code"></i></a>
-                <pre class="signature" style="margin-right: 54px;">cancel(string  <span class="argument">$title</span>, string  <span class="argument">$url</span>, array  <span class="argument">$options = array()</span>) : string</pre>
-                <p><em>Creates a `&lt;button&gt;` tag. The type attribute defaults to `type=&quot;submit&quot;`
-You can change it to a different value by using `$options[&#039;type&#039;]`.</em></p>
-                <h3>Options:</h3>
-<ul>
-<li><code>escape</code> - HTML entity encode the $title of the button. Defaults to false.</li>
-</ul>
-<h3>Original options</h3>
-<ul>
-<li><code>url</code> - The url in onclick attribute</li>
-</ul>
-
-                                    <h4>Parameters</h4>
-                    <table class="table table-condensed table-hover">
-                                                    <tr>
-                                <td>string</td>
-                                <td>$title </td>
-                                <td><p>The button's caption. Not automatically HTML encoded</p></td>
-                            </tr>
-                                                    <tr>
-                                <td>string</td>
-                                <td>$url </td>
-                                <td><p>The url in onclick attribute</p></td>
-                            </tr>
-                                                    <tr>
-                                <td>array</td>
-                                <td>$options </td>
-                                <td><p>Array of options and HTML attributes.</p></td>
-                            </tr>
-                                            </table>
-                
-                
-                                    <h4>Returns</h4>
-                    string
-                                            &mdash; <p>A HTML button tag.</p>
-                                    				
-                            </article>
-        </div>
-        <aside class="span4 detailsbar">
-            <h1><i class="icon-arrow-down"></i></h1>
-                                                            <dl>
-                                                                                            <dt>See also</dt>
-                                                                <dd><a href="http://book.cakephp.org/2.0/en/core-libraries/helpers/form.html#FormHelper::button"><span class="namespace-wrapper">http://book.cakephp.org/2.0/en/core-libraries/helpers/form.html#FormHelper::button</span></a></dd>
-                                                                </dl>
-            <h2>Tags</h2>
-            <table class="table table-condensed">
-                                    <tr><td colspan="2"><em>None found</em></td></tr>
-                            </table>
-        </aside>
-    </div>
-
-                                    <div class="row-fluid">
-        <div class="span8 content class">
-            <a id="method_cancelAndSave" name="method_cancelAndSave" class="anchor"></a>
-            <article class="method">
-                <h3 class="public ">cancelAndSave()</h3>
-                <a href="#source-view" role="button" class="pull-right btn" data-toggle="modal" style="font-size: 1.1em; padding: 9px 14px"><i class="icon-code"></i></a>
-                <pre class="signature" style="margin-right: 54px;">cancelAndSave(string  <span class="argument">$cancelTitle</span>, string  <span class="argument">$saveTitle</span>, string  <span class="argument">$cancelUrl = null</span>, array  <span class="argument">$cancelOptions = array()</span>, array  <span class="argument">$saveOptions = array()</span>) : string</pre>
-                <p><em>キャンセル、決定ボタン</em></p>
-                
-
-                                    <h4>Parameters</h4>
-                    <table class="table table-condensed table-hover">
-                                                    <tr>
-                                <td>string</td>
-                                <td>$cancelTitle </td>
-                                <td><p>キャンセルボタンのラベル</p></td>
-                            </tr>
-                                                    <tr>
-                                <td>string</td>
-                                <td>$saveTitle </td>
-                                <td><p>決定ボタンのラベル</p></td>
-                            </tr>
-                                                    <tr>
-                                <td>string</td>
-                                <td>$cancelUrl </td>
-                                <td><p>キャンセルボタン押下のURL</p></td>
-                            </tr>
-                                                    <tr>
-                                <td>array</td>
-                                <td>$cancelOptions </td>
-                                <td><p>キャンセルボタンのオプション</p></td>
-                            </tr>
-                                                    <tr>
-                                <td>array</td>
-                                <td>$saveOptions </td>
-                                <td><p>決定ボタンのオプション</p></td>
-                            </tr>
-                                            </table>
-                
-                
-                                    <h4>Returns</h4>
-                    string
-                                            &mdash; <p>A HTML button tag.</p>
-                                    				
-                            </article>
-        </div>
-        <aside class="span4 detailsbar">
-            <h1><i class="icon-arrow-down"></i></h1>
-                                                            <dl>
-                                                                                            <dt>See also</dt>
-                                                                <dd><a href="http://book.cakephp.org/2.0/en/core-libraries/helpers/form.html#FormHelper::button"><span class="namespace-wrapper">http://book.cakephp.org/2.0/en/core-libraries/helpers/form.html#FormHelper::button</span></a></dd>
-                                                                </dl>
-            <h2>Tags</h2>
-            <table class="table table-condensed">
-                                    <tr><td colspan="2"><em>None found</em></td></tr>
-                            </table>
-        </aside>
-    </div>
-
-                                    <div class="row-fluid">
-        <div class="span8 content class">
-            <a id="method_cancelAndSaveAndSaveTemp" name="method_cancelAndSaveAndSaveTemp" class="anchor"></a>
-            <article class="method">
-                <h3 class="public ">cancelAndSaveAndSaveTemp()</h3>
-                <a href="#source-view" role="button" class="pull-right btn" data-toggle="modal" style="font-size: 1.1em; padding: 9px 14px"><i class="icon-code"></i></a>
-                <pre class="signature" style="margin-right: 54px;">cancelAndSaveAndSaveTemp(string  <span class="argument">$cancelUrl = null</span>, array  <span class="argument">$cancelOptions = array()</span>, array  <span class="argument">$saveTempOptions = array()</span>, array  <span class="argument">$saveOptions = array()</span>, string|null  <span class="argument">$backUrl = null</span>) : string</pre>
-                <p><em>キャンセル、一時保存、決定ボタン</em></p>
-                
-
-                                    <h4>Parameters</h4>
-                    <table class="table table-condensed table-hover">
-                                                    <tr>
-                                <td>string</td>
-                                <td>$cancelUrl </td>
-                                <td><p>キャンセルボタン押下のURL</p></td>
-                            </tr>
-                                                    <tr>
-                                <td>array</td>
-                                <td>$cancelOptions </td>
-                                <td><p>キャンセルボタンのオプション</p></td>
-                            </tr>
-                                                    <tr>
-                                <td>array</td>
-                                <td>$saveTempOptions </td>
-                                <td><p>一時保存ボタンのオプション</p></td>
-                            </tr>
-                                                    <tr>
-                                <td>array</td>
-                                <td>$saveOptions </td>
-                                <td><p>決定ボタンのオプション</p></td>
-                            </tr>
-                                                    <tr>
-                                <td>string|null</td>
-                                <td>$backUrl </td>
-                                <td><p>Back url</p></td>
-                            </tr>
-                                            </table>
-                
-                
-                                    <h4>Returns</h4>
-                    string
-                                            &mdash; <p>ボタン群のタグ.</p>
-                                    				
-                            </article>
-        </div>
-        <aside class="span4 detailsbar">
-            <h1><i class="icon-arrow-down"></i></h1>
-                                                            <dl>
-                                                                            </dl>
-            <h2>Tags</h2>
-            <table class="table table-condensed">
-                                    <tr><td colspan="2"><em>None found</em></td></tr>
-                            </table>
-        </aside>
-    </div>
-
-                                    <div class="row-fluid">
-        <div class="span8 content class">
-            <a id="method_search" name="method_search" class="anchor"></a>
-            <article class="method">
-                <h3 class="public ">search()</h3>
-                <a href="#source-view" role="button" class="pull-right btn" data-toggle="modal" style="font-size: 1.1em; padding: 9px 14px"><i class="icon-code"></i></a>
-                <pre class="signature" style="margin-right: 54px;">search(string  <span class="argument">$title</span>, array  <span class="argument">$options = array()</span>) : string</pre>
-                <p><em>検索ボタンの出力</em></p>
-                
-
-                                    <h4>Parameters</h4>
-                    <table class="table table-condensed table-hover">
-                                                    <tr>
-                                <td>string</td>
-                                <td>$title </td>
-                                <td><p>タイトル</p></td>
-                            </tr>
-                                                    <tr>
-                                <td>array</td>
-                                <td>$options </td>
-                                <td><p>button属性</p></td>
-                            </tr>
-                                            </table>
-                
-                
-                                    <h4>Returns</h4>
-                    string
-                                            &mdash; <p>ボタンHTML.</p>
-                                    				
-                            </article>
-        </div>
-        <aside class="span4 detailsbar">
-            <h1><i class="icon-arrow-down"></i></h1>
-                                                            <dl>
-                                                                            </dl>
-            <h2>Tags</h2>
-            <table class="table table-condensed">
-                                    <tr><td colspan="2"><em>None found</em></td></tr>
-                            </table>
-        </aside>
-    </div>
-
-                                    <div class="row-fluid">
-        <div class="span8 content class">
-            <a id="method_add" name="method_add" class="anchor"></a>
-            <article class="method">
-                <h3 class="public ">add()</h3>
-                <a href="#source-view" role="button" class="pull-right btn" data-toggle="modal" style="font-size: 1.1em; padding: 9px 14px"><i class="icon-code"></i></a>
-                <pre class="signature" style="margin-right: 54px;">add(string  <span class="argument">$title</span>, array  <span class="argument">$options = array()</span>) : string</pre>
-                <p><em>追加ボタンの出力</em></p>
-                
-
-                                    <h4>Parameters</h4>
-                    <table class="table table-condensed table-hover">
-                                                    <tr>
-                                <td>string</td>
-                                <td>$title </td>
-                                <td><p>タイトル</p></td>
-                            </tr>
-                                                    <tr>
-                                <td>array</td>
-                                <td>$options </td>
-                                <td><p>button属性</p></td>
-                            </tr>
-                                            </table>
-                
-                
-                                    <h4>Returns</h4>
-                    string
-                                            &mdash; <p>ボタンHTML.</p>
+                    boolean
+                                            &mdash; <p>Should process continue</p>
                                     				
                             </article>
         </div>
@@ -847,10 +586,10 @@ You can change it to a different value by using `$options[&#039;type&#039;]`.</e
     <div id="source-view" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="source-view-label" aria-hidden="true">
         <div class="modal-header">
             <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
-            <h3 id="source-view-label">ButtonHelper.php</h3>
+            <h3 id="source-view-label">2100000002_add_language_records.php</h3>
         </div>
         <div class="modal-body">
-            <pre data-src="../files/Plugin/NetCommons/View/Helper/ButtonHelper.php.txt" class="language-php line-numbers"></pre>
+            <pre data-src="../files/Plugin/UserRoles/Config/Migration/2100000002_add_language_records.php.txt" class="language-php line-numbers"></pre>
         </div>
     </div>
 
