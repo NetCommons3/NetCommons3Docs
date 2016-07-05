@@ -39,14 +39,24 @@ class TimezoneBehavior extends ModelBehavior {
 
 		$timezoneIdentifiers = DateTimeZone::listIdentifiers($what, $country);
 		foreach ($timezoneIdentifiers as $timezone) {
+			$date = new DateTime('now', (new DateTimeZone($timezone)));
+
+			if ($timezone === 'UTC') {
+				$timezoneValue = __d('data_types', '(UTC%s)', '') . ' ';
+			} else {
+				$timezoneValue = __d('data_types', '(UTC%s)', $date->format('P')) . ' ';
+			}
+
 			$results[] = array(
 				'key' => $timezone,
-				'name' => __d('data_types', $timezone),
+				'name' => $timezoneValue . __d('data_types', $timezone),
 				'code' => $timezone,
 				'language_id' => Current::read('Language.id'),
+				'sort' => $date->format('Z')
 			);
 		}
 
+		$results = Hash::sort($results, '{n}.sort', 'asc');
 		return $results;
 	}
 
