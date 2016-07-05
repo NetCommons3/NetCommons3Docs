@@ -43,7 +43,8 @@ class DataType extends DataTypesAppModel {
 		DATA_TYPE_DATETIME = 'datetime',
 		DATA_TYPE_WYSIWYG = 'wysiwyg',
 		DATA_TYPE_PREFECTURE = 'prefecture',
-		DATA_TYPE_TIMEZONE = 'timezone';
+		DATA_TYPE_TIMEZONE = 'timezone',
+		DATA_TYPE_LANGUAGE = 'language';
 
 /**
  * Validation rules
@@ -159,7 +160,44 @@ class DataType extends DataTypesAppModel {
 			$dataTypes[$typeKey][$this->DataTypeChoice->alias] = $this->DataTypeChoice->getTimezone();
 		}
 
+		$typeKey = self::DATA_TYPE_LANGUAGE;
+		if (isset($dataTypes[$typeKey])) {
+			$dataTypes[$typeKey][$this->DataTypeChoice->alias] = $this->getLanguages();
+		}
+
 		return $dataTypes;
+	}
+
+/**
+ * 言語データタイプを取得
+ *
+ * @return array DataTypes配列
+ */
+	public function getLanguages() {
+		App::uses('L10n', 'I18n');
+		$L10n = new L10n();
+
+		$languages = $this->Language->find('all', array(
+			'recursive' => -1,
+			'conditions' => array(
+				'is_active' => true
+			),
+			'order' => array('weight' => 'asc')
+		));
+
+		$results = array();
+		foreach ($languages as $lang) {
+			$catalog = $L10n->catalog($lang['Language']['code']);
+
+			$results[] = array(
+				'key' => $lang['Language']['code'],
+				'name' => __d('m17n', $catalog['language']),
+				'code' => $lang['Language']['code'],
+				'language_id' => $lang['Language']['id'],
+			);
+		}
+
+		return $results;
 	}
 
 }
