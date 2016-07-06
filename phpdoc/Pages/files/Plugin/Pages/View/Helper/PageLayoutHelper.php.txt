@@ -92,6 +92,12 @@ class PageLayoutHelper extends AppHelper {
  */
 	public function beforeRender($viewFile) {
 		$this->NetCommonsHtml->css('/pages/css/style.css');
+
+		//メタデータ
+		foreach ($this->_View->viewVars['meta'] as $meta) {
+			$this->NetCommonsHtml->meta($meta, null, ['inline' => false]);
+		}
+
 		parent::beforeRender($viewFile);
 	}
 

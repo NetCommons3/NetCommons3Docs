@@ -18,6 +18,13 @@ App::uses('AppModel', 'Model');
 class LanguagesPage extends AppModel {
 
 /**
+ * `<title></title>`のデフォルト値
+ *
+ * @var const
+ */
+	const DEFAULT_META_TITLE = '{X-PAGE_NAME} - {X-SITE_NAME}';
+
+/**
  * Validation rules
  *
  * @var array

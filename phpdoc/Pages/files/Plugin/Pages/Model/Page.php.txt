@@ -368,6 +368,10 @@ class Page extends PagesAppModel {
  * @return array
  */
 	public function getPageWithFrame($permalink) {
+		$this->loadModels([
+			'LanguagesPage' => 'Pages.LanguagesPage',
+		]);
+
 		if ($permalink === '') {
 			$conditions = array(
 				'Page.id' => Current::read('Room.page_id_top')
@@ -395,7 +399,18 @@ class Page extends PagesAppModel {
 				)
 			)
 		);
-		$result = $this->find('first', $query);
+		$page = $this->find('first', $query);
+
+		$pagesLanguages = $this->LanguagesPage->find('first', array(
+			'recursive' => -1,
+			'conditions' => array(
+				'LanguagesPage.page_id' => Hash::extract($page, 'Page.id'),
+				'LanguagesPage.language_id' => Current::read('Language.id'),
+			),
+		));
+
+		$result = Hash::merge($page, $pagesLanguages);
+
 		return $result;
 	}
 
