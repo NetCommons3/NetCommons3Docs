@@ -71,7 +71,7 @@ class LanguagesPage extends AppModel {
 				'notBlank' => array(
 					'rule' => array('notBlank'),
 					'message' => sprintf(__d('net_commons', 'Please input %s.'), __d('pages', 'Page name')),
-					'required' => true
+					'required' => false
 				),
 			),
 			'page_id' => array(
@@ -86,13 +86,31 @@ class LanguagesPage extends AppModel {
 					'message' => __d('net_commons', 'Invalid request.'),
 				),
 			),
+			'meta_title' => array(
+				'notBlank' => array(
+					'rule' => array('notBlank'),
+					'message' => sprintf(__d('net_commons', 'Please input %s.'), __d('pages', 'Title tag')),
+					'required' => false
+				),
+			),
 		));
 
 		return parent::beforeValidate($options);
 	}
 
 /**
- * Get page data
+ * Called after data has been checked for errors
+ *
+ * @return void
+ */
+	public function afterValidate() {
+		if (Hash::get($this->data, $this->alias . '.meta_title') === self::DEFAULT_META_TITLE) {
+			$this->data = Hash::insert($this->data, $this->alias . '.meta_title', '');
+		}
+	}
+
+/**
+ * ページデータ取得
  *
  * @param int $pageId pages.id
  * @param int $languageId languages.id
@@ -110,6 +128,36 @@ class LanguagesPage extends AppModel {
 		));
 
 		return $languagesPage;
+	}
+
+/**
+ * 言語ページでデータ登録処理
+ *
+ * @param array $data リクエストデータ
+ * @throws InternalErrorException
+ * @return bool
+ */
+	public function saveLanguagesPage($data) {
+		//トランザクションBegin
+		$this->begin();
+
+		//バリデーション
+		$this->set($data);
+		if (! $this->validates()) {
+			return false;
+		}
+
+		try {
+			if (! $this->save(null, false)) {
+				throw new InternalErrorException(__d('net_commons', 'Internal Server Error'));
+			}
+			$this->commit();
+
+		} catch (Exception $ex) {
+			$this->rollback($ex);
+		}
+
+		return true;
 	}
 
 }

@@ -136,10 +136,10 @@
                                 <div class="accordion" style="margin-bottom: 0">
         <div class="accordion-group">
             <div class="accordion-heading">
-                                    <a class="accordion-toggle " data-toggle="collapse" data-target="#namespace-1182410030"></a>
+                                    <a class="accordion-toggle " data-toggle="collapse" data-target="#namespace-85762395"></a>
                                 <a href="../namespaces/default.html" style="margin-left: 30px; padding-left: 0">\</a>
             </div>
-            <div id="namespace-1182410030" class="accordion-body collapse in">
+            <div id="namespace-85762395" class="accordion-body collapse in">
                 <div class="accordion-inner">
 
                     
@@ -264,7 +264,9 @@ will inherit them.</p>
                                                                     <a href="../classes/NetCommonsAppModel.html#method_rollback" class="">rollback()</a><br />
                                                                     <a href="../classes/NetCommonsAppModel.html#method_loadModels" class="">loadModels()</a><br />
                                                                     <a href="../classes/LanguagesPage.html#method_beforeValidate" class="">beforeValidate()</a><br />
+                                                                    <a href="../classes/LanguagesPage.html#method_afterValidate" class="">afterValidate()</a><br />
                                                                     <a href="../classes/LanguagesPage.html#method_getLanguagesPage" class="">getLanguagesPage()</a><br />
+                                                                    <a href="../classes/LanguagesPage.html#method_saveLanguagesPage" class="">saveLanguagesPage()</a><br />
                                                             </section>
                             <section class="span4">
                                                                     <a href="../classes/NetCommonsAppModel.html#property_actsAs" class="">$actsAs</a><br />
@@ -1050,12 +1052,38 @@ validation rules can be defined in $validate.</em></p>
 
                                     <div class="row-fluid">
         <div class="span8 content class">
+            <a id="method_afterValidate" name="method_afterValidate" class="anchor"></a>
+            <article class="method">
+                <h3 class="public ">afterValidate()</h3>
+                <a href="#source-view" role="button" class="pull-right btn" data-toggle="modal" style="font-size: 1.1em; padding: 9px 14px"><i class="icon-code"></i></a>
+                <pre class="signature" style="margin-right: 54px;">afterValidate() : void</pre>
+                <p><em>Called after data has been checked for errors</em></p>
+                
+
+                
+                
+                				
+                            </article>
+        </div>
+        <aside class="span4 detailsbar">
+            <h1><i class="icon-arrow-down"></i></h1>
+                                                            <dl>
+                                                                            </dl>
+            <h2>Tags</h2>
+            <table class="table table-condensed">
+                                    <tr><td colspan="2"><em>None found</em></td></tr>
+                            </table>
+        </aside>
+    </div>
+
+                                    <div class="row-fluid">
+        <div class="span8 content class">
             <a id="method_getLanguagesPage" name="method_getLanguagesPage" class="anchor"></a>
             <article class="method">
                 <h3 class="public ">getLanguagesPage()</h3>
                 <a href="#source-view" role="button" class="pull-right btn" data-toggle="modal" style="font-size: 1.1em; padding: 9px 14px"><i class="icon-code"></i></a>
                 <pre class="signature" style="margin-right: 54px;">getLanguagesPage(integer  <span class="argument">$pageId</span>, integer  <span class="argument">$languageId</span>) : array</pre>
-                <p><em>Get page data</em></p>
+                <p><em>ページデータ取得</em></p>
                 
 
                                     <h4>Parameters</h4>
@@ -1075,6 +1103,47 @@ validation rules can be defined in $validate.</em></p>
                 
                                     <h4>Returns</h4>
                     array
+                                    				
+                            </article>
+        </div>
+        <aside class="span4 detailsbar">
+            <h1><i class="icon-arrow-down"></i></h1>
+                                                            <dl>
+                                                                            </dl>
+            <h2>Tags</h2>
+            <table class="table table-condensed">
+                                    <tr><td colspan="2"><em>None found</em></td></tr>
+                            </table>
+        </aside>
+    </div>
+
+                                    <div class="row-fluid">
+        <div class="span8 content class">
+            <a id="method_saveLanguagesPage" name="method_saveLanguagesPage" class="anchor"></a>
+            <article class="method">
+                <h3 class="public ">saveLanguagesPage()</h3>
+                <a href="#source-view" role="button" class="pull-right btn" data-toggle="modal" style="font-size: 1.1em; padding: 9px 14px"><i class="icon-code"></i></a>
+                <pre class="signature" style="margin-right: 54px;">saveLanguagesPage(array  <span class="argument">$data</span>) : boolean</pre>
+                <p><em>言語ページでデータ登録処理</em></p>
+                
+
+                                    <h4>Parameters</h4>
+                    <table class="table table-condensed table-hover">
+                                                    <tr>
+                                <td>array</td>
+                                <td>$data </td>
+                                <td><p>リクエストデータ</p></td>
+                            </tr>
+                                            </table>
+                
+                                    <h4>Throws</h4>
+                    <dl>
+                                                    <dt>\InternalErrorException</dt>
+                            <dd></dd>
+                                                                    </dl>
+                
+                                    <h4>Returns</h4>
+                    boolean
                                     				
                             </article>
         </div>
@@ -1228,7 +1297,7 @@ validation rules can be defined in $validate.</em></p>
                 <section class="span10 offset1">
                     <hr />
                     Documentation is powered by <a href="http://www.phpdoc.org/">phpDocumentor </a> and authored
-                    on July 6th, 2016 at 13:29.
+                    on July 7th, 2016 at 23:54.
                 </section>
             </section>
         </section>

@@ -89,7 +89,7 @@ class PagesEditController extends PagesAppController {
 	}
 
 /**
- * index method
+ * ページ設定の一覧
  *
  * @return void
  */
@@ -98,7 +98,7 @@ class PagesEditController extends PagesAppController {
 	}
 
 /**
- * add
+ * 追加
  *
  * @return void
  */
@@ -115,7 +115,7 @@ class PagesEditController extends PagesAppController {
 					'controller' => $this->params['controller'],
 					'action' => 'index',
 					'key' => Current::read('Room.id'),
-					$page['Page']['id'],
+					'key2' => $page['Page']['id'],
 				)));
 			}
 
@@ -132,7 +132,7 @@ class PagesEditController extends PagesAppController {
 	}
 
 /**
- * edit
+ * 編集
  *
  * @return void
  */
@@ -151,7 +151,7 @@ class PagesEditController extends PagesAppController {
 					'controller' => $this->params['controller'],
 					'action' => 'index',
 					'key' => Current::read('Room.id'),
-					$page['Page']['id'],
+					'key2' => Current::read('Page.id'),
 				)));
 			}
 
@@ -169,7 +169,7 @@ class PagesEditController extends PagesAppController {
 	}
 
 /**
- * delete
+ * 削除
  *
  * @return void
  */
@@ -178,14 +178,19 @@ class PagesEditController extends PagesAppController {
 			return $this->throwBadRequest();
 		}
 		if ($this->Page->deletePage($this->data)) {
-			return $this->redirect('/' . Current::SETTING_MODE_WORD);
+			return $this->redirect(NetCommonsUrl::actionUrl(array(
+				'plugin' => $this->params['plugin'],
+				'controller' => $this->params['controller'],
+				'action' => 'index',
+				'key' => Current::read('Room.id'),
+			)));
 		} else {
 			return $this->throwBadRequest();
 		}
 	}
 
 /**
- * layout
+ * レイアウト変更
  *
  * @return void
  * @throws NotFoundException
@@ -201,7 +206,13 @@ class PagesEditController extends PagesAppController {
 			$this->NetCommons->setFlashNotification(
 				__d('net_commons', 'Successfully saved.'), array('class' => 'success')
 			);
-			return $this->redirect('/' . Current::read('Page.permalink'));
+			return $this->redirect(NetCommonsUrl::actionUrl(array(
+				'plugin' => $this->params['plugin'],
+				'controller' => $this->params['controller'],
+				'action' => 'index',
+				'key' => Current::read('Room.id'),
+				'key2' => Current::read('Page.id'),
+			)));
 
 		} else {
 			$containersPages = $this->ContainersPage->find('all', array(
@@ -219,7 +230,7 @@ class PagesEditController extends PagesAppController {
 	}
 
 /**
- * theme
+ * テーマ設定
  *
  * @return void
  */
@@ -237,10 +248,57 @@ class PagesEditController extends PagesAppController {
 			$this->NetCommons->setFlashNotification(
 				__d('net_commons', 'Successfully saved.'), array('class' => 'success')
 			);
-			$this->redirect('/' . Current::read('Page.permalink'));
+			return $this->redirect(NetCommonsUrl::actionUrl(array(
+				'plugin' => $this->params['plugin'],
+				'controller' => $this->params['controller'],
+				'action' => 'index',
+				'key' => Current::read('Room.id'),
+				'key2' => Current::read('Page.id'),
+			)));
+
 		} else {
 			$this->request->data['Page'] = Current::read('Page');
 			$this->theme = Hash::get($this->request->query, 'theme', $this->theme);
+		}
+	}
+
+/**
+ * メタデータ変更
+ *
+ * @return void
+ */
+	public function meta() {
+		$result = $this->Page->existPage(Current::read('Page.id'));
+		if (! $result) {
+			return $this->throwBadRequest();
+		}
+
+		if ($this->request->is('put')) {
+			unset($this->request->data['save']);
+
+			if ($this->LanguagesPage->saveLanguagesPage($this->request->data)) {
+				//正常の場合
+				$this->NetCommons->setFlashNotification(
+					__d('net_commons', 'Successfully saved.'), array('class' => 'success')
+				);
+				return $this->redirect(NetCommonsUrl::actionUrl(array(
+					'plugin' => $this->params['plugin'],
+					'controller' => $this->params['controller'],
+					'action' => 'index',
+					'key' => Current::read('Room.id'),
+					'key2' => Current::read('Page.id'),
+				)));
+			}
+
+		} else {
+			//表示処理
+			$this->request->data = Hash::merge($this->request->data,
+				$this->LanguagesPage->getLanguagesPage(Current::read('Page.id'), Current::read('Language.id'))
+			);
+
+			if (! $this->request->data['LanguagesPage']['meta_title']) {
+				$this->request->data['LanguagesPage']['meta_title'] = LanguagesPage::DEFAULT_META_TITLE;
+			}
 		}
 	}
 
