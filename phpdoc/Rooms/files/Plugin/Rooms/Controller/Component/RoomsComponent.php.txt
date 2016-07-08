@@ -91,7 +91,10 @@ class RoomsComponent extends Component {
 		$result = array();
 		foreach ($getSpaces as $spaceId) {
 			//ルームデータ取得
-			$controller->Paginator->settings = $controller->Room->getRoomsCondtions($spaceId);
+			$controller->Paginator->settings = $controller->Room->getRoomsCondtions(
+				$spaceId,
+				array('limit' => 1000, 'maxLimit' => 1000)
+			);
 			$rooms = $controller->Paginator->paginate('Room');
 			$rooms = Hash::combine($rooms, '{n}.Room.id', '{n}');
 			$roomIds = array_keys($rooms);

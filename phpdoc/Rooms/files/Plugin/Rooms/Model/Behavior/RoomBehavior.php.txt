@@ -51,10 +51,10 @@ class RoomBehavior extends ModelBehavior {
  *
  * @param Model $model ビヘイビア呼び出し元モデル
  * @param int $spaceId SpaceId
- * @param array $conditions 条件配列
+ * @param array $options 取得オプション配列
  * @return array ルームデータ取得条件
  */
-	public function getRoomsCondtions(Model $model, $spaceId, $conditions = array()) {
+	public function getRoomsCondtions(Model $model, $spaceId, $options = array()) {
 		$options = Hash::merge(array(
 			'recursive' => 1,
 			'conditions' => array(
@@ -63,9 +63,7 @@ class RoomBehavior extends ModelBehavior {
 				$model->Room->alias . '.in_draft' => false
 			),
 			'order' => 'Room.lft',
-			'limit' => 1000,
-			'maxLimit' => 1000,
-		), array('conditions' => $conditions));
+		), $options);
 
 		return $options;
 	}
