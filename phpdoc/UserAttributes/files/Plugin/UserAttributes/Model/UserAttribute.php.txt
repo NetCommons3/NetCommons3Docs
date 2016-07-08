@@ -82,6 +82,13 @@ class UserAttribute extends UserAttributesAppModel {
 	);
 
 /**
+ * 日時フィールドの表示フォーマット
+ *
+ * @var const
+ */
+	const DISPLAY_DATETIME_FORMAT = 'Y/m/d G:i';
+
+/**
  * use behaviors
  *
  * @var array
