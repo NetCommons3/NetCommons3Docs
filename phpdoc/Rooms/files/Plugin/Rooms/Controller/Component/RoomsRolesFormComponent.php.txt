@@ -39,10 +39,10 @@ class RoomsRolesFormComponent extends Component {
  * @var const
  */
 	public static $displaFields = array(
-		//'room_role_key',
 		'handlename',
 		'name',
 		'role_key',
+		'room_role_key',
 	);
 
 /**
@@ -164,20 +164,19 @@ class RoomsRolesFormComponent extends Component {
 			$type = 'LEFT';
 		}
 
-		$controller->UserSearch->search(
-			array(),
-			array('RolesRoomsUser' => array(
-				'type' => $type,
-				'conditions' => array(
-					'RolesRoomsUser.room_id' => $room['Room']['id'],
+		$controller->UserSearchComp->search(array(
+			'fields' => self::$displaFields,
+			'joins' => array(
+				'RolesRoomsUser' => array(
+					'type' => $type,
+					'conditions' => array(
+						'RolesRoomsUser.room_id' => $room['Room']['id'],
+					)
 				)
-			)),
-			array('RoomRole.level' => 'desc'),
-			$this->limit
-		);
-
-		$fields = array_combine(self::$displaFields, self::$displaFields);
-		$controller->set('displayFields', $controller->User->cleanSearchFields($fields));
+			),
+			'order' => array('RoomRole.level' => 'desc'),
+			'limit' => $this->limit
+		));
 
 		$controller->request->data = $room;
 		$controller->request->data['RolesRoomsUser'] = Hash::combine(

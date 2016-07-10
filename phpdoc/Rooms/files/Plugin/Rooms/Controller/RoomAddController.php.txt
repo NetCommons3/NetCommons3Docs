@@ -36,7 +36,7 @@ class RoomAddController extends RoomsAppController {
 			'permissions' => array('content_publishable', 'html_not_limited')
 		),
 		'UserAttributes.UserAttributeLayout',
-		'Users.UserSearch',
+		'Users.UserSearchComp',
 	);
 
 /**
@@ -223,7 +223,7 @@ class RoomAddController extends RoomsAppController {
  */
 	public function search_conditions() {
 		//検索フォーム表示
-		$this->UserSearch->conditions();
+		$this->UserSearchComp->conditions();
 	}
 
 /**

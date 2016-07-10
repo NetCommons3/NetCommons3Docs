@@ -36,7 +36,6 @@ class RoomsController extends RoomsAppController {
 			'permissions' => array('content_publishable', 'html_not_limited')
 		),
 		'UserAttributes.UserAttributeLayout',
-		'Users.UserSearch',
 	);
 
 /**
@@ -57,8 +56,6 @@ class RoomsController extends RoomsAppController {
  */
 	public $helpers = array(
 		'UserAttributes.UserAttributeLayout',
-		'Users.UserSearchForm',
-		'Users.UserSearch',
 	);
 
 /**

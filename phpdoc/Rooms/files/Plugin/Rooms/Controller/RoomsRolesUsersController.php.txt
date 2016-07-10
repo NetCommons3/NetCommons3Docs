@@ -26,7 +26,9 @@ class RoomsRolesUsersController extends RoomsAppController {
  */
 	public $uses = array(
 		'Rooms.Room',
-		'Rooms.RolesRoomsUser'
+		'Rooms.RolesRoomsUser',
+		'Users.User',
+		'Users.UserSearch',
 	);
 
 /**
@@ -37,7 +39,7 @@ class RoomsRolesUsersController extends RoomsAppController {
 	public $components = array(
 		'Rooms.RoomsRolesForm',
 		'UserAttributes.UserAttributeLayout',
-		'Users.UserSearch',
+		'Users.UserSearchComp',
 	);
 
 /**
@@ -75,7 +77,7 @@ class RoomsRolesUsersController extends RoomsAppController {
  */
 	public function search_conditions() {
 		//検索フォーム表示
-		$this->UserSearch->conditions();
+		$this->UserSearchComp->conditions();
 	}
 }
 
