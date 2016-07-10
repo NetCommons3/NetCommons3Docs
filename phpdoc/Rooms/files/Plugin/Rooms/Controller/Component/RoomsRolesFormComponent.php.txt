@@ -34,6 +34,18 @@ class RoomsRolesFormComponent extends Component {
 	public $limit = self::DEFAULT_LIMIT;
 
 /**
+ * 会員一覧で取得する項目
+ *
+ * @var const
+ */
+	public static $findFields = array(
+		'handlename',
+		'name',
+		'role_key',
+		'room_role_key',
+	);
+
+/**
  * 会員一覧の表示する項目
  *
  * @var const
@@ -42,7 +54,6 @@ class RoomsRolesFormComponent extends Component {
 		'handlename',
 		'name',
 		'role_key',
-		'room_role_key',
 	);
 
 /**
@@ -165,7 +176,7 @@ class RoomsRolesFormComponent extends Component {
 		}
 
 		$controller->UserSearchComp->search(array(
-			'fields' => self::$displaFields,
+			'fields' => self::$findFields,
 			'joins' => array(
 				'RolesRoomsUser' => array(
 					'type' => $type,
@@ -175,7 +186,8 @@ class RoomsRolesFormComponent extends Component {
 				)
 			),
 			'order' => array('RoomRole.level' => 'desc'),
-			'limit' => $this->limit
+			'limit' => $this->limit,
+			'displayFields' => self::$displaFields
 		));
 
 		$controller->request->data = $room;
