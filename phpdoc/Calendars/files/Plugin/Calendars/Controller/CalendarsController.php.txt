@@ -70,6 +70,7 @@ class CalendarsController extends CalendarsAppController {
 		'Calendars.CalendarMonthly',
 		'Calendars.CalendarTurnCalendar',
 		'Calendars.CalendarLegend',
+		'Calendars.CalendarButton',
 	);
 
 /**
@@ -86,6 +87,7 @@ class CalendarsController extends CalendarsAppController {
 			$this->setAction('emptyRender');
 			return false;
 		}
+		$this->CalendarEvent->initSetting($this->Workflow);
 	}
 
 /**
@@ -120,12 +122,13 @@ class CalendarsController extends CalendarsAppController {
 				$style = 'smallmonthly';
 			}
 		}
-
+		$this->_storeRedirectPath($vars);
 		$ctpName = $this->getCtpAndVars($style, $vars);
 
+		$roomPermRoles = $this->CalendarEvent->prepareCalRoleAndPerm();
 		$frameId = Current::read('Frame.id');
 		$languageId = Current::read('Language.id');
-		$this->set(compact('frameId', 'languageId', 'vars'));
+		$this->set(compact('frameId', 'languageId', 'vars', 'roomPermRoles'));
 		$this->render($ctpName);
 	}
 
@@ -139,24 +142,7 @@ class CalendarsController extends CalendarsAppController {
  */
 	public function getMonthlyVars($vars) {
 		$this->setCalendarCommonVars($vars);
-
-		/* 藤原さんのソースとマージした後、以下のソースを有効化すること。
-		//設定情報の取り出し
-		$settingInfo = $this->CalendarFrameSetting->find('first', array(
-			'conditions' => array( 'frame_key' => Current::read('Frame.id')),
-			'recursive' => -1,
-		));
-		//表示方法設定で指定した選択ルーム群を取り出す
-		//なお選択したルーム群＋全会員(room_id = CalendarsComponent::CALENDAR_ALLMEMBERS)も含まれている。
-		$vars['selectRooms'] =
-			$this->CalendarFrameSetting->getSelectRooms($settingInfo['CalendarFrameSetting']['id']);
-		*/
 		$vars['selectRooms'] = array();	//マージ前の暫定
-		$vars['parentIdType'] = array(
-			'public' => Room::PUBLIC_PARENT_ID,	//公開
-			'private' => Room::PRIVATE_PARENT_ID,	//プライベート
-			'member' => Room::ROOM_PARENT_ID,	//全会員
-		);
 		return $vars;
 	}
 
@@ -170,38 +156,7 @@ class CalendarsController extends CalendarsAppController {
  */
 	public function getWeeklyVars($vars) {
 		$this->setCalendarCommonVars($vars);
-
-		//表示方法設定情報を取り出し
-		$frameSetting = $this->CalendarFrameSetting->find('first', array(
-			'recursive' => 1,	//hasManyでCalendarFrameSettingSelectRoomのデータも取り出す。
-			'conditions' => array('frame_key' => Current::read('Frame.key')),
-		));
-
-		//公開対象一覧のoptions配列と、自分自身のroom_idを取得
-		list($exposeRoomOptions, $myself) =
-			$this->CalendarActionPlan->getExposeRoomOptions($frameSetting);
-		$vars['exposeRoomOptions'] = $exposeRoomOptions;
-		$vars['myself'] = $myself;
-
-		//$this->set(compact('exposeRoomOptions'));
-
-		/* 藤原さんのソースとマージした後、以下のソースを有効化すること。
-		//設定情報の取り出し
-		$settingInfo = $this->CalendarFrameSetting->find('first', array(
-			'conditions' => array( 'frame_key' => Current::read('Frame.id')),
-			'recursive' => -1,
-		));
-		//表示方法設定で指定した選択ルーム群を取り出す
-		//なお選択したルーム群＋全会員(room_id = CalendarsComponent::CALENDAR_ALLMEMBERS)も含まれている。
-		$vars['selectRooms'] =
-			$this->CalendarFrameSetting->getSelectRooms($settingInfo['CalendarFrameSetting']['id']);
-		*/
 		$vars['selectRooms'] = array();	//マージ前の暫定
-		$vars['parentIdType'] = array(
-			'public' => Room::PUBLIC_PARENT_ID,	//公開
-			'private' => Room::PRIVATE_PARENT_ID,	//プライベート
-			'member' => Room::ROOM_PARENT_ID,	//全会員
-		);
 		if (isset($this->request->params['named']['week'])) {
 			$vars['week'] = $this->request->params['named']['week'];
 		} else {
@@ -251,11 +206,6 @@ class CalendarsController extends CalendarsAppController {
 		$this->setCalendarCommonVars($vars);
 
 		$vars['selectRooms'] = array();	//マージ前の暫定
-		$vars['parentIdType'] = array(
-			'public' => Room::PUBLIC_PARENT_ID,	//公開
-			'private' => Room::PRIVATE_PARENT_ID,	//プライベート
-			'member' => Room::ROOM_PARENT_ID,	//全会員
-		);
 
 		//表示方法設定情報を取り出し
 		$frameSetting = $this->CalendarFrameSetting->find('first', array(
@@ -294,11 +244,6 @@ class CalendarsController extends CalendarsAppController {
 		$this->setCalendarCommonVars($vars);
 
 		$vars['selectRooms'] = array();	//マージ前の暫定
-		$vars['parentIdType'] = array(
-			'public' => Room::PUBLIC_PARENT_ID,	//公開
-			'private' => Room::PRIVATE_PARENT_ID,	//プライベート
-			'member' => Room::ROOM_PARENT_ID,	//全会員
-		);
 
 		//表示方法設定情報を取り出し
 		$frameSetting = $this->CalendarFrameSetting->find('first', array(
@@ -341,11 +286,6 @@ class CalendarsController extends CalendarsAppController {
 		}
 
 		$vars['selectRooms'] = array();	//マージ前の暫定
-		$vars['parentIdType'] = array(
-			'public' => Room::PUBLIC_PARENT_ID,	//公開
-			'private' => Room::PRIVATE_PARENT_ID,	//プライベート
-			'member' => Room::ROOM_PARENT_ID,	//全会員
-		);
 
 		return $vars;
 	}

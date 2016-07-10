@@ -31,14 +31,15 @@ class CalendarEvent extends CalendarsAppModel {
 	public $actsAs = array(
 		'NetCommons.OriginalKey',
 		'NetCommons.Trackable',
-		'Workflow.WorkflowComment',
 		'Workflow.Workflow',
+		'Workflow.WorkflowComment',
 		'Calendars.CalendarValidate',
 		'Calendars.CalendarApp',	//baseビヘイビア
 		'Calendars.CalendarInsertPlan',	//Insert用
 		'Calendars.CalendarUpdatePlan',	//Update用
 		'Calendars.CalendarDeletePlan',	//Delete用
 		'Calendars.CalendarSearchPlan',	//Search用
+		'Calendars.CalendarRoleAndPerm', //カレンダー役割・権限
 	);
 
 /**
@@ -52,8 +53,15 @@ class CalendarEvent extends CalendarsAppModel {
 			'foreignKey' => 'calendar_rrule_id',
 			'conditions' => '',
 			'fields' => '',
+			'order' => '',
+		),
+		'Language' => array(
+			'className' => 'Languages.Language',
+			'foreignKey' => 'language_id',
+			'conditions' => '',
+			'fields' => '',
 			'order' => ''
-		)
+		),
 	);
 
 /**
@@ -88,7 +96,6 @@ class CalendarEvent extends CalendarsAppModel {
 			'finderQuery' => '',
 			'counterQuery' => ''
 		),
-
 	);
 
 /**
@@ -99,6 +106,43 @@ class CalendarEvent extends CalendarsAppModel {
 	public $validate = array(
 
 	);
+
+/**
+ * _doMergeWorkflowParamValidate
+ *
+ * Workflowパラメータ関連バリデーションのマージ
+ *
+ * @return void
+ */
+	protected function _doMergeWorkflowParamValidate() {
+		$this->validate = Hash::merge($this->validate, array(
+			'language_id' => array(
+				'rule1' => array(
+					'rule' => array('numeric'),
+					'message' => __d('net_commons', 'Invalid request.'),
+				),
+			),
+			'status' => array(
+				'rule1' => array(
+					'rule' => array('numeric'),
+					'message' => __d('net_commons', 'Invalid request'),
+					'required' => true,
+				),
+			),
+			'is_active' => array(
+				'rule1' => array(
+					'rule' => 'boolean',
+					'message' => __d('net_commons', 'Invalid request'),
+				),
+			),
+			'is_latest' => array(
+				'rule1' => array(
+					'rule' => 'boolean',
+					'message' => __d('net_commons', 'Invalid request'),
+				),
+			),
+		));
+	}
 
 /**
  * Called during validation operations, before validation. Please note that custom
@@ -118,12 +162,6 @@ class CalendarEvent extends CalendarsAppModel {
 				),
 			),
 			'room_id' => array(
-				'rule1' => array(
-					'rule' => array('numeric'),
-					'message' => __d('net_commons', 'Invalid request.'),
-				),
-			),
-			'language_id' => array(
 				'rule1' => array(
 					'rule' => array('numeric'),
 					'message' => __d('net_commons', 'Invalid request.'),
@@ -197,8 +235,53 @@ class CalendarEvent extends CalendarsAppModel {
 			//		'message' => __d('net_commons', 'Invalid request.'),
 			//	),
 			//),
+			'recurrence_event_id' => array(
+				'rule1' => array(
+					'rule' => array('numeric'),
+					'message' => __d('net_commons', 'Invalid request.'),
+				),
+			),
+			'exception_event_id' => array(
+				'rule1' => array(
+					'rule' => array('numeric'),
+					'message' => __d('net_commons', 'Invalid request.'),
+				),
+			),
 		));
+		$this->_doMergeWorkflowParamValidate(); //Workflowパラメータ関連validation
 		return parent::beforeValidate($options);
+	}
+
+/**
+ * 自分もふくめた兄弟一覧を取得
+ *
+ * @param interger $rruleId 兄弟が共通にもつrruleのid
+ * @param interger $needLatest 最新に限定するかどうか。0:最新に限定しない。1:最新に限定する。
+ * @param int $languageId 言語ID
+ * @return array 兄弟一覧の配列
+ */
+	public function getSiblings($rruleId, $needLatest = 0, $languageId = 0) {
+		if (empty($languageId)) {
+			$languageId = Current::read('Language.id');
+		}
+		$options = array(
+			'conditions' => array(
+				$this->alias . '.calendar_rrule_id' => $rruleId,
+				//$this->alias . '.is_latest' => 1,
+				$this->alias . '.language_id' => $languageId,
+				$this->alias . '.exception_event_id' => 0,	//除外でない
+			),
+			//'recursive' => -1, //eventだけとる
+			'recursive' => 1, //belongsTo, hasOne, hasManyをとる
+			'callbacks' => false,
+			'order' => array($this->alias . '.dtstart' => 'ASC'),
+		);
+
+		if ($needLatest) {
+			$field = $this->alias . '.is_latest';
+			$options['conditions'][$field] = 1;
+		}
+		return $this->find('all', $options);
 	}
 }
 

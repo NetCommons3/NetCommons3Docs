@@ -37,28 +37,65 @@ class CalendarCommonHelper extends AppHelper {
  * @return array 曜日名の配列
  */
 	public function getWdayArray() {
-		return array(__d('calendars', '日'), __d('calendars', '月'), __d('calendars', '火'),
-			__d('calendars', '水'), __d('calendars', '木'), __d('calendars', '金'),
-			__d('calendars', '土'),
+		return array(__d('calendars', 'Sun'), __d('calendars', 'Mon'), __d('calendars', 'Tue'),
+			__d('calendars', 'Wed'), __d('calendars', 'Thu'), __d('calendars', 'Fri'),
+			__d('calendars', 'Sat'),
 		);
+	}
+
+/**
+ * makePseudoPlanFromEvent
+ *
+ * イベント情報から擬似予定を生成
+ *
+ * @param array &$vars カレンダー情報
+ * @param array $event イベント情報
+ * @return array 擬似的な予定情報($plan)を生成して返す。
+ */
+	public function makePseudoPlanFromEvent(&$vars, $event) {
+		$plan = $event;
+		$shareUsers = Hash::extract($plan, 'CalendarEventShareUser.{n}.share_user');
+		if (!empty($shareUsers) && in_array(Current::read('User.id'), $shareUsers)) {
+			//共有者の一覧に「自分がある」＝共有「された」仲間の予定である。
+			//なので、その印として、$plan['CalendarEvent'] に擬似項目と値
+			//array('pseudo_friend_share_plan' => 1)をセットする。
+			$plan['CalendarEvent']['pseudo_friend_share_plan'] = 1;
+		}
+		return $plan;
 	}
 
 /**
  * getPlanMarkClassName
  *
- * 予定マーククラス名取得
+ * 予定マーククラス名または予定(日跨ぎライン)マーククラス名の取得
  *
  * @param array &$vars カレンダー情報
- * @param int $roomId ルームID
+ * @param array $plan 予定情報. 指定する予定がない場合nullにする。その場合、第３引数がroomIdとして利用される。
+ * @param int $roomId roomId
+ * @param string $prefix prefix
  * @return string ClassName
  */
-	public function getPlanMarkClassName(&$vars, $roomId) {
-		if ($key = array_search($roomId, $vars['parentIdType'])) {
-			//公開、プライベード、または、全会員
-			$html = 'calendar-plan-mark-' . $key;
-		} else {
-			//グループ空間
-			$html = 'calendar-plan-mark-group';
+	public function getPlanMarkClassName(&$vars, $plan = null, $roomId = null,
+		$prefix = 'calendar-plan-mark-') {
+		if ($plan !== null) {
+			$roomId = $plan['CalendarEvent']['room_id'];
+		}
+		if (empty($vars['spaceNameOfRooms'][$roomId])) {
+			//「仲間の予定」の場合、その１
+			$html = $prefix . 'share';
+			return $html;
+		}
+		//public,group,member,privateに該当しなかったら「仲間の予定」となるよう、初期値を指定しておく。
+		$html = $prefix . 'share';
+		if (preg_match('/^(public|group|member|private)$/', $vars['spaceNameOfRooms'][$roomId]) === 1) {
+			$html = $prefix . $vars['spaceNameOfRooms'][$roomId];
+		}
+		if ($vars['spaceNameOfRooms'][$roomId] === 'private' && $plan !== null) {
+			$shareUsers = Hash::extract($plan, 'CalendarEventShareUser.{n}.share_user');
+			if (!empty($shareUsers) && !in_array(Current::read('User.id'), $shareUsers)) {
+				//共有者の一覧は「全て自分以外」である＝「共有した予定」なのでshareグリフを追加しておく。
+				$html .= ' glyphicon glyphicon-share';
+			}
 		}
 		return $html;
 	}
@@ -77,13 +114,13 @@ class CalendarCommonHelper extends AppHelper {
 			case WorkflowComponent::STATUS_PUBLISHED:	//承認済
 				break;
 			case WorkflowComponent::STATUS_APPROVED;	//承認待ち
-				$html = "<span class='label label-warning'>" . __d('calendars', '承認待ち') . "</span>";
+				$html = "<span class='label label-warning'>" . __d('net_commons', 'Approving') . "</span>";
 				break;
 			case WorkflowComponent::STATUS_IN_DRAFT:	//一時保存
-				$html = "<span class='label label-info'>" . __d('calendars', '一時保存') . "</span>";
+				$html = "<span class='label label-info'>" . __d('net_commons', 'In draft') . "</span>";
 				break;
 			case WorkflowComponent::STATUS_DISAPPROVED:	//差し戻し
-				$html = "<span class='label label-danger'>" . __d('calendars', '差し戻し') . "</span>";
+				$html = "<span class='label label-danger'>" . __d('net_commons', 'Disapproving') . "</span>";
 				break;
 		}
 		return $html;
@@ -259,6 +296,7 @@ class CalendarCommonHelper extends AppHelper {
 		// 予定の終了日時が、この日に含まれる時、予定を返す。
 		$this->_includeToTimeOfDay($vars, $plan, $beginOfDay, $endOfDay, $fromTimeOfDay,
 			$toTimeOfDay, $nctm, $planOfThisDay);
+
 		/*
 		if (($planOfThisDay === false) && $beginOfDay < $plan['CalendarEvent']['dtend'] &&
 			$plan['CalendarEvent']['dtend'] <= $endOfDay) {
@@ -298,6 +336,13 @@ class CalendarCommonHelper extends AppHelper {
  */
 	public function canDisplayThisPlan(&$vars, $plan) {
 		//FIXME: この関数は簡易版。正確にはcanRead, canEdit, canDeleteなどを利用・参考にしながら追加実装すること。
+		//
+		//Calendars/Model/Behavior/CalendarSearchPlanBehavior.phpのgetPlans()の中で、
+		//filter機能をいれるようにしたので、個々の関数は、NOP(無条件true)に変える。 hashi
+		//
+		return true;
+
+		/* comment out hashi
 		if (!$plan) {
 			return false;
 		}
@@ -324,6 +369,7 @@ class CalendarCommonHelper extends AppHelper {
 		//FAXME: ここにログイン後の予定表示可否の詳細な判断ロジックを描くこと。
 
 		return true;
+		*/
 	}
 /**
  * getWeekName
@@ -344,5 +390,24 @@ class CalendarCommonHelper extends AppHelper {
 		);
 		return $weeks[$cnt % 7];
 	}
+
+/**
+ * decideRoomName
+ *
+ * 仲間の予定を考慮したルーム名取得関数
+ *
+ * @param string $roomName 候補ルーム名
+ * @param string $class 判断基準となるクラス名
+ * @return string 判断基準をもとに決定したルーム名
+ */
+	public function decideRoomName($roomName, $class) {
+		if (strpos($class, 'private') === false &&
+			(strpos($class, 'share') !== false)) {
+			//仲間の予定
+			$roomName = __d('calendars', 'Schedule of fellow');
+		}
+		return $roomName;
+	}
+
 }
 

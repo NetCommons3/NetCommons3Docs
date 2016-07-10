@@ -100,8 +100,7 @@ class CalendarDailyTimelineHelper extends CalendarMonthlyHelper {
 
 		if ($fromTime !== $plan['CalendarEvent']['fromTime'] || $toTime !==
 			$plan['CalendarEvent']['toTime']) {
-			$calendarPlanMark = $this->CalendarCommon->getPlanMarkClassName(
-				$vars, $plan['CalendarEvent']['room_id']);
+			$calendarPlanMark = $this->CalendarCommon->getPlanMarkClassName($vars, $plan);
 			$url = $this->CalendarUrl->makePlanShowUrl($year, $month, $day, $plan);
 
 			$html .= "<div class='calendar-daily-timeline-slit-deco {$calendarPlanMark}' id='" . $id . "'>";
@@ -112,12 +111,12 @@ class CalendarDailyTimelineHelper extends CalendarMonthlyHelper {
 			$html .= "data-url='" . $url . "'>";
 
 			$html .= "<small style='float:left'>";
-			$html .= $plan['CalendarEvent']['fromTime'] . '-' . $plan['CalendarEvent']['toTime'];
+			$html .= h($plan['CalendarEvent']['fromTime']) . '-' . h($plan['CalendarEvent']['toTime']);
 			$html .= '</small>';
 
 			// ワークフロー（一時保存/承認待ち、など）のマーク
-			$html .= $this->CalendarCommon->makeWorkFlowLabel($plan['CalendarRrule']['status']);
-			$html .= '<small>' . $plan['CalendarEvent']['title'] . '</small>';
+			$html .= $this->CalendarCommon->makeWorkFlowLabel($plan['CalendarEvent']['status']);
+			$html .= '<small>' . h($plan['CalendarEvent']['title']) . '</small>';
 			$html .= '</div></div>';
 			$html .= '</p></div>';
 
@@ -141,8 +140,6 @@ class CalendarDailyTimelineHelper extends CalendarMonthlyHelper {
 		$nctm = new NetCommonsTime();
 
 		$html .= $this->_makePlanSummariesHtml($vars, $nctm, $vars['year'], $vars['month'], $vars['day']);
-		//$this->log('HTML・・・', 'debug');
-		//$this->log($html, 'debug');
 		return $html;
 	}
 

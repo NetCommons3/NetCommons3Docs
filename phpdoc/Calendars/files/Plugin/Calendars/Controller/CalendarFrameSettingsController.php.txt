@@ -52,6 +52,7 @@ class CalendarFrameSettingsController extends CalendarsAppController {
 			),
 		),
 		'Paginator',
+		'Rooms.RoomsForm',
 	);
 
 /**
@@ -64,16 +65,14 @@ class CalendarFrameSettingsController extends CalendarsAppController {
 		'Blocks.BlockTabs' => array(
 			//画面上部のタブ設定
 			'mainTabs' => array(
-				'frame_settings' => array(
-					'url' => array(
-						'controller' => 'calendar_frame_settings',
-						'action' => 'edit')),	//表示設定変更
+				'frame_settings' => array(	//表示設定変更
+					'url' => array('controller' => 'calendar_frame_settings')
+				),
 				'role_permissions' => array(
-					'url' => array('controller' => 'calendar_block_role_permissions', 'action' => 'edit'),
+					'url' => array('controller' => 'calendar_block_role_permissions'),
 				),
 				'mail_settings' => array(
-				//暫定. BlocksのmainTabにメール設定が追加されるまでは、ここ＋beforeRender()で対処.
-					'url' => array('controller' => 'calendar_mail_settings', 'action' => 'edit'),
+					'url' => array('controller' => 'calendar_mail_settings'),
 				),
 			),
 		),
@@ -86,6 +85,7 @@ class CalendarFrameSettingsController extends CalendarsAppController {
  * uses model
  */
 	public $uses = array(
+		'Calendars.Calendar',
 		'Calendars.CalendarFrameSetting',
 		'Calendars.CalendarFrameSettingSelectRooms',
 		'Rooms.Room'
@@ -110,17 +110,17 @@ class CalendarFrameSettingsController extends CalendarsAppController {
 		parent::__construct($id, $table, $ds);
 		$this->_displayTypeOptions = array(
 			CalendarsComponent::CALENDAR_DISP_TYPE_SMALL_MONTHLY =>
-				__d('calendars', '月表示（縮小）'),
+				__d('calendars', 'Monthly Calendar (small)'),
 			CalendarsComponent::CALENDAR_DISP_TYPE_LARGE_MONTHLY =>
-				__d('calendars', '月表示（拡大）'),
+				__d('calendars', 'Monthly Calendar (large)'),
 			CalendarsComponent::CALENDAR_DISP_TYPE_WEEKLY =>
-				__d('calendars', '週表示'),
+				__d('calendars', 'Weekly Calendar'),
 			CalendarsComponent::CALENDAR_DISP_TYPE_DAILY =>
-				__d('calendars', '日表示'),
+				__d('calendars', 'Day View'),
 			CalendarsComponent::CALENDAR_DISP_TYPE_TSCHEDULE =>
-				__d('calendars', 'スケジュール（時間順）'),
+				__d('calendars', 'Schedule (ordered-by-time)'),
 			CalendarsComponent::CALENDAR_DISP_TYPE_MSCHEDULE =>
-				__d('calendars', 'スケジュール（会員順）'),
+				__d('calendars', 'Schedule (ordered-by-user)'),
 		);
 	}
 
@@ -132,6 +132,7 @@ class CalendarFrameSettingsController extends CalendarsAppController {
 	public function beforeFilter() {
 		parent::beforeFilter();
 		$this->Auth->deny('index');
+		$this->Calendar->afterFrameSave(Current::read());
 	}
 
 /**
@@ -146,7 +147,7 @@ class CalendarFrameSettingsController extends CalendarsAppController {
 			$data['CalendarFrameSetting']['display_type'] =
 				(int)$data['CalendarFrameSetting']['display_type'];
 			if ($this->CalendarFrameSetting->saveFrameSetting($data)) {
-				$this->redirect(NetCommonsUrl::backToPageUrl());
+				$this->redirect(NetCommonsUrl::backToPageUrl(true));
 				return;
 			}
 			$this->NetCommons->handleValidationError($this->CalendarFrameSetting->validationErrors);

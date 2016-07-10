@@ -10,6 +10,7 @@
  */
 
 App::uses('CalendarAppBehavior', 'Calendars.Model/Behavior');
+App::uses('CalendarRruleUtil', 'Calendars.Utility');
 
 /**
  * CalendarRruleEntryBehavior
@@ -56,13 +57,11 @@ class CalendarRruleEntryBehavior extends CalendarAppBehavior {
 			unset($model->rrule);
 		}
 
-		$model->rrule = $planParams['rrule'];	//引数ではなく、$modelのインスタンス変数としてセットする。
+		//引数ではなく、$modelのインスタンス変数としてセットする。
+		$model->rrule = $planParams['rrule'];
 
 		if (!is_array($model->rrule)) {	//$rrulea文字列を解析し配列化する。
-			if (!$model->Behaviors->hasMethod('parseRrule')) {
-				$model->Behaviors->load('Calendars.CalendarRruleHandle');
-			}
-			$model->rrule = $model->parseRrule($model->rrule);
+			$model->rrule = (new CalendarRruleUtil())->parseRrule($model->rrule);
 		}
 
 		//CakeLog::debug("DBG: In insertRrule() rrule array[" . print_r($model->rrule, true) . "]");
@@ -76,23 +75,33 @@ class CalendarRruleEntryBehavior extends CalendarAppBehavior {
 			//'fields' => array('CalendarEvent.*'),
 			'callbacks' => false
 		);
-
 		$eventData = $model->CalendarEvent->find('first', $params);
 		if (!is_array($eventData) || !isset($eventData['CalendarEvent'])) {
-			$model->validationErrors = Hash::merge($model->validationErrors, $model->CalendarEvent->validationErrors);
+			$model->validationErrors = Hash::merge(
+				$model->validationErrors, $model->CalendarEvent->validationErrors);
 			throw new InternalErrorException(__d('net_commons', 'Internal Server Error'));
 		}
 
-		$conditions = array(
-			$model->CalendarEvent->alias . '.calendar_rrule_id' => $eventData['CalendarEvent']['calendar_rrule_id'],
-			$model->CalendarEvent->alias . '.id <>' => $eventData['CalendarEvent']['id'],
-		);
+		//////////////////////////////
+		//ここのロジック(同じrrule_idをもつ兄弟eventの自分以外の全削除）について
+		//新規の時は、そもそも消す対象がない
+		//更新の時は、自分以外を消す（物理削除or除外フラグon)のは、NC3カレンダでは
+		//insertRrule()に来る前に済ませているので、やはり意味がない。
+		//よって、ここのロジックはOffする。
+		//$conditions = array(
+		//	$model->CalendarEvent->alias .
+		//		'.calendar_rrule_id' => $eventData['CalendarEvent']['calendar_rrule_id'],
+		//	$model->CalendarEvent->alias . '.id <>' => $eventData['CalendarEvent']['id'],
+		//);
+		//
+		//if (!$model->CalendarEvent->deleteAll($conditions, false)) {
+		//	$model->validationErrors = Hash::merge(
+		//		$model->validationErrors, $model->CalendarEvent->validationErrors);
+		//	throw new InternalErrorException(__d('net_commons', 'Internal Server Error'));
+		//}
 
-		if (!$model->CalendarEvent->deleteAll($conditions, false)) {
-			$model->validationErrors = Hash::merge($model->validationErrors, $model->CalendarEvent->validationErrors);
-			throw new InternalErrorException(__d('net_commons', 'Internal Server Error'));
-		}
-
+		/////////////////////////////
+		//周期性による、eventの順次登録
 		//rruleのin/outは、$modelのインスタンス変数をつかっておこなう。
 		$this->insertPriodEntry($model, $planParams, $rruleData, $eventData);
 	}
@@ -107,9 +116,9 @@ class CalendarRruleEntryBehavior extends CalendarAppBehavior {
  * @return void
  */
 	public function insertPriodEntry(Model &$model, $planParams, $rruleData, $startEventData) {
-		$model->rrule['INDEX'] = 1;
 		//CakeLog::debug("DBG: In insertPriodEntry(). i set model->rrule[INDEX] to 1.");
-		//
+
+		$model->rrule['INDEX'] = 1;
 
 		switch ($model->rrule['FREQ']) {
 			case 'YEARLY':
@@ -150,12 +159,13 @@ class CalendarRruleEntryBehavior extends CalendarAppBehavior {
  * @param array &$startEventData eventデータ
  * @return void
  */
-	protected function _insertMonthlyPriodEntry(Model &$model, &$planParams, &$rruleData, &$startEventData) {
+	protected function _insertMonthlyPriodEntry(Model &$model,
+		&$planParams, &$rruleData, &$startEventData) {
 		if (!$model->Behaviors->hasMethod('insertMonthlyByMonthday')) {
 			$model->Behaviors->load('Calendars.CalendarMonthlyEntry');
 		}
 		if (isset($model->rrule['BYMONTHDAY'])) {	//指定月のx日、y日
-			$model->insertMonthlyByMonthday($planParams, $rruleData, $startEventData, 1);
+			$model->insertMonthlyByMonthday($planParams, $rruleData, $startEventData, 1, 1);
 		} else {	//第ｘ週ｙ曜日
 			$model->insertMonthlyByDay($planParams, $rruleData, $startEventData, 1);
 		}

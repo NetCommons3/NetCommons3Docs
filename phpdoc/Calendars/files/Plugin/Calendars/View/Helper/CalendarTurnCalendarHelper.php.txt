@@ -56,39 +56,6 @@ class CalendarTurnCalendarHelper extends AppHelper {
  * @return string html
  */
 	public function getTurnCalendarOperations($type, $vars) {
-		/* ng
-		$prevUrl = $this->_getUrl('prev', $type, $vars);
-		$nextUrl = $this->_getUrl('next', $type, $vars);
-		$thisDayUrl = $this->_getUrl('now', $type, $vars);
-
-		$html = '';
-		$html .= '<div class="row"><div class="col-xs-12 col-sm-2 col-sm-push-10">';
-		$html .= '<div class="pull-right">';
-
-		//$url = $this->CalendarUrl->makeEasyEditUrl($vars['year'], $vars['month'], $vars['day'], $vars);
-		$url = $this->CalendarUrl->makeEditUrl($vars['year'], $vars['month'], $vars['day'], $vars);
-
-		$html .= '<a class="btn btn-success" href="' . $url . '">';
-		$html .= '<span class="glyphicon glyphicon-plus" tooltip="';
-		$html .= __d('net_commons', 'Add') . '"></span>';
-		$html .= '</a></div></div>';
-
-		$html .= '<div class="col-xs-12 col-sm-10 col-sm-pull-2">';
-
-		$html .= '<div class="calendar-date-move-operations">';
-		$html .= '<a href="' . $prevUrl . '"><span class="glyphicon glyphicon-chevron-left"></span></a>';
-
-		$html .= $this->_getDateTitle($type, $vars);
-
-		$html .= '<a href="' . $nextUrl . '"><span class="glyphicon glyphicon-chevron-right"></span></a>';
-
-		$html .= '<div class="calendar-this-month">';
-		$html .= '<a href="' . $thisDayUrl . '" >';
-		$html .= $this->_getNowButtonTitle($type);
-		$html .= '</a></div>';
-		$html .= '</div></div></div>';
-		return $html;
-		*/
 		$prevUrl = $this->_getUrl('prev', $type, $vars);
 		$nextUrl = $this->_getUrl('next', $type, $vars);
 		$thisDayUrl = $this->_getUrl('now', $type, $vars);
@@ -128,39 +95,22 @@ class CalendarTurnCalendarHelper extends AppHelper {
 		$html = '<label for="CalendarEventTargetYear"><h2 class="' . $textColor . ' calendar-space0">';
 		switch($type) {
 			case 'month':
-				$html .= '<small>';
-				$html .= sprintf(__d('calendars', '%d年'), $vars['mInfo']['year']);
-				$html .= '</small>';
-				$html .= sprintf(__d('calendars', '%d月'), $vars['mInfo']['month']);
-				break;
 			case 'week':
-				if ($vars['week'] == 0) {
-					//日付から第n週を求めて設定
-					$nWeek = ceil(($vars['mInfo']['wdayOf1stDay'] + $vars['day']) / 7);
-					//第n週の日曜日の日付に更新
-				} else {
-					$nWeek = $vars['week'];
-				}
-				$html .= '<small>';
-				$html .= sprintf(__d('calendars', '%d年'), $vars['year']);
-				$html .= '</small>';
-				$html .= sprintf(__d('calendars', '%d月'), $vars['month']);
-				//$html .= sprintf(__d('calendars', '第%d週'), $nWeek);
+				$html .= sprintf(__d('calendars', '<small>%d/</small> %d'),
+					$vars['mInfo']['year'], $vars['mInfo']['month']);
 				break;
 			case 'day':
 				/* 祝日タイトル */
 				$holidayTitle = $this->CalendarCommon->getHolidayTitle(
 					$vars['year'], $vars['month'], $vars['day'], $vars['holidays'], $vars['dayOfTheWeek']);
-				$html .= '<small>';
-				$html .= sprintf(__d('calendars', '%d年'), $vars['year']);
-				$html .= '</small>';
-				$html .= sprintf(__d('calendars', '%d月'), $vars['month']);
-				$html .= sprintf(__d('calendars', '%d日'), $vars['day']);
-				$html .= '<small>';
-				$html .= sprintf(__d('calendars', '(%s)'),
-					$this->CalendarCommon->getWeekName($vars['dayOfTheWeek']));
-				$html .= '&nbsp;<br class="visible-xs" />' . $holidayTitle;
-				$html .= '</small>';
+				$html .= sprintf(__d('calendars',
+						'<small>%d/</small>%d/%d<small>(%s)&nbsp;<br class="visible-xs" />%s</small>'),
+					$vars['year'],
+					$vars['month'],
+					$vars['day'],
+					$this->CalendarCommon->getWeekName($vars['dayOfTheWeek']),
+					$holidayTitle
+				);
 				break;
 
 		}
@@ -179,13 +129,13 @@ class CalendarTurnCalendarHelper extends AppHelper {
 	protected function _getNowButtonTitle($type) {
 		switch ($type) {
 			case 'month':
-				$ret = __d('calendars', '今月へ');
+				$ret = __d('calendars', 'This month');
 				break;
 			case 'week':
-				$ret = __d('calendars', '今週へ');
+				$ret = __d('calendars', 'This week');
 				break;
 			case 'day':
-				$ret = __d('calendars', '今日へ');
+				$ret = __d('calendars', 'Today');
 		}
 		return $ret;
 	}
@@ -208,15 +158,16 @@ class CalendarTurnCalendarHelper extends AppHelper {
 		} else {
 			$dateArr = $this->_getNowDate($type, $vars);
 		}
-		$url = NetCommonsUrl::actionUrl(Hash::merge(
-			array(
+		$urlArray = array(
 				'controller' => 'calendars',
 				'action' => 'index',
 				'style' => $vars['style'],
 				'frame_id' => Current::read('Frame.id'),
-			),
-			$dateArr
-		));
+		);
+		if (isset($vars['tab'])) {
+			$urlArray['tab'] = $vars['tab'];
+		}
+		$url = NetCommonsUrl::actionUrl(Hash::merge($urlArray, $dateArr));
 		return $url;
 	}
 /**

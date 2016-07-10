@@ -1,6 +1,6 @@
 <?php
 /**
- * Calendar Trun Calendar Helper
+ * Calendar Legend Calendar Helper
  *
  * @author Allcreator Co., Ltd. <info@allcreator.net>
  * @link http://www.netcommons.org NetCommons Project
@@ -9,7 +9,7 @@
  */
 App::uses('AppHelper', 'View/Helper');
 /**
- * Calendar Turn Calendar Helper
+ * Calendar Legend Calendar Helper
  *
  * @author Allcreator Co., Ltd. <info@allcreator.net>
  * @package NetCommons\Calendars\View\Helper
@@ -72,7 +72,13 @@ class CalendarLegendHelper extends AppHelper {
 	protected function _getPrivateLegend($vars) {
 		$html = '';
 		if (in_array(Space::PRIVATE_SPACE_ID, $vars['roomSpaceMaps'])) {
-			$html = $this->_getLegend($vars, Room::PRIVATE_PARENT_ID);
+			////$html = $this->_getLegend($vars, Room::PRIVATE_PARENT_ID);
+
+			//PRIVATE_PARENT_IDでは、各ユーザ毎のprivateRoomIdにはならない。
+			//myselfに、各ユーザ毎のprivateRoomIdをセットするように変えたので
+			//見直した。
+			//
+			$html = $this->_getLegend($vars, $vars['myself']);
 		}
 		return $html;
 	}
@@ -89,7 +95,7 @@ class CalendarLegendHelper extends AppHelper {
 		// 空間的にはグループスペースでルームIDは「全会員」ではないものがあるか
 		foreach ($vars['roomSpaceMaps'] as $roomId => $spaceId) {
 			if ($spaceId == Space::ROOM_SPACE_ID && $roomId != Room::ROOM_PARENT_ID) {
-				$html = $this->_getLegend($vars, $roomId, __d('calendars', 'ルーム'));
+				$html = $this->_getLegend($vars, $roomId, __d('calendars', 'Room'));
 				break;
 			}
 		}
@@ -106,7 +112,7 @@ class CalendarLegendHelper extends AppHelper {
 	protected function _getMemberLegend($vars) {
 		$html = '';
 		if (in_array(Space::ROOM_SPACE_ID, $vars['roomSpaceMaps'])) {
-			$html = $this->_getLegend($vars, Room::ROOM_PARENT_ID, __d('calendars', '全会員'));
+			$html = $this->_getLegend($vars, Room::ROOM_PARENT_ID, __d('calendars', 'All the members'));
 		}
 		return $html;
 	}
@@ -125,8 +131,8 @@ class CalendarLegendHelper extends AppHelper {
 			$html = $this->_getLegend(
 				$vars,
 				null,
-				__d('calendars', '共有した予定'),
-				'calendar-plan-mark-share',
+				__d('calendars', 'Shared plan'),
+				'calendar-plan-mark-private',
 				'share'
 			);
 		}
@@ -142,13 +148,14 @@ class CalendarLegendHelper extends AppHelper {
  */
 	protected function _getDoneShareLegend($vars) {
 		$html = '';
-		if (empty(Current::read('User.id'))) {
+		$userId = Current::read('User.id');
+		if (empty($userId)) {
 			return $html;
 		}
 		$html = $this->_getLegend(
 			$vars,
 			null,
-			__d('calendars', '仲間の予定'),
+			__d('calendars', 'Schedule of fellow'),
 			'calendar-plan-mark-share'
 		);
 		return $html;
@@ -168,7 +175,7 @@ class CalendarLegendHelper extends AppHelper {
 	protected function _getLegend($vars, $roomId, $spaceName = '', $calendarPlanMark = '',
 		$icon = '') {
 		if ($calendarPlanMark == '') {
-			$calendarPlanMark = $this->CalendarCommon->getPlanMarkClassName($vars, $roomId);
+			$calendarPlanMark = $this->CalendarCommon->getPlanMarkClassName($vars, null, $roomId);
 		}
 		if ($spaceName == '') {
 			$spaceName = $this->CalendarDaily->getSpaceName($vars, $roomId, Current::read('Language.id'));

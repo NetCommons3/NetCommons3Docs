@@ -20,21 +20,28 @@
 class CalendarSupport {
 
 /**
- * generateIcalUid
+ * getMixedToString
  *
- * iCalendar仕様のUID生成
+ * 配列の最初の要素を取り出す。文字列であればそのまま返す。
  *
- * @param string $startDate カレンダー開始日付
- * @param string $startTime カレンダー開始時刻
- * @return string iCalendar仕様のUIDを生成.
+ * @param mixed $data data
+ * @return mixed 成功時：$dateの最初要素を取り出す。空配列は''を返す。変数が文字列ならそのまま返す。失敗：falseを返す。
  */
-	public static function generateIcalUid($startDate, $startTime) {
-		$domain = 'localhost';
-		if (preg_match("/(?:.+)(?:\/\/)([^\/]+)/", FULL_BASE_URL, $matches) === 1) {
-			$domain = $matches[1];
+	public static function getMixedToString($data) {
+		if (is_string($data)) {
+			return $data;
 		}
-		$iCalendarUid = $startDate . 'T' . $startTime . 'Z' . '-' . uniqid() . '@' . $domain;
-		return $iCalendarUid;
+		if (is_array($data)) {
+			return Hash::get($data, '0');
+			/*
+				if (count($data) === 0 || !isset($data[0])) {
+					return '';
+				} else {
+					return (string)$data[0];
+				}
+			*/
+		}
+		return false;
 	}
 
 /**
@@ -53,68 +60,25 @@ class CalendarSupport {
 			//なので、calendarDateFormatをつかってTZ考慮したcalendarDateFormatはつかわなくてＯＫ。
 			$until = substr($rrule['UNTIL'], 0, 8) . substr($rrule['UNTIL'], -6);
 
-			CakeLog::debug("DBG:
-				In isRepeatable(). startDateTime[" . $startDateTime . "] until[" . $until . "]");
+			//CakeLog::debug("DBG:
+			//	In isRepeatable(). startDateTime[" . $startDateTime . "] until[" . $until . "]");
 			if ($startDateTime >= $until) {
-				CakeLog::debug("DBG: isRepeatable() return FALSE!
-					 startDateTime[" . $startDateTime . "] >= until[" . $until . "]");
+				//CakeLog::debug("DBG: isRepeatable() return FALSE!
+				//	 startDateTime[" . $startDateTime . "] >= until[" . $until . "]");
 				return false;
 			}
 		} else {
 			$count = isset($rrule['COUNT']) ? intval($rrule['COUNT']) : 3;	//初期値は３回繰り返す
-			CakeLog::debug("DBG: In isRepeatable(COUNT case).
-				 rrule[INDEX][" . $rrule['INDEX'] . "] count[" . $count . "]");
+			//CakeLog::debug("DBG: In isRepeatable(COUNT case).
+			//	 rrule[INDEX][" . $rrule['INDEX'] . "] count[" . $count . "]");
 			if ($rrule['INDEX'] > $count) {
-				CakeLog::debug("DBG: isRepeatable(COUNT case) return FALSE!
-					 rrule[INDEX][" . $rrule['INDEX'] . "] > count[" . $count . "]");
+				//CakeLog::debug("DBG: isRepeatable(COUNT case) return FALSE!
+				//	 rrule[INDEX][" . $rrule['INDEX'] . "] > count[" . $count . "]");
 				return false;
 			}
 		}
 		return true;
 	}
-
-/**
- * 日付をフォーマットする
- *
- * @param string $time 日付時刻文字列 (YmdHis形式)
- * @param float $timezoneOffset timezoneoffset (-12.0 ～ +12.0) 初期値はnull
- * @param int $insertFlag insertFlag  1:登録 0:非登録(＝更新)  初期値は0
- * @param string $calendarWeek calendar_week(Sun|Mon|....Sat、日|月|....|土 などの文字列。初期値は''
- * @param string $timeFormat 日付時刻書式文字列 初期値は'YmdHis'
- * @param int $toFlag 「まで」フラグ 1:「まで」有り 0:「まで」無し 初期値は0
- * @return string 書式化された日付時刻文字列
- */
-	/*
-	//public static function calendarDateFormat($time, $timezoneOffset = null, $insertFlag = 0, $calendarWeek = '', $timeFormat = 'YmdHis', $toFlag = 0) {
-		if (isset($timezoneOffset)) {
-
-			//タイムゾーンを考慮した日付時刻文字列にする
-			$time = self::setDateFormatWithTimezoneoffset($timezoneOffset, $insertFlag, $time);
-
-		} else {
-			$time = CalendarTime::timezoneDate($time, $insertFlag, 'YmdHis');
-		}
-		if ($toFlag && substr($time, 8) === '000000') {
-			$timeFormat = str_replace('H', '24', $timeFormat);
-			$timeFormat = str_replace('is', '0000', $timeFormat);
-			$timeFormat = str_replace('i', '00', $timeFormat);
-			$timestamp = mktime(0, 0, 0,
-						intval(substr($time, 4, 2)), intval(substr($time, 6, 2)), intval(substr($time, 0, 4)));
-			$timestamp = $timestamp - 1;
-		} else {
-			$timestamp = mktime(intval(substr($time, 8, 2)),
-				 intval(substr($time, 10, 2)), intval(substr($time, 12, 2)),
-						intval(substr($time, 4, 2)), intval(substr($time, 6, 2)), intval(substr($time, 0, 4)));
-		}
-		if ($calendarWeek === '') {
-			$weekNameArray = array('Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat');
-		} else {
-			$weekNameArray = explode('|', $calendarWeek);
-		}
-		$week = date('w', $timestamp);
-		return date(sprintf($timeFormat, $weekNameArray[$week]), $timestamp);
-	}
-	*/
 
 /**
  * タイムゾーンつきの日付をフォーマットする
@@ -145,51 +109,404 @@ class CalendarSupport {
  * @param int $week week
  * @param int $wdayNum wdayNum
  * @param string $userTz ユーザタイムゾーン(ex.Asia/Tokyo)
- * @return string $byday 生成されたbyday
+ * @return string $byday 生成されたbyday(このとき、サーバー系(UTC)にもどして返す。
  */
 	public static function getByday($timestamp, $week, $wdayNum, $userTz) {
-		$year = date('Y', $timestamp);
-		$month = date('m', $timestamp);
-		CakeLog::debug("DBG: In getByday(). year[" . $year . "] month[" . $month . "]");
+		$date = new DateTime('now', (new DateTimeZone($userTz)));	//TZはユーザ系
+
+		$date->setTimestamp($timestamp);
+		$year = $date->format('Y');
+		$month = $date->format('m');
 		if ($week === -1) {
 			//ここに飛び込むのは、BYDAYが'-1SA'といった値-1+曜日の書式のとき
+			$lastDay = $date->format('t');	//$timestampの月の日数
 
-			$lastDay = date("t", $timestamp);
-			//FIXME: defualtTZをユーザ系にしたdate()にすべきでは？
+			//カレンダー上(=ユーザー系)の指定月の月末日の00:00:00のタイムスタンプ
+			$date->setDate($year, $month, $lastDay);	//日付の再設定
+			$date->setTime(0, 0, 0);	//時刻の再設定
+			$timestamp = $date->getTimestamp();
+			$wLastDay = $date->format('w');	//カレンダー上の月末日の曜日のindex(0-6)
 
-			$timestamp = mktime(0, 0, 0, $month, $lastDay, $year);
-
-			//NC2のdate('w', $timestamp)はユーザTZを前提にしているので、date()を一時的に、UserTZ
-			////$wLastDay = date('w', $timestamp);
-			$wLastDay = CalendarTime::dateWdayIdxWithUserTz($timestamp, $userTz);
-
-			CakeLog::debug("DBG: getByday week=[-1] case.
-				dateWdayIdxWithUserTz(" . $timestamp . "," . $userTz . ") returned
-					 wLastDay[" . $wLastDay . "]");
-
+			//wdayNumはBYDAY(ex.3SA)の曜日(SA)のindex値(0-6,SAだと6)が入っている
+			//($wdayNum <= $wLastDay)の場合は、月末日の曜日indexをそのままつかう。
+			//($wdayNum > $wLastDay)の場合は、月末日の曜日indexに+7する
+			//
 			$wLastDay = ($wdayNum <= $wLastDay ? $wLastDay : 7 + $wLastDay);
-			$timestamp = mktime(0, 0, 0, $month, $lastDay - $wLastDay + $wdayNum, $year);
+
+			//下記は、カレンダー上の月末日に一番近い(=その月の最後の）BYDAYの
+			//指定曜日に該当する日付の00:00:00のタイムスタンプを求める。
+			//
+			$date->setDate($year, $month, $lastDay - $wLastDay + $wdayNum); //日付の再設定
+			$date->setTime(0, 0, 0);	//時刻の再設定
+			$timestamp = $date->getTimestamp();
 		} else {
-
-			//NC2のdate('w', $timestamp)はユーザTZを前提にしているので、date()ではなく,hdateWdayIdxWithUserTz()を使う.
-			////$w1Day = date('w', $timestamp);		//開始日の同年同月1日の曜日(0-6) a を取り出す。
-
-			$w1Day = CalendarTime::dateWdayIdxWithUserTz($timestamp, $userTz);
-			CakeLog::debug("DBG: getByday week=[" . $week . "] case. 
-				dateWdayIdxWithUserTz(" . $timestamp . ", " . $userTz . ") returned w1Day[" . $w1Day . "]");
-
-			// aが指定曜日以前ならaに1週加算。
+			$w1Day = $date->format('w');	//timestampの曜日のindex a を取り出す
+			// aがBYDAYの指定曜日以前ならaに1週加算。
 			$w1Day = ($w1Day <= $wdayNum ? 7 + $w1Day : $w1Day);
-
-			//1日が日曜日スタートとした場合の第x週第x日の「日」を計算
+			//第nＸ曜日(3MOなら第３月曜日)の日を計算する。
 			$day = $week * 7 + $wdayNum + 1;
-
 			//$day-$w1Dayで実際の1日が実曜日スタートになるよう調整した日のタイムスタンプ b を計算。
-			$timestamp = mktime(0, 0, 0, $month, $day - $w1Day, $year);
+			$date->setDate($year, $month, $day - $w1Day);	//日付の再設定
+			$date->setTime(0, 0, 0);	//時刻の再設定
+			$timestamp = $date->getTimestamp();
 		}
+
 		// b(第x週第y曜日の実際の日)を日付時刻文字列型に変換
-		$byday = date('YmdHis', $timestamp);
+		//このとき、ユーザー系TZからサーバー系TZに直す
+		$date->setTimestamp($timestamp);
+		$date->setTimezone(new DateTimeZone('UTC'));
+		$byday = $date->format('YmdHis');
 		return $byday;
+	}
+
+/**
+ * __getInitailTerm
+ *
+ * 繰返し期限配列の初期値を返す
+ *
+ * @param string $ymd ymd(YYYY-MM-DD形式)
+ * @return array 繰返し期限配列の初期値
+ */
+	private function __getInitailTerm($ymd) {
+		$term = array(
+			'REPEAT_COUNT' => 1,
+			'REPEAT_UNTIL' => 0,
+			'COUNT' => 3,
+			'UNTIL' => $ymd, //YYYY-MM-DD
+		);
+		return $term;
+	}
+
+/**
+ * __getInitialFreq
+ *
+ * 繰返し周期性配列の初期値を返す
+ *
+ * @param array $wdays array('SU', 'MO', ... , 'SA')
+ * @param int $wdayIndex $ways配列内の曜日index(0-6)
+ * @param mixed $month 月(1-12)
+ * @return array 繰返し周期性配列の初期値
+ */
+	private function __getInitialFreq($wdays, $wdayIndex, $month) {
+		$freq = array(
+			'DAILY' => array(
+				'INTERVAL' => 1,	//1日ごと
+			),
+			'WEEKLY' => array(
+				'INTERVAL' => 1,	//1週ごと
+				//指定日の曜日('SU'など)を返す
+				'BYDAY' => array($wdays[$wdayIndex]), //FRなどを要素のもつ配列
+			),
+			'MONTHLY' => array(
+				'INTERVAL' => 1,	//１月ごと
+				'BYDAY' => array(),	//空配列
+				'BYMONTHDAY' => array(),	//空配列
+			),
+			'YEARLY' => array(
+				'INTERVAL' => 1,	//１年ごと
+				'BYMONTH' => array(intval($month)), //12などを要素にもつ配列
+				'BYDAY' => array(),	//空配列
+			),
+		);
+		return $freq;
+	}
+
+/**
+ * getInitialCalendarActionPlanForView
+ *
+ * 表示用CalendarActionPlan初期データ生成
+ *
+ * @param string $year year
+ * @param string $month month
+ * @param string $day day
+ * @param string $hour hour
+ * @param string $minitue minitue
+ * @param string $second second
+ * @param bool $enableTime 時間指定が有効か
+ * @param array $exposeRoomOptions 公開対象ルーム配列
+ * @return array 生成された表示用CalendarActionPlan配列
+ */
+	public function getInitialCalendarActionPlanForView($year, $month, $day,
+		$hour, $minitue, $second, $enableTime, $exposeRoomOptions) {
+		$userTz = (new NetCommonsTime())->getUserTimezone();
+
+		// 時間指定のある場合かない場合かで
+		if ($enableTime) {
+			//"Y-m-d H:i:s"形式の指定日付時刻の日付時刻(from,to)を取得
+			list($ymdOfLastHour, $fromYmdHiOfLastHour, $toYmdHiOfLastHour) =
+				CalendarTime::getTheTime(sprintf('%04d-%02d-%02d %02d:%02d:%02d',
+					$year, $month, $day, $hour, $minitue, $second));
+		} else {
+			//"Y-m-d H:i:s"形式の指定日付時刻からの直近１時間の日付時刻(from,to)を取得
+			list($ymdOfLastHour, $fromYmdHiOfLastHour, $toYmdHiOfLastHour) =
+				CalendarTime::getTheTimeInTheLastHour(sprintf('%04d-%02d-%02d %02d:%02d:%02d',
+					$year, $month, $day, $hour, $minitue, $second));
+		}
+		$date = (new CalendarTime())->getDtObjWithTzDateTime($userTz,
+			$year, $month, $day, $hour, $minitue, $second);
+		$wdayIndex = intval($date->format('w'));	//0-6
+		$wdays = explode('|', CalendarsComponent::CALENDAR_REPEAT_WDAY);
+
+		$rooms = array_keys($exposeRoomOptions);
+		if (in_array(Current::read('Roomd.id'), $rooms)) {
+			//公開対象ルーム一覧にCurrentのRoom.idが存在する
+			$planRoomId = Current::read('Room.id');
+		} else {
+			//公開対象ルーム一覧にCurrentのRoom.idが存在しない時は、親
+			//のペアレント(パブリック、プライベート）の仮想room_idを
+			//セットする。
+			$planRoomId = Current::read('Room.parent_id');
+		}
+
+		$initialCapForView = array(
+			'GroupsUser' => array(),	//共有なし
+			'CalendarActionPlan' => array(
+				'edit_rrule' => 0,
+				'title' => '',
+				'title_icon' => '',
+				'enable_time' => $enableTime,
+				//YYYY-MM-DD hh:mm
+				'detail_start_datetime' =>
+					$ymdOfLastHour . ' ' . substr($fromYmdHiOfLastHour, 11),
+				//YYYY-MM-DD hh:mm
+				'detail_end_datetime' =>
+					substr($toYmdHiOfLastHour, 0, 10) . ' ' . substr($toYmdHiOfLastHour, 11),
+				'plan_room_id' => $planRoomId,
+				'timezone_offset' => (new NetCommonsTime())->getUserTimezone(),
+				'is_detail' => 0,
+				'location' => '',
+				'contact' => '',
+				'description' => '',
+				'is_repeat' => 0,
+				'repeat_freq' => 'DAILY',
+				'FREQ' => $this->__getInitialFreq($wdays, $wdayIndex, $month),
+				'TERM' => $this->__getInitailTerm($ymdOfLastHour),
+				'enable_email' => 0,
+				'email_send_timing' => 5,
+			),
+		);
+		return $initialCapForView;
+	}
+
+/**
+ * getCalendarActionPlanForView
+ *
+ * eventデータを元にした表示用CalendarActionPlanデータ生成
+ *
+ * @param array $event event
+ * @return array 生成された表示用CalendarActionPlan配列
+ */
+	public function getCalendarActionPlanForView($event) {
+		$userStartYmdHis =
+			(new CalendarTime())->svr2UserYmdHis($event['CalendarEvent']['dtstart']);
+		//YYYY-MM-DD hh:mm:ss
+		$userStartDatetime = CalendarTime::addDashColonAndSp($userStartYmdHis);
+
+		if ($event['CalendarEvent']['is_allday']) {
+			//注) 終日なので、dtendは、dtstar+24時間になっており、そのままViewに渡すと
+			//翌日になってしまうので、ここではdtendを使わずdtstartを代理利用する。
+			$userEndYmdHis =
+				(new CalendarTime())->svr2UserYmdHis($event['CalendarEvent']['dtstart']);
+			//YYYY-MM-DD hh:mm:ss
+			$userEndDatetime = CalendarTime::addDashColonAndSp($userEndYmdHis);
+		} else {
+			//開始、終了なので、dtendを素直にそのまま使う
+			$userEndYmdHis =
+				(new CalendarTime())->svr2UserYmdHis($event['CalendarEvent']['dtend']);
+			//YYYY-MM-DD hh:mm:ss
+			$userEndDatetime = CalendarTime::addDashColonAndSp($userEndYmdHis);
+		}
+
+		$userTz = (new NetCommonsTime())->getUserTimezone();
+		$tmArray = CalendarTime::transFromYmdHisToArray($userStartDatetime);
+		$date = (new CalendarTime())->getDtObjWithTzDateTime($userTz,
+			$tmArray['year'], $tmArray['month'], $tmArray['day'],
+			$tmArray['hour'], $tmArray['min'], $tmArray['sec']);
+		$wdayIndex = intval($date->format('w'));	//0-6
+		$wdays = explode('|', CalendarsComponent::CALENDAR_REPEAT_WDAY);
+
+		$isDetail = 0;
+		if ($event['CalendarEvent']['location'] !== '' ||
+			$event['CalendarEvent']['contact'] !== '' ||
+			$event['CalendarEvent']['description'] !== '') {
+			$isDetail = 1;
+		}
+
+		$capForView = $this->__makeCapForViewSubset($event, $userStartDatetime, $userEndDatetime,
+			$isDetail, $wdays, $wdayIndex, $tmArray);
+
+		$rrule = (new CalendarRruleUtil())->parseRrule($event['CalendarRrule']['rrule']);
+
+		$this->__setRruleFreqParamsToCapForView($rrule, $capForView);
+
+		$this->__setRruleTermParamsToCapForView($rrule, $capForView);
+
+		$capForView['GroupsUser'] = array();
+		if (isset($event['CalendarEventShareUser']) && is_array($event['CalendarEventShareUser'])) {
+			foreach ($event['CalendarEventShareUser'] as $shareUser) {
+				//request->data['GroupsUser']の格納形式に合わせる。
+				$capForView['GroupsUser'][] = array('user_id' => $shareUser['share_user']);
+			}
+		}
+
+		return $capForView;
+	}
+
+/**
+ * convTzOffset2TzId
+ *
+ * timezoneOffset(数字-12.0-12.0）からtzId(Asia/Tokyoなど)への変換
+ * 
+ * @param double $tzOffsetVal timezoneのoffset値(-12.0 - 12.0)
+ * @return string timezoneId
+ */
+	public function convTzOffset2TzId($tzOffsetVal) {
+		$tzId = (new NetCommonsTime())->getUserTimezone(); //初期値
+		$tzTbl = CalendarsComponent::getTzTbl();
+		foreach ($tzTbl as $tzInfo) {
+			if ($tzInfo[CalendarsComponent::CALENDAR_TIMEZONE_OFFSET_VAL] == $tzOffsetVal) {
+				$tzId = $tzInfo[CalendarsComponent::CALENDAR_TIMEZONE_ID];
+				break;
+			}
+		}
+		return $tzId;
+	}
+
+/**
+ * __makeCapForViewSubset
+ *
+ * CapForView配列のサブセット生成
+ *
+ * @param array $event event
+ * @param string $userStartDatetime userStartDatetime
+ * @param string $userEndDatetime userEndDatetime
+ * @param int $isDetail isDetail
+ * @param array $wdays wdays
+ * @param int $wdayIndex wdayIndex
+ * @param array $tmArray tmArray
+ * @return array 生成されたCapForView配列のサブセット
+ */
+	private function __makeCapForViewSubset($event, $userStartDatetime, $userEndDatetime,
+		$isDetail, $wdays, $wdayIndex, $tmArray) {
+		$tzId = $this->convTzOffset2TzId($event['CalendarEvent']['timezone_offset']);
+		$capForView = array(
+			'CalendarActionPlan' => array(
+				'edit_rrule' => 0,	//tableにはない項目なのでinitと同じ値
+				'title' => $event['CalendarEvent']['title'],
+				'title_icon' => $event['CalendarEvent']['title_icon'],
+				'enable_time' => ($event['CalendarEvent']['is_allday']) ? 0 : 1,
+				'easy_start_date' => substr($userStartDatetime, 0, 10), //YYYY-MM-DD
+				'easy_hour_minute_from' => substr($userStartDatetime, 11, 5), //hh:mm
+				'easy_hour_minute_to' => substr($userEndDatetime, 11, 5), //hh:mm
+				//YYYY-MM-DD hh:mm
+				'detail_start_datetime' => substr($userStartDatetime, 0, 16),
+				//YYYY-MM-DD hh:mm
+				'detail_end_datetime' => substr($userEndDatetime, 0, 16),
+				'plan_room_id' => $event['CalendarEvent']['room_id'],
+				'timezone_offset' => $tzId,
+				'is_detail' => $isDetail,
+				'location' => $event['CalendarEvent']['location'],
+				'contact' => $event['CalendarEvent']['contact'],
+				'description' => $event['CalendarEvent']['description'],
+				'is_repeat' => 0,	//まずは初期値
+				'repeat_freq' => 'DAILY',	//まずは初期値
+				'FREQ' => $this->__getInitialFreq($wdays, $wdayIndex, $tmArray['month']),
+				'TERM' => $this->__getInitailTerm(substr($userStartDatetime, 0, 10)),
+				'enable_email' => intval($event['CalendarEvent']['is_enable_mail']), //名違いに注意
+				'email_send_timing' => intval($event['CalendarEvent']['email_send_timing']),
+			),
+		);
+		return $capForView;
+	}
+
+/**
+ * __setRruleFreqParamsToCapForView
+ *
+ * 繰返し規則の周期性のパラメータをcapForView配列にセットする。
+ *
+ * @param array $rrule 元となるrrule配列
+ * @param array &$capForView 代入すべきcapForView配列
+ * @return void
+ */
+	private function __setRruleFreqParamsToCapForView($rrule, &$capForView) {
+		if ($rrule['FREQ'] === 'DAILY') {
+			$capForView['CalendarActionPlan']['is_repeat'] = 1;
+			$capForView['CalendarActionPlan']['repeat_freq'] = 'DAILY';
+			$capForView['CalendarActionPlan']['FREQ']['DAILY']['INTERVAL'] = $rrule['INTERVAL'];
+		}
+		if ($rrule['FREQ'] === 'WEEKLY') {
+			$capForView['CalendarActionPlan']['is_repeat'] = 1;
+			$capForView['CalendarActionPlan']['repeat_freq'] = 'WEEKLY';
+			$capForView['CalendarActionPlan']['FREQ']['WEEKLY']['INTERVAL'] = $rrule['INTERVAL'];
+			$capForView['CalendarActionPlan']['FREQ']['WEEKLY']['BYDAY'] = $rrule['BYDAY']; //配列
+		}
+		if ($rrule['FREQ'] === 'MONTHLY') {
+			$capForView['CalendarActionPlan']['is_repeat'] = 1;
+			$capForView['CalendarActionPlan']['repeat_freq'] = 'MONTHLY';
+			$capForView['CalendarActionPlan']['FREQ']['MONTHLY']['INTERVAL'] = $rrule['INTERVAL'];
+			$capForView['CalendarActionPlan']['FREQ']['MONTHLY']['BYDAY'] = array('');
+			$capForView['CalendarActionPlan']['FREQ']['MONTHLY']['BYMONTHDAY'] = array('');
+			if (isset($rrule['BYDAY'])) {
+				$capForView['CalendarActionPlan']['FREQ']['MONTHLY']['BYDAY'] =
+					$rrule['BYDAY'];
+			}
+			if (isset($rrule['BYMONTHDAY'])) {
+				$capForView['CalendarActionPlan']['FREQ']['MONTHLY']['BYMONTHDAY'] =
+					$rrule['BYMONTHDAY'];
+			}
+		}
+		if ($rrule['FREQ'] === 'YEARLY') {
+			$capForView['CalendarActionPlan']['is_repeat'] = 1;
+			$capForView['CalendarActionPlan']['repeat_freq'] = 'YEARLY';
+			$capForView['CalendarActionPlan']['FREQ']['YEARLY']['INTERVAL'] = $rrule['INTERVAL'];
+			$capForView['CalendarActionPlan']['FREQ']['YEARLY']['BYMONTH'] = $rrule['BYMONTH'];
+			$capForView['CalendarActionPlan']['FREQ']['YEARLY']['BYDAY'] = array('');
+			if (isset($rrule['BYDAY'])) {
+				$capForView['CalendarActionPlan']['FREQ']['YEARLY']['BYDAY'] = $rrule['BYDAY'];
+			}
+		}
+	}
+
+/**
+ * __setRruleTermParamsToCapForView
+ *
+ * 繰返し規則の期限のパラメータをcapForView配列にセットする。
+ *
+ * @param array $rrule 元となるrrule配列
+ * @param array &$capForView 代入すべきcapForView配列
+ * @return void
+ */
+	private function __setRruleTermParamsToCapForView($rrule, &$capForView) {
+		if (isset($rrule['REPEAT_COUNT']) && $rrule['REPEAT_COUNT'] == 1) {
+			$capForView['CalendarActionPlan']['TERM']['REPEAT_COUNT'] = 1;
+			$capForView['CalendarActionPlan']['TERM']['REPEAT_UNTIL'] = 0;
+			$capForView['CalendarActionPlan']['TERM']['COUNT'] = $rrule['COUNT'];
+		}
+		if (isset($rrule['REPEAT_UNTIL']) && $rrule['REPEAT_UNTIL'] == 1) {
+			$capForView['CalendarActionPlan']['TERM']['REPEAT_COUNT'] = 0;
+			$capForView['CalendarActionPlan']['TERM']['REPEAT_UNTIL'] = 1;
+
+			//ユーザーTZ=JSTのカレンダ編集画面より期限"2016-05-31まで"とすると、
+			//CalendarRruleのrruleには、UNTIL=20160531T150000(=UTC)が入る。
+			//parseRrule()して配列化して取り出すと、$rule[UNTIL]=20160531150000となる。
+			//これをJSTになおすと2016-06-01 00:00:00となる。
+			//時間の大小計算の場合、これ「2016-06-01 00:00:00まで(=未満)」
+			//との比較が、カレンダ編集画面に再表示する時は、
+			//「2016-05-31まで」と引く１日して代入・表現しないと、
+			//予定登録画面の表記と１日ずれてしまう。
+			//なので、ここで補正します。
+			//
+			$date = new DateTime('now', (new DateTimeZone('UTC')));	//サーバ系
+			$date->setDate(substr($rrule['UNTIL'], 0, 4),
+				substr($rrule['UNTIL'], 4, 2), substr($rrule['UNTIL'], 6, 2));
+			$date->setTime(substr($rrule['UNTIL'], 8, 2),
+				substr($rrule['UNTIL'], 10, 2), substr($rrule['UNTIL'], 12, 2));
+			$userTz = (new NetCommonsTime())->getUserTimezone();
+			$date->setTimezone(new DateTimeZone($userTz));	//ユーザ系へ変換
+			$date->setDate($date->format('Y'),
+				$date->format('m'), intval($date->format('d')) - 1);	//1日前にする
+			$capForView['CalendarActionPlan']['TERM']['UNTIL'] = $date->format('Y-m-d');
+		}
 	}
 }
 

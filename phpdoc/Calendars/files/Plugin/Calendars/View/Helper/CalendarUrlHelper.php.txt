@@ -9,6 +9,7 @@
  */
 App::uses('AppHelper', 'View/Helper');
 App::uses('WorkflowComponent', 'Workflow.Controller/Component');
+App::uses('CalendarFrameSetting', 'Calendars.Model');
 
 /**
  * Calendar url Helper
@@ -28,6 +29,7 @@ class CalendarUrlHelper extends AppHelper {
 		'NetCommonsHtml',
 		'Form',
 		'Calendars.CalendarCommon',
+		'NetCommons.BackTo',
 	);
 
 /**
@@ -69,7 +71,6 @@ class CalendarUrlHelper extends AppHelper {
 		$options = array(
 			'controller' => 'calendar_plans',
 			'action' => 'edit',
-			//'style' => 'easy',
 			'style' => 'detail',
 			'year' => $year,
 			'month' => $month,
@@ -78,12 +79,34 @@ class CalendarUrlHelper extends AppHelper {
 			'block_id' => Current::read('Block.id'),
 			'frame_id' => Current::read('Frame.id'),
 		);
-		if (isset($vars['return_style'])) {
-			$options['return_style'] = $vars['return_style'];
-		}
-		if (isset($vars['return_sort'])) {
-			$options['return_sort'] = $vars['return_sort'];
-		}
+		$url = NetCommonsUrl::actionUrl($options);
+		return $url;
+	}
+/**
+ * makeEditUrlWithTime
+ *
+ * 編集画面URL生成
+ *
+ * @param int $year 年
+ * @param int $month 月
+ * @param int $day 日
+ * @param int $hour 時
+ * @param array &$vars カレンダー情報
+ * @return string Url
+ */
+	public function makeEditUrlWithTime($year, $month, $day, $hour, &$vars) {
+		$options = array(
+			'controller' => 'calendar_plans',
+			'action' => 'edit',
+			'style' => 'detail',
+			'year' => $year,
+			'month' => $month,
+			'day' => $day,
+			'hour' => $hour,
+			//これがないと、遷移先でブロックIDがない、とでる。↓
+			'block_id' => Current::read('Block.id'),
+			'frame_id' => Current::read('Frame.id'),
+		);
 		$url = NetCommonsUrl::actionUrl($options);
 		return $url;
 	}
@@ -113,39 +136,28 @@ class CalendarUrlHelper extends AppHelper {
 	}
 
 /**
- * getPlanListUrl
+ * getBackFirstButton
  *
- * 予定一覧表示Url取得
+ * 最初の画面に戻るUrlリンクボタンの取得
  *
- * @param string $place 場所(prevMonth|thisMonth|nextMonth)
- * @param int $year 年
- * @param int $month 月
- * @param int $day 日
  * @param array $vars カレンダー情報
  * @return string URL
  */
-	public function getPlanListUrl($place, $year, $month, $day, $vars) {
-		if ($place === 'thisMonth') {
-			$backYear = $year;
-			$backMonth = $month;
-		} else {	//nextMont またはprevMonthの時は、中央年月をセット
-			$backYear = $vars['mInfo']['year'];
-			$backMonth = $vars['mInfo']['month'];
+	public function getBackFirstButton($vars) {
+		$displayType = $vars['CalendarFrameSetting']['display_type'];
+
+		if ($displayType == CalendarsComponent::CALENDAR_DISP_TYPE_LARGE_MONTHLY ||
+			$displayType == CalendarsComponent::CALENDAR_DISP_TYPE_SMALL_MONTHLY) {
+			$html = $this->BackTo->indexLinkButton(__d('calendars', 'Back to this month'));
+		} elseif ($displayType == CalendarsComponent::CALENDAR_DISP_TYPE_WEEKLY) {
+			$html = $this->BackTo->indexLinkButton(__d('calendars', 'Back to this week'));
+		} elseif ($displayType == CalendarsComponent::CALENDAR_DISP_TYPE_DAILY) {
+			$html = $this->BackTo->indexLinkButton(__d('calendars', 'Back to today'));
+		} else {
+			$html = $this->BackTo->indexLinkButton(__d('calendars', 'Back to First view'));
 		}
-		$options = array(
-			'controller' => 'calendar_plans',
-			'action' => 'daylist',
-			'year' => $year,
-			'month' => $month,
-			'day' => $day,
-			'back_year' => $backYear,
-			'back_month' => $backMonth,
-			'frame_id' => Current::read('Frame.id'),
-		);
-		//ここは固定的にカレンダー月（縮小）が戻り先となる。
-		$options['return_style'] = 'smallmonthly';
-		$url = NetCommonsUrl::actionUrl($options);
-		return $url;
+
+		return $html;
 	}
 }
 

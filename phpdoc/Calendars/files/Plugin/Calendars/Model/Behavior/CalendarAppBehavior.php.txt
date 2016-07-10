@@ -13,6 +13,7 @@ App::uses('ModelBehavior', 'Model');
 //App::uses('CalendarTime', 'Calendars.Utility');
 App::uses('CalendarTime', 'Calendars.Utility');
 App::uses('CalendarSupport', 'Calendars.Utility');
+App::uses('CalendarRruleUtil', 'Calendars.Utility');
 App::uses('WorkflowComponent', 'Workflow.Controller/Component');
 
 /**
@@ -20,6 +21,7 @@ App::uses('WorkflowComponent', 'Workflow.Controller/Component');
  *
  * @author Allcreator <info@allcreator.net>
  * @package NetCommons\Calendars\Model\Behavior
+ * @SuppressWarnings(PHPMD.NumberOfChildren)
  */
 class CalendarAppBehavior extends ModelBehavior {
 	const CALENDAR_PLAN_EDIT_THIS = '0';	//この日の予定のみ変更(削除)
@@ -62,7 +64,9 @@ class CalendarAppBehavior extends ModelBehavior {
 	);
 
 /**
- * 登録処理
+ * 繰返し専用event登録処理(*event初回登録に使ってはいけません）
+ *
+ * 毎回 keyをclearしてから登録します。(初回登録から踏襲するのは、status, is_active, is_latestとします)
  *
  * @param Model &$model 実際のモデル名
  * @param array $planParams planParams
@@ -86,10 +90,12 @@ class CalendarAppBehavior extends ModelBehavior {
 			//
 			$rruleData = $model->CalendarRrule->find('first', $params);
 			if (!is_array($rruleData) || !isset($rruleData['CalendarRrule'])) {
-				$model->validationErrors = Hash::merge($model->validationErrors, $model->CalendarRrule->validationErrors);
+				$model->validationErrors =
+					Hash::merge($model->validationErrors, $model->CalendarRrule->validationErrors);
 				throw new InternalErrorException(__d('net_commons', 'Internal Server Error'));
 			}
-			$this->rruleData = $rruleData;	//CalendarRruleのデータを記録し、２度目以降に備える。
+			//CalendarRruleのデータを記録し、２度目以降に備える。
+			$this->rruleData = $rruleData;
 		}
 
 		//NC3では内部はサーバー系日付時刻になっているのでtimezoneDateはつかわない.
@@ -98,28 +104,34 @@ class CalendarAppBehavior extends ModelBehavior {
 		$insertStartTime = $startTime;
 		$insertEndTime = $endTime;
 
-		$rEventData = $this->setReventData($eventData, $insertStartTime, $insertEndTime); //eventDataをもとにrEventDataをつくり、モデルにセット
+		//eventDataをもとにrEventDataをつくり、モデルにセット
+		$rEventData = $this->setReventData(
+			$eventData, $insertStartTime, $insertEndTime, $planParams);
+
+		//eventのkeyを新しく採番するため、nullクリアします。
+		$rEventData['CalendarEvent']['key'] = null;
 
 		$model->CalendarEvent->set($rEventData);
 
 		if (!$model->CalendarEvent->validates()) {	//rEventDataをチェック
-			$model->validationErrors = Hash::merge($model->validationErrors, $model->CalendarEvent->validationErrors);
+			$model->validationErrors = Hash::merge(
+				$model->validationErrors, $model->CalendarEvent->validationErrors);
 			throw new InternalErrorException(__d('net_commons', 'Internal Server Error'));
 		}
 
+		//eventの保存。
+		//なお、追加情報(workflowcomment)は WFCのafterSave()で自動セットされる。
+		//
 		if (!$model->CalendarEvent->save($rEventData, false)) { //保存のみ
-			$model->validationErrors = Hash::merge($model->validationErrors, $model->CalendarEvent->validationErrors);
+			$model->validationErrors = Hash::merge(
+				$model->validationErrors, $model->CalendarEvent->validationErrors);
 			throw new InternalErrorException(__d('net_commons', 'Internal Server Error'));
 		}
 
-		$rEventData['CalendarEvent']['id'] = $model->CalendarEvent->id; //採番されたidをeventDataにセ>
+		//採番されたidをeventDataにセット
+		$rEventData['CalendarEvent']['id'] = $model->CalendarEvent->id;
 
-		if (isset($rEventData['CalendarEventContent']) && $rEventData['CalendarEventContent']['linked_model'] !== '') { //関連コンテンツの登録
-			if (!(isset($this->CalendarEventContent))) {
-				$model->loadModels(['CalendarEventContent' => 'Calendar.CalendarEventContent']);
-			}
-			$this->CalendarEventContent->saveLinkedData($rEventData);
-		}
+		$this->_insertChidren($model, $planParams, $rEventData);
 
 		return $rEventData;
 	}
@@ -130,9 +142,10 @@ class CalendarAppBehavior extends ModelBehavior {
  * @param array $eventData 元になるeventData配列
  * @param string $insertStartTime insertStartTime 登録用開始日付時刻文字列
  * @param string $insertEndTime insertEndTime 登録用終了日付時刻文字列
+ * @param array $planParams planParamsが渡ってくる。追加拡張を取り出す為に必要。
  * @return array 実際に登録する$rEventData配列を返す
  */
-	public function setReventData($eventData, $insertStartTime, $insertEndTime) {
+	public function setReventData($eventData, $insertStartTime, $insertEndTime, $planParams) {
 		$rEventData = $eventData;
 
 		$rEventData['CalendarEvent']['id'] = null;		//新規登録用にidにnullセット
@@ -160,56 +173,116 @@ class CalendarAppBehavior extends ModelBehavior {
 			$rEventData['CalendarEvent']['modified'] = $eventData['CalendarEvent']['modified'];
 		}
 
+		//workflowcommentなどの追加拡張データはここで追加する。
+		//
+		if (isset($planParams[CalendarsComponent::ADDITIONAL]) &&
+			count($planParams[CalendarsComponent::ADDITIONAL]) > 0) {
+			foreach ($planParams[CalendarsComponent::ADDITIONAL] as $modelName => $vals) {
+				$rEventData[$modelName] = $vals;
+			}
+		}
+
 		return $rEventData;
 	}
 
 /**
  * startDate,startTime,endDate,endTime生成
  *
- * @param string $sTime sTime文字列(年月日時分秒）
- * @param string $eTime eTime文字列(年月日時分秒）
- * @param string $byday byday
- * @param string &$startDate 生成したstartDate文字列
- * @param string &$startTime 生成したstartTime文字列
- * @param string &$endDate 生成したendDate伯父列
- * @param string &$endTime 生成したendTime文字列
+ * @param string $sTime サーバー系sTime文字列(YmdHis)
+ * @param string $eTime サーバー系eTime文字列(YmdHis)
+ * @param string $byday byday サーバー系byday日文字列(YmdHis)
+ * @param string $userTz userTz ユーザー系タイムゾーンID (Asia/Tokyoなど)
+ * @param string &$startDate 生成したサーバー系startDate文字列
+ * @param string &$startTime 生成したサーバー系startTime文字列
+ * @param string &$endDate 生成したサーバー系endDate文字列
+ * @param string &$endTime 生成したサーバー系endTime文字列
  * @return void
  */
-	public function setStartDateTiemAndEndDateTime($sTime, $eTime, $byday, &$startDate, &$startTime, &$endDate, &$endTime) {
-		$startTimestamp = mktime(0, 0, 0, substr($sTime, 4, 2), substr($sTime, 6, 2), substr($sTime, 0, 4));
-		$endTimestamp = mktime(0, 0, 0, substr($eTime, 4, 2), substr($eTime, 6, 2), substr($eTime, 0, 4));
+	public function setStartDateTiemAndEndDateTime($sTime, $eTime, $byday, $userTz,
+		&$startDate, &$startTime, &$endDate, &$endTime) {
+		//INPUT引数のsTime, eTime, bydayはサーバー系なので、
+		//まずは、それぞれをTZのユーザー系のYmdHisに変換する。
+		$userStartTime = (new NetCommonsTime())->toUserDatetime(CalendarTime::calDt2dt($sTime));
+		$userStartTime = CalendarTime::dt2calDt($userStartTime);
+		$userEndTime = (new NetCommonsTime())->toUserDatetime(CalendarTime::calDt2dt($eTime));
+		$userEndTime = CalendarTime::dt2calDt($userEndTime);
+		$userByday = (new NetCommonsTime())->toUserDatetime(CalendarTime::calDt2dt($byday));
+		$userByday = CalendarTime::dt2calDt($userByday);
 
+		//カレンダー上（＝ユーザー系）の開始日の00:00:00のtimestamp取得
+		$date = new DateTime('now', (new DateTimeZone($userTz)));	//ユーザーTZ系のDateTimeObj生成
+		$date->setDate(substr($userStartTime, 0, 4),
+			substr($userStartTime, 4, 2), substr($userStartTime, 6, 2));
+		$date->setTime(0, 0, 0);
+		$startTimestamp = $date->getTimestamp();
+
+		//カレンダー上（＝ユーザー系）の終了日の00:00:00のtimestamp取得
+		$date->setDate(substr($userEndTime, 0, 4),
+			substr($userEndTime, 4, 2), substr($userEndTime, 6, 2));
+		$date->setTime(0, 0, 0);
+		$endTimestamp = $date->getTimestamp();
+
+		//開始日と終了日の差分の日数(a)を算出
 		$diffNum = ($endTimestamp - $startTimestamp) / 86400;
 
-		$timestamp = mktime(substr($sTime, 8, 2), substr($sTime, 10, 2), substr($sTime, 12, 2),
-							substr($byday, 4, 2), substr($byday, 6, 2), substr($byday, 0, 4));
-		$startDate = date('Ymd', $timestamp);
-		$startTime = date('His', $timestamp);
+		//日付がbyday日で時刻が開始日時刻のタイムスタンプの、「サーバー系」のYmdとHisを取得する
+		//
+		$sdate = new DateTime('now', (new DateTimeZone($userTz)));	//ユーザーTZ系のDateTimeObj生成
+		$sdate->setDate(substr($userByday, 0, 4),
+			substr($userByday, 4, 2), substr($userByday, 6, 2));
+		$sdate->setTime(substr($userStartTime, 8, 2),
+			substr($userStartTime, 10, 2), substr($userStartTime, 12, 2));
+		$sdate->setTimezone(new DateTimeZone('UTC'));	//サーバーTZに切り替える
+		$startDate = $sdate->format('Ymd');	//サーバー系の開始日付時刻のYmd
+		$startTime = $sdate->format('His');	//サーバー系の開始日付時刻のHis
 
-		$timestamp = mktime(substr($eTime, 8, 2), substr($eTime, 10, 2), substr($eTime, 12, 2),
-							substr($byday, 4, 2), substr($byday, 6, 2) + $diffNum, substr($byday, 0, 4));
-		$endDate = date('Ymd', $timestamp);
-		$endTime = date('His', $timestamp);
+		//月がbyday月、日がbyday日+差分日数(a)で時刻が終了日時刻のタイムスタンプの、「サーバー系」のYmdとHisを取得する
+		//
+		$edate = new DateTime('now', (new DateTimeZone($userTz)));	//ユーザーTZ系のDateTimeObj生成
+		$edate->setDate(substr($userByday, 0, 4),
+			substr($userByday, 4, 2), substr($userByday, 6, 2) + $diffNum);
+		$edate->setTime(substr($userEndTime, 8, 2),
+			substr($userEndTime, 10, 2), substr($userEndTime, 12, 2));
+		$edate->setTimezone(new DateTimeZone('UTC'));	//サーバーTZに切り替える
+		$endDate = $edate->format('Ymd');	//サーバー系の終了日付時刻のYmd
+		$endTime = $edate->format('His');	//サーバー系の終了日付時刻のHis
 	}
 
 /**
  * RruleDataへのデータ設定
  *
+ * @param Model &$model model
  * @param array $planParams 予定パラメータ
  * @param array &$rruleData rruleデータ
  * @param string $mode mode insert時:self::CALENDAR_INSERT_MODE(デフォルト値) update時:self::CALENDAR_UPDATE_MODE
+ * @param string $rruleKey rruleKey 未指定時はnull. null以外の文字列の時はこのkeyを使う。
+ * @param int $rruleId rruleId updateの時、このrruleIdをidに使う
  * @return void
  */
-	public function setRruleData($planParams, &$rruleData, $mode = self::CALENDAR_INSERT_MODE) {
+	public function setRruleData(&$model, $planParams, &$rruleData,
+		$mode = self::CALENDAR_INSERT_MODE, $rruleKey = null, $rruleId = 0) {
+		if (!(isset($model->Calendar))) {
+			$model->loadModels(['Calendar' => 'Calendars.Calendar']);
+		}
+		$blockKey = Current::read('Block.key');
+		$calendar = $model->Calendar->findByBlockKey($blockKey);	//find('first'形式で返る
+		$calendarId = 1;	//暫定初期値
+		if (!empty($calendar['Calendar']['id'])) {
+			$calendarId = $calendar['Calendar']['id'];
+		}
+		//CakeLog::debug("DBG: blockKey[" . $blockKey . "] calendar[" . print_r($calendar, true) .
+		//	"] calendarId[" . $calendarId . "]");
+
 		$params = array(
-			'calendar_id' => 1,	//暫定
+			'calendar_id' => $calendarId,
 			'name' => '',
 			'rrule' => '',
-			'icalendar_uid' => CalendarSupport::generateIcalUid($planParams['start_date'], $planParams['start_time']),
+			'icalendar_uid' => CalendarRruleUtil::generateIcalUid(
+				$planParams['start_date'], $planParams['start_time']),
 			'icalendar_comp_name' => self::CALENDAR_PLUGIN_NAME,
-			'room_id' => Current::read('Room.id'),
-			'language_id' => Current::read('Language.id'),
-			'status' => WorkflowComponent::STATUS_IN_DRAFT,
+			'room_id' => Current::read('Room.id'),	//FIXME: eventのroom_idと合わせるべきでは？
+			//'language_id' => Current::read('Language.id'),
+			//'status' => WorkflowComponent::STATUS_IN_DRAFT,
 		);
 
 		foreach ($planParams as $key => $val) {
@@ -221,19 +294,26 @@ class CalendarAppBehavior extends ModelBehavior {
 		//レコード $rrule_data  の初期化と'CalendarRrule'キーセットはおわっているので省略
 		//rruleDataに詰める。
 
-		//idはcreate()の後なので、不要。
+		//INSERT_MODEの時はidは自動採番されるので、セット不要
+		if ($mode === self::CALENDAR_UPDATE_MODE && $rruleId !== 0) {
+			//UPDATE_MODEの時は、更新対象のrruleIdを指定
+			$rruleData['CalendarRrule']['id'] = $rruleId;
+		}
+
 		$rruleData['CalendarRrule']['calendar_id'] = $params['calendar_id'];
-		//keyは、Workflowが自動セット
 		$rruleData['CalendarRrule']['name'] = $params['name'];
+		if ($rruleKey !== null) {
+			$rruleData['CalendarRrule']['key'] = $rruleKey;
+		}
 		$rruleData['CalendarRrule']['rrule'] = $params['rrule'];
 		if ($mode === self::CALENDAR_INSERT_MODE) {
 			$rruleData['CalendarRrule']['icalendar_uid'] = $params['icalendar_uid'];
 			$rruleData['CalendarRrule']['icalendar_comp_name'] = $params['icalendar_comp_name'];
 		}
 		$rruleData['CalendarRrule']['room_id'] = $params['room_id'];
-		$rruleData['CalendarRrule']['language_id'] = $params['language_id'];
-		$rruleData['CalendarRrule']['status'] = $params['status'];
-		//is_active,is_latestは、Workflowが自動セット
+		////$rruleData['CalendarRrule']['language_id'] = $params['language_id'];
+		////$rruleData['CalendarRrule']['status'] = $params['status'];
+		//is_active,is_latestは、Workflowが自動セット ->　is_xxxは項目削除した。
 		//create_user, created, modified_user, modifiedは、Trackableが自動セット
 	}
 
@@ -257,6 +337,8 @@ class CalendarAppBehavior extends ModelBehavior {
 			'timezone_offset',
 			'linked_model',
 			'linked_content_key',
+			'enable_email',
+			'email_send_timing',
 		);
 		foreach ($keys as $key) {
 			if (isset($planParams[$key])) {
@@ -274,11 +356,17 @@ class CalendarAppBehavior extends ModelBehavior {
  * @return void
  */
 	public function setEventData($planParams, $rruleData, &$eventData) {
+		//
+		//補足）ここでは、idとkeyは一切セットしていない。なので、$eventDataに値がなければ
+		//新規生成されるし、あればその値がそのまま利用されます。
+		//
 		//初期化
 		$params = array(
 			'calendar_rrule_id' => $rruleData['CalendarRrule']['id'],	//外部キーをセット
-			'room_id' => $rruleData['CalendarRrule']['room_id'],
-			'language_id' => $rruleData['CalendarRrule']['language_id'],
+			//keyは、Workflowが自動セット
+			////'room_id' => $rruleData['CalendarRrule']['room_id'],	//rruleDataにroom_idがあるのはおかしい。
+			'room_id' => $planParams['room_id'],	//画面で指定したroom_idとなるように修正.
+			'language_id' => Current::read('Language.id'),
 			'target_user' => Current::read('User.id'),
 			'title' => '',
 			'title_icon' => '',
@@ -293,6 +381,10 @@ class CalendarAppBehavior extends ModelBehavior {
 			'end_time' => $planParams['end_time'],
 			'dtend' => $planParams['end_date'] . $planParams['end_time'],
 			'timezone_offset' => $planParams['timezone_offset'],
+			'status' => $planParams['status'],
+			'enable_email' => $planParams['enable_email'],
+			'email_send_timing' => $planParams['email_send_timing'],
+
 			'linked_model' => '',
 			'linked_content_key' => '',
 		);
@@ -319,14 +411,27 @@ class CalendarAppBehavior extends ModelBehavior {
 		$eventData['CalendarEvent']['end_time'] = $params['end_time'];
 		$eventData['CalendarEvent']['dtend'] = $params['dtend'];
 		$eventData['CalendarEvent']['timezone_offset'] = $params['timezone_offset'];
+		$eventData['CalendarEvent']['status'] = $params['status'];
 
 		$eventData['CalendarEvent']['location'] = $params['location'];
 		$eventData['CalendarEvent']['contact'] = $params['contact'];
 		$eventData['CalendarEvent']['description'] = $params['description'];
 
+		$eventData['CalendarEvent']['is_enable_mail'] = $params['enable_email']; //名違いに注意
+		$eventData['CalendarEvent']['email_send_timing'] = $params['email_send_timing'];
+
 		//保存するモデルをここで替える
 		$eventData['CalendarEventContent']['linked_model'] = $params['linked_model'];
 		$eventData['CalendarEventContent']['linked_content_key'] = $params['linked_content_key'];
+
+		//workflowcommentなどの追加拡張データはここで追加する。
+		//
+		if (isset($planParams[CalendarsComponent::ADDITIONAL]) &&
+			count($planParams[CalendarsComponent::ADDITIONAL]) > 0) {
+			foreach ($planParams[CalendarsComponent::ADDITIONAL] as $modelName => $vals) {
+				$eventData[$modelName] = $vals;
+			}
+		}
 	}
 
 /**
@@ -346,6 +451,54 @@ class CalendarAppBehavior extends ModelBehavior {
 				'CalendarRrule' => 'Calendars.CalendarRrule'
 			]);
 		}
+	}
+
+/**
+ * _insertChidren
+ *
+ * 関連する(hasMany関係にある）子レコードを登録する
+ *
+ * @param Model &$model モデル
+ * @param array $planParams planParams
+ * @param array $eventData eventData
+ * @return void
+ */
+	protected function _insertChidren(&$model, $planParams, $eventData) {
+		//カレンダ共有ユーザ登録
+		if (!$model->Behaviors->hasMethod('insertShareUsers')) {
+			$model->Behaviors->load('Calendars.CalendarShareUserEntry');
+		}
+		$model->insertShareUsers($planParams['share_users'], $eventData['CalendarEvent']['id']);
+		//注: 他のモデルの組み込みBehaviorをcallする場合、第一引数に$modelの指定はいらない。
+
+		//関連コンテンツの登録
+		if (isset($eventData['CalendarEventContent']) &&
+			$eventData['CalendarEventContent']['linked_model'] !== '') {
+			if (!(isset($model->CalendarEventContent))) {
+				$model->loadModels(['CalendarEventContent' => 'Calendar.CalendarEventContent']);
+			}
+			$model->CalendarEventContent->saveLinkedData($eventData);
+		}
+	}
+
+/**
+ * shareUser変数を整える
+ *
+ * @param array &$planParams planParamsパラメータ
+ * @return void
+ * @throws InternalErrorException
+ */
+	protected function _arrangeShareUsers(&$planParams) {
+		if (!isset($planParams['share_users'])) {
+			$planParams['share_users'] = null;
+			return;
+		}
+		if (!is_null($planParams['share_users']) && !is_string($planParams['share_users']) &&
+			!is_array($planParams['share_users'])) {
+			throw new InternalErrorException(__d('net_commons', 'Internal Server Error'));
+		}
+		$planParams['share_users'] = is_string($planParams['share_users']) ?
+			array($planParams['share_users']) : $planParams['share_users'];
 	}
 }
 
