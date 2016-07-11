@@ -124,70 +124,43 @@ class RoomsRolesFormComponent extends Component {
 		//ルームデータチェック
 		$room = $controller->viewVars['room'];
 
+		//Ajaxの場合、一時セットとする(次へもしくは決定で更新する)
+		if ($controller->request->is('ajax')) {
+			return $this->__setRoomRoleUser($controller);
+		}
+
 		//登録処理
 		$result = null;
 		if ($controller->request->is('put')) {
-			$data = $controller->request->data;
-			foreach ($data['User']['id'] as $userId => $checked) {
-				if (! $checked) {
-					unset($data['RolesRoomsUser'][$userId]);
-					continue;
-				}
-				if (! $data['RolesRoomsUser'][$userId]['id']) {
-					$id = $controller->RolesRoomsUser->find('first', array(
-						'recursive' => -1,
-						'fields' => array('id'),
-						'conditions' => array(
-							'room_id' => $room['Room']['id'],
-							'user_id' => $userId
-						)
-					));
-					$data['RolesRoomsUser'][$userId]['id'] = Hash::get($id, 'RolesRoomsUser.id');
-				}
-			}
-
+			$data = $this->__getRequestData($controller);
 			if (! $data['RolesRoomsUser']) {
 				//未選択の場合、
-				$result = null;
+				$result = true;
 			} else {
-				if ($data['Role']['key'] !== 'delete') {
-					$rolesRooms = $controller->Room->getRolesRooms(array(
-						'Room.id' => $room['Room']['id'],
-						'RolesRoom.role_key' => $data['Role']['key']
-					));
-					$rolesRoomId = Hash::get($rolesRooms, '0.RolesRoom.id');
-					$data['RolesRoomsUser'] = Hash::insert(
-						$data['RolesRoomsUser'],
-						'{n}.roles_room_id',
-						$rolesRoomId
-					);
-
-					$result = $controller->RolesRoomsUser->saveRolesRoomsUsersForRooms($data);
-				} else {
-					$result = $controller->RolesRoomsUser->deleteRolesRoomsUsersForRooms($data);
-				}
+				$result = $controller->RolesRoomsUser->saveRolesRoomsUsersForRooms(array(
+					'RolesRoomsUser' => $data['RolesRoomsUser']
+				));
+				$controller->Session->delete('RoomsRolesUsers');
 			}
-		}
-
-		if (! $controller->request->query) {
-			$type = 'INNER';
-		} else {
-			$type = 'LEFT';
 		}
 
 		$controller->UserSearchComp->search(array(
 			'fields' => self::$findFields,
 			'joins' => array(
 				'RolesRoomsUser' => array(
-					'type' => $type,
 					'conditions' => array(
 						'RolesRoomsUser.room_id' => $room['Room']['id'],
 					)
 				)
 			),
-			'order' => array('RoomRole.level' => 'desc'),
+			'defaultOrder' => array('room_role_level' => 'desc'),
 			'limit' => $this->limit,
-			'displayFields' => self::$displaFields
+			'displayFields' => self::$displaFields,
+			'extra' => array(
+				'selectedUsers' => $controller->Session->read('RoomsRolesUsers'),
+				'plugin' => $controller->params['plugin'],
+				'search' => (bool)$controller->request->query
+			)
 		));
 
 		$controller->request->data = $room;
@@ -196,6 +169,110 @@ class RoomsRolesFormComponent extends Component {
 		);
 
 		return $result;
+	}
+
+/**
+ * RoomsRolesUserの登録のアクション(AJAX)
+ *
+ * @param Controller $controller コントローラ
+ * @return null|bool
+ */
+	private function __setRoomRoleUser(Controller $controller) {
+		//ルームデータチェック
+		$room = $controller->viewVars['room'];
+		$userId = $controller->request->data['RolesRoomsUser']['user_id'];
+
+		$rolesRoomsUserId = $controller->RolesRoomsUser->find('first', array(
+			'recursive' => -1,
+			'fields' => array('id'),
+			'conditions' => array(
+				'room_id' => $room['Room']['id'],
+				'user_id' => $userId
+			)
+		));
+		$rolesRoomsUser = array(
+			'id' => Hash::get($rolesRoomsUserId, 'RolesRoomsUser.id'),
+			'room_id' => $room['Room']['id'],
+			'user_id' => $userId,
+			'role_key' => $controller->request->data['RolesRoomsUser']['role_key'],
+		);
+
+		if ($controller->request->data['RolesRoomsUser']['role_key']) {
+			$rolesRooms = $controller->Room->getRolesRoomsInDraft(array(
+				'Room.id' => $room['Room']['id'],
+				'RolesRoom.role_key' => $controller->request->data['RolesRoomsUser']['role_key'],
+				//'Room.in_draft' => true
+			));
+
+			$rolesRoomsUser['roles_room_id'] = Hash::get($rolesRooms, '0.RolesRoom.id');
+			$controller->RolesRoomsUser->set($rolesRoomsUser);
+			if (! $controller->RolesRoomsUser->validates()) {
+				return false;
+			}
+		} elseif ($rolesRoomsUserId) {
+			$rolesRoomsUser['delete'] = true;
+		} else {
+			$controller->Session->delete('RoomsRolesUsers.' . $userId);
+			return true;
+		}
+
+		$controller->Session->write('RoomsRolesUsers.' . $userId, $rolesRoomsUser);
+
+		return true;
+	}
+
+/**
+ * RoomsRolesUserの登録時のリクエストデータの取得
+ *
+ * @param Controller $controller コントローラ
+ * @return array
+ */
+	private function __getRequestData(Controller $controller) {
+		//ルームデータチェック
+		$room = $controller->viewVars['room'];
+
+		$data = $controller->request->data;
+		foreach ($data['User']['id'] as $userId => $checked) {
+			if (! $checked) {
+				unset($data['RolesRoomsUser'][$userId]);
+				continue;
+			}
+			if (! $data['RolesRoomsUser'][$userId]['id']) {
+				$rolesRoomsUser = $controller->RolesRoomsUser->find('first', array(
+					'recursive' => -1,
+					'fields' => array('id'),
+					'conditions' => array(
+						'room_id' => $room['Room']['id'],
+						'user_id' => $userId
+					)
+				));
+				$data['RolesRoomsUser'][$userId]['id'] = Hash::get($rolesRoomsUser, 'RolesRoomsUser.id');
+			}
+		}
+
+		if ($data['Role']['key'] !== 'delete') {
+			$rolesRooms = $controller->Room->getRolesRoomsInDraft(array(
+				'Room.id' => $room['Room']['id'],
+				'RolesRoom.role_key' => $data['Role']['key']
+			));
+			$data['RolesRoomsUser'] = Hash::insert(
+				$data['RolesRoomsUser'], '{n}.roles_room_id', Hash::get($rolesRooms, '0.RolesRoom.id')
+			);
+			$data['RolesRoomsUser'] = Hash::remove(
+				$data['RolesRoomsUser'], '{n}.delete'
+			);
+		} elseif ($data['Role']['key'] === 'delete') {
+			$data['RolesRoomsUser'] = Hash::insert(
+				$data['RolesRoomsUser'], '{n}.delete', true
+			);
+		}
+
+		$tmpData = $controller->Session->read('RoomsRolesUsers');
+		if (! $tmpData) {
+			$tmpData = array();
+		}
+
+		return Hash::merge(array('RolesRoomsUser' => $tmpData), $data);
 	}
 
 }

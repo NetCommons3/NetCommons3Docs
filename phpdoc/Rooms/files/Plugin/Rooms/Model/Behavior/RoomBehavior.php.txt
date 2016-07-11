@@ -193,9 +193,33 @@ class RoomBehavior extends ModelBehavior {
  * @param array $conditions 条件配列
  * @return array
  */
-	public function getRolesRooms(Model $model, $conditions = array()) {
+	public function getRolesRoomsInDraft(Model $model, $conditions = array()) {
 		$conditions = Hash::merge(array(
 			'OR' => ['Room.page_id_top NOT' => null, 'Room.in_draft' => true]
+		), $conditions);
+
+		$rolesRooms = $model->RolesRoom->find('all', array(
+			'recursive' => 0,
+			'fields' => array(
+				$model->RolesRoom->alias . '.*',
+				$model->Room->alias . '.*',
+			),
+			'conditions' => $conditions,
+		));
+
+		return $rolesRooms;
+	}
+
+/**
+ * ロールルームデータの取得
+ *
+ * @param Model $model ビヘイビア呼び出し元モデル
+ * @param array $conditions 条件配列
+ * @return array
+ */
+	public function getRolesRoomsNotInDraft(Model $model, $conditions = array()) {
+		$conditions = Hash::merge(array(
+			'Room.page_id_top NOT' => null, 'Room.in_draft' => false
 		), $conditions);
 
 		$rolesRooms = $model->RolesRoom->find('all', array(

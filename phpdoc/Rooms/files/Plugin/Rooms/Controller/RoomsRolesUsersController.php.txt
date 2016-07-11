@@ -54,18 +54,45 @@ class RoomsRolesUsersController extends RoomsAppController {
 	);
 
 /**
- * edit
+ * beforeFilter
+ *
+ * @return void
+ */
+	public function beforeFilter() {
+		if ($this->params['action'] === 'role_room_user') {
+			$this->request->data = Hash::insert(
+				$this->request->data, 'Room.id', Hash::get($this->params['pass'], '1')
+			);
+		}
+		parent::beforeFilter();
+		$this->Security->unlockedActions = array('role_room_user');
+	}
+
+/**
+ * 参加者の選択アクション
  *
  * @return void
  */
 	public function edit() {
-		$result = $this->RoomsRolesForm->actionRoomsRolesUser($this, true);
+		$result = $this->RoomsRolesForm->actionRoomsRolesUser($this);
 		if ($result === true) {
 			//正常の場合
 			$this->NetCommons->setFlashNotification(__d('net_commons', 'Successfully saved.'), array(
 				'class' => 'success',
 			));
 		} elseif ($result === false) {
+			$this->NetCommons->handleValidationError($this->RolesRoomsUser->validationErrors);
+		}
+	}
+
+/**
+ * 参加者の個別選択のアクション
+ *
+ * @return void
+ */
+	public function role_room_user() {
+		$result = $this->RoomsRolesForm->actionRoomsRolesUser($this);
+		if ($result === false) {
 			$this->NetCommons->handleValidationError($this->RolesRoomsUser->validationErrors);
 		}
 	}

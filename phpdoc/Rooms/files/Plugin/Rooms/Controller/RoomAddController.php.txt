@@ -10,7 +10,7 @@
  */
 
 App::uses('RoomsAppController', 'Rooms.Controller');
-App::uses('RoomsRolesUsersController', 'Rooms.Controller');
+App::uses('DefaultRolePermission', 'Roles.Model');
 
 /**
  * ルーム作成(ウィザード) Controller
@@ -98,6 +98,7 @@ class RoomAddController extends RoomsAppController {
  */
 	public function beforeFilter() {
 		parent::beforeFilter();
+		$this->Security->unlockedActions = array('role_room_user');
 
 		//ウィザードの設定
 		$navibar = $this->helpers['NetCommons.Wizard']['navibar'];
@@ -111,6 +112,10 @@ class RoomAddController extends RoomsAppController {
 		$this->helpers['NetCommons.Wizard']['cancelUrl'] = $cancelUrl;
 
 		$this->PluginsForm->roomId = $this->Session->read('RoomAdd.Room.id');
+
+		if ($this->params['action'] !== 'basic' && ! $this->Session->read('RoomAdd.Room.id')) {
+			return $this->setAction('cancel');
+		}
 	}
 
 /**
@@ -210,7 +215,27 @@ class RoomAddController extends RoomsAppController {
  */
 	public function rooms_roles_users() {
 		$this->set('room', $this->Session->read('RoomAdd'));
-		$result = $this->RoomsRolesForm->actionRoomsRolesUser($this, false);
+
+		$spaceId = $this->viewVars['activeSpaceId'];
+		$roomId = $this->viewVars['activeRoomId'];
+		$redirect = (bool)Hash::get($this->request->data, '_RoomsRolesUsers.redirect');
+
+		$result = $this->RoomsRolesForm->actionRoomsRolesUser($this);
+		if ($result === true && $redirect) {
+			return $this->redirect('/rooms/room_add/plugins_rooms/' . $spaceId . '/' . $roomId);
+		} elseif ($result === false) {
+			$this->NetCommons->handleValidationError($this->RolesRoomsUser->validationErrors);
+		}
+	}
+
+/**
+ * 参加者の個別選択のアクション
+ *
+ * @return void
+ */
+	public function role_room_user() {
+		$this->set('room', $this->Session->read('RoomAdd'));
+		$result = $this->RoomsRolesForm->actionRoomsRolesUser($this);
 		if ($result === false) {
 			$this->NetCommons->handleValidationError($this->RolesRoomsUser->validationErrors);
 		}

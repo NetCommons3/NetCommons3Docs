@@ -71,6 +71,9 @@ class RoomsController extends RoomsAppController {
 			$this->Session->delete('RoomAdd');
 		}
 
+		//参加者修正のデータ削除
+		$this->Session->delete('RoomsRolesUsers');
+
 		//キャンセルボタンを押さずにルーム作成ウィザードを終了したときのごみデータ削除
 		$date = new DateTime();
 		$date->sub(new DateInterval('P1D'));
