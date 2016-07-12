@@ -32,7 +32,7 @@ class UserAttributeSetting extends UserAttributesAppModel {
  */
 	public $editDataTypes = array(
 		'label', 'text', 'textarea', 'radio', 'checkbox',
-		'select', 'password', 'email', 'img', 'prefecture', 'timezone', 'language',
+		'select', 'password', 'email', 'img', 'prefecture', 'timezone',
 	);
 
 /**
