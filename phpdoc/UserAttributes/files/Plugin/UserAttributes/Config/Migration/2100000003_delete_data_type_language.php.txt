@@ -94,7 +94,6 @@ class DeleteDataTypeLanguage extends NetCommonsMigration {
 			$record['user_attribute_id'] = Hash::get($userAttributes, $record['language_id']);
 			$this->records['UserAttributeChoice'][$i] = $record;
 		}
-debug($this->records);
 
 		foreach ($this->records as $model => $records) {
 			if (!$this->updateRecords($model, $records)) {

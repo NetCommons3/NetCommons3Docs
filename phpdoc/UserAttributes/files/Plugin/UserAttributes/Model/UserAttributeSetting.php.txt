@@ -16,6 +16,13 @@ App::uses('UserAttributesAppModel', 'UserAttributes.Model');
 class UserAttributeSetting extends UserAttributesAppModel {
 
 /**
+ * 自動登録用の表示順序のデフォルト値
+ *
+ * @const
+ */
+	const DEFAULT_AUTO_REGIST_DISPLAY = '9999';
+
+/**
  * 追加用データタイプ
  *
  * @var array
@@ -50,6 +57,7 @@ class UserAttributeSetting extends UserAttributesAppModel {
  * @return bool True if validate operation should continue, false to abort
  * @link http://book.cakephp.org/2.0/en/models/callback-methods.html#beforevalidate
  * @see Model::save()
+ * @SuppressWarnings(PHPMD.ExcessiveMethodLength)
  */
 	public function beforeValidate($options = array()) {
 		$this->validate = Hash::merge($this->validate, array(
@@ -57,6 +65,7 @@ class UserAttributeSetting extends UserAttributesAppModel {
 				'notBlank' => array(
 					'rule' => array('notBlank'),
 					'message' => __d('net_commons', 'Invalid request.'),
+					'required' => false,
 					'on' => 'update', // Limit validation to 'create' or 'update' operations
 				),
 			),
@@ -64,28 +73,33 @@ class UserAttributeSetting extends UserAttributesAppModel {
 				'notBlank' => array(
 					'rule' => array('notBlank'),
 					'message' => __d('net_commons', 'Invalid request.'),
+					'required' => false,
 				),
 				'inList' => array(
 					'rule' => array('inList', $this->editDataTypes),
 					'message' => __d('net_commons', 'Invalid request.'),
+					'required' => false,
 				),
 			),
 			'row' => array(
 				'numeric' => array(
 					'rule' => array('numeric'),
 					'message' => __d('net_commons', 'Invalid request.'),
+					'required' => false,
 				),
 			),
 			'col' => array(
 				'numeric' => array(
 					'rule' => array('numeric'),
 					'message' => __d('net_commons', 'Invalid request.'),
+					'required' => false,
 				),
 			),
 			'weight' => array(
 				'numeric' => array(
 					'rule' => array('numeric'),
 					'message' => __d('net_commons', 'Invalid request.'),
+					'required' => false,
 				),
 			),
 			'required' => array(
