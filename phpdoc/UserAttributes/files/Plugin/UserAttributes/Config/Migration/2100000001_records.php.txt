@@ -69,7 +69,7 @@ class Records extends NetCommonsMigration {
 		),
 		'UserAttribute' => array(
 			//日本語
-			array('id' => '1', 'language_id' => '2', 'key' => 'avatar', 'name' => 'アバター', ),
+			array('id' => '1', 'language_id' => '2', 'key' => 'avatar', 'name' => 'アバター', 'description' => '指定しない場合、ハンドルから自動的に生成します。'),
 			array('id' => '2', 'language_id' => '2', 'key' => 'username', 'name' => 'ログインID', ),
 			array('id' => '3', 'language_id' => '2', 'key' => 'password', 'name' => 'パスワード', ),
 			array('id' => '4', 'language_id' => '2', 'key' => 'handlename', 'name' => 'ハンドル', ),
@@ -90,7 +90,7 @@ class Records extends NetCommonsMigration {
 			array('id' => '19', 'language_id' => '2', 'key' => 'profile', 'name' => 'プロフィール', ),
 			array('id' => '20', 'language_id' => '2', 'key' => 'search_keywords', 'name' => '検索キーワード', ),
 			//英語
-			array('id' => '21', 'language_id' => '1', 'key' => 'avatar', 'name' => 'Avatar', ),
+			array('id' => '21', 'language_id' => '1', 'key' => 'avatar', 'name' => 'Avatar', 'description' => 'If you do not specify, automatically generates from the handle.'),
 			array('id' => '22', 'language_id' => '1', 'key' => 'username', 'name' => 'ID', ),
 			array('id' => '23', 'language_id' => '1', 'key' => 'password', 'name' => 'Password', ),
 			array('id' => '24', 'language_id' => '1', 'key' => 'handlename', 'name' => 'Handle', ),
