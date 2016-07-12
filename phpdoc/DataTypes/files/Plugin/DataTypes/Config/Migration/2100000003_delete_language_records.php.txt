@@ -1,6 +1,6 @@
 <?php
 /**
- * ユーザ項目に言語追加 migration
+ * 言語タイプを削除 migration
  *
  * @author Shohei Nakajima <nakajimashouhei@gmail.com>
  * @link http://www.netcommons.org NetCommons Project
@@ -11,18 +11,18 @@
 App::uses('NetCommonsMigration', 'NetCommons.Config/Migration');
 
 /**
- * ユーザ項目に言語追加 migration
+ * 言語タイプを削除 migration
  *
  * @package NetCommons\DataTypes\Config\Migration
  */
-class AddLanguageRecords extends NetCommonsMigration {
+class DeleteLanguageRecords extends NetCommonsMigration {
 
 /**
  * Migration description
  *
  * @var string
  */
-	public $description = 'add_language_records';
+	public $description = 'delete_language_records';
 
 /**
  * Actions to be performed
@@ -39,14 +39,7 @@ class AddLanguageRecords extends NetCommonsMigration {
  *
  * @var array $migration
  */
-	public $records = array(
-		'DataType' => array(
-			//日本語
-			array('language_id' => '2', 'key' => 'language', 'name' => '言語', 'weight' => '18', ),
-			//英語
-			array('language_id' => '1', 'key' => 'language', 'name' => 'Language', 'weight' => '18', ),
-		),
-	);
+	public $records = array();
 
 /**
  * Before migration callback
@@ -68,11 +61,8 @@ class AddLanguageRecords extends NetCommonsMigration {
 		if ($direction === 'down') {
 			return true;
 		}
-		foreach ($this->records as $model => $records) {
-			if (!$this->updateRecords($model, $records)) {
-				return false;
-			}
-		}
+		$Model = $this->generateModel('DataType');
+		$Model->deleteAll(array('key' => 'language'), false, false);
 		return true;
 	}
 }

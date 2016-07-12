@@ -43,8 +43,7 @@ class DataType extends DataTypesAppModel {
 		DATA_TYPE_DATETIME = 'datetime',
 		DATA_TYPE_WYSIWYG = 'wysiwyg',
 		DATA_TYPE_PREFECTURE = 'prefecture',
-		DATA_TYPE_TIMEZONE = 'timezone',
-		DATA_TYPE_LANGUAGE = 'language';
+		DATA_TYPE_TIMEZONE = 'timezone';
 
 /**
  * Validation rules
@@ -158,11 +157,6 @@ class DataType extends DataTypesAppModel {
 		$typeKey = self::DATA_TYPE_TIMEZONE;
 		if (isset($dataTypes[$typeKey])) {
 			$dataTypes[$typeKey][$this->DataTypeChoice->alias] = $this->DataTypeChoice->getTimezone();
-		}
-
-		$typeKey = self::DATA_TYPE_LANGUAGE;
-		if (isset($dataTypes[$typeKey])) {
-			$dataTypes[$typeKey][$this->DataTypeChoice->alias] = $this->getLanguages();
 		}
 
 		return $dataTypes;
