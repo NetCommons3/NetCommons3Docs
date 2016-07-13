@@ -136,10 +136,10 @@
                                 <div class="accordion" style="margin-bottom: 0">
         <div class="accordion-group">
             <div class="accordion-heading">
-                                    <a class="accordion-toggle " data-toggle="collapse" data-target="#namespace-1265337275"></a>
+                                    <a class="accordion-toggle " data-toggle="collapse" data-target="#namespace-1472227458"></a>
                                 <a href="../namespaces/default.html" style="margin-left: 30px; padding-left: 0">\</a>
             </div>
-            <div id="namespace-1265337275" class="accordion-body collapse in">
+            <div id="namespace-1472227458" class="accordion-body collapse in">
                 <div class="accordion-inner">
 
                     
@@ -326,6 +326,8 @@ will inherit them.</p>
                                                                     <a href="../classes/CalendarFrameSetting.html#method_getSelectRooms" class="">getSelectRooms()</a><br />
                                                                     <a href="../classes/CalendarFrameSetting.html#method_saveFrameSetting" class="">saveFrameSetting()</a><br />
                                                                     <a href="../classes/CalendarFrameSetting.html#method_setDefaultValue" class="">setDefaultValue()</a><br />
+                                                                    <a href="../classes/CalendarFrameSetting.html#method_getFrameSetting" class="">getFrameSetting()</a><br />
+                                                                    <a href="../classes/CalendarFrameSetting.html#method_getDefaultFrameSetting" class="">getDefaultFrameSetting()</a><br />
                                                             </section>
                             <section class="span4">
                                                                     <a href="../classes/CalendarFrameSetting.html#property_actsAs" class="">$actsAs</a><br />
@@ -351,7 +353,7 @@ will inherit them.</p>
                                                                     <a href="../classes/NetCommonsAppModel.html#method__getDefaultValue" class="">_getDefaultValue()</a><br />
                                                             </section>
                             <section class="span4">
-                                                                    <em>No protected properties found</em>
+                                                                    <a href="../classes/CalendarFrameSetting.html#property__getFrameSettingData" class="">$_getFrameSettingData</a><br />
                                                             </section>
                             <section class="span4">
                                 <em>N/A</em>
@@ -630,7 +632,31 @@ Behaviorで関連データ削除する際に使用する</em></p>
         </aside>
     </div>
 
-                                                                    <div class="row-fluid">
+                                                    <div class="row-fluid">
+        <div class="span8 content class">
+            <a id="property__getFrameSettingData" name="property__getFrameSettingData" class="anchor"></a>
+            <article class="property">
+                <h3 class="protected ">$_getFrameSettingData</h3>
+                <pre class="signature">$_getFrameSettingData : array</pre>
+                <p><em>getFrameSetting関数が何度も繰り返し呼び出された時のための保持変数</em></p>
+                
+
+                                <h4>Type</h4>
+                array
+                                            </article>
+        </div>
+        <aside class="span4 detailsbar">
+            <h1><i class="icon-arrow-down"></i></h1>
+                        <dl>
+                                                            </dl>
+            <h2>Tags</h2>
+            <table class="table table-condensed">
+                                    <tr><td colspan="2"><em>None found</em></td></tr>
+                            </table>
+        </aside>
+    </div>
+
+                                                    <div class="row-fluid">
         <div class="span8 content class">
             <a id="property___changeDbConfig" name="property___changeDbConfig" class="anchor"></a>
             <article class="property">
@@ -1258,6 +1284,64 @@ validation rules can be defined in $validate.</em></p>
                                                                     </dl>
                 
                 				
+                            </article>
+        </div>
+        <aside class="span4 detailsbar">
+            <h1><i class="icon-arrow-down"></i></h1>
+                                                            <dl>
+                                                                            </dl>
+            <h2>Tags</h2>
+            <table class="table table-condensed">
+                                    <tr><td colspan="2"><em>None found</em></td></tr>
+                            </table>
+        </aside>
+    </div>
+
+                                    <div class="row-fluid">
+        <div class="span8 content class">
+            <a id="method_getFrameSetting" name="method_getFrameSetting" class="anchor"></a>
+            <article class="method">
+                <h3 class="public ">getFrameSetting()</h3>
+                <a href="#source-view" role="button" class="pull-right btn" data-toggle="modal" style="font-size: 1.1em; padding: 9px 14px"><i class="icon-code"></i></a>
+                <pre class="signature" style="margin-right: 54px;">getFrameSetting() : array</pre>
+                <p><em>getFrameSetting</em></p>
+                
+
+                
+                
+                                    <h4>Returns</h4>
+                    array
+                                            &mdash; <p>カレンダー表示形式情報</p>
+                                    				
+                            </article>
+        </div>
+        <aside class="span4 detailsbar">
+            <h1><i class="icon-arrow-down"></i></h1>
+                                                            <dl>
+                                                                            </dl>
+            <h2>Tags</h2>
+            <table class="table table-condensed">
+                                    <tr><td colspan="2"><em>None found</em></td></tr>
+                            </table>
+        </aside>
+    </div>
+
+                                    <div class="row-fluid">
+        <div class="span8 content class">
+            <a id="method_getDefaultFrameSetting" name="method_getDefaultFrameSetting" class="anchor"></a>
+            <article class="method">
+                <h3 class="public ">getDefaultFrameSetting()</h3>
+                <a href="#source-view" role="button" class="pull-right btn" data-toggle="modal" style="font-size: 1.1em; padding: 9px 14px"><i class="icon-code"></i></a>
+                <pre class="signature" style="margin-right: 54px;">getDefaultFrameSetting() : array</pre>
+                <p><em>getDefaultFrameSetting</em></p>
+                
+
+                
+                
+                                    <h4>Returns</h4>
+                    array
+                                            &mdash; <p>カレンダー表示形式デフォルト情報</p>
+                                    				
                             </article>
         </div>
         <aside class="span4 detailsbar">
@@ -2002,7 +2086,7 @@ validation rules can be defined in $validate.</em></p>
                 <section class="span10 offset1">
                     <hr />
                     Documentation is powered by <a href="http://www.phpdoc.org/">phpDocumentor </a> and authored
-                    on July 13th, 2016 at 08:40.
+                    on July 13th, 2016 at 09:09.
                 </section>
             </section>
         </section>
