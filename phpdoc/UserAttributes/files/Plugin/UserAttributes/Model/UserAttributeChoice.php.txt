@@ -20,6 +20,38 @@ App::uses('DataType', 'DataTypes.Model');
 class UserAttributeChoice extends UsersAppModel {
 
 /**
+ * 状態のステータス(利用可能)
+ *
+ * @var const
+ */
+	const STATUS_KEY_ACTIVE = 'status_1',
+			STATUS_CODE_ACTIVE = '1';
+
+/**
+ * 状態のステータス(利用不可)
+ *
+ * @var const
+ */
+	const STATUS_KEY_NONACTIVE = 'status_0',
+			STATUS_CODE_NONACTIVE = '0';
+
+/**
+ * 状態のステータス(承認待ち)
+ *
+ * @var const
+ */
+	const STATUS_KEY_WAITING = 'status_2',
+			STATUS_CODE_WAITING = '2';
+
+/**
+ * 状態のステータス(承認済み⇒本人の確認待ち)
+ *
+ * @var const
+ */
+	const STATUS_KEY_APPROVED = 'status_3',
+			STATUS_CODE_APPROVED = '3';
+
+/**
  * use behaviors
  *
  * @var array
