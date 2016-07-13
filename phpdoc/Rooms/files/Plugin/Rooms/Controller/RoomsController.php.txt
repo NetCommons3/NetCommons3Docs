@@ -36,6 +36,7 @@ class RoomsController extends RoomsAppController {
 			'permissions' => array('content_publishable', 'html_not_limited')
 		),
 		'UserAttributes.UserAttributeLayout',
+		'Users.UserSearchComp',
 	);
 
 /**
@@ -56,6 +57,7 @@ class RoomsController extends RoomsAppController {
  */
 	public $helpers = array(
 		'UserAttributes.UserAttributeLayout',
+		'Users.UserSearch',
 	);
 
 /**
@@ -156,7 +158,7 @@ class RoomsController extends RoomsAppController {
 
 		$this->RoomsRolesForm->limit = 10;
 		$this->request->query = array();
-		$this->RoomsRolesForm->actionRoomsRolesUser($this, true);
+		$this->RoomsRolesForm->actionRoomsRolesUser($this);
 	}
 
 /**

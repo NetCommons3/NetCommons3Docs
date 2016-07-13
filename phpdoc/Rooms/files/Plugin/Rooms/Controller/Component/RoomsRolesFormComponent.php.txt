@@ -125,7 +125,7 @@ class RoomsRolesFormComponent extends Component {
 		$room = $controller->viewVars['room'];
 
 		//Ajaxの場合、一時セットとする(次へもしくは決定で更新する)
-		if ($controller->request->is('ajax')) {
+		if ($controller->request->is('ajax') && $controller->params['action'] === 'edit') {
 			return $this->__setRoomRoleUser($controller);
 		}
 
