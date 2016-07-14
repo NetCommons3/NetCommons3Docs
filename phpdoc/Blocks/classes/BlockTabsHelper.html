@@ -136,10 +136,10 @@
                                 <div class="accordion" style="margin-bottom: 0">
         <div class="accordion-group">
             <div class="accordion-heading">
-                                    <a class="accordion-toggle " data-toggle="collapse" data-target="#namespace-55313697"></a>
+                                    <a class="accordion-toggle " data-toggle="collapse" data-target="#namespace-800995843"></a>
                                 <a href="../namespaces/default.html" style="margin-left: 30px; padding-left: 0">\</a>
             </div>
-            <div id="namespace-55313697" class="accordion-body collapse in">
+            <div id="namespace-800995843" class="accordion-body collapse in">
                 <div class="accordion-inner">
 
                     
@@ -275,7 +275,7 @@ will inherit them.</p>
                         </section>
                         <section class="row-fluid protected">
                             <section class="span4">
-                                                                    <em>No protected methods found</em>
+                                                                    <a href="../classes/BlockTabsHelper.html#method__getBlockTitleHtml" class="">_getBlockTitleHtml()</a><br />
                                                             </section>
                             <section class="span4">
                                                                     <em>No protected properties found</em>
@@ -705,7 +705,7 @@ will inherit them.</p>
             <article class="method">
                 <h3 class="public ">block()</h3>
                 <a href="#source-view" role="button" class="pull-right btn" data-toggle="modal" style="font-size: 1.1em; padding: 9px 14px"><i class="icon-code"></i></a>
-                <pre class="signature" style="margin-right: 54px;">block(string  <span class="argument">$activeTab</span>) : string</pre>
+                <pre class="signature" style="margin-right: 54px;">block(string  <span class="argument">$activeTab</span>, array  <span class="argument">$options = array()</span>) : string</pre>
                 <p><em>ブロック設定タブの出力</em></p>
                 
 
@@ -715,6 +715,13 @@ will inherit them.</p>
                                 <td>string</td>
                                 <td>$activeTab </td>
                                 <td><p>Active tab</p></td>
+                            </tr>
+                                                    <tr>
+                                <td>array</td>
+                                <td>$options </td>
+                                <td><p>タブ表示のオプション
+displayAllTab:editアクション以外でもタブを表示するオプション
+displayBlockTitle:edit以外でもタイトルを表示する</p></td>
                             </tr>
                                             </table>
                 
@@ -736,7 +743,44 @@ will inherit them.</p>
         </aside>
     </div>
 
-                                                                    <div class="row-fluid">
+                                                    <div class="row-fluid">
+        <div class="span8 content class">
+            <a id="method__getBlockTitleHtml" name="method__getBlockTitleHtml" class="anchor"></a>
+            <article class="method">
+                <h3 class="protected ">_getBlockTitleHtml()</h3>
+                <a href="#source-view" role="button" class="pull-right btn" data-toggle="modal" style="font-size: 1.1em; padding: 9px 14px"><i class="icon-code"></i></a>
+                <pre class="signature" style="margin-right: 54px;">_getBlockTitleHtml(array  <span class="argument">$options</span>) : string</pre>
+                <p><em>ブロックタイトルのHTMLを返す</em></p>
+                
+
+                                    <h4>Parameters</h4>
+                    <table class="table table-condensed table-hover">
+                                                    <tr>
+                                <td>array</td>
+                                <td>$options </td>
+                                <td><p>オプション</p></td>
+                            </tr>
+                                            </table>
+                
+                
+                                    <h4>Returns</h4>
+                    string
+                                            &mdash; <p>html</p>
+                                    				
+                            </article>
+        </div>
+        <aside class="span4 detailsbar">
+            <h1><i class="icon-arrow-down"></i></h1>
+                                                            <dl>
+                                                                            </dl>
+            <h2>Tags</h2>
+            <table class="table table-condensed">
+                                    <tr><td colspan="2"><em>None found</em></td></tr>
+                            </table>
+        </aside>
+    </div>
+
+                                                    <div class="row-fluid">
         <div class="span8 content class">
             <a id="method___listTag" name="method___listTag" class="anchor"></a>
             <article class="method">
@@ -832,7 +876,7 @@ will inherit them.</p>
                 <section class="span10 offset1">
                     <hr />
                     Documentation is powered by <a href="http://www.phpdoc.org/">phpDocumentor </a> and authored
-                    on July 6th, 2016 at 13:03.
+                    on July 14th, 2016 at 06:01.
                 </section>
             </section>
         </section>
