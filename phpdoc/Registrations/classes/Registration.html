@@ -136,10 +136,10 @@
                                 <div class="accordion" style="margin-bottom: 0">
         <div class="accordion-group">
             <div class="accordion-heading">
-                                    <a class="accordion-toggle " data-toggle="collapse" data-target="#namespace-44112179"></a>
+                                    <a class="accordion-toggle " data-toggle="collapse" data-target="#namespace-1973573383"></a>
                                 <a href="../namespaces/default.html" style="margin-left: 30px; padding-left: 0">\</a>
             </div>
-            <div id="namespace-44112179" class="accordion-body collapse in">
+            <div id="namespace-1973573383" class="accordion-body collapse in">
                 <div class="accordion-inner">
 
                     
@@ -200,7 +200,6 @@
                                                     <li class="class"><a href="../classes/OriginalKeyBehavior.html">OriginalKeyBehavior</a></li>
                                                     <li class="class"><a href="../classes/PermissionComponent.html">PermissionComponent</a></li>
                                                     <li class="class"><a href="../classes/PluginRecords.html">PluginRecords</a></li>
-                                                    <li class="class"><a href="../classes/QuestionEditHelper.html">QuestionEditHelper</a></li>
                                                     <li class="class"><a href="../classes/Registration.html">Registration</a></li>
                                                     <li class="class"><a href="../classes/RegistrationAddController.html">RegistrationAddController</a></li>
                                                     <li class="class"><a href="../classes/RegistrationAnswer.html">RegistrationAnswer</a></li>
@@ -225,6 +224,7 @@
                                                     <li class="class"><a href="../classes/RegistrationBlocksController.html">RegistrationBlocksController</a></li>
                                                     <li class="class"><a href="../classes/RegistrationChoice.html">RegistrationChoice</a></li>
                                                     <li class="class"><a href="../classes/RegistrationEditController.html">RegistrationEditController</a></li>
+                                                    <li class="class"><a href="../classes/RegistrationEditHelper.html">RegistrationEditHelper</a></li>
                                                     <li class="class"><a href="../classes/RegistrationExport.html">RegistrationExport</a></li>
                                                     <li class="class"><a href="../classes/RegistrationFrameDisplayRegistration.html">RegistrationFrameDisplayRegistration</a></li>
                                                     <li class="class"><a href="../classes/RegistrationFrameSetting.html">RegistrationFrameSetting</a></li>
@@ -303,7 +303,7 @@ will inherit them.</p>
                                                                     <a href="../classes/NetCommonsAppModel.html#method_loadModels" class="">loadModels()</a><br />
                                                                     <a href="../classes/Registration.html#method_beforeValidate" class="">beforeValidate()</a><br />
                                                                     <a href="../classes/Registration.html#method_afterFind" class="">afterFind()</a><br />
-                                                                    <a href="../classes/Registration.html#method_afterFrameSave" class="">afterFrameSave()</a><br />
+                                                                    <a href="../classes/Registration.html#method_createBlock" class="">createBlock()</a><br />
                                                                     <a href="../classes/Registration.html#method_getBaseCondition" class="">getBaseCondition()</a><br />
                                                                     <a href="../classes/Registration.html#method_getCondition" class="">getCondition()</a><br />
                                                                     <a href="../classes/Registration.html#method_saveRegistration" class="">saveRegistration()</a><br />
@@ -1148,11 +1148,11 @@ validation rules can be defined in $validate.</em></p>
 
                                     <div class="row-fluid">
         <div class="span8 content class">
-            <a id="method_afterFrameSave" name="method_afterFrameSave" class="anchor"></a>
+            <a id="method_createBlock" name="method_createBlock" class="anchor"></a>
             <article class="method">
-                <h3 class="public ">afterFrameSave()</h3>
+                <h3 class="public ">createBlock()</h3>
                 <a href="#source-view" role="button" class="pull-right btn" data-toggle="modal" style="font-size: 1.1em; padding: 9px 14px"><i class="icon-code"></i></a>
-                <pre class="signature" style="margin-right: 54px;">afterFrameSave(array  <span class="argument">$data</span>) : mixed</pre>
+                <pre class="signature" style="margin-right: 54px;">createBlock(array  <span class="argument">$data</span>) : mixed</pre>
                 <p><em>After frame save hook</em></p>
                 <p>このルームにすでに登録フォームブロックが存在した場合で、かつ、現在フレームにまだブロックが結びついてない場合、
 すでに存在するブロックと現在フレームを結びつける</p>
@@ -1641,7 +1641,7 @@ update export key</em></p>
                 <section class="span10 offset1">
                     <hr />
                     Documentation is powered by <a href="http://www.phpdoc.org/">phpDocumentor </a> and authored
-                    on July 14th, 2016 at 04:00.
+                    on July 14th, 2016 at 06:40.
                 </section>
             </section>
         </section>
