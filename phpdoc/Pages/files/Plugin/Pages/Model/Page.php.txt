@@ -323,6 +323,22 @@ class Page extends PagesAppModel {
 	}
 
 /**
+ * トップページの取得
+ *
+ * @return int ページID
+ */
+	public function getTopPageId() {
+		$room = $this->Room->find('first', array(
+			'recursive' => -1,
+			'conditions' => array(
+				'id' => Room::PUBLIC_PARENT_ID
+			)
+		));
+
+		return Hash::get($room, 'Room.page_id_top');
+	}
+
+/**
  * ページデータの存在チェック
  *
  * @param int $pageId ページID
