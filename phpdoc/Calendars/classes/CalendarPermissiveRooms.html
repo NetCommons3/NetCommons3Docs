@@ -136,10 +136,10 @@
                                 <div class="accordion" style="margin-bottom: 0">
         <div class="accordion-group">
             <div class="accordion-heading">
-                                    <a class="accordion-toggle " data-toggle="collapse" data-target="#namespace-174523486"></a>
+                                    <a class="accordion-toggle " data-toggle="collapse" data-target="#namespace-2011143387"></a>
                                 <a href="../namespaces/default.html" style="margin-left: 30px; padding-left: 0">\</a>
             </div>
-            <div id="namespace-174523486" class="accordion-body collapse in">
+            <div id="namespace-2011143387" class="accordion-body collapse in">
                 <div class="accordion-inner">
 
                     
@@ -313,11 +313,12 @@
                                                                     <a href="../classes/CalendarPermissiveRooms.html#method_getPublishableRoomIdList" class="">getPublishableRoomIdList()</a><br />
                                                                     <a href="../classes/CalendarPermissiveRooms.html#method_getEditableRoomIdList" class="">getEditableRoomIdList()</a><br />
                                                                     <a href="../classes/CalendarPermissiveRooms.html#method_getCreatableRoomIdList" class="">getCreatableRoomIdList()</a><br />
+                                                                    <a href="../classes/CalendarPermissiveRooms.html#method_getAbleRoomIdList" class="">getAbleRoomIdList()</a><br />
                                                                     <a href="../classes/CalendarPermissiveRooms.html#method_isEditable" class="">isEditable()</a><br />
                                                                     <a href="../classes/CalendarPermissiveRooms.html#method_isCreatable" class="">isCreatable()</a><br />
                                                             </section>
                             <section class="span4">
-                                                                    <em>No public properties found</em>
+                                                                    <a href="../classes/CalendarPermissiveRooms.html#property_roomPermRoles" class="">$roomPermRoles</a><br />
                                                             </section>
                             <section class="span4">
                                                                     <em>No constants found</em>
@@ -325,7 +326,7 @@
                         </section>
                         <section class="row-fluid protected">
                             <section class="span4">
-                                                                    <a href="../classes/CalendarPermissiveRooms.html#method__getAbleRoomIdList" class="">_getAbleRoomIdList()</a><br />
+                                                                    <em>No protected methods found</em>
                                                             </section>
                             <section class="span4">
                                                                     <em>No protected properties found</em>
@@ -380,7 +381,39 @@
             </div>
 
                         
-                        
+                                    <a id="properties" name="properties"></a>
+            <div class="row-fluid">
+                <div class="span8 content class">
+                    <h2>Properties</h2>
+                </div>
+                <aside class="span4 detailsbar"></aside>
+            </div>
+
+                                    <div class="row-fluid">
+        <div class="span8 content class">
+            <a id="property_roomPermRoles" name="property_roomPermRoles" class="anchor"></a>
+            <article class="property">
+                <h3 class="public ">$roomPermRoles</h3>
+                <pre class="signature">$roomPermRoles : array</pre>
+                <p><em>$roomPermRoles</em></p>
+                <p>全空間におけるカレンダー権限情報</p>
+
+                                <h4>Type</h4>
+                array
+                                            </article>
+        </div>
+        <aside class="span4 detailsbar">
+            <h1><i class="icon-arrow-down"></i></h1>
+                        <dl>
+                                                            </dl>
+            <h2>Tags</h2>
+            <table class="table table-condensed">
+                                    <tr><td colspan="2"><em>None found</em></td></tr>
+                            </table>
+        </aside>
+    </div>
+
+                                                            
                                     <a id="methods" name="methods"></a>
             <div class="row-fluid">
                 <div class="span8 content class"><h2>Methods</h2></div>
@@ -393,18 +426,10 @@
             <article class="method">
                 <h3 class="public ">getPublishableRoomIdList()</h3>
                 <a href="#source-view" role="button" class="pull-right btn" data-toggle="modal" style="font-size: 1.1em; padding: 9px 14px"><i class="icon-code"></i></a>
-                <pre class="signature" style="margin-right: 54px;">getPublishableRoomIdList(array  <span class="argument">$roomPermRoles</span>) : array</pre>
+                <pre class="signature" style="margin-right: 54px;">getPublishableRoomIdList() : array</pre>
                 <p><em>getPublishableRoomIdList</em></p>
                 <p>発行権限を持つルームIDリストを返す</p>
 
-                                    <h4>Parameters</h4>
-                    <table class="table table-condensed table-hover">
-                                                    <tr>
-                                <td>array</td>
-                                <td>$roomPermRoles </td>
-                                <td><p>権限状況</p></td>
-                            </tr>
-                                            </table>
                 
                 
                                     <h4>Returns</h4>
@@ -414,6 +439,7 @@
         </div>
         <aside class="span4 detailsbar">
             <h1><i class="icon-arrow-down"></i></h1>
+                            <span class="label label-info">static</span>
                                                             <dl>
                                                                             </dl>
             <h2>Tags</h2>
@@ -429,18 +455,10 @@
             <article class="method">
                 <h3 class="public ">getEditableRoomIdList()</h3>
                 <a href="#source-view" role="button" class="pull-right btn" data-toggle="modal" style="font-size: 1.1em; padding: 9px 14px"><i class="icon-code"></i></a>
-                <pre class="signature" style="margin-right: 54px;">getEditableRoomIdList(array  <span class="argument">$roomPermRoles</span>) : array</pre>
+                <pre class="signature" style="margin-right: 54px;">getEditableRoomIdList() : array</pre>
                 <p><em>getEditableRoomIdList</em></p>
                 <p>編集権限を持つルームIDリストを返す</p>
 
-                                    <h4>Parameters</h4>
-                    <table class="table table-condensed table-hover">
-                                                    <tr>
-                                <td>array</td>
-                                <td>$roomPermRoles </td>
-                                <td><p>権限状況</p></td>
-                            </tr>
-                                            </table>
                 
                 
                                     <h4>Returns</h4>
@@ -450,6 +468,7 @@
         </div>
         <aside class="span4 detailsbar">
             <h1><i class="icon-arrow-down"></i></h1>
+                            <span class="label label-info">static</span>
                                                             <dl>
                                                                             </dl>
             <h2>Tags</h2>
@@ -465,18 +484,10 @@
             <article class="method">
                 <h3 class="public ">getCreatableRoomIdList()</h3>
                 <a href="#source-view" role="button" class="pull-right btn" data-toggle="modal" style="font-size: 1.1em; padding: 9px 14px"><i class="icon-code"></i></a>
-                <pre class="signature" style="margin-right: 54px;">getCreatableRoomIdList(array  <span class="argument">$roomPermRoles</span>) : array</pre>
+                <pre class="signature" style="margin-right: 54px;">getCreatableRoomIdList() : array</pre>
                 <p><em>getCreatableRoomIdList</em></p>
                 <p>登録権限を持つルームIDリストを返す</p>
 
-                                    <h4>Parameters</h4>
-                    <table class="table table-condensed table-hover">
-                                                    <tr>
-                                <td>array</td>
-                                <td>$roomPermRoles </td>
-                                <td><p>権限状況</p></td>
-                            </tr>
-                                            </table>
                 
                 
                                     <h4>Returns</h4>
@@ -486,6 +497,7 @@
         </div>
         <aside class="span4 detailsbar">
             <h1><i class="icon-arrow-down"></i></h1>
+                            <span class="label label-info">static</span>
                                                             <dl>
                                                                             </dl>
             <h2>Tags</h2>
@@ -497,103 +509,16 @@
 
                                     <div class="row-fluid">
         <div class="span8 content class">
-            <a id="method_isEditable" name="method_isEditable" class="anchor"></a>
+            <a id="method_getAbleRoomIdList" name="method_getAbleRoomIdList" class="anchor"></a>
             <article class="method">
-                <h3 class="public ">isEditable()</h3>
+                <h3 class="public ">getAbleRoomIdList()</h3>
                 <a href="#source-view" role="button" class="pull-right btn" data-toggle="modal" style="font-size: 1.1em; padding: 9px 14px"><i class="icon-code"></i></a>
-                <pre class="signature" style="margin-right: 54px;">isEditable(array  <span class="argument">$roomPermRoles</span>, integer  <span class="argument">$roomId</span>) : boolean</pre>
-                <p><em>isEditable</em></p>
-                <p>指定されたルームは閲覧者にとって編集権限のあるところか</p>
-
-                                    <h4>Parameters</h4>
-                    <table class="table table-condensed table-hover">
-                                                    <tr>
-                                <td>array</td>
-                                <td>$roomPermRoles </td>
-                                <td><p>権限状況情報</p></td>
-                            </tr>
-                                                    <tr>
-                                <td>integer</td>
-                                <td>$roomId </td>
-                                <td><p>ルームID</p></td>
-                            </tr>
-                                            </table>
-                
-                
-                                    <h4>Returns</h4>
-                    boolean
-                                    				
-                            </article>
-        </div>
-        <aside class="span4 detailsbar">
-            <h1><i class="icon-arrow-down"></i></h1>
-                                                            <dl>
-                                                                            </dl>
-            <h2>Tags</h2>
-            <table class="table table-condensed">
-                                    <tr><td colspan="2"><em>None found</em></td></tr>
-                            </table>
-        </aside>
-    </div>
-
-                                    <div class="row-fluid">
-        <div class="span8 content class">
-            <a id="method_isCreatable" name="method_isCreatable" class="anchor"></a>
-            <article class="method">
-                <h3 class="public ">isCreatable()</h3>
-                <a href="#source-view" role="button" class="pull-right btn" data-toggle="modal" style="font-size: 1.1em; padding: 9px 14px"><i class="icon-code"></i></a>
-                <pre class="signature" style="margin-right: 54px;">isCreatable(array  <span class="argument">$roomPermRoles</span>, integer  <span class="argument">$roomId</span>) : boolean</pre>
-                <p><em>isCreatable</em></p>
-                <p>指定されたルームは閲覧者にとって投稿権限のあるところか</p>
-
-                                    <h4>Parameters</h4>
-                    <table class="table table-condensed table-hover">
-                                                    <tr>
-                                <td>array</td>
-                                <td>$roomPermRoles </td>
-                                <td><p>権限状況情報</p></td>
-                            </tr>
-                                                    <tr>
-                                <td>integer</td>
-                                <td>$roomId </td>
-                                <td><p>ルームID</p></td>
-                            </tr>
-                                            </table>
-                
-                
-                                    <h4>Returns</h4>
-                    boolean
-                                    				
-                            </article>
-        </div>
-        <aside class="span4 detailsbar">
-            <h1><i class="icon-arrow-down"></i></h1>
-                                                            <dl>
-                                                                            </dl>
-            <h2>Tags</h2>
-            <table class="table table-condensed">
-                                    <tr><td colspan="2"><em>None found</em></td></tr>
-                            </table>
-        </aside>
-    </div>
-
-                                                    <div class="row-fluid">
-        <div class="span8 content class">
-            <a id="method__getAbleRoomIdList" name="method__getAbleRoomIdList" class="anchor"></a>
-            <article class="method">
-                <h3 class="protected ">_getAbleRoomIdList()</h3>
-                <a href="#source-view" role="button" class="pull-right btn" data-toggle="modal" style="font-size: 1.1em; padding: 9px 14px"><i class="icon-code"></i></a>
-                <pre class="signature" style="margin-right: 54px;">_getAbleRoomIdList(array  <span class="argument">$roomPermRoles</span>, array  <span class="argument">$perms</span>) : array</pre>
-                <p><em>_getAbleRoomIdList</em></p>
+                <pre class="signature" style="margin-right: 54px;">getAbleRoomIdList(array  <span class="argument">$perms</span>) : array</pre>
+                <p><em>getAbleRoomIdList</em></p>
                 <p>指定された権限を持つルームのIDのリストを返す</p>
 
                                     <h4>Parameters</h4>
                     <table class="table table-condensed table-hover">
-                                                    <tr>
-                                <td>array</td>
-                                <td>$roomPermRoles </td>
-                                <td><p>権限状況</p></td>
-                            </tr>
                                                     <tr>
                                 <td>array</td>
                                 <td>$perms </td>
@@ -609,6 +534,7 @@
         </div>
         <aside class="span4 detailsbar">
             <h1><i class="icon-arrow-down"></i></h1>
+                            <span class="label label-info">static</span>
                                                             <dl>
                                                                             </dl>
             <h2>Tags</h2>
@@ -618,7 +544,81 @@
         </aside>
     </div>
 
-                                                    </div>
+                                    <div class="row-fluid">
+        <div class="span8 content class">
+            <a id="method_isEditable" name="method_isEditable" class="anchor"></a>
+            <article class="method">
+                <h3 class="public ">isEditable()</h3>
+                <a href="#source-view" role="button" class="pull-right btn" data-toggle="modal" style="font-size: 1.1em; padding: 9px 14px"><i class="icon-code"></i></a>
+                <pre class="signature" style="margin-right: 54px;">isEditable(integer  <span class="argument">$roomId</span>) : boolean</pre>
+                <p><em>isEditable</em></p>
+                <p>指定されたルームは閲覧者にとって編集権限のあるところか</p>
+
+                                    <h4>Parameters</h4>
+                    <table class="table table-condensed table-hover">
+                                                    <tr>
+                                <td>integer</td>
+                                <td>$roomId </td>
+                                <td><p>ルームID</p></td>
+                            </tr>
+                                            </table>
+                
+                
+                                    <h4>Returns</h4>
+                    boolean
+                                    				
+                            </article>
+        </div>
+        <aside class="span4 detailsbar">
+            <h1><i class="icon-arrow-down"></i></h1>
+                            <span class="label label-info">static</span>
+                                                            <dl>
+                                                                            </dl>
+            <h2>Tags</h2>
+            <table class="table table-condensed">
+                                    <tr><td colspan="2"><em>None found</em></td></tr>
+                            </table>
+        </aside>
+    </div>
+
+                                    <div class="row-fluid">
+        <div class="span8 content class">
+            <a id="method_isCreatable" name="method_isCreatable" class="anchor"></a>
+            <article class="method">
+                <h3 class="public ">isCreatable()</h3>
+                <a href="#source-view" role="button" class="pull-right btn" data-toggle="modal" style="font-size: 1.1em; padding: 9px 14px"><i class="icon-code"></i></a>
+                <pre class="signature" style="margin-right: 54px;">isCreatable(integer  <span class="argument">$roomId</span>) : boolean</pre>
+                <p><em>isCreatable</em></p>
+                <p>指定されたルームは閲覧者にとって投稿権限のあるところか</p>
+
+                                    <h4>Parameters</h4>
+                    <table class="table table-condensed table-hover">
+                                                    <tr>
+                                <td>integer</td>
+                                <td>$roomId </td>
+                                <td><p>ルームID</p></td>
+                            </tr>
+                                            </table>
+                
+                
+                                    <h4>Returns</h4>
+                    boolean
+                                    				
+                            </article>
+        </div>
+        <aside class="span4 detailsbar">
+            <h1><i class="icon-arrow-down"></i></h1>
+                            <span class="label label-info">static</span>
+                                                            <dl>
+                                                                            </dl>
+            <h2>Tags</h2>
+            <table class="table table-condensed">
+                                    <tr><td colspan="2"><em>None found</em></td></tr>
+                            </table>
+        </aside>
+    </div>
+
+                                                                    </div>
     </section>
 
     <div id="source-view" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="source-view-label" aria-hidden="true">
@@ -667,7 +667,7 @@
                 <section class="span10 offset1">
                     <hr />
                     Documentation is powered by <a href="http://www.phpdoc.org/">phpDocumentor </a> and authored
-                    on July 15th, 2016 at 02:53.
+                    on July 16th, 2016 at 00:36.
                 </section>
             </section>
         </section>
