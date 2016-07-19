@@ -94,7 +94,8 @@ class PageLayoutHelper extends AppHelper {
 		$this->NetCommonsHtml->css('/pages/css/style.css');
 
 		//メタデータ
-		foreach ($this->_View->viewVars['meta'] as $meta) {
+		$metas = Hash::get($this->_View->viewVars, 'meta', array());
+		foreach ($metas as $meta) {
 			$this->NetCommonsHtml->meta($meta, null, ['inline' => false]);
 		}
 
