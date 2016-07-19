@@ -21,54 +21,54 @@
     <script src="../js/jquery.smooth-scroll.js"></script>
     <script src="../js/prism.min.js"></script>
     <!-- TODO: Add http://jscrollpane.kelvinluck.com/ to style the scrollbars for browsers not using webkit-->
-    <script type="text/javascript">
-    function loadExternalCodeSnippets() {
-        Array.prototype.slice.call(document.querySelectorAll('pre[data-src]')).forEach(function (pre) {
-            var src = pre.getAttribute('data-src');
-            var extension = (src.match(/\.(\w+)$/) || [, ''])[1];
-            var language = 'php';
+        <script type="text/javascript">
+        function loadExternalCodeSnippets() {
+            Array.prototype.slice.call(document.querySelectorAll('pre[data-src]')).forEach(function (pre) {
+                var src = pre.getAttribute('data-src');
+                var extension = (src.match(/\.(\w+)$/) || [, ''])[1];
+                var language = 'php';
 
-            var code = document.createElement('code');
-            code.className = 'language-' + language;
+                var code = document.createElement('code');
+                code.className = 'language-' + language;
 
-            pre.textContent = '';
+                pre.textContent = '';
 
-            code.textContent = 'Loading…';
+                code.textContent = 'Loading…';
 
-            pre.appendChild(code);
+                pre.appendChild(code);
 
-            var xhr = new XMLHttpRequest();
+                var xhr = new XMLHttpRequest();
 
-            xhr.open('GET', src, true);
+                xhr.open('GET', src, true);
 
-            xhr.onreadystatechange = function () {
-                if (xhr.readyState == 4) {
+                xhr.onreadystatechange = function () {
+                    if (xhr.readyState == 4) {
 
-                    if (xhr.status < 400 && xhr.responseText) {
-                        code.textContent = xhr.responseText;
+                        if (xhr.status < 400 && xhr.responseText) {
+                            code.textContent = xhr.responseText;
 
-                        Prism.highlightElement(code);
+                            Prism.highlightElement(code);
+                        }
+                        else if (xhr.status >= 400) {
+                            code.textContent = '✖ Error ' + xhr.status + ' while fetching file: ' + xhr.statusText;
+                        }
+                        else {
+                            code.textContent = '✖ Error: File does not exist or is empty';
+                        }
                     }
-                    else if (xhr.status >= 400) {
-                        code.textContent = '✖ Error ' + xhr.status + ' while fetching file: ' + xhr.statusText;
-                    }
-                    else {
-                        code.textContent = '✖ Error: File does not exist or is empty';
-                    }
-                }
-            };
+                };
 
-            xhr.send(null);
+                xhr.send(null);
+            });
+        }
+
+        $(document).ready(function(){
+            loadExternalCodeSnippets();
         });
-    }
-
-    $(document).ready(function(){
-        loadExternalCodeSnippets();
-    });
-    $('#source-view').on('shown', function () {
-        loadExternalCodeSnippets();
-    })
-</script>
+        $('#source-view').on('shown', function () {
+            loadExternalCodeSnippets();
+        })
+    </script>
 
     <link rel="shortcut icon" href="../images/favicon.ico"/>
     <link rel="apple-touch-icon" href="../images/apple-touch-icon.png"/>
@@ -136,10 +136,10 @@
                                 <div class="accordion" style="margin-bottom: 0">
         <div class="accordion-group">
             <div class="accordion-heading">
-                                    <a class="accordion-toggle " data-toggle="collapse" data-target="#namespace-1918752444"></a>
+                                    <a class="accordion-toggle " data-toggle="collapse" data-target="#namespace-965442862"></a>
                                 <a href="../namespaces/default.html" style="margin-left: 30px; padding-left: 0">\</a>
             </div>
-            <div id="namespace-1918752444" class="accordion-body collapse in">
+            <div id="namespace-965442862" class="accordion-body collapse in">
                 <div class="accordion-inner">
 
                     
@@ -219,501 +219,71 @@
     <section class="row-fluid">
         <div class="span10 offset2">
             <div class="row-fluid">
-                <div class="span8 content class">
+                <div class="span8 content file">
                     <nav>
-                                                <a href="../namespaces/default.html">\</a> <i class="icon-level-up"></i>
-                                            </nav>
+                                                                    </nav>
+
                     <a href="#source-view" role="button" class="pull-right btn" data-toggle="modal"><i class="icon-code"></i></a>
-
-                    <h1><small>\</small>PermissionComponent</h1>
-                    <p><em>Permission Component</em></p>
-                    <p>リクエストされたController、もしくは、actionのアクセス許可を、<br>
-<a href="./Current.html">Currentオブジェクト</a>
-の権限から判定します。<br>
-チェックタイプと許可アクションリストを指定してください。</p>
-<p><a href="#property_type">チェックタイプ</a><br>
-<a href="#property_allow">許可アクションリスト</a></p>
+                    <h1><small>Plugin/UserManager/Config</small>routes.php</h1>
+                    <p><em>Users routes configuration</em></p>
                     
-                                        
-                    <section id="summary">
-                        <h2>Summary</h2>
-                        <section class="row-fluid heading">
-                            <section class="span4">
-                                <a href="#methods">Methods</a>
-                            </section>
-                            <section class="span4">
-                                <a href="#properties">Properties</a>
-                            </section>
-                            <section class="span4">
-                                <a href="#constants">Constants</a>
-                            </section>
-                        </section>
-                        <section class="row-fluid public">
-                            <section class="span4">
-                                                                    <a href="../classes/PermissionComponent.html#method_initialize" class="">initialize()</a><br />
-                                                                    <a href="../classes/PermissionComponent.html#method_startup" class="">startup()</a><br />
-                                                            </section>
-                            <section class="span4">
-                                                                    <a href="../classes/PermissionComponent.html#property_type" class="">$type</a><br />
-                                                                    <a href="../classes/PermissionComponent.html#property_allow" class="">$allow</a><br />
-                                                            </section>
-                            <section class="span4">
-                                                                    <a href="../classes/PermissionComponent.html#constant_READABLE_PERMISSION" class="">READABLE_PERMISSION</a><br />
-                                                                    <a href="../classes/PermissionComponent.html#constant_CHECK_TYEP_GENERAL_PLUGIN" class="">CHECK_TYEP_GENERAL_PLUGIN</a><br />
-                                                                    <a href="../classes/PermissionComponent.html#constant_CHECK_TYEP_CONTROL_PANEL" class="">CHECK_TYEP_CONTROL_PANEL</a><br />
-                                                                    <a href="../classes/PermissionComponent.html#constant_CHECK_TYEP_SYSTEM_PLUGIN" class="">CHECK_TYEP_SYSTEM_PLUGIN</a><br />
-                                                            </section>
-                        </section>
-                        <section class="row-fluid protected">
-                            <section class="span4">
-                                                                    <em>No protected methods found</em>
-                                                            </section>
-                            <section class="span4">
-                                                                    <em>No protected properties found</em>
-                                                            </section>
-                            <section class="span4">
-                                <em>N/A</em>
-                            </section>
-                        </section>
-                        <section class="row-fluid private">
-                            <section class="span4">
-                                                                    <a href="../classes/PermissionComponent.html#method___allowAction" class="">__allowAction()</a><br />
-                                                                    <a href="../classes/PermissionComponent.html#method___accessCheck" class="">__accessCheck()</a><br />
-                                                                    <a href="../classes/PermissionComponent.html#method___checkBlockAccess" class="">__checkBlockAccess()</a><br />
-                                                            </section>
-                            <section class="span4">
-                                                                    <em>No private properties found</em>
-                                                            </section>
-                            <section class="span4">
-                                <em>N/A</em>
-                            </section>
-                        </section>
-                    </section>
-                </div>
+
+                    
+                    
+                                    </div>
+
                 <aside class="span4 detailsbar">
-                                        
-                    
                     <dl>
-                        <dt>File</dt>
-                            <dd><a href="../files/Plugin.NetCommons.Controller.Component.PermissionComponent.html"><div class="path-wrapper">Plugin/NetCommons/Controller/Component/PermissionComponent.php</div></a></dd>
-                                                <dt>Package</dt>
-                            <dd><div class="namespace-wrapper">Controller\Component</div></dd>
-                                                <dt>Class hierarchy</dt>
-                            <dd class="hierarchy">
-                                                                                                                                                                                                                                                                                                
-                                        <div class="namespace-wrapper">\Component</div>
-                                                                                                    <div class="namespace-wrapper">\PermissionComponent</div>
-                            </dd>
-
+                                                    <dt>Package</dt>
+                            <dd><div class="namespace-wrapper">\Default</div></dd>
                         
-                        
-                        
-                        
-                                                                        </dl>
+                                                                                    <dt>See also</dt>
+                                                                                        <dd><a href="http://www.netcommons.org"><div class="namespace-wrapper">NetCommons Project</div></a></dd>
+                                                    
+                    </dl>
                     <h2>Tags</h2>
                     <table class="table table-condensed">
-                                            <tr>
-                            <th>
-                                author
-                            </th>
-                            <td>
-                                                                    <p>Shohei Nakajima <a href="mailto:nakajimashouhei@gmail.com">nakajimashouhei@gmail.com</a></p>
-                                                            </td>
-                        </tr>
-                                        </table>
+                                                    <tr>
+                                <th>
+                                    author
+                                </th>
+                                <td>
+                                                                            <p>Shohei Nakajima <a href="mailto:nakajimashouhei@gmail.com">nakajimashouhei@gmail.com</a></p>
+                                                                    </td>
+                            </tr>
+                                                    <tr>
+                                <th>
+                                    license
+                                </th>
+                                <td>
+                                                                            <p><a href="http://www.netcommons.org/license.txt">http://www.netcommons.org/license.txt</a> NetCommons License</p>
+                                                                    </td>
+                            </tr>
+                                                    <tr>
+                                <th>
+                                    copyright
+                                </th>
+                                <td>
+                                                                            <p>Copyright 2014, NetCommons Project</p>
+                                                                    </td>
+                            </tr>
+                                            </table>
+
                 </aside>
             </div>
 
-                                    <a id="constants" name="constants"></a>
-            <div class="row-fluid">
-                <div class="span8 content class">
-                    <h2>Constants</h2>
-                </div>
-                <aside class="span4 detailsbar"></aside>
-            </div>
-
-                                <div class="row-fluid">
-        <div class="span8 content class">
-            <a id="constant_READABLE_PERMISSION" name="constant_READABLE_PERMISSION" class="anchor"></a>
-            <article id="constant_READABLE_PERMISSION" class="constant">
-                <h3 class="">READABLE_PERMISSION</h3>
-                <pre class="signature">READABLE_PERMISSION</pre>
-                <p><em>コンテンツReadableの定数</em></p>
-                
-            </article>
+            
+            
         </div>
-        <aside class="span4 detailsbar">
-            <h1><i class="icon-arrow-down"></i></h1>
-                        <dl>
-                                                                            </dl>
-            <h2>Tags</h2>
-            <table class="table table-condensed">
-                                    <tr><td colspan="2"><em>None found</em></td></tr>
-                            </table>
-        </aside>
-    </div>
-
-                                    <div class="row-fluid">
-        <div class="span8 content class">
-            <a id="constant_CHECK_TYEP_GENERAL_PLUGIN" name="constant_CHECK_TYEP_GENERAL_PLUGIN" class="anchor"></a>
-            <article id="constant_CHECK_TYEP_GENERAL_PLUGIN" class="constant">
-                <h3 class="">CHECK_TYEP_GENERAL_PLUGIN</h3>
-                <pre class="signature">CHECK_TYEP_GENERAL_PLUGIN</pre>
-                <p><em>チェックタイプの定数</em></p>
-                
-            </article>
-        </div>
-        <aside class="span4 detailsbar">
-            <h1><i class="icon-arrow-down"></i></h1>
-                        <dl>
-                                                                            </dl>
-            <h2>Tags</h2>
-            <table class="table table-condensed">
-                                    <tr><td colspan="2"><em>None found</em></td></tr>
-                            </table>
-        </aside>
-    </div>
-
-                                    <div class="row-fluid">
-        <div class="span8 content class">
-            <a id="constant_CHECK_TYEP_CONTROL_PANEL" name="constant_CHECK_TYEP_CONTROL_PANEL" class="anchor"></a>
-            <article id="constant_CHECK_TYEP_CONTROL_PANEL" class="constant">
-                <h3 class="">CHECK_TYEP_CONTROL_PANEL</h3>
-                <pre class="signature">CHECK_TYEP_CONTROL_PANEL</pre>
-                <p><em>チェックタイプの定数</em></p>
-                
-            </article>
-        </div>
-        <aside class="span4 detailsbar">
-            <h1><i class="icon-arrow-down"></i></h1>
-                        <dl>
-                                                                            </dl>
-            <h2>Tags</h2>
-            <table class="table table-condensed">
-                                    <tr><td colspan="2"><em>None found</em></td></tr>
-                            </table>
-        </aside>
-    </div>
-
-                                    <div class="row-fluid">
-        <div class="span8 content class">
-            <a id="constant_CHECK_TYEP_SYSTEM_PLUGIN" name="constant_CHECK_TYEP_SYSTEM_PLUGIN" class="anchor"></a>
-            <article id="constant_CHECK_TYEP_SYSTEM_PLUGIN" class="constant">
-                <h3 class="">CHECK_TYEP_SYSTEM_PLUGIN</h3>
-                <pre class="signature">CHECK_TYEP_SYSTEM_PLUGIN</pre>
-                <p><em>チェックタイプの定数</em></p>
-                
-            </article>
-        </div>
-        <aside class="span4 detailsbar">
-            <h1><i class="icon-arrow-down"></i></h1>
-                        <dl>
-                                                                            </dl>
-            <h2>Tags</h2>
-            <table class="table table-condensed">
-                                    <tr><td colspan="2"><em>None found</em></td></tr>
-                            </table>
-        </aside>
-    </div>
-
-                            
-                                    <a id="properties" name="properties"></a>
-            <div class="row-fluid">
-                <div class="span8 content class">
-                    <h2>Properties</h2>
-                </div>
-                <aside class="span4 detailsbar"></aside>
-            </div>
-
-                                    <div class="row-fluid">
-        <div class="span8 content class">
-            <a id="property_type" name="property_type" class="anchor"></a>
-            <article class="property">
-                <h3 class="public ">$type</h3>
-                <pre class="signature">$type : string</pre>
-                <p><em>チェックタイプ</em></p>
-                <ul>
-<li>
-<p>CHECK_TYEP_GENERAL_PLUGIN<br>
-ページに配置するプラグインの場合に指定します。（デフォルト）<br>
-許可アクションリストに指定された権限から判定します。</p>
-</li>
-<li>
-<p>CHECK_TYEP_CONTROL_PANEL<br>
-コントロールパネルを表示する際に指定します。<br>
-コントロールパネルで動作するプラグインの有無で判定します。</p>
-</li>
-<li>CHECK_TYEP_SYSTEM_PLUGIN<br>
-管理プラグインを表示・設定する際に指定します。<br>
-ユーザーが使用できる管理プラグインか否かで判定します。</li>
-</ul>
-
-                                <h4>Type</h4>
-                string
-                                            </article>
-        </div>
-        <aside class="span4 detailsbar">
-            <h1><i class="icon-arrow-down"></i></h1>
-                        <dl>
-                                                            </dl>
-            <h2>Tags</h2>
-            <table class="table table-condensed">
-                                    <tr><td colspan="2"><em>None found</em></td></tr>
-                            </table>
-        </aside>
-    </div>
-
-                                    <div class="row-fluid">
-        <div class="span8 content class">
-            <a id="property_allow" name="property_allow" class="anchor"></a>
-            <article class="property">
-                <h3 class="public ">$allow</h3>
-                <pre class="signature">$allow : array</pre>
-                <p><em>許可アクションリスト</em></p>
-                <p>チェックタイプがCHECK_TYEP_GENERAL_PLUGINの場合に使用される判定リストです。<br>
-アクション名 =&gt; 権限名の形式で指定してください。<br>
-デフォルトでは、indexアクション、viewアクションを許可しています。</p>
-<h4>サンプルコード</h4>
-<h5>Controller</h5>
-<pre><code>public $components = array(
-    'NetCommons.Permission' =&gt; array(
-        'allow' =&gt; array(
-            'add,edit,delete' =&gt; 'content_creatable',
-            'reply' =&gt; 'content_comment_creatable',
-            'approve' =&gt; 'content_comment_publishable',
-        )
-    )
-)</code></pre>
-<p>アクション名に'＊'を指定するとコントローラ内すべてのアクションが対象になります。</p>
-<pre><code>public $components = array(
-    'NetCommons.Permission' =&gt; array(
-        'allow' =&gt; array(
-            '*' =&gt; 'content_creatable'
-        )
-    )
-)</code></pre>
-<p>権限名にnullを指定するとアクセスが許可されます。</p>
-<pre><code>public $components = array(
-    'NetCommons.Permission' =&gt; array(
-        'allow' =&gt; array(
-            'add,edit,delete' =&gt; 'null'
-        )
-    )
-)</code></pre>
-
-                                <h4>Type</h4>
-                array
-                                            </article>
-        </div>
-        <aside class="span4 detailsbar">
-            <h1><i class="icon-arrow-down"></i></h1>
-                        <dl>
-                                                            </dl>
-            <h2>Tags</h2>
-            <table class="table table-condensed">
-                                    <tr><td colspan="2"><em>None found</em></td></tr>
-                            </table>
-        </aside>
-    </div>
-
-                                                            
-                                    <a id="methods" name="methods"></a>
-            <div class="row-fluid">
-                <div class="span8 content class"><h2>Methods</h2></div>
-                <aside class="span4 detailsbar"></aside>
-            </div>
-
-                                    <div class="row-fluid">
-        <div class="span8 content class">
-            <a id="method_initialize" name="method_initialize" class="anchor"></a>
-            <article class="method">
-                <h3 class="public ">initialize()</h3>
-                <a href="#source-view" role="button" class="pull-right btn" data-toggle="modal" style="font-size: 1.1em; padding: 9px 14px"><i class="icon-code"></i></a>
-                <pre class="signature" style="margin-right: 54px;">initialize(\Controller  <span class="argument">$controller</span>) : void</pre>
-                <p><em>Called before the Controller::beforeFilter().</em></p>
-                
-
-                                    <h4>Parameters</h4>
-                    <table class="table table-condensed table-hover">
-                                                    <tr>
-                                <td>\Controller</td>
-                                <td>$controller </td>
-                                <td><p>Instantiating controller</p></td>
-                            </tr>
-                                            </table>
-                
-                
-                				
-                            </article>
-        </div>
-        <aside class="span4 detailsbar">
-            <h1><i class="icon-arrow-down"></i></h1>
-                                                            <dl>
-                                                                            </dl>
-            <h2>Tags</h2>
-            <table class="table table-condensed">
-                                    <tr><td colspan="2"><em>None found</em></td></tr>
-                            </table>
-        </aside>
-    </div>
-
-                                    <div class="row-fluid">
-        <div class="span8 content class">
-            <a id="method_startup" name="method_startup" class="anchor"></a>
-            <article class="method">
-                <h3 class="public ">startup()</h3>
-                <a href="#source-view" role="button" class="pull-right btn" data-toggle="modal" style="font-size: 1.1em; padding: 9px 14px"><i class="icon-code"></i></a>
-                <pre class="signature" style="margin-right: 54px;">startup(\Controller  <span class="argument">$controller</span>) : void</pre>
-                <p><em>Called after the Controller::beforeFilter() and before the controller action</em></p>
-                
-
-                                    <h4>Parameters</h4>
-                    <table class="table table-condensed table-hover">
-                                                    <tr>
-                                <td>\Controller</td>
-                                <td>$controller </td>
-                                <td><p>Controller with components to startup</p></td>
-                            </tr>
-                                            </table>
-                
-                                    <h4>Throws</h4>
-                    <dl>
-                                                    <dt>\ForbiddenException</dt>
-                            <dd></dd>
-                                                                    </dl>
-                
-                				
-                            </article>
-        </div>
-        <aside class="span4 detailsbar">
-            <h1><i class="icon-arrow-down"></i></h1>
-                                                            <dl>
-                                                                            </dl>
-            <h2>Tags</h2>
-            <table class="table table-condensed">
-                                    <tr><td colspan="2"><em>None found</em></td></tr>
-                            </table>
-        </aside>
-    </div>
-
-                                                                    <div class="row-fluid">
-        <div class="span8 content class">
-            <a id="method___allowAction" name="method___allowAction" class="anchor"></a>
-            <article class="method">
-                <h3 class="private ">__allowAction()</h3>
-                <a href="#source-view" role="button" class="pull-right btn" data-toggle="modal" style="font-size: 1.1em; padding: 9px 14px"><i class="icon-code"></i></a>
-                <pre class="signature" style="margin-right: 54px;">__allowAction(\Controller  <span class="argument">$controller</span>) : boolean</pre>
-                <p><em>アクションの許可チェック</em></p>
-                
-
-                                    <h4>Parameters</h4>
-                    <table class="table table-condensed table-hover">
-                                                    <tr>
-                                <td>\Controller</td>
-                                <td>$controller </td>
-                                <td><p>Controller with components to startup</p></td>
-                            </tr>
-                                            </table>
-                
-                
-                                    <h4>Returns</h4>
-                    boolean
-                                    				
-                            </article>
-        </div>
-        <aside class="span4 detailsbar">
-            <h1><i class="icon-arrow-down"></i></h1>
-                                                            <dl>
-                                                                            </dl>
-            <h2>Tags</h2>
-            <table class="table table-condensed">
-                                    <tr><td colspan="2"><em>None found</em></td></tr>
-                            </table>
-        </aside>
-    </div>
-
-                                    <div class="row-fluid">
-        <div class="span8 content class">
-            <a id="method___accessCheck" name="method___accessCheck" class="anchor"></a>
-            <article class="method">
-                <h3 class="private ">__accessCheck()</h3>
-                <a href="#source-view" role="button" class="pull-right btn" data-toggle="modal" style="font-size: 1.1em; padding: 9px 14px"><i class="icon-code"></i></a>
-                <pre class="signature" style="margin-right: 54px;">__accessCheck(\Controller  <span class="argument">$controller</span>) : boolean</pre>
-                <p><em>アクセスチェック</em></p>
-                
-
-                                    <h4>Parameters</h4>
-                    <table class="table table-condensed table-hover">
-                                                    <tr>
-                                <td>\Controller</td>
-                                <td>$controller </td>
-                                <td><p>Controller with components to startup</p></td>
-                            </tr>
-                                            </table>
-                
-                
-                                    <h4>Returns</h4>
-                    boolean
-                                    				
-                            </article>
-        </div>
-        <aside class="span4 detailsbar">
-            <h1><i class="icon-arrow-down"></i></h1>
-                                                            <dl>
-                                                                            </dl>
-            <h2>Tags</h2>
-            <table class="table table-condensed">
-                                    <tr><td colspan="2"><em>None found</em></td></tr>
-                            </table>
-        </aside>
-    </div>
-
-                                    <div class="row-fluid">
-        <div class="span8 content class">
-            <a id="method___checkBlockAccess" name="method___checkBlockAccess" class="anchor"></a>
-            <article class="method">
-                <h3 class="private ">__checkBlockAccess()</h3>
-                <a href="#source-view" role="button" class="pull-right btn" data-toggle="modal" style="font-size: 1.1em; padding: 9px 14px"><i class="icon-code"></i></a>
-                <pre class="signature" style="margin-right: 54px;">__checkBlockAccess(\Controller  <span class="argument">$controller</span>) : boolean</pre>
-                <p><em>ブロックのアクセスチェック</em></p>
-                
-
-                                    <h4>Parameters</h4>
-                    <table class="table table-condensed table-hover">
-                                                    <tr>
-                                <td>\Controller</td>
-                                <td>$controller </td>
-                                <td><p>Controller with components to startup</p></td>
-                            </tr>
-                                            </table>
-                
-                
-                                    <h4>Returns</h4>
-                    boolean
-                                    				
-                            </article>
-        </div>
-        <aside class="span4 detailsbar">
-            <h1><i class="icon-arrow-down"></i></h1>
-                                                            <dl>
-                                                                            </dl>
-            <h2>Tags</h2>
-            <table class="table table-condensed">
-                                    <tr><td colspan="2"><em>None found</em></td></tr>
-                            </table>
-        </aside>
-    </div>
-
-                                    </div>
     </section>
 
     <div id="source-view" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="source-view-label" aria-hidden="true">
         <div class="modal-header">
             <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
-            <h3 id="source-view-label">PermissionComponent.php</h3>
+            <h3 id="source-view-label"></h3>
         </div>
         <div class="modal-body">
-            <pre data-src="../files/Plugin/NetCommons/Controller/Component/PermissionComponent.php.txt" class="language-php line-numbers"></pre>
+            <pre data-src="../files/Plugin/UserManager/Config/routes.php.txt" class="language-php line-numbers"></pre>
         </div>
     </div>
 
@@ -753,7 +323,7 @@
                 <section class="span10 offset1">
                     <hr />
                     Documentation is powered by <a href="http://www.phpdoc.org/">phpDocumentor </a> and authored
-                    on July 19th, 2016 at 06:33.
+                    on July 19th, 2016 at 06:34.
                 </section>
             </section>
         </section>
