@@ -121,6 +121,9 @@ class RoomsController extends RoomsAppController {
 					'fields' => array(
 						'User.id', 'User.handlename'
 					),
+					'conditions' => array(
+						'User.status' => UserAttributeChoice::STATUS_CODE_ACTIVE
+					),
 					'order' => array(
 						'RoomRole.weight' => 'asc'
 					),
