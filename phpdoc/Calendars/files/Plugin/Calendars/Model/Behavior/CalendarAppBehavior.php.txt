@@ -15,6 +15,7 @@ App::uses('CalendarTime', 'Calendars.Utility');
 App::uses('CalendarSupport', 'Calendars.Utility');
 App::uses('CalendarRruleUtil', 'Calendars.Utility');
 App::uses('WorkflowComponent', 'Workflow.Controller/Component');
+App::uses('CalendarPermissiveRooms', 'Calendars.Utility');
 
 /**
  * CalendarAppBehavior
@@ -62,6 +63,33 @@ class CalendarAppBehavior extends ModelBehavior {
 		self::CALENDAR_PLAN_EDIT_AFTER,
 		self::CALENDAR_PLAN_EDIT_ALL
 	);
+
+/**
+ * beforeValidate is called before a model is validated, you can use this callback to
+ * add behavior validation rules into a models validate array. Returning false
+ * will allow you to make the validation fail.
+ *
+ * @param Model $model Model using this behavior
+ * @param array $options Options passed from Model::save().
+ * @return mixed False or null will abort the operation. Any other result will continue.
+ * @see Model::save()
+ */
+	public function beforeValidate(Model $model, $options = array()) {
+		if ($model->alias == 'CalendarEvent') {
+			CalendarPermissiveRooms::setCurrentPermission($model->data['CalendarEvent']['room_id']);
+		}
+	}
+/**
+ * Called after data has been checked for errors
+ *
+ * @param Model $model Model using this behavior
+ * @return void
+ */
+	public function afterValidate(Model $model) {
+		if ($model->alias == 'CalendarEvent') {
+			CalendarPermissiveRooms::recoverCurrentPermission();
+		}
+	}
 
 /**
  * 繰返し専用event登録処理(*event初回登録に使ってはいけません）
@@ -175,9 +203,9 @@ class CalendarAppBehavior extends ModelBehavior {
 
 		//workflowcommentなどの追加拡張データはここで追加する。
 		//
-		if (isset($planParams[CalendarsComponent::ADDITIONAL]) &&
-			count($planParams[CalendarsComponent::ADDITIONAL]) > 0) {
-			foreach ($planParams[CalendarsComponent::ADDITIONAL] as $modelName => $vals) {
+		$addInfo = Hash::get($planParams, CalendarsComponent::ADDITIONAL);
+		if (! empty($addInfo)) {
+			foreach ($addInfo as $modelName => $vals) {
 				$rEventData[$modelName] = $vals;
 			}
 		}
@@ -426,9 +454,9 @@ class CalendarAppBehavior extends ModelBehavior {
 
 		//workflowcommentなどの追加拡張データはここで追加する。
 		//
-		if (isset($planParams[CalendarsComponent::ADDITIONAL]) &&
-			count($planParams[CalendarsComponent::ADDITIONAL]) > 0) {
-			foreach ($planParams[CalendarsComponent::ADDITIONAL] as $modelName => $vals) {
+		$addInfo = Hash::get($planParams, CalendarsComponent::ADDITIONAL);
+		if (! empty($addInfo)) {
+			foreach ($addInfo as $modelName => $vals) {
 				$eventData[$modelName] = $vals;
 			}
 		}
