@@ -136,10 +136,10 @@
                                 <div class="accordion" style="margin-bottom: 0">
         <div class="accordion-group">
             <div class="accordion-heading">
-                                    <a class="accordion-toggle " data-toggle="collapse" data-target="#namespace-1993839228"></a>
+                                    <a class="accordion-toggle " data-toggle="collapse" data-target="#namespace-1329038616"></a>
                                 <a href="../namespaces/default.html" style="margin-left: 30px; padding-left: 0">\</a>
             </div>
-            <div id="namespace-1993839228" class="accordion-body collapse in">
+            <div id="namespace-1329038616" class="accordion-body collapse in">
                 <div class="accordion-inner">
 
                     
@@ -154,7 +154,7 @@
                                                     <li class="class"><a href="../classes/AssetComponent.html">AssetComponent</a></li>
                                                     <li class="class"><a href="../classes/BackToHelper.html">BackToHelper</a></li>
                                                     <li class="class"><a href="../classes/Block.html">Block</a></li>
-                                                    <li class="class"><a href="../classes/BlockAppModel.html">BlockAppModel</a></li>
+                                                    <li class="class"><a href="../classes/BlockBaseModel.html">BlockBaseModel</a></li>
                                                     <li class="class"><a href="../classes/BlockBehavior.html">BlockBehavior</a></li>
                                                     <li class="class"><a href="../classes/BlockFormHelper.html">BlockFormHelper</a></li>
                                                     <li class="class"><a href="../classes/BlockIndexHelper.html">BlockIndexHelper</a></li>
@@ -239,8 +239,8 @@
                                             </nav>
                     <a href="#source-view" role="button" class="pull-right btn" data-toggle="modal"><i class="icon-code"></i></a>
 
-                    <h1><small>\</small>BlockAppModel</h1>
-                    <p><em>BlockApp Model</em></p>
+                    <h1><small>\</small>BlockBaseModel</h1>
+                    <p><em>BlockBase Model</em></p>
                     <p>Add your application-wide methods in the class below, your models
 will inherit them.</p>
                     
@@ -270,8 +270,8 @@ will inherit them.</p>
                                                                     <a href="../classes/NetCommonsAppModel.html#method_commit" class="">commit()</a><br />
                                                                     <a href="../classes/NetCommonsAppModel.html#method_rollback" class="">rollback()</a><br />
                                                                     <a href="../classes/NetCommonsAppModel.html#method_loadModels" class="">loadModels()</a><br />
-                                                                    <a href="../classes/BlockAppModel.html#method_beforeSave" class="">beforeSave()</a><br />
-                                                                    <a href="../classes/BlockAppModel.html#method_afterSave" class="">afterSave()</a><br />
+                                                                    <a href="../classes/BlockBaseModel.html#method_beforeSave" class="">beforeSave()</a><br />
+                                                                    <a href="../classes/BlockBaseModel.html#method_afterSave" class="">afterSave()</a><br />
                                                             </section>
                             <section class="span4">
                                                                     <a href="../classes/NetCommonsAppModel.html#property_actsAs" class="">$actsAs</a><br />
@@ -280,6 +280,7 @@ will inherit them.</p>
                                                                     <a href="../classes/NetCommonsAppModel.html#property_blockId" class="">$blockId</a><br />
                                                                     <a href="../classes/NetCommonsAppModel.html#property_blockKey" class="">$blockKey</a><br />
                                                                     <a href="../classes/NetCommonsAppModel.html#property_contentKey" class="">$contentKey</a><br />
+                                                                    <a href="../classes/BlockBaseModel.html#property_useTable" class="">$useTable</a><br />
                                                             </section>
                             <section class="span4">
                                                                     <em>No constants found</em>
@@ -316,7 +317,7 @@ will inherit them.</p>
                     
                     <dl>
                         <dt>File</dt>
-                            <dd><a href="../files/Plugin.Blocks.Model.BlockAppModel.html"><div class="path-wrapper">Plugin/Blocks/Model/BlockAppModel.php</div></a></dd>
+                            <dd><a href="../files/Plugin.Blocks.Model.BlockBaseModel.html"><div class="path-wrapper">Plugin/Blocks/Model/BlockBaseModel.php</div></a></dd>
                                                 <dt>Package</dt>
                             <dd><div class="namespace-wrapper">Blocks\Model</div></dd>
                                                 <dt>Class hierarchy</dt>
@@ -327,7 +328,7 @@ will inherit them.</p>
                                         <div class="namespace-wrapper"><a href="../classes/NetCommonsAppModel.html">\NetCommonsAppModel</a></div>
                                                                     
                                         <div class="namespace-wrapper"><a href="../classes/AppModel.html">\AppModel</a></div>
-                                                                                                    <div class="namespace-wrapper">\BlockAppModel</div>
+                                                                                                    <div class="namespace-wrapper">\BlockBaseModel</div>
                             </dd>
 
                         
@@ -509,6 +510,30 @@ Behaviorで関連データ削除する際に使用する</em></p>
                         <dl>
                                     <dt>Inherited from</dt>
                     <dd><a href="../classes/NetCommonsAppModel.html"><div class="path-wrapper">\NetCommonsAppModel</div></a></dd>
+                                                            </dl>
+            <h2>Tags</h2>
+            <table class="table table-condensed">
+                                    <tr><td colspan="2"><em>None found</em></td></tr>
+                            </table>
+        </aside>
+    </div>
+
+                                    <div class="row-fluid">
+        <div class="span8 content class">
+            <a id="property_useTable" name="property_useTable" class="anchor"></a>
+            <article class="property">
+                <h3 class="public ">$useTable</h3>
+                <pre class="signature">$useTable : string</pre>
+                <p><em>Custom database table name</em></p>
+                
+
+                                <h4>Type</h4>
+                string
+                                            </article>
+        </div>
+        <aside class="span4 detailsbar">
+            <h1><i class="icon-arrow-down"></i></h1>
+                        <dl>
                                                             </dl>
             <h2>Tags</h2>
             <table class="table table-condensed">
@@ -1153,10 +1178,10 @@ to halt the save.</em></p>
     <div id="source-view" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="source-view-label" aria-hidden="true">
         <div class="modal-header">
             <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
-            <h3 id="source-view-label">BlockAppModel.php</h3>
+            <h3 id="source-view-label">BlockBaseModel.php</h3>
         </div>
         <div class="modal-body">
-            <pre data-src="../files/Plugin/Blocks/Model/BlockAppModel.php.txt" class="language-php line-numbers"></pre>
+            <pre data-src="../files/Plugin/Blocks/Model/BlockBaseModel.php.txt" class="language-php line-numbers"></pre>
         </div>
     </div>
 
@@ -1196,7 +1221,7 @@ to halt the save.</em></p>
                 <section class="span10 offset1">
                     <hr />
                     Documentation is powered by <a href="http://www.phpdoc.org/">phpDocumentor </a> and authored
-                    on July 19th, 2016 at 15:23.
+                    on July 21st, 2016 at 07:49.
                 </section>
             </section>
         </section>
