@@ -1,6 +1,6 @@
 <?php
 /**
- * annoucement_settingsテーブルの追加
+ * AddIndex
  *
  * @author Shohei Nakajima <nakajimashouhei@gmail.com>
  * @link http://www.netcommons.org NetCommons Project
@@ -11,7 +11,7 @@
 App::uses('NetCommonsMigration', 'NetCommons.Config/Migration');
 
 /**
- * annoucement_settingsテーブルの追加
+ * AddIndex
  *
  * @author Shohei Nakajima <nakajimashouhei@gmail.com>
  * @package NetCommons\Announcements\Config\Migration
