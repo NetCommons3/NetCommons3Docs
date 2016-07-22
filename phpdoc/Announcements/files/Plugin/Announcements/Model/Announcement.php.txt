@@ -12,6 +12,7 @@
  */
 
 App::uses('AnnouncementsAppModel', 'Announcements.Model');
+App::uses('BlockSettingBehavior', 'Blocks.Model/Behavior');
 
 /**
  * Announcement Model
@@ -29,6 +30,9 @@ class Announcement extends AnnouncementsAppModel {
 	public $actsAs = array(
 		'Blocks.Block' => array(
 			'name' => 'Announcement.content',
+			'loadModels' => array(
+				'BlockSetting' => 'Blocks.BlockSetting',
+			)
 		),
 		'NetCommons.OriginalKey',
 		'Workflow.WorkflowComment',
@@ -124,13 +128,8 @@ class Announcement extends AnnouncementsAppModel {
 
 		//AnnouncementSetting登録
 		if (isset($this->data['AnnouncementSetting'])) {
-			if (! $this->data['AnnouncementSetting']['block_key']) {
-				$this->data['AnnouncementSetting']['block_key'] = $this->data['Block']['key'];
-			}
 			$this->AnnouncementSetting->set($this->data['AnnouncementSetting']);
-			if (! $this->AnnouncementSetting->save(null, false)) {
-				throw new InternalErrorException(__d('net_commons', 'Internal Server Error'));
-			}
+			$this->AnnouncementSetting->save(null, false);
 		}
 
 		parent::afterSave($created, $options);
@@ -155,7 +154,9 @@ class Announcement extends AnnouncementsAppModel {
 			'recursive' => 0,
 			'conditions' => $this->getBlockConditionById($conditions),
 		));
-
+		if (!$announcement) {
+			return $announcement;
+		}
 		return Hash::merge($announcement, $this->AnnouncementSetting->getAnnouncementSetting());
 	}
 

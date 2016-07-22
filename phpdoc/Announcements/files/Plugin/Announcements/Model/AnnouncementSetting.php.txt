@@ -9,7 +9,8 @@
  * @copyright Copyright 2014, NetCommons Project
  */
 
-App::uses('AnnouncementsAppModel', 'Announcements.Model');
+App::uses('BlockSettingBehavior', 'Blocks.Model/Behavior');
+App::uses('BlockBaseModel', 'Blocks.Model');
 
 /**
  * AnnouncementSetting Model
@@ -17,7 +18,14 @@ App::uses('AnnouncementsAppModel', 'Announcements.Model');
  * @author Shohei Nakajima <nakajimashouhei@gmail.com>
  * @package NetCommons\Announcements\Model
  */
-class AnnouncementSetting extends AnnouncementsAppModel {
+class AnnouncementSetting extends BlockBaseModel {
+
+/**
+ * Custom database table name
+ *
+ * @var string
+ */
+	public $useTable = false;
 
 /**
  * Validation rules
@@ -33,48 +41,20 @@ class AnnouncementSetting extends AnnouncementsAppModel {
  */
 	public $actsAs = array(
 		'Blocks.BlockRolePermission',
+		'Blocks.BlockSetting' => array(
+			BlockSettingBehavior::FIELD_USE_WORKFLOW,
+		),
 	);
-
-/**
- * Called during validation operations, before validation. Please note that custom
- * validation rules can be defined in $validate.
- *
- * @param array $options Options passed from Model::save().
- * @return bool True if validate operation should continue, false to abort
- * @link http://book.cakephp.org/2.0/en/models/callback-methods.html#beforevalidate
- * @see Model::save()
- */
-	public function beforeValidate($options = array()) {
-		$this->validate = Hash::merge($this->validate, array(
-			'block_key' => array(
-				'notBlank' => array(
-					'rule' => array('notBlank'),
-					'message' => __d('net_commons', 'Invalid request.'),
-				),
-			),
-			'use_workflow' => array(
-				'boolean' => array(
-					'rule' => array('boolean'),
-					'message' => __d('net_commons', 'Invalid request.'),
-				),
-			),
-		));
-
-		return parent::beforeValidate($options);
-	}
 
 /**
  * AnnouncementSettingデータ取得
  *
  * @return array
+ * @see BlockSettingBehavior::getBlockSetting() 取得
+ * @see BlockSettingBehavior::_createBlockSetting() 取得で空なら新規登録データ取得
  */
 	public function getAnnouncementSetting() {
-		$announcementSetting = $this->find('first', array(
-			'recursive' => -1,
-			'conditions' => array('block_key' => Current::read('Block.key')),
-		));
-
-		return $announcementSetting;
+		return $this->getBlockSetting();
 	}
 
 /**
@@ -95,9 +75,7 @@ class AnnouncementSetting extends AnnouncementsAppModel {
 		}
 
 		try {
-			if (! $this->save(null, false)) {
-				throw new InternalErrorException(__d('net_commons', 'Internal Server Error'));
-			}
+			$this->save(null, false);
 
 			//トランザクションCommit
 			$this->commit();
