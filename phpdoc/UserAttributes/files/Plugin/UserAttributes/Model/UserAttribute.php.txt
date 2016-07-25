@@ -194,10 +194,10 @@ class UserAttribute extends UserAttributesAppModel {
 /**
  * UserAttribureデータ取得
  *
+ * @param array $conditions 条件配列。主にimport、exportで使用する
  * @return array 会員項目データ配列
- * @SuppressWarnings(PHPMD.BooleanArgumentFlag)
  */
-	public function getUserAttriburesForAutoUserRegist() {
+	public function getUserAttriburesForAutoUserRegist($conditions = array()) {
 		//モデルのロード
 		$this->loadModels([
 			'DataType' => 'DataTypes.DataType',
@@ -206,12 +206,6 @@ class UserAttribute extends UserAttributesAppModel {
 		]);
 
 		//UserAttributeデータ取得
-		$conditions = array(
-			'OR' => array(
-				'UserAttributeSetting.required' => true,
-				'UserAttributeSetting.auto_regist_display' => true,
-			)
-		);
 		$query = $this->findOptionsForLayout($conditions);
 		$query['order'] = array(
 			'UserAttributeSetting.auto_regist_weight' => 'asc',
