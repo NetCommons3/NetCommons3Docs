@@ -53,7 +53,7 @@ class PagesSchema extends CakeSchema {
 	public $languages_pages = array(
 		'id' => array('type' => 'integer', 'null' => false, 'default' => null, 'unsigned' => false, 'key' => 'primary'),
 		'language_id' => array('type' => 'integer', 'null' => false, 'default' => null, 'length' => 6, 'unsigned' => false),
-		'page_id' => array('type' => 'integer', 'null' => false, 'default' => null, 'unsigned' => false),
+		'page_id' => array('type' => 'integer', 'null' => false, 'default' => null, 'unsigned' => false, 'key' => 'index'),
 		'name' => array('type' => 'string', 'null' => false, 'default' => null, 'collate' => 'utf8_general_ci', 'charset' => 'utf8'),
 		'meta_title' => array('type' => 'string', 'null' => true, 'default' => null, 'collate' => 'utf8_general_ci', 'charset' => 'utf8'),
 		'meta_description' => array('type' => 'string', 'null' => true, 'default' => null, 'collate' => 'utf8_general_ci', 'charset' => 'utf8'),
@@ -64,7 +64,8 @@ class PagesSchema extends CakeSchema {
 		'modified_user' => array('type' => 'integer', 'null' => true, 'default' => null, 'unsigned' => false),
 		'modified' => array('type' => 'datetime', 'null' => true, 'default' => null),
 		'indexes' => array(
-			'PRIMARY' => array('column' => 'id', 'unique' => 1)
+			'PRIMARY' => array('column' => 'id', 'unique' => 1),
+			'page_id' => array('column' => array('page_id', 'language_id'), 'unique' => 0)
 		),
 		'tableParameters' => array('charset' => 'utf8', 'collate' => 'utf8_general_ci', 'engine' => 'InnoDB')
 	);
@@ -76,12 +77,12 @@ class PagesSchema extends CakeSchema {
  */
 	public $pages = array(
 		'id' => array('type' => 'integer', 'null' => false, 'default' => null, 'unsigned' => false, 'key' => 'primary', 'comment' => 'Datetime display page from.'),
-		'room_id' => array('type' => 'integer', 'null' => false, 'default' => null, 'unsigned' => false),
+		'room_id' => array('type' => 'integer', 'null' => false, 'default' => null, 'unsigned' => false, 'key' => 'index'),
 		'root_id' => array('type' => 'integer', 'null' => true, 'default' => null, 'unsigned' => false),
-		'parent_id' => array('type' => 'integer', 'null' => true, 'default' => null, 'unsigned' => false),
-		'lft' => array('type' => 'integer', 'null' => true, 'default' => null, 'unsigned' => false),
+		'parent_id' => array('type' => 'integer', 'null' => true, 'default' => null, 'unsigned' => false, 'key' => 'index'),
+		'lft' => array('type' => 'integer', 'null' => true, 'default' => null, 'unsigned' => false, 'key' => 'index'),
 		'rght' => array('type' => 'integer', 'null' => true, 'default' => null, 'unsigned' => false),
-		'permalink' => array('type' => 'text', 'null' => true, 'default' => null, 'collate' => 'utf8_general_ci', 'charset' => 'utf8'),
+		'permalink' => array('type' => 'text', 'null' => true, 'default' => null, 'key' => 'index', 'collate' => 'utf8_general_ci', 'charset' => 'utf8'),
 		'slug' => array('type' => 'string', 'null' => true, 'default' => null, 'collate' => 'utf8_general_ci', 'charset' => 'utf8'),
 		'is_container_fluid' => array('type' => 'boolean', 'null' => false, 'default' => '0'),
 		'theme' => array('type' => 'string', 'null' => true, 'default' => null, 'collate' => 'utf8_general_ci', 'charset' => 'utf8'),
@@ -90,7 +91,11 @@ class PagesSchema extends CakeSchema {
 		'modified_user' => array('type' => 'integer', 'null' => true, 'default' => null, 'unsigned' => false),
 		'modified' => array('type' => 'datetime', 'null' => true, 'default' => null),
 		'indexes' => array(
-			'PRIMARY' => array('column' => 'id', 'unique' => 1)
+			'PRIMARY' => array('column' => 'id', 'unique' => 1),
+			'room_id' => array('column' => 'room_id', 'unique' => 0),
+			'parent_id' => array('column' => 'parent_id', 'unique' => 0),
+			'lft' => array('column' => array('lft', 'rght'), 'unique' => 0),
+			'permalink' => array('column' => 'permalink', 'unique' => 0, 'length' => array('permalink' => '255'))
 		),
 		'tableParameters' => array('charset' => 'utf8', 'collate' => 'utf8_general_ci', 'engine' => 'InnoDB')
 	);
