@@ -136,10 +136,10 @@
                                 <div class="accordion" style="margin-bottom: 0">
         <div class="accordion-group">
             <div class="accordion-heading">
-                                    <a class="accordion-toggle " data-toggle="collapse" data-target="#namespace-750508325"></a>
+                                    <a class="accordion-toggle " data-toggle="collapse" data-target="#namespace-1602702138"></a>
                                 <a href="../namespaces/default.html" style="margin-left: 30px; padding-left: 0">\</a>
             </div>
-            <div id="namespace-750508325" class="accordion-body collapse in">
+            <div id="namespace-1602702138" class="accordion-body collapse in">
                 <div class="accordion-inner">
 
                     
@@ -265,6 +265,7 @@
                                                                     <a href="../classes/BlockSettingBehavior.html#method_beforeSave" class="">beforeSave()</a><br />
                                                                     <a href="../classes/BlockSettingBehavior.html#method_createBlockSetting" class="">createBlockSetting()</a><br />
                                                                     <a href="../classes/BlockSettingBehavior.html#method_getBlockSetting" class="">getBlockSetting()</a><br />
+                                                                    <a href="../classes/BlockSettingBehavior.html#method_isExsistBlockSetting" class="">isExsistBlockSetting()</a><br />
                                                                     <a href="../classes/BlockSettingBehavior.html#method_saveBlockSetting" class="">saveBlockSetting()</a><br />
                                                                     <a href="../classes/BlockSettingBehavior.html#method_validateBlockSetting" class="">validateBlockSetting()</a><br />
                                                             </section>
@@ -746,11 +747,52 @@ public $actsAs = array(
 
                                     <div class="row-fluid">
         <div class="span8 content class">
+            <a id="method_isExsistBlockSetting" name="method_isExsistBlockSetting" class="anchor"></a>
+            <article class="method">
+                <h3 class="public ">isExsistBlockSetting()</h3>
+                <a href="#source-view" role="button" class="pull-right btn" data-toggle="modal" style="font-size: 1.1em; padding: 9px 14px"><i class="icon-code"></i></a>
+                <pre class="signature" style="margin-right: 54px;">isExsistBlockSetting(\Model  <span class="argument">$model</span>, string  <span class="argument">$blockKey = null</span>) : boolean</pre>
+                <p><em>BlockSettingデータ存在するか</em></p>
+                
+
+                                    <h4>Parameters</h4>
+                    <table class="table table-condensed table-hover">
+                                                    <tr>
+                                <td>\Model</td>
+                                <td>$model </td>
+                                <td><p>モデル</p></td>
+                            </tr>
+                                                    <tr>
+                                <td>string</td>
+                                <td>$blockKey </td>
+                                <td><p>ブロックキー</p></td>
+                            </tr>
+                                            </table>
+                
+                
+                                    <h4>Returns</h4>
+                    boolean
+                                    				
+                            </article>
+        </div>
+        <aside class="span4 detailsbar">
+            <h1><i class="icon-arrow-down"></i></h1>
+                                                            <dl>
+                                                                            </dl>
+            <h2>Tags</h2>
+            <table class="table table-condensed">
+                                    <tr><td colspan="2"><em>None found</em></td></tr>
+                            </table>
+        </aside>
+    </div>
+
+                                    <div class="row-fluid">
+        <div class="span8 content class">
             <a id="method_saveBlockSetting" name="method_saveBlockSetting" class="anchor"></a>
             <article class="method">
                 <h3 class="public ">saveBlockSetting()</h3>
                 <a href="#source-view" role="button" class="pull-right btn" data-toggle="modal" style="font-size: 1.1em; padding: 9px 14px"><i class="icon-code"></i></a>
-                <pre class="signature" style="margin-right: 54px;">saveBlockSetting(\Model  <span class="argument">$model</span>) : mixed</pre>
+                <pre class="signature" style="margin-right: 54px;">saveBlockSetting(\Model  <span class="argument">$model</span>, string  <span class="argument">$blockKey = null</span>) : mixed</pre>
                 <p><em>BlockSettingデータ保存</em></p>
                 <h3>仕組み</h3>
 <p>各プラグインの[横]の入力値を、BlockSettingをブロックキーで検索した縦データにセット or
@@ -815,6 +857,11 @@ array(
                                 <td>$model </td>
                                 <td><p>モデル</p></td>
                             </tr>
+                                                    <tr>
+                                <td>string</td>
+                                <td>$blockKey </td>
+                                <td><p>ブロックキー</p></td>
+                            </tr>
                                             </table>
                 
                                     <h4>Throws</h4>
@@ -846,7 +893,7 @@ array(
             <article class="method">
                 <h3 class="public ">validateBlockSetting()</h3>
                 <a href="#source-view" role="button" class="pull-right btn" data-toggle="modal" style="font-size: 1.1em; padding: 9px 14px"><i class="icon-code"></i></a>
-                <pre class="signature" style="margin-right: 54px;">validateBlockSetting(\Model  <span class="argument">$model</span>) : boolean</pre>
+                <pre class="signature" style="margin-right: 54px;">validateBlockSetting(\Model  <span class="argument">$model</span>, string  <span class="argument">$blockKey = null</span>) : boolean</pre>
                 <p><em>ブロックセッティングのValidate追加処理</em></p>
                 
 
@@ -856,6 +903,11 @@ array(
                                 <td>\Model</td>
                                 <td>$model </td>
                                 <td><p>モデル</p></td>
+                            </tr>
+                                                    <tr>
+                                <td>string</td>
+                                <td>$blockKey </td>
+                                <td><p>ブロックキー</p></td>
                             </tr>
                                             </table>
                 
@@ -1024,7 +1076,7 @@ room.need_approvalによって、値変わる</em></p>
                 <section class="span10 offset1">
                     <hr />
                     Documentation is powered by <a href="http://www.phpdoc.org/">phpDocumentor </a> and authored
-                    on July 22nd, 2016 at 09:24.
+                    on July 26th, 2016 at 09:18.
                 </section>
             </section>
         </section>
