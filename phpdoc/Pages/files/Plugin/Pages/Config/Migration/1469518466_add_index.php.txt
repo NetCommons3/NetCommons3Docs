@@ -51,7 +51,7 @@ class AddIndex extends CakeMigration {
 						'room_id' => array('column' => 'room_id', 'unique' => 0),
 						'parent_id' => array('column' => 'parent_id', 'unique' => 0),
 						'lft' => array('column' => array('lft', 'rght'), 'unique' => 0),
-						'permalink' => array('column' => 'permalink', 'unique' => 0, 'length' => array('255')),
+						'permalink' => array('column' => 'permalink', 'unique' => 0, 'length' => array('permalink' => '255')),
 					),
 				),
 			),
