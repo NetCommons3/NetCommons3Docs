@@ -72,7 +72,7 @@ class RoomsSchema extends CakeSchema {
 	public $roles_rooms_users = array(
 		'id' => array('type' => 'integer', 'null' => false, 'default' => null, 'unsigned' => false, 'key' => 'primary'),
 		'roles_room_id' => array('type' => 'integer', 'null' => false, 'default' => null, 'unsigned' => false),
-		'user_id' => array('type' => 'integer', 'null' => false, 'default' => null, 'unsigned' => false),
+		'user_id' => array('type' => 'integer', 'null' => false, 'default' => null, 'unsigned' => false, 'key' => 'index'),
 		'room_id' => array('type' => 'integer', 'null' => false, 'default' => null, 'unsigned' => false),
 		'access_count' => array('type' => 'integer', 'null' => false, 'default' => '0', 'unsigned' => false),
 		'last_accessed' => array('type' => 'datetime', 'null' => true, 'default' => null),
@@ -82,7 +82,8 @@ class RoomsSchema extends CakeSchema {
 		'modified_user' => array('type' => 'integer', 'null' => true, 'default' => null, 'unsigned' => false),
 		'modified' => array('type' => 'datetime', 'null' => true, 'default' => null),
 		'indexes' => array(
-			'PRIMARY' => array('column' => 'id', 'unique' => 1)
+			'PRIMARY' => array('column' => 'id', 'unique' => 1),
+			'user_id' => array('column' => array('user_id', 'room_id'), 'unique' => 0)
 		),
 		'tableParameters' => array('charset' => 'utf8', 'collate' => 'utf8_general_ci', 'engine' => 'InnoDB')
 	);
@@ -94,7 +95,7 @@ class RoomsSchema extends CakeSchema {
  */
 	public $room_role_permissions = array(
 		'id' => array('type' => 'integer', 'null' => false, 'default' => null, 'unsigned' => false, 'key' => 'primary'),
-		'roles_room_id' => array('type' => 'integer', 'null' => false, 'default' => null, 'unsigned' => false, 'comment' => 'Role type
+		'roles_room_id' => array('type' => 'integer', 'null' => false, 'default' => null, 'unsigned' => false, 'key' => 'index', 'comment' => 'Role type
 e.g.) roomRole, announcementBlockRole, bbsBlockRole
 '),
 		'permission' => array('type' => 'string', 'null' => true, 'default' => null, 'collate' => 'utf8_general_ci', 'comment' => 'Permission name
@@ -105,7 +106,8 @@ e.g.) createPage, editOtherContent, publishContent', 'charset' => 'utf8'),
 		'modified_user' => array('type' => 'integer', 'null' => true, 'default' => null, 'unsigned' => false),
 		'modified' => array('type' => 'datetime', 'null' => true, 'default' => null),
 		'indexes' => array(
-			'PRIMARY' => array('column' => 'id', 'unique' => 1)
+			'PRIMARY' => array('column' => 'id', 'unique' => 1),
+			'roles_room_id' => array('column' => 'roles_room_id', 'unique' => 0)
 		),
 		'tableParameters' => array('charset' => 'utf8', 'collate' => 'utf8_general_ci', 'engine' => 'InnoDB')
 	);
@@ -117,7 +119,7 @@ e.g.) createPage, editOtherContent, publishContent', 'charset' => 'utf8'),
  */
 	public $room_roles = array(
 		'id' => array('type' => 'integer', 'null' => false, 'default' => null, 'unsigned' => false, 'key' => 'primary'),
-		'role_key' => array('type' => 'string', 'null' => false, 'default' => null, 'collate' => 'utf8_general_ci', 'charset' => 'utf8'),
+		'role_key' => array('type' => 'string', 'null' => false, 'default' => null, 'key' => 'index', 'collate' => 'utf8_general_ci', 'charset' => 'utf8'),
 		'level' => array('type' => 'integer', 'null' => true, 'default' => null, 'unsigned' => false, 'comment' => '下位レベルに与えた権限を上位に与える時に使用。大きいほうが上位。'),
 		'weight' => array('type' => 'integer', 'null' => true, 'default' => null, 'unsigned' => false, 'comment' => 'Display order'),
 		'created_user' => array('type' => 'integer', 'null' => true, 'default' => null, 'unsigned' => false),
@@ -125,7 +127,8 @@ e.g.) createPage, editOtherContent, publishContent', 'charset' => 'utf8'),
 		'modified_user' => array('type' => 'integer', 'null' => true, 'default' => null, 'unsigned' => false),
 		'modified' => array('type' => 'datetime', 'null' => true, 'default' => null),
 		'indexes' => array(
-			'PRIMARY' => array('column' => 'id', 'unique' => 1)
+			'PRIMARY' => array('column' => 'id', 'unique' => 1),
+			'role_key' => array('column' => 'role_key', 'unique' => 0)
 		),
 		'tableParameters' => array('charset' => 'utf8', 'collate' => 'utf8_general_ci', 'engine' => 'InnoDB')
 	);
@@ -137,14 +140,14 @@ e.g.) createPage, editOtherContent, publishContent', 'charset' => 'utf8'),
  */
 	public $rooms = array(
 		'id' => array('type' => 'integer', 'null' => false, 'default' => null, 'unsigned' => false, 'key' => 'primary'),
-		'space_id' => array('type' => 'integer', 'null' => true, 'default' => null, 'unsigned' => false),
+		'space_id' => array('type' => 'integer', 'null' => true, 'default' => null, 'unsigned' => false, 'key' => 'index'),
 		'page_id_top' => array('type' => 'integer', 'null' => true, 'default' => null, 'unsigned' => false),
 		'root_id' => array('type' => 'integer', 'null' => true, 'default' => null, 'unsigned' => false),
 		'parent_id' => array('type' => 'integer', 'null' => true, 'default' => null, 'unsigned' => false),
 		'lft' => array('type' => 'integer', 'null' => true, 'default' => null, 'unsigned' => false),
 		'rght' => array('type' => 'integer', 'null' => true, 'default' => null, 'unsigned' => false),
 		'active' => array('type' => 'boolean', 'null' => true, 'default' => null),
-		'in_draft' => array('type' => 'boolean', 'null' => false, 'default' => false, 'comment' => '作成中かどうか。1: 作成中、0: 確定'),
+		'in_draft' => array('type' => 'boolean', 'null' => false, 'default' => '0', 'comment' => '作成中かどうか。1: 作成中、0: 確定'),
 		'default_role_key' => array('type' => 'string', 'null' => false, 'default' => null, 'collate' => 'utf8_general_ci', 'comment' => '「ルーム内の役割」のデフォルト値', 'charset' => 'utf8'),
 		'need_approval' => array('type' => 'boolean', 'null' => true, 'default' => null),
 		'default_participation' => array('type' => 'boolean', 'null' => true, 'default' => null),
@@ -155,7 +158,8 @@ e.g.) createPage, editOtherContent, publishContent', 'charset' => 'utf8'),
 		'modified_user' => array('type' => 'integer', 'null' => true, 'default' => null, 'unsigned' => false),
 		'modified' => array('type' => 'datetime', 'null' => true, 'default' => null),
 		'indexes' => array(
-			'PRIMARY' => array('column' => 'id', 'unique' => 1)
+			'PRIMARY' => array('column' => 'id', 'unique' => 1),
+			'space_id' => array('column' => array('space_id', 'page_id_top', 'lft'), 'unique' => 0)
 		),
 		'tableParameters' => array('charset' => 'utf8', 'collate' => 'utf8_general_ci', 'engine' => 'InnoDB')
 	);
@@ -168,14 +172,15 @@ e.g.) createPage, editOtherContent, publishContent', 'charset' => 'utf8'),
 	public $rooms_languages = array(
 		'id' => array('type' => 'integer', 'null' => false, 'default' => null, 'unsigned' => false, 'key' => 'primary'),
 		'language_id' => array('type' => 'integer', 'null' => false, 'default' => null, 'length' => 6, 'unsigned' => false),
-		'room_id' => array('type' => 'integer', 'null' => false, 'default' => null, 'unsigned' => false),
+		'room_id' => array('type' => 'integer', 'null' => false, 'default' => null, 'unsigned' => false, 'key' => 'index'),
 		'name' => array('type' => 'string', 'null' => false, 'default' => null, 'collate' => 'utf8_general_ci', 'charset' => 'utf8'),
 		'created_user' => array('type' => 'integer', 'null' => true, 'default' => null, 'unsigned' => false),
 		'created' => array('type' => 'datetime', 'null' => true, 'default' => null),
 		'modified_user' => array('type' => 'integer', 'null' => true, 'default' => null, 'unsigned' => false),
 		'modified' => array('type' => 'datetime', 'null' => true, 'default' => null),
 		'indexes' => array(
-			'PRIMARY' => array('column' => 'id', 'unique' => 1)
+			'PRIMARY' => array('column' => 'id', 'unique' => 1),
+			'room_id' => array('column' => 'room_id', 'unique' => 0)
 		),
 		'tableParameters' => array('charset' => 'utf8', 'collate' => 'utf8_general_ci', 'engine' => 'InnoDB')
 	);
