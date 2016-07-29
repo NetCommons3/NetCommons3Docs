@@ -136,10 +136,10 @@
                                 <div class="accordion" style="margin-bottom: 0">
         <div class="accordion-group">
             <div class="accordion-heading">
-                                    <a class="accordion-toggle " data-toggle="collapse" data-target="#namespace-152003627"></a>
+                                    <a class="accordion-toggle " data-toggle="collapse" data-target="#namespace-1312131896"></a>
                                 <a href="../namespaces/default.html" style="margin-left: 30px; padding-left: 0">\</a>
             </div>
-            <div id="namespace-152003627" class="accordion-body collapse in">
+            <div id="namespace-1312131896" class="accordion-body collapse in">
                 <div class="accordion-inner">
 
                     
@@ -237,10 +237,9 @@
                                             </nav>
                     <a href="#source-view" role="button" class="pull-right btn" data-toggle="modal"><i class="icon-code"></i></a>
 
-                    <h1><small>\</small>UserAttributeLayoutsController</h1>
-                    <p><em>UserAttributes Controller</em></p>
-                    <p>Add your application-wide methods in the class below, your controllers
-will inherit them.</p>
+                    <h1><small>\</small>AddIndex</h1>
+                    <p><em>Init migration</em></p>
+                    
                     
                                         
                     <section id="summary">
@@ -258,12 +257,12 @@ will inherit them.</p>
                         </section>
                         <section class="row-fluid public">
                             <section class="span4">
-                                                                    <a href="../classes/UserAttributesAppController.html#method_beforeFilter" class="">beforeFilter()</a><br />
-                                                                    <a href="../classes/UserAttributeLayoutsController.html#method_edit" class="">edit()</a><br />
+                                                                    <a href="../classes/AddIndex.html#method_before" class="">before()</a><br />
+                                                                    <a href="../classes/AddIndex.html#method_after" class="">after()</a><br />
                                                             </section>
                             <section class="span4">
-                                                                    <a href="../classes/UserAttributesAppController.html#property_components" class="">$components</a><br />
-                                                                    <a href="../classes/UserAttributeLayoutsController.html#property_uses" class="">$uses</a><br />
+                                                                    <a href="../classes/AddIndex.html#property_description" class="">$description</a><br />
+                                                                    <a href="../classes/AddIndex.html#property_migration" class="">$migration</a><br />
                                                             </section>
                             <section class="span4">
                                                                     <em>No constants found</em>
@@ -298,18 +297,14 @@ will inherit them.</p>
                     
                     <dl>
                         <dt>File</dt>
-                            <dd><a href="../files/Plugin.UserAttributes.Controller.UserAttributeLayoutsController.html"><div class="path-wrapper">Plugin/UserAttributes/Controller/UserAttributeLayoutsController.php</div></a></dd>
+                            <dd><a href="../files/Plugin.UserAttributes.Config.Migration.1469761648_add_index.html"><div class="path-wrapper">Plugin/UserAttributes/Config/Migration/1469761648_add_index.php</div></a></dd>
                                                 <dt>Package</dt>
-                            <dd><div class="namespace-wrapper">UserAttributes\Controller</div></dd>
+                            <dd><div class="namespace-wrapper">Config\Migration</div></dd>
                                                 <dt>Class hierarchy</dt>
                             <dd class="hierarchy">
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                        
-                                        <div class="namespace-wrapper">\Controller</div>
-                                                                    
-                                        <div class="namespace-wrapper"><a href="../classes/AppController.html">\AppController</a></div>
-                                                                    
-                                        <div class="namespace-wrapper"><a href="../classes/UserAttributesAppController.html">\UserAttributesAppController</a></div>
-                                                                                                    <div class="namespace-wrapper">\UserAttributeLayoutsController</div>
+                                                                                                                                                                                                                                                                                                
+                                        <div class="namespace-wrapper">\CakeMigration</div>
+                                                                                                    <div class="namespace-wrapper">\AddIndex</div>
                             </dd>
 
                         
@@ -319,14 +314,7 @@ will inherit them.</p>
                                                                         </dl>
                     <h2>Tags</h2>
                     <table class="table table-condensed">
-                                            <tr>
-                            <th>
-                                author
-                            </th>
-                            <td>
-                                                                    <p>Shohei Nakajima <a href="mailto:nakajimashouhei@gmail.com">nakajimashouhei@gmail.com</a></p>
-                                                            </td>
-                        </tr>
+                                            <tr><td colspan="2"><em>None found</em></td></tr>
                                         </table>
                 </aside>
             </div>
@@ -342,22 +330,20 @@ will inherit them.</p>
 
                                     <div class="row-fluid">
         <div class="span8 content class">
-            <a id="property_components" name="property_components" class="anchor"></a>
+            <a id="property_description" name="property_description" class="anchor"></a>
             <article class="property">
-                <h3 class="public ">$components</h3>
-                <pre class="signature">$components : array</pre>
-                <p><em>use component</em></p>
+                <h3 class="public ">$description</h3>
+                <pre class="signature">$description : string</pre>
+                <p><em>Migration description</em></p>
                 
 
                                 <h4>Type</h4>
-                array
+                string
                                             </article>
         </div>
         <aside class="span4 detailsbar">
             <h1><i class="icon-arrow-down"></i></h1>
                         <dl>
-                                    <dt>Inherited from</dt>
-                    <dd><a href="../classes/UserAttributesAppController.html"><div class="path-wrapper">\UserAttributesAppController</div></a></dd>
                                                             </dl>
             <h2>Tags</h2>
             <table class="table table-condensed">
@@ -368,11 +354,11 @@ will inherit them.</p>
 
                                     <div class="row-fluid">
         <div class="span8 content class">
-            <a id="property_uses" name="property_uses" class="anchor"></a>
+            <a id="property_migration" name="property_migration" class="anchor"></a>
             <article class="property">
-                <h3 class="public ">$uses</h3>
-                <pre class="signature">$uses : array</pre>
-                <p><em>use model</em></p>
+                <h3 class="public ">$migration</h3>
+                <pre class="signature">$migration : array</pre>
+                <p><em>Actions to be performed</em></p>
                 
 
                                 <h4>Type</h4>
@@ -399,25 +385,34 @@ will inherit them.</p>
 
                                     <div class="row-fluid">
         <div class="span8 content class">
-            <a id="method_beforeFilter" name="method_beforeFilter" class="anchor"></a>
+            <a id="method_before" name="method_before" class="anchor"></a>
             <article class="method">
-                <h3 class="public ">beforeFilter()</h3>
+                <h3 class="public ">before()</h3>
                 <a href="#source-view" role="button" class="pull-right btn" data-toggle="modal" style="font-size: 1.1em; padding: 9px 14px"><i class="icon-code"></i></a>
-                <pre class="signature" style="margin-right: 54px;">beforeFilter() : void</pre>
-                <p><em>beforeFilter</em></p>
+                <pre class="signature" style="margin-right: 54px;">before(string  <span class="argument">$direction</span>) : boolean</pre>
+                <p><em>Before migration callback</em></p>
                 
 
+                                    <h4>Parameters</h4>
+                    <table class="table table-condensed table-hover">
+                                                    <tr>
+                                <td>string</td>
+                                <td>$direction </td>
+                                <td><p>Direction of migration process (up or down)</p></td>
+                            </tr>
+                                            </table>
                 
                 
-                				
+                                    <h4>Returns</h4>
+                    boolean
+                                            &mdash; <p>Should process continue</p>
+                                    				
                             </article>
         </div>
         <aside class="span4 detailsbar">
             <h1><i class="icon-arrow-down"></i></h1>
                                                             <dl>
-                                                    <dt>Inherited from</dt>
-                    <dd><a href="../classes/UserAttributesAppController.html"><div class="path-wrapper">\UserAttributesAppController</div></a></dd>
-                                                            </dl>
+                                                                            </dl>
             <h2>Tags</h2>
             <table class="table table-condensed">
                                     <tr><td colspan="2"><em>None found</em></td></tr>
@@ -427,17 +422,28 @@ will inherit them.</p>
 
                                     <div class="row-fluid">
         <div class="span8 content class">
-            <a id="method_edit" name="method_edit" class="anchor"></a>
+            <a id="method_after" name="method_after" class="anchor"></a>
             <article class="method">
-                <h3 class="public ">edit()</h3>
+                <h3 class="public ">after()</h3>
                 <a href="#source-view" role="button" class="pull-right btn" data-toggle="modal" style="font-size: 1.1em; padding: 9px 14px"><i class="icon-code"></i></a>
-                <pre class="signature" style="margin-right: 54px;">edit() : void</pre>
-                <p><em>edit</em></p>
+                <pre class="signature" style="margin-right: 54px;">after(string  <span class="argument">$direction</span>) : boolean</pre>
+                <p><em>After migration callback</em></p>
                 
 
+                                    <h4>Parameters</h4>
+                    <table class="table table-condensed table-hover">
+                                                    <tr>
+                                <td>string</td>
+                                <td>$direction </td>
+                                <td><p>Direction of migration process (up or down)</p></td>
+                            </tr>
+                                            </table>
                 
                 
-                				
+                                    <h4>Returns</h4>
+                    boolean
+                                            &mdash; <p>Should process continue</p>
+                                    				
                             </article>
         </div>
         <aside class="span4 detailsbar">
@@ -457,10 +463,10 @@ will inherit them.</p>
     <div id="source-view" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="source-view-label" aria-hidden="true">
         <div class="modal-header">
             <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
-            <h3 id="source-view-label">UserAttributeLayoutsController.php</h3>
+            <h3 id="source-view-label">1469761648_add_index.php</h3>
         </div>
         <div class="modal-body">
-            <pre data-src="../files/Plugin/UserAttributes/Controller/UserAttributeLayoutsController.php.txt" class="language-php line-numbers"></pre>
+            <pre data-src="../files/Plugin/UserAttributes/Config/Migration/1469761648_add_index.php.txt" class="language-php line-numbers"></pre>
         </div>
     </div>
 

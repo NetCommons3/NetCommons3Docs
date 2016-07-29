@@ -53,7 +53,7 @@ class UserAttributesSchema extends CakeSchema {
 	public $user_attribute_choices = array(
 		'id' => array('type' => 'integer', 'null' => false, 'default' => null, 'unsigned' => false, 'key' => 'primary'),
 		'language_id' => array('type' => 'integer', 'null' => false, 'default' => null, 'length' => 6, 'unsigned' => false),
-		'user_attribute_id' => array('type' => 'integer', 'null' => true, 'default' => null, 'unsigned' => false),
+		'user_attribute_id' => array('type' => 'integer', 'null' => true, 'default' => null, 'unsigned' => false, 'key' => 'index'),
 		'key' => array('type' => 'string', 'null' => false, 'default' => null, 'collate' => 'utf8_general_ci', 'charset' => 'utf8'),
 		'name' => array('type' => 'string', 'null' => false, 'default' => null, 'collate' => 'utf8_general_ci', 'charset' => 'utf8'),
 		'code' => array('type' => 'string', 'null' => false, 'default' => null, 'collate' => 'utf8_general_ci', 'charset' => 'utf8'),
@@ -63,7 +63,8 @@ class UserAttributesSchema extends CakeSchema {
 		'modified_user' => array('type' => 'integer', 'null' => true, 'default' => null, 'unsigned' => false),
 		'modified' => array('type' => 'datetime', 'null' => true, 'default' => null),
 		'indexes' => array(
-			'PRIMARY' => array('column' => 'id', 'unique' => 1)
+			'PRIMARY' => array('column' => 'id', 'unique' => 1),
+			'user_attribute_id' => array('column' => 'user_attribute_id', 'unique' => 0)
 		),
 		'tableParameters' => array('charset' => 'utf8', 'collate' => 'utf8_general_ci', 'engine' => 'InnoDB')
 	);
@@ -93,8 +94,8 @@ class UserAttributesSchema extends CakeSchema {
  */
 	public $user_attribute_settings = array(
 		'id' => array('type' => 'integer', 'null' => false, 'default' => null, 'unsigned' => false, 'key' => 'primary'),
-		'user_attribute_key' => array('type' => 'string', 'null' => false, 'default' => null, 'collate' => 'utf8_general_ci', 'charset' => 'utf8'),
-		'data_type_key' => array('type' => 'string', 'null' => false, 'default' => 'text', 'collate' => 'utf8_general_ci', 'charset' => 'utf8'),
+		'user_attribute_key' => array('type' => 'string', 'null' => false, 'default' => null, 'key' => 'index', 'collate' => 'utf8_general_ci', 'charset' => 'utf8'),
+		'data_type_key' => array('type' => 'string', 'null' => false, 'default' => 'text', 'key' => 'index', 'collate' => 'utf8_general_ci', 'charset' => 'utf8'),
 		'row' => array('type' => 'integer', 'null' => false, 'default' => null, 'length' => 4, 'unsigned' => false),
 		'col' => array('type' => 'integer', 'null' => false, 'default' => null, 'length' => 4, 'unsigned' => false),
 		'weight' => array('type' => 'integer', 'null' => true, 'default' => null, 'unsigned' => false, 'comment' => '表示順'),
@@ -115,7 +116,9 @@ class UserAttributesSchema extends CakeSchema {
 		'modified_user' => array('type' => 'integer', 'null' => true, 'default' => null, 'unsigned' => false),
 		'modified' => array('type' => 'datetime', 'null' => true, 'default' => null),
 		'indexes' => array(
-			'PRIMARY' => array('column' => 'id', 'unique' => 1)
+			'PRIMARY' => array('column' => 'id', 'unique' => 1),
+			'user_attribute_key' => array('column' => 'user_attribute_key', 'unique' => 0),
+			'data_type_key' => array('column' => 'data_type_key', 'unique' => 0)
 		),
 		'tableParameters' => array('charset' => 'utf8', 'collate' => 'utf8_general_ci', 'engine' => 'InnoDB')
 	);
@@ -128,7 +131,7 @@ class UserAttributesSchema extends CakeSchema {
 	public $user_attributes = array(
 		'id' => array('type' => 'integer', 'null' => false, 'default' => null, 'unsigned' => false, 'key' => 'primary'),
 		'language_id' => array('type' => 'integer', 'null' => false, 'default' => null, 'length' => 6, 'unsigned' => false),
-		'key' => array('type' => 'string', 'null' => false, 'default' => null, 'collate' => 'utf8_general_ci', 'charset' => 'utf8'),
+		'key' => array('type' => 'string', 'null' => false, 'default' => null, 'key' => 'index', 'collate' => 'utf8_general_ci', 'charset' => 'utf8'),
 		'name' => array('type' => 'string', 'null' => false, 'default' => null, 'collate' => 'utf8_general_ci', 'charset' => 'utf8'),
 		'description' => array('type' => 'text', 'null' => true, 'default' => null, 'collate' => 'utf8_general_ci', 'charset' => 'utf8'),
 		'created_user' => array('type' => 'integer', 'null' => true, 'default' => null, 'unsigned' => false),
@@ -136,7 +139,8 @@ class UserAttributesSchema extends CakeSchema {
 		'modified_user' => array('type' => 'integer', 'null' => true, 'default' => null, 'unsigned' => false),
 		'modified' => array('type' => 'datetime', 'null' => true, 'default' => null),
 		'indexes' => array(
-			'PRIMARY' => array('column' => 'id', 'unique' => 1)
+			'PRIMARY' => array('column' => 'id', 'unique' => 1),
+			'key' => array('column' => 'key', 'unique' => 0)
 		),
 		'tableParameters' => array('charset' => 'utf8', 'collate' => 'utf8_general_ci', 'engine' => 'InnoDB')
 	);
