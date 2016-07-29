@@ -13,6 +13,7 @@ App::uses('DataType', 'DataTypes.Model');
 App::uses('ModelBehavior', 'Model');
 App::uses('CakeMigration', 'Migrations.Lib');
 App::uses('UserAttribute', 'UserAttributes.Model');
+App::uses('Current', 'NetCommons.Utility');
 
 /**
  * DefaultUserRole Behavior
