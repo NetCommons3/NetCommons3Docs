@@ -34,6 +34,7 @@ class AddIndex extends CakeMigration {
 					'role_key' => array('type' => 'string', 'null' => false, 'default' => null, 'key' => 'index', 'collate' => 'utf8_general_ci', 'charset' => 'utf8'),
 				),
 				'roles' => array(
+					'key' => array('type' => 'string', 'null' => true, 'default' => null, 'key' => 'index', 'collate' => 'utf8_general_ci', 'comment' => 'Key of the role.', 'charset' => 'utf8'),
 					'type' => array('type' => 'integer', 'null' => false, 'default' => null, 'unsigned' => false, 'key' => 'index', 'comment' => 'Type of the role. 1: User role, 2: Room role'),
 					'description' => array('type' => 'text', 'null' => true, 'default' => null, 'collate' => 'utf8_general_ci', 'charset' => 'utf8'),
 				),
@@ -47,6 +48,7 @@ class AddIndex extends CakeMigration {
 				'roles' => array(
 					'indexes' => array(
 						'type' => array('column' => array('type', 'language_id'), 'unique' => 0),
+						'key' => array('column' => array('key', 'language_id'), 'unique' => 0),
 					),
 				),
 			),
@@ -57,13 +59,14 @@ class AddIndex extends CakeMigration {
 					'role_key' => array('type' => 'string', 'null' => false, 'default' => null, 'collate' => 'utf8_general_ci', 'charset' => 'utf8'),
 				),
 				'roles' => array(
+					'key' => array('type' => 'string', 'null' => true, 'default' => null, 'collate' => 'utf8_general_ci', 'comment' => 'Key of the role.', 'charset' => 'utf8'),
 					'type' => array('type' => 'integer', 'null' => false, 'default' => null, 'unsigned' => false, 'comment' => 'Type of the role. 1: User role, 2: Room role'),
 					'description' => array('type' => 'text', 'null' => false, 'default' => null, 'collate' => 'utf8_general_ci', 'comment' => '', 'charset' => 'utf8'),
 				),
 			),
 			'drop_field' => array(
 				'default_role_permissions' => array('indexes' => array('role_key')),
-				'roles' => array('indexes' => array('type')),
+				'roles' => array('indexes' => array('type', 'key')),
 			),
 		),
 	);
