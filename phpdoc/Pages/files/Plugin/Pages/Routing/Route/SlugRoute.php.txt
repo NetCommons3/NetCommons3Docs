@@ -27,7 +27,7 @@ class SlugRoute extends CakeRoute {
 		$Page = ClassRegistry::init('Pages.Page');
 		$dataSource = ConnectionManager::getDataSource($Page->useDbConfig);
 		$tables = $dataSource->listSources();
-		if (!in_array($Page->useTable, $tables)) {
+		if (! in_array($Page->tablePrefix . $Page->useTable, $tables)) {
 			return false;
 		}
 
