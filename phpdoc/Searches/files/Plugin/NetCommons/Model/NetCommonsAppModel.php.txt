@@ -2,6 +2,7 @@
 /**
  * NetCommonsApp Model
  *
+ * @author Shohei Nakajima <nakajimashouhei@gmail.com>
  * @author Jun Nishikawa <topaz2@m0n0m0n0.com>
  * @author Takako Miyagawa <nekoget@gmail.com>
  * @link http://www.netcommons.org NetCommons Project
@@ -24,6 +25,7 @@ App::uses('Model', 'Model');
  * [getDataSource](#method_getDataSource)<br>
  * [create](#method_create)<br>
  *
+ * @author Shohei Nakajima <nakajimashouhei@gmail.com>
  * @author Jun Nishikawa <topaz2@m0n0m0n0.com>
  * @author Takako Miyagawa <nekoget@gmail.com>
  * @package NetCommons\NetCommons\Model
@@ -67,6 +69,30 @@ class NetCommonsAppModel extends Model {
  * @var string
  */
 	public $useDbConfig = 'master';
+
+/**
+ * ブロックId
+ * Behaviorで関連データ削除する際に使用する
+ *
+ * @var string
+ */
+	public $blockId = null;
+
+/**
+ * ブロックKey
+ * Behaviorで関連データ削除する際に使用する
+ *
+ * @var string
+ */
+	public $blockKey = null;
+
+/**
+ * コンテンツKey
+ * Behaviorで関連データ削除する際に使用する
+ *
+ * @var string
+ */
+	public $contentKey = null;
 
 /**
  * Constructor. DataSourceの選択

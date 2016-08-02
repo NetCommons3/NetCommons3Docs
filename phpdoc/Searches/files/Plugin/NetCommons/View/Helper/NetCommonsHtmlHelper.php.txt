@@ -57,6 +57,7 @@ class NetCommonsHtmlHelper extends AppHelper {
 			$helper = $this->MailsHtml;
 			$method = 'help';
 		} elseif ($method === 'titleIcon') {
+			$this->script('/net_commons/js/title_icon_picker.js');
 			$helper = $this->_View->loadHelper('NetCommons.TitleIcon');
 		} elseif ($method === 'dateFormat') {
 			$helper = $this->Date;
@@ -145,15 +146,23 @@ class NetCommonsHtmlHelper extends AppHelper {
 			if (! isset($url['action'])) {
 				$url['action'] = $this->_View->request->params['action'];
 			}
-			if (! isset($url['block_id']) && Current::read('Block.id')) {
-				$url['block_id'] = Current::read('Block.id');
-			}
-			if (! isset($url['frame_id']) && Current::read('Frame.id')) {
-				$url['frame_id'] = Current::read('Frame.id');
-			}
-			$url = NetCommonsUrl::actionUrl($url);
 		}
-		return $url;
+		return NetCommonsUrl::blockUrl($url);
+	}
+
+/**
+ * ImageのURLの取得
+ *
+ * @param mixed $path URL
+ * @param array $options HTML属性オプション
+ * @return string URL
+ * @link http://book.cakephp.org/2.0/ja/core-libraries/helpers/html.html#HtmlHelper::url HtmlHelper::url
+ */
+	public function image($path, $options = array()) {
+		//URLの設定
+		$path = $this->__getUrl($path);
+		$output = $this->Html->image($path, $options);
+		return $output;
 	}
 
 /**
@@ -199,15 +208,22 @@ class NetCommonsHtmlHelper extends AppHelper {
  * ```
  *
  * @param string $text タイトル
+ * @param string $titleIcon タイトルアイコン
  * @param array $options HTML属性オプション
  * @return string `<h1>`タグ
  */
-	public function blockTitle($text = '', $options = array()) {
+	public function blockTitle($text = '', $titleIcon = null, $options = array()) {
 		$output = '';
 
-		$options = Hash::merge(
-			array('escape' => true), $options
-		);
+		$escape = Hash::get($options, 'escape', true);
+		if ($escape) {
+			$text = h($text);
+		}
+		$options = Hash::insert($options, 'escape', false);
+
+		if ($titleIcon) {
+			$text = $this->titleIcon($titleIcon) . ' ' . $text;
+		}
 
 		$output .= $this->Html->tag('h1', $text, $options);
 		return $output;
@@ -238,13 +254,7 @@ class NetCommonsHtmlHelper extends AppHelper {
 		if (! isset($url['action'])) {
 			$url['action'] = 'edit';
 		}
-		if (! isset($url['block_id']) && Current::read('Block.id')) {
-			$url['block_id'] = Current::read('Block.id');
-		}
-		if (! isset($url['frame_id']) && Current::read('Frame.id')) {
-			$url['frame_id'] = Current::read('Frame.id');
-		}
-		$url = NetCommonsUrl::actionUrl($url);
+		$url = NetCommonsUrl::blockUrl($url);
 
 		return $this->Html->link($title, $url, $options);
 	}

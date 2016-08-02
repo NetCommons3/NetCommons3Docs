@@ -68,6 +68,7 @@ class NetCommonsControllerBaseTestCase extends ControllerTestCase {
 		'plugin.blocks.block_role_permission',
 		'plugin.boxes.box',
 		'plugin.boxes.boxes_page',
+		'plugin.categories.category',
 		'plugin.containers.container',
 		'plugin.containers.containers_page',
 		'plugin.data_types.data_type',
@@ -135,6 +136,7 @@ class NetCommonsControllerBaseTestCase extends ControllerTestCase {
 	public function setUp() {
 		NetCommonsCakeTestCase::loadTestPlugin($this, 'NetCommons', 'TestPlugin');
 
+		Current::$current['Permission']['html_not_limited']['value'] = true;
 		parent::setUp();
 
 		Configure::write('NetCommons.installed', true);

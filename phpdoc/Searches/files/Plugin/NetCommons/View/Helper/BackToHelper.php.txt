@@ -56,7 +56,8 @@ class BackToHelper extends AppHelper {
 			$options['icon'] = 'remove';
 		}
 		if ($options['icon'] !== '') {
-			$iconElement = '<span class="glyphicon glyphicon-' . h($options['icon']) . '"></span> ';
+			$iconElement = '<span class="glyphicon glyphicon-' . h($options['icon']) .
+				'" aria-hidden="true"></span> ';
 			unset($options['icon']);
 
 			$title = h($title);
@@ -108,19 +109,32 @@ class BackToHelper extends AppHelper {
 		$icon = Hash::get($options, 'icon', 'remove');
 		$options = Hash::remove($options, 'icon');
 		if ($icon) {
-			$iconElement = '<span class="glyphicon glyphicon-' . h($icon) . '"></span> ';
+			$iconElement = '<span class="glyphicon glyphicon-' . h($icon) .
+				'" aria-hidden="true"></span> ';
 		}
 
 		//ボタンサイズ
 		if (Hash::get($options, 'iconSize')) {
-			$sizeAttr = h(' btn-' . $options['iconSize']);
+			$sizeAttr = h('btn-' . $options['iconSize']);
 		} else {
-			$sizeAttr = $this->Button->getButtonSize();
+			$sizeAttr = trim($this->Button->getButtonSize());
 		}
 		$options = Hash::remove($options, 'iconSize');
 
+		//class属性
+		$class = Hash::get($options, 'class', array());
+		if (is_string($class)) {
+			$class = explode(' ', $class);
+		}
+		if ($sizeAttr) {
+			$class = array_merge(['btn', 'btn-default', $sizeAttr], $class);
+		} else {
+			$class = array_merge(['btn', 'btn-default'], $class);
+		}
+		$options = Hash::remove($options, 'class');
+
 		$inputOptions = Hash::merge(
-			array('class' => 'btn btn-default' . $sizeAttr),
+			array('class' => $class),
 			$options,
 			array('escapeTitle' => false)
 		);
@@ -153,6 +167,19 @@ class BackToHelper extends AppHelper {
 	public function indexLinkButton($title, $defaultField = 'default_action', $options = array()) {
 		$url = NetCommonsUrl::backToIndexUrl($defaultField);
 		return $this->linkButton($title, $url, $options);
+	}
+
+/**
+ * 一覧へボタンHTMLの出力
+ *
+ * @param array $options HTML属性オプション
+ * @return string HTMLタグ
+ */
+	public function listLinkButton($options = array()) {
+		$options = Hash::merge(['icon' => 'list'], $options);
+		$title = __d('net_commons', 'To list');
+
+		return $this->indexLinkButton($title, 'default_action', $options);
 	}
 
 }
