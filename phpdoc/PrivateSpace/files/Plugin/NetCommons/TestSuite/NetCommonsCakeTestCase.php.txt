@@ -85,6 +85,7 @@ class NetCommonsCakeTestCase extends CakeTestCase {
 		//'plugin.rooms.room_role',
 		//'plugin.rooms.room_role_permission',
 		'plugin.rooms.space',
+		'plugin.site_manager.site_setting',
 		'plugin.topics.topic',
 		'plugin.topics.topic_readable',
 		'plugin.topics.topic_user_status',
@@ -121,6 +122,7 @@ class NetCommonsCakeTestCase extends CakeTestCase {
  * @return void
  */
 	public function setUp() {
+		Current::$current['Permission']['html_not_limited']['value'] = true;
 		parent::setUp();
 
 		Configure::write('NetCommons.installed', true);
@@ -183,7 +185,8 @@ class NetCommonsCakeTestCase extends CakeTestCase {
 		App::build(array(
 			'Plugin' => array($pluginPath . 'Test' . DS . 'test_app' . DS . 'Plugin' . DS)
 		));
-		CakePlugin::load($testPlugin);
+		App::uses('CakePlugin', 'Core');
+		CakePlugin::load($testPlugin, ['routes' => true, 'ignoreMissing' => true]);
 	}
 
 /**
