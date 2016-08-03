@@ -120,6 +120,11 @@ class NetCommonsAppController extends Controller {
 				!isset($this->helpers['Html']['className'])) {
 			$this->helpers['Html']['className'] = 'NetCommons.SingletonViewBlockHtml';
 		}
+
+		//サイトの設定データセット
+		if (Configure::read('NetCommons.installed')) {
+			SiteSettingUtil::initialize();
+		}
 	}
 
 /**
@@ -129,9 +134,6 @@ class NetCommonsAppController extends Controller {
  */
 	public function beforeFilter() {
 		Security::setHash('sha512');
-
-		//サイトの設定データセット
-		SiteSettingUtil::initialize();
 
 		//言語の取得
 		if (isset($this->request->query['language'])) {
@@ -159,11 +161,15 @@ class NetCommonsAppController extends Controller {
 			$this->theme = $theme;
 		}
 
-		$this->Auth->allow('index', 'view', 'emptyRender', 'download');
+		$this->Auth->allow('index', 'view', 'emptyRender', 'download', 'throwBadRequest');
 
 		if ($this->RequestHandler->accepts('json')) {
 			$this->viewClass = 'Json';
 			$this->layout = false;
+		}
+
+		if (in_array($this->params['action'], ['emptyRender', 'throwBadRequest'])) {
+			$this->params['pass'] = array();
 		}
 
 		//モバイルかどうかの判定処理

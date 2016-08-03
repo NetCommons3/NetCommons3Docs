@@ -41,11 +41,11 @@ class ThemeBehavior extends ModelBehavior {
 
 			$package = json_decode(file_get_contents($themePath . $path . DS . 'theme.json'), true);
 			if (is_file(App::themePath($path) . 'webroot/snapshot.jpg')) {
-				$package['snapshot'] = FULL_BASE_URL . '/theme/' . $path . '/snapshot.jpg';
+				$package['snapshot'] = Router::url('/') . 'theme/' . $path . '/snapshot.jpg';
 			} elseif (is_file(App::themePath($path) . 'webroot/snapshot.png')) {
-				$package['snapshot'] = FULL_BASE_URL . '/theme/' . $path . '/snapshot.png';
+				$package['snapshot'] = Router::url('/') . 'theme/' . $path . '/snapshot.png';
 			} else {
-				$package['snapshot'] = FULL_BASE_URL . '/theme_settings/img/snapshot_noimage.png';
+				$package['snapshot'] = Router::url('/') . 'theme_settings/img/snapshot_noimage.png';
 			}
 			$package['key'] = $path;
 
