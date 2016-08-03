@@ -110,9 +110,7 @@ class PagesEditController extends PagesAppController {
 			$page = $this->Page->savePage($this->request->data);
 			if ($page) {
 				//正常の場合
-				return $this->redirect(NetCommonsUrl::actionUrl(array(
-					'plugin' => $this->params['plugin'],
-					'controller' => $this->params['controller'],
+				return $this->redirect(NetCommonsUrl::actionUrlAsArray(array(
 					'action' => 'index',
 					'key' => Current::read('Room.id'),
 					'key2' => $page['Page']['id'],
@@ -146,9 +144,7 @@ class PagesEditController extends PagesAppController {
 			$page = $this->Page->savePage($this->request->data);
 			if ($page) {
 				//正常の場合
-				return $this->redirect(NetCommonsUrl::actionUrl(array(
-					'plugin' => $this->params['plugin'],
-					'controller' => $this->params['controller'],
+				return $this->redirect(NetCommonsUrl::actionUrlAsArray(array(
 					'action' => 'index',
 					'key' => Current::read('Room.id'),
 					'key2' => Current::read('Page.id'),
@@ -178,10 +174,8 @@ class PagesEditController extends PagesAppController {
 			return $this->throwBadRequest();
 		}
 		if ($this->Page->deletePage($this->data)) {
-			return $this->redirect(NetCommonsUrl::actionUrl(array(
-				'plugin' => $this->params['plugin'],
-				'controller' => $this->params['controller'],
-				'action' => 'index',
+			return $this->redirect(NetCommonsUrl::actionUrlAsArray(array(
+					'action' => 'index',
 				'key' => Current::read('Room.id'),
 			)));
 		} else {
@@ -206,10 +200,8 @@ class PagesEditController extends PagesAppController {
 			$this->NetCommons->setFlashNotification(
 				__d('net_commons', 'Successfully saved.'), array('class' => 'success')
 			);
-			return $this->redirect(NetCommonsUrl::actionUrl(array(
-				'plugin' => $this->params['plugin'],
-				'controller' => $this->params['controller'],
-				'action' => 'index',
+			return $this->redirect(NetCommonsUrl::actionUrlAsArray(array(
+					'action' => 'index',
 				'key' => Current::read('Room.id'),
 				'key2' => Current::read('Page.id'),
 			)));
@@ -248,10 +240,8 @@ class PagesEditController extends PagesAppController {
 			$this->NetCommons->setFlashNotification(
 				__d('net_commons', 'Successfully saved.'), array('class' => 'success')
 			);
-			return $this->redirect(NetCommonsUrl::actionUrl(array(
-				'plugin' => $this->params['plugin'],
-				'controller' => $this->params['controller'],
-				'action' => 'index',
+			return $this->redirect(NetCommonsUrl::actionUrlAsArray(array(
+					'action' => 'index',
 				'key' => Current::read('Room.id'),
 				'key2' => Current::read('Page.id'),
 			)));
