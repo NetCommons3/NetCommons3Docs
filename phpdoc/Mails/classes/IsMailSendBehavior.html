@@ -136,10 +136,10 @@
                                 <div class="accordion" style="margin-bottom: 0">
         <div class="accordion-group">
             <div class="accordion-heading">
-                                    <a class="accordion-toggle " data-toggle="collapse" data-target="#namespace-1280816141"></a>
+                                    <a class="accordion-toggle " data-toggle="collapse" data-target="#namespace-1961491595"></a>
                                 <a href="../namespaces/default.html" style="margin-left: 30px; padding-left: 0">\</a>
             </div>
-            <div id="namespace-1280816141" class="accordion-body collapse in">
+            <div id="namespace-1961491595" class="accordion-body collapse in">
                 <div class="accordion-inner">
 
                     
@@ -570,7 +570,7 @@
             <article class="method">
                 <h3 class="public ">isSendMailQueueNotice()</h3>
                 <a href="#source-view" role="button" class="pull-right btn" data-toggle="modal" style="font-size: 1.1em; padding: 9px 14px"><i class="icon-code"></i></a>
-                <pre class="signature" style="margin-right: 54px;">isSendMailQueueNotice(\Model  <span class="argument">$model</span>, \strig  <span class="argument">$isMailSendApproval</span>, integer  <span class="argument">$createdUserId</span>) : boolean</pre>
+                <pre class="signature" style="margin-right: 54px;">isSendMailQueueNotice(\Model  <span class="argument">$model</span>, integer  <span class="argument">$isMailSendApproval</span>, integer  <span class="argument">$createdUserId</span>, string  <span class="argument">$pluginKey</span>) : boolean</pre>
                 <p><em>承認通知メールを送るかどうか</em></p>
                 
 
@@ -582,7 +582,7 @@
                                 <td><p>モデル</p></td>
                             </tr>
                                                     <tr>
-                                <td>\strig</td>
+                                <td>integer</td>
                                 <td>$isMailSendApproval </td>
                                 <td><p>承認メール通知機能を使うフラグ</p></td>
                             </tr>
@@ -590,6 +590,11 @@
                                 <td>integer</td>
                                 <td>$createdUserId </td>
                                 <td><p>登録ユーザID</p></td>
+                            </tr>
+                                                    <tr>
+                                <td>string</td>
+                                <td>$pluginKey </td>
+                                <td><p>プラグインキー</p></td>
                             </tr>
                                             </table>
                 
@@ -741,7 +746,7 @@
                 <section class="span10 offset1">
                     <hr />
                     Documentation is powered by <a href="http://www.phpdoc.org/">phpDocumentor </a> and authored
-                    on August 3rd, 2016 at 17:07.
+                    on August 4th, 2016 at 02:47.
                 </section>
             </section>
         </section>
