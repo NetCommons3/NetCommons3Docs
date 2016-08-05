@@ -56,13 +56,7 @@ class Frame extends FramesAppModel {
 			'fields' => '',
 			'order' => ''
 		),
-		'Plugin' => array(
-			'className' => 'PluginManager.Plugin',
-			'foreignKey' => false,
-			'conditions' => array('Frame.plugin_key = Plugin.key'),
-			'fields' => '',
-			'order' => ''
-		),
+		//Pluginは、beforeFindでbindする
 		'Language' => array(
 			'className' => 'M17n.Language',
 			'foreignKey' => 'language_id',
@@ -85,6 +79,35 @@ class Frame extends FramesAppModel {
 			'order' => ''
 		)
 	);
+
+/**
+ * Called before each find operation. Return false if you want to halt the find
+ * call, otherwise return the (modified) query data.
+ *
+ * @param array $query Data used to execute this query, i.e. conditions, order, etc.
+ * @return mixed true if the operation should continue, false if it should abort; or, modified
+ *  $query to continue with new $query
+ * @link http://book.cakephp.org/2.0/en/models/callback-methods.html#beforefind
+ */
+	public function beforeFind($query) {
+		if ($query['recursive'] > -1) {
+			$this->bindModel(array(
+				'belongsTo' => array(
+					'Plugin' => array(
+						'className' => 'PluginManager.Plugin',
+						'foreignKey' => false,
+						'conditions' => array(
+							'Plugin.key' . ' = ' . $this->alias . '.plugin_key',
+							'Plugin.language_id' => Current::read('Language.id', '0'),
+						),
+						'fields' => '',
+						'order' => ''
+					),
+				)
+			), true);
+		}
+		return true;
+	}
 
 /**
  * Get query option for containable behavior
