@@ -206,7 +206,7 @@ class RoomsFormHelper extends AppHelper {
 		$output .= $this->NetCommonsForm->create('Room', array(
 			'type' => 'put',
 			'class' => 'inline-block rooms-change-status',
-			'url' => $this->NetCommonsHtml->url(array(
+			'url' => NetCommonsUrl::actionUrlAsArray(array(
 				'action' => 'active', $room['Space']['id'], $room['Room']['id']
 			)),
 		));

@@ -24,7 +24,7 @@ class RoomsRolesFormComponent extends Component {
  *
  * @var const
  */
-	const DEFAULT_LIMIT = 30;
+	const DEFAULT_LIMIT = 20;
 
 /**
  * 取得件数

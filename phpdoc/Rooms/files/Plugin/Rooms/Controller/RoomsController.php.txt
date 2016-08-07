@@ -187,7 +187,10 @@ class RoomsController extends RoomsAppController {
 			$room = $this->Room->saveRoom($this->request->data);
 			if ($room) {
 				//正常の場合
-				$this->redirect(
+				$this->NetCommons->setFlashNotification(__d('net_commons', 'Successfully saved.'), array(
+					'class' => 'success',
+				));
+				return $this->redirect(
 					'/rooms/' . $this->viewVars['spaces'][$activeSpaceId]['Space']['default_setting_action']
 				);
 			}
@@ -224,6 +227,11 @@ class RoomsController extends RoomsAppController {
 		}
 
 		$activeSpaceId = $this->viewVars['activeSpaceId'];
+
+		//正常の場合
+		$this->NetCommons->setFlashNotification(__d('net_commons', 'Successfully saved.'), array(
+			'class' => 'success',
+		));
 		$this->redirect(
 			'/rooms/' . $this->viewVars['spaces'][$activeSpaceId]['Space']['default_setting_action']
 		);
