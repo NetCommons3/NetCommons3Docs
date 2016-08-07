@@ -38,6 +38,7 @@ class DeveloperController extends SystemManagerAppController {
 		if ($this->request->is('post')) {
 			//登録処理
 			if (! $this->request->data['SiteSetting']['only_session']) {
+				unset($this->request->data['SiteSetting']['only_session']);
 				$this->Session->write('debug', null);
 				$this->SiteManager->saveData();
 			} else {
