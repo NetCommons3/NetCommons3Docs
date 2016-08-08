@@ -136,10 +136,10 @@
                                 <div class="accordion" style="margin-bottom: 0">
         <div class="accordion-group">
             <div class="accordion-heading">
-                                    <a class="accordion-toggle " data-toggle="collapse" data-target="#namespace-1841331714"></a>
+                                    <a class="accordion-toggle " data-toggle="collapse" data-target="#namespace-1927740995"></a>
                                 <a href="../namespaces/default.html" style="margin-left: 30px; padding-left: 0">\</a>
             </div>
-            <div id="namespace-1841331714" class="accordion-body collapse in">
+            <div id="namespace-1927740995" class="accordion-body collapse in">
                 <div class="accordion-inner">
 
                     
@@ -528,7 +528,7 @@
             <article class="method">
                 <h3 class="public ">buttons()</h3>
                 <a href="#source-view" role="button" class="pull-right btn" data-toggle="modal" style="font-size: 1.1em; padding: 9px 14px"><i class="icon-code"></i></a>
-                <pre class="signature" style="margin-right: 54px;">buttons(string  <span class="argument">$activeKey</span>, array  <span class="argument">$cancelOpt = array()</span>, array  <span class="argument">$prevOpt = array()</span>, array  <span class="argument">$nextOpt = array()</span>) : string</pre>
+                <pre class="signature" style="margin-right: 54px;">buttons(string  <span class="argument">$actKey</span>, array  <span class="argument">$cancelOpt = array()</span>, array  <span class="argument">$prevOpt = array()</span>, array  <span class="argument">$nextOpt = array()</span>, array  <span class="argument">$isBlock = false</span>) : string</pre>
                 <p><em>ウィザードボタン</em></p>
                 
 
@@ -536,7 +536,7 @@
                     <table class="table table-condensed table-hover">
                                                     <tr>
                                 <td>string</td>
-                                <td>$activeKey </td>
+                                <td>$actKey </td>
                                 <td><p>アクティブのキー</p></td>
                             </tr>
                                                     <tr>
@@ -554,6 +554,11 @@
                                 <td>$nextOpt </td>
                                 <td><p>次へ、決定ボタンのオプション</p></td>
                             </tr>
+                                                    <tr>
+                                <td>array</td>
+                                <td>$isBlock </td>
+                                <td><p>ブロックに関するプラグインのウィザードかどうか</p></td>
+                            </tr>
                                             </table>
                 
                 
@@ -569,7 +574,14 @@
                                                                             </dl>
             <h2>Tags</h2>
             <table class="table table-condensed">
-                                    <tr><td colspan="2"><em>None found</em></td></tr>
+                                    <tr>
+                        <th>
+                            SuppressWarnings
+                        </th>
+                        <td>
+                                                                                            <p>(PHPMD.BooleanArgumentFlag)</p>
+                                                    </td>
+                    </tr>
                             </table>
         </aside>
     </div>
@@ -719,7 +731,7 @@
                 <section class="span10 offset1">
                     <hr />
                     Documentation is powered by <a href="http://www.phpdoc.org/">phpDocumentor </a> and authored
-                    on August 8th, 2016 at 00:28.
+                    on August 8th, 2016 at 15:36.
                 </section>
             </section>
         </section>
