@@ -44,7 +44,7 @@ class NetCommonsUrl {
 				$url .= h(Hash::get($page, 'Page.permalink'));
 			}
 		}
-		return self::url($url, $full);
+		return $url;
 	}
 
 /**
@@ -65,7 +65,7 @@ class NetCommonsUrl {
 				$url .= '?frame_id=' . Current::read('Frame.id');
 			}
 		}
-		return self::url($url, $full);
+		return $url;
 	}
 
 /**
@@ -94,21 +94,15 @@ class NetCommonsUrl {
  * @SuppressWarnings(PHPMD.BooleanArgumentFlag)
  */
 	public static function actionUrlAsArray($params = array(), $full = false) {
-		$url = array();
+		if (!is_array($params)) {
+			return $params;
+		}
+
+		$url = self::__getCommonAction($params);
 		$query['?'] = null;
-		if (! isset($params['plugin'])) {
-			$url['plugin'] = Current::read('Plugin.key');
-		} else {
-			$url['plugin'] = $params['plugin'];
-		}
-		if (isset($params['controller'])) {
-			$url['controller'] = $params['controller'];
-			unset($params['controller']);
-		}
-		if (isset($params['action'])) {
-			$url['action'] = $params['action'];
-			unset($params['action']);
-		}
+		$params = Hash::remove($params, 'plugin');
+		$params = Hash::remove($params, 'controller');
+		$params = Hash::remove($params, 'action');
 
 		if (isset($params['block_id'])) {
 			$url[] = $params['block_id'];
@@ -128,6 +122,37 @@ class NetCommonsUrl {
 			unset($params['frame_id']);
 		}
 		return Hash::merge($url, $query, $params);
+	}
+
+/**
+ * NetCommonsプラグインのアクションURL配列を生成
+ *
+ * @param array $params Action url array
+ * @return array
+ */
+	private static function __getCommonAction($params) {
+		$request = Router::getRequest(true);
+
+		$url = array();
+		if (isset($params['plugin'])) {
+			$url['plugin'] = $params['plugin'];
+		} elseif (is_object($request)) {
+			$url['plugin'] = $request->params['plugin'];
+		} elseif (Current::read('Plugin.key')) {
+			$url['plugin'] = Current::read('Plugin.key');
+		}
+		if (isset($params['controller'])) {
+			$url['controller'] = $params['controller'];
+		} elseif (is_object($request)) {
+			$url['controller'] = $request->params['controller'];
+		}
+		if (isset($params['action'])) {
+			$url['action'] = $params['action'];
+		} elseif (is_object($request)) {
+			$url['action'] = $request->params['action'];
+		}
+
+		return $url;
 	}
 
 /**
@@ -167,21 +192,15 @@ class NetCommonsUrl {
  * @SuppressWarnings(PHPMD.BooleanArgumentFlag)
  */
 	public static function url($params = array(), $full = false) {
+		if ($full) {
+			return Router::url($params, $full);
+		}
 		$url = Router::url($params, $full);
 		if (is_array($params) && Current::isSettingMode()) {
 			$url = preg_replace('/\/' . Current::SETTING_MODE_WORD . '/', '', $url);
 		}
-
-		$request = Router::getRequest(true);
-		$base = '';
-		if ($request) {
-			$base = $request->base;
-		}
-		if (! $full) {
-			return preg_replace('/&amp;/', '&', h(substr($url, strlen($base))));
-		} else {
-			return $url;
-		}
+		$url = preg_replace('/^' . preg_quote(substr(Router::url('/'), 0, -1), '/') . '/', '', $url);
+		return $url;
 	}
 
 /**
@@ -191,9 +210,11 @@ class NetCommonsUrl {
  *   and/or 'plugin', in addition to named arguments (keyed array elements),
  *   and standard URL arguments (indexed array elements).
  *   'autoSetting': Current::SETTING_MODE_WORDを付ける処理を自動で行う。デフォルトfalse
- * @return array block url
+ * @param bool $isArray 配列で戻すかどうか
+ * @return array|string block url
+ * @SuppressWarnings(PHPMD.BooleanArgumentFlag)
  */
-	public static function blockUrl($url = array()) {
+	public static function blockUrl($url = array(), $isArray = true) {
 		if (!is_array($url)) {
 			return $url;
 		}
@@ -209,21 +230,20 @@ class NetCommonsUrl {
 			$url['block_id'] = $blockId;
 		}
 
-		if (Hash::get($url, ['?', 'frame_id'])) {
-			return self::actionUrlAsArray($url);
-		}
 		if (isset($url['frame_id'])) {
+			//$url['frame_id']がある場合、パラメータとするように設定
 			$url['?']['frame_id'] = $url['frame_id'];
 			unset($url['frame_id']);
+		} elseif (Current::read('Frame.id')) {
+			//デフォルト、Current::readの値を使用
+			$url['?']['frame_id'] = Current::read('Frame.id');
+		}
+
+		if ($isArray) {
 			return self::actionUrlAsArray($url);
+		} else {
+			return self::actionUrl($url);
 		}
-
-		$frameId = Current::read('Frame.id');
-		if ($frameId) {
-			$url['?']['frame_id'] = $frameId;
-		}
-
-		return self::actionUrlAsArray($url);
 	}
 }
 
