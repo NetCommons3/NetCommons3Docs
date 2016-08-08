@@ -48,7 +48,7 @@ class UserAttributeHelper extends AppHelper {
 	public function editCol($layout) {
 		$output = '';
 
-		$url = $this->NetCommonsHtml->url(array(
+		$url = NetCommonsUrl::actionUrlAsArray(array(
 			'controller' => 'user_attribute_layouts',
 			'action' => 'edit',
 			$layout['UserAttributeLayout']['id']
@@ -93,7 +93,7 @@ class UserAttributeHelper extends AppHelper {
 
 		$output .= $this->NetCommonsForm->create(null, array(
 			'name' => 'UserAttributeDidplayForm' . $userAttrSettingId,
-			'url' => $this->NetCommonsHtml->url(array(
+			'url' => NetCommonsUrl::actionUrlAsArray(array(
 				'controller' => 'user_attribute_settings',
 				'action' => 'display',
 				$userAttrSettingId
@@ -193,7 +193,7 @@ class UserAttributeHelper extends AppHelper {
 		}
 
 		$output .= $this->NetCommonsForm->create(null, array('type' => 'put', 'name' => $formName,
-			'url' => $this->NetCommonsHtml->url(array(
+			'url' => NetCommonsUrl::actionUrlAsArray(array(
 				'controller' => 'user_attribute_settings',
 				'action' => 'move',
 				'key' => $userAttrSettingId
