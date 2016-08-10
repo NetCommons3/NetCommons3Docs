@@ -285,6 +285,38 @@ class CalendarEvent extends CalendarsAppModel {
 		}
 		return $this->find('all', $options);
 	}
+
+/**
+ * canDeleteContent
+ *
+ * 削除できる予定データか確認
+ *
+ * @param array $data 予定データ
+ * @return bool
+ */
+	public function canDeleteContent($data) {
+		// 発行済み状態を取得
+		$isPublished = Hash::get($data, 'CalendarEvent.is_published');
+
+		// 予定の対象ルームIDを取得
+		$roomId = Hash::get($data, 'CalendarEvent.room_id');
+
+		// データの対象空間での発行権限を取得
+		$canPublish = CalendarPermissiveRooms::isPublishable($roomId);
+
+		// データの編集権限を取得
+		$canEdit = $this->canEditWorkflowContent($data);
+
+		// 発行済みだと
+		if ($isPublished) {
+			// 発行権限と編集権限の両方がないと削除できない
+			return ($canPublish && $canEdit);
+		} else {
+			// 未発行の場合
+			// 編集権限さえあれば良い
+			return $canEdit;
+		}
+	}
 /**
  * getEventById
  *
@@ -325,6 +357,10 @@ class CalendarEvent extends CalendarsAppModel {
 	public function getEventByKey($eventKey) {
 		$conditions = array(
 			$this->alias . '.key' => $eventKey,
+			'OR' => array(
+				$this->alias . '.is_active' => true,
+				$this->alias . '.is_latest' => true,
+			)
 		);
 		$options = array(
 			'conditions' => $conditions,
@@ -343,12 +379,33 @@ class CalendarEvent extends CalendarsAppModel {
 				// 発行済みデータかどうかチェックし、値を追加する
 				$conditions[$this->alias . '.is_active'] = true;
 				$options = array(
-					'fields' => array('is_active'),
+					'fields' => array(
+						'CalendarEvent.is_active',
+						'Room.space_id'
+					),
 					'conditions' => $conditions,
 					'recursive' => -1,
+					'joins' => array(
+						array(
+							'table' => 'rooms',
+							'alias' => 'Room',
+							'type' => 'LEFT',
+							'conditions' => array(
+								'CalendarEvent.room_id = Room.id'
+							)
+						)
+					),
 				);
 				$isPublished = $this->find('first', $options);
-				$event[$this->alias]['is_published'] = Hash::get($isPublished, $this->alias . '.is_active');
+				// 最終発行公開空間がプライベート空間であった時は「発行済みだよ」にしない
+				// プライベート空間での発行は「公開」と見なさないのである
+				$event[$this->alias]['is_published'] = false;
+				if ($isPublished) {
+					if ($isPublished['Room']['space_id'] != Space::PRIVATE_SPACE_ID) {
+						$event[$this->alias]['is_published'] =
+							Hash::get($isPublished, $this->alias . '.is_active');
+					}
+				}
 				return $event;
 			}
 		}
