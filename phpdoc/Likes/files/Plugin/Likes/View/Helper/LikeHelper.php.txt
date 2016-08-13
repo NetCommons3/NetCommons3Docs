@@ -239,9 +239,13 @@ class LikeHelper extends AppHelper {
 		unset($hiddenFields['LikesUser.is_liked']);
 		$hiddenFields = array_keys($hiddenFields);
 
-		$this->_View->request->data = Hash::merge($this->_View->request->data, $data);
+		$cunnentData = $this->_View->request->data;
+		$this->_View->request->data = $data;
+
 		$tokens = $this->Token->getToken('Like', '/likes/likes/like.json', $tokenFields, $hiddenFields);
 		$data += $tokens;
+
+		$this->_View->request->data = $cunnentData;
 
 		$output .= '<div class="like-icon" ng-controller="Likes" ' .
 						'ng-init="initialize(' . h(json_encode($data)) . ', ' . h(json_encode($options)) . ')">';
