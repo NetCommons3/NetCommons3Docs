@@ -20,6 +20,13 @@ App::uses('Component', 'Controller');
 class RoomsComponent extends Component {
 
 /**
+ * デフォルトロールキー
+ *
+ * @var array
+ */
+	public $defaultRoleKeyList = null;
+
+/**
  * 一覧表示の参加者リスト件数
  *
  * @var const
@@ -59,14 +66,24 @@ class RoomsComponent extends Component {
 	public function startup(Controller $controller) {
 		$controller->helpers[] = 'Rooms.Rooms';
 
+		if ($this->defaultRoleKeyList) {
+			$conditions = array(
+				'is_system' => true,
+				'language_id' => Current::read('Language.id'),
+				'type' => Role::ROLE_TYPE_ROOM,
+				'key' => $this->defaultRoleKeyList
+			);
+		} else {
+			$conditions = array(
+				'is_system' => true,
+				'language_id' => Current::read('Language.id'),
+				'type' => Role::ROLE_TYPE_ROOM,
+			);
+		}
 		$defaultRoles = $controller->Role->find('list', array(
 			'recursive' => -1,
 			'fields' => array('key', 'name'),
-			'conditions' => array(
-				'is_system' => true,
-				'language_id' => Current::read('Language.id'),
-				'type' => Role::ROLE_TYPE_ROOM
-			),
+			'conditions' => $conditions,
 			'order' => array('id' => 'asc')
 		));
 		$controller->set('defaultRoles', $defaultRoles);

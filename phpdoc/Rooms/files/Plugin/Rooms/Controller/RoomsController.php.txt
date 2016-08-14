@@ -10,6 +10,7 @@
  */
 
 App::uses('RoomsAppController', 'Rooms.Controller');
+App::uses('UserAttributeChoice', 'UserAttributes.Model');
 
 /**
  * Rooms Controller
@@ -59,6 +60,16 @@ class RoomsController extends RoomsAppController {
 		'UserAttributes.UserAttributeLayout',
 		'Users.UserSearch',
 	);
+
+/**
+ * beforeFilter
+ *
+ * @return void
+ */
+	public function beforeFilter() {
+		parent::beforeFilter();
+		$this->Rooms->defaultRoleKeyList = Room::$defaultRoleKeyList;
+	}
 
 /**
  * 不要なデータ削除

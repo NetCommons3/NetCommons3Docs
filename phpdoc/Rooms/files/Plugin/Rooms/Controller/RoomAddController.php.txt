@@ -11,6 +11,7 @@
 
 App::uses('RoomsAppController', 'Rooms.Controller');
 App::uses('DefaultRolePermission', 'Roles.Model');
+App::uses('Room', 'Rooms.Model');
 
 /**
  * ルーム作成(ウィザード) Controller
@@ -112,6 +113,10 @@ class RoomAddController extends RoomsAppController {
 		$this->helpers['NetCommons.Wizard']['cancelUrl'] = $cancelUrl;
 
 		$this->PluginsForm->roomId = $this->Session->read('RoomAdd.Room.id');
+
+		if ($this->params['action'] === 'basic') {
+			$this->Rooms->defaultRoleKeyList = Room::$defaultRoleKeyList;
+		}
 
 		if ($this->params['action'] !== 'basic' && ! $this->Session->read('RoomAdd.Room.id')) {
 			return $this->setAction('cancel');

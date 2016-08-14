@@ -198,7 +198,7 @@ class RoomsHelper extends AppHelper {
 		if (isset($nest)) {
 			$output .= str_repeat('<span class="rooms-tree"> </span>', $nest);
 		}
-		$output .= h($roomsLanguage[0]['name']);
+		$output .= h(Hash::get($roomsLanguage, '0.name'));
 		return $output;
 	}
 

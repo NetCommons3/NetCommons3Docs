@@ -15,6 +15,7 @@
  */
 
 App::uses('RoomsAppModel', 'Rooms.Model');
+App::uses('Role', 'Roles.Model');
 
 /**
  * Room Model
@@ -41,6 +42,17 @@ class Room extends RoomsAppModel {
  * @var array
  */
 	public static $treeParser;
+
+/**
+ * デフォルトロールキー
+ *
+ * @var array
+ */
+	public static $defaultRoleKeyList = array(
+		Role::ROOM_ROLE_KEY_EDITOR,
+		Role::ROOM_ROLE_KEY_GENERAL_USER,
+		Role::ROOM_ROLE_KEY_VISITOR,
+	);
 
 /**
  * スペースルームIDのリスト
@@ -163,6 +175,7 @@ class Room extends RoomsAppModel {
  * @return bool True if validate operation should continue, false to abort
  * @link http://book.cakephp.org/2.0/en/models/callback-methods.html#beforevalidate
  * @see Model::save()
+ * @SuppressWarnings(PHPMD.ExcessiveMethodLength)
  */
 	public function beforeValidate($options = array()) {
 		$this->validate = Hash::merge($this->validate, array(
@@ -203,6 +216,13 @@ class Room extends RoomsAppModel {
 				'boolean' => array(
 					'rule' => array('boolean'),
 					'message' => __d('net_commons', 'Invalid request.'),
+				),
+			),
+			'default_role_key' => array(
+				'inList' => array(
+					'rule' => array('inList', self::$defaultRoleKeyList),
+					'message' => __d('net_commons', 'Invalid request.'),
+					'required' => true
 				),
 			),
 			'page_layout_permitted' => array(

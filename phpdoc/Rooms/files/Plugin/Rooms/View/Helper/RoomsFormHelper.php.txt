@@ -332,9 +332,11 @@ class RoomsFormHelper extends AppHelper {
 /**
  * すべての会員をデフォルトで参加させる
  *
+ * @param string $fieldName フィールド名
+ * @param array $options HTMLの属性オプション
  * @return string HTML
  */
-	public function inputDefaultParticipation() {
+	public function inputDefaultParticipation($fieldName, $options = array()) {
 		$output = '';
 
 		$roomNames = [];
@@ -365,13 +367,15 @@ class RoomsFormHelper extends AppHelper {
 		}
 
 		if ($this->_View->viewVars['participationFixed']) {
-			$output .= $this->NetCommonsForm->hidden('Room.default_participation');
+			$output .= $this->NetCommonsForm->hidden($fieldName);
 		}
 
-		$output .= $this->NetCommonsForm->inlineCheckbox('Room.default_participation', array(
-			'label' => $label,
-			'disabled' => $this->_View->viewVars['participationFixed'],
-		));
+		$output .= $this->NetCommonsForm->inlineCheckbox($fieldName,
+			Hash::merge(array(
+				'label' => $label,
+				'disabled' => $this->_View->viewVars['participationFixed'],
+			), $options)
+		);
 
 		return $output;
 	}
