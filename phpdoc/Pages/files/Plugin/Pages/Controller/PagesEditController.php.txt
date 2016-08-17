@@ -94,7 +94,10 @@ class PagesEditController extends PagesAppController {
  * @return void
  */
 	public function index() {
-		$this->__prepareIndex(array('Page.room_id' => Current::read('Room.id')));
+		$this->__setRedirectUrl();
+		$rooms = $this->Room->children(Current::read('Room.id'), false, 'Room.id', 'Room.rght');
+		$roomIds = Hash::merge(array(Current::read('Room.id')), Hash::extract($rooms, '{n}.Room.id'));
+		$this->__prepareIndex($roomIds, []);
 	}
 
 /**
@@ -110,11 +113,7 @@ class PagesEditController extends PagesAppController {
 			$page = $this->Page->savePage($this->request->data);
 			if ($page) {
 				//正常の場合
-				return $this->redirect(NetCommonsUrl::actionUrlAsArray(array(
-					'action' => 'index',
-					'key' => Current::read('Room.id'),
-					'key2' => $page['Page']['id'],
-				)));
+				return $this->redirect(Hash::get($this->request->data, '_NetCommonsUrl.redirect'));
 			}
 
 		} else {
@@ -126,6 +125,7 @@ class PagesEditController extends PagesAppController {
 
 			$this->request->data = $this->Page->createPage();
 			$this->request->data['Room'] = Current::read('Room');
+			$this->request->data['_NetCommonsUrl']['redirect'] = $this->__getRedirectUrl();
 		}
 	}
 
@@ -144,11 +144,7 @@ class PagesEditController extends PagesAppController {
 			$page = $this->Page->savePage($this->request->data);
 			if ($page) {
 				//正常の場合
-				return $this->redirect(NetCommonsUrl::actionUrlAsArray(array(
-					'action' => 'index',
-					'key' => Current::read('Room.id'),
-					'key2' => Current::read('Page.id'),
-				)));
+				return $this->redirect(Hash::get($this->request->data, '_NetCommonsUrl.redirect'));
 			}
 
 		} else {
@@ -161,6 +157,7 @@ class PagesEditController extends PagesAppController {
 				$this->LanguagesPage->getLanguagesPage(Current::read('Page.id'), Current::read('Language.id'))
 			);
 			$this->request->data['Room'] = Current::read('Room');
+			$this->request->data['_NetCommonsUrl']['redirect'] = $this->__getRedirectUrl();
 		}
 	}
 
@@ -174,10 +171,7 @@ class PagesEditController extends PagesAppController {
 			return $this->throwBadRequest();
 		}
 		if ($this->Page->deletePage($this->data)) {
-			return $this->redirect(NetCommonsUrl::actionUrlAsArray(array(
-					'action' => 'index',
-				'key' => Current::read('Room.id'),
-			)));
+			return $this->redirect(Hash::get($this->request->data, '_NetCommonsUrl.redirect'));
 		} else {
 			return $this->throwBadRequest();
 		}
@@ -200,11 +194,7 @@ class PagesEditController extends PagesAppController {
 			$this->NetCommons->setFlashNotification(
 				__d('net_commons', 'Successfully saved.'), array('class' => 'success')
 			);
-			return $this->redirect(NetCommonsUrl::actionUrlAsArray(array(
-					'action' => 'index',
-				'key' => Current::read('Room.id'),
-				'key2' => Current::read('Page.id'),
-			)));
+			return $this->redirect(Hash::get($this->request->data, '_NetCommonsUrl.redirect'));
 
 		} else {
 			$containersPages = $this->ContainersPage->find('all', array(
@@ -218,6 +208,7 @@ class PagesEditController extends PagesAppController {
 			$children = $this->Page->children(Current::read('Page.id'), false, 'id');
 			$extract = Hash::extract($children, '{n}.Page.id', array());
 			$this->request->data['ChildPage']['id'] = implode(',', $extract);
+			$this->request->data['_NetCommonsUrl']['redirect'] = $this->__getRedirectUrl();
 		}
 	}
 
@@ -240,15 +231,12 @@ class PagesEditController extends PagesAppController {
 			$this->NetCommons->setFlashNotification(
 				__d('net_commons', 'Successfully saved.'), array('class' => 'success')
 			);
-			return $this->redirect(NetCommonsUrl::actionUrlAsArray(array(
-					'action' => 'index',
-				'key' => Current::read('Room.id'),
-				'key2' => Current::read('Page.id'),
-			)));
+			return $this->redirect(Hash::get($this->request->data, '_NetCommonsUrl.redirect'));
 
 		} else {
 			$this->request->data['Page'] = Current::read('Page');
 			$this->theme = Hash::get($this->request->query, 'theme', $this->theme);
+			$this->request->data['_NetCommonsUrl']['redirect'] = $this->__getRedirectUrl();
 		}
 	}
 
@@ -271,13 +259,7 @@ class PagesEditController extends PagesAppController {
 				$this->NetCommons->setFlashNotification(
 					__d('net_commons', 'Successfully saved.'), array('class' => 'success')
 				);
-				return $this->redirect(NetCommonsUrl::actionUrl(array(
-					'plugin' => $this->params['plugin'],
-					'controller' => $this->params['controller'],
-					'action' => 'index',
-					'key' => Current::read('Room.id'),
-					'key2' => Current::read('Page.id'),
-				)));
+				return $this->redirect(Hash::get($this->request->data, '_NetCommonsUrl.redirect'));
 			}
 
 		} else {
@@ -289,6 +271,7 @@ class PagesEditController extends PagesAppController {
 			if (! $this->request->data['LanguagesPage']['meta_title']) {
 				$this->request->data['LanguagesPage']['meta_title'] = LanguagesPage::DEFAULT_META_TITLE;
 			}
+			$this->request->data['_NetCommonsUrl']['redirect'] = $this->__getRedirectUrl();
 		}
 	}
 
@@ -300,12 +283,19 @@ class PagesEditController extends PagesAppController {
 	public function move() {
 		if ($this->request->is('put')) {
 			//移動するページIDのチェック
-			$result = $this->Page->existPage($this->request->data['Page']['id']);
+			$result = $this->Page->existPage(
+				$this->request->data['Page']['id'],
+				$this->request->data['Page']['room_id'],
+				$this->request->data['Room']['id']
+			);
 			if (! $result) {
 				return $this->throwBadRequest();
 			}
 			//移動先の親ページIDのチェック
-			$result = $this->Page->existPage($this->request->data['Page']['parent_id']);
+			$result = $this->Page->existPage(
+				$this->request->data['Page']['parent_id'],
+				$this->request->data['Room']['id']
+			);
 			if (! $result) {
 				return $this->throwBadRequest();
 			}
@@ -322,8 +312,7 @@ class PagesEditController extends PagesAppController {
 		} else {
 			$this->viewClass = 'View';
 			$this->layout = 'NetCommons.modal';
-			$this->__prepareIndex(array(
-				'Page.room_id' => Current::read('Room.id'),
+			$this->__prepareIndex(Current::read('Room.id'), array(
 				'NOT' => array(
 					'AND' => array(
 						'Page.lft >=' => Current::read('Page.lft'),
@@ -337,18 +326,21 @@ class PagesEditController extends PagesAppController {
 /**
  * ページのTreeリストをセットする
  *
+ * @param array $roomIds ルームIDリスト
  * @param array $conditions 条件配列
  * @return void
  */
-	private function __prepareIndex($conditions) {
+	private function __prepareIndex($roomIds, $conditions) {
 		//ページでテータ取得
-		$pages = $this->Page->getPages();
+		$pages = $this->Page->getPages($roomIds);
 		if (! $pages) {
 			return $this->throwBadRequest();
 		}
+		$conditions['Page.room_id'] = $roomIds;
 
 		$pageTreeList = $this->Page->generateTreeList($conditions, null, null, Page::$treeParser);
-
+		$parentList = array();
+		$treeList = array();
 		foreach ($pageTreeList as $pageId => $tree) {
 			$treeList[] = $pageId;
 
@@ -385,7 +377,9 @@ class PagesEditController extends PagesAppController {
 
 			$pages[$pageId] = array(
 				'Page' => $page['Page'],
-				'LanguagesPage' => $page['LanguagesPage'],
+				'LanguagesPage' => array(
+					'name' => $page['LanguagesPage']['name']
+				),
 			);
 		}
 
@@ -412,6 +406,32 @@ class PagesEditController extends PagesAppController {
 		array_unshift($parentPathName, Hash::get($room, '0.name'));
 
 		$this->set('parentPathName', implode(' / ', $parentPathName));
+	}
+
+/**
+ * リダイレクトURLを取得する
+ *
+ * @return array
+ */
+	private function __getRedirectUrl() {
+		if (! $this->Session->read('_NetCommonsUrl.redirect')) {
+			$this->__setRedirectUrl();
+		}
+		$url = $this->Session->read('_NetCommonsUrl.redirect');
+
+		return $url;
+	}
+
+/**
+ * リダイレクトURLをセットする
+ *
+ * @return vaoid
+ */
+	private function __setRedirectUrl() {
+		$url = NetCommonsUrl::actionUrl(
+			['action' => 'index', 'key' => Current::read('Room.id'), 'key2' => Current::read('Page.id')]
+		);
+		$this->Session->write('_NetCommonsUrl.redirect', $url);
 	}
 
 }

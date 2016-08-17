@@ -308,16 +308,29 @@ class Page extends PagesAppModel {
  * ページデータの存在チェック
  *
  * @param int $pageId ページID
+ * @param int $roomId ルームID
+ * @param int $parentRoomId 親ルームID
  * @return bool
  */
-	public function existPage($pageId) {
-		$result = $this->find('count', array(
-			'recursive' => -1,
-			'conditions' => array(
-				'Page.id' => $pageId,
-				'Page.room_id' => Current::read('Room.id')
-			),
-		));
+	public function existPage($pageId, $roomId = null, $parentRoomId = null) {
+		if ($roomId && $roomId !== $parentRoomId) {
+			$result = $this->find('count', array(
+				'recursive' => 0,
+				'conditions' => array(
+					'Page.id' => $pageId,
+					'Page.room_id' => $roomId,
+					'Room.parent_id' => $parentRoomId,
+				),
+			));
+		} else {
+			$result = $this->find('count', array(
+				'recursive' => -1,
+				'conditions' => array(
+					'Page.id' => $pageId,
+					'Page.room_id' => Current::read('Room.id')
+				),
+			));
+		}
 
 		return (bool)$result;
 	}
@@ -539,10 +552,41 @@ class Page extends PagesAppModel {
 				throw new InternalErrorException(__d('net_commons', 'Internal Server Error'));
 			}
 
+			//パブリックスペースで、移動したものが先頭になった場合、Room.page_id_topを更新する
+			$this->__updatePageIdTopMove($data);
+
 			$this->commit();
 
 		} catch (Exception $ex) {
 			$this->rollback($ex);
+		}
+
+		return true;
+	}
+
+/**
+ * page_id_topの更新処理
+ *
+ * @param array $data request data
+ * @return bool
+ * @throws InternalErrorException
+ */
+	private function __updatePageIdTopMove($data) {
+		//パブリックスペースで、移動したものが先頭になった場合、Room.page_id_topを更新する
+		$first = $this->find('first', array(
+			'recursive' => -1,
+			'fields' => array('id'),
+			'conditions' => array(
+				'parent_id !=' => '',
+			),
+			'order' => array('lft' => 'asc'),
+		));
+
+		if ($first['Page']['id'] === $data[$this->alias]['id']) {
+			$this->Room->id = Room::PUBLIC_PARENT_ID;
+			if (! $this->Room->saveField('page_id_top', $first['Page']['id'], array('callbacks' => false))) {
+				throw new InternalErrorException(__d('net_commons', 'Internal Server Error'));
+			}
 		}
 
 		return true;
