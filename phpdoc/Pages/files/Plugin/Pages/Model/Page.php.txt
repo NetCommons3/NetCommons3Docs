@@ -207,12 +207,12 @@ class Page extends PagesAppModel {
 			'permalink' => array(
 				'notBlank' => array(
 					'rule' => array('notBlank'),
-					'message' => __d('net_commons', 'Invalid request.'),
+					'message' => sprintf(__d('net_commons', 'Please input %s.'), __d('pages', 'Slug')),
 					'required' => true
 				),
 				'isUnique' => array(
 					'rule' => array('isUnique'),
-					'message' => sprintf(__d('net_commons', '%s is already in use.'), __d('pages', 'Permalink')),
+					'message' => sprintf(__d('net_commons', '%s is already in use.'), __d('pages', 'Slug')),
 				),
 			),
 			'root_id' => array(
@@ -236,6 +236,42 @@ class Page extends PagesAppModel {
 		));
 
 		return parent::beforeValidate($options);
+	}
+
+/**
+ * Called after each successful save operation.
+ *
+ * @param bool $created True if this save created a new record
+ * @param array $options Options passed from Model::save().
+ * @return void
+ * @link http://book.cakephp.org/2.0/en/models/callback-methods.html#aftersave
+ * @see Model::save()
+ * @throws InternalErrorException
+ */
+	public function afterSave($created, $options = array()) {
+		if (Hash::get($this->data, 'Page.id') &&
+				Hash::get($this->data, 'Page.slug') !== Current::read('Page.slug')) {
+			$chidren = $this->children(
+				Hash::get($this->data, 'Page.id'), false, array('Page.id', 'Page.permalink')
+			);
+
+			$data = $this->data;
+
+			foreach ($chidren as $child) {
+				$this->id = $child[$this->alias]['id'];
+
+				$pattern = '/^' . preg_quote(Current::read('Page.permalink') . '/', '/') . '/';
+				$permalink = preg_replace(
+					$pattern, Hash::get($data, 'Page.permalink') . '/', $child[$this->alias]['permalink']
+				);
+
+				if (! $this->saveField('permalink', $permalink, array('callbacks' => false))) {
+					throw new InternalErrorException(__d('net_commons', 'Internal Server Error'));
+				}
+			}
+
+			$this->data = $data;
+		}
 	}
 
 /**

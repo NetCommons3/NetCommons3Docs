@@ -107,14 +107,17 @@ class PagesEditController extends PagesAppController {
  */
 	public function add() {
 		$this->view = 'edit';
+		$this->set('hasDelete', false);
 
 		if ($this->request->is('post')) {
 			//登録処理
+			$this->request->data['Page']['slug'] = Hash::get($this->request->data, 'Page.permalink');
 			$page = $this->Page->savePage($this->request->data);
 			if ($page) {
 				//正常の場合
 				return $this->redirect(Hash::get($this->request->data, '_NetCommonsUrl.redirect'));
 			}
+			$this->NetCommons->handleValidationError($this->Page->validationErrors);
 
 		} else {
 			//表示処理
@@ -135,17 +138,23 @@ class PagesEditController extends PagesAppController {
  * @return void
  */
 	public function edit() {
+		$hasDelete = Current::read('Page.parent_id') &&
+				$this->viewVars['room']['Room']['page_id_top'] !== Current::read('Page.id');
+		$this->set('hasDelete', $hasDelete);
+
 		if (! Current::read('Page.parent_id')) {
 			return $this->throwBadRequest();
 		}
 
 		if ($this->request->is('put')) {
 			//登録処理
+			$this->request->data['Page']['slug'] = Hash::get($this->request->data, 'Page.permalink');
 			$page = $this->Page->savePage($this->request->data);
 			if ($page) {
 				//正常の場合
 				return $this->redirect(Hash::get($this->request->data, '_NetCommonsUrl.redirect'));
 			}
+			$this->NetCommons->handleValidationError($this->Page->validationErrors);
 
 		} else {
 			$result = $this->Page->existPage(Current::read('Page.id'));
@@ -156,6 +165,7 @@ class PagesEditController extends PagesAppController {
 			$this->request->data = Hash::merge($this->request->data,
 				$this->LanguagesPage->getLanguagesPage(Current::read('Page.id'), Current::read('Language.id'))
 			);
+			$this->request->data['Page']['permalink'] = $this->request->data['Page']['slug'];
 			$this->request->data['Room'] = Current::read('Room');
 			$this->request->data['_NetCommonsUrl']['redirect'] = $this->__getRedirectUrl();
 		}
@@ -394,16 +404,19 @@ class PagesEditController extends PagesAppController {
  * @return void
  */
 	private function __setParentPageName() {
-		if ($this->params['action'] !== 'index') {
-			$parentPathName = $this->Page->getParentNodeName(Current::read('Page.id'));
-		} else {
-			$parentPathName = array();
+		if ($this->params['action'] === 'index') {
+			return;
 		}
-		$room = Hash::extract(
-			$this->viewVars['room'],
-			'RoomsLanguage.{n}[language_id=' . Current::read('Language.id') . ']'
-		);
-		array_unshift($parentPathName, Hash::get($room, '0.name'));
+
+		$parentPathName = $this->Page->getParentNodeName(Current::read('Page.id'));
+
+		if ($this->viewVars['room']['Room']['page_id_top'] !== Current::read('Page.id')) {
+			$room = Hash::extract(
+				$this->viewVars['room'],
+				'RoomsLanguage.{n}[language_id=' . Current::read('Language.id') . ']'
+			);
+			array_unshift($parentPathName, Hash::get($room, '0.name'));
+		}
 
 		$this->set('parentPathName', implode(' / ', $parentPathName));
 	}
