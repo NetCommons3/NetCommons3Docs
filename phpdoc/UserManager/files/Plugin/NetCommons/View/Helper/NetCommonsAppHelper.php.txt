@@ -19,7 +19,7 @@
  * @author Shohei Nakajima <nakajimashouhei@gmail.com>
  */
 
-App::uses('NetCommonsAppHelper', 'NetCommons.View/Helper');
+App::uses('Helper', 'View');
 
 /**
  * Application helper
@@ -27,6 +27,6 @@ App::uses('NetCommonsAppHelper', 'NetCommons.View/Helper');
  * Add your application-wide methods in the class below, your helpers
  * will inherit them.
  */
-class AppHelper extends NetCommonsAppHelper {
+class NetCommonsAppHelper extends Helper {
 }
 
