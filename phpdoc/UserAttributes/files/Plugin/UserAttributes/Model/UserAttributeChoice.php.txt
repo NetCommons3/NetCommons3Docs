@@ -52,6 +52,13 @@ class UserAttributeChoice extends UsersAppModel {
 			STATUS_CODE_APPROVED = '3';
 
 /**
+ * 言語の自動
+ *
+ * @var const
+ */
+	const LANGUAGE_KEY_AUTO = 'auto';
+
+/**
  * use behaviors
  *
  * @var array
