@@ -77,13 +77,9 @@ class ControlPanelLayoutComponent extends Component {
 		$plugin = Hash::extract($this->plugins, '{n}.Plugin[key=' . $plugin . ']');
 		if (isset($plugin[0]['name'])) {
 			if (! isset($controller->viewVars['title'])) {
-				$controller->set(
-					'title', $plugin[0]['name'] . ' - ' . SiteSettingUtil::read('App.site_name')
-				);
+				$controller->set('title', $plugin[0]['name']);
 			}
-			$controller->set(
-				'pageTitle', $plugin[0]['name'] . ' - ' . SiteSettingUtil::read('App.site_name')
-			);
+			$controller->set('pageTitle', $plugin[0]['name']);
 		}
 	}
 
