@@ -26,6 +26,7 @@ class RoomsRolesFormHelper extends AppHelper {
 	public $helpers = array(
 		'NetCommons.NetCommonsForm',
 		'NetCommons.NetCommonsHtml',
+		'Rooms.Rooms',
 	);
 
 /**
@@ -94,7 +95,8 @@ class RoomsRolesFormHelper extends AppHelper {
 						$model . '\', \'' . $permission . '\', \'' . Inflector::variable($roleKey) . '\')';
 			}
 
-			$options['label'] = $this->_View->request->data['Role'][$roleKey]['name'];
+			$options['label'] = $this->Rooms->roomRoleName($roleKey, ['help' => true]);
+			$options['escape'] = false;
 			$html .= $this->NetCommonsForm->checkbox($fieldName . '.' . $roleKey . '.value', $options);
 		}
 		$html .= $hidden;
@@ -159,6 +161,43 @@ class RoomsRolesFormHelper extends AppHelper {
 			'empty' => false
 		), $attributes);
 		$html .= $this->NetCommonsForm->select($fieldName, $defaultRoles, $attributes);
+
+		return $html;
+	}
+
+/**
+ * ルームロールの説明書きを出力
+ *
+ * @param array $options オプション
+ * @return string HTML
+ */
+	public function roomRolesDescription($options = []) {
+		$html = '';
+
+		$description = '';
+
+		$roles = Hash::get($this->_View->viewVars, 'defaultRoles');
+		foreach ($roles as $role) {
+			$description .= '<div class="room-role-name-desc">';
+			$description .= '<span class="glyphicon glyphicon-triangle-bottom" aria-hidden="true"></span> ';
+			$description .= h($role['name']);
+			$description .= '</div>';
+
+			$description .= '<div>';
+			$description .= h(__d('roles', $role['description']));
+			$description .= '</div>';
+		}
+
+		$html .= ' <a href="" data-toggle="popover"' .
+					' data-placement="bottom"' .
+					' title="' . __d('rooms', 'Room role') . '"' .
+					' data-content="' . h($description) . '"' .
+					' data-trigger="focus">';
+
+		$html .= '<span class="glyphicon glyphicon-question-sign" aria-hidden="true"></span>';
+		$html .= '</a>';
+		$html .= '<script type="text/javascript">' .
+			'$(function () { $(\'[data-toggle="popover"]\').popover({html: true}) });</script>';
 
 		return $html;
 	}

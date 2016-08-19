@@ -136,7 +136,10 @@ class RolesRoomsUser extends RoomsAppModel {
 			$this->Room->alias . '.*',
 		));
 
-		$rolesRoomsUsers = $this->find('all', Hash::merge(array(
+		$type = Hash::get($query, 'type', 'all');
+		$query = Hash::remove($query, 'type');
+
+		$rolesRoomsUsers = $this->find($type, Hash::merge(array(
 			'recursive' => -1,
 			'joins' => array(
 				array(

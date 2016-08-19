@@ -20,6 +20,34 @@ App::uses('ModelBehavior', 'Model');
 class SaveRoomAssociationsBehavior extends ModelBehavior {
 
 /**
+ * 関連テーブルの初期値の登録処理
+ *
+ * @param Model $model 呼び出し元のモデル
+ * @param bool $created 作成フラグ
+ * @param array $options Model::save()のoptions.
+ * @return void
+ */
+	public function saveDefaultAssociations(Model $model, $created, $options) {
+		//デフォルトデータ登録処理
+		$room = $model->data;
+		if ($created) {
+			$model->saveDefaultRolesRoom($room);
+			$model->saveDefaultRoomRolePermission($room);
+		}
+
+		if ($created || Hash::get($room, 'Room.in_draft')) {
+			$model->saveDefaultRolesRoomsUser($room, true);
+			$model->saveDefaultRolesPluginsRoom($room);
+		}
+
+		if (! Hash::get($room, 'Room.in_draft') &&
+				($created || Hash::get($options, 'preUpdate.Room.in_draft'))) {
+			$page = $model->saveDefaultPage($room);
+			$model->data = Hash::merge($room, $page);
+		}
+	}
+
+/**
  * RolesRoomのデフォルトデータ登録処理
  *
  * @param Model $model 呼び出し元のモデル
@@ -292,10 +320,10 @@ class SaveRoomAssociationsBehavior extends ModelBehavior {
 				'root_id' => $model->getParentPageId($data),
 				'parent_id' => $model->getParentPageId($data)
 			),
-			'LanguagesPage' => array(
-				'language_id' => Current::read('Language.id'),
-				'name' => __d('rooms', 'Top')
-			),
+			//'LanguagesPage' => array(
+			//	'language_id' => Current::read('Language.id'),
+			//	'name' => __d('rooms', 'Top')
+			//),
 		));
 
 		$model->Page->create(false);
@@ -311,6 +339,7 @@ class SaveRoomAssociationsBehavior extends ModelBehavior {
 			throw new InternalErrorException(__d('net_commons', 'Internal Server Error'));
 		}
 
+		$page[$model->Room->alias]['page_id_top'] = $page['Page']['id'];
 		return $page;
 	}
 

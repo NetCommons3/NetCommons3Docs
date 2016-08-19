@@ -74,12 +74,17 @@ class RoomsRolesUsersController extends RoomsAppController {
  * @return void
  */
 	public function edit() {
+		$saved = array_key_exists('save', $this->request->data);
 		$result = $this->RoomsRolesForm->actionRoomsRolesUser($this);
-		if ($result === true) {
+		if ($result === true && $saved) {
 			//正常の場合
 			$this->NetCommons->setFlashNotification(__d('net_commons', 'Successfully saved.'), array(
 				'class' => 'success',
 			));
+			$spaceId = $this->viewVars['activeSpaceId'];
+			return $this->redirect(
+				'/rooms/' . $this->viewVars['spaces'][$spaceId]['Space']['default_setting_action']
+			);
 		} elseif ($result === false) {
 			$this->NetCommons->handleValidationError($this->RolesRoomsUser->validationErrors);
 		}

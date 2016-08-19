@@ -131,7 +131,11 @@ class RoomAddController extends RoomsAppController {
 	public function cancel() {
 		if ($this->Session->read('RoomAdd.Room.id')) {
 			//削除処理
-			$this->Room->deleteRoom($this->Session->read('RoomAdd'));
+			try {
+				$this->Room->deleteRoom($this->Session->read('RoomAdd'));
+			} catch (Exception $ex) {
+				//エラーにしない
+			}
 			$this->Session->delete('RoomAdd');
 		}
 

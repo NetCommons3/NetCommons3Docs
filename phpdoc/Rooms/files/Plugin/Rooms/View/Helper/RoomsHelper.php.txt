@@ -241,13 +241,45 @@ class RoomsHelper extends AppHelper {
  * ルームロール名の出力
  *
  * @param string|array $roomRoleKey ルームロールKey
+ * @param array $options オプション
  * @return string HTML
  */
-	public function roomRoleName($roomRoleKey) {
+	public function roomRoleName($roomRoleKey, $options = []) {
 		if (is_array($roomRoleKey)) {
 			$roomRoleKey = Hash::get($roomRoleKey, 'RolesRoom.role_key', '');
 		}
-		return h(Hash::get($this->_View->viewVars, 'defaultRoles.' . $roomRoleKey, ''));
+
+		if (Hash::get($options, 'roles')) {
+			$role = Hash::get($options, 'roles')[$roomRoleKey];
+		} elseif (Hash::get($this->_View->request->data, 'Role.' . $roomRoleKey)) {
+			$role = $this->_View->request->data['Role'][$roomRoleKey];
+		} elseif (Hash::get($this->_View->viewVars, 'defaultRoles.' . $roomRoleKey)) {
+			$role = Hash::get($this->_View->viewVars, 'defaultRoles.' . $roomRoleKey);
+		} else {
+			return h(Hash::get(
+				$this->_View->viewVars, 'defaultRoles.' . $roomRoleKey, Hash::get($options, 'default', ''))
+			);
+		}
+
+		$roleName = h($role['name']);
+		$html = $roleName;
+
+		if (Hash::get($options, 'help') && $role['description']) {
+			$roleDesc = h(__d('roles', $role['description']));
+
+			$html .= ' <a href="" data-toggle="popover"' .
+						' data-placement="' . Hash::get($options, 'placement', 'top') . '"' .
+						' title="' . h($roleName) . '"' .
+						' data-content="' . $roleDesc . '"' .
+						//' data-trigger="focus">';
+						' data-trigger="focus">';
+			$html .= '<span class="glyphicon glyphicon-question-sign" aria-hidden="true"></span>';
+			$html .= '</a>';
+			$html .= '<script type="text/javascript">' .
+				'$(function () { $(\'[data-toggle="popover"]\').popover({html: true}) });</script>';
+		}
+
+		return $html;
 	}
 
 /**

@@ -80,13 +80,16 @@ class RoomsComponent extends Component {
 				'type' => Role::ROLE_TYPE_ROOM,
 			);
 		}
-		$defaultRoles = $controller->Role->find('list', array(
+		$defaultRoles = $controller->Role->find('all', array(
 			'recursive' => -1,
-			'fields' => array('key', 'name'),
+			'fields' => array('key', 'name', 'description'),
 			'conditions' => $conditions,
 			'order' => array('id' => 'asc')
 		));
-		$controller->set('defaultRoles', $defaultRoles);
+		$controller->set('defaultRoles', Hash::combine($defaultRoles, '{n}.{s}.key', '{n}.{s}'));
+		$controller->set(
+			'defaultRoleOptions', Hash::combine($defaultRoles, '{n}.{s}.key', '{n}.{s}.name')
+		);
 	}
 
 /**

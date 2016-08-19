@@ -16,6 +16,7 @@
 
 App::uses('RoomsAppModel', 'Rooms.Model');
 App::uses('Role', 'Roles.Model');
+App::uses('Space', 'Rooms.Model');
 
 /**
  * Room Model
@@ -218,13 +219,6 @@ class Room extends RoomsAppModel {
 					'message' => __d('net_commons', 'Invalid request.'),
 				),
 			),
-			'default_role_key' => array(
-				'inList' => array(
-					'rule' => array('inList', self::$defaultRoleKeyList),
-					'message' => __d('net_commons', 'Invalid request.'),
-					'required' => true
-				),
-			),
 			'page_layout_permitted' => array(
 				'boolean' => array(
 					'rule' => array('boolean'),
@@ -255,6 +249,29 @@ class Room extends RoomsAppModel {
 				),
 			),
 		));
+
+		if (Hash::get($this->data, 'Room.space_id') === Space::PRIVATE_SPACE_ID) {
+			$this->validate = Hash::merge($this->validate, array(
+				'default_role_key' => array(
+					'inList' => array(
+						'rule' => array('inList', [Role::ROOM_ROLE_KEY_ROOM_ADMINISTRATOR]),
+						'message' => __d('net_commons', 'Invalid request.'),
+						'required' => true
+					),
+				),
+			));
+		} else {
+			$this->validate = Hash::merge($this->validate, array(
+				'default_role_key' => array(
+					'inList' => array(
+						'rule' => array('inList', self::$defaultRoleKeyList),
+						'message' => __d('net_commons', 'Invalid request.'),
+						'required' => true
+					),
+				),
+			));
+		}
+
 		// * RoomsLanguageのバリデーション
 		if (isset($this->data['RoomsLanguage'])) {
 			$roomsLanguages = $this->data['RoomsLanguage'];
@@ -278,6 +295,7 @@ class Room extends RoomsAppModel {
 				}
 			}
 		}
+
 		return parent::beforeValidate($options);
 	}
 
@@ -339,7 +357,7 @@ class Room extends RoomsAppModel {
 		}
 
 		//デフォルトデータ登録処理
-		$this->__saveDefaultAssociations($created, $options);
+		$this->saveDefaultAssociations($created, $options);
 
 		//パーミッションデータ登録処理
 		$room = $this->data;
@@ -389,33 +407,6 @@ class Room extends RoomsAppModel {
 		}
 
 		parent::afterSave($created, $options);
-	}
-
-/**
- * 関連テーブルの初期値の登録処理
- *
- * @param bool $created 作成フラグ
- * @param array $options Model::save()のoptions.
- * @return void
- */
-	private function __saveDefaultAssociations($created, $options) {
-		//デフォルトデータ登録処理
-		$room = $this->data;
-		if ($created) {
-			$this->saveDefaultRolesRoom($room);
-			$this->saveDefaultRoomRolePermission($room);
-		}
-
-		if ($created || Hash::get($room, 'Room.in_draft')) {
-			$this->saveDefaultRolesRoomsUser($room, true);
-			$this->saveDefaultRolesPluginsRoom($room);
-		}
-
-		if (! Hash::get($room, 'Room.in_draft') &&
-				($created || Hash::get($options, 'preUpdate.Room.in_draft'))) {
-			$page = $this->saveDefaultPage($room);
-			$this->data = Hash::merge($room, $page);
-		}
 	}
 
 /**
@@ -478,6 +469,7 @@ class Room extends RoomsAppModel {
  */
 	public function saveRoom($data) {
 		$this->loadModels([
+			'LanguagesPage' => 'Pages.LanguagesPage',
 			'RoomsLanguage' => 'Rooms.RoomsLanguage',
 		]);
 
@@ -504,6 +496,34 @@ class Room extends RoomsAppModel {
 			$room = $this->save(null, ['validate' => false, 'preUpdate' => $preUpdate]);
 			if (! $room) {
 				throw new InternalErrorException(__d('net_commons', 'Internal Server Error'));
+			}
+
+			if (Hash::get($room, 'Room.page_id_top')) {
+				$roomLanguages = Hash::get($room, 'RoomsLanguage', array());
+				foreach ($roomLanguages as $roomLanguage) {
+					$pageLanguage = $this->LanguagesPage->find('first', array(
+						'recursive' => -1,
+						'fields' => array('id', 'page_id', 'language_id'),
+						'conditions' => array(
+							'page_id' => Hash::get($room, 'Room.page_id_top'),
+							'language_id' => $roomLanguage['language_id'],
+						)
+					));
+					if (! $pageLanguage) {
+						$pageLanguage['LanguagesPage'] = array(
+							'id' => null,
+							'page_id' => Hash::get($room, 'Room.page_id_top'),
+							'language_id' => $roomLanguage['language_id'],
+						);
+					}
+					$pageLanguage['LanguagesPage']['name'] = $roomLanguage['name'];
+
+					$this->create(false);
+					$pageLanguage = $this->LanguagesPage->save($pageLanguage);
+					if (! $pageLanguage) {
+						throw new InternalErrorException(__d('net_commons', 'Internal Server Error'));
+					}
+				}
 			}
 
 			//トランザクションCommit
@@ -593,7 +613,7 @@ class Room extends RoomsAppModel {
 		try {
 			//Roomデータの削除
 			if (! $this->delete($data['Room']['id'], false)) {
-				throw new InternalErrorException(__d('net_commons', 'Internal Server Error'));
+				throw new InternalErrorException(__d('net_commons', 'Internal Server Error 2'));
 			}
 
 			//トランザクションCommit
