@@ -136,10 +136,10 @@
                                 <div class="accordion" style="margin-bottom: 0">
         <div class="accordion-group">
             <div class="accordion-heading">
-                                    <a class="accordion-toggle " data-toggle="collapse" data-target="#namespace-721815078"></a>
+                                    <a class="accordion-toggle " data-toggle="collapse" data-target="#namespace-2113568322"></a>
                                 <a href="../namespaces/default.html" style="margin-left: 30px; padding-left: 0">\</a>
             </div>
-            <div id="namespace-721815078" class="accordion-body collapse in">
+            <div id="namespace-2113568322" class="accordion-body collapse in">
                 <div class="accordion-inner">
 
                     
@@ -309,7 +309,7 @@ will inherit them.</p>
                                                                     <a href="../classes/UserSearchAppModel.html#method__setReadableField" class="">_setReadableField()</a><br />
                                                                     <a href="../classes/UserSearchAppModel.html#method__parseRequestKey" class="">_parseRequestKey()</a><br />
                                                                     <a href="../classes/UserSearchAppModel.html#method__getSearchJoinTablesByConditions" class="">_getSearchJoinTablesByConditions()</a><br />
-                                                                    <a href="../classes/UserSearchAppModel.html#method__creanSearchCondtion" class="">_creanSearchCondtion()</a><br />
+                                                                    <a href="../classes/UserSearchAppModel.html#method__creanSearchCondition" class="">_creanSearchCondition()</a><br />
                                                                     <a href="../classes/UserSearchAppModel.html#method__getSearchFields" class="">_getSearchFields()</a><br />
                                                                     <a href="../classes/UserSearchAppModel.html#method__getSearchFieldsByRoomRoleKey" class="">_getSearchFieldsByRoomRoleKey()</a><br />
                                                                     <a href="../classes/UserSearchAppModel.html#method__getRolesByRoomRoleKey" class="">_getRolesByRoomRoleKey()</a><br />
@@ -1662,7 +1662,7 @@ self::__prepare()から実行される</em></p>
             <article class="method">
                 <h3 class="protected ">_parseRequestKey()</h3>
                 <a href="#source-view" role="button" class="pull-right btn" data-toggle="modal" style="font-size: 1.1em; padding: 9px 14px"><i class="icon-code"></i></a>
-                <pre class="signature" style="margin-right: 54px;">_parseRequestKey(string  <span class="argument">$requestKey</span>) : void</pre>
+                <pre class="signature" style="margin-right: 54px;">_parseRequestKey(string  <span class="argument">$requestKey</span>) : array</pre>
                 <p><em>リクエストキーのパース処理</em></p>
                 
 
@@ -1676,7 +1676,10 @@ self::__prepare()から実行される</em></p>
                                             </table>
                 
                 
-                				
+                                    <h4>Returns</h4>
+                    array
+                                            &mdash; <p>array(フィールド名、setting, 符号)</p>
+                                    				
                             </article>
         </div>
         <aside class="span4 detailsbar">
@@ -1733,11 +1736,11 @@ self::__prepare()から実行される</em></p>
 
                                     <div class="row-fluid">
         <div class="span8 content class">
-            <a id="method__creanSearchCondtion" name="method__creanSearchCondtion" class="anchor"></a>
+            <a id="method__creanSearchCondition" name="method__creanSearchCondition" class="anchor"></a>
             <article class="method">
-                <h3 class="protected ">_creanSearchCondtion()</h3>
+                <h3 class="protected ">_creanSearchCondition()</h3>
                 <a href="#source-view" role="button" class="pull-right btn" data-toggle="modal" style="font-size: 1.1em; padding: 9px 14px"><i class="icon-code"></i></a>
-                <pre class="signature" style="margin-right: 54px;">_creanSearchCondtion(array  <span class="argument">$field</span>, array  <span class="argument">$setting</span>, array  <span class="argument">$value</span>) : array</pre>
+                <pre class="signature" style="margin-right: 54px;">_creanSearchCondition(array  <span class="argument">$field</span>, array  <span class="argument">$setting</span>, array  <span class="argument">$value</span>) : array</pre>
                 <p><em>検索可能のフィールドをチェックして、検索不可なフィールドは削除する</em></p>
                 
 
@@ -2278,7 +2281,7 @@ self::__prepare()から実行される</em></p>
                 <section class="span10 offset1">
                     <hr />
                     Documentation is powered by <a href="http://www.phpdoc.org/">phpDocumentor </a> and authored
-                    on August 19th, 2016 at 05:59.
+                    on August 19th, 2016 at 08:57.
                 </section>
             </section>
         </section>
