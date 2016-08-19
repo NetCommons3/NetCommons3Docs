@@ -109,7 +109,6 @@ class TestAuthGeneral {
 			->method('user')
 			->will($test->returnCallback(function ($key = null) use ($role) {
 				CakeSession::write('Auth.User', self::$roles[$role]);
-				Current::$current['Permission']['html_not_limited']['value'] = true;
 				if (isset(self::$roles[$role][$key])) {
 					return self::$roles[$role][$key];
 				} else {

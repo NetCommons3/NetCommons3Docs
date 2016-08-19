@@ -1,9 +1,6 @@
 <?php
 /**
- * Application level View Helper
- *
- * This file is application-wide helper file. You can put all
- * application-wide helper-related methods here.
+ * AppShell file
  *
  * CakePHP(tm) : Rapid Development Framework (http://cakephp.org)
  * Copyright (c) Cake Software Foundation, Inc. (http://cakefoundation.org)
@@ -14,19 +11,21 @@
  *
  * @copyright     Copyright (c) Cake Software Foundation, Inc. (http://cakefoundation.org)
  * @link          http://cakephp.org CakePHP(tm) Project
- * @since         CakePHP(tm) v 0.2.9
+ * @since         CakePHP(tm) v 2.0
  * @license       http://www.opensource.org/licenses/mit-license.php MIT License
- * @author Shohei Nakajima <nakajimashouhei@gmail.com>
  */
 
-App::uses('NetCommonsAppHelper', 'NetCommons.View/Helper');
+App::uses('Shell', 'Console');
 
 /**
- * Application helper
+ * Application Shell
  *
- * Add your application-wide methods in the class below, your helpers
+ * Add your application-wide methods in the class below, your shells
  * will inherit them.
+ *
+ * @package       app.Console.Command
  */
-class AppHelper extends NetCommonsAppHelper {
+class NetCommonsAppShell extends Shell {
+
 }
 
