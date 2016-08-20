@@ -136,10 +136,10 @@
                                 <div class="accordion" style="margin-bottom: 0">
         <div class="accordion-group">
             <div class="accordion-heading">
-                                    <a class="accordion-toggle " data-toggle="collapse" data-target="#namespace-1565354922"></a>
+                                    <a class="accordion-toggle " data-toggle="collapse" data-target="#namespace-2093921876"></a>
                                 <a href="../namespaces/default.html" style="margin-left: 30px; padding-left: 0">\</a>
             </div>
-            <div id="namespace-1565354922" class="accordion-body collapse in">
+            <div id="namespace-2093921876" class="accordion-body collapse in">
                 <div class="accordion-inner">
 
                     
@@ -398,7 +398,7 @@
                         </section>
                         <section class="row-fluid private">
                             <section class="span4">
-                                                                    <a href="../classes/NetCommonsMailAssignTag.html#method___convertText" class="">__convertText()</a><br />
+                                                                    <a href="../classes/NetCommonsMailAssignTag.html#method___decodeAndStripTags" class="">__decodeAndStripTags()</a><br />
                                                                     <a href="../classes/NetCommonsMailAssignTag.html#method___textBrAndWrap" class="">__textBrAndWrap()</a><br />
                                                             </section>
                             <section class="span4">
@@ -1301,17 +1301,15 @@
 
                                                                     <div class="row-fluid">
         <div class="span8 content class">
-            <a id="method___convertText" name="method___convertText" class="anchor"></a>
+            <a id="method___decodeAndStripTags" name="method___decodeAndStripTags" class="anchor"></a>
             <article class="method">
-                <h3 class="private ">__convertText()</h3>
+                <h3 class="private ">__decodeAndStripTags()</h3>
                 <a href="#source-view" role="button" class="pull-right btn" data-toggle="modal" style="font-size: 1.1em; padding: 9px 14px"><i class="icon-code"></i></a>
-                <pre class="signature" style="margin-right: 54px;">__convertText(string  <span class="argument">$str</span>) : string</pre>
-                <p><em>htmlspecialchar をテキストに変換</em></p>
-                <p>strip_tagsの後で使う。
-・{X-BODY}のウィジウィグのテキストは、不等号等が htmlspecialchar になっているため、変換する。
+                <pre class="signature" style="margin-right: 54px;">__decodeAndStripTags(string  <span class="argument">$str</span>) : string</pre>
+                <p><em>htmlspecialchar 等をデコード と strap_tags</em></p>
+                <p>・{X-BODY}のウィジウィグのテキストは、不等号等が htmlspecialchar になっているため、変換する。
 ・{X-BODY}でウィジウィグじゃないテキストは、htmlspecialchar になっていないが、共通部分でstrip_tagsを使っているので、
-　不等号等を h()(=htmlspecialchars())を使って事前にコード化して、ウィジウィグもどきのテキストにする。後はウィジウィグテキストと同じ。
-※ strip_tagsで「&lt;」、「&gt;」があるとそれ以降の文字が消えるため、strip_tags後に変換。</p>
+　不等号等を h()(=htmlspecialchars())を使って事前にコード化して、ウィジウィグもどきのテキストにする。後はウィジウィグテキストと同じ。</p>
 
                                     <h4>Parameters</h4>
                     <table class="table table-condensed table-hover">
@@ -1426,7 +1424,7 @@
                 <section class="span10 offset1">
                     <hr />
                     Documentation is powered by <a href="http://www.phpdoc.org/">phpDocumentor </a> and authored
-                    on August 20th, 2016 at 13:54.
+                    on August 20th, 2016 at 14:44.
                 </section>
             </section>
         </section>
