@@ -153,7 +153,7 @@ class RoomsRolesFormComponent extends Component {
 						'RolesRoomsUser' => $data
 					));
 					$controller->Session->delete('RoomsRolesUsers');
-					$controller->Session->delete('paginateConditionsByRooms');
+					$controller->Session->delete('paginateConditionsByRoomRoleKey');
 				}
 			} else {
 				$data = $this->__getRequestData($controller);
