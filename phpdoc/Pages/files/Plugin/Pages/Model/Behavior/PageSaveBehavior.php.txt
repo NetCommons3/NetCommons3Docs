@@ -54,7 +54,7 @@ class PageSaveBehavior extends ModelBehavior {
 
 		$permalink = $slug;
 		if ($model->data['Page']['room_id'] !== Room::PUBLIC_PARENT_ID &&
-				$model->data['Page']['id'] !== Current::read('Room.page_id_top')) {
+				Hash::get($model->data, 'Page.id', false) !== Current::read('Room.page_id_top')) {
 			$roomPageTop = $model->Page->find('first', array(
 				'recursive' => -1,
 				'fields' => array('permalink'),

@@ -83,6 +83,20 @@ class PageLayoutHelper extends AppHelper {
 	}
 
 /**
+ * マジックメソッド。
+ *
+ * @param string $method メソッド
+ * @param array $params パラメータ
+ * @return string
+ */
+	public function __call($method, $params) {
+		if ($method === 'getBlockStatus') {
+			$helper = $this->_View->loadHelper('Blocks.Blocks');
+		}
+		return call_user_func_array(array($helper, $method), $params);
+	}
+
+/**
  * Before render callback. beforeRender is called before the view file is rendered.
  *
  * Overridden in subclasses.
@@ -257,45 +271,6 @@ class PageLayoutHelper extends AppHelper {
 		}
 
 		return array();
-	}
-
-/**
- * ブロックのステータスラベルを表示
- *
- * @return string HTML
- */
-	public function getBlockStatus() {
-		$html = '';
-
-		if (! Current::isSettingMode() || ! Current::read('Block.id')) {
-			return $html;
-		}
-
-		$block = Current::read('Block', array());
-
-		$publicType = Hash::get($block, 'public_type');
-		if ($publicType === Block::TYPE_PUBLIC) {
-			return $html;
-		}
-
-		$now = date('Y-m-d H:i:s');
-		$html .= '<span class="small block-style-label label label-default">';
-
-		if ($publicType === Block::TYPE_PRIVATE) {
-			$html .= __d('blocks', 'Private');
-		} elseif ($publicType === Block::TYPE_LIMITED) {
-			if ($now < Hash::get($block, 'publish_start')) {
-				$html .= __d('blocks', 'Public before');
-			} elseif ($now > Hash::get($block, 'publish_end')) {
-				$html .= __d('blocks', 'Public end');
-			} else {
-				$html .= __d('blocks', 'Limited');
-			}
-		}
-
-		$html .= '</span>';
-
-		return $html;
 	}
 
 }
