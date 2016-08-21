@@ -66,6 +66,13 @@ class UserAttribute extends UserAttributesAppModel {
 	const AVATAR_FIELD = 'avatar';
 
 /**
+ * 前回ログイン日時フィールド
+ *
+ * @var const
+ */
+	const PREVIOUS_LOGIN_FIELD = 'previous_login';
+
+/**
  * UserAttribute->getUserAttributesForLayout()で取得したデータ
  *
  * @var array
