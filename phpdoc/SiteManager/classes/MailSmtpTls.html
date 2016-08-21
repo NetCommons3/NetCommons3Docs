@@ -136,10 +136,10 @@
                                 <div class="accordion" style="margin-bottom: 0">
         <div class="accordion-group">
             <div class="accordion-heading">
-                                    <a class="accordion-toggle " data-toggle="collapse" data-target="#namespace-1572561871"></a>
+                                    <a class="accordion-toggle " data-toggle="collapse" data-target="#namespace-1510235716"></a>
                                 <a href="../namespaces/default.html" style="margin-left: 30px; padding-left: 0">\</a>
             </div>
-            <div id="namespace-1572561871" class="accordion-body collapse in">
+            <div id="namespace-1510235716" class="accordion-body collapse in">
                 <div class="accordion-inner">
 
                     
@@ -246,8 +246,8 @@
                                             </nav>
                     <a href="#source-view" role="button" class="pull-right btn" data-toggle="modal"><i class="icon-code"></i></a>
 
-                    <h1><small>\</small>TokenHelper</h1>
-                    <p><em>TokenHelper</em></p>
+                    <h1><small>\</small>MailSmtpTls</h1>
+                    <p><em>システム管理用データ - STARTTLSを使用する</em></p>
                     
                     
                                         
@@ -266,10 +266,15 @@
                         </section>
                         <section class="row-fluid public">
                             <section class="span4">
-                                                                    <a href="../classes/TokenHelper.html#method_getToken" class="">getToken()</a><br />
+                                                                    <a href="../classes/NetCommonsMigration.html#method_updateRecords" class="">updateRecords()</a><br />
+                                                                    <a href="../classes/NetCommonsMigration.html#method_loadModels" class="">loadModels()</a><br />
+                                                                    <a href="../classes/MailSmtpTls.html#method_before" class="">before()</a><br />
+                                                                    <a href="../classes/MailSmtpTls.html#method_after" class="">after()</a><br />
                                                             </section>
                             <section class="span4">
-                                                                    <em>No public properties found</em>
+                                                                    <a href="../classes/MailSmtpTls.html#property_description" class="">$description</a><br />
+                                                                    <a href="../classes/MailSmtpTls.html#property_migration" class="">$migration</a><br />
+                                                                    <a href="../classes/MailSmtpTls.html#property_records" class="">$records</a><br />
                                                             </section>
                             <section class="span4">
                                                                     <em>No constants found</em>
@@ -277,8 +282,7 @@
                         </section>
                         <section class="row-fluid protected">
                             <section class="span4">
-                                                                    <a href="../classes/TokenHelper.html#method__getInputsFields" class="">_getInputsFields()</a><br />
-                                                                    <a href="../classes/TokenHelper.html#method__extractToken" class="">_extractToken()</a><br />
+                                                                    <em>No protected methods found</em>
                                                             </section>
                             <section class="span4">
                                                                     <em>No protected properties found</em>
@@ -305,14 +309,16 @@
                     
                     <dl>
                         <dt>File</dt>
-                            <dd><a href="../files/Plugin.NetCommons.View.Helper.TokenHelper.html"><div class="path-wrapper">Plugin/NetCommons/View/Helper/TokenHelper.php</div></a></dd>
+                            <dd><a href="../files/Plugin.SiteManager.Config.Migration.2100000004_mail_smtp_tls.html"><div class="path-wrapper">Plugin/SiteManager/Config/Migration/2100000004_mail_smtp_tls.php</div></a></dd>
                                                 <dt>Package</dt>
-                            <dd><div class="namespace-wrapper">Default</div></dd>
+                            <dd><div class="namespace-wrapper">Config\Migration</div></dd>
                                                 <dt>Class hierarchy</dt>
                             <dd class="hierarchy">
-                                                                                                                                                                                                                                                                                                
-                                        <div class="namespace-wrapper">\FormHelper</div>
-                                                                                                    <div class="namespace-wrapper">\TokenHelper</div>
+                                                                                                                                                                                                                                                                                                                                                                                                                                                            
+                                        <div class="namespace-wrapper">\CakeMigration</div>
+                                                                    
+                                        <div class="namespace-wrapper"><a href="../classes/NetCommonsMigration.html">\NetCommonsMigration</a></div>
+                                                                                                    <div class="namespace-wrapper">\MailSmtpTls</div>
                             </dd>
 
                         
@@ -328,7 +334,87 @@
             </div>
 
                         
-                        
+                                    <a id="properties" name="properties"></a>
+            <div class="row-fluid">
+                <div class="span8 content class">
+                    <h2>Properties</h2>
+                </div>
+                <aside class="span4 detailsbar"></aside>
+            </div>
+
+                                    <div class="row-fluid">
+        <div class="span8 content class">
+            <a id="property_description" name="property_description" class="anchor"></a>
+            <article class="property">
+                <h3 class="public ">$description</h3>
+                <pre class="signature">$description : string</pre>
+                <p><em>Migration description</em></p>
+                
+
+                                <h4>Type</h4>
+                string
+                                            </article>
+        </div>
+        <aside class="span4 detailsbar">
+            <h1><i class="icon-arrow-down"></i></h1>
+                        <dl>
+                                                            </dl>
+            <h2>Tags</h2>
+            <table class="table table-condensed">
+                                    <tr><td colspan="2"><em>None found</em></td></tr>
+                            </table>
+        </aside>
+    </div>
+
+                                    <div class="row-fluid">
+        <div class="span8 content class">
+            <a id="property_migration" name="property_migration" class="anchor"></a>
+            <article class="property">
+                <h3 class="public ">$migration</h3>
+                <pre class="signature">$migration : array</pre>
+                <p><em>Actions to be performed</em></p>
+                
+
+                                <h4>Type</h4>
+                array
+                                            </article>
+        </div>
+        <aside class="span4 detailsbar">
+            <h1><i class="icon-arrow-down"></i></h1>
+                        <dl>
+                                                            </dl>
+            <h2>Tags</h2>
+            <table class="table table-condensed">
+                                    <tr><td colspan="2"><em>None found</em></td></tr>
+                            </table>
+        </aside>
+    </div>
+
+                                    <div class="row-fluid">
+        <div class="span8 content class">
+            <a id="property_records" name="property_records" class="anchor"></a>
+            <article class="property">
+                <h3 class="public ">$records</h3>
+                <pre class="signature">$records : array</pre>
+                <p><em>recodes</em></p>
+                
+
+                                <h4>Type</h4>
+                array
+                                            </article>
+        </div>
+        <aside class="span4 detailsbar">
+            <h1><i class="icon-arrow-down"></i></h1>
+                        <dl>
+                                                            </dl>
+            <h2>Tags</h2>
+            <table class="table table-condensed">
+                                    <tr><td colspan="2"><em>None found</em></td></tr>
+                            </table>
+        </aside>
+    </div>
+
+                                                            
                                     <a id="methods" name="methods"></a>
             <div class="row-fluid">
                 <div class="span8 content class"><h2>Methods</h2></div>
@@ -337,57 +423,94 @@
 
                                     <div class="row-fluid">
         <div class="span8 content class">
-            <a id="method_getToken" name="method_getToken" class="anchor"></a>
+            <a id="method_updateRecords" name="method_updateRecords" class="anchor"></a>
             <article class="method">
-                <h3 class="public ">getToken()</h3>
+                <h3 class="public ">updateRecords()</h3>
                 <a href="#source-view" role="button" class="pull-right btn" data-toggle="modal" style="font-size: 1.1em; padding: 9px 14px"><i class="icon-code"></i></a>
-                <pre class="signature" style="margin-right: 54px;">getToken(mixed  <span class="argument">$model = null</span>, array|string  <span class="argument">$actionUrl = null</span>, array  <span class="argument">$tokenFields = null</span>, array  <span class="argument">$hiddenFields = array()</span>, array  <span class="argument">$blacklist = null</span>) : array</pre>
-                <p><em>Return _Token array.</em></p>
+                <pre class="signature" style="margin-right: 54px;">updateRecords(string  <span class="argument">$model</span>, string  <span class="argument">$records</span>, string  <span class="argument">$clear = true</span>) : boolean</pre>
+                <p><em>Update model records</em></p>
                 
 
                                     <h4>Parameters</h4>
                     <table class="table table-condensed table-hover">
                                                     <tr>
-                                <td>mixed</td>
+                                <td>string</td>
                                 <td>$model </td>
-                                <td><p>The model name for which the form is being defined. Should
-include the plugin name for plugin models. e.g. <code>ContactManager.Contact</code>.
-If an array is passed and $options argument is empty, the array will be used as options.
-If <code>false</code> no model is used.</p></td>
+                                <td><p>model name to update</p></td>
                             </tr>
                                                     <tr>
-                                <td>array|string</td>
-                                <td>$actionUrl </td>
-                                <td><p>Action url.</p></td>
+                                <td>string</td>
+                                <td>$records </td>
+                                <td><p>records to be stored</p></td>
                             </tr>
                                                     <tr>
-                                <td>array</td>
-                                <td>$tokenFields </td>
-                                <td><p>An array of fields to generate inputs for, or null.</p></td>
-                            </tr>
-                                                    <tr>
-                                <td>array</td>
-                                <td>$hiddenFields </td>
-                                <td><p>An array of fields that exist in $tokenFields to generate inputs hidden for, or null.</p></td>
-                            </tr>
-                                                    <tr>
-                                <td>array</td>
-                                <td>$blacklist </td>
-                                <td><p>A array of fields to not create inputs for.</p></td>
+                                <td>string</td>
+                                <td>$clear </td>
+                                <td><p>初期化するかどうか</p></td>
                             </tr>
                                             </table>
                 
                 
                                     <h4>Returns</h4>
-                    array
-                                            &mdash; <p>_Token</p>
+                    boolean
+                                            &mdash; <p>Should process continue</p>
                                     				
                             </article>
         </div>
         <aside class="span4 detailsbar">
             <h1><i class="icon-arrow-down"></i></h1>
                                                             <dl>
-                                                                            </dl>
+                                                    <dt>Inherited from</dt>
+                    <dd><a href="../classes/NetCommonsMigration.html"><div class="path-wrapper">\NetCommonsMigration</div></a></dd>
+                                                            </dl>
+            <h2>Tags</h2>
+            <table class="table table-condensed">
+                                    <tr>
+                        <th>
+                            SuppressWarnings
+                        </th>
+                        <td>
+                                                                                            <p>(PHPMD.BooleanArgumentFlag)</p>
+                                                    </td>
+                    </tr>
+                            </table>
+        </aside>
+    </div>
+
+                                    <div class="row-fluid">
+        <div class="span8 content class">
+            <a id="method_loadModels" name="method_loadModels" class="anchor"></a>
+            <article class="method">
+                <h3 class="public ">loadModels()</h3>
+                <a href="#source-view" role="button" class="pull-right btn" data-toggle="modal" style="font-size: 1.1em; padding: 9px 14px"><i class="icon-code"></i></a>
+                <pre class="signature" style="margin-right: 54px;">loadModels(array  <span class="argument">$models = array()</span>, string  <span class="argument">$source = &#039;master&#039;</span>) : void</pre>
+                <p><em>Load models</em></p>
+                
+
+                                    <h4>Parameters</h4>
+                    <table class="table table-condensed table-hover">
+                                                    <tr>
+                                <td>array</td>
+                                <td>$models </td>
+                                <td><p>models to load</p></td>
+                            </tr>
+                                                    <tr>
+                                <td>string</td>
+                                <td>$source </td>
+                                <td><p>data source</p></td>
+                            </tr>
+                                            </table>
+                
+                
+                				
+                            </article>
+        </div>
+        <aside class="span4 detailsbar">
+            <h1><i class="icon-arrow-down"></i></h1>
+                                                            <dl>
+                                                    <dt>Inherited from</dt>
+                    <dd><a href="../classes/NetCommonsMigration.html"><div class="path-wrapper">\NetCommonsMigration</div></a></dd>
+                                                            </dl>
             <h2>Tags</h2>
             <table class="table table-condensed">
                                     <tr><td colspan="2"><em>None found</em></td></tr>
@@ -395,34 +518,29 @@ If <code>false</code> no model is used.</p></td>
         </aside>
     </div>
 
-                                                    <div class="row-fluid">
+                                    <div class="row-fluid">
         <div class="span8 content class">
-            <a id="method__getInputsFields" name="method__getInputsFields" class="anchor"></a>
+            <a id="method_before" name="method_before" class="anchor"></a>
             <article class="method">
-                <h3 class="protected ">_getInputsFields()</h3>
+                <h3 class="public ">before()</h3>
                 <a href="#source-view" role="button" class="pull-right btn" data-toggle="modal" style="font-size: 1.1em; padding: 9px 14px"><i class="icon-code"></i></a>
-                <pre class="signature" style="margin-right: 54px;">_getInputsFields(array  <span class="argument">$tokenFields</span>, array  <span class="argument">$hiddenFields</span>) : array</pre>
-                <p><em>Return input fields array added hidden option.</em></p>
+                <pre class="signature" style="margin-right: 54px;">before(string  <span class="argument">$direction</span>) : boolean</pre>
+                <p><em>Before migration callback</em></p>
                 
 
                                     <h4>Parameters</h4>
                     <table class="table table-condensed table-hover">
                                                     <tr>
-                                <td>array</td>
-                                <td>$tokenFields </td>
-                                <td><p>An array of fields to generate inputs for, or null.</p></td>
-                            </tr>
-                                                    <tr>
-                                <td>array</td>
-                                <td>$hiddenFields </td>
-                                <td><p>An array of fields that exist in $tokenFields to generate inputs hidden for, or null.</p></td>
+                                <td>string</td>
+                                <td>$direction </td>
+                                <td><p>Direction of migration process (up or down)</p></td>
                             </tr>
                                             </table>
                 
                 
                                     <h4>Returns</h4>
-                    array
-                                            &mdash; <p>input fields</p>
+                    boolean
+                                            &mdash; <p>Should process continue</p>
                                     				
                             </article>
         </div>
@@ -439,27 +557,27 @@ If <code>false</code> no model is used.</p></td>
 
                                     <div class="row-fluid">
         <div class="span8 content class">
-            <a id="method__extractToken" name="method__extractToken" class="anchor"></a>
+            <a id="method_after" name="method_after" class="anchor"></a>
             <article class="method">
-                <h3 class="protected ">_extractToken()</h3>
+                <h3 class="public ">after()</h3>
                 <a href="#source-view" role="button" class="pull-right btn" data-toggle="modal" style="font-size: 1.1em; padding: 9px 14px"><i class="icon-code"></i></a>
-                <pre class="signature" style="margin-right: 54px;">_extractToken(string  <span class="argument">$formHtml</span>) : array</pre>
-                <p><em>Return _Token array.</em></p>
+                <pre class="signature" style="margin-right: 54px;">after(string  <span class="argument">$direction</span>) : boolean</pre>
+                <p><em>After migration callback</em></p>
                 
 
                                     <h4>Parameters</h4>
                     <table class="table table-condensed table-hover">
                                                     <tr>
                                 <td>string</td>
-                                <td>$formHtml </td>
-                                <td><p>Token html string</p></td>
+                                <td>$direction </td>
+                                <td><p>Direction of migration process (up or down)</p></td>
                             </tr>
                                             </table>
                 
                 
                                     <h4>Returns</h4>
-                    array
-                                            &mdash; <p>_Token</p>
+                    boolean
+                                            &mdash; <p>Should process continue</p>
                                     				
                             </article>
         </div>
@@ -474,16 +592,16 @@ If <code>false</code> no model is used.</p></td>
         </aside>
     </div>
 
-                                                    </div>
+                                                                    </div>
     </section>
 
     <div id="source-view" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="source-view-label" aria-hidden="true">
         <div class="modal-header">
             <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
-            <h3 id="source-view-label">TokenHelper.php</h3>
+            <h3 id="source-view-label">2100000004_mail_smtp_tls.php</h3>
         </div>
         <div class="modal-body">
-            <pre data-src="../files/Plugin/NetCommons/View/Helper/TokenHelper.php.txt" class="language-php line-numbers"></pre>
+            <pre data-src="../files/Plugin/SiteManager/Config/Migration/2100000004_mail_smtp_tls.php.txt" class="language-php line-numbers"></pre>
         </div>
     </div>
 
