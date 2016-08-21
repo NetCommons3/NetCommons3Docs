@@ -60,6 +60,8 @@ class MailServerController extends SystemManagerAppController {
 					'Mail.smtp.user',
 					// ** SMTPAuthパスワード
 					'Mail.smtp.pass',
+					// ** STARTTLS SMTP 拡張
+					'Mail.smtp.tls',
 				)
 			));
 		}
