@@ -144,7 +144,7 @@ class CalendarPlansController extends CalendarsAppController {
 
 		// カレンダー権限設定情報確保
 		$this->roomPermRoles = $this->CalendarEvent->prepareCalRoleAndPerm();
-		CalendarPermissiveRooms::$roomPermRoles = $this->roomPermRoles;
+		CalendarPermissiveRooms::setRoomPermRoles($this->roomPermRoles);
 
 		// 表示のための各種共通パラメータ設定
 		$this->_vars = $this->getVarsForShow();
@@ -279,6 +279,11 @@ class CalendarPlansController extends CalendarsAppController {
  * @return void
  */
 	public function add() {
+		$frameId = Current::read('Frame.id');
+		if (! $frameId) {
+			$this->setAction('can_not_edit');
+			return;
+		}
 		if ($this->request->is('post')) {
 			$this->_calendarPost();
 		}
@@ -293,6 +298,11 @@ class CalendarPlansController extends CalendarsAppController {
  * @return void
  */
 	public function edit() {
+		$frameId = Current::read('Frame.id');
+		if (! $frameId) {
+			$this->setAction('can_not_edit');
+			return;
+		}
 		if ($this->request->is('post')) {
 			$this->_calendarPost();
 		}
@@ -307,12 +317,37 @@ class CalendarPlansController extends CalendarsAppController {
 	}
 
 /**
- * _calendarPost
+ * can_not_edit
+ *
+ * カレンダーは現在フレームIDがないと、編集ができないため
+ * フレームID未指定で編集画面へ来てしまった時のエラーメッセージ画面を用意しておく
  *
  * @return void
  */
+	public function can_not_edit() {
+		//実装中
+	}
+
+/**
+ * _calendarPost
+ *
+ * @return void
+ * @SuppressWarnings(PHPMD)
+ */
 	protected function _calendarPost() {
 		//CakeLog::debug("DBG: request_data[" . print_r($this->request->data, true) . "]");
+
+		//CalenarActionPlanモデルの繰返し回数超過フラグをoffにしておく。
+		$this->CalendarActionPlan->isOverMaxRruleIndex = false;
+
+		//Xdebugがインストールされている環境だと、xdebug.max_nesting_levelの値（100とか200とか256とか）
+		//の制限を受けてしまうので、再帰callを多用するカレンダー登録では一時的に閾値を引き上げておく。
+		$xdebugMaxNestingLvl = ini_get('xdebug.max_nesting_level');
+		if ($xdebugMaxNestingLvl) {
+			//Xdebugが入っている環境
+			$xdebugMaxNestingLvl = ini_set('xdebug.max_nesting_level',
+				CalendarsComponent::CALENDAR_XDEBUG_MAX_NESTING_LEVEL);
+		}
 
 		//登録処理
 		//注) getStatus()はsave_Nからの単純取得ではなくカレンダー独自status取得をしている.
@@ -367,12 +402,34 @@ class CalendarPlansController extends CalendarsAppController {
 		//成功なら元画面(カレンダーorスケジューラー)に戻る。
 		//FIXME: 遷移元がview.ctpなら、戻り先をview.ctpに変える必要あり。
 		//
+
 		$eventId = $this->CalendarActionPlan->saveCalendarPlan(
 			$this->request->data, $procMode, $isOriginRepeat, $isTimeMod, $isRepeatMod,
 			$createdUserWhenUpd, $this->_myself);
 		if (!$eventId) {
 			//保存失敗
 			CakeLog::error("保存失敗");	//FIXME: エラー処理を記述のこと。
+
+			if ($this->CalendarActionPlan->isOverMaxRruleIndex) {
+				CakeLog::info("save(CalendarPlanの内部でカレンダーのrruleIndex回数超過が" .
+					"発生している。");
+				$this->CalendarActionPlan->validationErrors['rrule_until'] = array();
+				$this->CalendarActionPlan->validationErrors['rrule_until'][] =
+					sprintf(__d('calendars',
+						'Cyclic rules using deadline specified exceeds the maximum number of %d',
+						intval(CalendarsComponent::CALENDAR_RRULE_COUNT_MAX)));
+			} else {
+				CakeLog::error("DBG: その他の不明なエラーが発生しました。");
+				$this->CalendarActionPlan->validationErrors['rrule_until'] = array();
+				$this->CalendarActionPlan->validationErrors['rrule_until'][] =
+						__d('calendars', '不明なエラーが発生しました。');
+			}
+
+			//これでエラーmsgが画面上部に数秒間flashされる。
+			$this->NetCommons->handleValidationError($this->CalendarActionPlan->validationErrors);
+
+			return;
+
 		}
 		//保存成功
 		$event = $this->CalendarEvent->findById($eventId);
@@ -463,8 +520,8 @@ class CalendarPlansController extends CalendarsAppController {
 		$this->set('frameId', Current::read('Frame.id'));
 		$this->set('languageId', Current::read('Language.id'));
 
-		$this->request->data['CalendarFrameSettingSelectRoom'] =
-			$this->CalendarFrameSetting->getSelectRooms($this->_frameSetting['CalendarFrameSetting']['id']);
+		//$this->request->data['CalendarFrameSettingSelectRoom'] =
+		//	$this->CalendarFrameSetting->getSelectRooms($this->_frameSetting['CalendarFrameSetting']['id']);
 	}
 
 /**
@@ -527,8 +584,15 @@ class CalendarPlansController extends CalendarsAppController {
 		$this->_frameSetting = $this->CalendarFrameSetting->getFrameSetting();
 
 		//公開対象一覧のoptions配列と自分自身のroom_idとルーム別空間名を取得
-		list($this->_exposeRoomOptions, $this->_myself, ) =
-			$this->CalendarActionPlan->getExposeRoomOptions($this->_frameSetting);
+		$this->_exposeRoomOptions = $vars['exposeRoomOptions'];
+		$this->_myself = null;
+		$userId = Current::read('User.id');
+		if ($userId) {
+			$myRoom = $this->Room->getPrivateRoomByUserId($userId);
+			if ($myRoom) {
+				$this->_myself = $myRoom['Room']['id'];
+			}
+		}
 
 		//eメール通知の選択options配列を取得
 		$this->_emailOptions = $this->CalendarActionPlan->getNoticeEmailOption();

@@ -15,6 +15,7 @@ App::uses('WorkflowComponent', 'Workflow.Controller/Component');
  *
  * @author Allcreator Co., Ltd. <info@allcreator.net>
  * @package NetCommons\Calendars\View\Helper
+ * @SuppressWarnings(PHPMD)
  */
 class CalendarMonthlyHelper extends AppHelper {
 
@@ -135,6 +136,10 @@ class CalendarMonthlyHelper extends AppHelper {
 
 		$html .= "<div class='hidden-xs calendar-plan-line " . $calendarLinePlanMark .
 						"'  id='" . $id . '_' . $this->_week . "'>";
+		$label = $this->CalendarCommon->makeWorkFlowLabel($plan['CalendarEvent']['status']);
+		if (! empty($label)) {
+			$html .= '<small>' . $label . '</small>&nbsp;';
+		}
 		$title = $this->TitleIcon->titleIcon($plan['CalendarEvent']['title_icon']) .
 			h(mb_strimwidth($plan['CalendarEvent']['title'], 0, 20, '...'));
 		$html .= $this->NetCommonsHtml->link($title, $url, array(
@@ -286,7 +291,11 @@ class CalendarMonthlyHelper extends AppHelper {
 		if ($fromTime !== $plan['CalendarEvent']['fromTime'] ||
 			$toTime !== $plan['CalendarEvent']['toTime']) {
 			$html .= '<p class="calendar-plan-time small">';
-			$html .= h($plan['CalendarEvent']['fromTime']) . '-' . h($plan['CalendarEvent']['toTime']);
+			$html .= h($plan['CalendarEvent']['fromTime']) .
+				' - ' .
+				// 上の両側のブランクに「折り返しはここで」の
+				//意味があるから削除しちゃダメよ
+				h($plan['CalendarEvent']['toTime']);
 			$html .= '</p>';
 		}
 		$html .= '<h3 class="calendar-plan-tittle">';

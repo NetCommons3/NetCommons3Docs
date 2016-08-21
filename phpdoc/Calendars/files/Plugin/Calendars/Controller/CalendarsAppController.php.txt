@@ -59,7 +59,7 @@ class CalendarsAppController extends AppController {
 		}
 
 		$queryFrameId = Hash::get($this->request->query, 'frame_id');
-		if (Current::read('Frame.id') == $queryFrameId) {
+		if (! $queryFrameId || Current::read('Frame.id') == $queryFrameId) {
 			return Hash::get($this->request->query, $paramName);
 		}
 		return false;
@@ -101,7 +101,6 @@ class CalendarsAppController extends AppController {
 		$qYear = $this->getQueryParam('year');
 		$qMonth = $this->getQueryParam('month');
 		$qDay = $this->getQueryParam('day');
-
 		if ($qYear) {
 			if ($qYear < CalendarsComponent::CALENDAR_RRULE_TERM_UNTIL_YEAR_MIN) {
 				$qYear = CalendarsComponent::CALENDAR_RRULE_TERM_UNTIL_YEAR_MIN;
@@ -117,7 +116,7 @@ class CalendarsAppController extends AppController {
 			$vars['day'] = intval($qDay);
 		} else { //省略時は、現在の日を設置
 			// 年月の指定がない場合は当日
-			if ($qYear === false && $qMonth === false) {
+			if ($qYear == false && $qMonth == false) {
 				$vars['day'] = intval($userNowArray['day']);
 			} else {
 				//月末日は月によって替わるので、すべての月でかならず存在する日(つまり一日）にする。
@@ -272,11 +271,12 @@ class CalendarsAppController extends AppController {
 		//
 		$frameSetting = $this->CalendarFrameSetting->getFrameSetting();
 		//公開対象一覧のoptions配列と自分自身のroom_idとルーム毎空間名配列を取得
-		list($exposeRoomOptions, $myself, $spaceNameOfRooms) =
+		list($exposeRoomOptions, $myself, $spaceNameOfRooms, $allRoomNames) =
 			$this->CalendarActionPlan->getExposeRoomOptions($frameSetting);
 		$vars['exposeRoomOptions'] = $exposeRoomOptions;
 		$vars['myself'] = $myself;
 		$vars['spaceNameOfRooms'] = $spaceNameOfRooms;
+		$vars['allRoomNames'] = $allRoomNames;
 	}
 
 /**
@@ -293,13 +293,11 @@ class CalendarsAppController extends AppController {
 		if ($this->name != 'Calendars') {
 			return;
 		}
-		$currentPath = Router::url();
 		// style指定がないときはデフォルト表示にしているときのはずです
 		// あるときは特殊画面から移動してます
 		$style = $this->getQueryParam('style');
 		if ($style) {
-			//$currentPath = substr($currentPath, 0, strpos($currentPath, '?'));
-			$currentPath .= '?' . http_build_query($this->request->query);
+			$currentPath = $this->request->here(false);
 		} else {
 			$currentPath = NetCommonsUrl::backToPageUrl();
 		}

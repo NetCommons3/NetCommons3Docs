@@ -14,6 +14,7 @@
 
 App::uses('CalendarsAppModel', 'Calendars.Model');
 App::uses('CalendarsComponent', 'Calendars.Controller/Component');
+App::uses('CalendarSupport', 'Calendars.Utility');
 
 /**
  * Calendar Action Plan Model
@@ -55,6 +56,20 @@ class CalendarActionPlan extends CalendarsAppModel {
 		'Calendars.CalendarPlanValidate',	//予定バリデーション専用
 		////'Calendars.CalendarRruleHandle',	//concatRrule()など
 		'Calendars.CalendarPlanGeneration',	//元予定の新世代予定生成関連
+		// 自動でメールキューの登録, 削除。ワークフロー利用時はWorkflow.Workflowより下に記述する
+		'Mails.MailQueue' => array(
+			'embedTags' => array(
+				'X-SUBJECT' => 'CalendarActionPlan.title',
+				'X-LOCATION' => 'CalendarActionPlan.location',
+				'X-CONTACT' => 'CalendarActionPlan.contact',
+				'X-URL' => array(
+					'controller' => 'calendar_plans'
+				)
+			),
+			'workflowType' => 'workflow',
+		),
+		'Mails.MailQueueDelete',
+		'Calendars.CalendarMail',
 	);
 	// @codingStandardsIgnoreStart
 	// $_schemaはcakePHP2の予約語だが、宣言するとphpcsが警告を出すので抑止する。
@@ -524,6 +539,7 @@ class CalendarActionPlan extends CalendarsAppModel {
 		// 設定画面を表示する前にこのルームのアンケートブロックがあるか確認
 		// 万が一、まだ存在しない場合には作成しておく
 		$this->Calendar->afterFrameSave(Current::read());
+
 		$this->begin();
 		$eventId = 0;
 		$this->aditionalData = $data['WorkflowComment'];
@@ -555,7 +571,7 @@ class CalendarActionPlan extends CalendarsAppModel {
 				//CakeLog::debug("DBG: PLAN_ADD case.");
 
 				//$this->insertPlan($planParam);
-				$eventId = $this->insertPlan($planParam);
+				$eventId = $this->insertPlan($planParam, $isMyPrivateRoom);
 			} else {	//PLAN_EDIT
 				//変更処理
 				//CakeLog::debug("DBG: PLAN_MODIFY case.");
@@ -576,6 +592,18 @@ class CalendarActionPlan extends CalendarsAppModel {
 				$eventId = $this->updatePlan($planParam, $newPlan, $status, $isInfoArray, $editRrule,
 					$createdUserWhenUpd);
 			}
+
+			if ($this->isOverMaxRruleIndex) {
+				CakeLog::info("save(CalendarPlanの内部でカレンダーのrruleIndex回数超過が" .
+				"発生している。強制rollbackし、画面にINDEXオーバーであることを" .
+				"出す流れに乗せ、例外は投げないようにする。");
+				$this->rollback();
+				return false;
+			}
+
+			// 承認メール、公開通知メールの送信
+			$this->sendWorkflowAndNoticeMail($eventId, $isMyPrivateRoom);
+
 			$this->_enqueueEmail($data);
 
 			$this->commit();
@@ -618,7 +646,19 @@ class CalendarActionPlan extends CalendarsAppModel {
 				$data[$this->alias]['timezone_offset']);
 			$planParam = $this->_setAndMergeDateTime($planParam, $data);
 			$planParam = $this->_setAndMergeRrule($planParam, $data);
-			$planParam['share_users'] = Hash::extract($data, 'GroupsUser.{n}.user_id');
+
+			$shareUsers = Hash::extract($data, 'GroupsUser.{n}.user_id');
+			$myUserId = Current::read('User.id');
+			$newShareUsers = array();
+			foreach ($shareUsers as $user) {
+				if ($user == $myUserId) {
+					CakeLog::info('予定を共有する人に自分自身 user_id[' .
+						$user . ']がいます。自分自身は除外します。');
+					continue;
+				}
+				$newShareUsers[] = $user;
+			}
+			$planParam['share_users'] = $newShareUsers;
 
 			//単純なcopyでＯＫな項目群
 			$fields = array(
