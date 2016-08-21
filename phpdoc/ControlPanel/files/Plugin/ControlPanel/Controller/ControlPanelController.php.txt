@@ -73,7 +73,7 @@ class ControlPanelController extends ControlPanelAppController {
 		$notifications = $this->Notification->find('all', array(
 			'recursive' => -1,
 			'limit' => Notification::MAX_ROW,
-			'order' => array('modified' => 'desc')
+			'order' => array('last_updated' => 'desc')
 		));
 
 		$this->set('notifications', $notifications);
