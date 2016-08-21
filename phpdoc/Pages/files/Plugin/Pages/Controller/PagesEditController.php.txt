@@ -181,6 +181,9 @@ class PagesEditController extends PagesAppController {
 			return $this->throwBadRequest();
 		}
 		if ($this->Page->deletePage($this->data)) {
+			$this->NetCommons->setFlashNotification(
+				__d('net_commons', 'Successfully saved.'), array('class' => 'success')
+			);
 			return $this->redirect(Hash::get($this->request->data, '_NetCommonsUrl.redirect'));
 		} else {
 			return $this->throwBadRequest();
@@ -330,6 +333,7 @@ class PagesEditController extends PagesAppController {
 					)
 				)
 			));
+			$this->request->data['_NetCommonsUrl']['redirect'] = $this->__getRedirectUrl();
 		}
 	}
 
