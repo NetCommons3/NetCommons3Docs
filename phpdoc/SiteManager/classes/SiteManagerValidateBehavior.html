@@ -136,10 +136,10 @@
                                 <div class="accordion" style="margin-bottom: 0">
         <div class="accordion-group">
             <div class="accordion-heading">
-                                    <a class="accordion-toggle " data-toggle="collapse" data-target="#namespace-978552213"></a>
+                                    <a class="accordion-toggle " data-toggle="collapse" data-target="#namespace-1275486788"></a>
                                 <a href="../namespaces/default.html" style="margin-left: 30px; padding-left: 0">\</a>
             </div>
-            <div id="namespace-978552213" class="accordion-body collapse in">
+            <div id="namespace-1275486788" class="accordion-body collapse in">
                 <div class="accordion-inner">
 
                     
@@ -269,7 +269,9 @@
                                                                     <a href="../classes/SiteSettingValidateBehavior.html#method_setup" class="">setup()</a><br />
                                                                     <a href="../classes/SiteManagerValidateBehavior.html#method_validateAppSetting" class="">validateAppSetting()</a><br />
                                                                     <a href="../classes/SiteManagerValidateBehavior.html#method_validateSiteClose" class="">validateSiteClose()</a><br />
+                                                                    <a href="../classes/SiteManagerValidateBehavior.html#method_validatePasswordReissue" class="">validatePasswordReissue()</a><br />
                                                                     <a href="../classes/SiteManagerValidateBehavior.html#method_validateMembership" class="">validateMembership()</a><br />
+                                                                    <a href="../classes/SiteManagerValidateBehavior.html#method_validateWorkflow" class="">validateWorkflow()</a><br />
                                                             </section>
                             <section class="span4">
                                                                     <em>No public properties found</em>
@@ -294,6 +296,7 @@
                         <section class="row-fluid private">
                             <section class="span4">
                                                                     <a href="../classes/SiteManagerValidateBehavior.html#method___validateMembershipAutoRegist" class="">__validateMembershipAutoRegist()</a><br />
+                                                                    <a href="../classes/SiteManagerValidateBehavior.html#method___validateMembershipUserRegist" class="">__validateMembershipUserRegist()</a><br />
                                                                     <a href="../classes/SiteManagerValidateBehavior.html#method___validateMembershipUserCancel" class="">__validateMembershipUserCancel()</a><br />
                                                             </section>
                             <section class="span4">
@@ -476,12 +479,96 @@
 
                                     <div class="row-fluid">
         <div class="span8 content class">
+            <a id="method_validatePasswordReissue" name="method_validatePasswordReissue" class="anchor"></a>
+            <article class="method">
+                <h3 class="public ">validatePasswordReissue()</h3>
+                <a href="#source-view" role="button" class="pull-right btn" data-toggle="modal" style="font-size: 1.1em; padding: 9px 14px"><i class="icon-code"></i></a>
+                <pre class="signature" style="margin-right: 54px;">validatePasswordReissue(\Model  <span class="argument">$model</span>, array  <span class="argument">$data</span>) : array</pre>
+                <p><em>パスワード再発行のValidate処理</em></p>
+                
+
+                                    <h4>Parameters</h4>
+                    <table class="table table-condensed table-hover">
+                                                    <tr>
+                                <td>\Model</td>
+                                <td>$model </td>
+                                <td><p>ビヘイビア呼び出し元モデル</p></td>
+                            </tr>
+                                                    <tr>
+                                <td>array</td>
+                                <td>$data </td>
+                                <td><p>リクエストデータ配列</p></td>
+                            </tr>
+                                            </table>
+                
+                
+                                    <h4>Returns</h4>
+                    array
+                                            &mdash; <p>リクエストデータ</p>
+                                    				
+                            </article>
+        </div>
+        <aside class="span4 detailsbar">
+            <h1><i class="icon-arrow-down"></i></h1>
+                                                            <dl>
+                                                                            </dl>
+            <h2>Tags</h2>
+            <table class="table table-condensed">
+                                    <tr><td colspan="2"><em>None found</em></td></tr>
+                            </table>
+        </aside>
+    </div>
+
+                                    <div class="row-fluid">
+        <div class="span8 content class">
             <a id="method_validateMembership" name="method_validateMembership" class="anchor"></a>
             <article class="method">
                 <h3 class="public ">validateMembership()</h3>
                 <a href="#source-view" role="button" class="pull-right btn" data-toggle="modal" style="font-size: 1.1em; padding: 9px 14px"><i class="icon-code"></i></a>
                 <pre class="signature" style="margin-right: 54px;">validateMembership(\Model  <span class="argument">$model</span>, array  <span class="argument">$data</span>) : array</pre>
                 <p><em>入会・退会のValidate処理</em></p>
+                
+
+                                    <h4>Parameters</h4>
+                    <table class="table table-condensed table-hover">
+                                                    <tr>
+                                <td>\Model</td>
+                                <td>$model </td>
+                                <td><p>ビヘイビア呼び出し元モデル</p></td>
+                            </tr>
+                                                    <tr>
+                                <td>array</td>
+                                <td>$data </td>
+                                <td><p>リクエストデータ配列</p></td>
+                            </tr>
+                                            </table>
+                
+                
+                                    <h4>Returns</h4>
+                    array
+                                            &mdash; <p>リクエストデータ</p>
+                                    				
+                            </article>
+        </div>
+        <aside class="span4 detailsbar">
+            <h1><i class="icon-arrow-down"></i></h1>
+                                                            <dl>
+                                                                            </dl>
+            <h2>Tags</h2>
+            <table class="table table-condensed">
+                                    <tr><td colspan="2"><em>None found</em></td></tr>
+                            </table>
+        </aside>
+    </div>
+
+                                    <div class="row-fluid">
+        <div class="span8 content class">
+            <a id="method_validateWorkflow" name="method_validateWorkflow" class="anchor"></a>
+            <article class="method">
+                <h3 class="public ">validateWorkflow()</h3>
+                <a href="#source-view" role="button" class="pull-right btn" data-toggle="modal" style="font-size: 1.1em; padding: 9px 14px"><i class="icon-code"></i></a>
+                <pre class="signature" style="margin-right: 54px;">validateWorkflow(\Model  <span class="argument">$model</span>, array  <span class="argument">$data</span>) : array</pre>
+                <p><em>承認メールのValidate処理</em></p>
                 
 
                                     <h4>Parameters</h4>
@@ -711,6 +798,48 @@
 
                                     <div class="row-fluid">
         <div class="span8 content class">
+            <a id="method___validateMembershipUserRegist" name="method___validateMembershipUserRegist" class="anchor"></a>
+            <article class="method">
+                <h3 class="private ">__validateMembershipUserRegist()</h3>
+                <a href="#source-view" role="button" class="pull-right btn" data-toggle="modal" style="font-size: 1.1em; padding: 9px 14px"><i class="icon-code"></i></a>
+                <pre class="signature" style="margin-right: 54px;">__validateMembershipUserRegist(\Model  <span class="argument">$model</span>, array  <span class="argument">$data</span>) : array</pre>
+                <p><em>入会のValidate処理</em></p>
+                
+
+                                    <h4>Parameters</h4>
+                    <table class="table table-condensed table-hover">
+                                                    <tr>
+                                <td>\Model</td>
+                                <td>$model </td>
+                                <td><p>ビヘイビア呼び出し元モデル</p></td>
+                            </tr>
+                                                    <tr>
+                                <td>array</td>
+                                <td>$data </td>
+                                <td><p>リクエストデータ配列</p></td>
+                            </tr>
+                                            </table>
+                
+                
+                                    <h4>Returns</h4>
+                    array
+                                            &mdash; <p>リクエストデータ</p>
+                                    				
+                            </article>
+        </div>
+        <aside class="span4 detailsbar">
+            <h1><i class="icon-arrow-down"></i></h1>
+                                                            <dl>
+                                                                            </dl>
+            <h2>Tags</h2>
+            <table class="table table-condensed">
+                                    <tr><td colspan="2"><em>None found</em></td></tr>
+                            </table>
+        </aside>
+    </div>
+
+                                    <div class="row-fluid">
+        <div class="span8 content class">
             <a id="method___validateMembershipUserCancel" name="method___validateMembershipUserCancel" class="anchor"></a>
             <article class="method">
                 <h3 class="private ">__validateMembershipUserCancel()</h3>
@@ -800,7 +929,7 @@
                 <section class="span10 offset1">
                     <hr />
                     Documentation is powered by <a href="http://www.phpdoc.org/">phpDocumentor </a> and authored
-                    on August 25th, 2016 at 15:32.
+                    on August 25th, 2016 at 22:46.
                 </section>
             </section>
         </section>
