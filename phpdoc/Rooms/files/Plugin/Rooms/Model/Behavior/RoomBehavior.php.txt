@@ -96,6 +96,15 @@ class RoomBehavior extends ModelBehavior {
 			$conditions = Hash::merge(array('Room.active' => true, 'Room.in_draft' => false), $conditions);
 		}
 
+		if (array_key_exists('Room.id', $conditions) && $conditions['Room.id'] === Room::ROOM_PARENT_ID) {
+			$conditions = Hash::merge(array('OR' => array('Room.id' => Room::ROOM_PARENT_ID)), $conditions);
+		} elseif (isset($conditions[$model->Room->alias . '.page_id_top NOT'])) {
+			$conditions = Hash::merge(array('OR' => array('Room.id' => Room::ROOM_PARENT_ID)), $conditions);
+			unset($conditions[$model->Room->alias . '.page_id_top NOT']);
+		} else {
+			$conditions = Hash::merge(array($model->Room->alias . '.page_id_top NOT' => null), $conditions);
+		}
+
 		$options = Hash::merge(array(
 			'recursive' => 1,
 			'fields' => array(
@@ -106,7 +115,7 @@ class RoomBehavior extends ModelBehavior {
 			),
 			'conditions' => array(
 				$model->Room->alias . '.space_id' => $spaceIds,
-				$model->Room->alias . '.page_id_top NOT' => null,
+				//$model->Room->alias . '.page_id_top NOT' => null,
 				//$model->Room->alias . '.root_id' => $rootIds,
 			),
 			'joins' => array(
@@ -194,9 +203,11 @@ class RoomBehavior extends ModelBehavior {
  * @return array
  */
 	public function getRolesRoomsInDraft(Model $model, $conditions = array()) {
-		$conditions = Hash::merge(array(
-			'OR' => ['Room.page_id_top NOT' => null, 'Room.in_draft' => true]
-		), $conditions);
+		if (! array_key_exists('Room.id', $conditions)) {
+			$conditions = Hash::merge(array(
+				'OR' => ['Room.page_id_top NOT' => null, 'Room.in_draft' => true]
+			), $conditions);
+		}
 
 		$rolesRooms = $model->RolesRoom->find('all', array(
 			'recursive' => 0,

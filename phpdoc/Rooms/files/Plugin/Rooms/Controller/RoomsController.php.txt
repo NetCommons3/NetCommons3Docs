@@ -202,7 +202,11 @@ class RoomsController extends RoomsAppController {
 		$activeSpaceId = $this->viewVars['activeSpaceId'];
 		$model = Inflector::camelize($this->viewVars['spaces'][$activeSpaceId]['Space']['plugin_key']);
 		$this->$model = ClassRegistry::init($model . '.' . $model);
-		$this->set('participationFixed', $this->$model->participationFixed);
+		if ($this->viewVars['room']['Room']['id'] === Room::ROOM_PARENT_ID) {
+			$this->set('participationFixed', true);
+		} else {
+			$this->set('participationFixed', $this->$model->participationFixed);
+		}
 
 		if ($this->request->is('put')) {
 			//不要パラメータ除去

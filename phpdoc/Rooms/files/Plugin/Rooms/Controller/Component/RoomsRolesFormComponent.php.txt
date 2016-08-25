@@ -135,6 +135,18 @@ class RoomsRolesFormComponent extends Component {
 		//ルームデータチェック
 		$room = $controller->viewVars['room'];
 
+		//スペースModel
+		$activeSpaceId = $controller->viewVars['activeSpaceId'];
+		$model = Inflector::camelize(
+			$controller->viewVars['spaces'][$activeSpaceId]['Space']['plugin_key']
+		);
+		$controller->$model = ClassRegistry::init($model . '.' . $model);
+		if ($room['Room']['id'] === Room::ROOM_PARENT_ID) {
+			$controller->set('participationFixed', true);
+		} else {
+			$controller->set('participationFixed', $controller->$model->participationFixed);
+		}
+
 		//Ajaxの場合、一時セットとする(次へもしくは決定で更新する)
 		if ($controller->request->is('ajax') && $controller->params['action'] === 'role_room_user') {
 			return $this->__setRoomRoleUser($controller);
@@ -199,9 +211,8 @@ class RoomsRolesFormComponent extends Component {
 		$userId = $controller->request->data['RolesRoomsUser']['user_id'];
 
 		//パブリックスペースの時不参加にできない
-		if ($room['Room']['space_id'] === Space::PUBLIC_SPACE_ID &&
+		if ($controller->viewVars['participationFixed'] &&
 				! $controller->request->data['RolesRoomsUser']['role_key']) {
-
 			$controller->throwBadRequest();
 			return false;
 		}
@@ -256,9 +267,8 @@ class RoomsRolesFormComponent extends Component {
 		$room = $controller->viewVars['room'];
 
 		//パブリックスペースの時不参加にできない
-		if ($room['Room']['space_id'] === Space::PUBLIC_SPACE_ID &&
+		if ($controller->viewVars['participationFixed'] &&
 				$controller->request->data['Role']['key'] === 'delete') {
-
 			$controller->throwBadRequest();
 			return false;
 		}

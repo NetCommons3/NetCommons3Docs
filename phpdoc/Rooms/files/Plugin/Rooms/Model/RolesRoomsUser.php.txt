@@ -126,9 +126,9 @@ class RolesRoomsUser extends RoomsAppModel {
 			'RoomRole' => 'Rooms.RoomRole',
 		]);
 
-		$conditions = Hash::merge(array(
-				'Room.page_id_top NOT' => null,
-			), $conditions);
+		if (! array_key_exists('Room.id', $conditions)) {
+			$conditions = Hash::merge(array('Room.page_id_top NOT' => null), $conditions);
+		}
 
 		$query['fields'] = Hash::get($query, 'fields', array(
 			$this->alias . '.*',
