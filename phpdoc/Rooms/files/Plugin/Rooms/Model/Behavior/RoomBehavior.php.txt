@@ -99,7 +99,10 @@ class RoomBehavior extends ModelBehavior {
 		if (array_key_exists('Room.id', $conditions) && $conditions['Room.id'] === Room::ROOM_PARENT_ID) {
 			$conditions = Hash::merge(array('OR' => array('Room.id' => Room::ROOM_PARENT_ID)), $conditions);
 		} elseif (isset($conditions[$model->Room->alias . '.page_id_top NOT'])) {
-			$conditions = Hash::merge(array('OR' => array('Room.id' => Room::ROOM_PARENT_ID)), $conditions);
+			$conditions = Hash::merge(array('OR' => array(
+				$model->Room->alias . '.page_id_top NOT' => null,
+				'Room.id' => Room::ROOM_PARENT_ID,
+			)), $conditions);
 			unset($conditions[$model->Room->alias . '.page_id_top NOT']);
 		} else {
 			$conditions = Hash::merge(array($model->Room->alias . '.page_id_top NOT' => null), $conditions);

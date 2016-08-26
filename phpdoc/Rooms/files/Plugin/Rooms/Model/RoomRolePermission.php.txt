@@ -82,5 +82,41 @@ class RoomRolePermission extends RoomsAppModel {
 		return parent::beforeValidate($options);
 	}
 
+/**
+ * パーミッションデータ登録処理
+ *
+ * @param bool $created 作成フラグ
+ * @param array $room ルーム
+ * @return array
+ * @throws InternalErrorException
+ */
+	public function saveRoomRolePermission($created, $room) {
+		if ($created) {
+			$roomRolePermissions = $this->find('all', array(
+				'recursive' => 0,
+				'conditions' => array(
+					'RolesRoom.room_id' => $room['Room']['id'],
+					'RoomRolePermission.permission' => array_keys($room['RoomRolePermission'])
+				)
+			));
+			$roomRolePermissions = Hash::combine($roomRolePermissions,
+				'{n}.RolesRoom.role_key',
+				'{n}.RoomRolePermission',
+				'{n}.RoomRolePermission.permission'
+			);
+			$room['RoomRolePermission'] = Hash::remove($room['RoomRolePermission'], '{s}.{s}.id');
+			$room['RoomRolePermission'] = Hash::merge(
+				$roomRolePermissions, $room['RoomRolePermission']
+			);
+		}
+
+		foreach ($room['RoomRolePermission'] as $permission) {
+			if (! $this->saveMany($permission, ['validate' => false])) {
+				throw new InternalErrorException(__d('net_commons', 'Internal Server Error'));
+			}
+		}
+
+		return $room['RoomRolePermission'];
+	}
 }
 
