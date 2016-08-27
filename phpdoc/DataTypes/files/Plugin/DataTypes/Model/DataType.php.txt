@@ -46,6 +46,13 @@ class DataType extends DataTypesAppModel {
 		DATA_TYPE_TIMEZONE = 'timezone';
 
 /**
+ * チェックボックスのセパレータ
+ *
+ * @var const
+ */
+	const CHECKBOX_SEPARATOR = "\n";
+
+/**
  * Validation rules
  *
  * @var array
