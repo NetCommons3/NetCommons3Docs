@@ -297,7 +297,7 @@ class UserEditFormHelper extends AppHelper {
 			);
 		}
 
-		$attributes['help'] = Hash::get($userAttribute, 'UserAttribute.description', '');
+		$attributes['help'] = h(Hash::get($userAttribute, 'UserAttribute.description', ''));
 		$html .= $this->__inputDataType($fieldName, $userAttribute, $attributes);
 
 		return $html;
@@ -305,11 +305,13 @@ class UserEditFormHelper extends AppHelper {
 
 /**
  * データタイプに対するinputタグのHTML出力
+ * ※PHPMD除外は暫定
  *
  * @param string $fieldName フィールド名("Modelname.fieldname"形式)
  * @param array $userAttribute UserAttributeデータ
  * @param array $attributes HTMLタグ属性
  * @return string HTML 入力HTML
+ * @SuppressWarnings(PHPMD.CyclomaticComplexity)
  */
 	private function __inputDataType($fieldName, $userAttribute, $attributes = array()) {
 		$output = '';
@@ -341,7 +343,11 @@ class UserEditFormHelper extends AppHelper {
 
 				$attributes = Hash::insert($attributes, 'label', false);
 				$attributes = Hash::insert($attributes, 'div', false);
-				$attributes = Hash::merge(['again' => true], $attributes);
+				if ($this->_View->request->params['plugin'] === 'users') {
+					$attributes = Hash::merge(['again' => true, 'current' => true], $attributes);
+				} else {
+					$attributes = Hash::merge(['again' => true], $attributes);
+				}
 
 				$output .= '<div class="col-xs-12 col-sm-9">';
 				$output .= $this->NetCommonsForm->input($fieldName, $attributes);
@@ -393,7 +399,7 @@ class UserEditFormHelper extends AppHelper {
 				$output .= '</div>';
 		}
 
-		if ($this->request->params['plugin'] === 'user_manager') {
+		if ($this->_View->request->params['plugin'] === 'user_manager') {
 			$output .= $this->userPublic($userAttribute);
 			$output .= $this->userMailReception($userAttribute);
 		} else {
