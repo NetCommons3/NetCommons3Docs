@@ -121,6 +121,7 @@ class UserAttributeChoice extends UsersAppModel {
 					'rule' => array('numeric'),
 					'message' => __d('net_commons', 'Invalid request.'),
 					'required' => true,
+					'on' => 'update', // Limit validation to 'create' or 'update' operations
 				),
 			),
 			'name' => array(

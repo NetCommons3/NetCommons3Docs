@@ -72,7 +72,7 @@ class AddUsenamePasswordDesc extends NetCommonsMigration {
 		}
 
 		$UserAttribute = $this->generateModel('UserAttribute');
-		foreach ($this->records['UserAttribute'] as $i => $record) {
+		foreach ($this->records['UserAttribute'] as $record) {
 			$update = array(
 				'description' => '\'' . $record['description'] . '\''
 			);
