@@ -30,6 +30,7 @@ class Announcement extends AnnouncementsAppModel {
 	public $actsAs = array(
 		'Blocks.Block' => array(
 			'name' => 'Announcement.content',
+			'nameHtml' => true,
 			'loadModels' => array(
 				'BlockSetting' => 'Blocks.BlockSetting',
 			)
