@@ -72,10 +72,10 @@ class PageLayoutHelper extends AppHelper {
 		parent::__construct($View, $settings);
 
 		$this->containers = Hash::combine(
-			Hash::get($View->viewVars, 'page.Container', array()), '{n}.type', '{n}'
+			Hash::get($settings, 'page.Container', array()), '{n}.type', '{n}'
 		);
 		$this->boxes = Hash::combine(
-			Hash::get($View->viewVars, 'page.Box', array()), '{n}.id', '{n}', '{n}.container_id'
+			Hash::get($settings, 'page.Box', array()), '{n}.id', '{n}', '{n}.container_id'
 		);
 		$this->plugins = Hash::combine(Current::read(
 			'PluginsRoom', array()), '{n}.Plugin.key', '{n}.Plugin'
@@ -170,7 +170,9 @@ class PageLayoutHelper extends AppHelper {
 			} else {
 				$element = $this->_View->element('Frames.frame', array(
 					'frame' => Current::read('Frame'),
-					'view' => $this->_View->fetch('content')
+					'view' => $this->_View->fetch('content'),
+					'centerContent' => true,
+					'displayBackTo' => Hash::get($this->_View->viewVars, 'displayBackTo', false)
 				));
 			}
 			//セッティングモード

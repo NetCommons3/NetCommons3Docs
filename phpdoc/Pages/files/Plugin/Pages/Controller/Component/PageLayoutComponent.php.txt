@@ -26,6 +26,13 @@ class PageLayoutComponent extends Component {
 	public $modal = null;
 
 /**
+ * page
+ *
+ * @var string
+ */
+	protected $_page = null;
+
+/**
  * beforeRender
  *
  * @param Controller $controller Controller
@@ -38,21 +45,32 @@ class PageLayoutComponent extends Component {
 			return;
 		}
 
+		if (! $this->_page) {
+			//pathからページデータ取得
+			if (! isset($controller->viewVars['page'])) {
+				$this->Page = ClassRegistry::init('Pages.Page');
+				$page = $this->Page->getPageWithFrame(Current::read('Page.permalink'));
+				if (empty($page)) {
+					throw new NotFoundException();
+				}
+				$this->_page = $page;
+			} else {
+				$this->_page = $controller->viewVars['page'];
+			}
+		}
+
+		if (! array_key_exists('Pages.PageLayout', $controller->helpers)) {
+			$controller->helpers['Pages.PageLayout'] = array(
+				'page' => $this->_page
+			);
+		}
+
 		//RequestActionの場合、スキップする
 		if (! empty($controller->request->params['requested'])) {
 			return;
 		}
 
-		//pathからページデータ取得
-		if (! isset($controller->viewVars['page'])) {
-			$this->Page = ClassRegistry::init('Pages.Page');
-			$page = $this->Page->getPageWithFrame(Current::read('Page.permalink'));
-			if (empty($page)) {
-				throw new NotFoundException();
-			}
-			$controller->set('page', $page);
-		}
-
+		$controller->set('page', $this->_page);
 		$controller->set('modal', $this->modal);
 
 		//メタデータのセット
@@ -61,9 +79,6 @@ class PageLayoutComponent extends Component {
 		//ヘルパーセット
 		if (! array_key_exists('NetCommons.Composer', $controller->helpers)) {
 			$controller->helpers[] = 'NetCommons.Composer';
-		}
-		if (! array_key_exists('Pages.PageLayout', $controller->helpers)) {
-			$controller->helpers[] = 'Pages.PageLayout';
 		}
 	}
 
