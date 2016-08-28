@@ -15,7 +15,7 @@ App::uses('MailsMigration', 'Mails.Config/Migration');
  *
  * @package NetCommons\Mails\Config\Migration
  */
-class BbsMailSettingRecords extends MailsMigration {
+class AnnouncementMailSettingRecords extends MailsMigration {
 
 /**
  * プラグインキー

@@ -49,6 +49,7 @@ class Announcement extends AnnouncementsAppModel {
 				'summary' => 'Announcement.content',
 			),
 			'titleHtml' => true,
+			'summaryWysiwyg' => true,
 		),
 		'Wysiwyg.Wysiwyg' => array(
 			'fields' => array('content'),
