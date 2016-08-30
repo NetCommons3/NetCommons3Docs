@@ -119,6 +119,7 @@ class NetCommonsMail extends CakeEmail {
 			$smtpPort = SiteSettingUtil::read('Mail.smtp.port');
 			$smtpUser = SiteSettingUtil::read('Mail.smtp.user');
 			$smtpPass = SiteSettingUtil::read('Mail.smtp.pass');
+			$smtpTls = SiteSettingUtil::read('Mail.smtp.tls');
 
 			$config['transport'] = 'Smtp';
 			$config['host'] = $smtpHost;
@@ -129,6 +130,11 @@ class NetCommonsMail extends CakeEmail {
 			if (!empty($smtpUser) && !empty($smtpPass)) {
 				$config['username'] = $smtpUser;
 				$config['password'] = $smtpPass;
+			}
+
+			// STARTTLSを使用する
+			if ($smtpTls) {
+				$config['tls'] = $smtpTls;
 			}
 
 		} elseif ($transport == SiteSetting::MAIL_TRANSPORT_PHPMAIL) {
@@ -311,7 +317,7 @@ class NetCommonsMail extends CakeEmail {
 				'RolesRoom.role_key' => $roleKeys,
 			);
 			$rolesRoomsUsers = $this->RolesRoomsUser->getRolesRoomsUsers($conditions);
-			$rolesRoomsUserIds = Hash::extract($rolesRoomsUsers, '{n}.RolesRoomsUser.roles_room_id');
+			$rolesRoomsUserIds = Hash::extract($rolesRoomsUsers, '{n}.RolesRoomsUser.user_id');
 
 			// 送らないユーザIDをルーム配信ユーザIDから排除
 			$notSendRoomUserIds = Hash::get($mailQueueUser, 'not_send_room_user_ids');

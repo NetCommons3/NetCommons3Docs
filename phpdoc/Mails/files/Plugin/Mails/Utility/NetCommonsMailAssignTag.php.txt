@@ -56,11 +56,13 @@ class NetCommonsMailAssignTag {
  * @var string 承認依頼通知
  * @var string 差戻し通知
  * @var string 承認完了通知
+ * @var string 担当者への連絡通知
  */
 	const
 		SITE_SETTING_FIXED_PHRASE_APPROVAL = 'approval',
 		SITE_SETTING_FIXED_PHRASE_DISAPPROVAL = 'disapproval',
-		SITE_SETTING_FIXED_PHRASE_APPROVAL_COMPLETION = 'approval_completion';
+		SITE_SETTING_FIXED_PHRASE_APPROVAL_COMPLETION = 'approval_completion',
+		SITE_SETTING_FIXED_PHRASE_CONTACT_AFTER_APPROVAL = 'contact_after_approval';
 
 /**
  * @var string 件名(定型文)
@@ -78,9 +80,9 @@ class NetCommonsMailAssignTag {
 	public $assignTags = array();
 
 /**
- * @var array {X-BODY}はウィジウィグか
+ * @var array 埋め込みタグのウィジウィグ対象
  */
-	public $isXbodyWysiwyg = null;
+	public $embedTagsWysiwyg = array();
 
 /**
  * @var array SiteSetting model data
@@ -109,6 +111,8 @@ class NetCommonsMailAssignTag {
 			'Workflow.disapproval_mail_body',
 			'Workflow.approval_completion_mail_subject',
 			'Workflow.approval_completion_mail_body',
+			'Workflow.contact_after_approval_mail_subject',
+			'Workflow.contact_after_approval_mail_body',
 			'Mail.body_header',
 			'Mail.signature',
 		));
@@ -195,7 +199,8 @@ class NetCommonsMailAssignTag {
  * @param array $mailSettingPlugin プラグイン側のメール設定データ
  * @return void
  */
-	public function setMailFixedPhraseSiteSetting($languageId, $fixedPhraseType,
+	public function setMailFixedPhraseSiteSetting($languageId,
+													$fixedPhraseType,
 													$mailSettingPlugin = null) {
 		$subject = SiteSettingUtil::read('Workflow.' . $fixedPhraseType . '_mail_subject',
 			null, $languageId);
@@ -313,22 +318,16 @@ class NetCommonsMailAssignTag {
 		}
 
 		// 本文
-		if (array_key_exists('X-BODY', $this->assignTags)) {
-			if ($messageType == 'text') {
-				// ウィジウィグ以外なら、h()を使って不等号をコード化
-				$body = $this->isXbodyWysiwyg ? $this->assignTags['X-BODY'] : h($this->assignTags['X-BODY']);
-				// htmlspecialchar 等をデコード と strap_tags
-				$body = $this->__decodeAndStripTags($body);
-
-				$this->fixedPhraseBody = str_replace('{X-BODY}',
-													$body,
-													$this->fixedPhraseBody);
-			} else {
-				$this->fixedPhraseBody = str_replace('{X-BODY}',
-													$this->assignTags['X-BODY'],
-													$this->fixedPhraseBody);
+		foreach ($this->embedTagsWysiwyg as $xbodyTag) {
+			if (array_key_exists($xbodyTag, $this->assignTags)) {
+				$body = $this->assignTags[$xbodyTag];
+				if ($messageType == 'text') {
+					// htmlspecialchar 等をデコード と strap_tags
+					$body = $this->__decodeAndStripTags($body);
+				}
+				$this->fixedPhraseBody = str_replace('{' . $xbodyTag . '}', $body, $this->fixedPhraseBody);
+				unset($this->assignTags[$xbodyTag]);
 			}
-			unset($this->assignTags['X-BODY']);
 		}
 
 		foreach ($this->assignTags as $key => $value) {
@@ -343,9 +342,7 @@ class NetCommonsMailAssignTag {
 /**
  * htmlspecialchar 等をデコード と strap_tags
  *
- * ・{X-BODY}のウィジウィグのテキストは、不等号等が htmlspecialchar になっているため、変換する。
- * ・{X-BODY}でウィジウィグじゃないテキストは、htmlspecialchar になっていないが、共通部分でstrip_tagsを使っているので、
- * 　不等号等を h()(=htmlspecialchars())を使って事前にコード化して、ウィジウィグもどきのテキストにする。後はウィジウィグテキストと同じ。
+ * ・{X-BODY}のウィジウィグのテキストは、不等号等が htmlspecialchar になっているため、変換する
  *
  * @param string $str 文字列
  * @return string 変換した文字列
@@ -463,12 +460,18 @@ class NetCommonsMailAssignTag {
  * SiteSettingの定型文の種類 ゲット
  *
  * @param string $status 承認ステータス
+ * @param string $comment 承認コメント
+ * @param bool $isPublishableEdit 公開許可あり（承認者、承認OFF時の一般）の編集か
  * @return string
  * @throws InternalErrorException
  */
-	public function getFixedPhraseType($status) {
+	public function getFixedPhraseType($status, $comment = null, $isPublishableEdit = null) {
 		if ($status == WorkflowComponent::STATUS_PUBLISHED) {
 			// --- 公開
+			if ($comment && $isPublishableEdit) {
+				// 担当者への連絡通知メール
+				return self::SITE_SETTING_FIXED_PHRASE_CONTACT_AFTER_APPROVAL;
+			}
 			// 承認完了通知メール
 			return self::SITE_SETTING_FIXED_PHRASE_APPROVAL_COMPLETION;
 

@@ -70,6 +70,7 @@ class MailQueueBehavior extends ModelBehavior {
 			'X-BODY' => null,
 		),
 		'addEmbedTagsValues' => array(),
+		'embedTagsWysiwyg' => array(),
 		'typeKey' => MailSettingFixedPhrase::DEFAULT_TYPE,
 		'keyField' => 'key',
 		'editablePermissionKey' => 'content_editable',
@@ -81,7 +82,6 @@ class MailQueueBehavior extends ModelBehavior {
 			'sendTimes' => null,
 			'useReminder' => 0,
 		),
-		'isXbodyWysiwyg' => true,
 		self::MAIL_QUEUE_SETTING_PLUGIN_NAME => null,
 		self::MAIL_QUEUE_SETTING_USER_IDS => array(),
 		self::MAIL_QUEUE_SETTING_TO_ADDRESSES => null,
@@ -111,8 +111,10 @@ class MailQueueBehavior extends ModelBehavior {
  * 		//'workflowType' => MailQueueBehavior::MAIL_QUEUE_WORKFLOW_TYPE_ANSWER,
  * 		// アンケートの未来公開日は指定
  * 		//'publishStartField' => 'answer_start_period',
- * 		// 動画のような{X-BODY}がウィジウィグでない時に指定
- * 		//'isXbodyWysiwyg' => false,
+ * 		// 動画のような{X-BODY}がウィジウィグでない時は指定
+ * 		//'embedTagsWysiwyg' => array(),
+ * 		// FAQのような{X-BODY}でない箇所がウィジウィグの時に指定
+ * 		//'embedTagsWysiwyg' => array('X-ANSWER'),
  *	),
  * ```
  * 注意事項：ワークフロー利用時はWorkflow.Workflowより下に記述
@@ -141,6 +143,10 @@ class MailQueueBehavior extends ModelBehavior {
 				// 回答タイプ
 				$this->settings[$model->alias]['typeKey'] = MailSettingFixedPhrase::ANSWER_TYPE;
 			}
+		}
+		// 埋め込みタグのウィジウィグ対象（メール送信プレーンテキストの時、strap_tagsされる対象）
+		if (!isset($this->settings[$model->alias]['embedTagsWysiwyg'])) {
+			$this->settings[$model->alias]['embedTagsWysiwyg'] = array('X-BODY');
 		}
 		$this->_defaultSettings['pluginKey'] = Current::read('Plugin.key');
 		$this->_defaultSettings[self::MAIL_QUEUE_SETTING_PLUGIN_NAME] = Current::read('Plugin.Name');
@@ -374,19 +380,6 @@ class MailQueueBehavior extends ModelBehavior {
 	}
 
 /**
- * save時のメール送信日時 ゲット
- *
- * @param string $sendTime 送信日時
- * @return string 送信日時
- */
-	private function __getSaveSendTime($sendTime = null) {
-		if (empty($sendTime)) {
-			$sendTime = NetCommonsTime::getNowDatetime();
-		}
-		return $sendTime;
-	}
-
-/**
  * プラグインのメール設定(定型文等) 取得
  *
  * @param Model $model モデル
@@ -433,22 +426,6 @@ class MailQueueBehavior extends ModelBehavior {
 	}
 
 /**
- * ルーム配信で送るパーミッション ゲット
- *
- * @param string $typeKey メール定型文の種類
- * @return string コンテンツキー
- */
-	private function __getSendRoomPermission($typeKey) {
-		if ($typeKey == MailSettingFixedPhrase::ANSWER_TYPE) {
-			// 回答タイプ
-			return 'mail_answer_receivable';
-		} else {
-			// 通常
-			return 'mail_content_receivable';
-		}
-	}
-
-/**
  * キュー保存
  *
  * @param Model $model モデル
@@ -484,9 +461,10 @@ class MailQueueBehavior extends ModelBehavior {
 
 			$mailSettingPlugin = $this->__getMailSettingPlugin($model, $languageId, $typeKey);
 			$isMailSend = Hash::get($mailSettingPlugin, 'MailSetting.is_mail_send');
+			$contentKey = $this->__getContentKey($model);
 
 			/** @see IsMailSendBehavior::isSendMailQueuePublish() */
-			if (! $model->isSendMailQueuePublish($isMailSend)) {
+			if (! $model->isSendMailQueuePublish($isMailSend, $contentKey)) {
 				return;
 			}
 
@@ -526,7 +504,7 @@ class MailQueueBehavior extends ModelBehavior {
 										$toAddresses = null, $roomId = null, $typeKey = MailSettingFixedPhrase::DEFAULT_TYPE) {
 		$model->Behaviors->load('Mails.IsMailSend', $this->settings[$model->alias]);
 		if ($sendTimes === null) {
-			$sendTimes[] = $this->__getSaveSendTime();
+			$sendTimes[] = $model->MailQueue->getSaveSendTime();
 		}
 		// 末尾定型文 なし
 		$mailQueue = $this->__createMailQueue($model, $languageId, $typeKey);
@@ -563,7 +541,7 @@ class MailQueueBehavior extends ModelBehavior {
 				return;
 			}
 
-			$sendTime = $this->__getSaveSendTime($sendTime);
+			$sendTime = $model->MailQueue->getSaveSendTime($sendTime);
 
 			if (!empty($userIds)) {
 				// メール内容save
@@ -604,7 +582,8 @@ class MailQueueBehavior extends ModelBehavior {
 				$notSendRoomUserIds = $this->settings[$model->alias][$key];
 
 				// ルーム配信で送るパーミッション
-				$sendRoomPermission = $this->__getSendRoomPermission($typeKey);
+				/** @see MailQueueUser::getSendRoomPermission() */
+				$sendRoomPermission = $model->MailQueueUser->getSendRoomPermission($typeKey);
 
 				// ルーム配信
 				/** @see MailQueueUser::addMailQueueUserInRoom() */
@@ -674,10 +653,14 @@ class MailQueueBehavior extends ModelBehavior {
 		$pluginKey = $this->settings[$model->alias]['pluginKey'];
 		$permissionKey = $this->settings[$model->alias]['editablePermissionKey'];
 
+		// 既に登録者に配信セット済みの人には送らない
+		$notSendKey = self::MAIL_QUEUE_SETTING_NOT_SEND_ROOM_USER_IDS;
+		$notSendRoomUserIds = $this->settings[$model->alias][$notSendKey];
+
 		// 編集者達(編集許可ありユーザ)
 		/** @see MailQueueUser::addMailQueueUserInRoomByPermission() */
 		$notSendRoomUserIds = $model->MailQueueUser->addMailQueueUserInRoomByPermission($mailQueueId,
-			$contentKey, $pluginKey, $permissionKey);
+			$contentKey, $pluginKey, $permissionKey, $notSendRoomUserIds);
 
 		// 承認者達(公開許可ありユーザ)
 		$permissionKey = $this->settings[$model->alias]['publishablePermissionKey'];
@@ -686,9 +669,8 @@ class MailQueueBehavior extends ModelBehavior {
 
 		// 承認完了時に2通（承認完了とルーム配信）を送らず1通にする対応
 		// ルーム配信で送らないユーザID セット
-		$key = self::MAIL_QUEUE_SETTING_NOT_SEND_ROOM_USER_IDS;
-		$this->settings[$model->alias][$key] =
-			Hash::merge($this->settings[$model->alias][$key], $notSendRoomUserIds);
+		$this->settings[$model->alias][$notSendKey] =
+			Hash::merge($this->settings[$model->alias][$notSendKey], $notSendRoomUserIds);
 	}
 
 /**
@@ -714,13 +696,19 @@ class MailQueueBehavior extends ModelBehavior {
 			return;
 		}
 
+		// 承認コメント
+		$comment = Hash::get($model->data, 'WorkflowComment.comment');
+		$contentKey = $this->__getContentKey($model);
+		/** @see IsMailSendBehavior::isPublishableEdit() */
+		$isPublishableEdit = $model->isPublishableEdit($contentKey);
+
 		// 定型文の種類
 		$mailAssignTag = new NetCommonsMailAssignTag();
 		$status = Hash::get($model->data, $model->alias . '.status');
-		$fixedPhraseType = $mailAssignTag->getFixedPhraseType($status);
+		$fixedPhraseType = $mailAssignTag->getFixedPhraseType($status, $comment, $isPublishableEdit);
 
 		$mailQueue = $this->__createMailQueue($model, $languageId, $typeKey, $fixedPhraseType);
-		$mailQueue['MailQueue']['send_time'] = $this->__getSaveSendTime();
+		$mailQueue['MailQueue']['send_time'] = $model->MailQueue->getSaveSendTime();
 
 		/** @see MailQueue::saveMailQueue() */
 		if (! $mailQueueResult = $model->MailQueue->saveMailQueue($mailQueue)) {
@@ -745,7 +733,8 @@ class MailQueueBehavior extends ModelBehavior {
  * @param string $fixedPhraseBodyAfter 末尾定型文
  * @return array メールキューデータ
  */
-	private function __createMailQueue(Model $model, $languageId,
+	private function __createMailQueue(Model $model,
+										$languageId,
 										$typeKey = MailSettingFixedPhrase::DEFAULT_TYPE,
 										$fixedPhraseType = null,
 										$fixedPhraseBodyAfter = '') {
@@ -761,8 +750,8 @@ class MailQueueBehavior extends ModelBehavior {
 		$mailAssignTag->initPlugin($languageId, $pluginName);
 		$mailAssignTag->setMailFixedPhrase($languageId, $fixedPhraseType, $mailSettingPlugin);
 
-		// {X-BODY}はウィジウィグか
-		$mailAssignTag->isXbodyWysiwyg = $this->settings[$model->alias]['isXbodyWysiwyg'];
+		// 埋め込みタグのウィジウィグ対象
+		$mailAssignTag->embedTagsWysiwyg = $this->settings[$model->alias]['embedTagsWysiwyg'];
 
 		// 末尾定型文
 		$mailAssignTag->setFixedPhraseBody($mailAssignTag->fixedPhraseBody . $fixedPhraseBodyAfter);

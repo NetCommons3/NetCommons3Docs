@@ -136,10 +136,10 @@
                                 <div class="accordion" style="margin-bottom: 0">
         <div class="accordion-group">
             <div class="accordion-heading">
-                                    <a class="accordion-toggle " data-toggle="collapse" data-target="#namespace-1690535548"></a>
+                                    <a class="accordion-toggle " data-toggle="collapse" data-target="#namespace-919027841"></a>
                                 <a href="../namespaces/default.html" style="margin-left: 30px; padding-left: 0">\</a>
             </div>
-            <div id="namespace-1690535548" class="accordion-body collapse in">
+            <div id="namespace-919027841" class="accordion-body collapse in">
                 <div class="accordion-inner">
 
                     
@@ -371,7 +371,7 @@
                                                                     <a href="../classes/NetCommonsMailAssignTag.html#property_fixedPhraseSubject" class="">$fixedPhraseSubject</a><br />
                                                                     <a href="../classes/NetCommonsMailAssignTag.html#property_fixedPhraseBody" class="">$fixedPhraseBody</a><br />
                                                                     <a href="../classes/NetCommonsMailAssignTag.html#property_assignTags" class="">$assignTags</a><br />
-                                                                    <a href="../classes/NetCommonsMailAssignTag.html#property_isXbodyWysiwyg" class="">$isXbodyWysiwyg</a><br />
+                                                                    <a href="../classes/NetCommonsMailAssignTag.html#property_embedTagsWysiwyg" class="">$embedTagsWysiwyg</a><br />
                                                                     <a href="../classes/NetCommonsMailAssignTag.html#property_siteSetting" class="">$siteSetting</a><br />
                                                                     <a href="../classes/NetCommonsMailAssignTag.html#property_SiteSetting" class="">$SiteSetting</a><br />
                                                                     <a href="../classes/NetCommonsMailAssignTag.html#property_RoomsLanguage" class="">$RoomsLanguage</a><br />
@@ -383,6 +383,7 @@
                                                                     <a href="../classes/NetCommonsMailAssignTag.html#constant_SITE_SETTING_FIXED_PHRASE_APPROVAL" class="">SITE_SETTING_FIXED_PHRASE_APPROVAL</a><br />
                                                                     <a href="../classes/NetCommonsMailAssignTag.html#constant_SITE_SETTING_FIXED_PHRASE_DISAPPROVAL" class="">SITE_SETTING_FIXED_PHRASE_DISAPPROVAL</a><br />
                                                                     <a href="../classes/NetCommonsMailAssignTag.html#constant_SITE_SETTING_FIXED_PHRASE_APPROVAL_COMPLETION" class="">SITE_SETTING_FIXED_PHRASE_APPROVAL_COMPLETION</a><br />
+                                                                    <a href="../classes/NetCommonsMailAssignTag.html#constant_SITE_SETTING_FIXED_PHRASE_CONTACT_AFTER_APPROVAL" class="">SITE_SETTING_FIXED_PHRASE_CONTACT_AFTER_APPROVAL</a><br />
                                                             </section>
                         </section>
                         <section class="row-fluid protected">
@@ -534,6 +535,27 @@
         </aside>
     </div>
 
+                                    <div class="row-fluid">
+        <div class="span8 content class">
+            <a id="constant_SITE_SETTING_FIXED_PHRASE_CONTACT_AFTER_APPROVAL" name="constant_SITE_SETTING_FIXED_PHRASE_CONTACT_AFTER_APPROVAL" class="anchor"></a>
+            <article id="constant_SITE_SETTING_FIXED_PHRASE_CONTACT_AFTER_APPROVAL" class="constant">
+                <h3 class="">SITE_SETTING_FIXED_PHRASE_CONTACT_AFTER_APPROVAL</h3>
+                <pre class="signature">SITE_SETTING_FIXED_PHRASE_CONTACT_AFTER_APPROVAL</pre>
+                <p><em>SiteSettingの定型文の種類</em></p>
+                
+            </article>
+        </div>
+        <aside class="span4 detailsbar">
+            <h1><i class="icon-arrow-down"></i></h1>
+                        <dl>
+                                                                            </dl>
+            <h2>Tags</h2>
+            <table class="table table-condensed">
+                                    <tr><td colspan="2"><em>None found</em></td></tr>
+                            </table>
+        </aside>
+    </div>
+
                             
                                     <a id="properties" name="properties"></a>
             <div class="row-fluid">
@@ -617,16 +639,16 @@
 
                                     <div class="row-fluid">
         <div class="span8 content class">
-            <a id="property_isXbodyWysiwyg" name="property_isXbodyWysiwyg" class="anchor"></a>
+            <a id="property_embedTagsWysiwyg" name="property_embedTagsWysiwyg" class="anchor"></a>
             <article class="property">
-                <h3 class="public ">$isXbodyWysiwyg</h3>
-                <pre class="signature">$isXbodyWysiwyg : array</pre>
+                <h3 class="public ">$embedTagsWysiwyg</h3>
+                <pre class="signature">$embedTagsWysiwyg : array</pre>
                 <p><em></em></p>
                 
 
                                 <h4>Type</h4>
                 array
-                &mdash; {X-BODY}はウィジウィグか                            </article>
+                &mdash; 埋め込みタグのウィジウィグ対象                            </article>
         </div>
         <aside class="span4 detailsbar">
             <h1><i class="icon-arrow-down"></i></h1>
@@ -1223,7 +1245,7 @@
             <article class="method">
                 <h3 class="public ">getFixedPhraseType()</h3>
                 <a href="#source-view" role="button" class="pull-right btn" data-toggle="modal" style="font-size: 1.1em; padding: 9px 14px"><i class="icon-code"></i></a>
-                <pre class="signature" style="margin-right: 54px;">getFixedPhraseType(string  <span class="argument">$status</span>) : string</pre>
+                <pre class="signature" style="margin-right: 54px;">getFixedPhraseType(string  <span class="argument">$status</span>, string  <span class="argument">$comment = null</span>, boolean  <span class="argument">$isPublishableEdit = null</span>) : string</pre>
                 <p><em>SiteSettingの定型文の種類 ゲット</em></p>
                 
 
@@ -1233,6 +1255,16 @@
                                 <td>string</td>
                                 <td>$status </td>
                                 <td><p>承認ステータス</p></td>
+                            </tr>
+                                                    <tr>
+                                <td>string</td>
+                                <td>$comment </td>
+                                <td><p>承認コメント</p></td>
+                            </tr>
+                                                    <tr>
+                                <td>boolean</td>
+                                <td>$isPublishableEdit </td>
+                                <td><p>公開許可あり（承認者、承認OFF時の一般）の編集か</p></td>
                             </tr>
                                             </table>
                 
@@ -1307,9 +1339,7 @@
                 <a href="#source-view" role="button" class="pull-right btn" data-toggle="modal" style="font-size: 1.1em; padding: 9px 14px"><i class="icon-code"></i></a>
                 <pre class="signature" style="margin-right: 54px;">__decodeAndStripTags(string  <span class="argument">$str</span>) : string</pre>
                 <p><em>htmlspecialchar 等をデコード と strap_tags</em></p>
-                <p>・{X-BODY}のウィジウィグのテキストは、不等号等が htmlspecialchar になっているため、変換する。
-・{X-BODY}でウィジウィグじゃないテキストは、htmlspecialchar になっていないが、共通部分でstrip_tagsを使っているので、
-　不等号等を h()(=htmlspecialchars())を使って事前にコード化して、ウィジウィグもどきのテキストにする。後はウィジウィグテキストと同じ。</p>
+                <p>・{X-BODY}のウィジウィグのテキストは、不等号等が htmlspecialchar になっているため、変換する</p>
 
                                     <h4>Parameters</h4>
                     <table class="table table-condensed table-hover">
@@ -1424,7 +1454,7 @@
                 <section class="span10 offset1">
                     <hr />
                     Documentation is powered by <a href="http://www.phpdoc.org/">phpDocumentor </a> and authored
-                    on August 21st, 2016 at 06:23.
+                    on August 30th, 2016 at 06:02.
                 </section>
             </section>
         </section>

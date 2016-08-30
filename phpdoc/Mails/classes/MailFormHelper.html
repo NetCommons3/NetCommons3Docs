@@ -136,10 +136,10 @@
                                 <div class="accordion" style="margin-bottom: 0">
         <div class="accordion-group">
             <div class="accordion-heading">
-                                    <a class="accordion-toggle " data-toggle="collapse" data-target="#namespace-17810536"></a>
+                                    <a class="accordion-toggle " data-toggle="collapse" data-target="#namespace-1703044877"></a>
                                 <a href="../namespaces/default.html" style="margin-left: 30px; padding-left: 0">\</a>
             </div>
-            <div id="namespace-17810536" class="accordion-body collapse in">
+            <div id="namespace-1703044877" class="accordion-body collapse in">
                 <div class="accordion-inner">
 
                     
@@ -340,7 +340,7 @@ will inherit them.</p>
             <article class="method">
                 <h3 class="public ">editFrom()</h3>
                 <a href="#source-view" role="button" class="pull-right btn" data-toggle="modal" style="font-size: 1.1em; padding: 9px 14px"><i class="icon-code"></i></a>
-                <pre class="signature" style="margin-right: 54px;">editFrom(array  <span class="argument">$editForms = array()</span>, string  <span class="argument">$cancelUrl = null</span>, integer  <span class="argument">$useReplyTo</span>, integer  <span class="argument">$isMailSendHelp</span>, integer  <span class="argument">$useMailSendApproval = 1</span>, array  <span class="argument">$options = array()</span>, string  <span class="argument">$action = null</span>) : string</pre>
+                <pre class="signature" style="margin-right: 54px;">editFrom(array  <span class="argument">$editForms = array()</span>, string  <span class="argument">$cancelUrl = null</span>, integer  <span class="argument">$useReplyTo</span>, integer  <span class="argument">$isMailSendHelp</span>, integer  <span class="argument">$useMailSendApproval = 1</span>, integer  <span class="argument">$useMailSend = 1</span>, array  <span class="argument">$options = array()</span>, string  <span class="argument">$action = null</span>) : string</pre>
                 <p><em>メール設定</em></p>
                 <h4>Sample code</h4>
 <h5>template file(ctp file) - 通常パターン</h5>
@@ -388,6 +388,15 @@ will inherit them.</p>
   1, // 問合せ先メールアドレス 表示
   1  // メール通知機能を使う ヘルプメッセージ 表示
 ); ?&gt;</code></pre>
+<h5>template file(ctp file) - 承認メール通知機能を使う のみ表示</h5>
+<pre><code class="language-php">&lt;?php echo $this-&gt;MailForm-&gt;editFrom(
+  array(),
+  NetCommonsUrl::backToIndexUrl('default_setting_action'),
+  0, // 問合せ先メールアドレス 非表示
+  0, // メール通知機能を使う ヘルプメッセージ 非表示
+  1, // 承認メール通知機能を使う 表示
+  0 // メール通知機能を使う 非表示
+); ?&gt;</code></pre>
 
                                     <h4>Parameters</h4>
                     <table class="table table-condensed table-hover">
@@ -415,6 +424,11 @@ will inherit them.</p>
                                 <td>integer</td>
                                 <td>$useMailSendApproval </td>
                                 <td><p>承認メール通知機能を使う を表示するか</p></td>
+                            </tr>
+                                                    <tr>
+                                <td>integer</td>
+                                <td>$useMailSend </td>
+                                <td><p>メール通知機能を使う 及び関連項目を表示するか</p></td>
                             </tr>
                                                     <tr>
                                 <td>array</td>
@@ -495,7 +509,7 @@ will inherit them.</p>
                 <section class="span10 offset1">
                     <hr />
                     Documentation is powered by <a href="http://www.phpdoc.org/">phpDocumentor </a> and authored
-                    on August 21st, 2016 at 06:23.
+                    on August 30th, 2016 at 06:02.
                 </section>
             </section>
         </section>
