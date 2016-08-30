@@ -104,16 +104,23 @@ class Records extends NetCommonsMigration {
  * @return bool Should process continue
  */
 	public function after($direction) {
-		if ($direction === 'down') {
-			return true;
-		}
-
 		foreach ($this->records as $model => $records) {
-			if (!$this->updateRecords($model, $records)) {
-				return false;
+			if ($direction === 'up') {
+				if (!$this->updateRecords($model, $records)) {
+					return false;
+				}
+			} elseif ($direction === 'down') {
+				if ($model == 'LanguagesPage') {
+					if (!$this->deleteRecords($model, $records, 'page_id')) {
+						return false;
+					}
+				} else {
+					if (!$this->deleteRecords($model, $records)) {
+						return false;
+					}
+				}
 			}
 		}
-
 		return true;
 	}
 

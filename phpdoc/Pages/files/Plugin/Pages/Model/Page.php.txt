@@ -349,7 +349,7 @@ class Page extends PagesAppModel {
  * @return bool
  */
 	public function existPage($pageId, $roomId = null, $parentRoomId = null) {
-		if ($roomId && $roomId !== $parentRoomId) {
+		if ($roomId && $parentRoomId && $roomId !== $parentRoomId) {
 			$result = $this->find('count', array(
 				'recursive' => 0,
 				'conditions' => array(
