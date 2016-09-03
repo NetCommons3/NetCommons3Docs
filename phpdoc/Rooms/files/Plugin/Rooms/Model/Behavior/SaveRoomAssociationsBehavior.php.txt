@@ -145,6 +145,16 @@ class SaveRoomAssociationsBehavior extends ModelBehavior {
 			return true;
 		}
 
+		$count = $model->User->find('count', array(
+			'recursive' => -1,
+			'conditions' => array(
+				'id !=' => $userId,
+			)
+		));
+		if (! $count) {
+			return true;
+		}
+
 		//多数のデータを一括で登録するためINSERT INTO ... SELECTを使う。
 		//--デフォルトのロールを取得
 		$rolesRoom = $model->RolesRoom->find('first', array(
