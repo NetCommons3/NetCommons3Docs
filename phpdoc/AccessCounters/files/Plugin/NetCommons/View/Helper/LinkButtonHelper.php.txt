@@ -194,6 +194,39 @@ class LinkButtonHelper extends FormHelper {
 	}
 
 /**
+ * 一覧へボタンHTMLの出力
+ *
+ * @param string $title タイトル
+ * @param mixed $url URL
+ * @param array $options HTML属性オプション
+ * @return string HTMLタグ
+ */
+	public function toList($title = '', $url = null, $options = array()) {
+		$output = '';
+
+		if (! isset($url)) {
+			$url = NetCommonsUrl::backToPageUrl();
+		}
+
+		//Linkオプションの設定
+		$inputOptions = Hash::merge(array(
+			'icon' => 'arrow-left',
+			'iconSize' => $this->Button->getButtonSize(),
+			'class' => 'btn btn-default nc-btn-style',
+		), $options, array('escapeTitle' => false));
+
+		if (Hash::get($options, 'escapeTitle', true)) {
+			$title = h($title);
+		}
+		if (! $title && $title !== false) {
+			$title = __d('net_commons', 'To list');
+		}
+
+		$output .= $this->__getLinkHtml($title, $url, $inputOptions);
+		return $output;
+	}
+
+/**
  * ソートボタンHTMLの出力
  *
  * @param string $title タイトル
@@ -213,8 +246,22 @@ class LinkButtonHelper extends FormHelper {
 		} else {
 			$title = '<span class="hidden-xs">' . $title . '</span>';
 		}
-		$glyphicon = 'glyphicon glyphicon-' . h($options['icon']);
-		$title = '<span ' . 'class="' . $glyphicon . '"' . $ariaHidden . '></span> ' . $title;
+		if (substr($options['icon'], 0, strlen('glyphicon-')) === 'glyphicon-') {
+			$glyphicon = 'glyphicon ' . h($options['icon']);
+		} else {
+			$glyphicon = 'glyphicon glyphicon-' . h($options['icon']);
+		}
+
+		$iconTag = '<span ' . 'class="' . $glyphicon . '"' . $ariaHidden . '></span> ';
+		if (Hash::get($options, 'addIcon')) {
+			if (substr($options['addIcon'], 0, strlen('glyphicon-')) === 'glyphicon-') {
+				$glyphicon = 'glyphicon ' . h($options['addIcon']);
+			} else {
+				$glyphicon = 'glyphicon glyphicon-' . h($options['addIcon']);
+			}
+			$iconTag .= '<span ' . 'class="' . $glyphicon . '"' . $ariaHidden . '></span> ';
+		}
+		$title = $iconTag . $title;
 		unset($options['icon']);
 
 		//ボタンサイズ
