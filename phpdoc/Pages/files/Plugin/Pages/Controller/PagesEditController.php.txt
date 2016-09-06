@@ -274,6 +274,7 @@ class PagesEditController extends PagesAppController {
 				);
 				return $this->redirect(Hash::get($this->request->data, '_NetCommonsUrl.redirect'));
 			}
+			$this->NetCommons->handleValidationError($this->LanguagesPage->validationErrors);
 
 		} else {
 			//表示処理

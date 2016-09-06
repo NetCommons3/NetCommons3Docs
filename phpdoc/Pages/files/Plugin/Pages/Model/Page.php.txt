@@ -203,6 +203,15 @@ class Page extends PagesAppModel {
 					'message' => sprintf(__d('net_commons', 'Please input %s.'), __d('pages', 'Slug')),
 					'required' => true
 				),
+				'validPermalink' => array(
+					'rule' => array('validPermalink'),
+					'message' => sprintf(
+						__d('pages', 'Use of %s is prohibited. Please enter a different entry.'),
+						__d('pages', 'Slug')
+					),
+					'allowEmpty' => false,
+					'required' => true,
+				),
 			),
 			'permalink' => array(
 				'notBlank' => array(
@@ -213,6 +222,15 @@ class Page extends PagesAppModel {
 				'isUnique' => array(
 					'rule' => array('isUnique'),
 					'message' => sprintf(__d('net_commons', '%s is already in use.'), __d('pages', 'Slug')),
+				),
+				'validPermalink' => array(
+					'rule' => array('validPermalink'),
+					'message' => sprintf(
+						__d('pages', 'Use of %s is prohibited. Please enter a different entry.'),
+						__d('pages', 'Slug')
+					),
+					'allowEmpty' => false,
+					'required' => true,
 				),
 			),
 			'root_id' => array(
@@ -236,6 +254,25 @@ class Page extends PagesAppModel {
 		));
 
 		return parent::beforeValidate($options);
+	}
+
+/**
+ * パーマリンクバリデーション
+ *
+ * @param array $check チェック値
+ * @return bool
+ */
+	public function validPermalink($check) {
+		$value = array_shift($check);
+
+		//NGワード
+		// 「%」「 」「#」「<」「>」「+」「\」「"」「'」「&」「?」「=」「~」「:」「;」「,」「$」「@」
+		// 「^/(最初にスラッシュ)」「./」「/.」「.$(最後にドット)」「^.(最初にドット)」
+		// 「|」「]」「[」「!」「(」「)」「*」
+		$pattern = '/(%| |#|<|>|\+|\\\\|\"|\'|&|\?|=|~|:|;|,|\$|@' .
+						'|^\/|\/$|\.\/|\/\.|\.$|^\.|\||\]|\[|\!|\(|\)|\*)/';
+
+		return !(bool)preg_match($pattern, $value);
 	}
 
 /**
