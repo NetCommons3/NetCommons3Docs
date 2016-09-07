@@ -179,7 +179,7 @@ class FrameSettingsControllerTest extends NetCommonsControllerTestCase {
 		}
 
 		//チェック
-		$this->asserts($asserts, $this->contents);
+		$this->asserts($asserts, $this->view);
 
 		//ログアウト
 		TestAuthGeneral::logout($this);
