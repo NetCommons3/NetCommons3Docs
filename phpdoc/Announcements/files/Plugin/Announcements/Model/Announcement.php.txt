@@ -47,6 +47,9 @@ class Announcement extends AnnouncementsAppModel {
 			'fields' => array(
 				'title' => 'Announcement.content',
 				'summary' => 'Announcement.content',
+				'public_type' => 'Block.public_type',
+				'publish_start' => 'Block.publish_start',
+				'publish_end' => 'Block.publish_end',
 			),
 			'titleHtml' => true,
 			'summaryWysiwyg' => true,
