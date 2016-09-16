@@ -109,7 +109,7 @@ class AddRoomRoleDesc extends NetCommonsMigration {
 		}
 
 		$Role = $this->generateModel('Role');
-		foreach ($this->records['Role'] as $i => $record) {
+		foreach ($this->records['Role'] as $record) {
 			$update = array(
 				'description' => '\'' . $record['description'] . '\''
 			);
