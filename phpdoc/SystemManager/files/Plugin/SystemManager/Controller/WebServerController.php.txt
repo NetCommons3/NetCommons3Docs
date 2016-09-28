@@ -47,7 +47,7 @@ class WebServerController extends SystemManagerAppController {
 					'Php.memory_limit',
 					// * セッション
 					// ** Cookieの名称
-					'Session.ini.session.name',
+					'Session.cookie',
 
 					// * 自動ログアウトする時間(cookie_lifetime)(6時間)
 					'Session.ini.session.cookie_lifetime',
