@@ -15,7 +15,7 @@ App::uses('NetCommonsMigration', 'NetCommons.Config/Migration');
  *
  * @package NetCommons\DataTypes\Config\Migration
  */
-class Records extends NetCommonsMigration {
+class DataTypesRecords extends NetCommonsMigration {
 
 /**
  * Migration description
@@ -196,6 +196,10 @@ class Records extends NetCommonsMigration {
  */
 	public function after($direction) {
 		if ($direction === 'down') {
+			return true;
+		}
+		$DataType = $this->generateModel('DataType');
+		if ($DataType->find('count') > 0) {
 			return true;
 		}
 		foreach ($this->records as $model => $records) {

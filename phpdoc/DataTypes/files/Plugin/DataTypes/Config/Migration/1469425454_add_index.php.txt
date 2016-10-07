@@ -14,7 +14,7 @@
  * @author Shohei Nakajima <nakajimashouhei@gmail.com>
  * @package NetCommons\DataTypes\Config\Migration
  */
- class AddIndex extends CakeMigration {
+class AddIndex extends CakeMigration {
 
 /**
  * Migration description
@@ -86,5 +86,5 @@
 	public function after($direction) {
 		return true;
 	}
-}
 
+}

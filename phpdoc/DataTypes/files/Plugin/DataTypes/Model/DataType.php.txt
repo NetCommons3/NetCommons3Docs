@@ -178,13 +178,7 @@ class DataType extends DataTypesAppModel {
 		App::uses('L10n', 'I18n');
 		$L10n = new L10n();
 
-		$languages = $this->Language->find('all', array(
-			'recursive' => -1,
-			'conditions' => array(
-				'is_active' => true
-			),
-			'order' => array('weight' => 'asc')
-		));
+		$languages = $this->Language->getLanguage();
 
 		$results = array();
 		foreach ($languages as $lang) {
