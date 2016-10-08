@@ -15,7 +15,7 @@ App::uses('NetCommonsMigration', 'NetCommons.Config/Migration');
  *
  * @package NetCommons\Roles\Config\Migration
  */
-class Records extends NetCommonsMigration {
+class RolesRecords extends NetCommonsMigration {
 
 /**
  * Migration description
@@ -517,6 +517,12 @@ class Records extends NetCommonsMigration {
 		if ($direction === 'down') {
 			return true;
 		}
+
+		$Role = $this->generateModel('Role');
+		if ($Role->find('count') > 0) {
+			return true;
+		}
+
 		foreach ($this->records as $model => $records) {
 			if (!$this->updateRecords($model, $records)) {
 				return false;
