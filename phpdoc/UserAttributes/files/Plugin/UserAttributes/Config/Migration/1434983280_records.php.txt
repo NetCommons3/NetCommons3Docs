@@ -15,7 +15,7 @@ App::uses('NetCommonsMigration', 'NetCommons.Config/Migration');
  *
  * @package NetCommons\UserAttributes\Config\Migration
  */
-class Records extends NetCommonsMigration {
+class UserAttributesRecords extends NetCommonsMigration {
 
 /**
  * Migration description
@@ -151,6 +151,11 @@ class Records extends NetCommonsMigration {
  */
 	public function after($direction) {
 		if ($direction === 'down') {
+			return true;
+		}
+
+		$UserAttribute = $this->generateModel('UserAttribute');
+		if ($UserAttribute->find('count') > 0) {
 			return true;
 		}
 		foreach ($this->records as $model => $records) {
