@@ -1,0 +1,1466 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0"/>
+    <meta charset="utf-8"/>
+    <title>API Documentation</title>
+    <meta name="author" content=""/>
+    <meta name="description" content=""/>
+
+    <link href="../css/bootstrap-combined.no-icons.min.css" rel="stylesheet">
+    <link href="../css/font-awesome.min.css" rel="stylesheet">
+    <link href="../css/prism.css" rel="stylesheet" media="all"/>
+    <link href="../css/template.css" rel="stylesheet" media="all"/>
+    
+    <!--[if lt IE 9]>
+    <script src="../js/html5.js"></script>
+    <![endif]-->
+    <script src="../js/jquery-1.11.0.min.js"></script>
+    <script src="../js/ui/1.10.4/jquery-ui.min.js"></script>
+    <script src="../js/bootstrap.min.js"></script>
+    <script src="../js/jquery.smooth-scroll.js"></script>
+    <script src="../js/prism.min.js"></script>
+    <!-- TODO: Add http://jscrollpane.kelvinluck.com/ to style the scrollbars for browsers not using webkit-->
+    <script type="text/javascript">
+    function loadExternalCodeSnippets() {
+        Array.prototype.slice.call(document.querySelectorAll('pre[data-src]')).forEach(function (pre) {
+            var src = pre.getAttribute('data-src');
+            var extension = (src.match(/\.(\w+)$/) || [, ''])[1];
+            var language = 'php';
+
+            var code = document.createElement('code');
+            code.className = 'language-' + language;
+
+            pre.textContent = '';
+
+            code.textContent = 'Loading…';
+
+            pre.appendChild(code);
+
+            var xhr = new XMLHttpRequest();
+
+            xhr.open('GET', src, true);
+
+            xhr.onreadystatechange = function () {
+                if (xhr.readyState == 4) {
+
+                    if (xhr.status < 400 && xhr.responseText) {
+                        code.textContent = xhr.responseText;
+
+                        Prism.highlightElement(code);
+                    }
+                    else if (xhr.status >= 400) {
+                        code.textContent = '✖ Error ' + xhr.status + ' while fetching file: ' + xhr.statusText;
+                    }
+                    else {
+                        code.textContent = '✖ Error: File does not exist or is empty';
+                    }
+                }
+            };
+
+            xhr.send(null);
+        });
+    }
+
+    $(document).ready(function(){
+        loadExternalCodeSnippets();
+    });
+    $('#source-view').on('shown', function () {
+        loadExternalCodeSnippets();
+    })
+</script>
+
+    <link rel="shortcut icon" href="../images/favicon.ico"/>
+    <link rel="apple-touch-icon" href="../images/apple-touch-icon.png"/>
+    <link rel="apple-touch-icon" sizes="72x72" href="../images/apple-touch-icon-72x72.png"/>
+    <link rel="apple-touch-icon" sizes="114x114" href="../images/apple-touch-icon-114x114.png"/>
+</head>
+<body>
+
+<div class="navbar navbar-fixed-top">
+    <div class="navbar-inner">
+        <div class="container">
+            <a class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
+                <i class="icon-ellipsis-vertical"></i>
+            </a>
+            <a class="brand" href="../index.html">API Documentation</a>
+
+            <div class="nav-collapse">
+                <ul class="nav pull-right">
+                                        <li class="dropdown" id="charts-menu">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                            Charts <b class="caret"></b>
+                        </a>
+                        <ul class="dropdown-menu">
+                            <li>
+                                <a href="../graphs/class.html">
+                                    <i class="icon-list-alt"></i>&#160;Class hierarchy diagram
+                                </a>
+                            </li>
+                        </ul>
+                    </li>
+                    <li class="dropdown" id="reports-menu">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                            Reports <b class="caret"></b>
+                        </a>
+                        <ul class="dropdown-menu">
+                            <li>
+                                <a href="../reports/errors.html">
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                <i class="icon-list-alt"></i>&#160;Errors <span class="label label-info pull-right">0</span>
+                                </a>
+                            </li>
+                            <li>
+                                <a href="../reports/markers.html">
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                <i class="icon-list-alt"></i>&#160;Markers <span class="label label-info pull-right">0</span>
+                                </a>
+                            </li>
+                            <li>
+                                <a href="../reports/deprecated.html">
+                                                                                                            <i class="icon-list-alt"></i>&#160;Deprecated <span class="label label-info pull-right">0</span>
+                                </a>
+                            </li>
+                        </ul>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+    <!--<div class="go_to_top">-->
+    <!--<a href="#___" style="color: inherit">Back to top&#160;&#160;<i class="icon-upload icon-white"></i></a>-->
+    <!--</div>-->
+</div>
+
+<div id="___" class="container-fluid">
+        <section class="row-fluid">
+        <div class="span2 sidebar">
+                                <div class="accordion" style="margin-bottom: 0">
+        <div class="accordion-group">
+            <div class="accordion-heading">
+                                    <a class="accordion-toggle " data-toggle="collapse" data-target="#namespace-1588520123"></a>
+                                <a href="../namespaces/default.html" style="margin-left: 30px; padding-left: 0">\</a>
+            </div>
+            <div id="namespace-1588520123" class="accordion-body collapse in">
+                <div class="accordion-inner">
+
+                    
+                    <ul>
+                                                                                                    <li class="class"><a href="../classes/AccessCtrlComponent.html">AccessCtrlComponent</a></li>
+                                                    <li class="class"><a href="../classes/AddIndex.html">AddIndex</a></li>
+                                                    <li class="class"><a href="../classes/AppController.html">AppController</a></li>
+                                                    <li class="class"><a href="../classes/AppController.html">AppController</a></li>
+                                                    <li class="class"><a href="../classes/AppHelper.html">AppHelper</a></li>
+                                                    <li class="class"><a href="../classes/AppModel.html">AppModel</a></li>
+                                                    <li class="class"><a href="../classes/AppPaginatorComponent.html">AppPaginatorComponent</a></li>
+                                                    <li class="class"><a href="../classes/AppPaginatorHelper.html">AppPaginatorHelper</a></li>
+                                                    <li class="class"><a href="../classes/AssetComponent.html">AssetComponent</a></li>
+                                                    <li class="class"><a href="../classes/BackToHelper.html">BackToHelper</a></li>
+                                                    <li class="class"><a href="../classes/ButtonHelper.html">ButtonHelper</a></li>
+                                                    <li class="class"><a href="../classes/ComposerHelper.html">ComposerHelper</a></li>
+                                                    <li class="class"><a href="../classes/Current.html">Current</a></li>
+                                                    <li class="class"><a href="../classes/CurrentBase.html">CurrentBase</a></li>
+                                                    <li class="class"><a href="../classes/CurrentFrame.html">CurrentFrame</a></li>
+                                                    <li class="class"><a href="../classes/CurrentPage.html">CurrentPage</a></li>
+                                                    <li class="class"><a href="../classes/CurrentSystem.html">CurrentSystem</a></li>
+                                                    <li class="class"><a href="../classes/DateHelper.html">DateHelper</a></li>
+                                                    <li class="class"><a href="../classes/DatetimePickerHelper.html">DatetimePickerHelper</a></li>
+                                                    <li class="class"><a href="../classes/DisplayNumberHelper.html">DisplayNumberHelper</a></li>
+                                                    <li class="class"><a href="../classes/FormInputHelper.html">FormInputHelper</a></li>
+                                                    <li class="class"><a href="../classes/IsMailSendBehavior.html">IsMailSendBehavior</a></li>
+                                                    <li class="class"><a href="../classes/LinkButtonHelper.html">LinkButtonHelper</a></li>
+                                                    <li class="class"><a href="../classes/MailFormHelper.html">MailFormHelper</a></li>
+                                                    <li class="class"><a href="../classes/MailQueue.html">MailQueue</a></li>
+                                                    <li class="class"><a href="../classes/MailQueueBehavior.html">MailQueueBehavior</a></li>
+                                                    <li class="class"><a href="../classes/MailQueueDeleteBehavior.html">MailQueueDeleteBehavior</a></li>
+                                                    <li class="class"><a href="../classes/MailQueueUser.html">MailQueueUser</a></li>
+                                                    <li class="class"><a href="../classes/Mails.html">Mails</a></li>
+                                                    <li class="class"><a href="../classes/MailsAppModel.html">MailsAppModel</a></li>
+                                                    <li class="class"><a href="../classes/MailSend.html">MailSend</a></li>
+                                                    <li class="class"><a href="../classes/MailSendShell.html">MailSendShell</a></li>
+                                                    <li class="class"><a href="../classes/MailSetting.html">MailSetting</a></li>
+                                                    <li class="class"><a href="../classes/MailSettingFixedPhrase.html">MailSettingFixedPhrase</a></li>
+                                                    <li class="class"><a href="../classes/MailSettingsComponent.html">MailSettingsComponent</a></li>
+                                                    <li class="class"><a href="../classes/MailSettingsController.html">MailSettingsController</a></li>
+                                                    <li class="class"><a href="../classes/MailsHtmlHelper.html">MailsHtmlHelper</a></li>
+                                                    <li class="class"><a href="../classes/MailsMigration.html">MailsMigration</a></li>
+                                                    <li class="class"><a href="../classes/MailsSchema.html">MailsSchema</a></li>
+                                                    <li class="class"><a href="../classes/MessageFlashHelper.html">MessageFlashHelper</a></li>
+                                                    <li class="class"><a href="../classes/NetCommonsAppController.html">NetCommonsAppController</a></li>
+                                                    <li class="class"><a href="../classes/NetCommonsAppHelper.html">NetCommonsAppHelper</a></li>
+                                                    <li class="class"><a href="../classes/NetCommonsAppModel.html">NetCommonsAppModel</a></li>
+                                                    <li class="class"><a href="../classes/NetCommonsAppShell.html">NetCommonsAppShell</a></li>
+                                                    <li class="class"><a href="../classes/NetCommonsCakeTestCase.html">NetCommonsCakeTestCase</a></li>
+                                                    <li class="class"><a href="../classes/NetCommonsComponent.html">NetCommonsComponent</a></li>
+                                                    <li class="class"><a href="../classes/NetCommonsConsoleTestCase.html">NetCommonsConsoleTestCase</a></li>
+                                                    <li class="class"><a href="../classes/NetCommonsController.html">NetCommonsController</a></li>
+                                                    <li class="class"><a href="../classes/NetCommonsControllerBaseTestCase.html">NetCommonsControllerBaseTestCase</a></li>
+                                                    <li class="class"><a href="../classes/NetCommonsControllerTestCase.html">NetCommonsControllerTestCase</a></li>
+                                                    <li class="class"><a href="../classes/NetCommonsDeleteTest.html">NetCommonsDeleteTest</a></li>
+                                                    <li class="class"><a href="../classes/NetCommonsExceptionRenderer.html">NetCommonsExceptionRenderer</a></li>
+                                                    <li class="class"><a href="../classes/NetCommonsExtentionTag.html">NetCommonsExtentionTag</a></li>
+                                                    <li class="class"><a href="../classes/NetCommonsFormHelper.html">NetCommonsFormHelper</a></li>
+                                                    <li class="class"><a href="../classes/NetCommonsGetTest.html">NetCommonsGetTest</a></li>
+                                                    <li class="class"><a href="../classes/NetCommonsHelperTestCase.html">NetCommonsHelperTestCase</a></li>
+                                                    <li class="class"><a href="../classes/NetCommonsHtmlHelper.html">NetCommonsHtmlHelper</a></li>
+                                                    <li class="class"><a href="../classes/NetCommonsMail.html">NetCommonsMail</a></li>
+                                                    <li class="class"><a href="../classes/NetCommonsMailAssignTag.html">NetCommonsMailAssignTag</a></li>
+                                                    <li class="class"><a href="../classes/NetCommonsMigration.html">NetCommonsMigration</a></li>
+                                                    <li class="class"><a href="../classes/NetCommonsModelTestCase.html">NetCommonsModelTestCase</a></li>
+                                                    <li class="class"><a href="../classes/NetCommonsRoutesTestCase.html">NetCommonsRoutesTestCase</a></li>
+                                                    <li class="class"><a href="../classes/NetCommonsSaveTest.html">NetCommonsSaveTest</a></li>
+                                                    <li class="class"><a href="../classes/NetCommonsSecurity.html">NetCommonsSecurity</a></li>
+                                                    <li class="class"><a href="../classes/NetCommonsTestSuite.html">NetCommonsTestSuite</a></li>
+                                                    <li class="class"><a href="../classes/NetCommonsTime.html">NetCommonsTime</a></li>
+                                                    <li class="class"><a href="../classes/NetCommonsTimeComponent.html">NetCommonsTimeComponent</a></li>
+                                                    <li class="class"><a href="../classes/NetCommonsTimeHelper.html">NetCommonsTimeHelper</a></li>
+                                                    <li class="class"><a href="../classes/NetCommonsUrl.html">NetCommonsUrl</a></li>
+                                                    <li class="class"><a href="../classes/NetCommonsValidateTest.html">NetCommonsValidateTest</a></li>
+                                                    <li class="class"><a href="../classes/NetCommonsValidationRuleBehavior.html">NetCommonsValidationRuleBehavior</a></li>
+                                                    <li class="class"><a href="../classes/OriginalKeyBehavior.html">OriginalKeyBehavior</a></li>
+                                                    <li class="class"><a href="../classes/PermissionComponent.html">PermissionComponent</a></li>
+                                                    <li class="class"><a href="../classes/SingletonViewBlockHtmlHelper.html">SingletonViewBlockHtmlHelper</a></li>
+                                                    <li class="class"><a href="../classes/SiteCloseController.html">SiteCloseController</a></li>
+                                                    <li class="class"><a href="../classes/SnsButtonHelper.html">SnsButtonHelper</a></li>
+                                                    <li class="class"><a href="../classes/TableListHelper.html">TableListHelper</a></li>
+                                                    <li class="class"><a href="../classes/TitleIconHelper.html">TitleIconHelper</a></li>
+                                                    <li class="class"><a href="../classes/TokenHelper.html">TokenHelper</a></li>
+                                                    <li class="class"><a href="../classes/TrackableBehavior.html">TrackableBehavior</a></li>
+                                                    <li class="class"><a href="../classes/WizardHelper.html">WizardHelper</a></li>
+                                            </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+
+        </div>
+    </section>
+    <section class="row-fluid">
+        <div class="span10 offset2">
+            <div class="row-fluid">
+                <div class="span8 content class">
+                    <nav>
+                                                <a href="../namespaces/default.html">\</a> <i class="icon-level-up"></i>
+                                            </nav>
+                    <a href="#source-view" role="button" class="pull-right btn" data-toggle="modal"><i class="icon-code"></i></a>
+
+                    <h1><small>\</small>NetCommonsMailAssignTag</h1>
+                    <p><em>NetCommonsメール 埋め込みタグ Utility</em></p>
+                    <h4>自動セットする埋め込みタグ</h4>
+<table>
+<thead>
+<tr>
+<th>埋め込みタグ</th>
+<th>名</th>
+<th>参照元</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>X-FROM_EMAIL</code></td>
+<td>送信者メールアドレス</td>
+<td>SiteSettingUtil::read('Mail.from');</td>
+</tr>
+<tr>
+<td><code>X-FROM_NAME</code></td>
+<td>送信者名</td>
+<td>SiteSettingUtil::read('Mail.from_name');</td>
+</tr>
+<tr>
+<td><code>X-SITE_NAME</code></td>
+<td>サイト名</td>
+<td>SiteSettingUtil::read('App.site_name');</td>
+</tr>
+<tr>
+<td><code>X-SITE_URL</code></td>
+<td>サイトURL</td>
+<td>Router::fullbaseUrl());</td>
+</tr>
+<tr>
+<td><code>X-PLUGIN_NAME</code></td>
+<td>プラグイン名</td>
+<td>Current::read('Plugin.name');</td>
+</tr>
+<tr>
+<td><code>X-BLOCK_NAME</code></td>
+<td>ブロック名</td>
+<td>Current::read('Block.name');</td>
+</tr>
+<tr>
+<td><code>X-TO_DATE</code></td>
+<td>今日日付 'Y/m/d H:i:s'</td>
+<td></td>
+</tr>
+<tr>
+<td><code>X-BODY_HEADER</code></td>
+<td>本文ヘッダー</td>
+<td>SiteSettingUtil::read('Mail.body_header');</td>
+</tr>
+<tr>
+<td><code>X-SIGNATURE</code></td>
+<td>署名</td>
+<td>SiteSettingUtil::read('Mail.signature');</td>
+</tr>
+<tr>
+<td><code>X-USER</code></td>
+<td>ユーザ名(ハンドル)</td>
+<td>NetCommonsExtentionTag::getXUser()</td>
+</tr>
+<tr>
+<td><code>X-ROOM</code></td>
+<td>ルーム名</td>
+<td>NetCommonsExtentionTag::getXRoom()</td>
+</tr>
+<tr>
+<td><code>X-URL</code></td>
+<td>コンテンツURL</td>
+<td>NetCommonsExtentionTag::getXUrl()</td>
+</tr>
+<tr>
+<td><code>X-TAGS</code></td>
+<td>タグ(タグプラグイン)</td>
+<td>NetCommonsExtentionTag::getXTags()</td>
+</tr>
+<tr>
+<td><code>X-WORKFLOW_COMMENT</code></td>
+<td>承認コメント</td>
+<td>NetCommonsExtentionTag::getXWorkflowComment()</td>
+</tr>
+<tr>
+<td><code>X-PLUGIN_MAIL_SUBJECT</code></td>
+<td>プラグイン側で設定した件名(承認メール用)</td>
+<td>NetCommonsMailAssignTag::setMailFixedPhraseSiteSetting()</td>
+</tr>
+<tr>
+<td><code>X-PLUGIN_MAIL_BODY</code></td>
+<td>プラグイン側で設定した本文(承認メール用)</td>
+<td>NetCommonsMailAssignTag::setMailFixedPhraseSiteSetting()</td>
+</tr>
+</tbody>
+</table>
+                    
+                                        
+                    <section id="summary">
+                        <h2>Summary</h2>
+                        <section class="row-fluid heading">
+                            <section class="span4">
+                                <a href="#methods">Methods</a>
+                            </section>
+                            <section class="span4">
+                                <a href="#properties">Properties</a>
+                            </section>
+                            <section class="span4">
+                                <a href="#constants">Constants</a>
+                            </section>
+                        </section>
+                        <section class="row-fluid public">
+                            <section class="span4">
+                                                                    <a href="../classes/NetCommonsMailAssignTag.html#method_initPlugin" class="">initPlugin()</a><br />
+                                                                    <a href="../classes/NetCommonsMailAssignTag.html#method_initTags" class="">initTags()</a><br />
+                                                                    <a href="../classes/NetCommonsMailAssignTag.html#method_setMailFixedPhrase" class="">setMailFixedPhrase()</a><br />
+                                                                    <a href="../classes/NetCommonsMailAssignTag.html#method_setMailFixedPhrasePlugin" class="">setMailFixedPhrasePlugin()</a><br />
+                                                                    <a href="../classes/NetCommonsMailAssignTag.html#method_setMailFixedPhraseSiteSetting" class="">setMailFixedPhraseSiteSetting()</a><br />
+                                                                    <a href="../classes/NetCommonsMailAssignTag.html#method_setFixedPhraseSubject" class="">setFixedPhraseSubject()</a><br />
+                                                                    <a href="../classes/NetCommonsMailAssignTag.html#method_setFixedPhraseBody" class="">setFixedPhraseBody()</a><br />
+                                                                    <a href="../classes/NetCommonsMailAssignTag.html#method_assignTag" class="">assignTag()</a><br />
+                                                                    <a href="../classes/NetCommonsMailAssignTag.html#method_assignTags" class="">assignTags()</a><br />
+                                                                    <a href="../classes/NetCommonsMailAssignTag.html#method_assignTagDatas" class="">assignTagDatas()</a><br />
+                                                                    <a href="../classes/NetCommonsMailAssignTag.html#method_assignTagReplace" class="">assignTagReplace()</a><br />
+                                                                    <a href="../classes/NetCommonsMailAssignTag.html#method_addHeaderAndSignature" class="">addHeaderAndSignature()</a><br />
+                                                                    <a href="../classes/NetCommonsMailAssignTag.html#method_getFixedPhraseType" class="">getFixedPhraseType()</a><br />
+                                                                    <a href="../classes/NetCommonsMailAssignTag.html#method___call" class="">__call()</a><br />
+                                                            </section>
+                            <section class="span4">
+                                                                    <a href="../classes/NetCommonsMailAssignTag.html#property_fixedPhraseSubject" class="">$fixedPhraseSubject</a><br />
+                                                                    <a href="../classes/NetCommonsMailAssignTag.html#property_fixedPhraseBody" class="">$fixedPhraseBody</a><br />
+                                                                    <a href="../classes/NetCommonsMailAssignTag.html#property_assignTags" class="">$assignTags</a><br />
+                                                                    <a href="../classes/NetCommonsMailAssignTag.html#property_embedTagsWysiwyg" class="">$embedTagsWysiwyg</a><br />
+                                                                    <a href="../classes/NetCommonsMailAssignTag.html#property_siteSetting" class="">$siteSetting</a><br />
+                                                                    <a href="../classes/NetCommonsMailAssignTag.html#property_SiteSetting" class="">$SiteSetting</a><br />
+                                                                    <a href="../classes/NetCommonsMailAssignTag.html#property_RoomsLanguage" class="">$RoomsLanguage</a><br />
+                                                                    <a href="../classes/NetCommonsMailAssignTag.html#property_Workflow" class="">$Workflow</a><br />
+                                                                    <a href="../classes/NetCommonsMailAssignTag.html#property_User" class="">$User</a><br />
+                                                            </section>
+                            <section class="span4">
+                                                                    <a href="../classes/NetCommonsMailAssignTag.html#constant_MAX_LINE_LENGTH" class="">MAX_LINE_LENGTH</a><br />
+                                                                    <a href="../classes/NetCommonsMailAssignTag.html#constant_SITE_SETTING_FIXED_PHRASE_APPROVAL" class="">SITE_SETTING_FIXED_PHRASE_APPROVAL</a><br />
+                                                                    <a href="../classes/NetCommonsMailAssignTag.html#constant_SITE_SETTING_FIXED_PHRASE_DISAPPROVAL" class="">SITE_SETTING_FIXED_PHRASE_DISAPPROVAL</a><br />
+                                                                    <a href="../classes/NetCommonsMailAssignTag.html#constant_SITE_SETTING_FIXED_PHRASE_APPROVAL_COMPLETION" class="">SITE_SETTING_FIXED_PHRASE_APPROVAL_COMPLETION</a><br />
+                                                                    <a href="../classes/NetCommonsMailAssignTag.html#constant_SITE_SETTING_FIXED_PHRASE_CONTACT_AFTER_APPROVAL" class="">SITE_SETTING_FIXED_PHRASE_CONTACT_AFTER_APPROVAL</a><br />
+                                                            </section>
+                        </section>
+                        <section class="row-fluid protected">
+                            <section class="span4">
+                                                                    <em>No protected methods found</em>
+                                                            </section>
+                            <section class="span4">
+                                                                    <em>No protected properties found</em>
+                                                            </section>
+                            <section class="span4">
+                                <em>N/A</em>
+                            </section>
+                        </section>
+                        <section class="row-fluid private">
+                            <section class="span4">
+                                                                    <a href="../classes/NetCommonsMailAssignTag.html#method___decodeAndStripTags" class="">__decodeAndStripTags()</a><br />
+                                                                    <a href="../classes/NetCommonsMailAssignTag.html#method___textBrAndWrap" class="">__textBrAndWrap()</a><br />
+                                                            </section>
+                            <section class="span4">
+                                                                    <em>No private properties found</em>
+                                                            </section>
+                            <section class="span4">
+                                <em>N/A</em>
+                            </section>
+                        </section>
+                    </section>
+                </div>
+                <aside class="span4 detailsbar">
+                                        
+                    
+                    <dl>
+                        <dt>File</dt>
+                            <dd><a href="../files/Plugin.Mails.Utility.NetCommonsMailAssignTag.html"><div class="path-wrapper">Plugin/Mails/Utility/NetCommonsMailAssignTag.php</div></a></dd>
+                                                <dt>Package</dt>
+                            <dd><div class="namespace-wrapper">Mails\Utility</div></dd>
+                                                <dt>Class hierarchy</dt>
+                            <dd class="hierarchy">
+                                                                                                                                                                    <div class="namespace-wrapper">\NetCommonsMailAssignTag</div>
+                            </dd>
+
+                        
+                        
+                        
+                        
+                                                                        </dl>
+                    <h2>Tags</h2>
+                    <table class="table table-condensed">
+                                            <tr>
+                            <th>
+                                author
+                            </th>
+                            <td>
+                                                                    <p>Mitsuru Mutaguchi <a href="mailto:mutaguchi@opensource-workshop.jp">mutaguchi@opensource-workshop.jp</a></p>
+                                                            </td>
+                        </tr>
+                                        </table>
+                </aside>
+            </div>
+
+                                    <a id="constants" name="constants"></a>
+            <div class="row-fluid">
+                <div class="span8 content class">
+                    <h2>Constants</h2>
+                </div>
+                <aside class="span4 detailsbar"></aside>
+            </div>
+
+                                <div class="row-fluid">
+        <div class="span8 content class">
+            <a id="constant_MAX_LINE_LENGTH" name="constant_MAX_LINE_LENGTH" class="anchor"></a>
+            <article id="constant_MAX_LINE_LENGTH" class="constant">
+                <h3 class="">MAX_LINE_LENGTH</h3>
+                <pre class="signature">MAX_LINE_LENGTH</pre>
+                <p><em></em></p>
+                
+            </article>
+        </div>
+        <aside class="span4 detailsbar">
+            <h1><i class="icon-arrow-down"></i></h1>
+                        <dl>
+                                                                            </dl>
+            <h2>Tags</h2>
+            <table class="table table-condensed">
+                                    <tr><td colspan="2"><em>None found</em></td></tr>
+                            </table>
+        </aside>
+    </div>
+
+                                    <div class="row-fluid">
+        <div class="span8 content class">
+            <a id="constant_SITE_SETTING_FIXED_PHRASE_APPROVAL" name="constant_SITE_SETTING_FIXED_PHRASE_APPROVAL" class="anchor"></a>
+            <article id="constant_SITE_SETTING_FIXED_PHRASE_APPROVAL" class="constant">
+                <h3 class="">SITE_SETTING_FIXED_PHRASE_APPROVAL</h3>
+                <pre class="signature">SITE_SETTING_FIXED_PHRASE_APPROVAL</pre>
+                <p><em>SiteSettingの定型文の種類</em></p>
+                
+            </article>
+        </div>
+        <aside class="span4 detailsbar">
+            <h1><i class="icon-arrow-down"></i></h1>
+                        <dl>
+                                                                            </dl>
+            <h2>Tags</h2>
+            <table class="table table-condensed">
+                                    <tr><td colspan="2"><em>None found</em></td></tr>
+                            </table>
+        </aside>
+    </div>
+
+                                    <div class="row-fluid">
+        <div class="span8 content class">
+            <a id="constant_SITE_SETTING_FIXED_PHRASE_DISAPPROVAL" name="constant_SITE_SETTING_FIXED_PHRASE_DISAPPROVAL" class="anchor"></a>
+            <article id="constant_SITE_SETTING_FIXED_PHRASE_DISAPPROVAL" class="constant">
+                <h3 class="">SITE_SETTING_FIXED_PHRASE_DISAPPROVAL</h3>
+                <pre class="signature">SITE_SETTING_FIXED_PHRASE_DISAPPROVAL</pre>
+                <p><em>SiteSettingの定型文の種類</em></p>
+                
+            </article>
+        </div>
+        <aside class="span4 detailsbar">
+            <h1><i class="icon-arrow-down"></i></h1>
+                        <dl>
+                                                                            </dl>
+            <h2>Tags</h2>
+            <table class="table table-condensed">
+                                    <tr><td colspan="2"><em>None found</em></td></tr>
+                            </table>
+        </aside>
+    </div>
+
+                                    <div class="row-fluid">
+        <div class="span8 content class">
+            <a id="constant_SITE_SETTING_FIXED_PHRASE_APPROVAL_COMPLETION" name="constant_SITE_SETTING_FIXED_PHRASE_APPROVAL_COMPLETION" class="anchor"></a>
+            <article id="constant_SITE_SETTING_FIXED_PHRASE_APPROVAL_COMPLETION" class="constant">
+                <h3 class="">SITE_SETTING_FIXED_PHRASE_APPROVAL_COMPLETION</h3>
+                <pre class="signature">SITE_SETTING_FIXED_PHRASE_APPROVAL_COMPLETION</pre>
+                <p><em>SiteSettingの定型文の種類</em></p>
+                
+            </article>
+        </div>
+        <aside class="span4 detailsbar">
+            <h1><i class="icon-arrow-down"></i></h1>
+                        <dl>
+                                                                            </dl>
+            <h2>Tags</h2>
+            <table class="table table-condensed">
+                                    <tr><td colspan="2"><em>None found</em></td></tr>
+                            </table>
+        </aside>
+    </div>
+
+                                    <div class="row-fluid">
+        <div class="span8 content class">
+            <a id="constant_SITE_SETTING_FIXED_PHRASE_CONTACT_AFTER_APPROVAL" name="constant_SITE_SETTING_FIXED_PHRASE_CONTACT_AFTER_APPROVAL" class="anchor"></a>
+            <article id="constant_SITE_SETTING_FIXED_PHRASE_CONTACT_AFTER_APPROVAL" class="constant">
+                <h3 class="">SITE_SETTING_FIXED_PHRASE_CONTACT_AFTER_APPROVAL</h3>
+                <pre class="signature">SITE_SETTING_FIXED_PHRASE_CONTACT_AFTER_APPROVAL</pre>
+                <p><em>SiteSettingの定型文の種類</em></p>
+                
+            </article>
+        </div>
+        <aside class="span4 detailsbar">
+            <h1><i class="icon-arrow-down"></i></h1>
+                        <dl>
+                                                                            </dl>
+            <h2>Tags</h2>
+            <table class="table table-condensed">
+                                    <tr><td colspan="2"><em>None found</em></td></tr>
+                            </table>
+        </aside>
+    </div>
+
+                            
+                                    <a id="properties" name="properties"></a>
+            <div class="row-fluid">
+                <div class="span8 content class">
+                    <h2>Properties</h2>
+                </div>
+                <aside class="span4 detailsbar"></aside>
+            </div>
+
+                                    <div class="row-fluid">
+        <div class="span8 content class">
+            <a id="property_fixedPhraseSubject" name="property_fixedPhraseSubject" class="anchor"></a>
+            <article class="property">
+                <h3 class="public ">$fixedPhraseSubject</h3>
+                <pre class="signature">$fixedPhraseSubject : string</pre>
+                <p><em></em></p>
+                
+
+                                <h4>Type</h4>
+                string
+                &mdash; 件名(定型文)                            </article>
+        </div>
+        <aside class="span4 detailsbar">
+            <h1><i class="icon-arrow-down"></i></h1>
+                        <dl>
+                                                            </dl>
+            <h2>Tags</h2>
+            <table class="table table-condensed">
+                                    <tr><td colspan="2"><em>None found</em></td></tr>
+                            </table>
+        </aside>
+    </div>
+
+                                    <div class="row-fluid">
+        <div class="span8 content class">
+            <a id="property_fixedPhraseBody" name="property_fixedPhraseBody" class="anchor"></a>
+            <article class="property">
+                <h3 class="public ">$fixedPhraseBody</h3>
+                <pre class="signature">$fixedPhraseBody : string</pre>
+                <p><em></em></p>
+                
+
+                                <h4>Type</h4>
+                string
+                &mdash; 本文(定型文)                            </article>
+        </div>
+        <aside class="span4 detailsbar">
+            <h1><i class="icon-arrow-down"></i></h1>
+                        <dl>
+                                                            </dl>
+            <h2>Tags</h2>
+            <table class="table table-condensed">
+                                    <tr><td colspan="2"><em>None found</em></td></tr>
+                            </table>
+        </aside>
+    </div>
+
+                                    <div class="row-fluid">
+        <div class="span8 content class">
+            <a id="property_assignTags" name="property_assignTags" class="anchor"></a>
+            <article class="property">
+                <h3 class="public ">$assignTags</h3>
+                <pre class="signature">$assignTags : array</pre>
+                <p><em></em></p>
+                
+
+                                <h4>Type</h4>
+                array
+                &mdash; 埋め込みタグ                            </article>
+        </div>
+        <aside class="span4 detailsbar">
+            <h1><i class="icon-arrow-down"></i></h1>
+                        <dl>
+                                                            </dl>
+            <h2>Tags</h2>
+            <table class="table table-condensed">
+                                    <tr><td colspan="2"><em>None found</em></td></tr>
+                            </table>
+        </aside>
+    </div>
+
+                                    <div class="row-fluid">
+        <div class="span8 content class">
+            <a id="property_embedTagsWysiwyg" name="property_embedTagsWysiwyg" class="anchor"></a>
+            <article class="property">
+                <h3 class="public ">$embedTagsWysiwyg</h3>
+                <pre class="signature">$embedTagsWysiwyg : array</pre>
+                <p><em></em></p>
+                
+
+                                <h4>Type</h4>
+                array
+                &mdash; 埋め込みタグのウィジウィグ対象                            </article>
+        </div>
+        <aside class="span4 detailsbar">
+            <h1><i class="icon-arrow-down"></i></h1>
+                        <dl>
+                                                            </dl>
+            <h2>Tags</h2>
+            <table class="table table-condensed">
+                                    <tr><td colspan="2"><em>None found</em></td></tr>
+                            </table>
+        </aside>
+    </div>
+
+                                    <div class="row-fluid">
+        <div class="span8 content class">
+            <a id="property_siteSetting" name="property_siteSetting" class="anchor"></a>
+            <article class="property">
+                <h3 class="public ">$siteSetting</h3>
+                <pre class="signature">$siteSetting : array</pre>
+                <p><em></em></p>
+                
+
+                                <h4>Type</h4>
+                array
+                &mdash; SiteSetting model data                            </article>
+        </div>
+        <aside class="span4 detailsbar">
+            <h1><i class="icon-arrow-down"></i></h1>
+                        <dl>
+                                                            </dl>
+            <h2>Tags</h2>
+            <table class="table table-condensed">
+                                    <tr><td colspan="2"><em>None found</em></td></tr>
+                            </table>
+        </aside>
+    </div>
+
+                                    <div class="row-fluid">
+        <div class="span8 content class">
+            <a id="property_SiteSetting" name="property_SiteSetting" class="anchor"></a>
+            <article class="property">
+                <h3 class="public ">$SiteSetting</h3>
+                <pre class="signature">$SiteSetting : \SiteSetting</pre>
+                <p><em></em></p>
+                
+
+                                <h4>Type</h4>
+                \SiteSetting
+                                            </article>
+        </div>
+        <aside class="span4 detailsbar">
+            <h1><i class="icon-arrow-down"></i></h1>
+                        <dl>
+                                                            </dl>
+            <h2>Tags</h2>
+            <table class="table table-condensed">
+                                    <tr><td colspan="2"><em>None found</em></td></tr>
+                            </table>
+        </aside>
+    </div>
+
+                                    <div class="row-fluid">
+        <div class="span8 content class">
+            <a id="property_RoomsLanguage" name="property_RoomsLanguage" class="anchor"></a>
+            <article class="property">
+                <h3 class="public ">$RoomsLanguage</h3>
+                <pre class="signature">$RoomsLanguage : \RoomsLanguage</pre>
+                <p><em></em></p>
+                
+
+                                <h4>Type</h4>
+                \RoomsLanguage
+                                            </article>
+        </div>
+        <aside class="span4 detailsbar">
+            <h1><i class="icon-arrow-down"></i></h1>
+                        <dl>
+                                                            </dl>
+            <h2>Tags</h2>
+            <table class="table table-condensed">
+                                    <tr><td colspan="2"><em>None found</em></td></tr>
+                            </table>
+        </aside>
+    </div>
+
+                                    <div class="row-fluid">
+        <div class="span8 content class">
+            <a id="property_Workflow" name="property_Workflow" class="anchor"></a>
+            <article class="property">
+                <h3 class="public ">$Workflow</h3>
+                <pre class="signature">$Workflow : \Workflow</pre>
+                <p><em></em></p>
+                
+
+                                <h4>Type</h4>
+                \Workflow
+                                            </article>
+        </div>
+        <aside class="span4 detailsbar">
+            <h1><i class="icon-arrow-down"></i></h1>
+                        <dl>
+                                                            </dl>
+            <h2>Tags</h2>
+            <table class="table table-condensed">
+                                    <tr><td colspan="2"><em>None found</em></td></tr>
+                            </table>
+        </aside>
+    </div>
+
+                                    <div class="row-fluid">
+        <div class="span8 content class">
+            <a id="property_User" name="property_User" class="anchor"></a>
+            <article class="property">
+                <h3 class="public ">$User</h3>
+                <pre class="signature">$User : \User</pre>
+                <p><em></em></p>
+                
+
+                                <h4>Type</h4>
+                \User
+                                            </article>
+        </div>
+        <aside class="span4 detailsbar">
+            <h1><i class="icon-arrow-down"></i></h1>
+                        <dl>
+                                                            </dl>
+            <h2>Tags</h2>
+            <table class="table table-condensed">
+                                    <tr><td colspan="2"><em>None found</em></td></tr>
+                            </table>
+        </aside>
+    </div>
+
+                                                            
+                                    <a id="methods" name="methods"></a>
+            <div class="row-fluid">
+                <div class="span8 content class"><h2>Methods</h2></div>
+                <aside class="span4 detailsbar"></aside>
+            </div>
+
+                                    <div class="row-fluid">
+        <div class="span8 content class">
+            <a id="method_initPlugin" name="method_initPlugin" class="anchor"></a>
+            <article class="method">
+                <h3 class="public ">initPlugin()</h3>
+                <a href="#source-view" role="button" class="pull-right btn" data-toggle="modal" style="font-size: 1.1em; padding: 9px 14px"><i class="icon-code"></i></a>
+                <pre class="signature" style="margin-right: 54px;">initPlugin(integer  <span class="argument">$languageId</span>, string  <span class="argument">$pluginName = null</span>) : void</pre>
+                <p><em>初期設定 プラグイン用</em></p>
+                
+
+                                    <h4>Parameters</h4>
+                    <table class="table table-condensed table-hover">
+                                                    <tr>
+                                <td>integer</td>
+                                <td>$languageId </td>
+                                <td><p>言語ID</p></td>
+                            </tr>
+                                                    <tr>
+                                <td>string</td>
+                                <td>$pluginName </td>
+                                <td><p>プラグイン名</p></td>
+                            </tr>
+                                            </table>
+                
+                
+                				
+                            </article>
+        </div>
+        <aside class="span4 detailsbar">
+            <h1><i class="icon-arrow-down"></i></h1>
+                                                            <dl>
+                                                                                            <dt>See also</dt>
+                                                                <dd><a href=""><span class="namespace-wrapper">\CakeEmail::$charset</span></a></dd>
+                                                                </dl>
+            <h2>Tags</h2>
+            <table class="table table-condensed">
+                                    <tr><td colspan="2"><em>None found</em></td></tr>
+                            </table>
+        </aside>
+    </div>
+
+                                    <div class="row-fluid">
+        <div class="span8 content class">
+            <a id="method_initTags" name="method_initTags" class="anchor"></a>
+            <article class="method">
+                <h3 class="public ">initTags()</h3>
+                <a href="#source-view" role="button" class="pull-right btn" data-toggle="modal" style="font-size: 1.1em; padding: 9px 14px"><i class="icon-code"></i></a>
+                <pre class="signature" style="margin-right: 54px;">initTags(integer  <span class="argument">$languageId</span>, string  <span class="argument">$pluginName = null</span>) : void</pre>
+                <p><em>初期設定 タグ</em></p>
+                
+
+                                    <h4>Parameters</h4>
+                    <table class="table table-condensed table-hover">
+                                                    <tr>
+                                <td>integer</td>
+                                <td>$languageId </td>
+                                <td><p>言語ID</p></td>
+                            </tr>
+                                                    <tr>
+                                <td>string</td>
+                                <td>$pluginName </td>
+                                <td><p>プラグイン名</p></td>
+                            </tr>
+                                            </table>
+                
+                
+                				
+                            </article>
+        </div>
+        <aside class="span4 detailsbar">
+            <h1><i class="icon-arrow-down"></i></h1>
+                                                            <dl>
+                                                                            </dl>
+            <h2>Tags</h2>
+            <table class="table table-condensed">
+                                    <tr><td colspan="2"><em>None found</em></td></tr>
+                            </table>
+        </aside>
+    </div>
+
+                                    <div class="row-fluid">
+        <div class="span8 content class">
+            <a id="method_setMailFixedPhrase" name="method_setMailFixedPhrase" class="anchor"></a>
+            <article class="method">
+                <h3 class="public ">setMailFixedPhrase()</h3>
+                <a href="#source-view" role="button" class="pull-right btn" data-toggle="modal" style="font-size: 1.1em; padding: 9px 14px"><i class="icon-code"></i></a>
+                <pre class="signature" style="margin-right: 54px;">setMailFixedPhrase(integer  <span class="argument">$languageId</span>, string  <span class="argument">$fixedPhraseType = null</span>, array  <span class="argument">$mailSettingPlugin = null</span>) : void</pre>
+                <p><em>サイト設定 セット</em></p>
+                
+
+                                    <h4>Parameters</h4>
+                    <table class="table table-condensed table-hover">
+                                                    <tr>
+                                <td>integer</td>
+                                <td>$languageId </td>
+                                <td><p>言語ID</p></td>
+                            </tr>
+                                                    <tr>
+                                <td>string</td>
+                                <td>$fixedPhraseType </td>
+                                <td><p>定型文の種類</p></td>
+                            </tr>
+                                                    <tr>
+                                <td>array</td>
+                                <td>$mailSettingPlugin </td>
+                                <td><p>プラグイン側のメール設定データ</p></td>
+                            </tr>
+                                            </table>
+                
+                
+                				
+                            </article>
+        </div>
+        <aside class="span4 detailsbar">
+            <h1><i class="icon-arrow-down"></i></h1>
+                                                            <dl>
+                                                                            </dl>
+            <h2>Tags</h2>
+            <table class="table table-condensed">
+                                    <tr><td colspan="2"><em>None found</em></td></tr>
+                            </table>
+        </aside>
+    </div>
+
+                                    <div class="row-fluid">
+        <div class="span8 content class">
+            <a id="method_setMailFixedPhrasePlugin" name="method_setMailFixedPhrasePlugin" class="anchor"></a>
+            <article class="method">
+                <h3 class="public ">setMailFixedPhrasePlugin()</h3>
+                <a href="#source-view" role="button" class="pull-right btn" data-toggle="modal" style="font-size: 1.1em; padding: 9px 14px"><i class="icon-code"></i></a>
+                <pre class="signature" style="margin-right: 54px;">setMailFixedPhrasePlugin(array  <span class="argument">$mailSettingPlugin</span>) : void</pre>
+                <p><em>プラグインの定型文 セット</em></p>
+                
+
+                                    <h4>Parameters</h4>
+                    <table class="table table-condensed table-hover">
+                                                    <tr>
+                                <td>array</td>
+                                <td>$mailSettingPlugin </td>
+                                <td><p>メール設定データ</p></td>
+                            </tr>
+                                            </table>
+                
+                
+                				
+                            </article>
+        </div>
+        <aside class="span4 detailsbar">
+            <h1><i class="icon-arrow-down"></i></h1>
+                                                            <dl>
+                                                                            </dl>
+            <h2>Tags</h2>
+            <table class="table table-condensed">
+                                    <tr><td colspan="2"><em>None found</em></td></tr>
+                            </table>
+        </aside>
+    </div>
+
+                                    <div class="row-fluid">
+        <div class="span8 content class">
+            <a id="method_setMailFixedPhraseSiteSetting" name="method_setMailFixedPhraseSiteSetting" class="anchor"></a>
+            <article class="method">
+                <h3 class="public ">setMailFixedPhraseSiteSetting()</h3>
+                <a href="#source-view" role="button" class="pull-right btn" data-toggle="modal" style="font-size: 1.1em; padding: 9px 14px"><i class="icon-code"></i></a>
+                <pre class="signature" style="margin-right: 54px;">setMailFixedPhraseSiteSetting(integer  <span class="argument">$languageId</span>, string  <span class="argument">$fixedPhraseType</span>, array  <span class="argument">$mailSettingPlugin = null</span>) : void</pre>
+                <p><em>サイト設定の定型文 セット</em></p>
+                
+
+                                    <h4>Parameters</h4>
+                    <table class="table table-condensed table-hover">
+                                                    <tr>
+                                <td>integer</td>
+                                <td>$languageId </td>
+                                <td><p>言語ID</p></td>
+                            </tr>
+                                                    <tr>
+                                <td>string</td>
+                                <td>$fixedPhraseType </td>
+                                <td><p>定型文の種類</p></td>
+                            </tr>
+                                                    <tr>
+                                <td>array</td>
+                                <td>$mailSettingPlugin </td>
+                                <td><p>プラグイン側のメール設定データ</p></td>
+                            </tr>
+                                            </table>
+                
+                
+                				
+                            </article>
+        </div>
+        <aside class="span4 detailsbar">
+            <h1><i class="icon-arrow-down"></i></h1>
+                                                            <dl>
+                                                                            </dl>
+            <h2>Tags</h2>
+            <table class="table table-condensed">
+                                    <tr><td colspan="2"><em>None found</em></td></tr>
+                            </table>
+        </aside>
+    </div>
+
+                                    <div class="row-fluid">
+        <div class="span8 content class">
+            <a id="method_setFixedPhraseSubject" name="method_setFixedPhraseSubject" class="anchor"></a>
+            <article class="method">
+                <h3 class="public ">setFixedPhraseSubject()</h3>
+                <a href="#source-view" role="button" class="pull-right btn" data-toggle="modal" style="font-size: 1.1em; padding: 9px 14px"><i class="icon-code"></i></a>
+                <pre class="signature" style="margin-right: 54px;">setFixedPhraseSubject(string  <span class="argument">$fixedPhraseSubject</span>) : void</pre>
+                <p><em>件名(定型文)をセットする</em></p>
+                
+
+                                    <h4>Parameters</h4>
+                    <table class="table table-condensed table-hover">
+                                                    <tr>
+                                <td>string</td>
+                                <td>$fixedPhraseSubject </td>
+                                <td><p>件名</p></td>
+                            </tr>
+                                            </table>
+                
+                
+                				
+                            </article>
+        </div>
+        <aside class="span4 detailsbar">
+            <h1><i class="icon-arrow-down"></i></h1>
+                                                            <dl>
+                                                                            </dl>
+            <h2>Tags</h2>
+            <table class="table table-condensed">
+                                    <tr><td colspan="2"><em>None found</em></td></tr>
+                            </table>
+        </aside>
+    </div>
+
+                                    <div class="row-fluid">
+        <div class="span8 content class">
+            <a id="method_setFixedPhraseBody" name="method_setFixedPhraseBody" class="anchor"></a>
+            <article class="method">
+                <h3 class="public ">setFixedPhraseBody()</h3>
+                <a href="#source-view" role="button" class="pull-right btn" data-toggle="modal" style="font-size: 1.1em; padding: 9px 14px"><i class="icon-code"></i></a>
+                <pre class="signature" style="margin-right: 54px;">setFixedPhraseBody(string  <span class="argument">$fixedPhraseBody</span>) : void</pre>
+                <p><em>本文(定型文)をセットする</em></p>
+                
+
+                                    <h4>Parameters</h4>
+                    <table class="table table-condensed table-hover">
+                                                    <tr>
+                                <td>string</td>
+                                <td>$fixedPhraseBody </td>
+                                <td><p>本文</p></td>
+                            </tr>
+                                            </table>
+                
+                
+                				
+                            </article>
+        </div>
+        <aside class="span4 detailsbar">
+            <h1><i class="icon-arrow-down"></i></h1>
+                                                            <dl>
+                                                                            </dl>
+            <h2>Tags</h2>
+            <table class="table table-condensed">
+                                    <tr><td colspan="2"><em>None found</em></td></tr>
+                            </table>
+        </aside>
+    </div>
+
+                                    <div class="row-fluid">
+        <div class="span8 content class">
+            <a id="method_assignTag" name="method_assignTag" class="anchor"></a>
+            <article class="method">
+                <h3 class="public ">assignTag()</h3>
+                <a href="#source-view" role="button" class="pull-right btn" data-toggle="modal" style="font-size: 1.1em; padding: 9px 14px"><i class="icon-code"></i></a>
+                <pre class="signature" style="margin-right: 54px;">assignTag(string  <span class="argument">$tag</span>, string  <span class="argument">$value</span>) : array</pre>
+                <p><em>埋め込みタグの追加</em></p>
+                
+
+                                    <h4>Parameters</h4>
+                    <table class="table table-condensed table-hover">
+                                                    <tr>
+                                <td>string</td>
+                                <td>$tag </td>
+                                <td><p>タグ</p></td>
+                            </tr>
+                                                    <tr>
+                                <td>string</td>
+                                <td>$value </td>
+                                <td><p>変換する値</p></td>
+                            </tr>
+                                            </table>
+                
+                
+                                    <h4>Returns</h4>
+                    array
+                                            &mdash; <p>タグ</p>
+                                    				
+                            </article>
+        </div>
+        <aside class="span4 detailsbar">
+            <h1><i class="icon-arrow-down"></i></h1>
+                                                            <dl>
+                                                                            </dl>
+            <h2>Tags</h2>
+            <table class="table table-condensed">
+                                    <tr><td colspan="2"><em>None found</em></td></tr>
+                            </table>
+        </aside>
+    </div>
+
+                                    <div class="row-fluid">
+        <div class="span8 content class">
+            <a id="method_assignTags" name="method_assignTags" class="anchor"></a>
+            <article class="method">
+                <h3 class="public ">assignTags()</h3>
+                <a href="#source-view" role="button" class="pull-right btn" data-toggle="modal" style="font-size: 1.1em; padding: 9px 14px"><i class="icon-code"></i></a>
+                <pre class="signature" style="margin-right: 54px;">assignTags(array  <span class="argument">$tags</span>) : void</pre>
+                <p><em>埋め込みタグを配列で追加</em></p>
+                
+
+                                    <h4>Parameters</h4>
+                    <table class="table table-condensed table-hover">
+                                                    <tr>
+                                <td>array</td>
+                                <td>$tags </td>
+                                <td><p>タグ配列</p></td>
+                            </tr>
+                                            </table>
+                
+                
+                				
+                            </article>
+        </div>
+        <aside class="span4 detailsbar">
+            <h1><i class="icon-arrow-down"></i></h1>
+                                                            <dl>
+                                                                            </dl>
+            <h2>Tags</h2>
+            <table class="table table-condensed">
+                                    <tr><td colspan="2"><em>None found</em></td></tr>
+                            </table>
+        </aside>
+    </div>
+
+                                    <div class="row-fluid">
+        <div class="span8 content class">
+            <a id="method_assignTagDatas" name="method_assignTagDatas" class="anchor"></a>
+            <article class="method">
+                <h3 class="public ">assignTagDatas()</h3>
+                <a href="#source-view" role="button" class="pull-right btn" data-toggle="modal" style="font-size: 1.1em; padding: 9px 14px"><i class="icon-code"></i></a>
+                <pre class="signature" style="margin-right: 54px;">assignTagDatas(array  <span class="argument">$tags</span>, array  <span class="argument">$data</span>) : void</pre>
+                <p><em>埋め込みタグをデータから参照して追加</em></p>
+                
+
+                                    <h4>Parameters</h4>
+                    <table class="table table-condensed table-hover">
+                                                    <tr>
+                                <td>array</td>
+                                <td>$tags </td>
+                                <td><p>タグ配列</p></td>
+                            </tr>
+                                                    <tr>
+                                <td>array</td>
+                                <td>$data </td>
+                                <td><p>タグ配列</p></td>
+                            </tr>
+                                            </table>
+                
+                
+                				
+                            </article>
+        </div>
+        <aside class="span4 detailsbar">
+            <h1><i class="icon-arrow-down"></i></h1>
+                                                            <dl>
+                                                                            </dl>
+            <h2>Tags</h2>
+            <table class="table table-condensed">
+                                    <tr><td colspan="2"><em>None found</em></td></tr>
+                            </table>
+        </aside>
+    </div>
+
+                                    <div class="row-fluid">
+        <div class="span8 content class">
+            <a id="method_assignTagReplace" name="method_assignTagReplace" class="anchor"></a>
+            <article class="method">
+                <h3 class="public ">assignTagReplace()</h3>
+                <a href="#source-view" role="button" class="pull-right btn" data-toggle="modal" style="font-size: 1.1em; padding: 9px 14px"><i class="icon-code"></i></a>
+                <pre class="signature" style="margin-right: 54px;">assignTagReplace() : array</pre>
+                <p><em>埋め込みタグ変換：定型文の埋め込みタグを変換して、メール生文にする</em></p>
+                
+
+                
+                
+                                    <h4>Returns</h4>
+                    array
+                                            &mdash; <p>タグ</p>
+                                    				
+                            </article>
+        </div>
+        <aside class="span4 detailsbar">
+            <h1><i class="icon-arrow-down"></i></h1>
+                                                            <dl>
+                                                                            </dl>
+            <h2>Tags</h2>
+            <table class="table table-condensed">
+                                    <tr><td colspan="2"><em>None found</em></td></tr>
+                            </table>
+        </aside>
+    </div>
+
+                                    <div class="row-fluid">
+        <div class="span8 content class">
+            <a id="method_addHeaderAndSignature" name="method_addHeaderAndSignature" class="anchor"></a>
+            <article class="method">
+                <h3 class="public ">addHeaderAndSignature()</h3>
+                <a href="#source-view" role="button" class="pull-right btn" data-toggle="modal" style="font-size: 1.1em; padding: 9px 14px"><i class="icon-code"></i></a>
+                <pre class="signature" style="margin-right: 54px;">addHeaderAndSignature(string  <span class="argument">$body</span>) : string</pre>
+                <p><em>メール本文の共通ヘッダー文、署名追加</em></p>
+                
+
+                                    <h4>Parameters</h4>
+                    <table class="table table-condensed table-hover">
+                                                    <tr>
+                                <td>string</td>
+                                <td>$body </td>
+                                <td><p>本文</p></td>
+                            </tr>
+                                            </table>
+                
+                
+                                    <h4>Returns</h4>
+                    string
+                                            &mdash; <p>本文</p>
+                                    				
+                            </article>
+        </div>
+        <aside class="span4 detailsbar">
+            <h1><i class="icon-arrow-down"></i></h1>
+                                                            <dl>
+                                                                            </dl>
+            <h2>Tags</h2>
+            <table class="table table-condensed">
+                                    <tr><td colspan="2"><em>None found</em></td></tr>
+                            </table>
+        </aside>
+    </div>
+
+                                    <div class="row-fluid">
+        <div class="span8 content class">
+            <a id="method_getFixedPhraseType" name="method_getFixedPhraseType" class="anchor"></a>
+            <article class="method">
+                <h3 class="public ">getFixedPhraseType()</h3>
+                <a href="#source-view" role="button" class="pull-right btn" data-toggle="modal" style="font-size: 1.1em; padding: 9px 14px"><i class="icon-code"></i></a>
+                <pre class="signature" style="margin-right: 54px;">getFixedPhraseType(string  <span class="argument">$status</span>, string  <span class="argument">$comment = null</span>, boolean  <span class="argument">$isPublishableEdit = null</span>) : string</pre>
+                <p><em>SiteSettingの定型文の種類 ゲット</em></p>
+                
+
+                                    <h4>Parameters</h4>
+                    <table class="table table-condensed table-hover">
+                                                    <tr>
+                                <td>string</td>
+                                <td>$status </td>
+                                <td><p>承認ステータス</p></td>
+                            </tr>
+                                                    <tr>
+                                <td>string</td>
+                                <td>$comment </td>
+                                <td><p>承認コメント</p></td>
+                            </tr>
+                                                    <tr>
+                                <td>boolean</td>
+                                <td>$isPublishableEdit </td>
+                                <td><p>公開許可あり（承認者、承認OFF時の一般）の編集か</p></td>
+                            </tr>
+                                            </table>
+                
+                                    <h4>Throws</h4>
+                    <dl>
+                                                    <dt>\InternalErrorException</dt>
+                            <dd></dd>
+                                                                    </dl>
+                
+                                    <h4>Returns</h4>
+                    string
+                                    				
+                            </article>
+        </div>
+        <aside class="span4 detailsbar">
+            <h1><i class="icon-arrow-down"></i></h1>
+                                                            <dl>
+                                                                            </dl>
+            <h2>Tags</h2>
+            <table class="table table-condensed">
+                                    <tr><td colspan="2"><em>None found</em></td></tr>
+                            </table>
+        </aside>
+    </div>
+
+                                    <div class="row-fluid">
+        <div class="span8 content class">
+            <a id="method___call" name="method___call" class="anchor"></a>
+            <article class="method">
+                <h3 class="public ">__call()</h3>
+                <a href="#source-view" role="button" class="pull-right btn" data-toggle="modal" style="font-size: 1.1em; padding: 9px 14px"><i class="icon-code"></i></a>
+                <pre class="signature" style="margin-right: 54px;">__call(string  <span class="argument">$method</span>, array  <span class="argument">$params</span>) : mixed</pre>
+                <p><em>オリジナルタグのセット用マジックメソッド</em></p>
+                
+
+                                    <h4>Parameters</h4>
+                    <table class="table table-condensed table-hover">
+                                                    <tr>
+                                <td>string</td>
+                                <td>$method </td>
+                                <td><p>メソッド</p></td>
+                            </tr>
+                                                    <tr>
+                                <td>array</td>
+                                <td>$params </td>
+                                <td><p>パラメータ</p></td>
+                            </tr>
+                                            </table>
+                
+                
+                                    <h4>Returns</h4>
+                    mixed
+                                    				
+                            </article>
+        </div>
+        <aside class="span4 detailsbar">
+            <h1><i class="icon-arrow-down"></i></h1>
+                                                            <dl>
+                                                                            </dl>
+            <h2>Tags</h2>
+            <table class="table table-condensed">
+                                    <tr><td colspan="2"><em>None found</em></td></tr>
+                            </table>
+        </aside>
+    </div>
+
+                                                                    <div class="row-fluid">
+        <div class="span8 content class">
+            <a id="method___decodeAndStripTags" name="method___decodeAndStripTags" class="anchor"></a>
+            <article class="method">
+                <h3 class="private ">__decodeAndStripTags()</h3>
+                <a href="#source-view" role="button" class="pull-right btn" data-toggle="modal" style="font-size: 1.1em; padding: 9px 14px"><i class="icon-code"></i></a>
+                <pre class="signature" style="margin-right: 54px;">__decodeAndStripTags(string  <span class="argument">$str</span>) : string</pre>
+                <p><em>htmlspecialchar 等をデコード と strap_tags</em></p>
+                <p>・{X-BODY}のウィジウィグのテキストは、不等号等が htmlspecialchar になっているため、変換する</p>
+
+                                    <h4>Parameters</h4>
+                    <table class="table table-condensed table-hover">
+                                                    <tr>
+                                <td>string</td>
+                                <td>$str </td>
+                                <td><p>文字列</p></td>
+                            </tr>
+                                            </table>
+                
+                
+                                    <h4>Returns</h4>
+                    string
+                                            &mdash; <p>変換した文字列</p>
+                                    				
+                            </article>
+        </div>
+        <aside class="span4 detailsbar">
+            <h1><i class="icon-arrow-down"></i></h1>
+                                                            <dl>
+                                                                            </dl>
+            <h2>Tags</h2>
+            <table class="table table-condensed">
+                                    <tr><td colspan="2"><em>None found</em></td></tr>
+                            </table>
+        </aside>
+    </div>
+
+                                    <div class="row-fluid">
+        <div class="span8 content class">
+            <a id="method___textBrAndWrap" name="method___textBrAndWrap" class="anchor"></a>
+            <article class="method">
+                <h3 class="private ">__textBrAndWrap()</h3>
+                <a href="#source-view" role="button" class="pull-right btn" data-toggle="modal" style="font-size: 1.1em; padding: 9px 14px"><i class="icon-code"></i></a>
+                <pre class="signature" style="margin-right: 54px;">__textBrAndWrap(string  <span class="argument">$text</span>) : string</pre>
+                <p><em>改行処理 と テキストのブロックを決められた幅で折り返す</em></p>
+                
+
+                                    <h4>Parameters</h4>
+                    <table class="table table-condensed table-hover">
+                                                    <tr>
+                                <td>string</td>
+                                <td>$text </td>
+                                <td><p>文字列</p></td>
+                            </tr>
+                                            </table>
+                
+                
+                                    <h4>Returns</h4>
+                    string
+                                            &mdash; <p>文字列</p>
+                                    				
+                            </article>
+        </div>
+        <aside class="span4 detailsbar">
+            <h1><i class="icon-arrow-down"></i></h1>
+                                                            <dl>
+                                                                            </dl>
+            <h2>Tags</h2>
+            <table class="table table-condensed">
+                                    <tr><td colspan="2"><em>None found</em></td></tr>
+                            </table>
+        </aside>
+    </div>
+
+                                    </div>
+    </section>
+
+    <div id="source-view" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="source-view-label" aria-hidden="true">
+        <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+            <h3 id="source-view-label">NetCommonsMailAssignTag.php</h3>
+        </div>
+        <div class="modal-body">
+            <pre data-src="../files/Plugin/Mails/Utility/NetCommonsMailAssignTag.php.txt" class="language-php line-numbers"></pre>
+        </div>
+    </div>
+
+    <footer class="row-fluid">
+        <section class="span10 offset2">
+            <section class="row-fluid">
+                <section class="span10 offset1">
+                    <section class="row-fluid footer-sections">
+                        <section class="span4">
+                                                        <h1><i class="icon-code"></i></h1>
+                            <div>
+                                <ul>
+                                                                    </ul>
+                            </div>
+                        </section>
+                        <section class="span4">
+                                                        <h1><i class="icon-bar-chart"></i></h1>
+                            <div>
+                                <ul>
+                                    <li><a href="../graphs/class.html">Class Hierarchy Diagram</a></li>
+                                </ul>
+                            </div>
+                        </section>
+                        <section class="span4">
+                                                        <h1><i class="icon-pushpin"></i></h1>
+                            <div>
+                                <ul>
+                                    <li><a href="../reports/errors.html">Errors</a></li>
+                                    <li><a href="../reports/markers.html">Markers</a></li>
+                                </ul>
+                            </div>
+                        </section>
+                    </section>
+                </section>
+            </section>
+            <section class="row-fluid">
+                <section class="span10 offset1">
+                    <hr />
+                    Documentation is powered by <a href="http://www.phpdoc.org/">phpDocumentor </a> and authored
+                    on October 9th, 2016 at 01:28.
+                </section>
+            </section>
+        </section>
+    </footer>
+</div>
+
+</body>
+</html>
