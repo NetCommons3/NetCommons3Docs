@@ -136,10 +136,10 @@
                                 <div class="accordion" style="margin-bottom: 0">
         <div class="accordion-group">
             <div class="accordion-heading">
-                                    <a class="accordion-toggle " data-toggle="collapse" data-target="#namespace-1871791674"></a>
+                                    <a class="accordion-toggle " data-toggle="collapse" data-target="#namespace-791923079"></a>
                                 <a href="../namespaces/default.html" style="margin-left: 30px; padding-left: 0">\</a>
             </div>
-            <div id="namespace-1871791674" class="accordion-body collapse in">
+            <div id="namespace-791923079" class="accordion-body collapse in">
                 <div class="accordion-inner">
 
                     
@@ -549,9 +549,11 @@ const FFMPEG_PATH = '/usr/local/ffmpeg_build/bin/ffmpeg';</code></pre>
                 <p><em>ffmpeg オプション</em></p>
                 <h4>サンプルコード</h4>
 <pre><code class="language-php">    // 通常
-const FFMPEG_OPTION = '-acodec libmp3lame -ab 128k -ar 44100 -ac 2 -vcodec libx264 -r 30 -b 500k';
-    // for ffmpeg version git-2016-05-13-cb928fc 動画の傾き対応
-const FFMPEG_OPTION = '-acodec libmp3lame -ab 128k -ar 44100 -ac 2 -vcodec libx264 -r 30 -b 500k -vf hflip -metadata:s:v:0 rotate=0';</code></pre>
+const FFMPEG_OPTION = '-ar 48000 -vcodec libx264 -r 30 -b 500k -strict -2';
+    // for ffmpeg version git-2016-05-13-cb928fc ダウンロードしながら再生対応
+const FFMPEG_OPTION = '-ar 48000 -vcodec libx264 -r 30 -b 500k  -strict -2 -movflags faststart';
+    // 2016.10.11以前の通常
+const FFMPEG_OPTION = '-acodec libmp3lame -ab 128k -ar 44100 -ac 2 -vcodec libx264 -r 30 -b 500k';</code></pre>
             </article>
         </div>
         <aside class="span4 detailsbar">
@@ -1856,7 +1858,7 @@ validation rules can be defined in $validate.</em></p>
                 <section class="span10 offset1">
                     <hr />
                     Documentation is powered by <a href="http://www.phpdoc.org/">phpDocumentor </a> and authored
-                    on October 11th, 2016 at 00:57.
+                    on October 11th, 2016 at 06:53.
                 </section>
             </section>
         </section>
