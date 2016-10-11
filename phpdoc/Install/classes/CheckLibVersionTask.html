@@ -136,10 +136,10 @@
                                 <div class="accordion" style="margin-bottom: 0">
         <div class="accordion-group">
             <div class="accordion-heading">
-                                    <a class="accordion-toggle " data-toggle="collapse" data-target="#namespace-1836330223"></a>
+                                    <a class="accordion-toggle " data-toggle="collapse" data-target="#namespace-1728677266"></a>
                                 <a href="../namespaces/default.html" style="margin-left: 30px; padding-left: 0">\</a>
             </div>
-            <div id="namespace-1836330223" class="accordion-body collapse in">
+            <div id="namespace-1728677266" class="accordion-body collapse in">
                 <div class="accordion-inner">
 
                     
@@ -235,10 +235,9 @@
                                             </nav>
                     <a href="#source-view" role="button" class="pull-right btn" data-toggle="modal"><i class="icon-code"></i></a>
 
-                    <h1><small>\</small>NetCommonsTimeHelper</h1>
-                    <p><em>Class NetCommonsTimeHelper</em></p>
-                    <p>Add your application-wide methods in the class below, your helpers
-will inherit them.</p>
+                    <h1><small>\</small>CheckLibVersionTask</h1>
+                    <p><em>Installのパーミッション設定</em></p>
+                    
                     
                                         
                     <section id="summary">
@@ -256,13 +255,11 @@ will inherit them.</p>
                         </section>
                         <section class="row-fluid public">
                             <section class="span4">
-                                                                    <a href="../classes/NetCommonsTimeHelper.html#method___construct" class="">__construct()</a><br />
-                                                                    <a href="../classes/NetCommonsTimeHelper.html#method___call" class="">__call()</a><br />
-                                                                    <a href="../classes/NetCommonsTimeHelper.html#method_beforeFormInput" class="">beforeFormInput()</a><br />
-                                                                    <a href="../classes/NetCommonsTimeHelper.html#method_beforeFormEnd" class="">beforeFormEnd()</a><br />
+                                                                    <a href="../classes/CheckLibVersionTask.html#method_execute" class="">execute()</a><br />
+                                                                    <a href="../classes/CheckLibVersionTask.html#method_getOptionParser" class="">getOptionParser()</a><br />
                                                             </section>
                             <section class="span4">
-                                                                    <a href="../classes/NetCommonsTimeHelper.html#property_helpers" class="">$helpers</a><br />
+                                                                    <a href="../classes/CheckLibVersionTask.html#property_phpVersion" class="">$phpVersion</a><br />
                                                             </section>
                             <section class="span4">
                                                                     <em>No constants found</em>
@@ -273,8 +270,7 @@ will inherit them.</p>
                                                                     <em>No protected methods found</em>
                                                             </section>
                             <section class="span4">
-                                                                    <a href="../classes/NetCommonsTimeHelper.html#property__netCommonsTime" class="">$_netCommonsTime</a><br />
-                                                                    <a href="../classes/NetCommonsTimeHelper.html#property__convertFields" class="">$_convertFields</a><br />
+                                                                    <em>No protected properties found</em>
                                                             </section>
                             <section class="span4">
                                 <em>N/A</em>
@@ -298,18 +294,16 @@ will inherit them.</p>
                     
                     <dl>
                         <dt>File</dt>
-                            <dd><a href="../files/Plugin.NetCommons.View.Helper.NetCommonsTimeHelper.html"><div class="path-wrapper">Plugin/NetCommons/View/Helper/NetCommonsTimeHelper.php</div></a></dd>
+                            <dd><a href="../files/Plugin.Install.Console.Command.Task.CheckLibVersionTask.html"><div class="path-wrapper">Plugin/Install/Console/Command/Task/CheckLibVersionTask.php</div></a></dd>
                                                 <dt>Package</dt>
-                            <dd><div class="namespace-wrapper">Default</div></dd>
+                            <dd><div class="namespace-wrapper">Console\Command</div></dd>
                                                 <dt>Class hierarchy</dt>
                             <dd class="hierarchy">
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                        
-                                        <div class="namespace-wrapper">\Helper</div>
+                                                                                                                                                                                                                                                                                                                                                                                                                                                            
+                                        <div class="namespace-wrapper">\AppShell</div>
                                                                     
-                                        <div class="namespace-wrapper"><a href="../classes/NetCommonsAppHelper.html">\NetCommonsAppHelper</a></div>
-                                                                    
-                                        <div class="namespace-wrapper"><a href="../classes/AppHelper.html">\AppHelper</a></div>
-                                                                                                    <div class="namespace-wrapper">\NetCommonsTimeHelper</div>
+                                        <div class="namespace-wrapper"><a href="../classes/InstallAppTask.html">\InstallAppTask</a></div>
+                                                                                                    <div class="namespace-wrapper">\CheckLibVersionTask</div>
                             </dd>
 
                         
@@ -319,7 +313,14 @@ will inherit them.</p>
                                                                         </dl>
                     <h2>Tags</h2>
                     <table class="table table-condensed">
-                                            <tr><td colspan="2"><em>None found</em></td></tr>
+                                            <tr>
+                            <th>
+                                author
+                            </th>
+                            <td>
+                                                                    <p>Shohei Nakajima <a href="mailto:nakajimashouhei@gmail.com">nakajimashouhei@gmail.com</a></p>
+                                                            </td>
+                        </tr>
                                         </table>
                 </aside>
             </div>
@@ -335,11 +336,12 @@ will inherit them.</p>
 
                                     <div class="row-fluid">
         <div class="span8 content class">
-            <a id="property_helpers" name="property_helpers" class="anchor"></a>
+            <a id="property_phpVersion" name="property_phpVersion" class="anchor"></a>
             <article class="property">
-                <h3 class="public ">$helpers</h3>
-                <pre class="signature">$helpers : array</pre>
-                <p><em>Other helpers used by FormHelper</em></p>
+                <h3 class="public ">$phpVersion</h3>
+                <pre class="signature">$phpVersion : array</pre>
+                <p><em>PHPバージョン
+※テストで変更できるようにメンバー変数にする</em></p>
                 
 
                                 <h4>Type</h4>
@@ -357,55 +359,7 @@ will inherit them.</p>
         </aside>
     </div>
 
-                                                    <div class="row-fluid">
-        <div class="span8 content class">
-            <a id="property__netCommonsTime" name="property__netCommonsTime" class="anchor"></a>
-            <article class="property">
-                <h3 class="protected ">$_netCommonsTime</h3>
-                <pre class="signature">$_netCommonsTime : \NetCommonsTime</pre>
-                <p><em></em></p>
-                
-
-                                <h4>Type</h4>
-                <a href="../classes/NetCommonsTime.html">\NetCommonsTime</a>
-                &mdash; NetCommonsTimeのインスタンス                            </article>
-        </div>
-        <aside class="span4 detailsbar">
-            <h1><i class="icon-arrow-down"></i></h1>
-                        <dl>
-                                                            </dl>
-            <h2>Tags</h2>
-            <table class="table table-condensed">
-                                    <tr><td colspan="2"><em>None found</em></td></tr>
-                            </table>
-        </aside>
-    </div>
-
-                                    <div class="row-fluid">
-        <div class="span8 content class">
-            <a id="property__convertFields" name="property__convertFields" class="anchor"></a>
-            <article class="property">
-                <h3 class="protected ">$_convertFields</h3>
-                <pre class="signature">$_convertFields : array</pre>
-                <p><em></em></p>
-                
-
-                                <h4>Type</h4>
-                array
-                &mdash; タイムゾーン変換対象フィールド                            </article>
-        </div>
-        <aside class="span4 detailsbar">
-            <h1><i class="icon-arrow-down"></i></h1>
-                        <dl>
-                                                            </dl>
-            <h2>Tags</h2>
-            <table class="table table-condensed">
-                                    <tr><td colspan="2"><em>None found</em></td></tr>
-                            </table>
-        </aside>
-    </div>
-
-                                            
+                                                            
                                     <a id="methods" name="methods"></a>
             <div class="row-fluid">
                 <div class="span8 content class"><h2>Methods</h2></div>
@@ -414,110 +368,14 @@ will inherit them.</p>
 
                                     <div class="row-fluid">
         <div class="span8 content class">
-            <a id="method___construct" name="method___construct" class="anchor"></a>
+            <a id="method_execute" name="method_execute" class="anchor"></a>
             <article class="method">
-                <h3 class="public ">__construct()</h3>
+                <h3 class="public ">execute()</h3>
                 <a href="#source-view" role="button" class="pull-right btn" data-toggle="modal" style="font-size: 1.1em; padding: 9px 14px"><i class="icon-code"></i></a>
-                <pre class="signature" style="margin-right: 54px;">__construct(\View  <span class="argument">$View</span>, array  <span class="argument">$settings = array()</span>) : \NetCommonsTimeHelper</pre>
-                <p><em>コンストラクタ</em></p>
+                <pre class="signature" style="margin-right: 54px;">execute() : void</pre>
+                <p><em>Execution method always used for tasks</em></p>
                 
 
-                                    <h4>Parameters</h4>
-                    <table class="table table-condensed table-hover">
-                                                    <tr>
-                                <td>\View</td>
-                                <td>$View </td>
-                                <td><p>The View this helper is being attached to.</p></td>
-                            </tr>
-                                                    <tr>
-                                <td>array</td>
-                                <td>$settings </td>
-                                <td><p>Configuration settings for the helper.</p></td>
-                            </tr>
-                                            </table>
-                
-                
-                                    <h4>Returns</h4>
-                    <a href="../classes/NetCommonsTimeHelper.html">\NetCommonsTimeHelper</a>
-                                    				
-                            </article>
-        </div>
-        <aside class="span4 detailsbar">
-            <h1><i class="icon-arrow-down"></i></h1>
-                                                            <dl>
-                                                                            </dl>
-            <h2>Tags</h2>
-            <table class="table table-condensed">
-                                    <tr><td colspan="2"><em>None found</em></td></tr>
-                            </table>
-        </aside>
-    </div>
-
-                                    <div class="row-fluid">
-        <div class="span8 content class">
-            <a id="method___call" name="method___call" class="anchor"></a>
-            <article class="method">
-                <h3 class="public ">__call()</h3>
-                <a href="#source-view" role="button" class="pull-right btn" data-toggle="modal" style="font-size: 1.1em; padding: 9px 14px"><i class="icon-code"></i></a>
-                <pre class="signature" style="margin-right: 54px;">__call(string  <span class="argument">$method</span>, array  <span class="argument">$params</span>) : mixed</pre>
-                <p><em>NetCommonsTime ラップ用マジックメソッド。</em></p>
-                
-
-                                    <h4>Parameters</h4>
-                    <table class="table table-condensed table-hover">
-                                                    <tr>
-                                <td>string</td>
-                                <td>$method </td>
-                                <td><p>メソッド</p></td>
-                            </tr>
-                                                    <tr>
-                                <td>array</td>
-                                <td>$params </td>
-                                <td><p>パラメータ</p></td>
-                            </tr>
-                                            </table>
-                
-                
-                                    <h4>Returns</h4>
-                    mixed
-                                    				
-                            </article>
-        </div>
-        <aside class="span4 detailsbar">
-            <h1><i class="icon-arrow-down"></i></h1>
-                                                            <dl>
-                                                                            </dl>
-            <h2>Tags</h2>
-            <table class="table table-condensed">
-                                    <tr><td colspan="2"><em>None found</em></td></tr>
-                            </table>
-        </aside>
-    </div>
-
-                                    <div class="row-fluid">
-        <div class="span8 content class">
-            <a id="method_beforeFormInput" name="method_beforeFormInput" class="anchor"></a>
-            <article class="method">
-                <h3 class="public ">beforeFormInput()</h3>
-                <a href="#source-view" role="button" class="pull-right btn" data-toggle="modal" style="font-size: 1.1em; padding: 9px 14px"><i class="icon-code"></i></a>
-                <pre class="signature" style="margin-right: 54px;">beforeFormInput(string  <span class="argument">$fieldName</span>, array  <span class="argument">$options</span>) : void</pre>
-                <p><em>コンバートするFieldsをセットする処理
-NetCommonsForm::inputから呼ばれる。</em></p>
-                
-
-                                    <h4>Parameters</h4>
-                    <table class="table table-condensed table-hover">
-                                                    <tr>
-                                <td>string</td>
-                                <td>$fieldName </td>
-                                <td><p>field name</p></td>
-                            </tr>
-                                                    <tr>
-                                <td>array</td>
-                                <td>$options </td>
-                                <td><p>options</p></td>
-                            </tr>
-                                            </table>
                 
                 
                 				
@@ -536,19 +394,18 @@ NetCommonsForm::inputから呼ばれる。</em></p>
 
                                     <div class="row-fluid">
         <div class="span8 content class">
-            <a id="method_beforeFormEnd" name="method_beforeFormEnd" class="anchor"></a>
+            <a id="method_getOptionParser" name="method_getOptionParser" class="anchor"></a>
             <article class="method">
-                <h3 class="public ">beforeFormEnd()</h3>
+                <h3 class="public ">getOptionParser()</h3>
                 <a href="#source-view" role="button" class="pull-right btn" data-toggle="modal" style="font-size: 1.1em; padding: 9px 14px"><i class="icon-code"></i></a>
-                <pre class="signature" style="margin-right: 54px;">beforeFormEnd() : string</pre>
-                <p><em>Timezone変換の準備を組み込んだForm::end</em></p>
+                <pre class="signature" style="margin-right: 54px;">getOptionParser() : \ConsoleOptionParser</pre>
+                <p><em>Gets the option parser instance and configures it.</em></p>
                 
 
                 
                 
                                     <h4>Returns</h4>
-                    string
-                                            &mdash; <p>$out timezone変換用のhiddenタグ</p>
+                    \ConsoleOptionParser
                                     				
                             </article>
         </div>
@@ -569,10 +426,10 @@ NetCommonsForm::inputから呼ばれる。</em></p>
     <div id="source-view" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="source-view-label" aria-hidden="true">
         <div class="modal-header">
             <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
-            <h3 id="source-view-label">NetCommonsTimeHelper.php</h3>
+            <h3 id="source-view-label">CheckLibVersionTask.php</h3>
         </div>
         <div class="modal-body">
-            <pre data-src="../files/Plugin/NetCommons/View/Helper/NetCommonsTimeHelper.php.txt" class="language-php line-numbers"></pre>
+            <pre data-src="../files/Plugin/Install/Console/Command/Task/CheckLibVersionTask.php.txt" class="language-php line-numbers"></pre>
         </div>
     </div>
 
