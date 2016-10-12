@@ -136,10 +136,10 @@
                                 <div class="accordion" style="margin-bottom: 0">
         <div class="accordion-group">
             <div class="accordion-heading">
-                                    <a class="accordion-toggle " data-toggle="collapse" data-target="#namespace-373288131"></a>
+                                    <a class="accordion-toggle " data-toggle="collapse" data-target="#namespace-1014072973"></a>
                                 <a href="../namespaces/default.html" style="margin-left: 30px; padding-left: 0">\</a>
             </div>
-            <div id="namespace-373288131" class="accordion-body collapse in">
+            <div id="namespace-1014072973" class="accordion-body collapse in">
                 <div class="accordion-inner">
 
                     
@@ -444,7 +444,7 @@ will inherit them.</p>
             <article class="method">
                 <h3 class="public ">getTurnCalendarOperationsWrap()</h3>
                 <a href="#source-view" role="button" class="pull-right btn" data-toggle="modal" style="font-size: 1.1em; padding: 9px 14px"><i class="icon-code"></i></a>
-                <pre class="signature" style="margin-right: 54px;">getTurnCalendarOperationsWrap(string  <span class="argument">$type</span>, array  <span class="argument">$vars</span>) : string</pre>
+                <pre class="signature" style="margin-right: 54px;">getTurnCalendarOperationsWrap(string  <span class="argument">$type</span>, string  <span class="argument">$pos</span>, array  <span class="argument">$vars</span>) : string</pre>
                 <p><em>getTurnCalendarOperationsWrap</em></p>
                 <p>カレンダー上部の年月移動オペレーション部</p>
 
@@ -454,6 +454,11 @@ will inherit them.</p>
                                 <td>string</td>
                                 <td>$type </td>
                                 <td><p>month, week, day のいずれか</p></td>
+                            </tr>
+                                                    <tr>
+                                <td>string</td>
+                                <td>$pos </td>
+                                <td><p>position</p></td>
                             </tr>
                                                     <tr>
                                 <td>array</td>
@@ -486,7 +491,7 @@ will inherit them.</p>
             <article class="method">
                 <h3 class="public ">getTurnCalendarOperations()</h3>
                 <a href="#source-view" role="button" class="pull-right btn" data-toggle="modal" style="font-size: 1.1em; padding: 9px 14px"><i class="icon-code"></i></a>
-                <pre class="signature" style="margin-right: 54px;">getTurnCalendarOperations(string  <span class="argument">$type</span>, array  <span class="argument">$vars</span>) : string</pre>
+                <pre class="signature" style="margin-right: 54px;">getTurnCalendarOperations(string  <span class="argument">$type</span>, string  <span class="argument">$pos</span>, array  <span class="argument">$vars</span>) : string</pre>
                 <p><em>getTurnCalendarOperations</em></p>
                 <p>カレンダー上部の年月移動オペレーション部</p>
 
@@ -496,6 +501,11 @@ will inherit them.</p>
                                 <td>string</td>
                                 <td>$type </td>
                                 <td><p>month, week, day のいずれか</p></td>
+                            </tr>
+                                                    <tr>
+                                <td>string</td>
+                                <td>$pos </td>
+                                <td><p>position</p></td>
                             </tr>
                                                     <tr>
                                 <td>array</td>
@@ -528,7 +538,7 @@ will inherit them.</p>
             <article class="method">
                 <h3 class="protected ">_getDateTitle()</h3>
                 <a href="#source-view" role="button" class="pull-right btn" data-toggle="modal" style="font-size: 1.1em; padding: 9px 14px"><i class="icon-code"></i></a>
-                <pre class="signature" style="margin-right: 54px;">_getDateTitle(string  <span class="argument">$type</span>, array  <span class="argument">$vars</span>) : string</pre>
+                <pre class="signature" style="margin-right: 54px;">_getDateTitle(string  <span class="argument">$type</span>, string  <span class="argument">$pos</span>, array  <span class="argument">$vars</span>) : string</pre>
                 <p><em>_getDateTitle</em></p>
                 <p>カレンダー上部の年月表示部</p>
 
@@ -538,6 +548,11 @@ will inherit them.</p>
                                 <td>string</td>
                                 <td>$type </td>
                                 <td><p>month, week, day のいずれか</p></td>
+                            </tr>
+                                                    <tr>
+                                <td>string</td>
+                                <td>$pos </td>
+                                <td><p>position</p></td>
                             </tr>
                                                     <tr>
                                 <td>array</td>
@@ -777,7 +792,7 @@ will inherit them.</p>
             <article class="method">
                 <h3 class="protected ">_getDateTimePickerForMoveOperation()</h3>
                 <a href="#source-view" role="button" class="pull-right btn" data-toggle="modal" style="font-size: 1.1em; padding: 9px 14px"><i class="icon-code"></i></a>
-                <pre class="signature" style="margin-right: 54px;">_getDateTimePickerForMoveOperation(string  <span class="argument">$type</span>, array  <span class="argument">$vars</span>) : array</pre>
+                <pre class="signature" style="margin-right: 54px;">_getDateTimePickerForMoveOperation(string  <span class="argument">$type</span>, string  <span class="argument">$pos</span>, array  <span class="argument">$vars</span>) : array</pre>
                 <p><em>_getDateTimePickerForMoveOperation</em></p>
                 <p>カレンダー上部今への日付</p>
 
@@ -787,6 +802,11 @@ will inherit them.</p>
                                 <td>string</td>
                                 <td>$type </td>
                                 <td><p>month, week, day のいずれか</p></td>
+                            </tr>
+                                                    <tr>
+                                <td>string</td>
+                                <td>$pos </td>
+                                <td><p>position</p></td>
                             </tr>
                                                     <tr>
                                 <td>array</td>
@@ -861,7 +881,7 @@ will inherit them.</p>
                 <section class="span10 offset1">
                     <hr />
                     Documentation is powered by <a href="http://www.phpdoc.org/">phpDocumentor </a> and authored
-                    on September 30th, 2016 at 02:08.
+                    on October 12th, 2016 at 08:52.
                 </section>
             </section>
         </section>
