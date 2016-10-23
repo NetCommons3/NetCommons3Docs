@@ -81,7 +81,7 @@ class PagesSchema extends CakeSchema {
 		'root_id' => array('type' => 'integer', 'null' => true, 'default' => null, 'unsigned' => false),
 		'parent_id' => array('type' => 'integer', 'null' => true, 'default' => null, 'unsigned' => false, 'key' => 'index'),
 		'lft' => array('type' => 'integer', 'null' => true, 'default' => null, 'unsigned' => false, 'key' => 'index'),
-		'rght' => array('type' => 'integer', 'null' => true, 'default' => null, 'unsigned' => false),
+		'rght' => array('type' => 'integer', 'null' => true, 'default' => null, 'unsigned' => false, 'key' => 'index'),
 		'permalink' => array('type' => 'text', 'null' => true, 'default' => null, 'key' => 'index', 'collate' => 'utf8_general_ci', 'charset' => 'utf8'),
 		'slug' => array('type' => 'string', 'null' => true, 'default' => null, 'collate' => 'utf8_general_ci', 'charset' => 'utf8'),
 		'is_container_fluid' => array('type' => 'boolean', 'null' => false, 'default' => '0'),
@@ -95,7 +95,8 @@ class PagesSchema extends CakeSchema {
 			'room_id' => array('column' => 'room_id', 'unique' => 0),
 			'parent_id' => array('column' => 'parent_id', 'unique' => 0),
 			'lft' => array('column' => array('lft', 'rght'), 'unique' => 0),
-			'permalink' => array('column' => 'permalink', 'unique' => 0, 'length' => array('permalink' => '255'))
+			'permalink' => array('column' => 'permalink', 'unique' => 0, 'length' => array('permalink' => '255')),
+			'rght' => array('column' => array('rght', 'id'), 'unique' => 0)
 		),
 		'tableParameters' => array('charset' => 'utf8', 'collate' => 'utf8_general_ci', 'engine' => 'InnoDB')
 	);
