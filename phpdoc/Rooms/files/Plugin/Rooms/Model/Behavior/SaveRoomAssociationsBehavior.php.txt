@@ -472,15 +472,18 @@ class SaveRoomAssociationsBehavior extends ModelBehavior {
 			'RolesRoomsUser' => 'Rooms.RolesRoomsUser',
 		]);
 
-		$rooms = $model->Room->find('all', array(
+		$result = $model->Room->find('all', array(
 			'recursive' => -1,
-			'conditions' => array(
-				'OR' => array(
-					'default_participation' => true,
-					'root_id' => null
-				)
-			),
+			'conditions' => array('root_id' => null),
 		));
+		$rooms = Hash::combine($result, '{n}.Room.id', '{n}');
+
+		$result = $model->Room->find('all', array(
+			'recursive' => -1,
+			'conditions' => array('default_participation' => true),
+		));
+		$rooms = Hash::merge($rooms, Hash::combine($result, '{n}.Room.id', '{n}'));
+
 		if (! Configure::read('NetCommons.installed')) {
 			$rooms = Hash::insert(
 				$rooms, '{n}.Room.default_role_key', Role::ROOM_ROLE_KEY_ROOM_ADMINISTRATOR

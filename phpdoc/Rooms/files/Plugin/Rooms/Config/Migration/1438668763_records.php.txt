@@ -16,7 +16,7 @@ App::uses('NetCommonsMigration', 'NetCommons.Config/Migration');
  * @author Shohei Nakajima <nakajimashouhei@gmail.com>
  * @package NetCommons\Rooms\Config\Migration
  */
-class Records extends NetCommonsMigration {
+class RoomsRecords extends NetCommonsMigration {
 
 /**
  * Migration description
@@ -358,6 +358,10 @@ class Records extends NetCommonsMigration {
 			return true;
 		}
 
+		$Room = $this->generateModel('Room');
+		if ($Room->find('count') > 0) {
+			return true;
+		}
 		foreach ($this->records as $model => $records) {
 			if (!$this->updateRecords($model, $records)) {
 				return false;

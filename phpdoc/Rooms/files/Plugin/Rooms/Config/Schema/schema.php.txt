@@ -53,13 +53,14 @@ class RoomsSchema extends CakeSchema {
 	public $roles_rooms = array(
 		'id' => array('type' => 'integer', 'null' => false, 'default' => null, 'unsigned' => false, 'key' => 'primary'),
 		'room_id' => array('type' => 'integer', 'null' => false, 'default' => null, 'unsigned' => false),
-		'role_key' => array('type' => 'string', 'null' => false, 'default' => null, 'collate' => 'utf8_general_ci', 'charset' => 'utf8'),
+		'role_key' => array('type' => 'string', 'null' => false, 'default' => null, 'key' => 'index', 'collate' => 'utf8_general_ci', 'charset' => 'utf8'),
 		'created_user' => array('type' => 'integer', 'null' => true, 'default' => null, 'unsigned' => false),
 		'created' => array('type' => 'datetime', 'null' => true, 'default' => null),
 		'modified_user' => array('type' => 'integer', 'null' => true, 'default' => null, 'unsigned' => false),
 		'modified' => array('type' => 'datetime', 'null' => true, 'default' => null),
 		'indexes' => array(
-			'PRIMARY' => array('column' => 'id', 'unique' => 1)
+			'PRIMARY' => array('column' => 'id', 'unique' => 1),
+			'role_key' => array('column' => array('role_key', 'room_id'), 'unique' => 0)
 		),
 		'tableParameters' => array('charset' => 'utf8', 'collate' => 'utf8_general_ci', 'engine' => 'InnoDB')
 	);
@@ -142,15 +143,15 @@ e.g.) createPage, editOtherContent, publishContent', 'charset' => 'utf8'),
 		'id' => array('type' => 'integer', 'null' => false, 'default' => null, 'unsigned' => false, 'key' => 'primary'),
 		'space_id' => array('type' => 'integer', 'null' => true, 'default' => null, 'unsigned' => false, 'key' => 'index'),
 		'page_id_top' => array('type' => 'integer', 'null' => true, 'default' => null, 'unsigned' => false),
-		'root_id' => array('type' => 'integer', 'null' => true, 'default' => null, 'unsigned' => false),
+		'root_id' => array('type' => 'integer', 'null' => true, 'default' => null, 'unsigned' => false, 'key' => 'index'),
 		'parent_id' => array('type' => 'integer', 'null' => true, 'default' => null, 'unsigned' => false),
-		'lft' => array('type' => 'integer', 'null' => true, 'default' => null, 'unsigned' => false),
-		'rght' => array('type' => 'integer', 'null' => true, 'default' => null, 'unsigned' => false),
+		'lft' => array('type' => 'integer', 'null' => true, 'default' => null, 'unsigned' => false, 'key' => 'index'),
+		'rght' => array('type' => 'integer', 'null' => true, 'default' => null, 'unsigned' => false, 'key' => 'index'),
 		'active' => array('type' => 'boolean', 'null' => true, 'default' => null),
 		'in_draft' => array('type' => 'boolean', 'null' => false, 'default' => '0', 'comment' => '作成中かどうか。1: 作成中、0: 確定'),
 		'default_role_key' => array('type' => 'string', 'null' => false, 'default' => null, 'collate' => 'utf8_general_ci', 'comment' => '「ルーム内の役割」のデフォルト値', 'charset' => 'utf8'),
 		'need_approval' => array('type' => 'boolean', 'null' => true, 'default' => null),
-		'default_participation' => array('type' => 'boolean', 'null' => true, 'default' => null),
+		'default_participation' => array('type' => 'boolean', 'null' => true, 'default' => null, 'key' => 'index'),
 		'page_layout_permitted' => array('type' => 'boolean', 'null' => true, 'default' => null),
 		'theme' => array('type' => 'string', 'null' => true, 'default' => null, 'collate' => 'utf8_general_ci', 'charset' => 'utf8'),
 		'created_user' => array('type' => 'integer', 'null' => true, 'default' => null, 'unsigned' => false),
@@ -159,7 +160,11 @@ e.g.) createPage, editOtherContent, publishContent', 'charset' => 'utf8'),
 		'modified' => array('type' => 'datetime', 'null' => true, 'default' => null),
 		'indexes' => array(
 			'PRIMARY' => array('column' => 'id', 'unique' => 1),
-			'space_id' => array('column' => array('space_id', 'page_id_top', 'lft'), 'unique' => 0)
+			'space_id' => array('column' => array('space_id', 'page_id_top', 'lft'), 'unique' => 0),
+			'lft' => array('column' => array('lft', 'id'), 'unique' => 0),
+			'rght' => array('column' => array('rght', 'id'), 'unique' => 0),
+			'default_participation' => array('column' => 'default_participation', 'unique' => 0),
+			'root_id' => array('column' => 'root_id', 'unique' => 0)
 		),
 		'tableParameters' => array('charset' => 'utf8', 'collate' => 'utf8_general_ci', 'engine' => 'InnoDB')
 	);
