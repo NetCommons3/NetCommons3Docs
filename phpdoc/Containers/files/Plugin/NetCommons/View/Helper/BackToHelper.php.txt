@@ -74,7 +74,7 @@ class BackToHelper extends AppHelper {
 		if ($url) {
 			$inputOptions = Hash::merge(array(
 				'class' => 'btn btn-default btn-workflow' . $sizeAttr,
-				'ng-disabled' => 'sending',
+				'ng-class' => '{disabled: sending}',
 				'ng-click' => 'sending=true',
 			), $options);
 
@@ -83,7 +83,7 @@ class BackToHelper extends AppHelper {
 			$inputOptions = Hash::merge(array(
 				'type' => 'button',
 				'class' => 'btn btn-default btn-workflow' . $sizeAttr,
-				'ng-disabled' => 'sending',
+				'ng-class' => '{disabled: sending}',
 			), $options);
 
 			return $this->Form->button($iconElement . $title, $inputOptions);
@@ -171,15 +171,19 @@ class BackToHelper extends AppHelper {
 
 /**
  * 一覧へボタンHTMLの出力
+ * ※後で削除予定
  *
+ * @param string $title タイトル文字列
  * @param array $options HTML属性オプション
  * @return string HTMLタグ
  */
-	public function listLinkButton($options = array()) {
-		$options = Hash::merge(['icon' => 'list'], $options);
-		$title = __d('net_commons', 'To list');
+	public function listLinkButton($title, $options = array()) {
+		$options = Hash::merge(['icon' => 'arrow-left'], $options);
+		if (! is_string($title)) {
+			$title = __d('net_commons', 'To list');
+		}
 
-		return $this->indexLinkButton($title, 'default_action', $options);
+		return $this->pageLinkButton($title, $options);
 	}
 
 }
