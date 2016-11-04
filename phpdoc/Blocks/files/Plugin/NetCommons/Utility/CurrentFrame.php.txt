@@ -67,10 +67,13 @@ class CurrentFrame {
 /**
  * Set Frame
  *
+ * @param string $frameId フレームID
  * @return void
  */
-	public function setFrame() {
-		if (! Hash::get(Current::$request->params, 'requested') &&
+	public function setFrame($frameId = null) {
+		if ($frameId) {
+			//何もしない
+		} elseif (! Hash::get(Current::$request->params, 'requested') &&
 					Hash::get(Current::$request->data, 'Frame.id')) {
 			$frameId = Current::$request->data['Frame']['id'];
 		} elseif (Hash::get(Current::$request->params, '?.frame_id')) {
@@ -94,7 +97,7 @@ class CurrentFrame {
 			Current::$current['Block'] = $this->Block->create()['Block'];
 		}
 
-		$this->setPageByBox();
+		$this->setBox();
 	}
 
 /**
@@ -102,20 +105,18 @@ class CurrentFrame {
  *
  * @return void
  */
-	public function setPageByBox() {
+	public function setBox() {
 		if (isset(Current::$current['Box']['id'])) {
 			$boxId = Current::$current['Box']['id'];
 		} elseif (isset(Current::$request->data['Frame']) &&
 					isset(Current::$request->data['Frame']['box_id'])) {
 			$boxId = Current::$request->data['Frame']['box_id'];
-		} elseif (isset(Current::$request->data['Box']) &&
-					isset(Current::$request->data['Box']['id'])) {
-			$boxId = Current::$request->data['Box']['id'];
 		} else {
 			return;
 		}
 
 		$result = $this->Box->find('first', array(
+			'recursive' => -1,
 			'conditions' => array(
 				'Box.id' => $boxId,
 			),
@@ -124,22 +125,59 @@ class CurrentFrame {
 			return;
 		}
 
-		if ($result['Container']['type'] === Container::TYPE_MAIN) {
-			Current::$current['Page'] = $result['Page'][0];
+		//Box、Room、Space更新
+		Current::$current = Hash::merge(Current::$current, $result);
+
+		$this->setBoxPageContainer();
+	}
+
+/**
+ * Set BoxPageContainer
+ *
+ * @return void
+ */
+	public function setBoxPageContainer() {
+		if (isset(Current::$current['BoxesPageContainer'])) {
+			return;
 		}
 
-		if (! isset(Current::$current['Room'])) {
-			Current::$current['Room'] = $result['Room'];
+		if (! isset(Current::$current['Box']['id'])) {
+			return;
+		}
+		if (isset(Current::$current['Page'])) {
+			$pageId = Current::$current['Page']['id'];
+		} elseif (! Current::$current['Box']['page_id']) {
+			$pageId = Current::$current['Box']['page_id'];
+		} else {
+			return;
 		}
 
-		Current::$current['Container'] = $result['Container'];
+		$this->BoxesPageContainer = ClassRegistry::init('Boxes.BoxesPageContainer');
+
+		$result = $this->BoxesPageContainer->find('first', array(
+			'recursive' => 0,
+			'conditions' => array(
+				'BoxesPageContainer.box_id' => Current::$current['Box']['id'],
+				'BoxesPageContainer.page_id' => $pageId,
+				'BoxesPageContainer.container_type' => Current::$current['Box']['container_type'],
+			),
+		));
+		if (! $result) {
+			return;
+		}
+
+		//BoxesPageContainer、Box、PageContainer、Page更新
+		Current::$current = Hash::merge(Current::$current, $result);
 	}
 
 /**
  * Set Block
  *
+ * ※PHPMのSuppressWarningsは暫定
+ *
  * @param int $blockId Blocks.id
  * @return void
+ * @SuppressWarnings(PHPMD.CyclomaticComplexity)
  */
 	public function setBlock($blockId = null) {
 		$this->Block = ClassRegistry::init('Blocks.Block');
@@ -163,10 +201,26 @@ class CurrentFrame {
 		));
 		if ($result) {
 			Current::$current = Hash::merge(Current::$current, $result);
-			return;
 		}
 
-		if (isset(Current::$current['Frame']['block_id'])) {
+		if (! isset(Current::$current['Frame'])) {
+			$frame = $this->Frame->find('first', array(
+				'fields' => array('id'),
+				'recursive' => -1,
+				'conditions' => array(
+					'block_id' => $blockId,
+					'is_deleted' => false
+				),
+				'order' => array('id' => 'asc')
+			));
+
+			$frameId = Hash::get($frame, 'Frame.id');
+			if ($frameId) {
+				$this->setFrame($frameId);
+			}
+		}
+
+		if (! isset(Current::$current['Block']) && isset(Current::$current['Frame']['block_id'])) {
 			$result = $this->Block->find('first', array(
 				'recursive' => 0,
 				'conditions' => array(
