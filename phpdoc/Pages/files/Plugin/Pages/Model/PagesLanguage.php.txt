@@ -1,21 +1,23 @@
 <?php
 /**
- * LanguagesPage Model
+ * PagesLanguage Model
  *
- * @property Page $Page
  * @property Language $Language
+ * @property Page $Page
  *
+ * @author Noriko Arai <arai@nii.ac.jp>
  * @author Shohei Nakajima <nakajimashouhei@gmail.com>
  * @link http://www.netcommons.org NetCommons Project
  * @license http://www.netcommons.org/license.txt NetCommons License
+ * @copyright Copyright 2014, NetCommons Project
  */
 
-App::uses('AppModel', 'Model');
+App::uses('PagesAppModel', 'Pages.Model');
 
 /**
- * Summary for LanguagesPage Model
+ * PagesLanguage Model
  */
-class LanguagesPage extends AppModel {
+class PagesLanguage extends PagesAppModel {
 
 /**
  * `<title></title>`のデフォルト値
@@ -116,18 +118,18 @@ class LanguagesPage extends AppModel {
  * @param int $languageId languages.id
  * @return array
  */
-	public function getLanguagesPage($pageId, $languageId) {
+	public function getPagesLanguage($pageId, $languageId) {
 		$conditions = array(
-			'LanguagesPage.page_id' => $pageId,
-			'LanguagesPage.language_id' => $languageId,
+			'PagesLanguage.page_id' => $pageId,
+			'PagesLanguage.language_id' => $languageId,
 		);
 
-		$languagesPage = $this->find('first', array(
+		$PagesLanguage = $this->find('first', array(
 			'recursive' => 0,
 			'conditions' => $conditions,
 		));
 
-		return $languagesPage;
+		return $PagesLanguage;
 	}
 
 /**
@@ -137,7 +139,7 @@ class LanguagesPage extends AppModel {
  * @throws InternalErrorException
  * @return bool
  */
-	public function saveLanguagesPage($data) {
+	public function savePagesLanguage($data) {
 		//トランザクションBegin
 		$this->begin();
 
@@ -159,6 +161,5 @@ class LanguagesPage extends AppModel {
 
 		return true;
 	}
-
 }
 

@@ -18,6 +18,7 @@
 
 App::uses('ModelBehavior', 'Model');
 App::uses('Page', 'Pages.Model');
+App::uses('Container', 'Containers.Model');
 
 /**
  * Page Behavior
@@ -26,33 +27,6 @@ App::uses('Page', 'Pages.Model');
  * @package NetCommons\Pages\Model
  */
 class PageAssociationsBehavior extends ModelBehavior {
-
-/**
- * Save container data.
- *
- * @param Model $model ビヘイビア呼び出し前のモデル
- * @param array $page ページデータ
- * @return mixed On success Model::$data
- * @throws InternalErrorException
- */
-	public function saveContainer(Model $model, $page) {
-		$model->loadModels([
-			'Container' => 'Containers.Container',
-		]);
-
-		$model->Container->create(false);
-		$data = array(
-			'Container' => array(
-				'type' => Container::TYPE_MAIN
-			)
-		);
-
-		$result = $model->Container->save($data);
-		if (! $result) {
-			throw new InternalErrorException(__d('net_commons', 'Internal Server Error'));
-		}
-		return $result;
-	}
 
 /**
  * Save box data.
@@ -67,108 +41,146 @@ class PageAssociationsBehavior extends ModelBehavior {
 			'Box' => 'Boxes.Box',
 		]);
 
-		$model->Box->create(false);
-		$data = array(
-			'Box' => array(
-				'container_id' => $page['Container']['id'],
-				'type' => Box::TYPE_WITH_PAGE,
-				'space_id' => $page['Room']['space_id'],
-				'room_id' => $page['Page']['room_id'],
-				'page_id' => $page['Page']['id']
-			)
-		);
-
-		$result = $model->Box->save($data);
-		if (! $result) {
-			throw new InternalErrorException(__d('net_commons', 'Internal Server Error'));
+		if (! $page['Page']['id']) {
+			$containerTypes = array(
+				Container::TYPE_HEADER, Container::TYPE_MAJOR,
+				Container::TYPE_MINOR, Container::TYPE_FOOTER,
+			);
+			$type = Box::TYPE_WITH_ROOM;
+		} else {
+			$containerTypes = array(
+				Container::TYPE_HEADER, Container::TYPE_MAJOR, Container::TYPE_MAIN,
+				Container::TYPE_MINOR, Container::TYPE_FOOTER,
+			);
+			$type = Box::TYPE_WITH_PAGE;
 		}
-		return $result;
+
+		$boxes['Box'] = array();
+		foreach ($containerTypes as $containerType) {
+			$model->Box->create(false);
+			$data = array(
+				'Box' => array(
+					'type' => $type,
+					'space_id' => $page['Room']['space_id'],
+					'room_id' => $page['Page']['room_id'],
+					'page_id' => $page['Page']['id'],
+					'container_type' => $containerType,
+				)
+			);
+
+			$result = $model->Box->save($data);
+			if (! $result) {
+				throw new InternalErrorException(__d('net_commons', 'Internal Server Error'));
+			}
+			$boxes['Box'][$containerType] = $result;
+		}
+
+		return $boxes;
 	}
 
 /**
- * ContainersPageの登録処理
+ * PageContainersの登録処理
  *
  * @param Model $model ビヘイビア呼び出し前のモデル
  * @param array $page ページデータ
- * @return bool True on success
+ * @return array
  * @throws InternalErrorException
  */
-	public function saveContainersPage(Model $model, $page) {
+	public function savePageContainers(Model $model, $page) {
 		$model->loadModels([
-			'Container' => 'Containers.Container',
-			'ContainersPage' => 'Containers.ContainersPage',
+			'PageContainer' => 'Pages.PageContainer',
 		]);
 
 		$query = array(
+			'recursive' => -1,
 			'conditions' => array(
-				'ContainersPage.page_id' => $model->getReferencePageId($model, $page),
-				'Container.type !=' => Container::TYPE_MAIN
+				'page_id' => $model->getReferencePageId($model, $page),
 			)
 		);
+		$pageContainers = $model->PageContainer->find('all', $query);
 
-		$containersPages = $model->ContainersPage->find('all', $query);
-		$containersPages[] = array(
-			'ContainersPage' => array(
-				'page_id' => $page['Page']['id'],
-				'container_id' => $page['Container']['id'],
-				'is_published' => true
-			)
-		);
-
-		foreach ($containersPages as $containersPage) {
+		$results['PageContainer'] = array();
+		foreach ($pageContainers as $pageContainer) {
 			$data = array(
 				'page_id' => $page['Page']['id'],
-				'container_id' => $containersPage['ContainersPage']['container_id'],
-				'is_published' => $containersPage['ContainersPage']['is_published']
+				'container_type' => $pageContainer['PageContainer']['container_type'],
+				'is_published' => $pageContainer['PageContainer']['is_published'],
+				'is_configured' => $pageContainer['PageContainer']['is_configured']
 			);
 
-			$model->ContainersPage->create(false);
-			if (!$model->ContainersPage->save($data)) {
+			$model->PageContainer->create(false);
+			$result = $model->PageContainer->save($data);
+			if (! $result) {
 				throw new InternalErrorException(__d('net_commons', 'Internal Server Error'));
 			}
+
+			$results['PageContainer'][$data['container_type']] = $result;
 		}
 
-		return true;
+		return $results;
 	}
 
 /**
- * BoxesPageの登録処理
+ * PageBoxesの登録処理
  *
  * @param Model $model ビヘイビア呼び出し前のモデル
  * @param array $page ページデータ
  * @return bool True on success
  * @throws InternalErrorException
  */
-	public function saveBoxesPage(Model $model, $page) {
+	public function saveBoxesPageContainers(Model $model, $page) {
 		$model->loadModels([
 			'Box' => 'Boxes.Box',
-			'BoxesPage' => 'Boxes.BoxesPage',
+			'BoxesPageContainer' => 'Boxes.BoxesPageContainer',
 		]);
 
-		$query = array(
-			'conditions' => array(
-				'BoxesPage.page_id' => $model->getReferencePageId($model, $page),
-				'Box.type !=' => Box::TYPE_WITH_PAGE
-			)
+		$parentBoxesPages = array();
+		$parentBoxesPages = array_merge(
+			$parentBoxesPages,
+			$this->__getDafaultBoxesPageContainers($model, $page, Box::TYPE_WITH_SITE)
 		);
-		$boxesPages = $model->BoxesPage->find('all', $query);
-		$boxesPages[] = array(
-			'BoxesPage' => array(
-				'page_id' => $page['Page']['id'],
-				'box_id' => $page['Box']['id'],
-				'is_published' => true
-			)
+		$parentBoxesPages = array_merge(
+			$parentBoxesPages,
+			$this->__getDafaultBoxesPageContainers($model, $page, Box::TYPE_WITH_SPACE)
+		);
+		$parentBoxesPages = array_merge(
+			$parentBoxesPages,
+			$this->__getDafaultBoxesPageContainers($model, $page, Box::TYPE_WITH_ROOM)
+		);
+		$parentBoxesPages = array_merge(
+			$parentBoxesPages,
+			$this->__getDafaultBoxesPageContainers($model, $page, Box::TYPE_WITH_PAGE)
+		);
+		$parentBoxesPages[] = array(
+			'BoxesPageContainer' => array(
+				'container_type' => Container::TYPE_MAIN,
+				'is_published' => true,
+				'weight' => '1',
+			),
+			'Box' => array(
+				'page_id' => true
+			),
 		);
 
-		foreach ($boxesPages as $boxesPage) {
+		foreach ($parentBoxesPages as $boxPage) {
+			$containerType = $boxPage['BoxesPageContainer']['container_type'];
+			if (! $boxPage['Box']['page_id']) {
+				$boxId = $boxPage['Box']['id'];
+			} else {
+				$boxId = $page['Box'][$containerType]['Box']['id'];
+			}
+			$pageContaireId = $page['PageContainer'][$containerType]['PageContainer']['id'];
+
 			$data = array(
+				'page_container_id' => $pageContaireId,
 				'page_id' => $page['Page']['id'],
-				'box_id' => $boxesPage['BoxesPage']['box_id'],
-				'is_published' => $boxesPage['BoxesPage']['is_published']
+				'container_type' => $containerType,
+				'box_id' => $boxId,
+				'is_published' => $boxPage['BoxesPageContainer']['is_published'],
+				'weight' => $boxPage['BoxesPageContainer']['weight'],
 			);
-
-			$model->BoxesPage->create(false);
-			if (!$model->BoxesPage->save($data)) {
+			$model->BoxesPageContainer->create(false);
+			if (!$model->BoxesPageContainer->save($data)) {
 				throw new InternalErrorException(__d('net_commons', 'Internal Server Error'));
 			}
 		}
@@ -177,15 +189,76 @@ class PageAssociationsBehavior extends ModelBehavior {
 	}
 
 /**
- * BoxesPageやContainersPageを作成するためのコピー元のページIDを取得する
- * ※NC3では、強制的にパブリックスペースのものとする
+ * PageBoxesの登録処理
+ *
+ * @param Model $model ビヘイビア呼び出し前のモデル
+ * @param array $page ページデータ
+ * @param int $boxType ボックスタイプ
+ * @return bool True on success
+ * @throws InternalErrorException
+ */
+	private function __getDafaultBoxesPageContainers(Model $model, $page, $boxType) {
+		$model->loadModels([
+			'Box' => 'Boxes.Box',
+			'BoxesPageContainer' => 'Boxes.BoxesPageContainer',
+		]);
+
+		$conditions = array(
+			'BoxesPageContainer.page_id' => $this->getReferencePageId($model, $page),
+			'BoxesPageContainer.container_type !=' => Container::TYPE_MAIN,
+			'Box.type' => $boxType
+		);
+		if (in_array($boxType, [Box::TYPE_WITH_ROOM, Box::TYPE_WITH_PAGE], true)) {
+			$conditions['Box.room_id'] = $page['Room']['id'];
+		}
+		$parentBoxesPages = $model->BoxesPageContainer->find('all', array(
+			'recursive' => 0,
+			'conditions' => $conditions
+		));
+
+		if (! $parentBoxesPages) {
+			$conditions = array(
+				'type' => $boxType,
+				'container_type !=' => Container::TYPE_MAIN,
+			);
+			if (in_array($boxType, [Box::TYPE_WITH_SPACE, Box::TYPE_WITH_ROOM, Box::TYPE_WITH_PAGE], true)) {
+				$conditions['space_id'] = $page['Room']['space_id'];
+			}
+			if (in_array($boxType, [Box::TYPE_WITH_ROOM, Box::TYPE_WITH_PAGE], true)) {
+				$conditions['room_id'] = $page['Room']['id'];
+			}
+			if (in_array($boxType, [Box::TYPE_WITH_PAGE], true)) {
+				$conditions['page_id'] = $page['Page']['id'];
+			}
+			$parentBoxesPages = $model->Box->find('all', array(
+				'recursive' => -1,
+				'conditions' => $conditions
+			));
+			foreach ($parentBoxesPages as $i => $box) {
+				$parentBoxesPages[$i]['BoxesPageContainer'] = array(
+					'container_type' => $box['Box']['container_type'],
+					'is_published' => false,
+					'weight' => $boxType,
+				);
+			}
+		}
+
+		return $parentBoxesPages;
+	}
+
+/**
+ * PageContainersを作成するためのコピー元のページIDを取得する
+ * ※親のページとするが、ない場合は、NC3では、強制的にパブリックスペースのものとする
  *
  * @param Model $model ビヘイビアの呼び出し前のモデル
  * @param array $page ページデータ
  * @return string
  */
 	public function getReferencePageId(Model $model, $page) {
-		return Page::PUBLIC_ROOT_PAGE_ID;
+		if (! is_array($page)) {
+			return Page::PUBLIC_ROOT_PAGE_ID;
+		}
+		return Hash::get($page, 'Page.parent_id', Page::PUBLIC_ROOT_PAGE_ID);
 	}
 
 /**
@@ -198,36 +271,10 @@ class PageAssociationsBehavior extends ModelBehavior {
  */
 	public function deleteContainers(Model $model, $pageId) {
 		$model->loadModels([
-			'Container' => 'Containers.Container',
-			'ContainersPage' => 'Containers.ContainersPage',
+			'PageContainer' => 'Pages.PageContainer',
 		]);
 
-		$conditions = array(
-			'ContainersPage.page_id' => $pageId,
-			'Container.type' => Container::TYPE_MAIN
-		);
-		$containers = $model->ContainersPage->find('list', array(
-			'recursive' => -1,
-			'fields' => 'Container.id',
-			'joins' => array(
-				array(
-					'table' => $model->Container->table,
-					'alias' => $model->Container->alias,
-					'type' => 'INNER',
-					'conditions' => array(
-						$model->ContainersPage->alias . '.container_id' . ' = ' . $model->Container->alias . ' .id',
-					),
-				),
-			),
-			'conditions' => $conditions
-		));
-		$containerIds = array_values($containers);
-
-		if (! $model->Container->deleteAll(array('Container.id' => $containerIds), false)) {
-			throw new InternalErrorException(__d('net_commons', 'Internal Server Error'));
-		}
-
-		if (! $model->ContainersPage->deleteAll(array('ContainersPage.page_id' => $pageId), false)) {
+		if (! $model->PageContainer->deleteAll(array('PageContainer.page_id' => $pageId), false)) {
 			throw new InternalErrorException(__d('net_commons', 'Internal Server Error'));
 		}
 
@@ -245,14 +292,15 @@ class PageAssociationsBehavior extends ModelBehavior {
 	public function deleteBoxes(Model $model, $pageId) {
 		$model->loadModels([
 			'Box' => 'Boxes.Box',
-			'BoxesPage' => 'Boxes.BoxesPage',
+			'BoxesPageContainer' => 'Boxes.BoxesPageContainer',
 		]);
 
 		if (! $model->Box->deleteAll(array('Box.page_id' => $pageId), false)) {
 			throw new InternalErrorException(__d('net_commons', 'Internal Server Error'));
 		}
 
-		if (! $model->BoxesPage->deleteAll(array('BoxesPage.page_id' => $pageId), false)) {
+		$conditions = array('BoxesPageContainer.page_id' => $pageId);
+		if (! $model->BoxesPageContainer->deleteAll($conditions, false)) {
 			throw new InternalErrorException(__d('net_commons', 'Internal Server Error'));
 		}
 

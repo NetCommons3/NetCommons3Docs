@@ -10,6 +10,8 @@
 
 App::uses('AppHelper', 'View/Helper');
 App::uses('Container', 'Containers.Model');
+App::uses('Box', 'Boxes.Model');
+App::uses('Current', 'NetCommons.Utility');
 
 /**
  * LayoutHelper
@@ -24,6 +26,8 @@ class PageLayoutHelper extends AppHelper {
  */
 	public $helpers = array(
 		'Html',
+		'NetCommons.Button',
+		'NetCommons.NetCommonsForm',
 		'NetCommons.NetCommonsHtml',
 	);
 
@@ -49,13 +53,6 @@ class PageLayoutHelper extends AppHelper {
 	public $containers;
 
 /**
- * Boxes data
- *
- * @var array
- */
-	public $boxes;
-
-/**
  * Plugins data
  *
  * @var array
@@ -72,10 +69,7 @@ class PageLayoutHelper extends AppHelper {
 		parent::__construct($View, $settings);
 
 		$this->containers = Hash::combine(
-			Hash::get($settings, 'page.Container', array()), '{n}.type', '{n}'
-		);
-		$this->boxes = Hash::combine(
-			Hash::get($settings, 'page.Box', array()), '{n}.id', '{n}', '{n}.container_id'
+			Hash::get($settings, 'page.PageContainer', array()), '{n}.container_type', '{n}'
 		);
 		$this->plugins = Hash::combine(Current::read(
 			'PluginsRoom', array()), '{n}.Plugin.key', '{n}.Plugin'
@@ -90,10 +84,20 @@ class PageLayoutHelper extends AppHelper {
  * @return string
  */
 	public function __call($method, $params) {
+		$boxMethods = array(
+			'getBox', 'boxTitle', 'displayBoxSetting', 'hasBox',
+			'hasBoxSetting', 'renderAddPlugin', 'renderFrames'
+		);
+
 		if ($method === 'getBlockStatus') {
 			$helper = $this->_View->loadHelper('Blocks.Blocks');
+			return call_user_func_array(array($helper, $method), $params);
+		} elseif (in_array($method, $boxMethods, true)) {
+			$helper = $this->_View->loadHelper(
+				'Boxes.Boxes', array('containers' => $this->containers)
+			);
+			return call_user_func_array(array($helper, $method), $params);
 		}
-		return call_user_func_array(array($helper, $method), $params);
 	}
 
 /**
@@ -106,6 +110,7 @@ class PageLayoutHelper extends AppHelper {
  */
 	public function beforeRender($viewFile) {
 		$this->NetCommonsHtml->css('/pages/css/style.css');
+		$this->NetCommonsHtml->css('/boxes/css/style.css');
 
 		//メタデータ
 		$metas = Hash::get($this->_View->viewVars, 'meta', array());
@@ -125,10 +130,26 @@ class PageLayoutHelper extends AppHelper {
  * @return void
  */
 	public function beforeLayout($layoutFile) {
-		$this->_View->viewVars['pageHeader'] = $this->_View->element('Pages.page_header');
-		$this->_View->viewVars['pageMajor'] = $this->_View->element('Pages.page_major');
-		$this->_View->viewVars['pageMinor'] = $this->_View->element('Pages.page_minor');
-		$this->_View->viewVars['pageFooter'] = $this->_View->element('Pages.page_footer');
+		if ($this->hasContainer(Container::TYPE_HEADER)) {
+			$this->_View->viewVars['pageHeader'] = $this->_View->element('Pages.page_header');
+		} else {
+			$this->_View->viewVars['pageHeader'] = '';
+		}
+		if ($this->hasContainer(Container::TYPE_MAJOR)) {
+			$this->_View->viewVars['pageMajor'] = $this->_View->element('Pages.page_major');
+		} else {
+			$this->_View->viewVars['pageMajor'] = '';
+		}
+		if ($this->hasContainer(Container::TYPE_MINOR)) {
+			$this->_View->viewVars['pageMinor'] = $this->_View->element('Pages.page_minor');
+		} else {
+			$this->_View->viewVars['pageMinor'] = '';
+		}
+		if ($this->hasContainer(Container::TYPE_FOOTER)) {
+			$this->_View->viewVars['pageFooter'] = $this->_View->element('Pages.page_footer');
+		} else {
+			$this->_View->viewVars['pageFooter'] = '';
+		}
 
 		parent::beforeLayout($layoutFile);
 	}
@@ -172,7 +193,11 @@ class PageLayoutHelper extends AppHelper {
 					'frame' => Current::read('Frame'),
 					'view' => $this->_View->fetch('content'),
 					'centerContent' => true,
-					'displayBackTo' => Hash::get($this->_View->viewVars, 'displayBackTo', false)
+					'displayBackTo' => Hash::get($this->_View->viewVars, 'displayBackTo', false),
+					'box' => array(
+						'Box' => Current::read('Box'),
+						'BoxesPageContainer' => Current::read('BoxesPageContainer'),
+					),
 				));
 			}
 			//セッティングモード
@@ -198,8 +223,9 @@ class PageLayoutHelper extends AppHelper {
 /**
  * Get the container size for layout
  *
- * @param string $containerType Container type.
- *    e.g.) Container::TYPE_MAJOR or Container::TYPE_MAIN or Container::TYPE_MINOR
+ * @param string $containerType コンテナータイプ
+ *		Container::TYPE_HEADER or Container::TYPE_MAJOR or Container::TYPE_MAIN or
+ *		Container::TYPE_MINOR or Container::TYPE_FOOTER
  * @return string Html class attribute
  */
 	public function containerSize($containerType) {
@@ -238,13 +264,14 @@ class PageLayoutHelper extends AppHelper {
  * レイアウトの有無チェック
  *
  * @param string $containerType コンテナータイプ
- *    e.g.) Container::TYPE_HEADER or TYPE_MAJOR or TYPE_MAIN or TYPE_MINOR or TYPE_FOOTER
+ *		Container::TYPE_HEADER or Container::TYPE_MAJOR or Container::TYPE_MAIN or
+ *		Container::TYPE_MINOR or Container::TYPE_FOOTER
  * @param bool $layoutSetting レイアウト変更画面かどうか
  * @return bool The layout have container
  * @SuppressWarnings(PHPMD.BooleanArgumentFlag)
  */
 	public function hasContainer($containerType, $layoutSetting = false) {
-		$result = Hash::get($this->containers, $containerType . '.ContainersPage.is_published', false);
+		$result = Hash::get($this->containers, $containerType . '.is_published', false);
 		if (! $result) {
 			return false;
 		}
@@ -256,23 +283,6 @@ class PageLayoutHelper extends AppHelper {
 		}
 
 		return (bool)$result;
-	}
-
-/**
- * Get the box data for container
- *
- * @param string $containerType Container type.
- *    e.g.) Container::TYPE_MAJOR or Container::TYPE_MAIN or Container::TYPE_MINOR
- * @return array Box data
- */
-	public function getBox($containerType) {
-		if (Hash::get($this->containers, $containerType . '.id') &&
-				Hash::get($this->boxes, Hash::get($this->containers, $containerType . '.id'))) {
-
-			return Hash::get($this->boxes, Hash::get($this->containers, $containerType . '.id'));
-		}
-
-		return array();
 	}
 
 }

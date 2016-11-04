@@ -79,15 +79,15 @@ class PageSaveBehavior extends ModelBehavior {
  */
 	public function afterValidate(Model $model) {
 		$model->loadModels([
-			'LanguagesPage' => 'Pages.LanguagesPage',
+			'PagesLanguage' => 'Pages.PagesLanguage',
 		]);
 
-		if (isset($model->data['LanguagesPage'])) {
-			$model->LanguagesPage->create(false);
-			$model->LanguagesPage->set($model->data['LanguagesPage']);
-			if (! $model->LanguagesPage->validates()) {
+		if (isset($model->data['PagesLanguage'])) {
+			$model->PagesLanguage->create(false);
+			$model->PagesLanguage->set($model->data['PagesLanguage']);
+			if (! $model->PagesLanguage->validates()) {
 				$model->validationErrors = Hash::merge(
-					$model->validationErrors, $model->LanguagesPage->validationErrors
+					$model->validationErrors, $model->PagesLanguage->validationErrors
 				);
 				return false;
 			}
@@ -108,26 +108,25 @@ class PageSaveBehavior extends ModelBehavior {
  */
 	public function afterSave(Model $model, $created, $options = array()) {
 		$model->loadModels([
-			'LanguagesPage' => 'Pages.LanguagesPage',
+			'PagesLanguage' => 'Pages.PagesLanguage',
 			'Page' => 'Pages.Page',
 		]);
 
-		if (isset($model->data['LanguagesPage'])) {
-			$model->LanguagesPage->data['LanguagesPage']['page_id'] = $model->data['Page']['id'];
-			if (! $model->LanguagesPage->save(null, false)) {
+		if (isset($model->data['PagesLanguage'])) {
+			$model->PagesLanguage->data['PagesLanguage']['page_id'] = $model->data['Page']['id'];
+			if (! $model->PagesLanguage->save(null, false)) {
 				throw new InternalErrorException(__d('net_commons', 'Internal Server Error'));
 			}
 		}
 
 		if ($created) {
-			$result = $model->Page->saveContainer($model->data);
+			$result = $model->Page->savePageContainers($model->data);
 			$model->data = Hash::merge($model->data, $result);
 
 			$result = $model->Page->saveBox($model->data);
 			$model->data = Hash::merge($model->data, $result);
 
-			$model->Page->saveContainersPage($model->data);
-			$model->Page->saveBoxesPage($model->data);
+			$model->Page->saveBoxesPageContainers($model->data);
 		}
 
 		return parent::afterSave($model, $created, $options);

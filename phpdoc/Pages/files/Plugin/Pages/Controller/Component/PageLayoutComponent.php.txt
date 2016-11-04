@@ -92,22 +92,22 @@ class PageLayoutComponent extends Component {
 		//メタデータのセット
 		$meta['title'] = Hash::get(
 			$controller->viewVars['page'],
-			'LanguagesPage.meta_title',
-			LanguagesPage::DEFAULT_META_TITLE
+			'PagesLanguage.meta_title',
+			PagesLanguage::DEFAULT_META_TITLE
 		);
 		$meta['description'] = Hash::get(
 			$controller->viewVars['page'],
-			'LanguagesPage.meta_description',
+			'PagesLanguage.meta_description',
 			SiteSettingUtil::read('Meta.description')
 		);
 		$meta['keywords'] = Hash::get(
 			$controller->viewVars['page'],
-			'LanguagesPage.meta_keywords',
+			'PagesLanguage.meta_keywords',
 			SiteSettingUtil::read('Meta.keywords')
 		);
 		$meta['robots'] = Hash::get(
 			$controller->viewVars['page'],
-			'LanguagesPage.meta_robots',
+			'PagesLanguage.meta_robots',
 			SiteSettingUtil::read('Meta.robots')
 		);
 		$meta['copyright'] = SiteSettingUtil::read('Meta.copyright');
@@ -119,7 +119,7 @@ class PageLayoutComponent extends Component {
 				'{X-SITE_NAME}', SiteSettingUtil::read('App.site_name'), $value
 			);
 			$value = str_replace(
-				'{X-PAGE_NAME}', Hash::get($controller->viewVars['page'], 'LanguagesPage.name'), $value
+				'{X-PAGE_NAME}', Hash::get($controller->viewVars['page'], 'PagesLanguage.name'), $value
 			);
 
 			if ($key === 'title') {

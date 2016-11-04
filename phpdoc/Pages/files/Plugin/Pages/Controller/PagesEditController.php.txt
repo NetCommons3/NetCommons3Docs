@@ -23,16 +23,16 @@ class PagesEditController extends PagesAppController {
 /**
  * 使用するModels
  *
- * - [Containers.Page](../../Containers/classes/ContainersPage.html)
- * - [Pages.LanguagesPage](../../Pages/classes/LanguagesPage.html)
+ * - [Containers.Page](../../Pages/classes/PageContainer.html)
+ * - [Pages.PagesLanguage](../../Pages/classes/PagesLanguage.html)
  * - [Pages.Page](../../Pages/classes/Page.html)
  * - [Rooms.Room](../../Rooms/classes/Room.html)
  *
  * @var array
  */
 	public $uses = array(
-		'Containers.ContainersPage',
-		'Pages.LanguagesPage',
+		'Pages.PageContainer',
+		'Pages.PagesLanguage',
 		'Pages.Page',
 		'Rooms.Room',
 		'SiteManager.SiteSetting',
@@ -163,7 +163,7 @@ class PagesEditController extends PagesAppController {
 			}
 			//表示処理
 			$this->request->data = Hash::merge($this->request->data,
-				$this->LanguagesPage->getLanguagesPage(Current::read('Page.id'), Current::read('Language.id'))
+				$this->PagesLanguage->getPagesLanguage(Current::read('Page.id'), Current::read('Language.id'))
 			);
 			$this->request->data['Page']['permalink'] = $this->request->data['Page']['slug'];
 			$this->request->data['Room'] = Current::read('Room');
@@ -200,7 +200,7 @@ class PagesEditController extends PagesAppController {
 		if ($this->request->is('put')) {
 			unset($this->request->data['save']);
 
-			if (! $this->ContainersPage->saveContainersPage($this->request->data)) {
+			if (! $this->PageContainer->savePageContainer($this->request->data)) {
 				return $this->throwBadRequest();
 			}
 			//正常の場合
@@ -210,12 +210,12 @@ class PagesEditController extends PagesAppController {
 			return $this->redirect(Hash::get($this->request->data, '_NetCommonsUrl.redirect'));
 
 		} else {
-			$containersPages = $this->ContainersPage->find('all', array(
+			$containersPages = $this->PageContainer->find('all', array(
 				'recursive' => 0,
-				'conditions' => array('ContainersPage.page_id' => Current::read('Page.id'))
+				'conditions' => array('PageContainer.page_id' => Current::read('Page.id'))
 			));
-			$this->request->data['ContainersPage'] = Hash::combine(
-				$containersPages, '{n}.Container.type', '{n}.ContainersPage'
+			$this->request->data['PageContainer'] = Hash::combine(
+				$containersPages, '{n}.PageContainer.container_type', '{n}.PageContainer'
 			);
 
 			$children = $this->Page->children(Current::read('Page.id'), false, 'id');
@@ -267,23 +267,23 @@ class PagesEditController extends PagesAppController {
 		if ($this->request->is('put')) {
 			unset($this->request->data['save']);
 
-			if ($this->LanguagesPage->saveLanguagesPage($this->request->data)) {
+			if ($this->PagesLanguage->savePagesLanguage($this->request->data)) {
 				//正常の場合
 				$this->NetCommons->setFlashNotification(
 					__d('net_commons', 'Successfully saved.'), array('class' => 'success')
 				);
 				return $this->redirect(Hash::get($this->request->data, '_NetCommonsUrl.redirect'));
 			}
-			$this->NetCommons->handleValidationError($this->LanguagesPage->validationErrors);
+			$this->NetCommons->handleValidationError($this->PagesLanguage->validationErrors);
 
 		} else {
 			//表示処理
 			$this->request->data = Hash::merge($this->request->data,
-				$this->LanguagesPage->getLanguagesPage(Current::read('Page.id'), Current::read('Language.id'))
+				$this->PagesLanguage->getPagesLanguage(Current::read('Page.id'), Current::read('Language.id'))
 			);
 
-			if (! $this->request->data['LanguagesPage']['meta_title']) {
-				$this->request->data['LanguagesPage']['meta_title'] = LanguagesPage::DEFAULT_META_TITLE;
+			if (! $this->request->data['PagesLanguage']['meta_title']) {
+				$this->request->data['PagesLanguage']['meta_title'] = PagesLanguage::DEFAULT_META_TITLE;
 			}
 			$this->request->data['_NetCommonsUrl']['redirect'] = $this->__getRedirectUrl();
 		}
@@ -373,7 +373,7 @@ class PagesEditController extends PagesAppController {
 					$this->viewVars['room'],
 					'RoomsLanguage.{n}[language_id=' . Current::read('Language.id') . ']'
 				);
-				$page['LanguagesPage']['name'] = Hash::get($room, '0.name');
+				$page['PagesLanguage']['name'] = Hash::get($room, '0.name');
 			}
 
 			// * ページ順
@@ -392,8 +392,8 @@ class PagesEditController extends PagesAppController {
 
 			$pages[$pageId] = array(
 				'Page' => $page['Page'],
-				'LanguagesPage' => array(
-					'name' => $page['LanguagesPage']['name']
+				'PagesLanguage' => array(
+					'name' => $page['PagesLanguage']['name']
 				),
 			);
 		}
