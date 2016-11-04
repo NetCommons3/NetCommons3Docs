@@ -129,6 +129,29 @@ class Frame extends FramesAppModel {
 	}
 
 /**
+ * BoxによるFrameデータ取得
+ *
+ * @param int $boxId boxes.id
+ * @return array
+ */
+	public function getFrameByBox($boxId) {
+		$query = array(
+			'recursive' => -1,
+			'conditions' => array(
+				'language_id' => Current::read('Language.id'),
+				'is_deleted' => false,
+				'box_id' => $boxId,
+			),
+			'order' => array(
+				'weight'
+			),
+		);
+
+		$result = $this->find('all', $query);
+		return Hash::extract($result, '{n}.Frame');
+	}
+
+/**
  * getMaxWeight
  *
  * @param int $boxId boxes.id
