@@ -8,13 +8,16 @@
  * @license http://www.netcommons.org/license.txt NetCommons License
  */
 
+// @codeCoverageIgnoreStart
 App::uses('AppModel', 'Model');
+// @codeCoverageIgnoreEnd
 
 /**
  * ContainersApp Model
  *
  * @author Kohei Teraguchi <kteraguchi@commonsnet.org>
  * @package NetCommons\Containers\Model
+ * @codeCoverageIgnore
  */
 class ContainersAppModel extends AppModel {
 
