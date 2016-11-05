@@ -31,6 +31,15 @@ App::uses('SiteSettingUtil', 'SiteManager.Utility');
 class NetCommonsControllerBaseTestCase extends ControllerTestCase {
 
 /**
+ * CakePHPv2.5.7以前は強制的にtruncateされていたため、同テーブルで別名のFixtureが定義されていても動作していたが、
+ * dropTables=falseにしないとtruncateしなくなった。
+ *
+ * @var bool
+ * @see https://github.com/cakephp/cakephp/blob/2.8.7/lib/Cake/TestSuite/Fixture/CakeFixtureManager.php#L232-L234
+ */
+	public $dropTables = false;
+
+/**
  * Plugin name
  *
  * @var string
@@ -68,10 +77,8 @@ class NetCommonsControllerBaseTestCase extends ControllerTestCase {
 		'plugin.blocks.block_role_permission',
 		'plugin.blocks.block_setting',
 		'plugin.boxes.box',
-		'plugin.boxes.boxes_page',
+		'plugin.boxes.boxes_page_container',
 		'plugin.categories.category',
-		'plugin.containers.container',
-		'plugin.containers.containers_page',
 		'plugin.data_types.data_type',
 		'plugin.data_types.data_type_choice',
 		'plugin.files.upload_file',
@@ -81,8 +88,9 @@ class NetCommonsControllerBaseTestCase extends ControllerTestCase {
 		'plugin.mails.mail_queue',
 		'plugin.mails.mail_queue_user',
 		'plugin.mails.mail_setting',
-		'plugin.pages.languages_page',
+		'plugin.pages.pages_language',
 		'plugin.pages.page',
+		'plugin.pages.page_container',
 		'plugin.plugin_manager.plugin',
 		'plugin.plugin_manager.plugins_role',
 		'plugin.plugin_manager.plugins_room',
@@ -137,7 +145,6 @@ class NetCommonsControllerBaseTestCase extends ControllerTestCase {
 	public function setUp() {
 		NetCommonsCakeTestCase::loadTestPlugin($this, 'NetCommons', 'TestPlugin');
 
-		Current::$current['Permission']['html_not_limited']['value'] = true;
 		parent::setUp();
 
 		Configure::write('NetCommons.installed', true);
@@ -160,6 +167,8 @@ class NetCommonsControllerBaseTestCase extends ControllerTestCase {
 		CakeSession::write('Auth.User', null);
 
 		Current::$current = array();
+		Current::$permission = array();
+
 		SiteSettingUtil::reset();
 		parent::tearDown();
 	}
@@ -221,14 +230,28 @@ class NetCommonsControllerBaseTestCase extends ControllerTestCase {
 	}
 
 /**
- * Assert Date time
+ * 日時の評価
  *
- * @param string $result Result data
+ * @param string $result 期待値
  * @param string $message メッセージ
  * @return void
  */
 	public function assertDatetime($result, $message = null) {
 		(new NetCommonsCakeTestCase())->assertDatetime($result, $message);
+	}
+
+/**
+ * リダイレクトの評価
+ *
+ * @param string $result 期待値
+ * @param string $message メッセージ
+ * @return void
+ */
+	public function assertRedirect($result, $message = null) {
+		$this->assertNull($this->contents, $message);
+
+		$header = $this->controller->response->header();
+		$this->assertTextContains($result, $header['Location'], $message);
 	}
 
 }
