@@ -21,54 +21,54 @@
     <script src="../js/jquery.smooth-scroll.js"></script>
     <script src="../js/prism.min.js"></script>
     <!-- TODO: Add http://jscrollpane.kelvinluck.com/ to style the scrollbars for browsers not using webkit-->
-    <script type="text/javascript">
-    function loadExternalCodeSnippets() {
-        Array.prototype.slice.call(document.querySelectorAll('pre[data-src]')).forEach(function (pre) {
-            var src = pre.getAttribute('data-src');
-            var extension = (src.match(/\.(\w+)$/) || [, ''])[1];
-            var language = 'php';
+        <script type="text/javascript">
+        function loadExternalCodeSnippets() {
+            Array.prototype.slice.call(document.querySelectorAll('pre[data-src]')).forEach(function (pre) {
+                var src = pre.getAttribute('data-src');
+                var extension = (src.match(/\.(\w+)$/) || [, ''])[1];
+                var language = 'php';
 
-            var code = document.createElement('code');
-            code.className = 'language-' + language;
+                var code = document.createElement('code');
+                code.className = 'language-' + language;
 
-            pre.textContent = '';
+                pre.textContent = '';
 
-            code.textContent = 'Loading…';
+                code.textContent = 'Loading…';
 
-            pre.appendChild(code);
+                pre.appendChild(code);
 
-            var xhr = new XMLHttpRequest();
+                var xhr = new XMLHttpRequest();
 
-            xhr.open('GET', src, true);
+                xhr.open('GET', src, true);
 
-            xhr.onreadystatechange = function () {
-                if (xhr.readyState == 4) {
+                xhr.onreadystatechange = function () {
+                    if (xhr.readyState == 4) {
 
-                    if (xhr.status < 400 && xhr.responseText) {
-                        code.textContent = xhr.responseText;
+                        if (xhr.status < 400 && xhr.responseText) {
+                            code.textContent = xhr.responseText;
 
-                        Prism.highlightElement(code);
+                            Prism.highlightElement(code);
+                        }
+                        else if (xhr.status >= 400) {
+                            code.textContent = '✖ Error ' + xhr.status + ' while fetching file: ' + xhr.statusText;
+                        }
+                        else {
+                            code.textContent = '✖ Error: File does not exist or is empty';
+                        }
                     }
-                    else if (xhr.status >= 400) {
-                        code.textContent = '✖ Error ' + xhr.status + ' while fetching file: ' + xhr.statusText;
-                    }
-                    else {
-                        code.textContent = '✖ Error: File does not exist or is empty';
-                    }
-                }
-            };
+                };
 
-            xhr.send(null);
+                xhr.send(null);
+            });
+        }
+
+        $(document).ready(function(){
+            loadExternalCodeSnippets();
         });
-    }
-
-    $(document).ready(function(){
-        loadExternalCodeSnippets();
-    });
-    $('#source-view').on('shown', function () {
-        loadExternalCodeSnippets();
-    })
-</script>
+        $('#source-view').on('shown', function () {
+            loadExternalCodeSnippets();
+        })
+    </script>
 
     <link rel="shortcut icon" href="../images/favicon.ico"/>
     <link rel="apple-touch-icon" href="../images/apple-touch-icon.png"/>
@@ -136,10 +136,10 @@
                                 <div class="accordion" style="margin-bottom: 0">
         <div class="accordion-group">
             <div class="accordion-heading">
-                                    <a class="accordion-toggle " data-toggle="collapse" data-target="#namespace-1971536945"></a>
+                                    <a class="accordion-toggle " data-toggle="collapse" data-target="#namespace-234731923"></a>
                                 <a href="../namespaces/default.html" style="margin-left: 30px; padding-left: 0">\</a>
             </div>
-            <div id="namespace-1971536945" class="accordion-body collapse in">
+            <div id="namespace-234731923" class="accordion-body collapse in">
                 <div class="accordion-inner">
 
                     
@@ -236,537 +236,79 @@
     <section class="row-fluid">
         <div class="span10 offset2">
             <div class="row-fluid">
-                <div class="span8 content class">
+                <div class="span8 content file">
                     <nav>
-                                                <a href="../namespaces/default.html">\</a> <i class="icon-level-up"></i>
-                                            </nav>
+                                                                    </nav>
+
                     <a href="#source-view" role="button" class="pull-right btn" data-toggle="modal"><i class="icon-code"></i></a>
-
-                    <h1><small>\</small>CabinetsAppController</h1>
-                    <p><em>Class CabinetsAppController</em></p>
-                    <p>Add your application-wide methods in the class below, your controllers
-will inherit them.</p>
+                    <h1><small>Plugin/NetCommons/Utility</small>CurrentBase.php</h1>
+                    <p><em>Current Utility</em></p>
                     
-                                        
-                    <section id="summary">
-                        <h2>Summary</h2>
-                        <section class="row-fluid heading">
-                            <section class="span4">
-                                <a href="#methods">Methods</a>
-                            </section>
-                            <section class="span4">
-                                <a href="#properties">Properties</a>
-                            </section>
-                            <section class="span4">
-                                <a href="#constants">Constants</a>
-                            </section>
-                        </section>
-                        <section class="row-fluid public">
-                            <section class="span4">
-                                                                    <a href="../classes/CabinetsAppController.html#method_beforeFilter" class="">beforeFilter()</a><br />
-                                                                    <a href="../classes/CabinetsAppController.html#method_initTabs" class="">initTabs()</a><br />
-                                                                    <a href="../classes/CabinetsAppController.html#method_initCabinet" class="">initCabinet()</a><br />
-                                                            </section>
-                            <section class="span4">
-                                                                    <a href="../classes/CabinetsAppController.html#property_components" class="">$components</a><br />
-                                                                    <a href="../classes/CabinetsAppController.html#property_helpers" class="">$helpers</a><br />
-                                                                    <a href="../classes/CabinetsAppController.html#property_uses" class="">$uses</a><br />
-                                                                    <a href="../classes/CabinetsAppController.html#property_CabinetFrameSetting" class="">$CabinetFrameSetting</a><br />
-                                                            </section>
-                            <section class="span4">
-                                                                    <em>No constants found</em>
-                                                            </section>
-                        </section>
-                        <section class="row-fluid protected">
-                            <section class="span4">
-                                                                    <a href="../classes/CabinetsAppController.html#method__getNow" class="">_getNow()</a><br />
-                                                                    <a href="../classes/CabinetsAppController.html#method__getCurrentDateTime" class="">_getCurrentDateTime()</a><br />
-                                                                    <a href="../classes/CabinetsAppController.html#method__setupCabinetTitle" class="">_setupCabinetTitle()</a><br />
-                                                                    <a href="../classes/CabinetsAppController.html#method__loadFrameSetting" class="">_loadFrameSetting()</a><br />
-                                                                    <a href="../classes/CabinetsAppController.html#method__prepare" class="">_prepare()</a><br />
-                                                            </section>
-                            <section class="span4">
-                                                                    <a href="../classes/CabinetsAppController.html#property__cabinetTitle" class="">$_cabinetTitle</a><br />
-                                                                    <a href="../classes/CabinetsAppController.html#property__cabinetSetting" class="">$_cabinetSetting</a><br />
-                                                                    <a href="../classes/CabinetsAppController.html#property__frameSetting" class="">$_frameSetting</a><br />
-                                                            </section>
-                            <section class="span4">
-                                <em>N/A</em>
-                            </section>
-                        </section>
-                        <section class="row-fluid private">
-                            <section class="span4">
-                                                                    <em>No private methods found</em>
-                                                            </section>
-                            <section class="span4">
-                                                                    <em>No private properties found</em>
-                                                            </section>
-                            <section class="span4">
-                                <em>N/A</em>
-                            </section>
-                        </section>
-                    </section>
-                </div>
+
+                    
+                    
+                                        <h2>Classes</h2>
+                    <table class="table table-hover">
+                                            <tr>
+                            <td><a href="../classes/CurrentBase.html">CurrentBase</a></td>
+                            <td><em>Current Utility</em></td>
+                        </tr>
+                                        </table>
+                                    </div>
+
                 <aside class="span4 detailsbar">
-                                        
-                    
                     <dl>
-                        <dt>File</dt>
-                            <dd><a href="../files/Plugin.Cabinets.Controller.CabinetsAppController.html"><div class="path-wrapper">Plugin/Cabinets/Controller/CabinetsAppController.php</div></a></dd>
-                                                <dt>Package</dt>
-                            <dd><div class="namespace-wrapper">Default</div></dd>
-                                                <dt>Class hierarchy</dt>
-                            <dd class="hierarchy">
-                                                                                                                                                                                                                                                                                                                                                                                                                                                            
-                                        <div class="namespace-wrapper">\Controller</div>
-                                                                    
-                                        <div class="namespace-wrapper"><a href="../classes/AppController.html">\AppController</a></div>
-                                                                                                    <div class="namespace-wrapper">\CabinetsAppController</div>
-                            </dd>
-
+                                                    <dt>Package</dt>
+                            <dd><div class="namespace-wrapper">\Default</div></dd>
                         
-                        
-                        
-                        
-                                                                        </dl>
+                                                                                    <dt>See also</dt>
+                                                                                        <dd><a href="http://www.netcommons.org"><div class="namespace-wrapper">NetCommons Project</div></a></dd>
+                                                    
+                    </dl>
                     <h2>Tags</h2>
                     <table class="table table-condensed">
-                                            <tr><td colspan="2"><em>None found</em></td></tr>
-                                        </table>
+                                                    <tr>
+                                <th>
+                                    author
+                                </th>
+                                <td>
+                                                                            <p>Noriko Arai <a href="mailto:arai@nii.ac.jp">arai@nii.ac.jp</a></p>
+                                                                            <p>Shohei Nakajima <a href="mailto:nakajimashouhei@gmail.com">nakajimashouhei@gmail.com</a></p>
+                                                                    </td>
+                            </tr>
+                                                    <tr>
+                                <th>
+                                    license
+                                </th>
+                                <td>
+                                                                            <p><a href="http://www.netcommons.org/license.txt">http://www.netcommons.org/license.txt</a> NetCommons License</p>
+                                                                    </td>
+                            </tr>
+                                                    <tr>
+                                <th>
+                                    copyright
+                                </th>
+                                <td>
+                                                                            <p>Copyright 2014, NetCommons Project</p>
+                                                                    </td>
+                            </tr>
+                                            </table>
+
                 </aside>
             </div>
 
-                        
-                                    <a id="properties" name="properties"></a>
-            <div class="row-fluid">
-                <div class="span8 content class">
-                    <h2>Properties</h2>
-                </div>
-                <aside class="span4 detailsbar"></aside>
-            </div>
-
-                                    <div class="row-fluid">
-        <div class="span8 content class">
-            <a id="property_components" name="property_components" class="anchor"></a>
-            <article class="property">
-                <h3 class="public ">$components</h3>
-                <pre class="signature">$components : array</pre>
-                <p><em>use components</em></p>
-                
-
-                                <h4>Type</h4>
-                array
-                                            </article>
+            
+            
         </div>
-        <aside class="span4 detailsbar">
-            <h1><i class="icon-arrow-down"></i></h1>
-                        <dl>
-                                                            </dl>
-            <h2>Tags</h2>
-            <table class="table table-condensed">
-                                    <tr><td colspan="2"><em>None found</em></td></tr>
-                            </table>
-        </aside>
-    </div>
-
-                                    <div class="row-fluid">
-        <div class="span8 content class">
-            <a id="property_helpers" name="property_helpers" class="anchor"></a>
-            <article class="property">
-                <h3 class="public ">$helpers</h3>
-                <pre class="signature">$helpers : array</pre>
-                <p><em></em></p>
-                
-
-                                <h4>Type</h4>
-                array
-                &mdash; helpers                            </article>
-        </div>
-        <aside class="span4 detailsbar">
-            <h1><i class="icon-arrow-down"></i></h1>
-                        <dl>
-                                                            </dl>
-            <h2>Tags</h2>
-            <table class="table table-condensed">
-                                    <tr><td colspan="2"><em>None found</em></td></tr>
-                            </table>
-        </aside>
-    </div>
-
-                                    <div class="row-fluid">
-        <div class="span8 content class">
-            <a id="property_uses" name="property_uses" class="anchor"></a>
-            <article class="property">
-                <h3 class="public ">$uses</h3>
-                <pre class="signature">$uses : array</pre>
-                <p><em></em></p>
-                
-
-                                <h4>Type</h4>
-                array
-                &mdash; use model                            </article>
-        </div>
-        <aside class="span4 detailsbar">
-            <h1><i class="icon-arrow-down"></i></h1>
-                        <dl>
-                                                            </dl>
-            <h2>Tags</h2>
-            <table class="table table-condensed">
-                                    <tr><td colspan="2"><em>None found</em></td></tr>
-                            </table>
-        </aside>
-    </div>
-
-                                    <div class="row-fluid">
-        <div class="span8 content class">
-            <a id="property_CabinetFrameSetting" name="property_CabinetFrameSetting" class="anchor"></a>
-            <article class="property">
-                <h3 class="public ">$CabinetFrameSetting</h3>
-                <pre class="signature">$CabinetFrameSetting : \CabinetFrameSetting</pre>
-                <p><em></em></p>
-                
-
-                                <h4>Type</h4>
-                \CabinetFrameSetting
-                                            </article>
-        </div>
-        <aside class="span4 detailsbar">
-            <h1><i class="icon-arrow-down"></i></h1>
-                        <dl>
-                                                            </dl>
-            <h2>Tags</h2>
-            <table class="table table-condensed">
-                                    <tr><td colspan="2"><em>None found</em></td></tr>
-                            </table>
-        </aside>
-    </div>
-
-                                                    <div class="row-fluid">
-        <div class="span8 content class">
-            <a id="property__cabinetTitle" name="property__cabinetTitle" class="anchor"></a>
-            <article class="property">
-                <h3 class="protected ">$_cabinetTitle</h3>
-                <pre class="signature">$_cabinetTitle : array</pre>
-                <p><em></em></p>
-                
-
-                                <h4>Type</h4>
-                array
-                &mdash; キャビネット名                            </article>
-        </div>
-        <aside class="span4 detailsbar">
-            <h1><i class="icon-arrow-down"></i></h1>
-                        <dl>
-                                                            </dl>
-            <h2>Tags</h2>
-            <table class="table table-condensed">
-                                    <tr><td colspan="2"><em>None found</em></td></tr>
-                            </table>
-        </aside>
-    </div>
-
-                                    <div class="row-fluid">
-        <div class="span8 content class">
-            <a id="property__cabinetSetting" name="property__cabinetSetting" class="anchor"></a>
-            <article class="property">
-                <h3 class="protected ">$_cabinetSetting</h3>
-                <pre class="signature">$_cabinetSetting : array</pre>
-                <p><em></em></p>
-                
-
-                                <h4>Type</h4>
-                array
-                &mdash; キャビネット設定                            </article>
-        </div>
-        <aside class="span4 detailsbar">
-            <h1><i class="icon-arrow-down"></i></h1>
-                        <dl>
-                                                            </dl>
-            <h2>Tags</h2>
-            <table class="table table-condensed">
-                                    <tr><td colspan="2"><em>None found</em></td></tr>
-                            </table>
-        </aside>
-    </div>
-
-                                    <div class="row-fluid">
-        <div class="span8 content class">
-            <a id="property__frameSetting" name="property__frameSetting" class="anchor"></a>
-            <article class="property">
-                <h3 class="protected ">$_frameSetting</h3>
-                <pre class="signature">$_frameSetting : array</pre>
-                <p><em></em></p>
-                
-
-                                <h4>Type</h4>
-                array
-                &mdash; フレーム設定                            </article>
-        </div>
-        <aside class="span4 detailsbar">
-            <h1><i class="icon-arrow-down"></i></h1>
-                        <dl>
-                                                            </dl>
-            <h2>Tags</h2>
-            <table class="table table-condensed">
-                                    <tr><td colspan="2"><em>None found</em></td></tr>
-                            </table>
-        </aside>
-    </div>
-
-                                            
-                                    <a id="methods" name="methods"></a>
-            <div class="row-fluid">
-                <div class="span8 content class"><h2>Methods</h2></div>
-                <aside class="span4 detailsbar"></aside>
-            </div>
-
-                                    <div class="row-fluid">
-        <div class="span8 content class">
-            <a id="method_beforeFilter" name="method_beforeFilter" class="anchor"></a>
-            <article class="method">
-                <h3 class="public ">beforeFilter()</h3>
-                <a href="#source-view" role="button" class="pull-right btn" data-toggle="modal" style="font-size: 1.1em; padding: 9px 14px"><i class="icon-code"></i></a>
-                <pre class="signature" style="margin-right: 54px;">beforeFilter() : void</pre>
-                <p><em>beforeFilter</em></p>
-                
-
-                
-                
-                				
-                            </article>
-        </div>
-        <aside class="span4 detailsbar">
-            <h1><i class="icon-arrow-down"></i></h1>
-                                                            <dl>
-                                                                            </dl>
-            <h2>Tags</h2>
-            <table class="table table-condensed">
-                                    <tr><td colspan="2"><em>None found</em></td></tr>
-                            </table>
-        </aside>
-    </div>
-
-                                    <div class="row-fluid">
-        <div class="span8 content class">
-            <a id="method_initTabs" name="method_initTabs" class="anchor"></a>
-            <article class="method">
-                <h3 class="public ">initTabs()</h3>
-                <a href="#source-view" role="button" class="pull-right btn" data-toggle="modal" style="font-size: 1.1em; padding: 9px 14px"><i class="icon-code"></i></a>
-                <pre class="signature" style="margin-right: 54px;">initTabs(string  <span class="argument">$mainActiveTab</span>, string  <span class="argument">$blockActiveTab</span>) : void</pre>
-                <p><em>initTabs</em></p>
-                
-
-                                    <h4>Parameters</h4>
-                    <table class="table table-condensed table-hover">
-                                                    <tr>
-                                <td>string</td>
-                                <td>$mainActiveTab </td>
-                                <td><p>Main active tab</p></td>
-                            </tr>
-                                                    <tr>
-                                <td>string</td>
-                                <td>$blockActiveTab </td>
-                                <td><p>Block active tab</p></td>
-                            </tr>
-                                            </table>
-                
-                
-                				
-                            </article>
-        </div>
-        <aside class="span4 detailsbar">
-            <h1><i class="icon-arrow-down"></i></h1>
-                                                            <dl>
-                                                                            </dl>
-            <h2>Tags</h2>
-            <table class="table table-condensed">
-                                    <tr><td colspan="2"><em>None found</em></td></tr>
-                            </table>
-        </aside>
-    </div>
-
-                                    <div class="row-fluid">
-        <div class="span8 content class">
-            <a id="method_initCabinet" name="method_initCabinet" class="anchor"></a>
-            <article class="method">
-                <h3 class="public ">initCabinet()</h3>
-                <a href="#source-view" role="button" class="pull-right btn" data-toggle="modal" style="font-size: 1.1em; padding: 9px 14px"><i class="icon-code"></i></a>
-                <pre class="signature" style="margin-right: 54px;">initCabinet(array  <span class="argument">$contains = array()</span>) : boolean</pre>
-                <p><em>initCabinet</em></p>
-                
-
-                                    <h4>Parameters</h4>
-                    <table class="table table-condensed table-hover">
-                                                    <tr>
-                                <td>array</td>
-                                <td>$contains </td>
-                                <td><p>Optional result sets</p></td>
-                            </tr>
-                                            </table>
-                
-                
-                                    <h4>Returns</h4>
-                    boolean
-                                            &mdash; <p>True on success, False on failure</p>
-                                    				
-                            </article>
-        </div>
-        <aside class="span4 detailsbar">
-            <h1><i class="icon-arrow-down"></i></h1>
-                                                            <dl>
-                                                                            </dl>
-            <h2>Tags</h2>
-            <table class="table table-condensed">
-                                    <tr><td colspan="2"><em>None found</em></td></tr>
-                            </table>
-        </aside>
-    </div>
-
-                                                    <div class="row-fluid">
-        <div class="span8 content class">
-            <a id="method__getNow" name="method__getNow" class="anchor"></a>
-            <article class="method">
-                <h3 class="protected ">_getNow()</h3>
-                <a href="#source-view" role="button" class="pull-right btn" data-toggle="modal" style="font-size: 1.1em; padding: 9px 14px"><i class="icon-code"></i></a>
-                <pre class="signature" style="margin-right: 54px;">_getNow() : integer</pre>
-                <p><em>現在時刻を返す。テストしやすくするためにメソッドに切り出した。</em></p>
-                
-
-                
-                
-                                    <h4>Returns</h4>
-                    integer
-                                    				
-                            </article>
-        </div>
-        <aside class="span4 detailsbar">
-            <h1><i class="icon-arrow-down"></i></h1>
-                                                            <dl>
-                                                                            </dl>
-            <h2>Tags</h2>
-            <table class="table table-condensed">
-                                    <tr><td colspan="2"><em>None found</em></td></tr>
-                            </table>
-        </aside>
-    </div>
-
-                                    <div class="row-fluid">
-        <div class="span8 content class">
-            <a id="method__getCurrentDateTime" name="method__getCurrentDateTime" class="anchor"></a>
-            <article class="method">
-                <h3 class="protected ">_getCurrentDateTime()</h3>
-                <a href="#source-view" role="button" class="pull-right btn" data-toggle="modal" style="font-size: 1.1em; padding: 9px 14px"><i class="icon-code"></i></a>
-                <pre class="signature" style="margin-right: 54px;">_getCurrentDateTime() : string</pre>
-                <p><em>現在の日時を返す</em></p>
-                
-
-                
-                
-                                    <h4>Returns</h4>
-                    string
-                                            &mdash; <p>datetime</p>
-                                    				
-                            </article>
-        </div>
-        <aside class="span4 detailsbar">
-            <h1><i class="icon-arrow-down"></i></h1>
-                                                            <dl>
-                                                                            </dl>
-            <h2>Tags</h2>
-            <table class="table table-condensed">
-                                    <tr><td colspan="2"><em>None found</em></td></tr>
-                            </table>
-        </aside>
-    </div>
-
-                                    <div class="row-fluid">
-        <div class="span8 content class">
-            <a id="method__setupCabinetTitle" name="method__setupCabinetTitle" class="anchor"></a>
-            <article class="method">
-                <h3 class="protected ">_setupCabinetTitle()</h3>
-                <a href="#source-view" role="button" class="pull-right btn" data-toggle="modal" style="font-size: 1.1em; padding: 9px 14px"><i class="icon-code"></i></a>
-                <pre class="signature" style="margin-right: 54px;">_setupCabinetTitle() : void</pre>
-                <p><em>ブロック名をキャビネットタイトルとしてセットする</em></p>
-                
-
-                
-                
-                				
-                            </article>
-        </div>
-        <aside class="span4 detailsbar">
-            <h1><i class="icon-arrow-down"></i></h1>
-                                                            <dl>
-                                                                            </dl>
-            <h2>Tags</h2>
-            <table class="table table-condensed">
-                                    <tr><td colspan="2"><em>None found</em></td></tr>
-                            </table>
-        </aside>
-    </div>
-
-                                    <div class="row-fluid">
-        <div class="span8 content class">
-            <a id="method__loadFrameSetting" name="method__loadFrameSetting" class="anchor"></a>
-            <article class="method">
-                <h3 class="protected ">_loadFrameSetting()</h3>
-                <a href="#source-view" role="button" class="pull-right btn" data-toggle="modal" style="font-size: 1.1em; padding: 9px 14px"><i class="icon-code"></i></a>
-                <pre class="signature" style="margin-right: 54px;">_loadFrameSetting() : void</pre>
-                <p><em>フレーム設定を読みこむ</em></p>
-                
-
-                
-                
-                				
-                            </article>
-        </div>
-        <aside class="span4 detailsbar">
-            <h1><i class="icon-arrow-down"></i></h1>
-                                                            <dl>
-                                                                            </dl>
-            <h2>Tags</h2>
-            <table class="table table-condensed">
-                                    <tr><td colspan="2"><em>None found</em></td></tr>
-                            </table>
-        </aside>
-    </div>
-
-                                    <div class="row-fluid">
-        <div class="span8 content class">
-            <a id="method__prepare" name="method__prepare" class="anchor"></a>
-            <article class="method">
-                <h3 class="protected ">_prepare()</h3>
-                <a href="#source-view" role="button" class="pull-right btn" data-toggle="modal" style="font-size: 1.1em; padding: 9px 14px"><i class="icon-code"></i></a>
-                <pre class="signature" style="margin-right: 54px;">_prepare() : void</pre>
-                <p><em>設定等の呼び出し</em></p>
-                
-
-                
-                
-                				
-                            </article>
-        </div>
-        <aside class="span4 detailsbar">
-            <h1><i class="icon-arrow-down"></i></h1>
-                                                            <dl>
-                                                                            </dl>
-            <h2>Tags</h2>
-            <table class="table table-condensed">
-                                    <tr><td colspan="2"><em>None found</em></td></tr>
-                            </table>
-        </aside>
-    </div>
-
-                                                    </div>
     </section>
 
     <div id="source-view" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="source-view-label" aria-hidden="true">
         <div class="modal-header">
             <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
-            <h3 id="source-view-label">CabinetsAppController.php</h3>
+            <h3 id="source-view-label"></h3>
         </div>
         <div class="modal-body">
-            <pre data-src="../files/Plugin/Cabinets/Controller/CabinetsAppController.php.txt" class="language-php line-numbers"></pre>
+            <pre data-src="../files/Plugin/NetCommons/Utility/CurrentBase.php.txt" class="language-php line-numbers"></pre>
         </div>
     </div>
 
