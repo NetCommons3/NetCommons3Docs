@@ -68,6 +68,7 @@ class RoomsHelper extends AppHelper {
 		}
 
 		if (isset($roomNames)) {
+			array_shift($roomNames);
 			$output = implode(self::ROOM_NAME_PAUSE, array_map('h', $roomNames));
 		} else {
 			$output = $this->roomName($this->_View->viewVars['spaces'][$activeSpaceId]);

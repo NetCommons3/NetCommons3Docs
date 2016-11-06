@@ -166,7 +166,7 @@ class RoomBehavior extends ModelBehavior {
 		$spaces = $model->Room->find('all', array(
 			'recursive' => 1,
 			'conditions' => array(
-				$model->Room->alias . '.parent_id' => null,
+				$model->Room->alias . '.parent_id' => Room::WHOLE_SITE_PARENT_ID,
 			),
 			'order' => 'Room.lft'
 		));

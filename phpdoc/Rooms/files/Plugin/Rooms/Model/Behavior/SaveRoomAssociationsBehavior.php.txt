@@ -330,12 +330,22 @@ class SaveRoomAssociationsBehavior extends ModelBehavior {
 				'root_id' => $model->getParentPageId($data),
 				'parent_id' => $model->getParentPageId($data)
 			),
-			//'LanguagesPage' => array(
+			//'PagesLanguage' => array(
 			//	'language_id' => Current::read('Language.id'),
 			//	'name' => __d('rooms', 'Top')
 			//),
 		));
 
+		//ルームのBoxを生成する
+		$model->Page->saveBox(array(
+			'Room' => $data['Room'],
+			'Page' => array(
+				'id' => null,
+				'room_id' => $data['Room']['id'],
+			),
+		));
+
+		//ページ生成
 		$model->Page->create(false);
 		$page = $model->Page->savePage($page, array('atomic' => false));
 		if (! $page) {
@@ -503,6 +513,7 @@ class SaveRoomAssociationsBehavior extends ModelBehavior {
 		$rolesRoomsUsers = array();
 		foreach ($rooms as $room) {
 			$roomId = $room['Room']['id'];
+			$model->RolesRoomsUser->create(false);
 			$rolesRoomsUsers[$roomId] = $model->RolesRoomsUser->create([
 				'id' => null,
 				'roles_room_id' => Hash::get($rolesRooms, $roomId . '.' . $room['Room']['default_role_key']),

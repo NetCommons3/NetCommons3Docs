@@ -33,9 +33,10 @@ class Room extends RoomsAppModel {
  * @var const
  */
 	const
-		PUBLIC_PARENT_ID = '1',
-		PRIVATE_PARENT_ID = '2',
-		ROOM_PARENT_ID = '3';
+		WHOLE_SITE_PARENT_ID = '1',
+		PUBLIC_PARENT_ID = '2',
+		PRIVATE_PARENT_ID = '3',
+		ROOM_PARENT_ID = '4';
 
 /**
  * TreeParser
@@ -464,7 +465,7 @@ class Room extends RoomsAppModel {
  */
 	public function saveRoom($data) {
 		$this->loadModels([
-			'LanguagesPage' => 'Pages.LanguagesPage',
+			'PagesLanguage' => 'Pages.PagesLanguage',
 			'RoomsLanguage' => 'Rooms.RoomsLanguage',
 		]);
 
@@ -496,7 +497,7 @@ class Room extends RoomsAppModel {
 			if (Hash::get($room, 'Room.page_id_top')) {
 				$roomLanguages = Hash::get($room, 'RoomsLanguage', array());
 				foreach ($roomLanguages as $roomLanguage) {
-					$pageLanguage = $this->LanguagesPage->find('first', array(
+					$pageLanguage = $this->PagesLanguage->find('first', array(
 						'recursive' => -1,
 						'fields' => array('id', 'page_id', 'language_id'),
 						'conditions' => array(
@@ -505,16 +506,16 @@ class Room extends RoomsAppModel {
 						)
 					));
 					if (! $pageLanguage) {
-						$pageLanguage['LanguagesPage'] = array(
+						$pageLanguage['PagesLanguage'] = array(
 							'id' => null,
 							'page_id' => Hash::get($room, 'Room.page_id_top'),
 							'language_id' => $roomLanguage['language_id'],
 						);
 					}
-					$pageLanguage['LanguagesPage']['name'] = $roomLanguage['name'];
+					$pageLanguage['PagesLanguage']['name'] = $roomLanguage['name'];
 
 					$this->create(false);
-					$pageLanguage = $this->LanguagesPage->save($pageLanguage);
+					$pageLanguage = $this->PagesLanguage->save($pageLanguage);
 					if (! $pageLanguage) {
 						throw new InternalErrorException(__d('net_commons', 'Internal Server Error'));
 					}
