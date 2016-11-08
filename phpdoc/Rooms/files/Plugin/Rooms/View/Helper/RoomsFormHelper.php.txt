@@ -244,10 +244,33 @@ class RoomsFormHelper extends AppHelper {
 		$output = '';
 		$output .= '<div class="clearfix">';
 
+		$button = '';
+		$button .= $this->LinkButton->edit(
+			'',
+			array(
+				'controller' => 'rooms',
+				'action' => 'edit',
+				'key' => $space['Space']['id'],
+				'key2' => $space['Room']['id']
+			),
+			array('iconSize' => 'btn-xs')
+		);
+
 		if ($spaceId === Space::PUBLIC_SPACE_ID) {
 			$output .= sprintf(
 				__d('rooms', 'The setting of %s space also to non-members is published.'),
 				$this->Rooms->roomName($space)
+			);
+
+			$button .= $this->LinkButton->edit(
+				__d('rooms', 'Edit the members'),
+				array(
+					'controller' => 'rooms_roles_users',
+					'action' => 'edit',
+					'key' => $space['Space']['id'],
+					'key2' => $space['Room']['id']
+				),
+				array('iconSize' => 'btn-xs space-edit-rooms-roles-users')
 			);
 		} else {
 			$output .= sprintf(
@@ -256,17 +279,9 @@ class RoomsFormHelper extends AppHelper {
 			);
 		}
 
-		$output .= $this->NetCommonsHtml->div(null,
-			$this->LinkButton->edit(
-				'',
-				array('action' => 'edit', 'key' => $space['Space']['id'], 'key2' => $space['Room']['id']),
-				array('iconSize' => 'btn-xs')
-			),
-			array(
-				'class' => 'pull-right'
-			)
+		$output .= $this->NetCommonsHtml->div(
+			null, $button, array('class' => 'pull-right')
 		);
-
 		$output .= '</div>';
 
 		return $this->MessageFlash->description($output);
