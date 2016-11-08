@@ -44,7 +44,7 @@ class PageContainer extends PagesAppModel {
  */
 	public $belongsTo = array(
 		'Page' => array(
-			'className' => 'Page',
+			'className' => 'Pages.Page',
 			'foreignKey' => 'page_id',
 			'conditions' => '',
 			'fields' => '',
