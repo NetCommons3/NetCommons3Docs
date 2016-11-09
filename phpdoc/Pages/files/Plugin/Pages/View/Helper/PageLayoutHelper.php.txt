@@ -71,8 +71,8 @@ class PageLayoutHelper extends AppHelper {
 		$this->containers = Hash::combine(
 			Hash::get($settings, 'page.PageContainer', array()), '{n}.container_type', '{n}'
 		);
-		$this->plugins = Hash::combine(Current::read(
-			'PluginsRoom', array()), '{n}.Plugin.key', '{n}.Plugin'
+		$this->plugins = Hash::combine(
+			Current::read('PluginsRoom', array()), '{n}.Plugin.key', '{n}.Plugin'
 		);
 	}
 
