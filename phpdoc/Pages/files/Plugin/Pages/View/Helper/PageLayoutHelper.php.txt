@@ -86,7 +86,7 @@ class PageLayoutHelper extends AppHelper {
 	public function __call($method, $params) {
 		$boxMethods = array(
 			'getBox', 'boxTitle', 'displayBoxSetting', 'hasBox',
-			'hasBoxSetting', 'renderAddPlugin', 'renderFrames'
+			'hasBoxSetting', 'renderAddPlugin', 'renderFrames', 'renderBoxes',
 		);
 		$frameMethods = array(
 			'frameActionUrl', 'frameSettingLink', 'frameSettingQuitLink',
