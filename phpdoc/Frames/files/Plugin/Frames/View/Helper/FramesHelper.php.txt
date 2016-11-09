@@ -1,0 +1,182 @@
+<?php
+/**
+ * LayoutHelper
+ *
+ * @copyright Copyright 2014, NetCommons Project
+ * @author Kohei Teraguchi <kteraguchi@commonsnet.org>
+ * @link http://www.netcommons.org NetCommons Project
+ * @license http://www.netcommons.org/license.txt NetCommons License
+ */
+
+App::uses('AppHelper', 'View/Helper');
+App::uses('Current', 'NetCommons.Utility');
+
+/**
+ * LayoutHelper
+ *
+ */
+class FramesHelper extends AppHelper {
+
+/**
+ * Other helpers used by FormHelper
+ *
+ * @var array
+ */
+	public $helpers = array(
+		'NetCommons.NetCommonsForm',
+		'NetCommons.NetCommonsHtml',
+	);
+
+/**
+ * Plugins data
+ *
+ * @var array
+ */
+	public $plugins;
+
+/**
+ * Default Constructor
+ *
+ * @param View $View The View this helper is being attached to.
+ * @param array $settings Configuration settings for the helper.
+ */
+	public function __construct(View $View, $settings = array()) {
+		parent::__construct($View, $settings);
+
+		$this->plugins = Hash::get($settings, 'plugins', array());
+	}
+
+/**
+ * フレームの編集画面のリンク
+ *
+ * @param array $frame Frameデータ
+ * @return string
+ */
+	public function frameActionUrl($frame) {
+		if ($frame['default_action']) {
+			$action = $frame['default_action'];
+		} elseif (Hash::get($this->plugins, $frame['plugin_key'] . '.default_action')) {
+			$action = Hash::get($this->plugins, $frame['plugin_key'] . '.default_action');
+		} else {
+			$action = $frame['plugin_key'] . '/index';
+		}
+
+		$url = $frame['plugin_key'] . '/' . $action . '?frame_id=' . $frame['id'];
+		if (Current::read('Page.id')) {
+			$url .= '&page_id=' . Current::read('Page.id');
+		}
+
+		if (Current::isSettingMode()) {
+			$url = Current::SETTING_MODE_WORD . '/' . $url;
+		}
+
+		return $url;
+	}
+
+/**
+ * フレームの編集画面のリンク
+ *
+ * @param array $frame Frameデータ
+ * @return string
+ */
+	public function frameSettingLink($frame) {
+		$html = '';
+
+		$action = Hash::get($this->plugins, $frame['plugin_key'] . '.default_setting_action');
+		if ($action) {
+			$title = '<span class="glyphicon glyphicon-cog" aria-hidden="true"> </span> ';
+			$title .= '<span class="sr-only">' . __d('frames', 'Show flame setting') . '</span>';
+
+			$options = array(
+				'class' => 'btn btn-default btn-sm frame-btn pull-left',
+				'escapeTitle' => false
+			);
+
+			$url = '/' . $frame['plugin_key'] . '/' . $action . '?frame_id=' . $frame['id'];
+			if (Current::read('Page.id')) {
+				$url .= '&page_id=' . Current::read('Page.id');
+			}
+
+			$html .= $this->NetCommonsHtml->link($title, $url, $options);
+		}
+
+		return $html;
+	}
+
+/**
+ * フレームの編集終了のリンク
+ *
+ * @return string
+ */
+	public function frameSettingQuitLink() {
+		$html = '';
+
+		$title = '<span class="glyphicon glyphicon-cog" aria-hidden="true"></span> ';
+		$title .= __d('net_commons', 'Quit');
+
+		$options = array(
+			'class' => 'btn btn-default btn-sm',
+			'escapeTitle' => false
+		);
+
+		$html .= $this->NetCommonsHtml->link($title, NetCommonsUrl::backToPageUrl(true), $options);
+
+		return $html;
+	}
+
+/**
+ * フレームの順序変更ボタン
+ *
+ * @param string $type タイプ(up or down)
+ * @return string
+ */
+	public function frameOrderButton($type) {
+		$html = '';
+
+		if ($type === 'up') {
+			$title = '<span class="glyphicon glyphicon-arrow-up" aria-hidden="true"></span> ';
+			$title .= '<span class="sr-only">' . __d('frames', 'Up frame position') . '</span>';
+
+			$options = array(
+				'name' => 'up',
+				'class' => 'btn btn-default btn-sm frame-btn pull-left'
+			);
+		} else {
+			$title = '<span class="glyphicon glyphicon-arrow-down" aria-hidden="true"></span>';
+			$title .= '<span class="sr-only">' . __d('frames', 'Down frame position') . '</span>';
+
+			$options = array(
+				'name' => 'down',
+				'class' => 'btn btn-default btn-sm frame-btn pull-left'
+			);
+		}
+
+		$html .= $this->NetCommonsForm->button($title, $options);
+
+		return $html;
+	}
+
+/**
+ * フレームの削除ボタン
+ *
+ * @return string
+ */
+	public function frameDeleteButton() {
+		$html = '';
+
+		$title = '<span class="glyphicon glyphicon-remove" aria-hidden="true"> </span> ';
+		$title .= '<span class="sr-only">' . __d('frames', 'Delete frame') . '</span>';
+
+		$options = array(
+			'name' => 'delete',
+			'class' => 'btn btn-default btn-sm',
+			'onclick' => 'return confirm(\'' . __d('frames', 'Do you want to delete the frame?') . '\')'
+		);
+
+		$html .= $this->NetCommonsForm->button($title, $options);
+
+		return $html;
+	}
+
+}
+

@@ -90,18 +90,21 @@ class FramesController extends FramesAppController {
 		);
 		$data['Frame']['room_id'] = Hash::get($data, 'Frame.room_id', 1);
 
-		if (! $frame = $this->Frame->saveFrame($data)) {
+		$frame = $this->Frame->saveFrame($data);
+		if (! $frame) {
 			//エラー処理
 			return $this->throwBadRequest();
 		}
 
-		if ($plugin = $this->Plugin->findByKey($data['Frame']['plugin_key'])) {
+		$plugin = $this->Plugin->findByKey($data['Frame']['plugin_key']);
+		if ($plugin) {
+			$urlQuery = '?frame_id=' . $frame['Frame']['id'] . '&page_id=' . Current::read('Page.id');
 			if (Hash::get($plugin, 'Plugin.frame_add_action')) {
 				$url = '/' . $data['Frame']['plugin_key'] . '/' . $plugin['Plugin']['frame_add_action'];
-				return $this->redirect($url . '?frame_id=' . $frame['Frame']['id']);
+				return $this->redirect($url . $urlQuery);
 			} elseif (Hash::get($plugin, 'Plugin.default_setting_action')) {
 				$url = '/' . $data['Frame']['plugin_key'] . '/' . $plugin['Plugin']['default_setting_action'];
-				return $this->redirect($url . '?frame_id=' . $frame['Frame']['id']);
+				return $this->redirect($url . $urlQuery);
 			}
 		}
 
