@@ -88,13 +88,24 @@ class PageLayoutHelper extends AppHelper {
 			'getBox', 'boxTitle', 'displayBoxSetting', 'hasBox',
 			'hasBoxSetting', 'renderAddPlugin', 'renderFrames'
 		);
+		$frameMethods = array(
+			'frameActionUrl', 'frameSettingLink', 'frameSettingQuitLink',
+			'frameOrderButton', 'frameDeleteButton',
+		);
 
 		if ($method === 'getBlockStatus') {
 			$helper = $this->_View->loadHelper('Blocks.Blocks');
 			return call_user_func_array(array($helper, $method), $params);
+
 		} elseif (in_array($method, $boxMethods, true)) {
 			$helper = $this->_View->loadHelper(
 				'Boxes.Boxes', array('containers' => $this->containers)
+			);
+			return call_user_func_array(array($helper, $method), $params);
+
+		} elseif (in_array($method, $frameMethods, true)) {
+			$helper = $this->_View->loadHelper(
+				'Frames.Frames', array('plugins' => $this->plugins)
 			);
 			return call_user_func_array(array($helper, $method), $params);
 		}
