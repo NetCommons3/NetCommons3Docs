@@ -62,7 +62,7 @@ class FramesHelper extends AppHelper {
 		}
 
 		$url = $frame['plugin_key'] . '/' . $action . '?frame_id=' . $frame['id'];
-		if (Current::read('Page.id')) {
+		if (Current::read('Page.id') && ! Current::read('Box.page_id')) {
 			$url .= '&page_id=' . Current::read('Page.id');
 		}
 
@@ -93,7 +93,7 @@ class FramesHelper extends AppHelper {
 			);
 
 			$url = '/' . $frame['plugin_key'] . '/' . $action . '?frame_id=' . $frame['id'];
-			if (Current::read('Page.id')) {
+			if (Current::read('Page.id') && ! Current::read('Box.page_id')) {
 				$url .= '&page_id=' . Current::read('Page.id');
 			}
 
