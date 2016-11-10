@@ -122,6 +122,7 @@ class PageLayoutHelper extends AppHelper {
 	public function beforeRender($viewFile) {
 		$this->NetCommonsHtml->css('/pages/css/style.css');
 		$this->NetCommonsHtml->css('/boxes/css/style.css');
+		$this->NetCommonsHtml->script('/boxes/js/boxes.js');
 
 		//メタデータ
 		$metas = Hash::get($this->_View->viewVars, 'meta', array());
