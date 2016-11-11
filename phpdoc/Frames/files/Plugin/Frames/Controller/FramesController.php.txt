@@ -80,7 +80,9 @@ class FramesController extends FramesAppController {
  * @return void
  */
 	public function add() {
-		$this->request->onlyAllow('post');
+		if (! $this->request->is('post')) {
+			return $this->throwBadRequest();
+		}
 
 		$this->Frame->create();
 		$data = $this->data;
@@ -117,10 +119,12 @@ class FramesController extends FramesAppController {
  * @return void
  */
 	public function delete() {
-		$this->request->onlyAllow('delete');
+		if (! $this->request->is('delete')) {
+			return $this->throwBadRequest();
+		}
 
-		$this->Frame->setDataSource('master');
-		if (! $frame['Frame'] = Current::read('Frame')) {
+		$frame['Frame'] = Current::read('Frame');
+		if (! $frame['Frame']) {
 			return $this->throwBadRequest();
 		}
 
@@ -140,9 +144,12 @@ class FramesController extends FramesAppController {
  * @return void
  */
 	public function edit() {
-		$this->request->onlyAllow('post');
+		if (! $this->request->is('put')) {
+			return $this->throwBadRequest();
+		}
 
-		if (! $frame['Frame'] = Current::read('Frame')) {
+		$frame['Frame'] = Current::read('Frame');
+		if (! $frame['Frame']) {
 			return $this->throwBadRequest();
 		}
 
@@ -169,9 +176,12 @@ class FramesController extends FramesAppController {
  * @return void
  */
 	public function order() {
-		$this->request->onlyAllow('put');
+		if (! $this->request->is('put')) {
+			return $this->throwBadRequest();
+		}
 
-		if (! $frame['Frame'] = Current::read('Frame')) {
+		$frame['Frame'] = Current::read('Frame');
+		if (! $frame['Frame']) {
 			return $this->throwBadRequest();
 		}
 
