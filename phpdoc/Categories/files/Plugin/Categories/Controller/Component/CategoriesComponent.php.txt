@@ -55,7 +55,7 @@ class CategoriesComponent extends Component {
 		);
 		$this->controller->set('categories', $result);
 
-		if (! in_array('Categories.Category', $this->controller->helpers)) {
+		if (! in_array('Categories.Category', $this->controller->helpers, true)) {
 			$this->controller->helpers[] = 'Categories.Category';
 		}
 	}
