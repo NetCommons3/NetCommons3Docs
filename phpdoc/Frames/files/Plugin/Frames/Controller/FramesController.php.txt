@@ -48,33 +48,6 @@ class FramesController extends FramesAppController {
 	);
 
 /**
- * index method
- *
- * @param string $id frameId
- * @throws NotFoundException
- * @return void
- */
-	public function index($id = null) {
-		$frame = $this->Frame->findById($id);
-		if (empty($frame)) {
-			throw new NotFoundException();
-		}
-
-		$frame['Frame']['Plugin'] = $frame['Plugin'];
-		$frame['Frame']['Language'] = $frame['Language'];
-		unset($frame['Plugin'], $frame['Language']);
-
-		$this->set('frames', array($frame['Frame']));
-
-		$plugins = $this->Plugin->find('all', array(
-			'recursive' => -1,
-			'conditions' => array('language_id' => Current::read('Language.id'))
-		));
-		$pluginMap = Hash::combine($plugins, '{n}.Plugin.key', '{n}.Plugin');
-		$this->set('pluginMap', $pluginMap);
-	}
-
-/**
  * add method
  *
  * @return void

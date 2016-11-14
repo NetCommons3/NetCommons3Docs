@@ -199,14 +199,14 @@ class Frame extends FramesAppModel {
 		$this->begin();
 
 		try {
-			if ($data['Frame']['is_deleted']) {
+			if (Hash::get($data, 'Frame.is_deleted')) {
 				//論理削除の場合、カウントDown
-				$this->__saveWeight($data, -1);
+				$this->__updateWeight($data, -1);
 				$data['Frame']['weight'] = null;
-			} elseif (! isset($data['Frame']['id']) || ! $data['Frame']['id']) {
+			} elseif (! Hash::get($data, 'Frame.id')) {
 				//カウントUp
 				$data['Frame']['weight'] = 1;
-				$this->__saveWeight($data, 1);
+				$this->__updateWeight($data, 1);
 			}
 
 			$frame = $this->save($data);
@@ -245,10 +245,10 @@ class Frame extends FramesAppModel {
 		try {
 			if ($order === 'up') {
 				$data['Frame']['weight']--;
-				$this->__saveWeight($data, 1, '=');
+				$this->__updateWeight($data, 1, '=');
 			} else {
 				$data['Frame']['weight']++;
-				$this->__saveWeight($data, -1, '=');
+				$this->__updateWeight($data, -1, '=');
 			}
 
 			$this->id = (int)$data['Frame']['id'];
@@ -278,7 +278,7 @@ class Frame extends FramesAppModel {
  * @throws InternalErrorException
  * @return mixed On success void if it not throw exception on failure
  */
-	private function __saveWeight($data, $sequence, $sign = null) {
+	private function __updateWeight($data, $sequence, $sign = null) {
 		if (! isset($sign)) {
 			if ($sequence > 0) {
 				$sign = '>=';
@@ -287,14 +287,15 @@ class Frame extends FramesAppModel {
 			}
 		}
 
-		if (! $this->updateAll(
-			array('Frame.weight' => 'Frame.weight + (' . $sequence . ')'),
-			array(
-				'Frame.weight ' . $sign . ' ' => $data['Frame']['weight'],
-				'Frame.box_id' => $data['Frame']['box_id'],
-				'Frame.is_deleted' => false,
-			)
-		)) {
+		$update = array(
+			'Frame.weight' => 'Frame.weight + (' . $sequence . ')'
+		);
+		$conditions = array(
+			'Frame.weight ' . $sign . ' ' => $data['Frame']['weight'],
+			'Frame.box_id' => $data['Frame']['box_id'],
+			'Frame.is_deleted' => false,
+		);
+		if (! $this->updateAll($update, $conditions)) {
 			throw new InternalErrorException(__d('net_commons', 'Internal Server Error'));
 		}
 	}

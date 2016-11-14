@@ -24,7 +24,16 @@ class FramesControllerTestCase extends NetCommonsControllerTestCase {
  *
  * @var array
  */
-	private $__fixtures = array();
+	private $__fixtures = array(
+		'plugin.pages.box4pages',
+		'plugin.pages.boxes_page_container4pages',
+		'plugin.frames.frame4frames',
+		'plugin.pages.pages_language4pages',
+		'plugin.pages.page_container4pages',
+		'plugin.pages.page4pages',
+		'plugin.pages.plugin4pages',
+		'plugin.pages.plugins_room4pages',
+	);
 
 /**
  * Plugin name
