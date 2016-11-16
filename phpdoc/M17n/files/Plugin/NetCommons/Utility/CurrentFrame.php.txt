@@ -37,21 +37,7 @@ class CurrentFrame {
  * @return void
  */
 	public function initialize() {
-		if (isset(Current::$current['Frame'])) {
-			unset(Current::$current['Frame']);
-		}
-		if (isset(Current::$current['Block'])) {
-			unset(Current::$current['Block']);
-		}
-		if (isset(Current::$current['BlockRolePermission'])) {
-			unset(Current::$current['BlockRolePermission']);
-		}
-		if (isset(Current::$m17n['Frame'])) {
-			unset(Current::$m17n['Frame']);
-		}
-		if (isset(Current::$m17n['Block'])) {
-			unset(Current::$m17n['Block']);
-		}
+		$this->clear();
 
 		if (!in_array(Current::$request->params['plugin'], self::$skipFramePlugins, true)) {
 			$this->setFrame();
@@ -62,6 +48,25 @@ class CurrentFrame {
 		(new CurrentPage())->initialize();
 
 		$this->setBlockRolePermissions();
+	}
+
+/**
+ * setup current data
+ *
+ * @return void
+ */
+	public function clear() {
+		foreach (['Room', 'Frame', 'Block'] as $model) {
+			if (isset(Current::$current[$model])) {
+				unset(Current::$current[$model]);
+			}
+			if (isset(Current::$m17n[$model])) {
+				unset(Current::$m17n[$model]);
+			}
+		}
+		if (isset(Current::$current['BlockRolePermission'])) {
+			unset(Current::$current['BlockRolePermission']);
+		}
 	}
 
 /**
@@ -97,7 +102,7 @@ class CurrentFrame {
 			Current::$current['Block'] = $this->Block->create()['Block'];
 		}
 
-		$this->setPageByBox();
+		$this->setBox();
 	}
 
 /**
@@ -105,20 +110,18 @@ class CurrentFrame {
  *
  * @return void
  */
-	public function setPageByBox() {
+	public function setBox() {
 		if (isset(Current::$current['Box']['id'])) {
 			$boxId = Current::$current['Box']['id'];
 		} elseif (isset(Current::$request->data['Frame']) &&
 					isset(Current::$request->data['Frame']['box_id'])) {
 			$boxId = Current::$request->data['Frame']['box_id'];
-		} elseif (isset(Current::$request->data['Box']) &&
-					isset(Current::$request->data['Box']['id'])) {
-			$boxId = Current::$request->data['Box']['id'];
 		} else {
 			return;
 		}
 
 		$result = $this->Box->find('first', array(
+			'recursive' => 0,
 			'conditions' => array(
 				'Box.id' => $boxId,
 			),
@@ -127,15 +130,49 @@ class CurrentFrame {
 			return;
 		}
 
-		if ($result['Container']['type'] === Container::TYPE_MAIN) {
-			Current::$current['Page'] = $result['Page'][0];
+		//Box、Room、Space更新
+		Current::$current = Hash::merge(Current::$current, $result);
+
+		$this->setBoxPageContainer();
+	}
+
+/**
+ * Set BoxPageContainer
+ *
+ * @return void
+ */
+	public function setBoxPageContainer() {
+		if (isset(Current::$current['BoxesPageContainer'])) {
+			return;
 		}
 
-		if (! isset(Current::$current['Room'])) {
-			Current::$current['Room'] = $result['Room'];
+		if (! isset(Current::$current['Box']['id'])) {
+			return;
+		}
+		if (isset(Current::$current['Page'])) {
+			$pageId = Current::$current['Page']['id'];
+		} elseif (Current::$current['Box']['page_id']) {
+			$pageId = Current::$current['Box']['page_id'];
+		} else {
+			return;
 		}
 
-		Current::$current['Container'] = $result['Container'];
+		$this->BoxesPageContainer = ClassRegistry::init('Boxes.BoxesPageContainer');
+
+		$result = $this->BoxesPageContainer->find('first', array(
+			'recursive' => 0,
+			'conditions' => array(
+				'BoxesPageContainer.box_id' => Current::$current['Box']['id'],
+				'BoxesPageContainer.page_id' => $pageId,
+				'BoxesPageContainer.container_type' => Current::$current['Box']['container_type'],
+			),
+		));
+		if (! $result) {
+			return;
+		}
+
+		//BoxesPageContainer、Box、PageContainer、Page更新
+		Current::$current = Hash::merge(Current::$current, $result);
 	}
 
 /**
