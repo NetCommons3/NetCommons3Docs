@@ -187,6 +187,7 @@ class Space extends RoomsAppModel {
  */
 	public function createRoom($data = array()) {
 		$this->loadModels([
+			'Language' => 'M17n.Language',
 			'Room' => 'Rooms.Room',
 			'RoomsLanguage' => 'Rooms.RoomsLanguage',
 		]);
@@ -196,7 +197,7 @@ class Space extends RoomsAppModel {
 			'active' => true,
 		), $data));
 
-		$languages = Current::readM17n(null, 'Language');
+		$languages = $this->Language->getLanguages();
 		foreach ($languages as $i => $language) {
 			$roomsLanguage = $this->RoomsLanguage->create(array(
 				'id' => null,
