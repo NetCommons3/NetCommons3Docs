@@ -31,15 +31,6 @@ App::uses('SiteSettingUtil', 'SiteManager.Utility');
 class NetCommonsControllerBaseTestCase extends ControllerTestCase {
 
 /**
- * CakePHPv2.5.7以前は強制的にtruncateされていたため、同テーブルで別名のFixtureが定義されていても動作していたが、
- * dropTables=falseにしないとtruncateしなくなった。
- *
- * @var bool
- * @see https://github.com/cakephp/cakephp/blob/2.8.7/lib/Cake/TestSuite/Fixture/CakeFixtureManager.php#L232-L234
- */
-	public $dropTables = false;
-
-/**
  * Plugin name
  *
  * @var string
@@ -227,6 +218,21 @@ class NetCommonsControllerBaseTestCase extends ControllerTestCase {
 		$method->setAccessible(true);
 		$result = $method->invokeArgs($instance, $params);
 		return $result;
+	}
+
+/**
+ * Viewの結果をスペース等のパースを行う
+ *
+ * @param string $view Viewの結果
+ * @return string
+ */
+	protected function _parseView($view) {
+		$view = preg_replace('/[>][\s\t]+([^a-z])/u', '>$1', $view);
+		$view = preg_replace('/[\s\t]+</u', '<', $view);
+		$view = preg_replace('/[\s\t]+/u', ' ', $view);
+		$view = str_replace("\n", '', $view);
+		$view = trim($view);
+		return $view;
 	}
 
 /**
