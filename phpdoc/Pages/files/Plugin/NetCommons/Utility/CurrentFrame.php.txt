@@ -37,31 +37,29 @@ class CurrentFrame {
  * @return void
  */
 	public function initialize() {
-		if (isset(Current::$current['Frame'])) {
-			unset(Current::$current['Frame']);
-		}
-		if (isset(Current::$current['Block'])) {
-			unset(Current::$current['Block']);
-		}
-		if (isset(Current::$current['BlockRolePermission'])) {
-			unset(Current::$current['BlockRolePermission']);
-		}
-		if (isset(Current::$m17n['Frame'])) {
-			unset(Current::$m17n['Frame']);
-		}
-		if (isset(Current::$m17n['Block'])) {
-			unset(Current::$m17n['Block']);
-		}
+		$this->clear();
 
 		if (!in_array(Current::$request->params['plugin'], self::$skipFramePlugins, true)) {
 			$this->setFrame();
 			$this->setBlock();
-			$this->setM17n();
 		}
 
 		(new CurrentPage())->initialize();
 
 		$this->setBlockRolePermissions();
+	}
+
+/**
+ * setup current data
+ *
+ * @return void
+ */
+	public function clear() {
+		foreach (['Room', 'Frame', 'Block', 'BlockRolePermission'] as $model) {
+			if (isset(Current::$current[$model])) {
+				unset(Current::$current[$model]);
+			}
+		}
 	}
 
 /**
@@ -116,7 +114,7 @@ class CurrentFrame {
 		}
 
 		$result = $this->Box->find('first', array(
-			'recursive' => -1,
+			'recursive' => 0,
 			'conditions' => array(
 				'Box.id' => $boxId,
 			),
@@ -298,33 +296,6 @@ class CurrentFrame {
 		}
 
 		Current::$current['Permission'] = $permission;
-	}
-
-/**
- * 多言語化のデータ取得
- *
- * @return void
- */
-	public function setM17n() {
-		if (isset(Current::$current['Frame'])) {
-			$this->Frame = ClassRegistry::init('Frames.Frame');
-			Current::$m17n['Frame'] = $this->Frame->find('all', array(
-				'recursive' => -1,
-				'conditions' => array(
-					'key' => Current::$current['Frame']['key']
-				),
-			));
-		}
-
-		if (isset(Current::$current['Block'])) {
-			$this->Block = ClassRegistry::init('Blocks.Block');
-			Current::$m17n['Block'] = $this->Block->find('all', array(
-				'recursive' => -1,
-				'conditions' => array(
-					'key' => Current::$current['Block']['key']
-				),
-			));
-		}
 	}
 
 }
