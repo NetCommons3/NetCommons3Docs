@@ -136,10 +136,10 @@
                                 <div class="accordion" style="margin-bottom: 0">
         <div class="accordion-group">
             <div class="accordion-heading">
-                                    <a class="accordion-toggle " data-toggle="collapse" data-target="#namespace-2041317334"></a>
+                                    <a class="accordion-toggle " data-toggle="collapse" data-target="#namespace-1945579454"></a>
                                 <a href="../namespaces/default.html" style="margin-left: 30px; padding-left: 0">\</a>
             </div>
-            <div id="namespace-2041317334" class="accordion-body collapse in">
+            <div id="namespace-1945579454" class="accordion-body collapse in">
                 <div class="accordion-inner">
 
                     
@@ -365,7 +365,109 @@ created_by to created_user,updated_by to modified_user</p>
 
                                 <h4>Type</h4>
                 
-                                            </article>
+                
+Warning: Missing argument 1 for phpDocumentor\Descriptor\Collection::get(), called in /home/travis/build/NetCommons3/NetCommons3/vendors/twig/twig/lib/Twig/Template.php on line 665 and defined in /home/travis/build/NetCommons3/NetCommons3/vendors/phpdocumentor/phpdocumentor/src/phpDocumentor/Descriptor/Collection.php on line 72
+
+Call Stack:
+    0.0001     241664   1. {main}() /home/travis/build/NetCommons3/NetCommons3/vendors/phpdocumentor/phpdocumentor/bin/phpdoc:0
+    0.1377   12345672   2. phpDocumentor\Application->run() /home/travis/build/NetCommons3/NetCommons3/vendors/phpdocumentor/phpdocumentor/bin/phpdoc:24
+    0.1403   12643072   3. Symfony\Component\Console\Application->run() /home/travis/build/NetCommons3/NetCommons3/vendors/phpdocumentor/phpdocumentor/src/phpDocumentor/Application.php:183
+    0.1407   12644048   4. Symfony\Component\Console\Application->doRun() /home/travis/build/NetCommons3/NetCommons3/vendors/symfony/console/Application.php:124
+    0.1409   12645032   5. Symfony\Component\Console\Application->doRunCommand() /home/travis/build/NetCommons3/NetCommons3/vendors/symfony/console/Application.php:193
+    0.1409   12645560   6. Symfony\Component\Console\Command\Command->run() /home/travis/build/NetCommons3/NetCommons3/vendors/symfony/console/Application.php:849
+    0.1416   12653136   7. phpDocumentor\Command\Project\RunCommand->execute() /home/travis/build/NetCommons3/NetCommons3/vendors/symfony/console/Command/Command.php:257
+    4.7152   34211752   8. Symfony\Component\Console\Command\Command->run() /home/travis/build/NetCommons3/NetCommons3/vendors/phpdocumentor/phpdocumentor/src/phpDocumentor/Command/Project/RunCommand.php:275
+    4.7162   34215224   9. phpDocumentor\Transformer\Command\Project\TransformCommand->execute() /home/travis/build/NetCommons3/NetCommons3/vendors/symfony/console/Command/Command.php:257
+    4.9486   34856720  10. phpDocumentor\Console\Output\Output->writeTimedLog() /home/travis/build/NetCommons3/NetCommons3/vendors/phpdocumentor/phpdocumentor/src/phpDocumentor/Transformer/Command/Project/TransformCommand.php:206
+    4.9487   34856816  11. call_user_func_array:{/home/travis/build/NetCommons3/NetCommons3/vendors/phpdocumentor/phpdocumentor/src/phpDocumentor/Console/Output/Output.php:59}() /home/travis/build/NetCommons3/NetCommons3/vendors/phpdocumentor/phpdocumentor/src/phpDocumentor/Console/Output/Output.php:59
+    4.9487   34857392  12. phpDocumentor\Transformer\Transformer->execute() /home/travis/build/NetCommons3/NetCommons3/vendors/phpdocumentor/phpdocumentor/src/phpDocumentor/Console/Output/Output.php:59
+    4.9500   34879280  13. phpDocumentor\Transformer\Transformer->transformProject() /home/travis/build/NetCommons3/NetCommons3/vendors/phpdocumentor/phpdocumentor/src/phpDocumentor/Transformer/Transformer.php:141
+    5.4901   41779824  14. phpDocumentor\Transformer\Transformer->applyTransformationToProject() /home/travis/build/NetCommons3/NetCommons3/vendors/phpdocumentor/phpdocumentor/src/phpDocumentor/Transformer/Transformer.php:275
+    5.4903   41780176  15. phpDocumentor\Plugin\Twig\Writer\Twig->transform() /home/travis/build/NetCommons3/NetCommons3/vendors/phpdocumentor/phpdocumentor/src/phpDocumentor/Transformer/Transformer.php:312
+    6.6483   40484152  16. Twig_Environment->render() /home/travis/build/NetCommons3/NetCommons3/vendors/phpdocumentor/phpdocumentor/src/phpDocumentor/Plugin/Twig/Writer/Twig.php:116
+    6.6489   40499424  17. Twig_Template->render() /home/travis/build/NetCommons3/NetCommons3/vendors/twig/twig/lib/Twig/Environment.php:362
+    6.6489   40516048  18. Twig_Template->display() /home/travis/build/NetCommons3/NetCommons3/vendors/twig/twig/lib/Twig/Template.php:407
+    6.6490   40517504  19. Twig_Template->displayWithErrorHandling() /home/travis/build/NetCommons3/NetCommons3/vendors/twig/twig/lib/Twig/Template.php:396
+    6.6490   40517504  20. __TwigTemplate_989d0329cc043cef745de111ebcfd9980127d5f7a0eab1d66ff2289ff0d3cc8e->doDisplay() /home/travis/build/NetCommons3/NetCommons3/vendors/twig/twig/lib/Twig/Template.php:428
+    6.6490   40518032  21. Twig_Template->display() /tmp/phpdoc-twig-cache/5d/5dffc0a58d3799d02a5afa0d8ca16314445dc469e3fd239d73d38969abff50b4.php:26
+    6.6490   40519240  22. Twig_Template->displayWithErrorHandling() /home/travis/build/NetCommons3/NetCommons3/vendors/twig/twig/lib/Twig/Template.php:396
+    6.6490   40519240  23. __TwigTemplate_9a1ef9d0be6842fe188a54e0fc362b52ead1377a07d7c106b5e5a85e1180243f->doDisplay() /home/travis/build/NetCommons3/NetCommons3/vendors/twig/twig/lib/Twig/Template.php:428
+    6.6751   40700416  24. Twig_Template->displayBlock() /tmp/phpdoc-twig-cache/fb/fbe1eb4acf07e3d0d465fa3e789b445f77def656502a8e98d4d159266177bd4a.php:312
+    6.6751   40700544  25. __TwigTemplate_989d0329cc043cef745de111ebcfd9980127d5f7a0eab1d66ff2289ff0d3cc8e->block_content() /home/travis/build/NetCommons3/NetCommons3/vendors/twig/twig/lib/Twig/Template.php:207
+    6.6941   40731520  26. Twig_Template->displayBlock() /tmp/phpdoc-twig-cache/5d/5dffc0a58d3799d02a5afa0d8ca16314445dc469e3fd239d73d38969abff50b4.php:801
+    6.6941   40731648  27. __TwigTemplate_29bcbc752332549d2f11c579555f45a960e6be3ee7e27831569880917a627f3e->block_property() /home/travis/build/NetCommons3/NetCommons3/vendors/twig/twig/lib/Twig/Template.php:207
+    6.6946   40863080  28. Twig_Template->getAttribute() /tmp/phpdoc-twig-cache/57/570b5340f31d2d9825bab97cc17eb871bdacb5cd12ed507b002b1ec3aa7b23f4.php:73
+    6.6946   40863688  29. phpDocumentor\Descriptor\Collection->get() /home/travis/build/NetCommons3/NetCommons3/vendors/twig/twig/lib/Twig/Template.php:665
+
+
+Notice: Undefined variable: index in /home/travis/build/NetCommons3/NetCommons3/vendors/phpdocumentor/phpdocumentor/src/phpDocumentor/Descriptor/Collection.php on line 74
+
+Call Stack:
+    0.0001     241664   1. {main}() /home/travis/build/NetCommons3/NetCommons3/vendors/phpdocumentor/phpdocumentor/bin/phpdoc:0
+    0.1377   12345672   2. phpDocumentor\Application->run() /home/travis/build/NetCommons3/NetCommons3/vendors/phpdocumentor/phpdocumentor/bin/phpdoc:24
+    0.1403   12643072   3. Symfony\Component\Console\Application->run() /home/travis/build/NetCommons3/NetCommons3/vendors/phpdocumentor/phpdocumentor/src/phpDocumentor/Application.php:183
+    0.1407   12644048   4. Symfony\Component\Console\Application->doRun() /home/travis/build/NetCommons3/NetCommons3/vendors/symfony/console/Application.php:124
+    0.1409   12645032   5. Symfony\Component\Console\Application->doRunCommand() /home/travis/build/NetCommons3/NetCommons3/vendors/symfony/console/Application.php:193
+    0.1409   12645560   6. Symfony\Component\Console\Command\Command->run() /home/travis/build/NetCommons3/NetCommons3/vendors/symfony/console/Application.php:849
+    0.1416   12653136   7. phpDocumentor\Command\Project\RunCommand->execute() /home/travis/build/NetCommons3/NetCommons3/vendors/symfony/console/Command/Command.php:257
+    4.7152   34211752   8. Symfony\Component\Console\Command\Command->run() /home/travis/build/NetCommons3/NetCommons3/vendors/phpdocumentor/phpdocumentor/src/phpDocumentor/Command/Project/RunCommand.php:275
+    4.7162   34215224   9. phpDocumentor\Transformer\Command\Project\TransformCommand->execute() /home/travis/build/NetCommons3/NetCommons3/vendors/symfony/console/Command/Command.php:257
+    4.9486   34856720  10. phpDocumentor\Console\Output\Output->writeTimedLog() /home/travis/build/NetCommons3/NetCommons3/vendors/phpdocumentor/phpdocumentor/src/phpDocumentor/Transformer/Command/Project/TransformCommand.php:206
+    4.9487   34856816  11. call_user_func_array:{/home/travis/build/NetCommons3/NetCommons3/vendors/phpdocumentor/phpdocumentor/src/phpDocumentor/Console/Output/Output.php:59}() /home/travis/build/NetCommons3/NetCommons3/vendors/phpdocumentor/phpdocumentor/src/phpDocumentor/Console/Output/Output.php:59
+    4.9487   34857392  12. phpDocumentor\Transformer\Transformer->execute() /home/travis/build/NetCommons3/NetCommons3/vendors/phpdocumentor/phpdocumentor/src/phpDocumentor/Console/Output/Output.php:59
+    4.9500   34879280  13. phpDocumentor\Transformer\Transformer->transformProject() /home/travis/build/NetCommons3/NetCommons3/vendors/phpdocumentor/phpdocumentor/src/phpDocumentor/Transformer/Transformer.php:141
+    5.4901   41779824  14. phpDocumentor\Transformer\Transformer->applyTransformationToProject() /home/travis/build/NetCommons3/NetCommons3/vendors/phpdocumentor/phpdocumentor/src/phpDocumentor/Transformer/Transformer.php:275
+    5.4903   41780176  15. phpDocumentor\Plugin\Twig\Writer\Twig->transform() /home/travis/build/NetCommons3/NetCommons3/vendors/phpdocumentor/phpdocumentor/src/phpDocumentor/Transformer/Transformer.php:312
+    6.6483   40484152  16. Twig_Environment->render() /home/travis/build/NetCommons3/NetCommons3/vendors/phpdocumentor/phpdocumentor/src/phpDocumentor/Plugin/Twig/Writer/Twig.php:116
+    6.6489   40499424  17. Twig_Template->render() /home/travis/build/NetCommons3/NetCommons3/vendors/twig/twig/lib/Twig/Environment.php:362
+    6.6489   40516048  18. Twig_Template->display() /home/travis/build/NetCommons3/NetCommons3/vendors/twig/twig/lib/Twig/Template.php:407
+    6.6490   40517504  19. Twig_Template->displayWithErrorHandling() /home/travis/build/NetCommons3/NetCommons3/vendors/twig/twig/lib/Twig/Template.php:396
+    6.6490   40517504  20. __TwigTemplate_989d0329cc043cef745de111ebcfd9980127d5f7a0eab1d66ff2289ff0d3cc8e->doDisplay() /home/travis/build/NetCommons3/NetCommons3/vendors/twig/twig/lib/Twig/Template.php:428
+    6.6490   40518032  21. Twig_Template->display() /tmp/phpdoc-twig-cache/5d/5dffc0a58d3799d02a5afa0d8ca16314445dc469e3fd239d73d38969abff50b4.php:26
+    6.6490   40519240  22. Twig_Template->displayWithErrorHandling() /home/travis/build/NetCommons3/NetCommons3/vendors/twig/twig/lib/Twig/Template.php:396
+    6.6490   40519240  23. __TwigTemplate_9a1ef9d0be6842fe188a54e0fc362b52ead1377a07d7c106b5e5a85e1180243f->doDisplay() /home/travis/build/NetCommons3/NetCommons3/vendors/twig/twig/lib/Twig/Template.php:428
+    6.6751   40700416  24. Twig_Template->displayBlock() /tmp/phpdoc-twig-cache/fb/fbe1eb4acf07e3d0d465fa3e789b445f77def656502a8e98d4d159266177bd4a.php:312
+    6.6751   40700544  25. __TwigTemplate_989d0329cc043cef745de111ebcfd9980127d5f7a0eab1d66ff2289ff0d3cc8e->block_content() /home/travis/build/NetCommons3/NetCommons3/vendors/twig/twig/lib/Twig/Template.php:207
+    6.6941   40731520  26. Twig_Template->displayBlock() /tmp/phpdoc-twig-cache/5d/5dffc0a58d3799d02a5afa0d8ca16314445dc469e3fd239d73d38969abff50b4.php:801
+    6.6941   40731648  27. __TwigTemplate_29bcbc752332549d2f11c579555f45a960e6be3ee7e27831569880917a627f3e->block_property() /home/travis/build/NetCommons3/NetCommons3/vendors/twig/twig/lib/Twig/Template.php:207
+    6.6946   40863080  28. Twig_Template->getAttribute() /tmp/phpdoc-twig-cache/57/570b5340f31d2d9825bab97cc17eb871bdacb5cd12ed507b002b1ec3aa7b23f4.php:73
+    6.6946   40863688  29. phpDocumentor\Descriptor\Collection->get() /home/travis/build/NetCommons3/NetCommons3/vendors/twig/twig/lib/Twig/Template.php:665
+
+
+Notice: Undefined variable: index in /home/travis/build/NetCommons3/NetCommons3/vendors/phpdocumentor/phpdocumentor/src/phpDocumentor/Descriptor/Collection.php on line 78
+
+Call Stack:
+    0.0001     241664   1. {main}() /home/travis/build/NetCommons3/NetCommons3/vendors/phpdocumentor/phpdocumentor/bin/phpdoc:0
+    0.1377   12345672   2. phpDocumentor\Application->run() /home/travis/build/NetCommons3/NetCommons3/vendors/phpdocumentor/phpdocumentor/bin/phpdoc:24
+    0.1403   12643072   3. Symfony\Component\Console\Application->run() /home/travis/build/NetCommons3/NetCommons3/vendors/phpdocumentor/phpdocumentor/src/phpDocumentor/Application.php:183
+    0.1407   12644048   4. Symfony\Component\Console\Application->doRun() /home/travis/build/NetCommons3/NetCommons3/vendors/symfony/console/Application.php:124
+    0.1409   12645032   5. Symfony\Component\Console\Application->doRunCommand() /home/travis/build/NetCommons3/NetCommons3/vendors/symfony/console/Application.php:193
+    0.1409   12645560   6. Symfony\Component\Console\Command\Command->run() /home/travis/build/NetCommons3/NetCommons3/vendors/symfony/console/Application.php:849
+    0.1416   12653136   7. phpDocumentor\Command\Project\RunCommand->execute() /home/travis/build/NetCommons3/NetCommons3/vendors/symfony/console/Command/Command.php:257
+    4.7152   34211752   8. Symfony\Component\Console\Command\Command->run() /home/travis/build/NetCommons3/NetCommons3/vendors/phpdocumentor/phpdocumentor/src/phpDocumentor/Command/Project/RunCommand.php:275
+    4.7162   34215224   9. phpDocumentor\Transformer\Command\Project\TransformCommand->execute() /home/travis/build/NetCommons3/NetCommons3/vendors/symfony/console/Command/Command.php:257
+    4.9486   34856720  10. phpDocumentor\Console\Output\Output->writeTimedLog() /home/travis/build/NetCommons3/NetCommons3/vendors/phpdocumentor/phpdocumentor/src/phpDocumentor/Transformer/Command/Project/TransformCommand.php:206
+    4.9487   34856816  11. call_user_func_array:{/home/travis/build/NetCommons3/NetCommons3/vendors/phpdocumentor/phpdocumentor/src/phpDocumentor/Console/Output/Output.php:59}() /home/travis/build/NetCommons3/NetCommons3/vendors/phpdocumentor/phpdocumentor/src/phpDocumentor/Console/Output/Output.php:59
+    4.9487   34857392  12. phpDocumentor\Transformer\Transformer->execute() /home/travis/build/NetCommons3/NetCommons3/vendors/phpdocumentor/phpdocumentor/src/phpDocumentor/Console/Output/Output.php:59
+    4.9500   34879280  13. phpDocumentor\Transformer\Transformer->transformProject() /home/travis/build/NetCommons3/NetCommons3/vendors/phpdocumentor/phpdocumentor/src/phpDocumentor/Transformer/Transformer.php:141
+    5.4901   41779824  14. phpDocumentor\Transformer\Transformer->applyTransformationToProject() /home/travis/build/NetCommons3/NetCommons3/vendors/phpdocumentor/phpdocumentor/src/phpDocumentor/Transformer/Transformer.php:275
+    5.4903   41780176  15. phpDocumentor\Plugin\Twig\Writer\Twig->transform() /home/travis/build/NetCommons3/NetCommons3/vendors/phpdocumentor/phpdocumentor/src/phpDocumentor/Transformer/Transformer.php:312
+    6.6483   40484152  16. Twig_Environment->render() /home/travis/build/NetCommons3/NetCommons3/vendors/phpdocumentor/phpdocumentor/src/phpDocumentor/Plugin/Twig/Writer/Twig.php:116
+    6.6489   40499424  17. Twig_Template->render() /home/travis/build/NetCommons3/NetCommons3/vendors/twig/twig/lib/Twig/Environment.php:362
+    6.6489   40516048  18. Twig_Template->display() /home/travis/build/NetCommons3/NetCommons3/vendors/twig/twig/lib/Twig/Template.php:407
+    6.6490   40517504  19. Twig_Template->displayWithErrorHandling() /home/travis/build/NetCommons3/NetCommons3/vendors/twig/twig/lib/Twig/Template.php:396
+    6.6490   40517504  20. __TwigTemplate_989d0329cc043cef745de111ebcfd9980127d5f7a0eab1d66ff2289ff0d3cc8e->doDisplay() /home/travis/build/NetCommons3/NetCommons3/vendors/twig/twig/lib/Twig/Template.php:428
+    6.6490   40518032  21. Twig_Template->display() /tmp/phpdoc-twig-cache/5d/5dffc0a58d3799d02a5afa0d8ca16314445dc469e3fd239d73d38969abff50b4.php:26
+    6.6490   40519240  22. Twig_Template->displayWithErrorHandling() /home/travis/build/NetCommons3/NetCommons3/vendors/twig/twig/lib/Twig/Template.php:396
+    6.6490   40519240  23. __TwigTemplate_9a1ef9d0be6842fe188a54e0fc362b52ead1377a07d7c106b5e5a85e1180243f->doDisplay() /home/travis/build/NetCommons3/NetCommons3/vendors/twig/twig/lib/Twig/Template.php:428
+    6.6751   40700416  24. Twig_Template->displayBlock() /tmp/phpdoc-twig-cache/fb/fbe1eb4acf07e3d0d465fa3e789b445f77def656502a8e98d4d159266177bd4a.php:312
+    6.6751   40700544  25. __TwigTemplate_989d0329cc043cef745de111ebcfd9980127d5f7a0eab1d66ff2289ff0d3cc8e->block_content() /home/travis/build/NetCommons3/NetCommons3/vendors/twig/twig/lib/Twig/Template.php:207
+    6.6941   40731520  26. Twig_Template->displayBlock() /tmp/phpdoc-twig-cache/5d/5dffc0a58d3799d02a5afa0d8ca16314445dc469e3fd239d73d38969abff50b4.php:801
+    6.6941   40731648  27. __TwigTemplate_29bcbc752332549d2f11c579555f45a960e6be3ee7e27831569880917a627f3e->block_property() /home/travis/build/NetCommons3/NetCommons3/vendors/twig/twig/lib/Twig/Template.php:207
+    6.6946   40863080  28. Twig_Template->getAttribute() /tmp/phpdoc-twig-cache/57/570b5340f31d2d9825bab97cc17eb871bdacb5cd12ed507b002b1ec3aa7b23f4.php:73
+    6.6946   40863688  29. phpDocumentor\Descriptor\Collection->get() /home/travis/build/NetCommons3/NetCommons3/vendors/twig/twig/lib/Twig/Template.php:665
+
+                            </article>
         </div>
         <aside class="span4 detailsbar">
             <h1><i class="icon-arrow-down"></i></h1>
@@ -644,7 +746,7 @@ can simulate a logged in user by setting <code>Trackable.Auth</code> config:</p>
                 <section class="span10 offset1">
                     <hr />
                     Documentation is powered by <a href="http://www.phpdoc.org/">phpDocumentor </a> and authored
-                    on November 10th, 2016 at 07:46.
+                    on November 17th, 2016 at 02:46.
                 </section>
             </section>
         </section>
