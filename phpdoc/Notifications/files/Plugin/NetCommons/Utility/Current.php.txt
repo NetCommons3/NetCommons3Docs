@@ -9,6 +9,7 @@
  * @copyright Copyright 2014, NetCommons Project
  */
 
+App::uses('CurrentBase', 'NetCommons.Utility');
 App::uses('CurrentSystem', 'NetCommons.Utility');
 App::uses('CurrentFrame', 'NetCommons.Utility');
 App::uses('CurrentPage', 'NetCommons.Utility');
@@ -230,107 +231,6 @@ App::uses('Plugin', 'PluginManager.Model');
  * @author Shohei Nakajima <nakajimashouhei@gmail.com>
  * @package NetCommons\NetCommons\Utility
  */
-class CurrentBase {
-
-/**
- * Current data
- *
- * @var array
- */
-	public static $current = array();
-
-/**
- * 指定された$keyの値を返します。
- *
- * 現在のBlockKeyを取得したい場合
- * ```
- * Cuurent::read('Block.key')
- * ```
- *
- * @param string|null $key Hashクラスのpath
- * @param mixed $default デフォルト値
- * @return array|null Current data.
- */
-	public static function read($key = null, $default = null) {
-		if (! isset(self::$current)) {
-			return self::$current;
-		}
-
-		if (! isset($key)) {
-			return self::$current;
-		}
-		return Hash::get(self::$current, $key, $default);
-	}
-
-/**
- * 指定された$keyの値をセットします
- *
- * 現在のBlockKeyをセットしたい場合
- * ```
- * Cuurent::write('Block.key', 'block_key)
- * ```
- *
- * @param string|null $key Hashクラスのpath、nullの場合、Hash::mergeする
- * @param mixted $value セットする値
- * @return void
- */
-	public static function write($key, $value) {
-		if (! isset(self::$current)) {
-			self::$current = array();
-		}
-		if (! isset($key)) {
-			self::$current = Hash::merge(self::$current, $value);
-		} else {
-			self::$current = Hash::insert(self::$current, $key, $value);
-		}
-	}
-
-/**
- * 指定された$keyの値を削除します。
- *
- * 現在のBlockKeyを削除したい場合
- * ```
- * Cuurent::remove('Block.key')
- * ```
- *
- * @param string|null $key Hashクラスのpath
- * @return array|null Current data.
- */
-	public static function remove($key = null) {
-		if (! isset(self::$current) || ! isset($key)) {
-			self::$current = array();
-		}
-
-		self::$current = Hash::remove(self::$current, $key);
-	}
-
-/**
- * 指定された$key(権限名文字列)の値を返します。
- *
- * ```
- * Current::permission('content_publishable')
- * ```
- *
- * @param string $key Hashクラスのpath
- * @return bool permission value
- */
-	public static function permission($key) {
-		if (! isset(self::$current)) {
-			return false;
-		}
-		$path = 'Permission.' . $key . '.value';
-		return (bool)Hash::get(self::$current, $path);
-	}
-
-}
-
-
-/**
- * Current Utilityチェック
- *
- * @author Shohei Nakajima <nakajimashouhei@gmail.com>
- * @package NetCommons\NetCommons\Utility
- */
 class Current extends CurrentBase {
 
 /**
@@ -387,13 +287,6 @@ class Current extends CurrentBase {
 	protected static $_instance;
 
 /**
- * M17n data
- *
- * @var array
- */
-	public static $m17n = array();
-
-/**
  * setup current data
  *
  * @param Controller $controller コントローラ
@@ -407,6 +300,23 @@ class Current extends CurrentBase {
 		self::$request = clone $controller->request;
 		self::$layout = $controller->layout;
 
+		if (Hash::get(self::$current, 'User.modified') !== AuthComponent::user('modified')) {
+			$User = ClassRegistry::init('Users.User');
+			$changeUser = $User->find('first', array(
+				'recursive' => 0,
+				'conditions' => array(
+					'User.id' => AuthComponent::user('id'),
+					'User.modified !=' => AuthComponent::user('modified'),
+				),
+			));
+			if ($changeUser) {
+				$sessionUser = $changeUser['User'];
+				unset($changeUser['User']);
+				CakeSession::write(
+					AuthComponent::$sessionKey, array_merge_recursive($sessionUser, $changeUser)
+				);
+			}
+		}
 		self::$current['User'] = AuthComponent::user();
 
 		(new CurrentSystem())->initialize();
@@ -414,43 +324,9 @@ class Current extends CurrentBase {
 		if (! self::isControlPanel()) {
 			(new CurrentFrame())->initialize();
 		}
-	}
 
-/**
- * 多言語のデータ取得
- *
- * @param string|null $languageId 言語ID
- * @param string|null $model モデル名
- * @param string|null $field フィールド名
- * @return mixed Currentデータ
- */
-	public static function readM17n($languageId, $model = null, $field = null) {
-		if (! isset(self::$m17n)) {
-			return self::$m17n;
-		}
-
-		if (! isset($model)) {
-			return self::$m17n;
-		}
-
-		if (! isset(self::$m17n[$model])) {
-			return null;
-		}
-		if (! isset($languageId)) {
-			return self::$m17n[$model];
-		}
-
-		$pathKey = $model . '.{n}.' . $model . '[language_id=' . $languageId . ']';
-		$result = Hash::extract(self::$m17n, $pathKey);
-		if (! $result) {
-			return null;
-		}
-
-		if (! isset($field)) {
-			return array($model => $result[0]);
-		} else {
-			return $result[0][$field];
-		}
+		//会員権限に紐づくパーミッションのセット
+		(new CurrentPage())->setDefaultRolePermissions(Hash::get(self::$current, 'User.role_key'), true);
 	}
 
 /**
@@ -551,6 +427,30 @@ class Current extends CurrentBase {
 		//	return true;
 		//}
 		return Hash::check(Current::$current['PluginsRole'], '{n}[plugin_key=' . $pluginKey . ']');
+	}
+
+/**
+ * 取得した結果を$currentにセットする
+ *
+ * @param array $results 取得結果
+ * @param array $forceMargeModels 既に取得済みでも強制でマージするModelのリスト
+ * @return void
+ */
+	public static function setCurrent($results, $forceMargeModels = []) {
+		if (! $results) {
+			return;
+		}
+		$models = array_keys($results);
+
+		foreach ($models as $model) {
+			if (array_key_exists('id', $results[$model]) && ! Hash::get($results[$model], 'id')) {
+				continue;
+			}
+			if (! isset(Current::$current[$model]) ||
+					$forceMargeModels === true || in_array($model, $forceMargeModels, true)) {
+				Current::$current[$model] = $results[$model];
+			}
+		}
 	}
 
 }
