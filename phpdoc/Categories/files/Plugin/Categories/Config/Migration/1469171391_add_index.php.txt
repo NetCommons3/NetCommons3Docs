@@ -32,10 +32,10 @@ class AddIndex extends CakeMigration {
 		'up' => array(
 			'alter_field' => array(
 				'categories' => array(
-					'block_id' => array('type' => 'integer', 'null' => false, 'default' => null, 'unsigned' => false, 'key' => 'index', 'comment' => 'block id |  ブロックID | blocks.id | '),
+					'block_id' => array('type' => 'integer', 'null' => false, 'default' => null, 'unsigned' => false, 'key' => 'index', 'comment' => 'ブロックID'),
 				),
 				'category_orders' => array(
-					'category_key' => array('type' => 'string', 'null' => false, 'default' => null, 'key' => 'index', 'collate' => 'utf8_general_ci', 'comment' => 'category key | カテゴリーKey | categories.key | ', 'charset' => 'utf8'),
+					'category_key' => array('type' => 'string', 'null' => false, 'default' => null, 'key' => 'index', 'collate' => 'utf8_general_ci', 'comment' => 'カテゴリーKey', 'charset' => 'utf8'),
 				),
 			),
 			'create_field' => array(
@@ -54,10 +54,10 @@ class AddIndex extends CakeMigration {
 		'down' => array(
 			'alter_field' => array(
 				'categories' => array(
-					'block_id' => array('type' => 'integer', 'null' => false, 'default' => null, 'unsigned' => false, 'comment' => 'block id |  ブロックID | blocks.id | '),
+					'block_id' => array('type' => 'integer', 'null' => false, 'default' => null, 'unsigned' => false, 'comment' => 'ブロックID'),
 				),
 				'category_orders' => array(
-					'category_key' => array('type' => 'string', 'null' => false, 'default' => null, 'collate' => 'utf8_general_ci', 'comment' => 'category key | カテゴリーKey | categories.key | ', 'charset' => 'utf8'),
+					'category_key' => array('type' => 'string', 'null' => false, 'default' => null, 'collate' => 'utf8_general_ci', 'comment' => 'カテゴリーKey', 'charset' => 'utf8'),
 				),
 			),
 			'drop_field' => array(
