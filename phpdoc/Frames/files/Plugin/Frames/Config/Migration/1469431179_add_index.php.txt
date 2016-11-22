@@ -33,7 +33,7 @@ class AddIndex extends CakeMigration {
 			'alter_field' => array(
 				'frames' => array(
 					'box_id' => array('type' => 'integer', 'null' => false, 'default' => null, 'unsigned' => false, 'key' => 'index'),
-					'key' => array('type' => 'string', 'null' => false, 'default' => null, 'key' => 'index', 'collate' => 'utf8_general_ci', 'comment' => 'Key of the frame.', 'charset' => 'utf8'),
+					'key' => array('type' => 'string', 'null' => false, 'default' => null, 'key' => 'index', 'collate' => 'utf8_general_ci', 'comment' => 'フレームKey', 'charset' => 'utf8'),
 				),
 			),
 			'create_field' => array(
@@ -50,7 +50,7 @@ class AddIndex extends CakeMigration {
 			'alter_field' => array(
 				'frames' => array(
 					'box_id' => array('type' => 'integer', 'null' => false, 'default' => null, 'unsigned' => false),
-					'key' => array('type' => 'string', 'null' => false, 'default' => null, 'collate' => 'utf8_general_ci', 'comment' => 'Key of the frame.', 'charset' => 'utf8'),
+					'key' => array('type' => 'string', 'null' => false, 'default' => null, 'collate' => 'utf8_general_ci', 'comment' => 'フレームKey', 'charset' => 'utf8'),
 				),
 			),
 			'drop_field' => array(
