@@ -17,6 +17,7 @@
  */
 
 App::uses('ModelBehavior', 'Model');
+App::uses('Space', 'Rooms.Model');
 
 /**
  * Page Behavior
@@ -53,7 +54,7 @@ class PageSaveBehavior extends ModelBehavior {
 		$model->data['Page']['slug'] = $slug;
 
 		$permalink = $slug;
-		if ($model->data['Page']['room_id'] !== Room::PUBLIC_PARENT_ID &&
+		if ($model->data['Page']['room_id'] !== Space::getRoomIdRoot(Space::PUBLIC_SPACE_ID) &&
 				Hash::get($model->data, 'Page.id', false) !== Current::read('Room.page_id_top')) {
 			$roomPageTop = $model->Page->find('first', array(
 				'recursive' => -1,

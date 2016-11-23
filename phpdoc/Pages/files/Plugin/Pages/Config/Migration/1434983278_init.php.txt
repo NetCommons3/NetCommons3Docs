@@ -45,7 +45,7 @@ class Init extends CakeMigration {
 					'tableParameters' => array('charset' => 'utf8', 'collate' => 'utf8_general_ci', 'engine' => 'InnoDB'),
 				),
 				'pages' => array(
-					'id' => array('type' => 'integer', 'null' => false, 'default' => null, 'unsigned' => false, 'key' => 'primary', 'comment' => 'Datetime display page from.'),
+					'id' => array('type' => 'integer', 'null' => false, 'default' => null, 'unsigned' => false, 'key' => 'primary', 'comment' => 'ページID'),
 					'room_id' => array('type' => 'integer', 'null' => false, 'default' => null, 'unsigned' => false),
 					'root_id' => array('type' => 'integer', 'null' => true, 'default' => null, 'unsigned' => false),
 					'parent_id' => array('type' => 'integer', 'null' => true, 'default' => null, 'unsigned' => false),

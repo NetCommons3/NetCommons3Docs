@@ -18,6 +18,7 @@
 
 App::uses('PagesAppModel', 'Pages.Model');
 App::uses('Current', 'NetCommons.Utility');
+App::uses('Space', 'Rooms.Model');
 
 /**
  * Page Model
@@ -429,7 +430,7 @@ class Page extends PagesAppModel {
 		$room = $this->Room->find('first', array(
 			'recursive' => -1,
 			'conditions' => array(
-				'id' => Room::PUBLIC_PARENT_ID
+				'id' => Space::getRoomIdRoot(Space::PUBLIC_SPACE_ID)
 			)
 		));
 
@@ -669,7 +670,7 @@ class Page extends PagesAppModel {
 		));
 
 		if ($first['Page']['id'] === $data[$this->alias]['id']) {
-			$this->Room->id = Room::PUBLIC_PARENT_ID;
+			$this->Room->id = Space::getRoomIdRoot(Space::PUBLIC_SPACE_ID);
 			if (! $this->Room->saveField('page_id_top', $first['Page']['id'], array('callbacks' => false))) {
 				throw new InternalErrorException(__d('net_commons', 'Internal Server Error'));
 			}
