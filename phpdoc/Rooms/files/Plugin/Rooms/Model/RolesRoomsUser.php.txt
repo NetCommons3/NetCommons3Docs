@@ -14,6 +14,7 @@
 
 App::uses('RoomsAppModel', 'Rooms.Model');
 App::uses('Room', 'Rooms.Model');
+App::uses('Space', 'Rooms.Model');
 
 /**
  * RolesRoomsUser Model
@@ -338,7 +339,7 @@ class RolesRoomsUser extends RoomsAppModel {
  * @SuppressWarnings(PHPMD.BooleanArgumentFlag)
  */
 	public function saveSpaceRoomForRooms($rolesRoomsUser, $spaceRolesRoomIds, $isCreate = false) {
-		if ($rolesRoomsUser['room_id'] !== Room::PUBLIC_PARENT_ID) {
+		if ($rolesRoomsUser['room_id'] !== Space::getRoomIdRoot(Space::PUBLIC_SPACE_ID, 'Room')) {
 			return true;
 		}
 
@@ -353,9 +354,9 @@ class RolesRoomsUser extends RoomsAppModel {
 		}
 
 		$roomIds = array(
-			Room::WHOLE_SITE_PARENT_ID,
-			Room::ROOM_PARENT_ID,
-			Room::PRIVATE_PARENT_ID
+			Space::getRoomIdRoot(Space::WHOLE_SITE_ID, 'Room'),
+			Space::getRoomIdRoot(Space::COMMUNITY_SPACE_ID, 'Room'),
+			Space::getRoomIdRoot(Space::PRIVATE_SPACE_ID, 'Room')
 		);
 		foreach ($roomIds as $roomId) {
 			$rolesRoomId = Hash::get(
@@ -379,7 +380,17 @@ class RolesRoomsUser extends RoomsAppModel {
 					$this->alias . '.room_id' => $roomId,
 					$this->alias . '.user_id' => $rolesRoomsUser['user_id'],
 				);
-				$result = $this->updateAll($update, $conditions);
+				$count = $this->find('count', ['recursive' => -1, 'conditions' => $conditions]);
+				if ($count > 0) {
+					$result = $this->updateAll($update, $conditions);
+				} else {
+					$this->create(false);
+					$result = $this->save(array(
+						'roles_room_id' => $rolesRoomId,
+						'room_id' => $roomId,
+						'user_id' => $rolesRoomsUser['user_id'],
+					));
+				}
 			}
 			if (! $result) {
 				return false;
@@ -400,13 +411,14 @@ class RolesRoomsUser extends RoomsAppModel {
 			'recursive' => -1,
 			'conditions' => array(
 				'room_id' => array(
-					Room::WHOLE_SITE_PARENT_ID,
-					Room::PUBLIC_PARENT_ID,
-					Room::ROOM_PARENT_ID,
-					Room::PRIVATE_PARENT_ID
+					Space::getRoomIdRoot(Space::WHOLE_SITE_ID, 'Room'),
+					Space::getRoomIdRoot(Space::PUBLIC_SPACE_ID, 'Room'),
+					Space::getRoomIdRoot(Space::COMMUNITY_SPACE_ID, 'Room'),
+					Space::getRoomIdRoot(Space::PRIVATE_SPACE_ID, 'Room')
 				),
 			),
 		));
+
 		$spaceRolesRoomIds = Hash::combine(
 			$spaceRolesRoomIds,
 			'{n}.RolesRoom.role_key',

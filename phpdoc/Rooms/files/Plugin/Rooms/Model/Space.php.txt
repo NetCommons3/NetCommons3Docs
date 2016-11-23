@@ -40,18 +40,14 @@ class Space extends RoomsAppModel {
 		WHOLE_SITE_ID = '1',
 		PUBLIC_SPACE_ID = '2',
 		PRIVATE_SPACE_ID = '3',
-		ROOM_SPACE_ID = '4';
+		COMMUNITY_SPACE_ID = '4';
 
 /**
- * Space type
+ * SpaceIdのリスト
  *
- * @var const
+ * @var array
  */
-	const
-		WHOLE_SITE_TYPE = '1',
-		PUBLIC_SPACE_TYPE = '2',
-		PRIVATE_SPACE_TYPE = '3',
-		ROOM_SPACE_TYPE = '4';
+	public static $spaceIds = array();
 
 /**
  * DefaultParticipationFixed
@@ -159,21 +155,6 @@ class Space extends RoomsAppModel {
 					'on' => 'update', // Limit validation to 'create' or 'update' operations
 				),
 			),
-			'type' => array(
-				'numeric' => array(
-					'rule' => array('numeric'),
-					'message' => __d('net_commons', 'Invalid request.'),
-					'required' => true
-				),
-				'inList' => array(
-					'rule' => array('inList', array(
-						self::WHOLE_SITE_TYPE, self::PUBLIC_SPACE_TYPE,
-						self::PRIVATE_SPACE_TYPE, self::ROOM_SPACE_TYPE
-					)),
-					'message' => __d('net_commons', 'Invalid request.'),
-					'required' => true
-				),
-			),
 		));
 
 		return parent::beforeValidate($options);
@@ -210,6 +191,55 @@ class Space extends RoomsAppModel {
 		}
 
 		return $result;
+	}
+
+/**
+ * SpaceのルームIDを取得
+ *
+ * @param int $spaceId スペースID
+ * @param string $spaceModel モデル名(Migrationで使用)
+ * @return int
+ */
+	public static function getRoomIdRoot($spaceId, $spaceModel = 'Space') {
+		$Space = ClassRegistry::init('Rooms.' . $spaceModel, true);
+		if ($spaceModel === 'Space') {
+			if (! Hash::get(self::$spaceIds, 'Space')) {
+				$spaces = $Space->find('list', array(
+					'recursive' => -1,
+					'fields' => array('id', 'room_id_root'),
+				));
+				if ($spaces) {
+					self::$spaceIds['Space'] = $spaces;
+				}
+			}
+			$spaceIds = Hash::get(self::$spaceIds, 'Space', array());
+		} else {
+			if (! Hash::get(self::$spaceIds, 'Room')) {
+				$spaceIds = array();
+				$result = $Space->find('list', array(
+					'recursive' => -1,
+					'fields' => array('space_id', 'id'),
+					'conditions' => array(
+						'space_id' => self::WHOLE_SITE_ID
+					),
+				));
+				$spaceIds = Hash::merge($spaceIds, $result);
+
+				$result = $Space->find('list', array(
+					'recursive' => -1,
+					'fields' => array('space_id', 'id'),
+					'conditions' => array(
+						'parent_id' => $spaceIds[self::WHOLE_SITE_ID]
+					),
+				));
+				$spaceIds = Hash::merge($spaceIds, $result);
+
+				self::$spaceIds['Room'] = $spaceIds;
+			}
+			$spaceIds = Hash::get(self::$spaceIds, 'Room', array());
+		}
+
+		return (string)Hash::get($spaceIds, $spaceId, '0');
 	}
 
 }

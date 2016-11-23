@@ -10,6 +10,7 @@
  */
 
 App::uses('ModelBehavior', 'Model');
+App::uses('Space', 'Rooms.Model');
 
 /**
  * Room Behavior
@@ -84,7 +85,7 @@ class RoomBehavior extends ModelBehavior {
 		$spaceIds = array();
 		$spaceIds[] = Space::PUBLIC_SPACE_ID;
 		if (Current::read('User.id')) {
-			$spaceIds[] = Space::ROOM_SPACE_ID;
+			$spaceIds[] = Space::COMMUNITY_SPACE_ID;
 			$joinType = 'INNER';
 		} else {
 			$joinType = 'LEFT';
@@ -96,12 +97,16 @@ class RoomBehavior extends ModelBehavior {
 			$conditions = Hash::merge(array('Room.active' => true, 'Room.in_draft' => false), $conditions);
 		}
 
-		if (array_key_exists('Room.id', $conditions) && $conditions['Room.id'] === Room::ROOM_PARENT_ID) {
-			$conditions = Hash::merge(array('OR' => array('Room.id' => Room::ROOM_PARENT_ID)), $conditions);
+		$communityRoomId = Space::getRoomIdRoot(Space::COMMUNITY_SPACE_ID);
+		if (array_key_exists('Room.id', $conditions) && $conditions['Room.id'] === $communityRoomId) {
+			$conditions = Hash::merge(
+				array('OR' => array('Room.id' => $communityRoomId)),
+				$conditions
+			);
 		} elseif (isset($conditions[$model->Room->alias . '.page_id_top NOT'])) {
 			$conditions = Hash::merge(array('OR' => array(
 				$model->Room->alias . '.page_id_top NOT' => null,
-				'Room.id' => Room::ROOM_PARENT_ID,
+				'Room.id' => Space::getRoomIdRoot(Space::COMMUNITY_SPACE_ID),
 			)), $conditions);
 			unset($conditions[$model->Room->alias . '.page_id_top NOT']);
 		} else {
@@ -166,7 +171,7 @@ class RoomBehavior extends ModelBehavior {
 		$spaces = $model->Room->find('all', array(
 			'recursive' => 1,
 			'conditions' => array(
-				$model->Room->alias . '.parent_id' => Room::WHOLE_SITE_PARENT_ID,
+				$model->Room->alias . '.parent_id' => Space::getRoomIdRoot(Space::WHOLE_SITE_ID, 'Room'),
 			),
 			'order' => 'Room.lft'
 		));
@@ -177,7 +182,10 @@ class RoomBehavior extends ModelBehavior {
 			'recursive' => -1,
 			'fields' => '*',
 			'conditions' => array(
-				$model->RolesRoom->alias . '.room_id' => array(Room::PUBLIC_PARENT_ID, Room::PRIVATE_PARENT_ID),
+				$model->RolesRoom->alias . '.room_id' => array(
+					Space::getRoomIdRoot(Space::PUBLIC_SPACE_ID),
+					Space::getRoomIdRoot(Space::PRIVATE_SPACE_ID)
+				),
 			),
 			'joins' => array(
 				array(

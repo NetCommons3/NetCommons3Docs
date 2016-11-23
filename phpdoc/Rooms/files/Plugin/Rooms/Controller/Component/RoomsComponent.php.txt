@@ -102,7 +102,7 @@ class RoomsComponent extends Component {
 		$controller = $this->controller;
 
 		if (! $spaceId) {
-			$getSpaces = [Space::PUBLIC_SPACE_ID, Space::ROOM_SPACE_ID];
+			$getSpaces = [Space::PUBLIC_SPACE_ID, Space::COMMUNITY_SPACE_ID];
 		} else {
 			$getSpaces = [$spaceId];
 		}
@@ -157,8 +157,8 @@ class RoomsComponent extends Component {
 		$roomTreeLists[Space::PUBLIC_SPACE_ID] = $controller->Room->generateTreeList(
 				array('Room.space_id' => Space::PUBLIC_SPACE_ID), null, null, Room::$treeParser);
 
-		$roomTreeLists[Space::ROOM_SPACE_ID] = $controller->Room->generateTreeList(
-				array('Room.space_id' => Space::ROOM_SPACE_ID), null, null, Room::$treeParser);
+		$roomTreeLists[Space::COMMUNITY_SPACE_ID] = $controller->Room->generateTreeList(
+				array('Room.space_id' => Space::COMMUNITY_SPACE_ID), null, null, Room::$treeParser);
 		$controller->set('roomTreeLists', $roomTreeLists);
 
 		//** ロールルームユーザデータ取得

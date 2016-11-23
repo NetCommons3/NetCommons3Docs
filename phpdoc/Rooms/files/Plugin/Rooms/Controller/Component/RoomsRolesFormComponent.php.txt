@@ -141,7 +141,7 @@ class RoomsRolesFormComponent extends Component {
 			$controller->viewVars['spaces'][$activeSpaceId]['Space']['plugin_key']
 		);
 		$controller->$model = ClassRegistry::init($model . '.' . $model);
-		if ($room['Room']['id'] === Room::ROOM_PARENT_ID) {
+		if ($room['Room']['id'] === Space::getRoomIdRoot(Space::COMMUNITY_SPACE_ID)) {
 			$controller->set('participationFixed', true);
 		} else {
 			$controller->set('participationFixed', $controller->$model->participationFixed);

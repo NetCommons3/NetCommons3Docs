@@ -28,17 +28,6 @@ App::uses('BlockSettingBehavior', 'Blocks.Model/Behavior');
 class Room extends RoomsAppModel {
 
 /**
- * room id
- *
- * @var const
- */
-	const
-		WHOLE_SITE_PARENT_ID = '1',
-		PUBLIC_PARENT_ID = '2',
-		PRIVATE_PARENT_ID = '3',
-		ROOM_PARENT_ID = '4';
-
-/**
  * TreeParser
  * __constructでセットする
  *
@@ -59,14 +48,11 @@ class Room extends RoomsAppModel {
 
 /**
  * スペースルームIDのリスト
+ * __constructでセットする
  *
  * @var array
  */
-	public static $spaceRooms = array(
-		self::PUBLIC_PARENT_ID,
-		self::PRIVATE_PARENT_ID,
-		self::ROOM_PARENT_ID,
-	);
+	public static $spaceRooms = array();
 
 /**
  * Validation rules
@@ -168,6 +154,12 @@ class Room extends RoomsAppModel {
 	public function __construct($id = false, $table = null, $ds = null) {
 		parent::__construct($id, $table, $ds);
 		self::$treeParser = chr(9);
+
+		self::$spaceRooms = array(
+			Space::getRoomIdRoot(Space::PUBLIC_SPACE_ID),
+			Space::getRoomIdRoot(Space::PRIVATE_SPACE_ID),
+			Space::getRoomIdRoot(Space::COMMUNITY_SPACE_ID),
+		);
 	}
 
 /**
@@ -622,5 +614,6 @@ class Room extends RoomsAppModel {
 
 		return true;
 	}
+
 }
 

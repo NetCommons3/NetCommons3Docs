@@ -163,7 +163,8 @@ class RoomsFormHelper extends AppHelper {
 		$output .= $this->NetCommonsHtml->link(__d('rooms', 'General setting'), $urlRooms);
 		$output .= '</li>';
 
-		if (Hash::get($this->_View->request->data, 'Room.id') !== Room::ROOM_PARENT_ID) {
+		$communityRoomId = Space::getRoomIdRoot(Space::COMMUNITY_SPACE_ID);
+		if (Hash::get($this->_View->request->data, 'Room.id') !== $communityRoomId) {
 			if ($this->_View->params['controller'] === 'rooms_roles_users') {
 				$class = 'active';
 			} else {
@@ -176,7 +177,7 @@ class RoomsFormHelper extends AppHelper {
 			$output .= '</li>';
 		}
 
-		if (Hash::get($this->_View->request->data, 'Room.id') !== Room::ROOM_PARENT_ID) {
+		if (Hash::get($this->_View->request->data, 'Room.id') !== $communityRoomId) {
 			if ($this->_View->params['controller'] === 'plugins_rooms') {
 				$class = 'active';
 			} else {
