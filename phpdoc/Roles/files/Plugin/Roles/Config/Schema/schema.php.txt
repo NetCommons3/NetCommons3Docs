@@ -53,11 +53,8 @@ class RolesSchema extends CakeSchema {
 	public $default_role_permissions = array(
 		'id' => array('type' => 'integer', 'null' => false, 'default' => null, 'unsigned' => false, 'key' => 'primary'),
 		'role_key' => array('type' => 'string', 'null' => false, 'default' => null, 'key' => 'index', 'collate' => 'utf8_general_ci', 'charset' => 'utf8'),
-		'type' => array('type' => 'string', 'null' => false, 'default' => null, 'collate' => 'utf8_general_ci', 'comment' => 'Role type
-e.g.) room_role, announcement_block_role, bbs_block_role
-', 'charset' => 'utf8'),
-		'permission' => array('type' => 'string', 'null' => false, 'default' => null, 'collate' => 'utf8_general_ci', 'comment' => 'Permission name
-e.g.) create_page, edit_other_content, post_top_article', 'charset' => 'utf8'),
+		'type' => array('type' => 'string', 'null' => false, 'default' => null, 'collate' => 'utf8_general_ci', 'comment' => 'ロールタイプ　e.g.) room_role, announcement_block_role, bbs_block_role', 'charset' => 'utf8'),
+		'permission' => array('type' => 'string', 'null' => false, 'default' => null, 'collate' => 'utf8_general_ci', 'comment' => 'パーミッション名　e.g.) page_creatable, content_editable', 'charset' => 'utf8'),
 		'value' => array('type' => 'boolean', 'null' => false, 'default' => null),
 		'fixed' => array('type' => 'boolean', 'null' => false, 'default' => null),
 		'created_user' => array('type' => 'integer', 'null' => true, 'default' => null, 'unsigned' => false),
@@ -79,11 +76,11 @@ e.g.) create_page, edit_other_content, post_top_article', 'charset' => 'utf8'),
 	public $roles = array(
 		'id' => array('type' => 'integer', 'null' => false, 'default' => null, 'unsigned' => false, 'key' => 'primary'),
 		'language_id' => array('type' => 'integer', 'null' => false, 'default' => null, 'length' => 6, 'unsigned' => false),
-		'key' => array('type' => 'string', 'null' => true, 'default' => null, 'key' => 'index', 'collate' => 'utf8_general_ci', 'comment' => 'Key of the role.', 'charset' => 'utf8'),
-		'type' => array('type' => 'integer', 'null' => false, 'default' => null, 'unsigned' => false, 'key' => 'index', 'comment' => 'Type of the role. 1: User role, 2: Room role'),
-		'name' => array('type' => 'string', 'null' => false, 'default' => null, 'collate' => 'utf8_general_ci', 'comment' => 'Name of the role.  e.g.) Administrator, User Manager, Chief, User', 'charset' => 'utf8'),
+		'key' => array('type' => 'string', 'null' => true, 'default' => null, 'key' => 'index', 'collate' => 'utf8_general_ci', 'comment' => 'ロールKey', 'charset' => 'utf8'),
+		'type' => array('type' => 'integer', 'null' => false, 'default' => null, 'unsigned' => false, 'key' => 'index', 'comment' => 'ロールタイプ   1: User role, 2: Room role'),
+		'name' => array('type' => 'string', 'null' => false, 'default' => null, 'collate' => 'utf8_general_ci', 'comment' => 'ロール名', 'charset' => 'utf8'),
 		'description' => array('type' => 'text', 'null' => true, 'default' => null, 'collate' => 'utf8_general_ci', 'charset' => 'utf8'),
-		'is_system' => array('type' => 'boolean', 'null' => false, 'default' => '0', 'comment' => '0: normalized, 1: systemized'),
+		'is_system' => array('type' => 'boolean', 'null' => false, 'default' => '0', 'comment' => '1:システムのロール, 0:権限管理で追加したロール'),
 		'created_user' => array('type' => 'integer', 'null' => true, 'default' => null, 'unsigned' => false),
 		'created' => array('type' => 'datetime', 'null' => true, 'default' => null),
 		'modified_user' => array('type' => 'integer', 'null' => true, 'default' => null, 'unsigned' => false),
