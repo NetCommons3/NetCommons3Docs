@@ -50,12 +50,12 @@ class SystemManagerController extends SystemManagerAppController {
 
 			$spaces = $this->Space->find('all', array(
 				'recursive' => -1,
-				'conditions' => array('id' => [Space::PRIVATE_SPACE_ID, Space::ROOM_SPACE_ID]),
+				'conditions' => array('id' => [Space::PRIVATE_SPACE_ID, Space::COMMUNITY_SPACE_ID]),
 			));
 
 			$setSpaceDisk = array(
 				// * グループルームの容量
-				Space::ROOM_SPACE_ID => 'App.disk_for_group_room',
+				Space::COMMUNITY_SPACE_ID => 'App.disk_for_group_room',
 				// * プライベートルームの容量
 				Space::PRIVATE_SPACE_ID => 'App.disk_for_private_room',
 			);
