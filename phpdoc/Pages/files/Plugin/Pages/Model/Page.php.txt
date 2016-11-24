@@ -408,6 +408,14 @@ class Page extends PagesAppModel {
 					'Room.parent_id' => $parentRoomId,
 				),
 			));
+		} elseif ($roomId) {
+			$result = $this->find('count', array(
+				'recursive' => -1,
+				'conditions' => array(
+					'Page.id' => $pageId,
+					'Page.room_id' => $roomId
+				),
+			));
 		} else {
 			$result = $this->find('count', array(
 				'recursive' => -1,
