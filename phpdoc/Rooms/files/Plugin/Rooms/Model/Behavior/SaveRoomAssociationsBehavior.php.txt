@@ -373,7 +373,7 @@ class SaveRoomAssociationsBehavior extends ModelBehavior {
  */
 	public function getParentPageId(Model $model, $page) {
 		if (Hash::get($page, 'Room.parent_id') &&
-				! in_array((string)Hash::get($page, 'Room.parent_id'), Room::$spaceRooms, true)) {
+				! in_array((string)Hash::get($page, 'Room.parent_id'), Room::getSpaceRooms(), true)) {
 			$model->loadModels(['Room' => 'Rooms.Room']);
 			$parentRoom = $model->Room->find('first', array(
 				'recursive' => -1,
