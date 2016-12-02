@@ -226,14 +226,24 @@ class RoomsHelper extends AppHelper {
  * @param bool $displayActive アクティブの表示有無
  * @return string HTML
  * @SuppressWarnings(PHPMD.BooleanArgumentFlag)
+ * @link https://github.com/NetCommons3/UserManager/blob/3.0.1/View/Elements/UsersRolesRooms/render_room_index.ctp#L31
+ * @link https://github.com/NetCommons3/Users/blob/3.0.1/View/Elements/Users/view_rooms_index.ctp#L27
  */
 	public function statusLabel($room, $messageFormat = '%s', $displayActive = false) {
 		$output = '';
 
 		if (! $room['Room']['active']) {
-			$output .= ' ' . __d('rooms', sprintf($messageFormat, 'Under maintenance'));
+			if ($messageFormat === '(%s)') {
+				$output .= ' ' . __d('rooms', '(Under maintenance)');
+			} else {
+				$output .= ' ' . __d('rooms', 'Under maintenance');
+			}
 		} elseif ($displayActive) {
-			$output .= ' ' . __d('rooms', sprintf($messageFormat, 'Open'));
+			if ($messageFormat === '(%s)') {
+				$output .= ' ' . __d('rooms', '(Open)');
+			} else {
+				$output .= ' ' . __d('rooms', 'Open');
+			}
 		}
 		return $output;
 	}
