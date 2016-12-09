@@ -121,16 +121,15 @@ class Announcement extends AnnouncementsAppModel {
 	}
 
 /**
- * Called after each successful save operation.
+ * Called before each save operation, after validation. Return a non-true result
+ * to halt the save.
  *
- * @param bool $created True if this save created a new record
  * @param array $options Options passed from Model::save().
- * @return void
- * @throws InternalErrorException
- * @link http://book.cakephp.org/2.0/en/models/callback-methods.html#aftersave
+ * @return bool True if the operation should continue, false if it should abort
+ * @link http://book.cakephp.org/2.0/en/models/callback-methods.html#beforesave
  * @see Model::save()
  */
-	public function afterSave($created, $options = array()) {
+	public function beforeSave($options = array()) {
 		$this->loadModels([
 			'AnnouncementSetting' => 'Announcements.AnnouncementSetting',
 		]);
@@ -141,7 +140,7 @@ class Announcement extends AnnouncementsAppModel {
 			$this->AnnouncementSetting->save(null, false);
 		}
 
-		parent::afterSave($created, $options);
+		parent::beforeSave($options);
 	}
 
 /**

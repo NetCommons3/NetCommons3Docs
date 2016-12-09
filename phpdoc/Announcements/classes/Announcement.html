@@ -136,10 +136,10 @@
                                 <div class="accordion" style="margin-bottom: 0">
         <div class="accordion-group">
             <div class="accordion-heading">
-                                    <a class="accordion-toggle " data-toggle="collapse" data-target="#namespace-647450095"></a>
+                                    <a class="accordion-toggle " data-toggle="collapse" data-target="#namespace-1256443933"></a>
                                 <a href="../namespaces/default.html" style="margin-left: 30px; padding-left: 0">\</a>
             </div>
-            <div id="namespace-647450095" class="accordion-body collapse in">
+            <div id="namespace-1256443933" class="accordion-body collapse in">
                 <div class="accordion-inner">
 
                     
@@ -269,7 +269,7 @@ will inherit them.</p>
                                                                     <a href="../classes/NetCommonsAppModel.html#method_rollback" class="">rollback()</a><br />
                                                                     <a href="../classes/NetCommonsAppModel.html#method_loadModels" class="">loadModels()</a><br />
                                                                     <a href="../classes/Announcement.html#method_beforeValidate" class="">beforeValidate()</a><br />
-                                                                    <a href="../classes/Announcement.html#method_afterSave" class="">afterSave()</a><br />
+                                                                    <a href="../classes/Announcement.html#method_beforeSave" class="">beforeSave()</a><br />
                                                                     <a href="../classes/Announcement.html#method_getAnnouncement" class="">getAnnouncement()</a><br />
                                                                     <a href="../classes/Announcement.html#method_saveAnnouncement" class="">saveAnnouncement()</a><br />
                                                                     <a href="../classes/Announcement.html#method_deleteAnnouncement" class="">deleteAnnouncement()</a><br />
@@ -1036,21 +1036,17 @@ validation rules can be defined in $validate.</em></p>
 
                                     <div class="row-fluid">
         <div class="span8 content class">
-            <a id="method_afterSave" name="method_afterSave" class="anchor"></a>
+            <a id="method_beforeSave" name="method_beforeSave" class="anchor"></a>
             <article class="method">
-                <h3 class="public ">afterSave()</h3>
+                <h3 class="public ">beforeSave()</h3>
                 <a href="#source-view" role="button" class="pull-right btn" data-toggle="modal" style="font-size: 1.1em; padding: 9px 14px"><i class="icon-code"></i></a>
-                <pre class="signature" style="margin-right: 54px;">afterSave(boolean  <span class="argument">$created</span>, array  <span class="argument">$options = array()</span>) : void</pre>
-                <p><em>Called after each successful save operation.</em></p>
+                <pre class="signature" style="margin-right: 54px;">beforeSave(array  <span class="argument">$options = array()</span>) : boolean</pre>
+                <p><em>Called before each save operation, after validation. Return a non-true result
+to halt the save.</em></p>
                 
 
                                     <h4>Parameters</h4>
                     <table class="table table-condensed table-hover">
-                                                    <tr>
-                                <td>boolean</td>
-                                <td>$created </td>
-                                <td><p>True if this save created a new record</p></td>
-                            </tr>
                                                     <tr>
                                 <td>array</td>
                                 <td>$options </td>
@@ -1058,20 +1054,18 @@ validation rules can be defined in $validate.</em></p>
                             </tr>
                                             </table>
                 
-                                    <h4>Throws</h4>
-                    <dl>
-                                                    <dt>\InternalErrorException</dt>
-                            <dd></dd>
-                                                                    </dl>
                 
-                				
+                                    <h4>Returns</h4>
+                    boolean
+                                            &mdash; <p>True if the operation should continue, false if it should abort</p>
+                                    				
                             </article>
         </div>
         <aside class="span4 detailsbar">
             <h1><i class="icon-arrow-down"></i></h1>
                                                             <dl>
                                                                                             <dt>See also</dt>
-                                                                <dd><a href="http://book.cakephp.org/2.0/en/models/callback-methods.html#aftersave"><span class="namespace-wrapper">http://book.cakephp.org/2.0/en/models/callback-methods.html#aftersave</span></a></dd>
+                                                                <dd><a href="http://book.cakephp.org/2.0/en/models/callback-methods.html#beforesave"><span class="namespace-wrapper">http://book.cakephp.org/2.0/en/models/callback-methods.html#beforesave</span></a></dd>
                                                                                                     <dd><a href=""><span class="namespace-wrapper">\Model::save()</span></a></dd>
                                                                 </dl>
             <h2>Tags</h2>
@@ -1332,7 +1326,7 @@ validation rules can be defined in $validate.</em></p>
                 <section class="span10 offset1">
                     <hr />
                     Documentation is powered by <a href="http://www.phpdoc.org/">phpDocumentor </a> and authored
-                    on December 1st, 2016 at 06:49.
+                    on December 9th, 2016 at 04:29.
                 </section>
             </section>
         </section>
