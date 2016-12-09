@@ -187,7 +187,7 @@ class Like extends LikesAppModel {
 		if (Current::read('User.id')) {
 			$joinConditions[$this->LikesUser->alias . '.user_id'] = Current::read('User.id');
 		} else {
-			$joinConditions[$this->LikesUser->alias . '.session_key'] = CakeSession::id();
+			$joinConditions[$this->LikesUser->alias . '.session_key'] = (string)CakeSession::id();
 		}
 
 		$count = $this->find('count', array(
@@ -204,6 +204,7 @@ class Like extends LikesAppModel {
 				),
 			)
 		));
+
 		return (bool)$count;
 	}
 
