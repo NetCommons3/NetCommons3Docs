@@ -57,6 +57,8 @@ class AnnouncementsSchema extends CakeSchema {
 		'status' => array('type' => 'integer', 'null' => false, 'default' => null, 'length' => 4, 'unsigned' => false, 'comment' => '公開状況  1:公開中、2:公開申請中、3:下書き中、4:差し戻し'),
 		'is_active' => array('type' => 'boolean', 'null' => false, 'default' => '0', 'comment' => 'アクティブなコンテンツかどうか 0:アクティブでない 1:アクティブ'),
 		'is_latest' => array('type' => 'boolean', 'null' => false, 'default' => '0', 'comment' => '最新コンテンツかどうか 0:最新でない 1:最新'),
+		'is_origin' => array('type' => 'boolean', 'null' => false, 'default' => '1'),
+		'is_translation' => array('type' => 'boolean', 'null' => false, 'default' => '0'),
 		'content' => array('type' => 'text', 'null' => true, 'default' => null, 'collate' => 'utf8_general_ci', 'comment' => '本文', 'charset' => 'utf8'),
 		'created_user' => array('type' => 'integer', 'null' => true, 'default' => '0', 'unsigned' => false, 'comment' => '作成者'),
 		'created' => array('type' => 'datetime', 'null' => true, 'default' => null, 'comment' => '作成日時'),

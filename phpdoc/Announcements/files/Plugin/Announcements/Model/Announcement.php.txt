@@ -57,6 +57,7 @@ class Announcement extends AnnouncementsAppModel {
 		'Wysiwyg.Wysiwyg' => array(
 			'fields' => array('content'),
 		),
+		'M17n.M17n', //多言語
 	);
 
 /**
