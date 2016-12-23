@@ -29,6 +29,7 @@ class PagesGetTestCase extends NetCommonsGetTest {
 		'plugin.pages.box4pages',
 		'plugin.pages.boxes_page_container4pages',
 		'plugin.pages.frame4pages',
+		'plugin.pages.frames_language4pages',
 		'plugin.pages.pages_language4pages',
 		'plugin.pages.page_container4pages',
 		'plugin.pages.page4pages',
@@ -57,6 +58,16 @@ class PagesGetTestCase extends NetCommonsGetTest {
 		}
 		$this->fixtures = array_merge($this->__fixtures, $this->fixtures);
 		parent::__construct($name, $data, $dataName);
+	}
+
+/**
+ * setUp method
+ *
+ * @return void
+ */
+	public function setUp() {
+		parent::setUp();
+		Current::$current['Language']['id'] = '2';
 	}
 
 }

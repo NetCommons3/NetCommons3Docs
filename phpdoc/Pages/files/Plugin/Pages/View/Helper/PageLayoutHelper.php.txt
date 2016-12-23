@@ -201,8 +201,18 @@ class PageLayoutHelper extends AppHelper {
 			if ($this->_View->request->params['plugin'] === 'pages') {
 				$element = $this->_View->fetch('content');
 			} else {
+				$frame = Hash::merge(
+					Current::read('FramesLanguage', array(
+						'name' => Current::read('Plugin.name')
+					)),
+					Current::read('Frame', array(
+						'header_type' => null,
+						'id' => null,
+						'plugin_key' => Current::read('Plugin.key'),
+					))
+				);
 				$element = $this->_View->element('Frames.frame', array(
-					'frame' => Current::read('Frame'),
+					'frame' => $frame,
 					'view' => $this->_View->fetch('content'),
 					'centerContent' => true,
 					'displayBackTo' => Hash::get($this->_View->viewVars, 'displayBackTo', false),
