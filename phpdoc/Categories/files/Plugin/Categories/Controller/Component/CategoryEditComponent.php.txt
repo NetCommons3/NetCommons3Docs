@@ -45,6 +45,7 @@ class CategoryEditComponent extends Component {
 	public function startup(Controller $controller) {
 		$controller->Category = ClassRegistry::init('Categories.Category');
 		$controller->CategoryOrder = ClassRegistry::init('Categories.CategoryOrder');
+		$controller->CategoriesLanguage = ClassRegistry::init('Categories.CategoriesLanguage');
 
 		if ($controller->request->is(array('post', 'put'))) {
 			$categories = array();
@@ -53,7 +54,7 @@ class CategoryEditComponent extends Component {
 			}
 
 			foreach ($controller->request->data['Categories'] as $post) {
-				if (! isset($post['Category']['name'])) {
+				if (! isset($post['CategoriesLanguage']['name'])) {
 					continue;
 				}
 				$category = null;
@@ -61,7 +62,10 @@ class CategoryEditComponent extends Component {
 					$category = $controller->Category->createAll(array(
 						'Category' => array(
 							'id' => null,
-							'name' => $post['Category']['name'],
+						),
+						'CategoriesLanguage' => array(
+							'id' => null,
+							'name' => $post['CategoriesLanguage']['name'],
 						),
 						'CategoryOrder' => array(
 							'id' => null,

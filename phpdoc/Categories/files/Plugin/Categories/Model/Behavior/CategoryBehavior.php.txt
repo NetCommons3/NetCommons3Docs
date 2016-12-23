@@ -42,12 +42,22 @@ class CategoryBehavior extends ModelBehavior {
 		$model->loadModels(array(
 			'Category' => 'Categories.Category',
 			'CategoryOrder' => 'Categories.CategoryOrder',
+			'CategoriesLanguage' => 'Categories.CategoriesLanguage',
 		));
 
 		foreach ($model->data['Categories'] as $category) {
 			$model->Category->set($category['Category']);
 			if (! $model->Category->validates()) {
-				$model->validationErrors['category_name'] = $model->Category->validationErrors['name'];
+				$model->validationErrors = Hash::merge(
+					$model->validationErrors, $model->CategoryOrder->validationErrors
+				);
+				return false;
+			}
+
+			$model->CategoriesLanguage->set($category['CategoriesLanguage']);
+			if (! $model->CategoriesLanguage->validates()) {
+				$model->validationErrors['category_name'] =
+						$model->CategoriesLanguage->validationErrors['name'];
 				return false;
 			}
 
@@ -79,24 +89,73 @@ class CategoryBehavior extends ModelBehavior {
 		if (! isset($model->data['Categories'])) {
 			return true;
 		}
+
 		$model->loadModels(array(
 			'Category' => 'Categories.Category',
 			'CategoryOrder' => 'Categories.CategoryOrder',
+			'CategoriesLanguage' => 'Categories.CategoriesLanguage',
 		));
 
+		//不要なカテゴリを削除する
+		$this->_deleteCategories($model);
+
+		//登録処理
+		foreach ($model->data['Categories'] as $category) {
+			$result = $model->Category->save($category['Category'], false);
+			if (! $result) {
+				throw new InternalErrorException(__d('net_commons', 'Internal Server Error'));
+			}
+
+			$category['CategoryOrder']['category_key'] = $result['Category']['key'];
+			$category['CategoriesLanguage']['category_id'] = $result['Category']['id'];
+
+			if (! $model->CategoryOrder->save($category['CategoryOrder'], false)) {
+				throw new InternalErrorException(__d('net_commons', 'Internal Server Error'));
+			}
+
+			if (! $model->CategoriesLanguage->save($category['CategoriesLanguage'], false)) {
+				throw new InternalErrorException(__d('net_commons', 'Internal Server Error'));
+			}
+		}
+		return true;
+	}
+
+/**
+ * 不要なカテゴリを削除する
+ *
+ * @param Model $model Model using this behavior
+ * @return bool
+ * @throws InternalErrorException
+ */
+	protected function _deleteCategories(Model $model) {
 		$categoryKeys = Hash::combine($model->data['Categories'], '{n}.Category.key', '{n}.Category.key');
 
-		//削除処理
 		$conditions = array(
 			'block_id' => $model->data['Block']['id']
 		);
 		if ($categoryKeys) {
 			$conditions[$model->Category->alias . '.key NOT'] = $categoryKeys;
 		}
+		$categoryIds = $model->Category->find('list', array(
+			'recursive' => -1,
+			'fields' => array('id', 'id'),
+			'conditions' => $conditions
+		));
+
+		//Category削除処理
 		if (! $model->Category->deleteAll($conditions, false)) {
 			throw new InternalErrorException(__d('net_commons', 'Internal Server Error'));
 		}
 
+		//CategoriesLanguage削除処理
+		$conditions = array(
+			'category_id' => array_values($categoryIds)
+		);
+		if (! $model->CategoriesLanguage->deleteAll($conditions, false)) {
+			throw new InternalErrorException(__d('net_commons', 'Internal Server Error'));
+		}
+
+		//CategoriesLanguage削除処理
 		$conditions = array(
 			'block_key' => $model->data['Block']['key']
 		);
@@ -107,17 +166,6 @@ class CategoryBehavior extends ModelBehavior {
 			throw new InternalErrorException(__d('net_commons', 'Internal Server Error'));
 		}
 
-		//登録処理
-		foreach ($model->data['Categories'] as $category) {
-			if (! $result = $model->Category->save($category['Category'], false)) {
-				throw new InternalErrorException(__d('net_commons', 'Internal Server Error'));
-			}
-
-			$category['CategoryOrder']['category_key'] = $result['Category']['key'];
-			if (! $model->CategoryOrder->save($category['CategoryOrder'], false)) {
-				throw new InternalErrorException(__d('net_commons', 'Internal Server Error'));
-			}
-		}
 		return true;
 	}
 }

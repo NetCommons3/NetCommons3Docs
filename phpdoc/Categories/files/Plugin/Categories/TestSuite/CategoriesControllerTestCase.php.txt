@@ -30,6 +30,7 @@ class CategoriesControllerTestCase extends NetCommonsControllerTestCase {
 	private $__fixtures = array(
 		'plugin.categories.category',
 		'plugin.categories.category_order',
+		'plugin.categories.categories_language',
 	);
 
 /**

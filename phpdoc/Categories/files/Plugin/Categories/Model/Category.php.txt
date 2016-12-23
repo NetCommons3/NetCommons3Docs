@@ -3,7 +3,6 @@
  * Category Model
  *
  * @property Block $Block
- * @property Category $Category
  *
  * @author Noriko Arai <arai@nii.ac.jp>
  * @author Shohei Nakajima <nakajimashouhei@gmail.com>
@@ -29,6 +28,7 @@ class Category extends CategoriesAppModel {
  */
 	public $actsAs = array(
 		'NetCommons.OriginalKey',
+		'M17n.M17n', //多言語
 	);
 
 /**
@@ -89,17 +89,26 @@ class Category extends CategoriesAppModel {
 					'on' => 'update', // Limit validation to 'create' or 'update' operations
 				),
 			),
-			'name' => array(
-				'notBlank' => array(
-					'rule' => array('notBlank'),
-					'message' => sprintf(__d('net_commons', 'Please input %s.'), __d('categories', 'Category')),
-					'allowEmpty' => false,
-					'required' => true,
-				),
-			),
 		);
 
 		return parent::beforeValidate($options);
+	}
+
+/**
+ * Called before each find operation. Return false if you want to halt the find
+ * call, otherwise return the (modified) query data.
+ *
+ * @param array $query Data used to execute this query, i.e. conditions, order, etc.
+ * @return mixed true if the operation should continue, false if it should abort; or, modified
+ *  $query to continue with new $query
+ * @link http://book.cakephp.org/2.0/en/models/callback-methods.html#beforefind
+ */
+	public function beforeFind($query) {
+		if (Hash::get($query, 'recursive') > -1) {
+			$belongsTo = $this->bindModelCategoryLang();
+			$this->bindModel($belongsTo, true);
+		}
+		return true;
 	}
 
 /**
@@ -127,16 +136,77 @@ class Category extends CategoriesAppModel {
 			)
 		), false);
 
+		$belongsTo = $this->bindModelCategoryLang();
+		$this->bindModel($belongsTo, true);
+
 		$categories = $this->find('all', array(
 			'recursive' => 0,
-			'fields' => array(
-				$this->alias . '.*',
-				$this->CategoryOrder->alias . '.*',
-			),
 			'conditions' => $conditions,
 		));
 
 		return $categories;
+	}
+
+/**
+ * カテゴリーの取得
+ *
+ * @param int $categoryId カテゴリーID
+ * @return array Categories
+ */
+	public function getCategory($categoryId) {
+		$conditions = array(
+			'Category.id' => $categoryId,
+		);
+
+		$this->bindModel(array(
+			'belongsTo' => array(
+				'CategoryOrder' => array(
+					'className' => 'Categories.CategoryOrder',
+					'foreignKey' => false,
+					'conditions' => 'CategoryOrder.category_key=Category.key',
+					'fields' => '',
+					'order' => array('CategoryOrder.weight' => 'ASC')
+				),
+			)
+		), false);
+
+		$belongsTo = $this->bindModelCategoryLang();
+		$this->bindModel($belongsTo, true);
+
+		$categories = $this->find('first', array(
+			'recursive' => 0,
+			'conditions' => $conditions,
+		));
+
+		return $categories;
+	}
+
+/**
+ * カテゴリ言語テーブルのバインド条件を戻す
+ *
+ * @param string $joinKey JOINするKeyフィールド(default: Category.id)
+ * @return array
+ */
+	public function bindModelCategoryLang($joinKey = 'Category.id') {
+		$belongsTo = array(
+			'belongsTo' => array(
+				'CategoriesLanguage' => array(
+					'className' => 'Categories.CategoriesLanguage',
+					'foreignKey' => false,
+					'conditions' => array(
+						'CategoriesLanguage.category_id = ' . $joinKey,
+						'OR' => array(
+							'CategoriesLanguage.is_translation' => false,
+							'CategoriesLanguage.language_id' => Current::read('Language.id', '0'),
+						),
+					),
+					'fields' => array('id', 'language_id', 'category_id', 'name', 'is_origin', 'is_translation'),
+					'order' => ''
+				),
+			)
+		);
+
+		return $belongsTo;
 	}
 
 }

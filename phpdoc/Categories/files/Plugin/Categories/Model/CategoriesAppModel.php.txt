@@ -2,7 +2,6 @@
 /**
  * CategoriesAppModel Model
  *
- *
  * @author Noriko Arai <arai@nii.ac.jp>
  * @author Shohei Nakajima <nakajimashouhei@gmail.com>
  * @link http://www.netcommons.org NetCommons Project
@@ -14,7 +13,7 @@ App::uses('AppModel', 'Model');
 
 /**
  * CategoriesAppModel Model
- * 
+ *
  * @author Shohei Nakajima <nakajimashouhei@gmail.com>
  * @package NetCommons\Categories\Model
  */
