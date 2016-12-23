@@ -611,7 +611,7 @@ class Room extends RoomsAppModel {
 		try {
 			//Roomデータの削除
 			if (! $this->delete($data['Room']['id'], false)) {
-				throw new InternalErrorException(__d('net_commons', 'Internal Server Error 2'));
+				throw new InternalErrorException(__d('net_commons', 'Internal Server Error'));
 			}
 
 			//トランザクションCommit

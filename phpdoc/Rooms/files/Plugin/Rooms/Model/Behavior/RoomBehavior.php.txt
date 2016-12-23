@@ -84,7 +84,7 @@ class RoomBehavior extends ModelBehavior {
 
 		$spaceIds = array();
 		$spaceIds[] = Space::PUBLIC_SPACE_ID;
-		if (Current::read('User.id')) {
+		if ($userId) {
 			$spaceIds[] = Space::COMMUNITY_SPACE_ID;
 			$joinType = 'INNER';
 		} else {
