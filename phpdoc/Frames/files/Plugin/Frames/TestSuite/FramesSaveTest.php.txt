@@ -31,6 +31,7 @@ class FramesSaveTest extends NetCommonsSaveTest {
 		'plugin.pages.box4pages',
 		'plugin.pages.boxes_page_container4pages',
 		'plugin.frames.frame4frames',
+		'plugin.frames.frames_language4frames',
 		'plugin.pages.pages_language4pages',
 		'plugin.pages.page_container4pages',
 		'plugin.pages.page4pages',

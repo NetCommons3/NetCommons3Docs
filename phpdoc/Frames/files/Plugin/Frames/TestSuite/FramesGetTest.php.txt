@@ -11,6 +11,7 @@
 
 //@codeCoverageIgnoreStart;
 App::uses('NetCommonsGetTest', 'NetCommons.TestSuite');
+App::uses('Current', 'NetCommons.Utility');
 //@codeCoverageIgnoreEnd;
 
 /**
@@ -31,6 +32,7 @@ class FramesGetTest extends NetCommonsGetTest {
 		'plugin.pages.box4pages',
 		'plugin.pages.boxes_page_container4pages',
 		'plugin.frames.frame4frames',
+		'plugin.frames.frames_language4frames',
 		'plugin.pages.pages_language4pages',
 		'plugin.pages.page_container4pages',
 		'plugin.pages.page4pages',
@@ -59,6 +61,16 @@ class FramesGetTest extends NetCommonsGetTest {
 		}
 		$this->fixtures = array_merge($this->__fixtures, $this->fixtures);
 		parent::__construct($name, $data, $dataName);
+	}
+
+/**
+ * setUp method
+ *
+ * @return void
+ */
+	public function setUp() {
+		parent::setUp();
+		Current::write('Language.id', '2');
 	}
 
 }

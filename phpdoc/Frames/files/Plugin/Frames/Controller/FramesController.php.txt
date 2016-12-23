@@ -60,7 +60,7 @@ class FramesController extends FramesAppController {
 		$this->Frame->create();
 		$data = $this->data;
 		$data['Frame']['is_deleted'] = false;
-		$data['Frame']['name'] = Hash::get(
+		$data['FramesLanguage']['name'] = Hash::get(
 			$data, 'Plugin.name', __d('frames', 'New frame %s', date('YmdHis'))
 		);
 		$data['Frame']['room_id'] = Hash::get($data, 'Frame.room_id', 1);

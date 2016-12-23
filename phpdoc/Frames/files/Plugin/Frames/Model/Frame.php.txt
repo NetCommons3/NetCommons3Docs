@@ -16,6 +16,7 @@
  */
 
 App::uses('FramesAppModel', 'Frames.Model');
+App::uses('Current', 'NetCommons.Utility');
 
 /**
  * Summary for Frame Model
@@ -50,13 +51,6 @@ class Frame extends FramesAppModel {
 			'order' => ''
 		),
 		//Pluginは、beforeFindでbindする
-		'Language' => array(
-			'className' => 'M17n.Language',
-			'foreignKey' => 'language_id',
-			'conditions' => '',
-			'fields' => '',
-			'order' => ''
-		),
 		'Block' => array(
 			'className' => 'Blocks.Block',
 			'foreignKey' => 'block_id',
@@ -83,7 +77,7 @@ class Frame extends FramesAppModel {
  * @link http://book.cakephp.org/2.0/en/models/callback-methods.html#beforefind
  */
 	public function beforeFind($query) {
-		if ($query['recursive'] > -1) {
+		if (Hash::get($query, 'recursive') > -1) {
 			$this->bindModel(array(
 				'belongsTo' => array(
 					'Plugin' => array(
@@ -98,27 +92,43 @@ class Frame extends FramesAppModel {
 					),
 				)
 			), true);
+
+			$belongsTo = $this->bindModelFrameLang();
+			$this->bindModel($belongsTo, true);
+
+			$belongsTo = $this->Block->bindModelBlockLang();
+			$this->bindModel($belongsTo, true);
 		}
 		return true;
 	}
 
 /**
- * Get query option for containable behavior
+ * Frame言語テーブルのバインド条件を戻す
  *
  * @return array
  */
-	public function getContainableQuery() {
-		$query = array(
-			'conditions' => array(
-				'language_id' => Current::read('Language.id'),
-				'is_deleted' => false
-			),
-			'order' => array(
-				'Frame.weight'
-			),
+	public function bindModelFrameLang() {
+		$belongsTo = array(
+			'belongsTo' => array(
+				'FramesLanguage' => array(
+					'className' => 'Frames.FramesLanguage',
+					'foreignKey' => false,
+					'conditions' => array(
+						'FramesLanguage.frame_id = Frame.id',
+						'OR' => array(
+							'FramesLanguage.is_translation' => false,
+							'FramesLanguage.language_id' => Current::read('Language.id', '0'),
+						)
+					),
+					'fields' => array(
+						'id', 'language_id', 'frame_id', 'name', 'is_origin', 'is_translation'
+					),
+					'order' => ''
+				),
+			)
 		);
 
-		return $query;
+		return $belongsTo;
 	}
 
 /**
@@ -129,19 +139,23 @@ class Frame extends FramesAppModel {
  */
 	public function getFrameByBox($boxId) {
 		$query = array(
-			'recursive' => -1,
+			'recursive' => 0,
 			'conditions' => array(
-				'language_id' => Current::read('Language.id'),
-				'is_deleted' => false,
-				'box_id' => $boxId,
+				//'language_id' => Current::read('Language.id'),
+				'Frame.is_deleted' => false,
+				'Frame.box_id' => $boxId,
 			),
 			'order' => array(
-				'weight'
+				'Frame.weight'
 			),
 		);
 
 		$result = $this->find('all', $query);
-		return Hash::extract($result, '{n}.Frame');
+		$frames = array();
+		foreach ($result as $i => $frame) {
+			$frames[$i] = Hash::merge($frame['FramesLanguage'], $frame['Frame']);
+		}
+		return $frames;
 	}
 
 /**
@@ -182,7 +196,9 @@ class Frame extends FramesAppModel {
 		$plugin = Inflector::camelize($data[$this->alias]['plugin_key']);
 		$model = Inflector::singularize($plugin);
 		$classExists = ClassRegistry::init($plugin . '.' . $model, true);
-		$models = [];
+		$models = array(
+			'FramesLanguage' => 'Frames.FramesLanguage'
+		);
 		if ($classExists) {
 			$models[$model] = $plugin . '.' . $model;
 		}
@@ -206,6 +222,7 @@ class Frame extends FramesAppModel {
 			if (! $frame) {
 				throw new InternalErrorException(__d('net_commons', 'Internal Server Error'));
 			}
+
 			if ($this->{$model} instanceof Model && method_exists($this->{$model}, 'afterFrameSave')) {
 				$this->{$model}->afterFrameSave($frame);
 			}
@@ -219,6 +236,34 @@ class Frame extends FramesAppModel {
 		}
 
 		return $frame;
+	}
+
+/**
+ * Called after each successful save operation.
+ *
+ * @param bool $created True if this save created a new record
+ * @param array $options Options passed from Model::save().
+ * @return void
+ * @link http://book.cakephp.org/2.0/en/models/callback-methods.html#aftersave
+ * @see Model::save()
+ * @throws InternalErrorException
+ */
+	public function afterSave($created, $options = array()) {
+		if (isset($this->data['FramesLanguage'])) {
+			$data = $this->FramesLanguage->create(
+				Hash::merge(
+					array('frame_id' => $this->data['Frame']['id']),
+					$this->data['FramesLanguage']
+				)
+			);
+			$result = $this->FramesLanguage->save($data);
+			if (! $result) {
+				throw new InternalErrorException(__d('net_commons', 'Internal Server Error'));
+			}
+			//$this->data['FramesLanguage'] = $result['FramesLanguage'];
+		}
+
+		parent::afterSave($created, $options);
 	}
 
 /**
@@ -291,34 +336,6 @@ class Frame extends FramesAppModel {
 		if (! $this->updateAll($update, $conditions)) {
 			throw new InternalErrorException(__d('net_commons', 'Internal Server Error'));
 		}
-	}
-
-/**
- * Delete frame from master data source
- * Is it better to use before after method?
- * If so, is it okay to use beforeValidate?
- *
- * @throws InternalErrorException
- * @return bool True on success
- */
-	public function deleteFrame() {
-		//トランザクションBegin
-		$this->begin();
-
-		try {
-			if (!$this->delete()) {
-				throw new InternalErrorException(__d('net_commons', 'Internal Server Error'));
-			}
-
-			//トランザクションCommit
-			$this->commit();
-
-		} catch (Exception $ex) {
-			//トランザクションRollbaxk
-			$this->rollback($ex);
-		}
-
-		return true;
 	}
 
 }
