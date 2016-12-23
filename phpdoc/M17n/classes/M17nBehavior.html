@@ -136,10 +136,10 @@
                                 <div class="accordion" style="margin-bottom: 0">
         <div class="accordion-group">
             <div class="accordion-heading">
-                                    <a class="accordion-toggle " data-toggle="collapse" data-target="#namespace-2080197561"></a>
+                                    <a class="accordion-toggle " data-toggle="collapse" data-target="#namespace-1917182385"></a>
                                 <a href="../namespaces/default.html" style="margin-left: 30px; padding-left: 0">\</a>
             </div>
-            <div id="namespace-2080197561" class="accordion-body collapse in">
+            <div id="namespace-1917182385" class="accordion-body collapse in">
                 <div class="accordion-inner">
 
                     
@@ -237,29 +237,30 @@
 
                     <h1><small>\</small>M17nBehavior</h1>
                     <p><em>M17nBehavior</em></p>
-                    <p>登録するコンテンツデータに対して、対応している言語分登録します。<br>
-対応言語を運用途中で追加する場合は、追加する言語の全データを作成するバッチプログラムが必要になります。</p>
+                    <p>登録するコンテンツデータに対して、対応している言語分登録します。<br></p>
 <p>コンテンツデータのテーブルに以下のフィールドを保持してください。</p>
 <ul>
-<li>key
-異なる言語で同一のデータが登録されます。</li>
 <li>language_id
 言語コードに対応するidが登録されます。</li>
+<li>is_origin
+オリジナルデータとします。</li>
+<li>is_translation
+翻訳したかどうか。</li>
 </ul>
-<p>コンテンツデータがbelongsToのアソシエーションを持ち、アソシエーション側でも言語ごとにデータがある場合は、
-登録時に外部キーとしてのIDを取得するための情報を指定してください。<br>
-指定内容は、外部キーのフィールド名、アソシエーションモデル名、ID取得条件です。</p>
 <h4>サンプルコード</h4>
 <pre><code>public $actsAs = array(
     'M17n.M17n' =&gt; array(
-        'associations' =&gt; array(
-            'faq_id' =&gt; array(
-                'className' =&gt; 'Faqs.Faq',
-            ),
-            'category_id' =&gt; array(
-                'className' =&gt; 'Categories.Category',
-            ),
+        'keyField' =&gt; 'key', //デフォルト"key"
+    'commonFields' =&gt; array('category_id'), //このフィールドが更新された場合、全言語のデータを更新する
+    'associations' =&gt; array(
+        '(Model名)' =&gt; array(
+            'class' =&gt; (クラス名: Plugin.Model形式),
+            'foreignKey' =&gt; (外部キー),
+            'isM17n' =&gt; 多言語ありかどうか,
         )
+    ),
+    'afterCallback' =&gt; afterSaveを実行するかどうか,
+    'isWorkflow' =&gt; ワークフローかどうか。省略もしくはNULLの場合、
     ),</code></pre>
                     
                                         
@@ -278,13 +279,14 @@
                         </section>
                         <section class="row-fluid public">
                             <section class="span4">
-                                                                    <a href="../classes/OriginalKeyBehavior.html#method_beforeSave" class="">beforeSave()</a><br />
-                                                                    <a href="../classes/OriginalKeyBehavior.html#method_afterSave" class="">afterSave()</a><br />
-                                                                    <a href="../classes/OriginalKeyBehavior.html#method_generateKey" class="">generateKey()</a><br />
+                                                                    <a href="../classes/M17nBehavior.html#method_setup" class="">setup()</a><br />
+                                                                    <a href="../classes/M17nBehavior.html#method_beforeSave" class="">beforeSave()</a><br />
+                                                                    <a href="../classes/M17nBehavior.html#method_afterSave" class="">afterSave()</a><br />
+                                                                    <a href="../classes/M17nBehavior.html#method_updateTranslationField" class="">updateTranslationField()</a><br />
+                                                                    <a href="../classes/M17nBehavior.html#method_saveM17nData" class="">saveM17nData()</a><br />
                                                             </section>
                             <section class="span4">
-                                                                    <a href="../classes/OriginalKeyBehavior.html#property_settings" class="">$settings</a><br />
-                                                                    <a href="../classes/OriginalKeyBehavior.html#property_isUnitRandomKey" class="">$isUnitRandomKey</a><br />
+                                                                    <em>No public properties found</em>
                                                             </section>
                             <section class="span4">
                                                                     <em>No constants found</em>
@@ -292,7 +294,13 @@
                         </section>
                         <section class="row-fluid protected">
                             <section class="span4">
-                                                                    <em>No protected methods found</em>
+                                                                    <a href="../classes/M17nBehavior.html#method__hasM17nFields" class="">_hasM17nFields()</a><br />
+                                                                    <a href="../classes/M17nBehavior.html#method__hasWorkflowFields" class="">_hasWorkflowFields()</a><br />
+                                                                    <a href="../classes/M17nBehavior.html#method__getSaveConditions" class="">_getSaveConditions()</a><br />
+                                                                    <a href="../classes/M17nBehavior.html#method__saveM17nData" class="">_saveM17nData()</a><br />
+                                                                    <a href="../classes/M17nBehavior.html#method__updateWorkflowFields" class="">_updateWorkflowFields()</a><br />
+                                                                    <a href="../classes/M17nBehavior.html#method__updateWorkflowAssociations" class="">_updateWorkflowAssociations()</a><br />
+                                                                    <a href="../classes/M17nBehavior.html#method__saveWorkflowAssociations" class="">_saveWorkflowAssociations()</a><br />
                                                             </section>
                             <section class="span4">
                                                                     <em>No protected properties found</em>
@@ -303,7 +311,7 @@
                         </section>
                         <section class="row-fluid private">
                             <section class="span4">
-                                                                    <em>No private methods found</em>
+                                                                    <a href="../classes/M17nBehavior.html#method___hasFields" class="">__hasFields()</a><br />
                                                             </section>
                             <section class="span4">
                                                                     <em>No private properties found</em>
@@ -324,10 +332,8 @@
                             <dd><div class="namespace-wrapper">Model\Befavior</div></dd>
                                                 <dt>Class hierarchy</dt>
                             <dd class="hierarchy">
-                                                                                                                                                                                                                                                                                                                                                                                                                                                            
+                                                                                                                                                                                                                                                                                                
                                         <div class="namespace-wrapper">\ModelBehavior</div>
-                                                                    
-                                        <div class="namespace-wrapper"><a href="../classes/OriginalKeyBehavior.html">\OriginalKeyBehavior</a></div>
                                                                                                     <div class="namespace-wrapper">\M17nBehavior</div>
                             </dd>
 
@@ -346,79 +352,64 @@
                                                                     <p>Shohei Nakajima <a href="mailto:nakajimashouhei@gmail.com">nakajimashouhei@gmail.com</a></p>
                                                             </td>
                         </tr>
+                                            <tr>
+                            <th>
+                                SuppressWarnings
+                            </th>
+                            <td>
+                                                                    <p>(PHPMD.ExcessiveClassComplexity)</p>
+                                                            </td>
+                        </tr>
                                         </table>
                 </aside>
             </div>
 
                         
-                                    <a id="properties" name="properties"></a>
-            <div class="row-fluid">
-                <div class="span8 content class">
-                    <h2>Properties</h2>
-                </div>
-                <aside class="span4 detailsbar"></aside>
-            </div>
-
-                                    <div class="row-fluid">
-        <div class="span8 content class">
-            <a id="property_settings" name="property_settings" class="anchor"></a>
-            <article class="property">
-                <h3 class="public ">$settings</h3>
-                <pre class="signature">$settings : array</pre>
-                <p><em>ビヘイビアの設定</em></p>
-                
-
-                                <h4>Type</h4>
-                array
-                                            </article>
-        </div>
-        <aside class="span4 detailsbar">
-            <h1><i class="icon-arrow-down"></i></h1>
-                        <dl>
-                                    <dt>Inherited from</dt>
-                    <dd><a href="../classes/OriginalKeyBehavior.html"><div class="path-wrapper">\OriginalKeyBehavior</div></a></dd>
-                                                                            <dt>See also</dt>
-                                                                <dd><a href=""><span class="namespace-wrapper">\ModelBehavior::$settings</span></a></dd>
-                                                                </dl>
-            <h2>Tags</h2>
-            <table class="table table-condensed">
-                                    <tr><td colspan="2"><em>None found</em></td></tr>
-                            </table>
-        </aside>
-    </div>
-
-                                    <div class="row-fluid">
-        <div class="span8 content class">
-            <a id="property_isUnitRandomKey" name="property_isUnitRandomKey" class="anchor"></a>
-            <article class="property">
-                <h3 class="public ">$isUnitRandomKey</h3>
-                <pre class="signature">$isUnitRandomKey : mixed</pre>
-                <p><em>PHPUnitで使用するキー配列</em></p>
-                
-
-                                <h4>Type</h4>
-                mixed
-                                            </article>
-        </div>
-        <aside class="span4 detailsbar">
-            <h1><i class="icon-arrow-down"></i></h1>
-                        <dl>
-                                    <dt>Inherited from</dt>
-                    <dd><a href="../classes/OriginalKeyBehavior.html"><div class="path-wrapper">\OriginalKeyBehavior</div></a></dd>
-                                                            </dl>
-            <h2>Tags</h2>
-            <table class="table table-condensed">
-                                    <tr><td colspan="2"><em>None found</em></td></tr>
-                            </table>
-        </aside>
-    </div>
-
-                                                            
+                        
                                     <a id="methods" name="methods"></a>
             <div class="row-fluid">
                 <div class="span8 content class"><h2>Methods</h2></div>
                 <aside class="span4 detailsbar"></aside>
             </div>
+
+                                    <div class="row-fluid">
+        <div class="span8 content class">
+            <a id="method_setup" name="method_setup" class="anchor"></a>
+            <article class="method">
+                <h3 class="public ">setup()</h3>
+                <a href="#source-view" role="button" class="pull-right btn" data-toggle="modal" style="font-size: 1.1em; padding: 9px 14px"><i class="icon-code"></i></a>
+                <pre class="signature" style="margin-right: 54px;">setup(\Model  <span class="argument">$model</span>, array  <span class="argument">$config = array()</span>) : void</pre>
+                <p><em>Setup this behavior with the specified configuration settings.</em></p>
+                
+
+                                    <h4>Parameters</h4>
+                    <table class="table table-condensed table-hover">
+                                                    <tr>
+                                <td>\Model</td>
+                                <td>$model </td>
+                                <td><p>Model using this behavior</p></td>
+                            </tr>
+                                                    <tr>
+                                <td>array</td>
+                                <td>$config </td>
+                                <td><p>Configuration settings for $model</p></td>
+                            </tr>
+                                            </table>
+                
+                
+                				
+                            </article>
+        </div>
+        <aside class="span4 detailsbar">
+            <h1><i class="icon-arrow-down"></i></h1>
+                                                            <dl>
+                                                                            </dl>
+            <h2>Tags</h2>
+            <table class="table table-condensed">
+                                    <tr><td colspan="2"><em>None found</em></td></tr>
+                            </table>
+        </aside>
+    </div>
 
                                     <div class="row-fluid">
         <div class="span8 content class">
@@ -436,7 +427,7 @@ will abort the save operation.</em></p>
                                                     <tr>
                                 <td>\Model</td>
                                 <td>$model </td>
-                                <td><p>Model using this behavior</p></td>
+                                <td><p>呼び出し元Model</p></td>
                             </tr>
                                                     <tr>
                                 <td>array</td>
@@ -455,9 +446,7 @@ will abort the save operation.</em></p>
         <aside class="span4 detailsbar">
             <h1><i class="icon-arrow-down"></i></h1>
                                                             <dl>
-                                                    <dt>Inherited from</dt>
-                    <dd><a href="../classes/OriginalKeyBehavior.html"><div class="path-wrapper">\OriginalKeyBehavior</div></a></dd>
-                                                                            <dt>See also</dt>
+                                                                                            <dt>See also</dt>
                                                                 <dd><a href=""><span class="namespace-wrapper">\Model::save()</span></a></dd>
                                                                 </dl>
             <h2>Tags</h2>
@@ -496,6 +485,11 @@ will abort the save operation.</em></p>
                             </tr>
                                             </table>
                 
+                                    <h4>Throws</h4>
+                    <dl>
+                                                    <dt>\InternalErrorException</dt>
+                            <dd></dd>
+                                                                    </dl>
                 
                                     <h4>Returns</h4>
                     boolean
@@ -505,9 +499,7 @@ will abort the save operation.</em></p>
         <aside class="span4 detailsbar">
             <h1><i class="icon-arrow-down"></i></h1>
                                                             <dl>
-                                                    <dt>Inherited from</dt>
-                    <dd><a href="../classes/OriginalKeyBehavior.html"><div class="path-wrapper">\OriginalKeyBehavior</div></a></dd>
-                                                                            <dt>See also</dt>
+                                                                                            <dt>See also</dt>
                                                                 <dd><a href=""><span class="namespace-wrapper">\Model::save()</span></a></dd>
                                                                 </dl>
             <h2>Tags</h2>
@@ -519,42 +511,38 @@ will abort the save operation.</em></p>
 
                                     <div class="row-fluid">
         <div class="span8 content class">
-            <a id="method_generateKey" name="method_generateKey" class="anchor"></a>
+            <a id="method_updateTranslationField" name="method_updateTranslationField" class="anchor"></a>
             <article class="method">
-                <h3 class="public ">generateKey()</h3>
+                <h3 class="public ">updateTranslationField()</h3>
                 <a href="#source-view" role="button" class="pull-right btn" data-toggle="modal" style="font-size: 1.1em; padding: 9px 14px"><i class="icon-code"></i></a>
-                <pre class="signature" style="margin-right: 54px;">generateKey(string  <span class="argument">$plugin</span>, string  <span class="argument">$dataSource</span>) : string</pre>
-                <p><em>Generate key</em></p>
+                <pre class="signature" style="margin-right: 54px;">updateTranslationField(\Model  <span class="argument">$model</span>) : boolean</pre>
+                <p><em>is_translationの更新</em></p>
                 
 
                                     <h4>Parameters</h4>
                     <table class="table table-condensed table-hover">
                                                     <tr>
-                                <td>string</td>
-                                <td>$plugin </td>
-                                <td><p>Plugin name</p></td>
-                            </tr>
-                                                    <tr>
-                                <td>string</td>
-                                <td>$dataSource </td>
-                                <td><p>The name of the DataSource, as defined in app/Config/database.php</p></td>
+                                <td>\Model</td>
+                                <td>$model </td>
+                                <td><p>呼び出し元Model</p></td>
                             </tr>
                                             </table>
                 
+                                    <h4>Throws</h4>
+                    <dl>
+                                                    <dt>\InternalErrorException</dt>
+                            <dd></dd>
+                                                                    </dl>
                 
                                     <h4>Returns</h4>
-                    string
-                                            &mdash; <p>Hash key</p>
+                    boolean
                                     				
                             </article>
         </div>
         <aside class="span4 detailsbar">
             <h1><i class="icon-arrow-down"></i></h1>
-                            <span class="label label-info">static</span>
                                                             <dl>
-                                                    <dt>Inherited from</dt>
-                    <dd><a href="../classes/OriginalKeyBehavior.html"><div class="path-wrapper">\OriginalKeyBehavior</div></a></dd>
-                                                            </dl>
+                                                                            </dl>
             <h2>Tags</h2>
             <table class="table table-condensed">
                                     <tr><td colspan="2"><em>None found</em></td></tr>
@@ -562,7 +550,427 @@ will abort the save operation.</em></p>
         </aside>
     </div>
 
-                                                                    </div>
+                                    <div class="row-fluid">
+        <div class="span8 content class">
+            <a id="method_saveM17nData" name="method_saveM17nData" class="anchor"></a>
+            <article class="method">
+                <h3 class="public ">saveM17nData()</h3>
+                <a href="#source-view" role="button" class="pull-right btn" data-toggle="modal" style="font-size: 1.1em; padding: 9px 14px"><i class="icon-code"></i></a>
+                <pre class="signature" style="margin-right: 54px;">saveM17nData(\Model  <span class="argument">$model</span>, array|null  <span class="argument">$commonFields = null</span>, array|null  <span class="argument">$associations = null</span>) : boolean</pre>
+                <p><em>全言語をコピーする処理</em></p>
+                
+
+                                    <h4>Parameters</h4>
+                    <table class="table table-condensed table-hover">
+                                                    <tr>
+                                <td>\Model</td>
+                                <td>$model </td>
+                                <td><p>呼び出し元Model</p></td>
+                            </tr>
+                                                    <tr>
+                                <td>array|null</td>
+                                <td>$commonFields </td>
+                                <td><p>共通フィールド</p></td>
+                            </tr>
+                                                    <tr>
+                                <td>array|null</td>
+                                <td>$associations </td>
+                                <td><p>関連情報</p></td>
+                            </tr>
+                                            </table>
+                
+                
+                                    <h4>Returns</h4>
+                    boolean
+                                    				
+                            </article>
+        </div>
+        <aside class="span4 detailsbar">
+            <h1><i class="icon-arrow-down"></i></h1>
+                                                            <dl>
+                                                                            </dl>
+            <h2>Tags</h2>
+            <table class="table table-condensed">
+                                    <tr>
+                        <th>
+                            SuppressWarnings
+                        </th>
+                        <td>
+                                                                                            <p>(PHPMD.CyclomaticComplexity)</p>
+                                                                                            <p>(PHPMD.NPathComplexity)</p>
+                                                    </td>
+                    </tr>
+                            </table>
+        </aside>
+    </div>
+
+                                                    <div class="row-fluid">
+        <div class="span8 content class">
+            <a id="method__hasM17nFields" name="method__hasM17nFields" class="anchor"></a>
+            <article class="method">
+                <h3 class="protected ">_hasM17nFields()</h3>
+                <a href="#source-view" role="button" class="pull-right btn" data-toggle="modal" style="font-size: 1.1em; padding: 9px 14px"><i class="icon-code"></i></a>
+                <pre class="signature" style="margin-right: 54px;">_hasM17nFields(\Model  <span class="argument">$model</span>) : boolean</pre>
+                <p><em>M17nフィールドのチェック</em></p>
+                
+
+                                    <h4>Parameters</h4>
+                    <table class="table table-condensed table-hover">
+                                                    <tr>
+                                <td>\Model</td>
+                                <td>$model </td>
+                                <td><p>呼び出し元Model</p></td>
+                            </tr>
+                                            </table>
+                
+                
+                                    <h4>Returns</h4>
+                    boolean
+                                    				
+                            </article>
+        </div>
+        <aside class="span4 detailsbar">
+            <h1><i class="icon-arrow-down"></i></h1>
+                                                            <dl>
+                                                                            </dl>
+            <h2>Tags</h2>
+            <table class="table table-condensed">
+                                    <tr><td colspan="2"><em>None found</em></td></tr>
+                            </table>
+        </aside>
+    </div>
+
+                                    <div class="row-fluid">
+        <div class="span8 content class">
+            <a id="method__hasWorkflowFields" name="method__hasWorkflowFields" class="anchor"></a>
+            <article class="method">
+                <h3 class="protected ">_hasWorkflowFields()</h3>
+                <a href="#source-view" role="button" class="pull-right btn" data-toggle="modal" style="font-size: 1.1em; padding: 9px 14px"><i class="icon-code"></i></a>
+                <pre class="signature" style="margin-right: 54px;">_hasWorkflowFields(\Model  <span class="argument">$model</span>) : boolean</pre>
+                <p><em>Workflowフィールドのチェック</em></p>
+                
+
+                                    <h4>Parameters</h4>
+                    <table class="table table-condensed table-hover">
+                                                    <tr>
+                                <td>\Model</td>
+                                <td>$model </td>
+                                <td><p>呼び出し元Model</p></td>
+                            </tr>
+                                            </table>
+                
+                
+                                    <h4>Returns</h4>
+                    boolean
+                                    				
+                            </article>
+        </div>
+        <aside class="span4 detailsbar">
+            <h1><i class="icon-arrow-down"></i></h1>
+                                                            <dl>
+                                                                            </dl>
+            <h2>Tags</h2>
+            <table class="table table-condensed">
+                                    <tr><td colspan="2"><em>None found</em></td></tr>
+                            </table>
+        </aside>
+    </div>
+
+                                    <div class="row-fluid">
+        <div class="span8 content class">
+            <a id="method__getSaveConditions" name="method__getSaveConditions" class="anchor"></a>
+            <article class="method">
+                <h3 class="protected ">_getSaveConditions()</h3>
+                <a href="#source-view" role="button" class="pull-right btn" data-toggle="modal" style="font-size: 1.1em; padding: 9px 14px"><i class="icon-code"></i></a>
+                <pre class="signature" style="margin-right: 54px;">_getSaveConditions(\Model  <span class="argument">$model</span>) : array</pre>
+                <p><em>saveの条件を取得する</em></p>
+                
+
+                                    <h4>Parameters</h4>
+                    <table class="table table-condensed table-hover">
+                                                    <tr>
+                                <td>\Model</td>
+                                <td>$model </td>
+                                <td><p>Model using this behavior</p></td>
+                            </tr>
+                                            </table>
+                
+                                    <h4>Throws</h4>
+                    <dl>
+                                                    <dt>\InternalErrorException</dt>
+                            <dd></dd>
+                                                                    </dl>
+                
+                                    <h4>Returns</h4>
+                    array
+                                    				
+                            </article>
+        </div>
+        <aside class="span4 detailsbar">
+            <h1><i class="icon-arrow-down"></i></h1>
+                                                            <dl>
+                                                                                            <dt>See also</dt>
+                                                                <dd><a href=""><span class="namespace-wrapper">\Model::save()</span></a></dd>
+                                                                </dl>
+            <h2>Tags</h2>
+            <table class="table table-condensed">
+                                    <tr><td colspan="2"><em>None found</em></td></tr>
+                            </table>
+        </aside>
+    </div>
+
+                                    <div class="row-fluid">
+        <div class="span8 content class">
+            <a id="method__saveM17nData" name="method__saveM17nData" class="anchor"></a>
+            <article class="method">
+                <h3 class="protected ">_saveM17nData()</h3>
+                <a href="#source-view" role="button" class="pull-right btn" data-toggle="modal" style="font-size: 1.1em; padding: 9px 14px"><i class="icon-code"></i></a>
+                <pre class="signature" style="margin-right: 54px;">_saveM17nData(\Model  <span class="argument">$model</span>, array  <span class="argument">$targetDatas</span>, array  <span class="argument">$options</span>) : boolean</pre>
+                <p><em>多言語データの登録処理</em></p>
+                <h2>$options</h2>
+<p>array(
+'baseData' =&gt; 基準となるデータ,
+'commonFields' =&gt; 共通フィールド,
+'commonUpdate' =&gt; 共通フィールドの更新データ,
+'associations' =&gt; 関連情報,
+);</p>
+
+                                    <h4>Parameters</h4>
+                    <table class="table table-condensed table-hover">
+                                                    <tr>
+                                <td>\Model</td>
+                                <td>$model </td>
+                                <td><p>呼び出し元Model</p></td>
+                            </tr>
+                                                    <tr>
+                                <td>array</td>
+                                <td>$targetDatas </td>
+                                <td><p>対象データ</p></td>
+                            </tr>
+                                                    <tr>
+                                <td>array</td>
+                                <td>$options </td>
+                                <td><p>オプション</p></td>
+                            </tr>
+                                            </table>
+                
+                                    <h4>Throws</h4>
+                    <dl>
+                                                    <dt>\InternalErrorException</dt>
+                            <dd></dd>
+                                                                    </dl>
+                
+                                    <h4>Returns</h4>
+                    boolean
+                                    				
+                            </article>
+        </div>
+        <aside class="span4 detailsbar">
+            <h1><i class="icon-arrow-down"></i></h1>
+                                                            <dl>
+                                                                            </dl>
+            <h2>Tags</h2>
+            <table class="table table-condensed">
+                                    <tr>
+                        <th>
+                            SuppressWarnings
+                        </th>
+                        <td>
+                                                                                            <p>(PHPMD.CyclomaticComplexity)</p>
+                                                    </td>
+                    </tr>
+                            </table>
+        </aside>
+    </div>
+
+                                    <div class="row-fluid">
+        <div class="span8 content class">
+            <a id="method__updateWorkflowFields" name="method__updateWorkflowFields" class="anchor"></a>
+            <article class="method">
+                <h3 class="protected ">_updateWorkflowFields()</h3>
+                <a href="#source-view" role="button" class="pull-right btn" data-toggle="modal" style="font-size: 1.1em; padding: 9px 14px"><i class="icon-code"></i></a>
+                <pre class="signature" style="margin-right: 54px;">_updateWorkflowFields(\Model  <span class="argument">$model</span>, array  <span class="argument">$data</span>) : boolean</pre>
+                <p><em>ワークフローのデータであれば、is_activeとis_latestのフラグを更新する</em></p>
+                
+
+                                    <h4>Parameters</h4>
+                    <table class="table table-condensed table-hover">
+                                                    <tr>
+                                <td>\Model</td>
+                                <td>$model </td>
+                                <td><p>呼び出し元Model</p></td>
+                            </tr>
+                                                    <tr>
+                                <td>array</td>
+                                <td>$data </td>
+                                <td><p>更新データ</p></td>
+                            </tr>
+                                            </table>
+                
+                
+                                    <h4>Returns</h4>
+                    boolean
+                                    				
+                            </article>
+        </div>
+        <aside class="span4 detailsbar">
+            <h1><i class="icon-arrow-down"></i></h1>
+                                                            <dl>
+                                                                            </dl>
+            <h2>Tags</h2>
+            <table class="table table-condensed">
+                                    <tr><td colspan="2"><em>None found</em></td></tr>
+                            </table>
+        </aside>
+    </div>
+
+                                    <div class="row-fluid">
+        <div class="span8 content class">
+            <a id="method__updateWorkflowAssociations" name="method__updateWorkflowAssociations" class="anchor"></a>
+            <article class="method">
+                <h3 class="protected ">_updateWorkflowAssociations()</h3>
+                <a href="#source-view" role="button" class="pull-right btn" data-toggle="modal" style="font-size: 1.1em; padding: 9px 14px"><i class="icon-code"></i></a>
+                <pre class="signature" style="margin-right: 54px;">_updateWorkflowAssociations(\Model  <span class="argument">$model</span>, array  <span class="argument">$options</span>, array|null  <span class="argument">$associations = null</span>) : boolean</pre>
+                <p><em>ワークフローのデータでコピーする場合で、関連テーブルを更新する</em></p>
+                <h2>$options</h2>
+<p>array(
+'baseData' =&gt; 基準となるデータ,
+'targetData' =&gt; 対象データ,
+'newData' =&gt; 登録したデータ,
+'isWorkflow' =&gt; ワークフローかどうか
+);</p>
+
+                                    <h4>Parameters</h4>
+                    <table class="table table-condensed table-hover">
+                                                    <tr>
+                                <td>\Model</td>
+                                <td>$model </td>
+                                <td><p>呼び出し元Model</p></td>
+                            </tr>
+                                                    <tr>
+                                <td>array</td>
+                                <td>$options </td>
+                                <td><p>オプション</p></td>
+                            </tr>
+                                                    <tr>
+                                <td>array|null</td>
+                                <td>$associations </td>
+                                <td><p>関連情報</p></td>
+                            </tr>
+                                            </table>
+                
+                
+                                    <h4>Returns</h4>
+                    boolean
+                                    				
+                            </article>
+        </div>
+        <aside class="span4 detailsbar">
+            <h1><i class="icon-arrow-down"></i></h1>
+                                                            <dl>
+                                                                            </dl>
+            <h2>Tags</h2>
+            <table class="table table-condensed">
+                                    <tr><td colspan="2"><em>None found</em></td></tr>
+                            </table>
+        </aside>
+    </div>
+
+                                    <div class="row-fluid">
+        <div class="span8 content class">
+            <a id="method__saveWorkflowAssociations" name="method__saveWorkflowAssociations" class="anchor"></a>
+            <article class="method">
+                <h3 class="protected ">_saveWorkflowAssociations()</h3>
+                <a href="#source-view" role="button" class="pull-right btn" data-toggle="modal" style="font-size: 1.1em; padding: 9px 14px"><i class="icon-code"></i></a>
+                <pre class="signature" style="margin-right: 54px;">_saveWorkflowAssociations(\Model  <span class="argument">$model</span>, array  <span class="argument">$targetDatas</span>, array  <span class="argument">$options</span>) : boolean</pre>
+                <p><em>ワークフローのデータでコピーする場合で、関連テーブルを更新する</em></p>
+                <h2>$options</h2>
+<p>array(
+'foreignKey' =&gt; 外部キーのフィールド,
+'associationId' =&gt; 関連データのID,
+'commonFields' =&gt; 共通フィールド,
+'associations' =&gt; 関連情報,
+'isWorkflow' =&gt; ワークフローかどうか
+);</p>
+
+                                    <h4>Parameters</h4>
+                    <table class="table table-condensed table-hover">
+                                                    <tr>
+                                <td>\Model</td>
+                                <td>$model </td>
+                                <td><p>呼び出し元Model※_updateWorkflowAssociations()の$model-&gt;$modelName</p></td>
+                            </tr>
+                                                    <tr>
+                                <td>array</td>
+                                <td>$targetDatas </td>
+                                <td><p>対象データ</p></td>
+                            </tr>
+                                                    <tr>
+                                <td>array</td>
+                                <td>$options </td>
+                                <td><p>オプション</p></td>
+                            </tr>
+                                            </table>
+                
+                
+                                    <h4>Returns</h4>
+                    boolean
+                                    				
+                            </article>
+        </div>
+        <aside class="span4 detailsbar">
+            <h1><i class="icon-arrow-down"></i></h1>
+                                                            <dl>
+                                                                            </dl>
+            <h2>Tags</h2>
+            <table class="table table-condensed">
+                                    <tr><td colspan="2"><em>None found</em></td></tr>
+                            </table>
+        </aside>
+    </div>
+
+                                                    <div class="row-fluid">
+        <div class="span8 content class">
+            <a id="method___hasFields" name="method___hasFields" class="anchor"></a>
+            <article class="method">
+                <h3 class="private ">__hasFields()</h3>
+                <a href="#source-view" role="button" class="pull-right btn" data-toggle="modal" style="font-size: 1.1em; padding: 9px 14px"><i class="icon-code"></i></a>
+                <pre class="signature" style="margin-right: 54px;">__hasFields(\Model  <span class="argument">$model</span>, \arrau  <span class="argument">$fields</span>) : boolean</pre>
+                <p><em>フィールドのチェック</em></p>
+                
+
+                                    <h4>Parameters</h4>
+                    <table class="table table-condensed table-hover">
+                                                    <tr>
+                                <td>\Model</td>
+                                <td>$model </td>
+                                <td><p>呼び出し元Model</p></td>
+                            </tr>
+                                                    <tr>
+                                <td>\arrau</td>
+                                <td>$fields </td>
+                                <td><p>フィールド</p></td>
+                            </tr>
+                                            </table>
+                
+                
+                                    <h4>Returns</h4>
+                    boolean
+                                    				
+                            </article>
+        </div>
+        <aside class="span4 detailsbar">
+            <h1><i class="icon-arrow-down"></i></h1>
+                                                            <dl>
+                                                                            </dl>
+            <h2>Tags</h2>
+            <table class="table table-condensed">
+                                    <tr><td colspan="2"><em>None found</em></td></tr>
+                            </table>
+        </aside>
+    </div>
+
+                                    </div>
     </section>
 
     <div id="source-view" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="source-view-label" aria-hidden="true">
@@ -611,7 +1019,7 @@ will abort the save operation.</em></p>
                 <section class="span10 offset1">
                     <hr />
                     Documentation is powered by <a href="http://www.phpdoc.org/">phpDocumentor </a> and authored
-                    on December 2nd, 2016 at 07:07.
+                    on December 23rd, 2016 at 04:52.
                 </section>
             </section>
         </section>
