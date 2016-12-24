@@ -250,6 +250,9 @@ class Frame extends FramesAppModel {
  */
 	public function afterSave($created, $options = array()) {
 		if (isset($this->data['FramesLanguage'])) {
+			$this->loadModels(array(
+				'FramesLanguage' => 'Frames.FramesLanguage'
+			));
 			$data = $this->FramesLanguage->create(
 				Hash::merge(
 					array('frame_id' => $this->data['Frame']['id']),
