@@ -136,16 +136,17 @@
                                 <div class="accordion" style="margin-bottom: 0">
         <div class="accordion-group">
             <div class="accordion-heading">
-                                    <a class="accordion-toggle " data-toggle="collapse" data-target="#namespace-335325933"></a>
+                                    <a class="accordion-toggle " data-toggle="collapse" data-target="#namespace-533457751"></a>
                                 <a href="../namespaces/default.html" style="margin-left: 30px; padding-left: 0">\</a>
             </div>
-            <div id="namespace-335325933" class="accordion-body collapse in">
+            <div id="namespace-533457751" class="accordion-body collapse in">
                 <div class="accordion-inner">
 
                     
                     <ul>
                                                                                                     <li class="class"><a href="../classes/AccessCtrlComponent.html">AccessCtrlComponent</a></li>
                                                     <li class="class"><a href="../classes/AddEmailSendTiming.html">AddEmailSendTiming</a></li>
+                                                    <li class="class"><a href="../classes/AddFieldsForM17n.html">AddFieldsForM17n</a></li>
                                                     <li class="class"><a href="../classes/AppController.html">AppController</a></li>
                                                     <li class="class"><a href="../classes/AppController.html">AppController</a></li>
                                                     <li class="class"><a href="../classes/AppHelper.html">AppHelper</a></li>
@@ -181,7 +182,6 @@
                                                     <li class="class"><a href="../classes/CalendarInsertPlanBehavior.html">CalendarInsertPlanBehavior</a></li>
                                                     <li class="class"><a href="../classes/CalendarLegendHelper.html">CalendarLegendHelper</a></li>
                                                     <li class="class"><a href="../classes/CalendarMailBehavior.html">CalendarMailBehavior</a></li>
-                                                    <li class="class"><a href="../classes/CalendarMailSetting.html">CalendarMailSetting</a></li>
                                                     <li class="class"><a href="../classes/CalendarMailSettingRecords.html">CalendarMailSettingRecords</a></li>
                                                     <li class="class"><a href="../classes/CalendarMailSettingsController.html">CalendarMailSettingsController</a></li>
                                                     <li class="class"><a href="../classes/CalendarMonthlyEntryBehavior.html">CalendarMonthlyEntryBehavior</a></li>
@@ -333,6 +333,7 @@ will inherit them.</p>
                                                                     <a href="../classes/NetCommonsAppModel.html#method_rollback" class="">rollback()</a><br />
                                                                     <a href="../classes/NetCommonsAppModel.html#method_loadModels" class="">loadModels()</a><br />
                                                                     <a href="../classes/CalendarEvent.html#method_beforeValidate" class="">beforeValidate()</a><br />
+                                                                    <a href="../classes/CalendarEvent.html#method_validates" class="">validates()</a><br />
                                                                     <a href="../classes/CalendarEvent.html#method_getSiblings" class="">getSiblings()</a><br />
                                                                     <a href="../classes/CalendarEvent.html#method_canDeleteContent" class="">canDeleteContent()</a><br />
                                                                     <a href="../classes/CalendarEvent.html#method_getEventById" class="">getEventById()</a><br />
@@ -1187,6 +1188,44 @@ validation rules can be defined in $validate.</em></p>
                                                                 <dd><a href="http://book.cakephp.org/2.0/en/models/callback-methods.html#beforevalidate"><span class="namespace-wrapper">http://book.cakephp.org/2.0/en/models/callback-methods.html#beforevalidate</span></a></dd>
                                                                                                     <dd><a href=""><span class="namespace-wrapper">\Model::save()</span></a></dd>
                                                                 </dl>
+            <h2>Tags</h2>
+            <table class="table table-condensed">
+                                    <tr><td colspan="2"><em>None found</em></td></tr>
+                            </table>
+        </aside>
+    </div>
+
+                                    <div class="row-fluid">
+        <div class="span8 content class">
+            <a id="method_validates" name="method_validates" class="anchor"></a>
+            <article class="method">
+                <h3 class="public ">validates()</h3>
+                <a href="#source-view" role="button" class="pull-right btn" data-toggle="modal" style="font-size: 1.1em; padding: 9px 14px"><i class="icon-code"></i></a>
+                <pre class="signature" style="margin-right: 54px;">validates(array  <span class="argument">$options = array()</span>) : boolean</pre>
+                <p><em>Returns true if all fields pass validation. Will validate hasAndBelongsToMany associations
+that use the &#039;with&#039; key as well. Since _saveMulti is incapable of exiting a save operation.</em></p>
+                <p>Will validate the currently set data. Use Model::set() or Model::create() to set the active data.</p>
+
+                                    <h4>Parameters</h4>
+                    <table class="table table-condensed table-hover">
+                                                    <tr>
+                                <td>array</td>
+                                <td>$options </td>
+                                <td><p>An optional array of custom options to be made available in the beforeValidate callback</p></td>
+                            </tr>
+                                            </table>
+                
+                
+                                    <h4>Returns</h4>
+                    boolean
+                                            &mdash; <p>True if there are no errors</p>
+                                    				
+                            </article>
+        </div>
+        <aside class="span4 detailsbar">
+            <h1><i class="icon-arrow-down"></i></h1>
+                                                            <dl>
+                                                                            </dl>
             <h2>Tags</h2>
             <table class="table table-condensed">
                                     <tr><td colspan="2"><em>None found</em></td></tr>
@@ -2190,7 +2229,7 @@ validation rules can be defined in $validate.</em></p>
                 <section class="span10 offset1">
                     <hr />
                     Documentation is powered by <a href="http://www.phpdoc.org/">phpDocumentor </a> and authored
-                    on December 2nd, 2016 at 05:26.
+                    on December 24th, 2016 at 06:13.
                 </section>
             </section>
         </section>
