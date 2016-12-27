@@ -215,7 +215,6 @@ class PageLayoutHelper extends AppHelper {
 					'frame' => $frame,
 					'view' => $this->_View->fetch('content'),
 					'centerContent' => true,
-					'displayBackTo' => Hash::get($this->_View->viewVars, 'displayBackTo', false),
 					'box' => array(
 						'Box' => Current::read('Box'),
 						'BoxesPageContainer' => Current::read('BoxesPageContainer'),
