@@ -63,7 +63,7 @@ class Role extends RolesAppModel {
 	const ROOM_ROLE_KEY_GENERAL_USER = 'general_user';
 
 /**
- * ルームロールのキー(参観者)
+ * ルームロールのキー(ゲスト)
  *
  * @var const
  */

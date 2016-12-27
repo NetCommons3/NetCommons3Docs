@@ -388,7 +388,7 @@ class RolesRecords extends NetCommonsMigration {
 				'value' => '0',
 				'fixed' => '1',
 			),
-			//参観者
+			//ゲスト
 			array(
 				'role_key' => 'visitor',
 				'type' => 'room_role',
