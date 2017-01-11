@@ -73,14 +73,23 @@ class FramesController extends FramesAppController {
 
 		$plugin = $this->Plugin->findByKey($data['Frame']['plugin_key']);
 		if ($plugin) {
-			$urlQuery = '?frame_id=' . $frame['Frame']['id'] . '&page_id=' . Current::read('Page.id');
+			$pluginKey = $data['Frame']['plugin_key'];
 			if (Hash::get($plugin, 'Plugin.frame_add_action')) {
-				$url = '/' . $data['Frame']['plugin_key'] . '/' . $plugin['Plugin']['frame_add_action'];
-				return $this->redirect($url . $urlQuery);
+				list($controller, $action) = explode('/', $plugin['Plugin']['frame_add_action']);
 			} elseif (Hash::get($plugin, 'Plugin.default_setting_action')) {
-				$url = '/' . $data['Frame']['plugin_key'] . '/' . $plugin['Plugin']['default_setting_action'];
-				return $this->redirect($url . $urlQuery);
+				list($controller, $action) = explode('/', $plugin['Plugin']['default_setting_action']);
+			} else {
+				return $this->redirect($this->request->referer());
 			}
+
+			$url = array(
+				'plugin' => $pluginKey,
+				'controller' => $controller,
+				'action' => $action,
+				'?' => array('frame_id' => $frame['Frame']['id'], 'page_id' => Current::read('Page.id')),
+				'#' => 'frame-' . $frame['Frame']['id']
+			);
+			return $this->redirect($url);
 		}
 
 		$this->redirect($this->request->referer());

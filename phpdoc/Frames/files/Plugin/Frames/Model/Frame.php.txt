@@ -263,7 +263,7 @@ class Frame extends FramesAppModel {
 			if (! $result) {
 				throw new InternalErrorException(__d('net_commons', 'Internal Server Error'));
 			}
-			//$this->data['FramesLanguage'] = $result['FramesLanguage'];
+			$this->data['FramesLanguage'] = $result['FramesLanguage'];
 		}
 
 		parent::afterSave($created, $options);
