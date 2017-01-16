@@ -17,13 +17,16 @@ App::uses('PagesAppController', 'Pages.Controller');
  * @author Kohei Teraguchi <kteraguchi@commonsnet.org>
  * @author Shohei Nakajima <nakajimashouhei@gmail.com>
  * @package NetCommons\Pages\Controller
+ * @SuppressWarnings(PHPMD.TooManyPublicMethods)
+ * @SuppressWarnings(PHPMD.ExcessiveClassComplexity)
  */
 class PagesEditController extends PagesAppController {
 
 /**
  * 使用するModels
  *
- * - [Containers.Page](../../Pages/classes/PageContainer.html)
+ * - [M17n.Language](../../M17n/classes/Language.html)
+ * - [Pages.PageContainer](../../Pages/classes/PageContainer.html)
  * - [Pages.PagesLanguage](../../Pages/classes/PagesLanguage.html)
  * - [Pages.Page](../../Pages/classes/Page.html)
  * - [Rooms.Room](../../Rooms/classes/Room.html)
@@ -31,6 +34,7 @@ class PagesEditController extends PagesAppController {
  * @var array
  */
 	public $uses = array(
+		'M17n.Language',
 		'Pages.PageContainer',
 		'Pages.PagesLanguage',
 		'Pages.Page',
@@ -49,7 +53,7 @@ class PagesEditController extends PagesAppController {
 	public $components = array(
 		'NetCommons.Permission' => array(
 			'allow' => array(
-				'index,add,edit,delete,layout' => 'page_editable',
+				'index,add,edit,delete,layout,add_m17n' => 'page_editable',
 			),
 		),
 		'Pages.PageLayout',
@@ -107,7 +111,8 @@ class PagesEditController extends PagesAppController {
  */
 	public function add() {
 		$this->view = 'edit';
-		$this->set('hasDelete', false);
+		$this->set('hasDeletePage', false);
+		$this->set('hasDeleteThisPage', false);
 
 		if ($this->request->is('post')) {
 			//登録処理
@@ -133,14 +138,73 @@ class PagesEditController extends PagesAppController {
 	}
 
 /**
+ * 他言語ページ作成
+ *
+ * @return void
+ */
+	public function add_m17n() {
+		$this->viewClass = 'View';
+		$this->layout = 'NetCommons.modal';
+
+		$activeLangs = $this->Language->getLanguages();
+		list(, $enableLangs) = $this->Language->getLanguagesWithName();
+
+		if ($this->request->is('post')) {
+			//登録処理
+			$result = $this->PagesLanguage->saveM17nPage($this->request->data);
+			if ($result) {
+				//正常の場合、追加したページの言語に遷移する。
+				$language = $this->Language->getLanguage('first', array(
+					'conditions' => array('id' => $this->request->data['PagesLanguage']['language_id']),
+				));
+				if ($language) {
+					Configure::write('Config.language', $language['Language']['code']);
+					$this->Session->write('Config.language', $language['Language']['code']);
+				}
+				$redirectUrl =
+						'/pages/pages_edit/edit/' . Current::read('Room.id') . '/' . Current::read('Page.id');
+				return $this->redirect($redirectUrl);
+			}
+			$this->NetCommons->handleValidationError($this->PagesLanguage->validationErrors);
+
+		} else {
+			$result = $this->Page->existPage(Current::read('Page.id'));
+			if (! $result) {
+				return $this->throwBadRequest();
+			}
+			//表示処理
+			$this->request->data = Hash::merge($this->request->data,
+				$this->PagesLanguage->getPagesLanguage(Current::read('Page.id'), Current::read('Language.id'))
+			);
+
+			$this->request->data['Room'] = Current::read('Room');
+			$this->request->data['_NetCommonsUrl']['redirect'] = $this->__getRedirectUrl();
+		}
+
+		$usedLangs = $this->PagesLanguage->find('list', array(
+			'recursive' => -1,
+			'fields' => array('id', 'language_id'),
+			'conditions' => array('page_id' => Current::read('Page.id')),
+		));
+
+		$disusedLang = array();
+		foreach ($activeLangs as $language) {
+			$langId = (string)$language['Language']['id'];
+			if (! in_array($langId, $usedLangs, true)) {
+				$disusedLang[$langId] = Hash::get($enableLangs, $language['Language']['code']);
+			}
+		}
+		$this->set('disusedLangs', $disusedLang);
+	}
+
+/**
  * 編集
  *
  * @return void
  */
 	public function edit() {
-		$hasDelete = Current::read('Page.parent_id') &&
-				$this->viewVars['room']['Room']['page_id_top'] !== Current::read('Page.id');
-		$this->set('hasDelete', $hasDelete);
+		$this->set('hasDeletePage', $this->__hasDeletePage());
+		$this->set('hasDeleteThisPage', $this->__hasDeleteThisPage());
 
 		if (! Current::read('Page.parent_id')) {
 			return $this->throwBadRequest();
@@ -162,9 +226,10 @@ class PagesEditController extends PagesAppController {
 				return $this->throwBadRequest();
 			}
 			//表示処理
-			$this->request->data = Hash::merge($this->request->data,
-				$this->PagesLanguage->getPagesLanguage(Current::read('Page.id'), Current::read('Language.id'))
+			$pageLang = $this->PagesLanguage->getPagesLanguage(
+				Current::read('Page.id'), Current::read('Language.id')
 			);
+			$this->request->data = Hash::merge($this->request->data, $pageLang);
 			$this->request->data['Page']['permalink'] = $this->request->data['Page']['slug'];
 			$this->request->data['Room'] = Current::read('Room');
 			$this->request->data['_NetCommonsUrl']['redirect'] = $this->__getRedirectUrl();
@@ -177,10 +242,31 @@ class PagesEditController extends PagesAppController {
  * @return void
  */
 	public function delete() {
-		if (! $this->request->is('delete')) {
+		if (! $this->request->is('delete') || ! $this->__hasDeletePage()) {
 			return $this->throwBadRequest();
 		}
+
 		if ($this->Page->deletePage($this->data)) {
+			$this->NetCommons->setFlashNotification(
+				__d('net_commons', 'Successfully saved.'), array('class' => 'success')
+			);
+			return $this->redirect(Hash::get($this->request->data, '_NetCommonsUrl.redirect'));
+		} else {
+			return $this->throwBadRequest();
+		}
+	}
+
+/**
+ * 削除
+ *
+ * @return void
+ */
+	public function delete_page_language() {
+		if (! $this->request->is('delete') || ! $this->__hasDeleteThisPage()) {
+			return $this->throwBadRequest();
+		}
+
+		if ($this->PagesLanguage->deletePageLanguage($this->data)) {
 			$this->NetCommons->setFlashNotification(
 				__d('net_commons', 'Successfully saved.'), array('class' => 'success')
 			);
@@ -353,7 +439,15 @@ class PagesEditController extends PagesAppController {
 		}
 		$conditions['Page.room_id'] = $roomIds;
 
+		$activeLangs = $this->Language->getLanguages();
+		$activeLangIds = Hash::extract($activeLangs, '{n}.Language.id');
+
+		$isSpaceM17n = Current::read('Space.is_m17n') && count($activeLangIds) > 1;
+		$this->set('isSpaceM17n', $isSpaceM17n);
+
 		$pageTreeList = $this->Page->generateTreeList($conditions, null, null, Page::$treeParser);
+		$pageIdsM17n = $this->Page->getPageIdsWithM17n(array_keys($pageTreeList));
+
 		$parentList = array();
 		$treeList = array();
 		foreach ($pageTreeList as $pageId => $tree) {
@@ -363,6 +457,13 @@ class PagesEditController extends PagesAppController {
 			$parentId = (int)$page['Page']['parent_id'];
 			$page['Page']['parent_id'] = (string)$parentId;
 			$page['Page']['type'] = '';
+
+			if ($this->viewVars['isSpaceM17n']) {
+				$page['Page']['is_m17n'] =
+						!(bool)array_diff($activeLangIds, Hash::get($pageIdsM17n, $pageId, []));
+			} else {
+				$page['Page']['is_m17n'] = null;
+			}
 
 			// * ページ名
 			if (Hash::get($page, 'Page.id') === Page::PUBLIC_ROOT_PAGE_ID ||
@@ -414,16 +515,26 @@ class PagesEditController extends PagesAppController {
 		}
 
 		$parentPathName = $this->Page->getParentNodeName(Current::read('Page.id'));
-
-		if ($this->viewVars['room']['Room']['page_id_top'] !== Current::read('Page.id')) {
+		if (! Current::read('Space.permalink')) {
 			$room = Hash::extract(
 				$this->viewVars['room'],
 				'RoomsLanguage.{n}[language_id=' . Current::read('Language.id') . ']'
 			);
 			array_unshift($parentPathName, Hash::get($room, '0.name'));
 		}
-
 		$this->set('parentPathName', implode(' / ', $parentPathName));
+
+		$created = $this->params['action'] === 'add';
+		$parentPermalink = $this->Page->getParentPermalink(Current::read('Page.id'), $created);
+		if (Current::read('Space.permalink')) {
+			array_unshift($parentPermalink, '/' . Current::read('Space.permalink'));
+		}
+
+		if (Current::read('Page.parent_id') === Current::read('Page.root_id') && ! $created) {
+			array_pop($parentPermalink);
+		}
+
+		$this->set('parentPermalink', implode('/', $parentPermalink) . '/');
 	}
 
 /**
@@ -450,6 +561,39 @@ class PagesEditController extends PagesAppController {
 			['action' => 'index', 'key' => Current::read('Room.id'), 'key2' => Current::read('Page.id')]
 		);
 		$this->Session->write('_NetCommonsUrl.redirect', $url);
+	}
+
+/**
+ * 削除できるかどうか
+ *
+ * @return bool
+ */
+	private function __hasDeletePage() {
+		$pageIdTop = $this->viewVars['room']['Room']['page_id_top'];
+		return Current::read('Page.parent_id') && $pageIdTop !== Current::read('Page.id');
+	}
+
+/**
+ * 削除できるかどうか
+ *
+ * @return bool
+ */
+	private function __hasDeleteThisPage() {
+		if (! Current::read('Space.is_m17n')) {
+			return false;
+		}
+
+		$hasDeletePage = $this->__hasDeletePage();
+		if (! $hasDeletePage) {
+			return false;
+		}
+
+		$activeLangs = $this->Language->getLanguages();
+		$activeLangIds = Hash::extract($activeLangs, '{n}.Language.id');
+
+		$pageIdsM17n = $this->Page->getPageIdsWithM17n(Current::read('Page.id'));
+
+		return !(bool)array_diff($activeLangIds, Hash::get($pageIdsM17n, Current::read('Page.id'), []));
 	}
 
 }

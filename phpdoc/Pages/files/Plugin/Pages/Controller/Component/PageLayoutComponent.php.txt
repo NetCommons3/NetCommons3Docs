@@ -38,6 +38,7 @@ class PageLayoutComponent extends Component {
  * @param Controller $controller Controller
  * @return void
  * @throws NotFoundException
+ * @SuppressWarnings(PHPMD.CyclomaticComplexity)
  */
 	public function beforeRender(Controller $controller) {
 		// Ajax用
@@ -79,6 +80,11 @@ class PageLayoutComponent extends Component {
 		//ヘルパーセット
 		if (! array_key_exists('NetCommons.Composer', $controller->helpers)) {
 			$controller->helpers[] = 'NetCommons.Composer';
+		}
+
+		//表示言語フレームのセット
+		if ($controller->layout === 'NetCommons.setting' && Current::read('Frame.id')) {
+			$this->setFramePublicLang($controller);
 		}
 	}
 
@@ -130,6 +136,47 @@ class PageLayoutComponent extends Component {
 		}
 
 		$controller->set('meta', $result);
+	}
+
+/**
+ * フレームの表示言語設定に関するデータをviewVarsセットする
+ *
+ * @param Controller $controller Controller
+ * @return void
+ */
+	public function setFramePublicLang(Controller $controller) {
+		$this->Language = ClassRegistry::init('M17n.Language');
+		$this->FramePublicLanguage = ClassRegistry::init('Frames.FramePublicLanguage');
+
+		$activeLangs = $this->Language->getLanguages();
+		list(, $enableLangs) = $this->Language->getLanguagesWithName();
+
+		$framePublicLangs = $this->FramePublicLanguage->find('list', array(
+			'recursive' => -1,
+			'fields' => array('id', 'language_id'),
+			'conditions' => array(
+				'frame_id' => Current::read('Frame.id'),
+				'is_public' => true
+			),
+		));
+
+		$frameLangs = array();
+		$publicLangs = array();
+		foreach ($activeLangs as $language) {
+			$langId = (int)$language['Language']['id'];
+			$langCode = $language['Language']['code'];
+
+			$frameLangs[$langId] = __d(
+				'frames', 'Display of the %s page', Hash::get($enableLangs, $langCode)
+			);
+
+			if (in_array((string)$langId, $framePublicLangs, true) ||
+					in_array('0', $framePublicLangs, true)) {
+				$publicLangs[$langId] = $langId;
+			}
+		}
+		$controller->set('framePublicLangs', $publicLangs);
+		$controller->set('frameLangs', $frameLangs);
 	}
 
 }

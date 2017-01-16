@@ -31,6 +31,17 @@ class SlugRoute extends CakeRoute {
 			return false;
 		}
 
+		if ($params['pass']) {
+			$Space = ClassRegistry::init('Rooms.Space');
+			$count = $Space->find('count', array(
+				'conditions' => array('permalink' => $params['pass'][0]),
+				'recursive' => -1
+			));
+			if ($count > 0) {
+				unset($params['pass'][0]);
+			}
+		}
+
 		$path = implode('/', $params['pass']);
 		if ($path === '') {
 			$conditions = array('Page.lft' => '1');

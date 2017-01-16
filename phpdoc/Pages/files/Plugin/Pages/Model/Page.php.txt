@@ -63,8 +63,9 @@ class Page extends PagesAppModel {
  * @var array
  */
 	public $actsAs = array(
-		'Tree',
-		'Pages.PageSave',
+		'Pages.PagesTree',
+		'Pages.SavePage',
+		'Pages.GetPage',
 		'Pages.PageAssociations',
 		'ThemeSettings.Theme',
 	);
@@ -135,52 +136,11 @@ class Page extends PagesAppModel {
 	);
 
 /**
- * hasAndBelongsToMany associations
+ * Spaceモデルをバインドしているかどうか
  *
  * @var array
  */
-	public $hasAndBelongsToMany = array(
-		//'Box' => array(
-		//	'className' => 'Boxes.Box',
-		//	'joinTable' => 'boxes_pages',
-		//	'foreignKey' => 'page_id',
-		//	'associationForeignKey' => 'box_id',
-		//	'unique' => 'keepExisting',
-		//	'conditions' => '',
-		//	'fields' => '',
-		//	'order' => '',
-		//	'limit' => '',
-		//	'offset' => '',
-		//	'finderQuery' => '',
-		//),
-		//'Container' => array(
-		//	'className' => 'Containers.Container',
-		//	'joinTable' => 'containers_pages',
-		//	'foreignKey' => 'page_id',
-		//	'associationForeignKey' => 'container_id',
-		//	'unique' => 'keepExisting',
-		//	//'conditions' => array('ContainersPage.is_published' => true),
-		//	'conditions' => '',
-		//	'fields' => '',
-		//	'order' => '',
-		//	'limit' => '',
-		//	'offset' => '',
-		//	'finderQuery' => '',
-		//),
-		'Language' => array(
-			'className' => 'M17n.Language',
-			'joinTable' => 'pages_languages',
-			'foreignKey' => 'page_id',
-			'associationForeignKey' => 'language_id',
-			'unique' => 'keepExisting',
-			'conditions' => '',
-			'fields' => '',
-			'order' => '',
-			'limit' => '',
-			'offset' => '',
-			'finderQuery' => '',
-		)
-	);
+	protected $_isSpaceBind = false;
 
 /**
  * Constructor. Binds the model's database table to the object.
@@ -195,6 +155,59 @@ class Page extends PagesAppModel {
 	public function __construct($id = false, $table = null, $ds = null) {
 		parent::__construct($id, $table, $ds);
 		self::$treeParser = chr(9);
+	}
+
+/**
+ * Called before each find operation. Return false if you want to halt the find
+ * call, otherwise return the (modified) query data.
+ *
+ * @param array $query Data used to execute this query, i.e. conditions, order, etc.
+ * @return mixed true if the operation should continue, false if it should abort; or, modified
+ *  $query to continue with new $query
+ * @link http://book.cakephp.org/2.0/en/models/callback-methods.html#beforefind
+ */
+	public function beforeFind($query) {
+		if (Hash::get($query, 'recursive') > -1 && isset($this->belongsTo['Room'])) {
+			$this->bindModel(array(
+				'belongsTo' => array(
+					'Space' => array(
+						'className' => 'Rooms.Space',
+						'foreignKey' => false,
+						'conditions' => array(
+							'Room.space_id = Space.id',
+						),
+						'fields' => '',
+						'order' => ''
+					),
+				)
+			), true);
+		}
+		return true;
+	}
+
+/**
+ * Called after each find operation. Can be used to modify any results returned by find().
+ * Return value should be the (modified) results.
+ *
+ * @param mixed $results The results of the find operation
+ * @param bool $primary Whether this model is being queried directly (vs. being queried as an association)
+ * @return mixed Result of the find operation
+ * @link http://book.cakephp.org/2.0/en/models/callback-methods.html#afterfind
+ * @SuppressWarnings(PHPMD.BooleanArgumentFlag)
+ */
+	public function afterFind($results, $primary = false) {
+		if (Hash::extract($results, '{n}.Space')) {
+			foreach ($results as $i => $result) {
+				if ($result['Space']['permalink']) {
+					$results[$i]['Page']['full_permalink'] = $result['Space']['permalink'] . '/';
+				} else {
+					$results[$i]['Page']['full_permalink'] = '';
+				}
+				$results[$i]['Page']['full_permalink'] .= $result['Page']['permalink'];
+			}
+		}
+
+		return $results;
 	}
 
 /**
@@ -232,8 +245,8 @@ class Page extends PagesAppModel {
 					'message' => sprintf(__d('net_commons', 'Please input %s.'), __d('pages', 'Slug')),
 					'required' => true
 				),
-				'isUnique' => array(
-					'rule' => array('isUnique'),
+				'isUniquePermalink' => array(
+					'rule' => array('isUniquePermalink'),
 					'message' => sprintf(__d('net_commons', '%s is already in use.'), __d('pages', 'Slug')),
 				),
 				'validPermalink' => array(
@@ -286,6 +299,23 @@ class Page extends PagesAppModel {
 						'|^\/|\/$|\.\/|\/\.|\.$|^\.|\||\]|\[|\!|\(|\)|\*)/';
 
 		return !(bool)preg_match($pattern, $value);
+	}
+
+/**
+ * パーマリンクバリデーション
+ *
+ * @param array $fields チェック値
+ * @return bool
+ */
+	public function isUniquePermalink($fields) {
+		if (!empty($this->id)) {
+			$fields[$this->primaryKey . ' !='] = $this->id;
+		}
+		if (isset($this->data[$this->alias]['root_id'])) {
+			$fields['root_id'] = $this->data[$this->alias]['root_id'];
+		}
+
+		return !$this->find('count', array('conditions' => $fields, 'recursive' => -1));
 	}
 
 /**
@@ -355,42 +385,6 @@ class Page extends PagesAppModel {
 	}
 
 /**
- * ページデータ取得
- *
- * @param int|array $roomIds Room.id
- * @return array
- */
-	public function getPages($roomIds = null) {
-		$this->loadModels([
-			'PagesLanguage' => 'Pages.PagesLanguage',
-		]);
-
-		if (! isset($roomIds)) {
-			$roomIds = Current::read('Room.id');
-		}
-
-		$pages = $this->find('all', array(
-			'recursive' => 1,
-			'conditions' => array(
-				'Page.room_id' => $roomIds,
-			),
-		));
-
-		$pagesLanguages = $this->PagesLanguage->find('all', array(
-			'recursive' => -1,
-			'conditions' => array(
-				'PagesLanguage.page_id' => Hash::extract($pages, '{n}.Page.id'),
-				'PagesLanguage.language_id' => Current::read('Language.id'),
-			),
-		));
-
-		return Hash::merge(
-			Hash::combine($pages, '{n}.Page.id', '{n}'),
-			Hash::combine($pagesLanguages, '{n}.PagesLanguage.page_id', '{n}')
-		);
-	}
-
-/**
  * ページデータの存在チェック
  *
  * @param int $pageId ページID
@@ -430,264 +424,6 @@ class Page extends PagesAppModel {
 	}
 
 /**
- * トップページの取得
- *
- * @return int ページID
- */
-	public function getTopPageId() {
-		$room = $this->Room->find('first', array(
-			'recursive' => -1,
-			'conditions' => array(
-				'id' => Space::getRoomIdRoot(Space::PUBLIC_SPACE_ID)
-			)
-		));
-
-		return Hash::get($room, 'Room.page_id_top');
-	}
-
-/**
- * ページデータの存在チェック
- *
- * @param int $pageId ページID
- * @return array 親ノード名リスト
- */
-	public function getParentNodeName($pageId) {
-		$this->loadModels([
-			'PagesLanguage' => 'Pages.PagesLanguage',
-		]);
-
-		$parentNode = $this->getPath($pageId);
-
-		$pagesLanguages = $this->find('list', array(
-			'recursive' => -1,
-			'fields' => array(
-				$this->PagesLanguage->alias . '.page_id',
-				$this->PagesLanguage->alias . '.name',
-			),
-			'conditions' => array(
-				$this->alias . '.id' => Hash::extract($parentNode, '{n}.Page.id'),
-				$this->alias . '.parent_id NOT' => null,
-			),
-			'joins' => array(
-				array(
-					'table' => $this->PagesLanguage->table,
-					'alias' => $this->PagesLanguage->alias,
-					'conditions' => array(
-						$this->PagesLanguage->alias . '.page_id' . ' = ' . $this->alias . '.id',
-						$this->PagesLanguage->alias . '.language_id' => Current::read('Language.id'),
-					),
-				),
-			),
-			'order' => array($this->alias . ' .lft' => 'asc')
-		));
-
-		return $pagesLanguages;
-	}
-
-/**
- * Frameデータも一緒にページデータ取得
- *
- * @param string $permalink Permalink
- * @return array
- */
-	public function getPageWithFrame($permalink) {
-		$this->loadModels([
-			'Box' => 'Boxes.Box',
-			'PagesLanguage' => 'Pages.PagesLanguage',
-			'PageContainer' => 'Pages.PageContainer',
-		]);
-
-		if ($permalink === '') {
-			$conditions = array(
-				'Page.id' => Current::read('Room.page_id_top')
-			);
-		} else {
-			$conditions = array(
-				'Page.permalink' => $permalink
-			);
-		}
-
-		$query = array(
-			'recursive' => 0,
-			'conditions' => $conditions,
-		);
-		$page = $this->find('first', $query);
-
-		$pagesLanguages = $this->PagesLanguage->find('first', array(
-			'recursive' => -1,
-			'conditions' => array(
-				'PagesLanguage.page_id' => Hash::get($page, 'Page.id'),
-				'PagesLanguage.language_id' => Current::read('Language.id'),
-			),
-		));
-		$result = Hash::merge($page, $pagesLanguages);
-
-		$pageContainers = $this->PageContainer->find('all', array(
-			'recursive' => -1,
-			'conditions' => array(
-				'PageContainer.page_id' => Hash::get($page, 'Page.id'),
-			),
-			'order' => array('container_type' => 'asc'),
-		));
-		$result['PageContainer'] = Hash::extract($pageContainers, '{n}.PageContainer');
-		foreach ($result['PageContainer'] as $i => $pageContainer) {
-			$pageContainer['Box'] = $this->Box->getBoxWithFrame($pageContainer['id']);
-			$result['PageContainer'][$i] = $pageContainer;
-		}
-
-		return $result;
-	}
-
-/**
- * Save page each association model
- *
- * #### Options
- *
- * - `atomic`: If true (default), will attempt to save all records in a single transaction.
- *   Should be set to false if database/table does not support transactions.
- *
- * @param array $data request data
- * @param array $options Options to use when saving record data, See $options above.
- * @throws InternalErrorException
- * @return mixed On success Model::$data if its not empty or true, false on failure
- */
-	public function savePage($data, $options = array()) {
-		$options = Hash::merge(array('atomic' => true), $options);
-
-		//トランザクションBegin
-		if ($options['atomic']) {
-			$this->begin();
-		}
-
-		//バリデーション
-		$this->set($data);
-		if (! $this->validates()) {
-			return false;
-		}
-
-		try {
-			if (! $page = $this->save(null, false)) {
-				throw new InternalErrorException(__d('net_commons', 'Internal Server Error'));
-			}
-
-			if ($options['atomic']) {
-				$this->commit();
-			}
-
-		} catch (Exception $ex) {
-			if ($options['atomic']) {
-				$this->rollback($ex);
-			}
-			throw $ex;
-		}
-
-		return $page;
-	}
-
-/**
- * テーマ
- *
- * @param array $data request data
- * @throws InternalErrorException
- * @return mixed True on success, false on failure
- */
-	public function saveTheme($data) {
-		//トランザクションBegin
-		$this->begin();
-
-		if (! $this->exists($data[$this->alias]['id'])) {
-			return false;
-		}
-
-		try {
-			$this->id = $data[$this->alias]['id'];
-
-			if (! $this->saveField('theme', $data[$this->alias]['theme'], array('callbacks' => false))) {
-				throw new InternalErrorException(__d('net_commons', 'Internal Server Error'));
-			}
-
-			$this->commit();
-
-		} catch (Exception $ex) {
-			$this->rollback($ex);
-		}
-
-		return true;
-	}
-
-/**
- * 移動
- *
- * @param array $data request data
- * @return bool
- * @throws InternalErrorException
- */
-	public function saveMove($data) {
-		//トランザクションBegin
-		$this->begin();
-
-		if (! $this->exists($data[$this->alias]['id'])) {
-			return false;
-		}
-
-		try {
-			$this->id = $data[$this->alias]['id'];
-
-			if ($data[$this->alias]['type'] === 'up') {
-				$result = $this->moveUp($this->id, 1);
-			} elseif ($data[$this->alias]['type'] === 'down') {
-				$result = $this->moveDown($this->id, 1);
-			} elseif ($data[$this->alias]['type'] === 'move') {
-				$result = $this->saveField('parent_id', $data[$this->alias]['parent_id']);
-			} else {
-				$result = false;
-			}
-
-			if (! $result) {
-				throw new InternalErrorException(__d('net_commons', 'Internal Server Error'));
-			}
-
-			//パブリックスペースで、移動したものが先頭になった場合、Room.page_id_topを更新する
-			$this->__updatePageIdTopMove($data);
-
-			$this->commit();
-
-		} catch (Exception $ex) {
-			$this->rollback($ex);
-		}
-
-		return true;
-	}
-
-/**
- * page_id_topの更新処理
- *
- * @param array $data request data
- * @return bool
- * @throws InternalErrorException
- */
-	private function __updatePageIdTopMove($data) {
-		//パブリックスペースで、移動したものが先頭になった場合、Room.page_id_topを更新する
-		$first = $this->find('first', array(
-			'recursive' => -1,
-			'fields' => array('id'),
-			'conditions' => array(
-				'parent_id !=' => '',
-			),
-			'order' => array('lft' => 'asc'),
-		));
-
-		if ($first['Page']['id'] === $data[$this->alias]['id']) {
-			$this->Room->id = Space::getRoomIdRoot(Space::PUBLIC_SPACE_ID);
-			if (! $this->Room->saveField('page_id_top', $first['Page']['id'], array('callbacks' => false))) {
-				throw new InternalErrorException(__d('net_commons', 'Internal Server Error'));
-			}
-		}
-
-		return true;
-	}
-
-/**
  * Delete page each association model
  * - `atomic`: If true (default), will attempt to save all records in a single transaction.
  *   Should be set to false if database/table does not support transactions.
@@ -719,8 +455,6 @@ class Page extends PagesAppModel {
 			if (! $this->PagesLanguage->deleteAll($conditions, false)) {
 				throw new InternalErrorException(__d('net_commons', 'Internal Server Error'));
 			}
-
-			//後で、Room.page_id_topを更新する処理追加
 
 			//Container関連の削除
 			$this->deleteContainers($data[$this->alias]['id']);

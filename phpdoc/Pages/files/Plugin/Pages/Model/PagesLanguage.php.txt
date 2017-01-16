@@ -59,6 +59,18 @@ class PagesLanguage extends PagesAppModel {
 	);
 
 /**
+ * use behaviors
+ *
+ * @var array
+ */
+	public $actsAs = array(
+		//多言語
+		'M17n.M17n' => array(
+			'keyField' => 'page_id'
+		),
+	);
+
+/**
  * Called during validation operations, before validation. Please note that custom
  * validation rules can be defined in $validate.
  *
@@ -124,12 +136,74 @@ class PagesLanguage extends PagesAppModel {
 			'PagesLanguage.language_id' => $languageId,
 		);
 
-		$PagesLanguage = $this->find('first', array(
+		$pagesLanguage = $this->find('first', array(
 			'recursive' => 0,
 			'conditions' => $conditions,
 		));
 
-		return $PagesLanguage;
+		return $pagesLanguage;
+	}
+
+/**
+ * ページデータ取得条件配列
+ *
+ * @param array $addConditions 追加条件
+ * @param bool $reset リセットフラグ
+ * @return array
+ * @SuppressWarnings(PHPMD.BooleanArgumentFlag)
+ */
+	public function getConditions($addConditions = array(), $reset = true) {
+		$this->bindPagesLanguage($reset);
+
+		$conditions = Hash::merge(array(
+			'OR' => array(
+				'PagesLanguage.language_id' => Current::read('Language.id'),
+				'Space.is_m17n' => false
+			)
+		), $addConditions);
+
+		return $conditions;
+	}
+
+/**
+ * PagesLanguageのバインド
+ *
+ * @param bool $reset リセットフラグ
+ * @return void
+ * @SuppressWarnings(PHPMD.BooleanArgumentFlag)
+ */
+	public function bindPagesLanguage($reset = true) {
+		$this->bindModel(array(
+			'belongsTo' => array(
+				'Room' => array(
+					'className' => 'Rooms.Room',
+					'foreignKey' => false,
+					'conditions' => array(
+						'Page.room_id = Room.id',
+					),
+					'fields' => '',
+					'order' => ''
+				),
+				'Space' => array(
+					'className' => 'Rooms.Space',
+					'foreignKey' => false,
+					'conditions' => array(
+						'Room.space_id = Space.id',
+					),
+					'fields' => '',
+					'order' => ''
+				),
+			)
+		), $reset);
+	}
+
+/**
+ * PagesLanguageのunbind
+ *
+ * @return void
+ */
+	public function unbindPagesLanguage() {
+		$this->unbindModel(array('belongsTo' => array('Room', 'Space')));
 	}
 
 /**
@@ -161,5 +235,109 @@ class PagesLanguage extends PagesAppModel {
 
 		return true;
 	}
+
+/**
+ * 言語ページでデータ登録処理
+ *
+ * @param array $data リクエストデータ
+ * @return bool
+ */
+	public function saveM17nPage($data) {
+		$conditions = array(
+			'PagesLanguage.page_id' => $data['Page']['id'],
+			'PagesLanguage.language_id' => Current::read('Language.id'),
+		);
+		$pagesLanguage = $this->find('first', array(
+			'recursive' => -1,
+			'conditions' => $conditions,
+		));
+		$data['PagesLanguage']['name'] = $pagesLanguage['PagesLanguage']['name'];
+
+		$langId = Current::read('Language.id');
+
+		Current::write('Language.id', $data['PagesLanguage']['language_id']);
+
+		$result = $this->savePagesLanguage($data['PagesLanguage']);
+
+		Current::write('Language.id', $langId);
+
+		return $result;
+	}
+
+/**
+ * 当言語ページの削除
+ *
+ * @param array $data request data
+ * @throws InternalErrorException
+ * @return mixed On success Model::$data if its not empty or true, false on failure
+ */
+	public function deletePageLanguage($data) {
+		//トランザクションBegin
+		$this->begin();
+
+		try {
+			//PagesLanguageの削除
+			if (! $this->delete($data['PagesLanguage']['id'])) {
+				throw new InternalErrorException(__d('net_commons', 'Internal Server Error'));
+			}
+
+			//is_originの付け替え
+			$update = array();
+			$conditions = array();
+			$pageCount = $this->find('count', array(
+				'recursive' => -1,
+				'conditions' => array(
+					'PagesLanguage.page_id' => $data['Page']['id']
+				),
+			));
+			if ($pageCount === 1) {
+				$update = array(
+					'is_origin' => true,
+					'is_translation' => false
+				);
+				$conditions = array(
+					'page_id' => $data['Page']['id']
+				);
+			} else {
+				$isOrigin = $this->find('count', array(
+					'recursive' => -1,
+					'conditions' => array(
+						'PagesLanguage.page_id' => $data['Page']['id'],
+						'PagesLanguage.is_origin' => true
+					),
+				));
+				if ($isOrigin) {
+					$this->commit();
+					return true;
+				}
+				$pageLang = $this->find('first', array(
+					'recursive' => 0,
+					'conditions' => array(
+						'PagesLanguage.page_id' => $data['Page']['id'],
+						'Language.is_active' => true
+					),
+					'order' => array('Language.weight' => 'asc')
+				));
+
+				$update = array(
+					'is_origin' => true,
+				);
+				$conditions = array(
+					'id' => $pageLang['PagesLanguage']['id']
+				);
+			}
+			if (! $this->updateAll($update, $conditions)) {
+				throw new InternalErrorException(__d('net_commons', 'Internal Server Error'));
+			}
+
+			$this->commit();
+
+		} catch (Exception $ex) {
+			$this->rollback($ex);
+		}
+
+		return true;
+	}
+
 }
 
