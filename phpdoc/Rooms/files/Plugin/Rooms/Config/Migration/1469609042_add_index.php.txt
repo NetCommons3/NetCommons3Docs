@@ -34,9 +34,7 @@ class AddIndex extends CakeMigration {
 					'user_id' => array('type' => 'integer', 'null' => false, 'default' => null, 'unsigned' => false, 'key' => 'index'),
 				),
 				'room_role_permissions' => array(
-					'roles_room_id' => array('type' => 'integer', 'null' => false, 'default' => null, 'unsigned' => false, 'key' => 'index', 'comment' => 'Role type
-e.g.) roomRole, announcementBlockRole, bbsBlockRole
-'),
+					'roles_room_id' => array('type' => 'integer', 'null' => false, 'default' => null, 'unsigned' => false, 'key' => 'index', 'comment' => 'ルーム毎のロールID'),
 				),
 				'room_roles' => array(
 					'role_key' => array('type' => 'string', 'null' => false, 'default' => null, 'key' => 'index', 'collate' => 'utf8_general_ci', 'charset' => 'utf8'),
