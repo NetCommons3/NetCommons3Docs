@@ -21,7 +21,55 @@
     <script src="../js/jquery.smooth-scroll.js"></script>
     <script src="../js/prism.min.js"></script>
     <!-- TODO: Add http://jscrollpane.kelvinluck.com/ to style the scrollbars for browsers not using webkit-->
-    
+        <script type="text/javascript">
+        function loadExternalCodeSnippets() {
+            Array.prototype.slice.call(document.querySelectorAll('pre[data-src]')).forEach(function (pre) {
+                var src = pre.getAttribute('data-src');
+                var extension = (src.match(/\.(\w+)$/) || [, ''])[1];
+                var language = 'php';
+
+                var code = document.createElement('code');
+                code.className = 'language-' + language;
+
+                pre.textContent = '';
+
+                code.textContent = 'Loading…';
+
+                pre.appendChild(code);
+
+                var xhr = new XMLHttpRequest();
+
+                xhr.open('GET', src, true);
+
+                xhr.onreadystatechange = function () {
+                    if (xhr.readyState == 4) {
+
+                        if (xhr.status < 400 && xhr.responseText) {
+                            code.textContent = xhr.responseText;
+
+                            Prism.highlightElement(code);
+                        }
+                        else if (xhr.status >= 400) {
+                            code.textContent = '✖ Error ' + xhr.status + ' while fetching file: ' + xhr.statusText;
+                        }
+                        else {
+                            code.textContent = '✖ Error: File does not exist or is empty';
+                        }
+                    }
+                };
+
+                xhr.send(null);
+            });
+        }
+
+        $(document).ready(function(){
+            loadExternalCodeSnippets();
+        });
+        $('#source-view').on('shown', function () {
+            loadExternalCodeSnippets();
+        })
+    </script>
+
     <link rel="shortcut icon" href="../images/favicon.ico"/>
     <link rel="apple-touch-icon" href="../images/apple-touch-icon.png"/>
     <link rel="apple-touch-icon" sizes="72x72" href="../images/apple-touch-icon-72x72.png"/>
@@ -88,10 +136,10 @@
                                 <div class="accordion" style="margin-bottom: 0">
         <div class="accordion-group">
             <div class="accordion-heading">
-                                    <a class="accordion-toggle " data-toggle="collapse" data-target="#namespace-234856235"></a>
+                                    <a class="accordion-toggle " data-toggle="collapse" data-target="#namespace-1107371446"></a>
                                 <a href="../namespaces/default.html" style="margin-left: 30px; padding-left: 0">\</a>
             </div>
-            <div id="namespace-234856235" class="accordion-body collapse in">
+            <div id="namespace-1107371446" class="accordion-body collapse in">
                 <div class="accordion-inner">
 
                     
@@ -180,321 +228,63 @@
     <section class="row-fluid">
         <div class="span10 offset2">
             <div class="row-fluid">
-                <div class="span8 content namespace">
+                <div class="span8 content file">
                     <nav>
-                                                
-                                            </nav>
-                    <h1><small></small>\</h1>
+                                                                    </nav>
 
+                    <a href="#source-view" role="button" class="pull-right btn" data-toggle="modal"><i class="icon-code"></i></a>
+                    <h1><small>Plugin/Roles/Config/Migration</small>1483656610_add_table_for_m17n_1.php</h1>
+                    <p><em>多言語化対応</em></p>
                     
+
                     
                     
                                         <h2>Classes</h2>
                     <table class="table table-hover">
                                             <tr>
-                            <td><a href="../classes/AccessCtrlComponent.html">AccessCtrlComponent</a></td>
-                            <td><em>アクセス制御 Component</em></td>
-                        </tr>
-                                            <tr>
-                            <td><a href="../classes/AddFieldsForM17n.html">AddFieldsForM17n</a></td>
-                            <td><em>多言語化対応</em></td>
-                        </tr>
-                                            <tr>
-                            <td><a href="../classes/AddIndex.html">AddIndex</a></td>
-                            <td><em>AddIndex migration</em></td>
-                        </tr>
-                                            <tr>
-                            <td><a href="../classes/AddRoomRoleDesc.html">AddRoomRoleDesc</a></td>
-                            <td><em>Insert records migration</em></td>
-                        </tr>
-                                            <tr>
                             <td><a href="../classes/AddTableForM17n1.html">AddTableForM17n1</a></td>
                             <td><em>多言語化対応</em></td>
-                        </tr>
-                                            <tr>
-                            <td><a href="../classes/AppController.html">AppController</a></td>
-                            <td><em>Application Controller for NetCommons</em></td>
-                        </tr>
-                                            <tr>
-                            <td><a href="../classes/AppController.html">AppController</a></td>
-                            <td><em>Application Controller</em></td>
-                        </tr>
-                                            <tr>
-                            <td><a href="../classes/AppHelper.html">AppHelper</a></td>
-                            <td><em>Application helper</em></td>
-                        </tr>
-                                            <tr>
-                            <td><a href="../classes/AppModel.html">AppModel</a></td>
-                            <td><em>Application model for Cake.</em></td>
-                        </tr>
-                                            <tr>
-                            <td><a href="../classes/AppPaginatorComponent.html">AppPaginatorComponent</a></td>
-                            <td><em>NetCommons用に拡張したページネーション Component</em></td>
-                        </tr>
-                                            <tr>
-                            <td><a href="../classes/AppPaginatorHelper.html">AppPaginatorHelper</a></td>
-                            <td><em>NetCommons用に拡張したページネーション Helper</em></td>
-                        </tr>
-                                            <tr>
-                            <td><a href="../classes/AssetComponent.html">AssetComponent</a></td>
-                            <td><em>Summary for AssetComponent Component</em></td>
-                        </tr>
-                                            <tr>
-                            <td><a href="../classes/BackToHelper.html">BackToHelper</a></td>
-                            <td><em>BackTo Helper</em></td>
-                        </tr>
-                                            <tr>
-                            <td><a href="../classes/ButtonHelper.html">ButtonHelper</a></td>
-                            <td><em>Button Helper</em></td>
-                        </tr>
-                                            <tr>
-                            <td><a href="../classes/ComposerHelper.html">ComposerHelper</a></td>
-                            <td><em>Composer helper</em></td>
-                        </tr>
-                                            <tr>
-                            <td><a href="../classes/Current.html">Current</a></td>
-                            <td><em>Current Utility</em></td>
-                        </tr>
-                                            <tr>
-                            <td><a href="../classes/CurrentBase.html">CurrentBase</a></td>
-                            <td><em>Current Utility</em></td>
-                        </tr>
-                                            <tr>
-                            <td><a href="../classes/CurrentFrame.html">CurrentFrame</a></td>
-                            <td><em>CurrentFrame Utility</em></td>
-                        </tr>
-                                            <tr>
-                            <td><a href="../classes/CurrentPage.html">CurrentPage</a></td>
-                            <td><em>CurrentPage Utility</em></td>
-                        </tr>
-                                            <tr>
-                            <td><a href="../classes/CurrentSystem.html">CurrentSystem</a></td>
-                            <td><em>CurrentSystem Utility</em></td>
-                        </tr>
-                                            <tr>
-                            <td><a href="../classes/DateHelper.html">DateHelper</a></td>
-                            <td><em>DateHelper Helper</em></td>
-                        </tr>
-                                            <tr>
-                            <td><a href="../classes/DatetimePickerHelper.html">DatetimePickerHelper</a></td>
-                            <td><em>Class DatetimePickerHelper
-このHelperはNetCommonsFormから使われる前提で開発されています。Viewから直接使われることは想定していません。</em></td>
-                        </tr>
-                                            <tr>
-                            <td><a href="../classes/DefaultRolePermission.html">DefaultRolePermission</a></td>
-                            <td><em>DefaultRolePermission Model</em></td>
-                        </tr>
-                                            <tr>
-                            <td><a href="../classes/DisplayNumberHelper.html">DisplayNumberHelper</a></td>
-                            <td><em>DisplayNumber Helper</em></td>
-                        </tr>
-                                            <tr>
-                            <td><a href="../classes/FormInputHelper.html">FormInputHelper</a></td>
-                            <td><em>FormInputHelper</em></td>
-                        </tr>
-                                            <tr>
-                            <td><a href="../classes/Init.html">Init</a></td>
-                            <td><em>Init migration</em></td>
-                        </tr>
-                                            <tr>
-                            <td><a href="../classes/LinkButtonHelper.html">LinkButtonHelper</a></td>
-                            <td><em>`&lt;a&gt;`のボタン Helper</em></td>
-                        </tr>
-                                            <tr>
-                            <td><a href="../classes/MessageFlashHelper.html">MessageFlashHelper</a></td>
-                            <td><em>メッセージ表示のためのHelper</em></td>
-                        </tr>
-                                            <tr>
-                            <td><a href="../classes/NetCommonsAppController.html">NetCommonsAppController</a></td>
-                            <td><em>NetCommonsApp Controller</em></td>
-                        </tr>
-                                            <tr>
-                            <td><a href="../classes/NetCommonsAppHelper.html">NetCommonsAppHelper</a></td>
-                            <td><em>Application helper</em></td>
-                        </tr>
-                                            <tr>
-                            <td><a href="../classes/NetCommonsAppModel.html">NetCommonsAppModel</a></td>
-                            <td><em>NetCommonsApp Model</em></td>
-                        </tr>
-                                            <tr>
-                            <td><a href="../classes/NetCommonsAppShell.html">NetCommonsAppShell</a></td>
-                            <td><em>NetCommonsApp Shell</em></td>
-                        </tr>
-                                            <tr>
-                            <td><a href="../classes/NetCommonsCakeTestCase.html">NetCommonsCakeTestCase</a></td>
-                            <td><em>NetCommonsCakeTestCase class</em></td>
-                        </tr>
-                                            <tr>
-                            <td><a href="../classes/NetCommonsComponent.html">NetCommonsComponent</a></td>
-                            <td><em>NetCommons Component</em></td>
-                        </tr>
-                                            <tr>
-                            <td><a href="../classes/NetCommonsConsoleTestCase.html">NetCommonsConsoleTestCase</a></td>
-                            <td><em>NetCommonsConsoleTestCase class</em></td>
-                        </tr>
-                                            <tr>
-                            <td><a href="../classes/NetCommonsController.html">NetCommonsController</a></td>
-                            <td><em>NetCommons Controller</em></td>
-                        </tr>
-                                            <tr>
-                            <td><a href="../classes/NetCommonsControllerBaseTestCase.html">NetCommonsControllerBaseTestCase</a></td>
-                            <td><em>NetCommonsControllerTestCase</em></td>
-                        </tr>
-                                            <tr>
-                            <td><a href="../classes/NetCommonsControllerTestCase.html">NetCommonsControllerTestCase</a></td>
-                            <td><em>NetCommonsControllerTestCase</em></td>
-                        </tr>
-                                            <tr>
-                            <td><a href="../classes/NetCommonsCurrentUtilityBase.html">NetCommonsCurrentUtilityBase</a></td>
-                            <td><em>NetCommonsCakeTestCase class</em></td>
-                        </tr>
-                                            <tr>
-                            <td><a href="../classes/NetCommonsDeleteTest.html">NetCommonsDeleteTest</a></td>
-                            <td><em>NetCommonsDeleteTest</em></td>
-                        </tr>
-                                            <tr>
-                            <td><a href="../classes/NetCommonsExceptionRenderer.html">NetCommonsExceptionRenderer</a></td>
-                            <td><em>Exception Renderer.</em></td>
-                        </tr>
-                                            <tr>
-                            <td><a href="../classes/NetCommonsFormHelper.html">NetCommonsFormHelper</a></td>
-                            <td><em>NetCommonsでFormHelperをOverrideしたHelper</em></td>
-                        </tr>
-                                            <tr>
-                            <td><a href="../classes/NetCommonsGetTest.html">NetCommonsGetTest</a></td>
-                            <td><em>NetCommonsGetTest</em></td>
-                        </tr>
-                                            <tr>
-                            <td><a href="../classes/NetCommonsHelperTestCase.html">NetCommonsHelperTestCase</a></td>
-                            <td><em>NetCommonsHelperTestCase class</em></td>
-                        </tr>
-                                            <tr>
-                            <td><a href="../classes/NetCommonsHtmlHelper.html">NetCommonsHtmlHelper</a></td>
-                            <td><em>NetCommonsでHtmlHelperをOverrideしたHelper</em></td>
-                        </tr>
-                                            <tr>
-                            <td><a href="../classes/NetCommonsMigration.html">NetCommonsMigration</a></td>
-                            <td><em>NetCommonsMigration</em></td>
-                        </tr>
-                                            <tr>
-                            <td><a href="../classes/NetCommonsModelTestCase.html">NetCommonsModelTestCase</a></td>
-                            <td><em>NetCommonsModelTestCase class</em></td>
-                        </tr>
-                                            <tr>
-                            <td><a href="../classes/NetCommonsRoutesTestCase.html">NetCommonsRoutesTestCase</a></td>
-                            <td><em>NetCommonsRoutesTestCase class</em></td>
-                        </tr>
-                                            <tr>
-                            <td><a href="../classes/NetCommonsSaveTest.html">NetCommonsSaveTest</a></td>
-                            <td><em>NetCommonsSaveTest</em></td>
-                        </tr>
-                                            <tr>
-                            <td><a href="../classes/NetCommonsSecurity.html">NetCommonsSecurity</a></td>
-                            <td><em>NetCommonsセキュリティ Utility</em></td>
-                        </tr>
-                                            <tr>
-                            <td><a href="../classes/NetCommonsTestSuite.html">NetCommonsTestSuite</a></td>
-                            <td><em>NetCommonsTestSuite</em></td>
-                        </tr>
-                                            <tr>
-                            <td><a href="../classes/NetCommonsTime.html">NetCommonsTime</a></td>
-                            <td><em>Class NetCommonsTime</em></td>
-                        </tr>
-                                            <tr>
-                            <td><a href="../classes/NetCommonsTimeComponent.html">NetCommonsTimeComponent</a></td>
-                            <td><em>Class NetCommonsTimeComponent</em></td>
-                        </tr>
-                                            <tr>
-                            <td><a href="../classes/NetCommonsTimeHelper.html">NetCommonsTimeHelper</a></td>
-                            <td><em>Class NetCommonsTimeHelper</em></td>
-                        </tr>
-                                            <tr>
-                            <td><a href="../classes/NetCommonsUrl.html">NetCommonsUrl</a></td>
-                            <td><em>NetCommons Utility</em></td>
-                        </tr>
-                                            <tr>
-                            <td><a href="../classes/NetCommonsValidateTest.html">NetCommonsValidateTest</a></td>
-                            <td><em>NetCommonsSaveTest</em></td>
-                        </tr>
-                                            <tr>
-                            <td><a href="../classes/NetCommonsValidationRuleBehavior.html">NetCommonsValidationRuleBehavior</a></td>
-                            <td><em>共通Validation Behavior</em></td>
-                        </tr>
-                                            <tr>
-                            <td><a href="../classes/OriginalKeyBehavior.html">OriginalKeyBehavior</a></td>
-                            <td><em>OriginalKey Behavior</em></td>
-                        </tr>
-                                            <tr>
-                            <td><a href="../classes/PermissionComponent.html">PermissionComponent</a></td>
-                            <td><em>Permission Component</em></td>
-                        </tr>
-                                            <tr>
-                            <td><a href="../classes/Records.html">Records</a></td>
-                            <td><em>Insert records migration</em></td>
-                        </tr>
-                                            <tr>
-                            <td><a href="../classes/RenameVisitor.html">RenameVisitor</a></td>
-                            <td><em>参観者からゲストに修正</em></td>
-                        </tr>
-                                            <tr>
-                            <td><a href="../classes/Role.html">Role</a></td>
-                            <td><em>Role Model</em></td>
-                        </tr>
-                                            <tr>
-                            <td><a href="../classes/RolesAppModel.html">RolesAppModel</a></td>
-                            <td><em>RolesApp Model</em></td>
-                        </tr>
-                                            <tr>
-                            <td><a href="../classes/RolesRecords.html">RolesRecords</a></td>
-                            <td><em>Insert records migration</em></td>
-                        </tr>
-                                            <tr>
-                            <td><a href="../classes/RolesSchema.html">RolesSchema</a></td>
-                            <td><em>Schema file</em></td>
-                        </tr>
-                                            <tr>
-                            <td><a href="../classes/SingletonViewBlockHtmlHelper.html">SingletonViewBlockHtmlHelper</a></td>
-                            <td><em>SingletonViewBlockHtmlHelper</em></td>
-                        </tr>
-                                            <tr>
-                            <td><a href="../classes/SiteCloseController.html">SiteCloseController</a></td>
-                            <td><em>NetCommons Controller</em></td>
-                        </tr>
-                                            <tr>
-                            <td><a href="../classes/SnsButtonHelper.html">SnsButtonHelper</a></td>
-                            <td><em>Class BlogsFormatHelper
-ex)</em></td>
-                        </tr>
-                                            <tr>
-                            <td><a href="../classes/TableListHelper.html">TableListHelper</a></td>
-                            <td><em>テーブルリスト用Helper</em></td>
-                        </tr>
-                                            <tr>
-                            <td><a href="../classes/TitleIconHelper.html">TitleIconHelper</a></td>
-                            <td><em>Title Icon Helper</em></td>
-                        </tr>
-                                            <tr>
-                            <td><a href="../classes/TokenHelper.html">TokenHelper</a></td>
-                            <td><em>TokenHelper</em></td>
-                        </tr>
-                                            <tr>
-                            <td><a href="../classes/TrackableBehavior.html">TrackableBehavior</a></td>
-                            <td><em>Trackable Behavior</em></td>
-                        </tr>
-                                            <tr>
-                            <td><a href="../classes/WizardHelper.html">WizardHelper</a></td>
-                            <td><em>ウィザードHelper</em></td>
                         </tr>
                                         </table>
                                     </div>
 
                 <aside class="span4 detailsbar">
                     <dl>
-                        <dt>Namespace hierarchy</dt>
-                        <dd class="hierarchy">
-                                                                                                                                                <div class="namespace-wrapper">\</div>
-                        </dd>
+                                                    <dt>Package</dt>
+                            <dd><div class="namespace-wrapper">\Default</div></dd>
+                        
+                                                                                    <dt>See also</dt>
+                                                                                        <dd><a href="http://www.netcommons.org"><div class="namespace-wrapper">NetCommons Project</div></a></dd>
+                                                    
                     </dl>
+                    <h2>Tags</h2>
+                    <table class="table table-condensed">
+                                                    <tr>
+                                <th>
+                                    author
+                                </th>
+                                <td>
+                                                                            <p>Shohei Nakajima <a href="mailto:nakajimashouhei@gmail.com">nakajimashouhei@gmail.com</a></p>
+                                                                    </td>
+                            </tr>
+                                                    <tr>
+                                <th>
+                                    license
+                                </th>
+                                <td>
+                                                                            <p><a href="http://www.netcommons.org/license.txt">http://www.netcommons.org/license.txt</a> NetCommons License</p>
+                                                                    </td>
+                            </tr>
+                                                    <tr>
+                                <th>
+                                    copyright
+                                </th>
+                                <td>
+                                                                            <p>Copyright 2014, NetCommons Project</p>
+                                                                    </td>
+                            </tr>
+                                            </table>
+
                 </aside>
             </div>
 
@@ -502,6 +292,16 @@ ex)</em></td>
             
         </div>
     </section>
+
+    <div id="source-view" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="source-view-label" aria-hidden="true">
+        <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+            <h3 id="source-view-label"></h3>
+        </div>
+        <div class="modal-body">
+            <pre data-src="../files/Plugin/Roles/Config/Migration/1483656610_add_table_for_m17n_1.php.txt" class="language-php line-numbers"></pre>
+        </div>
+    </div>
 
     <footer class="row-fluid">
         <section class="span10 offset2">
@@ -539,7 +339,7 @@ ex)</em></td>
                 <section class="span10 offset1">
                     <hr />
                     Documentation is powered by <a href="http://www.phpdoc.org/">phpDocumentor </a> and authored
-                    on January 16th, 2017 at 07:48.
+                    on January 16th, 2017 at 07:49.
                 </section>
             </section>
         </section>
