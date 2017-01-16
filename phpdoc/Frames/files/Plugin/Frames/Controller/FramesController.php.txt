@@ -64,6 +64,7 @@ class FramesController extends FramesAppController {
 			$data, 'Plugin.name', __d('frames', 'New frame %s', date('YmdHis'))
 		);
 		$data['Frame']['room_id'] = Hash::get($data, 'Frame.room_id', 1);
+		$data['FramePublicLanguage']['language_id'] = array('0');
 
 		$frame = $this->Frame->saveFrame($data);
 		if (! $frame) {

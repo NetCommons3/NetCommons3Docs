@@ -99,7 +99,7 @@ class Frame extends FramesAppModel {
 			$belongsTo = $this->Block->bindModelBlockLang();
 			$this->bindModel($belongsTo, true);
 		}
-		return true;
+		return $query;
 	}
 
 /**
@@ -110,6 +110,19 @@ class Frame extends FramesAppModel {
 	public function bindModelFrameLang() {
 		$belongsTo = array(
 			'belongsTo' => array(
+				'FramePublicLanguage' => array(
+					'className' => 'Frames.FramePublicLanguage',
+					'foreignKey' => false,
+					'conditions' => array(
+						'FramePublicLanguage.frame_id = Frame.id',
+						'FramePublicLanguage.language_id' => ['0', Current::read('Language.id', '0')],
+						'FramePublicLanguage.is_public' => true,
+					),
+					'fields' => array(
+						'id', 'language_id', 'frame_id', 'is_public'
+					),
+					'order' => ''
+				),
 				'FramesLanguage' => array(
 					'className' => 'Frames.FramesLanguage',
 					'foreignKey' => false,
@@ -197,7 +210,8 @@ class Frame extends FramesAppModel {
 		$model = Inflector::singularize($plugin);
 		$classExists = ClassRegistry::init($plugin . '.' . $model, true);
 		$models = array(
-			'FramesLanguage' => 'Frames.FramesLanguage'
+			'FramePublicLanguage' => 'Frames.FramePublicLanguage',
+			'FramesLanguage' => 'Frames.FramesLanguage',
 		);
 		if ($classExists) {
 			$models[$model] = $plugin . '.' . $model;
@@ -220,6 +234,10 @@ class Frame extends FramesAppModel {
 
 			$frame = $this->save($data);
 			if (! $frame) {
+				throw new InternalErrorException(__d('net_commons', 'Internal Server Error'));
+			}
+
+			if (! $this->FramePublicLanguage->savePublicLang($frame)) {
 				throw new InternalErrorException(__d('net_commons', 'Internal Server Error'));
 			}
 
