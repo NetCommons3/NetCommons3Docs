@@ -45,6 +45,8 @@ class PluginRecords extends NetCommonsMigration {
 			array(
 				'language_id' => '2',
 				'key' => 'rooms',
+				'is_origin' => true,
+				'is_translation' => true,
 				'namespace' => 'netcommons/rooms',
 				'name' => 'ルーム管理',
 				'type' => 2,
@@ -57,6 +59,8 @@ class PluginRecords extends NetCommonsMigration {
 			array(
 				'language_id' => '1',
 				'key' => 'rooms',
+				'is_origin' => false,
+				'is_translation' => true,
 				'namespace' => 'netcommons/rooms',
 				'name' => 'Room Manager',
 				'type' => 2,
