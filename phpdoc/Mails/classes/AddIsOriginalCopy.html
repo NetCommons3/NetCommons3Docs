@@ -136,10 +136,10 @@
                                 <div class="accordion" style="margin-bottom: 0">
         <div class="accordion-group">
             <div class="accordion-heading">
-                                    <a class="accordion-toggle " data-toggle="collapse" data-target="#namespace-1073097692"></a>
+                                    <a class="accordion-toggle " data-toggle="collapse" data-target="#namespace-2131718313"></a>
                                 <a href="../namespaces/default.html" style="margin-left: 30px; padding-left: 0">\</a>
             </div>
-            <div id="namespace-1073097692" class="accordion-body collapse in">
+            <div id="namespace-2131718313" class="accordion-body collapse in">
                 <div class="accordion-inner">
 
                     
@@ -246,10 +246,9 @@
                                             </nav>
                     <a href="#source-view" role="button" class="pull-right btn" data-toggle="modal"><i class="icon-code"></i></a>
 
-                    <h1><small>\</small>AppHelper</h1>
-                    <p><em>Application helper</em></p>
-                    <p>Add your application-wide methods in the class below, your helpers
-will inherit them.</p>
+                    <h1><small>\</small>AddIsOriginalCopy</h1>
+                    <p><em>多言語化対応</em></p>
+                    
                     
                                         
                     <section id="summary">
@@ -267,10 +266,17 @@ will inherit them.</p>
                         </section>
                         <section class="row-fluid public">
                             <section class="span4">
-                                                                    <em>No public methods found</em>
+                                                                    <a href="../classes/NetCommonsMigration.html#method_updateRecords" class="">updateRecords()</a><br />
+                                                                    <a href="../classes/NetCommonsMigration.html#method_deleteRecords" class="">deleteRecords()</a><br />
+                                                                    <a href="../classes/NetCommonsMigration.html#method_loadModels" class="">loadModels()</a><br />
+                                                                    <a href="../classes/NetCommonsMigration.html#method_updateAndDeleteRecords" class="">updateAndDeleteRecords()</a><br />
+                                                                    <a href="../classes/AddIsOriginalCopy.html#method_before" class="">before()</a><br />
+                                                                    <a href="../classes/AddIsOriginalCopy.html#method_after" class="">after()</a><br />
                                                             </section>
                             <section class="span4">
-                                                                    <em>No public properties found</em>
+                                                                    <a href="../classes/NetCommonsMigration.html#property_records" class="">$records</a><br />
+                                                                    <a href="../classes/AddIsOriginalCopy.html#property_description" class="">$description</a><br />
+                                                                    <a href="../classes/AddIsOriginalCopy.html#property_migration" class="">$migration</a><br />
                                                             </section>
                             <section class="span4">
                                                                     <em>No constants found</em>
@@ -305,16 +311,16 @@ will inherit them.</p>
                     
                     <dl>
                         <dt>File</dt>
-                            <dd><a href="../files/View.Helper.AppHelper.html"><div class="path-wrapper">View/Helper/AppHelper.php</div></a></dd>
+                            <dd><a href="../files/Plugin.Mails.Config.Migration.1484545516_add_is_original_copy.html"><div class="path-wrapper">Plugin/Mails/Config/Migration/1484545516_add_is_original_copy.php</div></a></dd>
                                                 <dt>Package</dt>
-                            <dd><div class="namespace-wrapper">Default</div></dd>
+                            <dd><div class="namespace-wrapper">Config\Migration</div></dd>
                                                 <dt>Class hierarchy</dt>
                             <dd class="hierarchy">
                                                                                                                                                                                                                                                                                                                                                                                                                                                             
-                                        <div class="namespace-wrapper">\Helper</div>
+                                        <div class="namespace-wrapper">\CakeMigration</div>
                                                                     
-                                        <div class="namespace-wrapper"><a href="../classes/NetCommonsAppHelper.html">\NetCommonsAppHelper</a></div>
-                                                                                                    <div class="namespace-wrapper">\AppHelper</div>
+                                        <div class="namespace-wrapper"><a href="../classes/NetCommonsMigration.html">\NetCommonsMigration</a></div>
+                                                                                                    <div class="namespace-wrapper">\AddIsOriginalCopy</div>
                             </dd>
 
                         
@@ -324,23 +330,377 @@ will inherit them.</p>
                                                                         </dl>
                     <h2>Tags</h2>
                     <table class="table table-condensed">
-                                            <tr><td colspan="2"><em>None found</em></td></tr>
+                                            <tr>
+                            <th>
+                                author
+                            </th>
+                            <td>
+                                                                    <p>Shohei Nakajima <a href="mailto:nakajimashouhei@gmail.com">nakajimashouhei@gmail.com</a></p>
+                                                            </td>
+                        </tr>
                                         </table>
                 </aside>
             </div>
 
                         
-                        
-                                </div>
+                                    <a id="properties" name="properties"></a>
+            <div class="row-fluid">
+                <div class="span8 content class">
+                    <h2>Properties</h2>
+                </div>
+                <aside class="span4 detailsbar"></aside>
+            </div>
+
+                                    <div class="row-fluid">
+        <div class="span8 content class">
+            <a id="property_records" name="property_records" class="anchor"></a>
+            <article class="property">
+                <h3 class="public ">$records</h3>
+                <pre class="signature">$records : array</pre>
+                <p><em>plugin data</em></p>
+                
+
+                                <h4>Type</h4>
+                array
+                                            </article>
+        </div>
+        <aside class="span4 detailsbar">
+            <h1><i class="icon-arrow-down"></i></h1>
+                        <dl>
+                                    <dt>Inherited from</dt>
+                    <dd><a href="../classes/NetCommonsMigration.html"><div class="path-wrapper">\NetCommonsMigration</div></a></dd>
+                                                            </dl>
+            <h2>Tags</h2>
+            <table class="table table-condensed">
+                                    <tr><td colspan="2"><em>None found</em></td></tr>
+                            </table>
+        </aside>
+    </div>
+
+                                    <div class="row-fluid">
+        <div class="span8 content class">
+            <a id="property_description" name="property_description" class="anchor"></a>
+            <article class="property">
+                <h3 class="public ">$description</h3>
+                <pre class="signature">$description : string</pre>
+                <p><em>Migration description</em></p>
+                
+
+                                <h4>Type</h4>
+                string
+                                            </article>
+        </div>
+        <aside class="span4 detailsbar">
+            <h1><i class="icon-arrow-down"></i></h1>
+                        <dl>
+                                                            </dl>
+            <h2>Tags</h2>
+            <table class="table table-condensed">
+                                    <tr><td colspan="2"><em>None found</em></td></tr>
+                            </table>
+        </aside>
+    </div>
+
+                                    <div class="row-fluid">
+        <div class="span8 content class">
+            <a id="property_migration" name="property_migration" class="anchor"></a>
+            <article class="property">
+                <h3 class="public ">$migration</h3>
+                <pre class="signature">$migration : array</pre>
+                <p><em>Actions to be performed</em></p>
+                
+
+                                <h4>Type</h4>
+                array
+                                            </article>
+        </div>
+        <aside class="span4 detailsbar">
+            <h1><i class="icon-arrow-down"></i></h1>
+                        <dl>
+                                                            </dl>
+            <h2>Tags</h2>
+            <table class="table table-condensed">
+                                    <tr><td colspan="2"><em>None found</em></td></tr>
+                            </table>
+        </aside>
+    </div>
+
+                                                            
+                                    <a id="methods" name="methods"></a>
+            <div class="row-fluid">
+                <div class="span8 content class"><h2>Methods</h2></div>
+                <aside class="span4 detailsbar"></aside>
+            </div>
+
+                                    <div class="row-fluid">
+        <div class="span8 content class">
+            <a id="method_updateRecords" name="method_updateRecords" class="anchor"></a>
+            <article class="method">
+                <h3 class="public ">updateRecords()</h3>
+                <a href="#source-view" role="button" class="pull-right btn" data-toggle="modal" style="font-size: 1.1em; padding: 9px 14px"><i class="icon-code"></i></a>
+                <pre class="signature" style="margin-right: 54px;">updateRecords(string  <span class="argument">$model</span>, array  <span class="argument">$records</span>, boolean  <span class="argument">$clear = false</span>) : boolean</pre>
+                <p><em>Update model records</em></p>
+                
+
+                                    <h4>Parameters</h4>
+                    <table class="table table-condensed table-hover">
+                                                    <tr>
+                                <td>string</td>
+                                <td>$model </td>
+                                <td><p>model name to update</p></td>
+                            </tr>
+                                                    <tr>
+                                <td>array</td>
+                                <td>$records </td>
+                                <td><p>records to be stored</p></td>
+                            </tr>
+                                                    <tr>
+                                <td>boolean</td>
+                                <td>$clear </td>
+                                <td><p>初期化するかどうか</p></td>
+                            </tr>
+                                            </table>
+                
+                
+                                    <h4>Returns</h4>
+                    boolean
+                                            &mdash; <p>Should process continue</p>
+                                    				
+                            </article>
+        </div>
+        <aside class="span4 detailsbar">
+            <h1><i class="icon-arrow-down"></i></h1>
+                                                            <dl>
+                                                    <dt>Inherited from</dt>
+                    <dd><a href="../classes/NetCommonsMigration.html"><div class="path-wrapper">\NetCommonsMigration</div></a></dd>
+                                                            </dl>
+            <h2>Tags</h2>
+            <table class="table table-condensed">
+                                    <tr>
+                        <th>
+                            SuppressWarnings
+                        </th>
+                        <td>
+                                                                                            <p>(PHPMD.BooleanArgumentFlag)</p>
+                                                    </td>
+                    </tr>
+                            </table>
+        </aside>
+    </div>
+
+                                    <div class="row-fluid">
+        <div class="span8 content class">
+            <a id="method_deleteRecords" name="method_deleteRecords" class="anchor"></a>
+            <article class="method">
+                <h3 class="public ">deleteRecords()</h3>
+                <a href="#source-view" role="button" class="pull-right btn" data-toggle="modal" style="font-size: 1.1em; padding: 9px 14px"><i class="icon-code"></i></a>
+                <pre class="signature" style="margin-right: 54px;">deleteRecords(string  <span class="argument">$model</span>, array  <span class="argument">$records</span>, string  <span class="argument">$key = &#039;id&#039;</span>) : boolean</pre>
+                <p><em>Delete model records</em></p>
+                
+
+                                    <h4>Parameters</h4>
+                    <table class="table table-condensed table-hover">
+                                                    <tr>
+                                <td>string</td>
+                                <td>$model </td>
+                                <td><p>model name to delete</p></td>
+                            </tr>
+                                                    <tr>
+                                <td>array</td>
+                                <td>$records </td>
+                                <td><p>records to be stored</p></td>
+                            </tr>
+                                                    <tr>
+                                <td>string</td>
+                                <td>$key </td>
+                                <td><p>削除条件項目</p></td>
+                            </tr>
+                                            </table>
+                
+                
+                                    <h4>Returns</h4>
+                    boolean
+                                            &mdash; <p>Should process continue</p>
+                                    				
+                            </article>
+        </div>
+        <aside class="span4 detailsbar">
+            <h1><i class="icon-arrow-down"></i></h1>
+                                                            <dl>
+                                                    <dt>Inherited from</dt>
+                    <dd><a href="../classes/NetCommonsMigration.html"><div class="path-wrapper">\NetCommonsMigration</div></a></dd>
+                                                            </dl>
+            <h2>Tags</h2>
+            <table class="table table-condensed">
+                                    <tr><td colspan="2"><em>None found</em></td></tr>
+                            </table>
+        </aside>
+    </div>
+
+                                    <div class="row-fluid">
+        <div class="span8 content class">
+            <a id="method_loadModels" name="method_loadModels" class="anchor"></a>
+            <article class="method">
+                <h3 class="public ">loadModels()</h3>
+                <a href="#source-view" role="button" class="pull-right btn" data-toggle="modal" style="font-size: 1.1em; padding: 9px 14px"><i class="icon-code"></i></a>
+                <pre class="signature" style="margin-right: 54px;">loadModels(array  <span class="argument">$models = array()</span>, string  <span class="argument">$source = &#039;master&#039;</span>) : void</pre>
+                <p><em>Load models</em></p>
+                
+
+                                    <h4>Parameters</h4>
+                    <table class="table table-condensed table-hover">
+                                                    <tr>
+                                <td>array</td>
+                                <td>$models </td>
+                                <td><p>models to load</p></td>
+                            </tr>
+                                                    <tr>
+                                <td>string</td>
+                                <td>$source </td>
+                                <td><p>data source</p></td>
+                            </tr>
+                                            </table>
+                
+                
+                				
+                            </article>
+        </div>
+        <aside class="span4 detailsbar">
+            <h1><i class="icon-arrow-down"></i></h1>
+                                                            <dl>
+                                                    <dt>Inherited from</dt>
+                    <dd><a href="../classes/NetCommonsMigration.html"><div class="path-wrapper">\NetCommonsMigration</div></a></dd>
+                                                            </dl>
+            <h2>Tags</h2>
+            <table class="table table-condensed">
+                                    <tr><td colspan="2"><em>None found</em></td></tr>
+                            </table>
+        </aside>
+    </div>
+
+                                    <div class="row-fluid">
+        <div class="span8 content class">
+            <a id="method_updateAndDeleteRecords" name="method_updateAndDeleteRecords" class="anchor"></a>
+            <article class="method">
+                <h3 class="public ">updateAndDeleteRecords()</h3>
+                <a href="#source-view" role="button" class="pull-right btn" data-toggle="modal" style="font-size: 1.1em; padding: 9px 14px"><i class="icon-code"></i></a>
+                <pre class="signature" style="margin-right: 54px;">updateAndDeleteRecords(string  <span class="argument">$direction</span>) : boolean</pre>
+                <p><em>データ投入のマイグレーションupの更新と,downの削除</em></p>
+                
+
+                                    <h4>Parameters</h4>
+                    <table class="table table-condensed table-hover">
+                                                    <tr>
+                                <td>string</td>
+                                <td>$direction </td>
+                                <td><p>Direction of migration process (up or down)</p></td>
+                            </tr>
+                                            </table>
+                
+                
+                                    <h4>Returns</h4>
+                    boolean
+                                            &mdash; <p>Should process continue</p>
+                                    				
+                            </article>
+        </div>
+        <aside class="span4 detailsbar">
+            <h1><i class="icon-arrow-down"></i></h1>
+                                                            <dl>
+                                                    <dt>Inherited from</dt>
+                    <dd><a href="../classes/NetCommonsMigration.html"><div class="path-wrapper">\NetCommonsMigration</div></a></dd>
+                                                            </dl>
+            <h2>Tags</h2>
+            <table class="table table-condensed">
+                                    <tr><td colspan="2"><em>None found</em></td></tr>
+                            </table>
+        </aside>
+    </div>
+
+                                    <div class="row-fluid">
+        <div class="span8 content class">
+            <a id="method_before" name="method_before" class="anchor"></a>
+            <article class="method">
+                <h3 class="public ">before()</h3>
+                <a href="#source-view" role="button" class="pull-right btn" data-toggle="modal" style="font-size: 1.1em; padding: 9px 14px"><i class="icon-code"></i></a>
+                <pre class="signature" style="margin-right: 54px;">before(string  <span class="argument">$direction</span>) : boolean</pre>
+                <p><em>Before migration callback</em></p>
+                
+
+                                    <h4>Parameters</h4>
+                    <table class="table table-condensed table-hover">
+                                                    <tr>
+                                <td>string</td>
+                                <td>$direction </td>
+                                <td><p>Direction of migration process (up or down)</p></td>
+                            </tr>
+                                            </table>
+                
+                
+                                    <h4>Returns</h4>
+                    boolean
+                                            &mdash; <p>Should process continue</p>
+                                    				
+                            </article>
+        </div>
+        <aside class="span4 detailsbar">
+            <h1><i class="icon-arrow-down"></i></h1>
+                                                            <dl>
+                                                                            </dl>
+            <h2>Tags</h2>
+            <table class="table table-condensed">
+                                    <tr><td colspan="2"><em>None found</em></td></tr>
+                            </table>
+        </aside>
+    </div>
+
+                                    <div class="row-fluid">
+        <div class="span8 content class">
+            <a id="method_after" name="method_after" class="anchor"></a>
+            <article class="method">
+                <h3 class="public ">after()</h3>
+                <a href="#source-view" role="button" class="pull-right btn" data-toggle="modal" style="font-size: 1.1em; padding: 9px 14px"><i class="icon-code"></i></a>
+                <pre class="signature" style="margin-right: 54px;">after(string  <span class="argument">$direction</span>) : boolean</pre>
+                <p><em>After migration callback</em></p>
+                
+
+                                    <h4>Parameters</h4>
+                    <table class="table table-condensed table-hover">
+                                                    <tr>
+                                <td>string</td>
+                                <td>$direction </td>
+                                <td><p>Direction of migration process (up or down)</p></td>
+                            </tr>
+                                            </table>
+                
+                
+                                    <h4>Returns</h4>
+                    boolean
+                                            &mdash; <p>Should process continue</p>
+                                    				
+                            </article>
+        </div>
+        <aside class="span4 detailsbar">
+            <h1><i class="icon-arrow-down"></i></h1>
+                                                            <dl>
+                                                                            </dl>
+            <h2>Tags</h2>
+            <table class="table table-condensed">
+                                    <tr><td colspan="2"><em>None found</em></td></tr>
+                            </table>
+        </aside>
+    </div>
+
+                                                                    </div>
     </section>
 
     <div id="source-view" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="source-view-label" aria-hidden="true">
         <div class="modal-header">
             <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
-            <h3 id="source-view-label">AppHelper.php</h3>
+            <h3 id="source-view-label">1484545516_add_is_original_copy.php</h3>
         </div>
         <div class="modal-body">
-            <pre data-src="../files/View/Helper/AppHelper.php.txt" class="language-php line-numbers"></pre>
+            <pre data-src="../files/Plugin/Mails/Config/Migration/1484545516_add_is_original_copy.php.txt" class="language-php line-numbers"></pre>
         </div>
     </div>
 
