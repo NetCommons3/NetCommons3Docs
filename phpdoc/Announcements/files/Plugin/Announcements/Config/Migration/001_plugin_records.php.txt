@@ -45,6 +45,8 @@ class PluginRecords extends NetCommonsMigration {
 			//日本語
 			array(
 				'language_id' => '2',
+				'is_origin' => true,
+				'is_translation' => true,
 				'key' => 'announcements',
 				'namespace' => 'netcommons/announcements',
 				'name' => 'お知らせ',
@@ -58,6 +60,8 @@ class PluginRecords extends NetCommonsMigration {
 			//英語
 			array(
 				'language_id' => '1',
+				'is_origin' => false,
+				'is_translation' => true,
 				'key' => 'announcements',
 				'namespace' => 'netcommons/announcements',
 				'name' => 'Announcements',
