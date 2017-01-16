@@ -47,7 +47,7 @@ class AddLanguageRecords extends NetCommonsMigration {
 				'row' => '1',
 				'col' => '1',
 				'weight' => '5',
-				'required' => '1',
+				'required' => '0',
 				'display' => '1',
 				'only_administrator_readable' => '0',
 				'only_administrator_editable' => '0',
@@ -58,7 +58,7 @@ class AddLanguageRecords extends NetCommonsMigration {
 				'self_email_setting' => '0',
 				'is_multilingualization' => '0',
 				'auto_regist_display' => null,
-				'auto_regist_weight' => '6',
+				'auto_regist_weight' => '9999',
 			),
 		),
 		'UserAttribute' => array(

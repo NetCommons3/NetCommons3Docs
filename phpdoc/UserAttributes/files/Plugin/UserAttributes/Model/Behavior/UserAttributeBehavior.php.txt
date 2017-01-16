@@ -42,7 +42,11 @@ class UserAttributeBehavior extends ModelBehavior {
  * @return void
  */
 	public function setup(Model $model, $config = array()) {
-		$this->cakeMigration = new CakeMigration(array('connection' => $model->useDbConfig));
+		if ($model->useDbConfig === 'test') {
+			$this->cakeMigration = new CakeMigration(array('connection' => $model->useDbConfig));
+		} else {
+			$this->cakeMigration = new CakeMigration(array('connection' => 'master'));
+		}
 	}
 
 /**
