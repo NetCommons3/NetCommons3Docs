@@ -115,6 +115,10 @@ class FormInputHelper extends AppHelper {
 		$input .= '<div class="' . $radioClass . '"><label class="control-label">' . $befor;
 
 		$attributes = Hash::remove($attributes, 'outer');
+
+		if (Hash::get($attributes, 'escape', true) === true) {
+			$options = array_map('h', $options);
+		}
 		$input .= $this->Form->radio($fieldName, $options, $attributes);
 		$input .= $after . '</label></div>';
 
@@ -389,6 +393,9 @@ class FormInputHelper extends AppHelper {
 
 		$divOption = $this->getDivOption('password', $options, 'div');
 
+		$current = Hash::get($options, 'current', false);
+		$options = Hash::remove($options, 'current');
+
 		$again = Hash::get($options, 'again', false);
 		$options = Hash::remove($options, 'again');
 
@@ -403,8 +410,30 @@ class FormInputHelper extends AppHelper {
 			$options
 		);
 
-		//入力フォーム
-		$input .= $this->Form->input($fieldName, $options);
+		if ($current) {
+			$options = Hash::merge(
+				$options,
+				array(
+					'placeholder' => __d('net_commons', 'Enter current password.'),
+					'class' => 'form-control form-input-again'
+				)
+			);
+			$input .= $this->Form->input($fieldName . '_current', $options);
+
+			$options = Hash::merge(
+				$options,
+				array(
+					'placeholder' => __d('net_commons', 'Enter new password.'),
+					'class' => 'form-control form-input-again'
+				)
+			);
+			//入力フォーム
+			$input .= $this->Form->input($fieldName, $options);
+
+		} else {
+			//入力フォーム
+			$input .= $this->Form->input($fieldName, $options);
+		}
 
 		//再度入力フォーム
 		if ($again) {
@@ -500,9 +529,9 @@ class FormInputHelper extends AppHelper {
 
 		$input .= '<div class="form-label-input-outer form-control">';
 		if (isset($options['value'])) {
-			$input .= Hash::get($options, 'value');
+			$input .= h(Hash::get($options, 'value'));
 		} else {
-			$input .= Hash::get($this->_View->request->data, $fieldName);
+			$input .= h(Hash::get($this->_View->request->data, $fieldName));
 		}
 		$input .= '</div>';
 
