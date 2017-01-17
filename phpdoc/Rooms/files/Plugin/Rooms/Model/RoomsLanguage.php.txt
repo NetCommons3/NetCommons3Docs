@@ -54,6 +54,19 @@ class RoomsLanguage extends RoomsAppModel {
 	);
 
 /**
+ * use behaviors
+ *
+ * @var array
+ */
+	public $actsAs = array(
+		//多言語
+		'M17n.M17n' => array(
+			'keyField' => 'room_id',
+			'callbacks' => false,
+		),
+	);
+
+/**
  * Called during validation operations, before validation. Please note that custom
  * validation rules can be defined in $validate.
  *
