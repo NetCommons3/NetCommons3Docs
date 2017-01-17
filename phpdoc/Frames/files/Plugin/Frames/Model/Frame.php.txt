@@ -134,7 +134,7 @@ class Frame extends FramesAppModel {
 						)
 					),
 					'fields' => array(
-						'id', 'language_id', 'frame_id', 'name', 'is_origin', 'is_translation'
+						'id', 'language_id', 'frame_id', 'name', 'is_origin', 'is_translation', 'is_original_copy'
 					),
 					'order' => ''
 				),
