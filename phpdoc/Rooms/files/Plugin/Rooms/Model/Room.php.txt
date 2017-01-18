@@ -353,6 +353,7 @@ class Room extends RoomsAppModel {
 				$this->data['RoomsLanguage'], '{n}.room_id', $this->data['Room']['id']
 			);
 			foreach ($roomsLanguages as $index => $roomsLanguage) {
+				$this->RoomsLanguage->create(false);
 				if (! $result = $this->RoomsLanguage->save($roomsLanguage, false, false)) {
 					throw new InternalErrorException(__d('net_commons', 'Internal Server Error'));
 				}
@@ -512,15 +513,18 @@ class Room extends RoomsAppModel {
 							'id' => null,
 							'page_id' => Hash::get($room, 'Room.page_id_top'),
 							'language_id' => $roomLanguage['language_id'],
+							'is_origin' => ($roomLanguage['language_id'] == Current::read('Language.id'))
 						);
 					}
 					$pageLanguage['PagesLanguage']['name'] = $roomLanguage['name'];
 
-					$this->create(false);
+					$this->PagesLanguage->Behaviors->disable('M17n');
+					$this->PagesLanguage->create(false);
 					$pageLanguage = $this->PagesLanguage->save($pageLanguage);
 					if (! $pageLanguage) {
 						throw new InternalErrorException(__d('net_commons', 'Internal Server Error'));
 					}
+					$this->PagesLanguage->Behaviors->enable('M17n');
 				}
 			}
 
