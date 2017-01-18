@@ -110,19 +110,23 @@ class GetPageBehavior extends ModelBehavior {
 			);
 		}
 
-		$model->bindModel(array(
-			'belongsTo' => array(
-				'Space' => array(
-					'className' => 'Rooms.Space',
-					'foreignKey' => false,
-					'conditions' => array(
-						'Room.space_id = Space.id',
+		if (isset($model->belongsTo['Room'])) {
+			$model->bindModel(array(
+				'belongsTo' => array(
+					'Space' => array(
+						'className' => 'Rooms.Space',
+						'foreignKey' => false,
+						'conditions' => array(
+							'Room.space_id = Space.id',
+						),
+						'fields' => '',
+						'order' => ''
 					),
-					'fields' => '',
-					'order' => ''
-				),
-			)
-		), true);
+				)
+			), true);
+			$model->Room->useDbConfig = $model->useDbConfig;
+			$model->Space->useDbConfig = $model->useDbConfig;
+		}
 
 		$query = array(
 			'recursive' => 0,

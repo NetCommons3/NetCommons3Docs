@@ -158,7 +158,13 @@ class PagesLanguage extends PagesAppModel {
 		$conditions = Hash::merge(array(
 			'OR' => array(
 				'PagesLanguage.language_id' => Current::read('Language.id'),
-				'Space.is_m17n' => false
+				array(
+					'Space.is_m17n' => false,
+					'OR' => array(
+						'PagesLanguage.id = OriginPagesLanguage.id',
+						'OriginPagesLanguage.id' => null,
+					)
+				)
 			)
 		), $addConditions);
 
@@ -193,6 +199,16 @@ class PagesLanguage extends PagesAppModel {
 					'fields' => '',
 					'order' => ''
 				),
+				'OriginPagesLanguage' => array(
+					'className' => 'Pages.PagesLanguage',
+					'foreignKey' => false,
+					'conditions' => array(
+						'PagesLanguage.page_id = OriginPagesLanguage.page_id',
+						'OriginPagesLanguage.language_id' => Current::read('Language.id'),
+					),
+					'fields' => '',
+					'order' => ''
+				),
 			)
 		), $reset);
 	}
@@ -203,7 +219,7 @@ class PagesLanguage extends PagesAppModel {
  * @return void
  */
 	public function unbindPagesLanguage() {
-		$this->unbindModel(array('belongsTo' => array('Room', 'Space')));
+		$this->unbindModel(array('belongsTo' => array('Room', 'Space', 'OriginPagesLanguage')));
 	}
 
 /**

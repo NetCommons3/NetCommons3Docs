@@ -41,9 +41,10 @@ class PagesTreeBehavior extends TreeBehavior {
 		$recursive = 0;
 
 		if (isset($Model->belongsTo['Room'])) {
-			$pageLangConditions = $Model->PagesLanguage->getConditions(
-				array('PagesLanguage.page_id = Page.id'), true
-			);
+			$pageLangConditions = $Model->PagesLanguage->getConditions(array(
+				'PagesLanguage.page_id = Page.id',
+				'PagesLanguage.page_id = Page.id',
+			), true);
 			$Model->bindModel(array(
 				'belongsTo' => array(
 					'Space' => array(
@@ -64,6 +65,16 @@ class PagesTreeBehavior extends TreeBehavior {
 						'fields' => '',
 						'order' => ''
 					),
+					'OriginPagesLanguage' => array(
+						'className' => 'Pages.PagesLanguage',
+						'foreignKey' => false,
+						'conditions' => array(
+							'PagesLanguage.page_id = OriginPagesLanguage.page_id',
+							'OriginPagesLanguage.language_id' => Current::read('Language.id'),
+						),
+						'fields' => '',
+						'order' => ''
+					),
 				)
 			), false);
 
@@ -79,7 +90,9 @@ class PagesTreeBehavior extends TreeBehavior {
 		);
 
 		if (isset($Model->belongsTo['Room'])) {
-			$Model->unbindModel(array('belongsTo' => array('Space', 'PagesLanguage')));
+			$Model->unbindModel(
+				array('belongsTo' => array('Space', 'PagesLanguage', 'OriginPagesLanguage'))
+			);
 		}
 
 		return $results;

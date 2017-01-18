@@ -181,6 +181,8 @@ class Page extends PagesAppModel {
 					),
 				)
 			), true);
+			$this->Room->useDbConfig = $this->useDbConfig;
+			$this->Space->useDbConfig = $this->useDbConfig;
 		}
 		return true;
 	}
