@@ -136,10 +136,10 @@
                                 <div class="accordion" style="margin-bottom: 0">
         <div class="accordion-group">
             <div class="accordion-heading">
-                                    <a class="accordion-toggle " data-toggle="collapse" data-target="#namespace-1719106193"></a>
+                                    <a class="accordion-toggle " data-toggle="collapse" data-target="#namespace-1677986146"></a>
                                 <a href="../namespaces/default.html" style="margin-left: 30px; padding-left: 0">\</a>
             </div>
-            <div id="namespace-1719106193" class="accordion-body collapse in">
+            <div id="namespace-1677986146" class="accordion-body collapse in">
                 <div class="accordion-inner">
 
                     
@@ -259,6 +259,10 @@
         '(Model名)' =&gt; array(
             'class' =&gt; (クラス名: Plugin.Model形式),
             'foreignKey' =&gt; (外部キー),
+            'fieldForIdentifyPlugin' =&gt; array( //プラグインを特定するフィールド （例）'AuthorizationKey'
+                'field' =&gt; (フィールド名),
+                'value' =&gt; (値)
+            ),
             'isM17n' =&gt; 多言語ありかどうか,
         )
     ),
@@ -975,7 +979,7 @@ will abort the save operation.</em></p>
             <article class="method">
                 <h3 class="protected ">_saveWorkflowAssociations()</h3>
                 <a href="#source-view" role="button" class="pull-right btn" data-toggle="modal" style="font-size: 1.1em; padding: 9px 14px"><i class="icon-code"></i></a>
-                <pre class="signature" style="margin-right: 54px;">_saveWorkflowAssociations(\Model  <span class="argument">$model</span>, array  <span class="argument">$targetDatas</span>, array  <span class="argument">$options</span>) : boolean</pre>
+                <pre class="signature" style="margin-right: 54px;">_saveWorkflowAssociations(\Model  <span class="argument">$targetModel</span>, array  <span class="argument">$targetDatas</span>, array  <span class="argument">$options</span>) : boolean</pre>
                 <p><em>ワークフローのデータでコピーする場合で、関連テーブルを更新する</em></p>
                 <h2>$options</h2>
 <p>array(
@@ -990,8 +994,8 @@ will abort the save operation.</em></p>
                     <table class="table table-condensed table-hover">
                                                     <tr>
                                 <td>\Model</td>
-                                <td>$model </td>
-                                <td><p>呼び出し元Model※_updateWorkflowAssociations()の$model-&gt;$modelName</p></td>
+                                <td>$targetModel </td>
+                                <td><p>呼び出し元Model※_updateWorkflowAssociations()の$tagetModel</p></td>
                             </tr>
                                                     <tr>
                                 <td>array</td>
@@ -1112,7 +1116,7 @@ will abort the save operation.</em></p>
                 <section class="span10 offset1">
                     <hr />
                     Documentation is powered by <a href="http://www.phpdoc.org/">phpDocumentor </a> and authored
-                    on January 20th, 2017 at 06:47.
+                    on January 20th, 2017 at 08:03.
                 </section>
             </section>
         </section>
