@@ -423,11 +423,12 @@ class RoomsFormHelper extends AppHelper {
 
 		$html .= $this->NetCommonsForm->input($fieldName,
 			Hash::merge(array(
-			'type' => 'select',
-			'options' => $options,
-			'label' => false,
-			'div' => false,
-			'error' => false,
+				'type' => 'select',
+				'options' => $options,
+				'label' => false,
+				'div' => false,
+				'error' => false,
+				'escape' => false,
 			), $attributes)
 		);
 
