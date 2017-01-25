@@ -59,20 +59,20 @@ class AddPermalink1 extends NetCommonsMigration {
 		if ($direction === 'up') {
 			$Space = $this->generateModel('Space');
 			$update = array(
-				'permalink' => '\'private\''
+				'Space.permalink' => '\'private\''
 			);
 			$conditions = array(
-				'id' => Space::PRIVATE_SPACE_ID
+				'Space.id' => Space::PRIVATE_SPACE_ID
 			);
 			if (! $Space->updateAll($update, $conditions)) {
 				return false;
 			}
 
 			$update = array(
-				'permalink' => '\'community\''
+				'Space.permalink' => '\'community\''
 			);
 			$conditions = array(
-				'id' => Space::COMMUNITY_SPACE_ID
+				'Space.id' => Space::COMMUNITY_SPACE_ID
 			);
 			if (! $Space->updateAll($update, $conditions)) {
 				return false;
