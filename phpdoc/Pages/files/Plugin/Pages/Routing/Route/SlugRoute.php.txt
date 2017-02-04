@@ -24,10 +24,10 @@ class SlugRoute extends CakeRoute {
 			return false;
 		}
 
-		$Page = ClassRegistry::init('Pages.Page');
-		$dataSource = ConnectionManager::getDataSource($Page->useDbConfig);
+		$PageModel = ClassRegistry::init('Pages.Page');
+		$dataSource = ConnectionManager::getDataSource($PageModel->useDbConfig);
 		$tables = $dataSource->listSources();
-		if (! in_array($Page->tablePrefix . $Page->useTable, $tables)) {
+		if (! in_array($PageModel->tablePrefix . $PageModel->useTable, $tables)) {
 			return false;
 		}
 
@@ -38,8 +38,10 @@ class SlugRoute extends CakeRoute {
 				'recursive' => -1
 			));
 			if ($count > 0) {
+				$params['spacePermalink'] = $params['pass'][0];
 				unset($params['pass'][0]);
 			}
+			$params['pass'] = array_values($params['pass']);
 		}
 
 		$path = implode('/', $params['pass']);
@@ -49,12 +51,13 @@ class SlugRoute extends CakeRoute {
 			$conditions = array('Page.permalink' => $path);
 		}
 
-		$count = $Page->find('count', array(
+		$count = $PageModel->find('count', array(
 			'conditions' => $conditions,
 			'recursive' => -1
 		));
 
 		if ($count) {
+			$params['pagePermalink'] = $params['pass'];
 			return $params;
 		}
 
