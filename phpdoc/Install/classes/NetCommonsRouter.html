@@ -1,0 +1,603 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0"/>
+    <meta charset="utf-8"/>
+    <title>API Documentation</title>
+    <meta name="author" content=""/>
+    <meta name="description" content=""/>
+
+    <link href="../css/bootstrap-combined.no-icons.min.css" rel="stylesheet">
+    <link href="../css/font-awesome.min.css" rel="stylesheet">
+    <link href="../css/prism.css" rel="stylesheet" media="all"/>
+    <link href="../css/template.css" rel="stylesheet" media="all"/>
+    
+    <!--[if lt IE 9]>
+    <script src="../js/html5.js"></script>
+    <![endif]-->
+    <script src="../js/jquery-1.11.0.min.js"></script>
+    <script src="../js/ui/1.10.4/jquery-ui.min.js"></script>
+    <script src="../js/bootstrap.min.js"></script>
+    <script src="../js/jquery.smooth-scroll.js"></script>
+    <script src="../js/prism.min.js"></script>
+    <!-- TODO: Add http://jscrollpane.kelvinluck.com/ to style the scrollbars for browsers not using webkit-->
+    <script type="text/javascript">
+    function loadExternalCodeSnippets() {
+        Array.prototype.slice.call(document.querySelectorAll('pre[data-src]')).forEach(function (pre) {
+            var src = pre.getAttribute('data-src');
+            var extension = (src.match(/\.(\w+)$/) || [, ''])[1];
+            var language = 'php';
+
+            var code = document.createElement('code');
+            code.className = 'language-' + language;
+
+            pre.textContent = '';
+
+            code.textContent = 'Loading…';
+
+            pre.appendChild(code);
+
+            var xhr = new XMLHttpRequest();
+
+            xhr.open('GET', src, true);
+
+            xhr.onreadystatechange = function () {
+                if (xhr.readyState == 4) {
+
+                    if (xhr.status < 400 && xhr.responseText) {
+                        code.textContent = xhr.responseText;
+
+                        Prism.highlightElement(code);
+                    }
+                    else if (xhr.status >= 400) {
+                        code.textContent = '✖ Error ' + xhr.status + ' while fetching file: ' + xhr.statusText;
+                    }
+                    else {
+                        code.textContent = '✖ Error: File does not exist or is empty';
+                    }
+                }
+            };
+
+            xhr.send(null);
+        });
+    }
+
+    $(document).ready(function(){
+        loadExternalCodeSnippets();
+    });
+    $('#source-view').on('shown', function () {
+        loadExternalCodeSnippets();
+    })
+</script>
+
+    <link rel="shortcut icon" href="../images/favicon.ico"/>
+    <link rel="apple-touch-icon" href="../images/apple-touch-icon.png"/>
+    <link rel="apple-touch-icon" sizes="72x72" href="../images/apple-touch-icon-72x72.png"/>
+    <link rel="apple-touch-icon" sizes="114x114" href="../images/apple-touch-icon-114x114.png"/>
+</head>
+<body>
+
+<div class="navbar navbar-fixed-top">
+    <div class="navbar-inner">
+        <div class="container">
+            <a class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
+                <i class="icon-ellipsis-vertical"></i>
+            </a>
+            <a class="brand" href="../index.html">API Documentation</a>
+
+            <div class="nav-collapse">
+                <ul class="nav pull-right">
+                                        <li class="dropdown" id="charts-menu">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                            Charts <b class="caret"></b>
+                        </a>
+                        <ul class="dropdown-menu">
+                            <li>
+                                <a href="../graphs/class.html">
+                                    <i class="icon-list-alt"></i>&#160;Class hierarchy diagram
+                                </a>
+                            </li>
+                        </ul>
+                    </li>
+                    <li class="dropdown" id="reports-menu">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                            Reports <b class="caret"></b>
+                        </a>
+                        <ul class="dropdown-menu">
+                            <li>
+                                <a href="../reports/errors.html">
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                <i class="icon-list-alt"></i>&#160;Errors <span class="label label-info pull-right">0</span>
+                                </a>
+                            </li>
+                            <li>
+                                <a href="../reports/markers.html">
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                <i class="icon-list-alt"></i>&#160;Markers <span class="label label-info pull-right">0</span>
+                                </a>
+                            </li>
+                            <li>
+                                <a href="../reports/deprecated.html">
+                                                                                                            <i class="icon-list-alt"></i>&#160;Deprecated <span class="label label-info pull-right">0</span>
+                                </a>
+                            </li>
+                        </ul>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+    <!--<div class="go_to_top">-->
+    <!--<a href="#___" style="color: inherit">Back to top&#160;&#160;<i class="icon-upload icon-white"></i></a>-->
+    <!--</div>-->
+</div>
+
+<div id="___" class="container-fluid">
+        <section class="row-fluid">
+        <div class="span2 sidebar">
+                                <div class="accordion" style="margin-bottom: 0">
+        <div class="accordion-group">
+            <div class="accordion-heading">
+                                    <a class="accordion-toggle " data-toggle="collapse" data-target="#namespace-1009538954"></a>
+                                <a href="../namespaces/default.html" style="margin-left: 30px; padding-left: 0">\</a>
+            </div>
+            <div id="namespace-1009538954" class="accordion-body collapse in">
+                <div class="accordion-inner">
+
+                    
+                    <ul>
+                                                                                                    <li class="class"><a href="../classes/AccessCtrlComponent.html">AccessCtrlComponent</a></li>
+                                                    <li class="class"><a href="../classes/AppController.html">AppController</a></li>
+                                                    <li class="class"><a href="../classes/AppController.html">AppController</a></li>
+                                                    <li class="class"><a href="../classes/AppHelper.html">AppHelper</a></li>
+                                                    <li class="class"><a href="../classes/AppModel.html">AppModel</a></li>
+                                                    <li class="class"><a href="../classes/AppPaginatorComponent.html">AppPaginatorComponent</a></li>
+                                                    <li class="class"><a href="../classes/AppPaginatorHelper.html">AppPaginatorHelper</a></li>
+                                                    <li class="class"><a href="../classes/AssetComponent.html">AssetComponent</a></li>
+                                                    <li class="class"><a href="../classes/BackToHelper.html">BackToHelper</a></li>
+                                                    <li class="class"><a href="../classes/ButtonHelper.html">ButtonHelper</a></li>
+                                                    <li class="class"><a href="../classes/CheckLibVersionTask.html">CheckLibVersionTask</a></li>
+                                                    <li class="class"><a href="../classes/ComposerHelper.html">ComposerHelper</a></li>
+                                                    <li class="class"><a href="../classes/CreateDatabaseTask.html">CreateDatabaseTask</a></li>
+                                                    <li class="class"><a href="../classes/Current.html">Current</a></li>
+                                                    <li class="class"><a href="../classes/CurrentBase.html">CurrentBase</a></li>
+                                                    <li class="class"><a href="../classes/CurrentFrame.html">CurrentFrame</a></li>
+                                                    <li class="class"><a href="../classes/CurrentPage.html">CurrentPage</a></li>
+                                                    <li class="class"><a href="../classes/CurrentSystem.html">CurrentSystem</a></li>
+                                                    <li class="class"><a href="../classes/DateHelper.html">DateHelper</a></li>
+                                                    <li class="class"><a href="../classes/DatetimePickerHelper.html">DatetimePickerHelper</a></li>
+                                                    <li class="class"><a href="../classes/DisplayNumberHelper.html">DisplayNumberHelper</a></li>
+                                                    <li class="class"><a href="../classes/FormInputHelper.html">FormInputHelper</a></li>
+                                                    <li class="class"><a href="../classes/InstallAppController.html">InstallAppController</a></li>
+                                                    <li class="class"><a href="../classes/InstallAppTask.html">InstallAppTask</a></li>
+                                                    <li class="class"><a href="../classes/InstallBowerTask.html">InstallBowerTask</a></li>
+                                                    <li class="class"><a href="../classes/InstallController.html">InstallController</a></li>
+                                                    <li class="class"><a href="../classes/InstallFinishTask.html">InstallFinishTask</a></li>
+                                                    <li class="class"><a href="../classes/InstallInitData.html">InstallInitData</a></li>
+                                                    <li class="class"><a href="../classes/InstallMigrationsTask.html">InstallMigrationsTask</a></li>
+                                                    <li class="class"><a href="../classes/InstallPermissionTask.html">InstallPermissionTask</a></li>
+                                                    <li class="class"><a href="../classes/InstallShell.html">InstallShell</a></li>
+                                                    <li class="class"><a href="../classes/InstallSiteSettingTask.html">InstallSiteSettingTask</a></li>
+                                                    <li class="class"><a href="../classes/InstallStartTask.html">InstallStartTask</a></li>
+                                                    <li class="class"><a href="../classes/InstallUtil.html">InstallUtil</a></li>
+                                                    <li class="class"><a href="../classes/InstallValidatorUtil.html">InstallValidatorUtil</a></li>
+                                                    <li class="class"><a href="../classes/LinkButtonHelper.html">LinkButtonHelper</a></li>
+                                                    <li class="class"><a href="../classes/MessageFlashHelper.html">MessageFlashHelper</a></li>
+                                                    <li class="class"><a href="../classes/NetCommonsAppController.html">NetCommonsAppController</a></li>
+                                                    <li class="class"><a href="../classes/NetCommonsAppHelper.html">NetCommonsAppHelper</a></li>
+                                                    <li class="class"><a href="../classes/NetCommonsAppModel.html">NetCommonsAppModel</a></li>
+                                                    <li class="class"><a href="../classes/NetCommonsAppShell.html">NetCommonsAppShell</a></li>
+                                                    <li class="class"><a href="../classes/NetCommonsCakeTestCase.html">NetCommonsCakeTestCase</a></li>
+                                                    <li class="class"><a href="../classes/NetCommonsComponent.html">NetCommonsComponent</a></li>
+                                                    <li class="class"><a href="../classes/NetCommonsConsoleTestCase.html">NetCommonsConsoleTestCase</a></li>
+                                                    <li class="class"><a href="../classes/NetCommonsController.html">NetCommonsController</a></li>
+                                                    <li class="class"><a href="../classes/NetCommonsControllerBaseTestCase.html">NetCommonsControllerBaseTestCase</a></li>
+                                                    <li class="class"><a href="../classes/NetCommonsControllerTestCase.html">NetCommonsControllerTestCase</a></li>
+                                                    <li class="class"><a href="../classes/NetCommonsCurrentUtilityBase.html">NetCommonsCurrentUtilityBase</a></li>
+                                                    <li class="class"><a href="../classes/NetCommonsDeleteTest.html">NetCommonsDeleteTest</a></li>
+                                                    <li class="class"><a href="../classes/NetCommonsExceptionRenderer.html">NetCommonsExceptionRenderer</a></li>
+                                                    <li class="class"><a href="../classes/NetCommonsFormHelper.html">NetCommonsFormHelper</a></li>
+                                                    <li class="class"><a href="../classes/NetCommonsGetTest.html">NetCommonsGetTest</a></li>
+                                                    <li class="class"><a href="../classes/NetCommonsHelperTestCase.html">NetCommonsHelperTestCase</a></li>
+                                                    <li class="class"><a href="../classes/NetCommonsHtmlHelper.html">NetCommonsHtmlHelper</a></li>
+                                                    <li class="class"><a href="../classes/NetCommonsMigration.html">NetCommonsMigration</a></li>
+                                                    <li class="class"><a href="../classes/NetCommonsModelTestCase.html">NetCommonsModelTestCase</a></li>
+                                                    <li class="class"><a href="../classes/NetCommonsRouter.html">NetCommonsRouter</a></li>
+                                                    <li class="class"><a href="../classes/NetCommonsRoutesTestCase.html">NetCommonsRoutesTestCase</a></li>
+                                                    <li class="class"><a href="../classes/NetCommonsSaveTest.html">NetCommonsSaveTest</a></li>
+                                                    <li class="class"><a href="../classes/NetCommonsSecurity.html">NetCommonsSecurity</a></li>
+                                                    <li class="class"><a href="../classes/NetCommonsTestSuite.html">NetCommonsTestSuite</a></li>
+                                                    <li class="class"><a href="../classes/NetCommonsTime.html">NetCommonsTime</a></li>
+                                                    <li class="class"><a href="../classes/NetCommonsTimeComponent.html">NetCommonsTimeComponent</a></li>
+                                                    <li class="class"><a href="../classes/NetCommonsTimeHelper.html">NetCommonsTimeHelper</a></li>
+                                                    <li class="class"><a href="../classes/NetCommonsUrl.html">NetCommonsUrl</a></li>
+                                                    <li class="class"><a href="../classes/NetCommonsValidateTest.html">NetCommonsValidateTest</a></li>
+                                                    <li class="class"><a href="../classes/NetCommonsValidationRuleBehavior.html">NetCommonsValidationRuleBehavior</a></li>
+                                                    <li class="class"><a href="../classes/OriginalKeyBehavior.html">OriginalKeyBehavior</a></li>
+                                                    <li class="class"><a href="../classes/PermissionComponent.html">PermissionComponent</a></li>
+                                                    <li class="class"><a href="../classes/SaveAdministratorTask.html">SaveAdministratorTask</a></li>
+                                                    <li class="class"><a href="../classes/SaveInitDataTask.html">SaveInitDataTask</a></li>
+                                                    <li class="class"><a href="../classes/SingletonViewBlockHtmlHelper.html">SingletonViewBlockHtmlHelper</a></li>
+                                                    <li class="class"><a href="../classes/SiteCloseController.html">SiteCloseController</a></li>
+                                                    <li class="class"><a href="../classes/SnsButtonHelper.html">SnsButtonHelper</a></li>
+                                                    <li class="class"><a href="../classes/TableListHelper.html">TableListHelper</a></li>
+                                                    <li class="class"><a href="../classes/TitleIconHelper.html">TitleIconHelper</a></li>
+                                                    <li class="class"><a href="../classes/TokenHelper.html">TokenHelper</a></li>
+                                                    <li class="class"><a href="../classes/TrackableBehavior.html">TrackableBehavior</a></li>
+                                                    <li class="class"><a href="../classes/WizardHelper.html">WizardHelper</a></li>
+                                            </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+
+        </div>
+    </section>
+    <section class="row-fluid">
+        <div class="span10 offset2">
+            <div class="row-fluid">
+                <div class="span8 content class">
+                    <nav>
+                                                <a href="../namespaces/default.html">\</a> <i class="icon-level-up"></i>
+                                            </nav>
+                    <a href="#source-view" role="button" class="pull-right btn" data-toggle="modal"><i class="icon-code"></i></a>
+
+                    <h1><small>\</small>NetCommonsRouter</h1>
+                    <p><em>Automatically slugs routes based on named parameters</em></p>
+                    
+                    
+                                        
+                    <section id="summary">
+                        <h2>Summary</h2>
+                        <section class="row-fluid heading">
+                            <section class="span4">
+                                <a href="#methods">Methods</a>
+                            </section>
+                            <section class="span4">
+                                <a href="#properties">Properties</a>
+                            </section>
+                            <section class="span4">
+                                <a href="#constants">Constants</a>
+                            </section>
+                        </section>
+                        <section class="row-fluid public">
+                            <section class="span4">
+                                                                    <a href="../classes/NetCommonsRouter.html#method_parse" class="">parse()</a><br />
+                                                                    <a href="../classes/NetCommonsRouter.html#method_connectBlock" class="">connectBlock()</a><br />
+                                                                    <a href="../classes/NetCommonsRouter.html#method_getGeneralPlugins" class="">getGeneralPlugins()</a><br />
+                                                                    <a href="../classes/NetCommonsRouter.html#method_getPagePermalinkOptions" class="">getPagePermalinkOptions()</a><br />
+                                                                    <a href="../classes/NetCommonsRouter.html#method_getSpacePermalinkOptions" class="">getSpacePermalinkOptions()</a><br />
+                                                            </section>
+                            <section class="span4">
+                                                                    <a href="../classes/NetCommonsRouter.html#property_params" class="">$params</a><br />
+                                                            </section>
+                            <section class="span4">
+                                                                    <em>No constants found</em>
+                                                            </section>
+                        </section>
+                        <section class="row-fluid protected">
+                            <section class="span4">
+                                                                    <em>No protected methods found</em>
+                                                            </section>
+                            <section class="span4">
+                                                                    <em>No protected properties found</em>
+                                                            </section>
+                            <section class="span4">
+                                <em>N/A</em>
+                            </section>
+                        </section>
+                        <section class="row-fluid private">
+                            <section class="span4">
+                                                                    <em>No private methods found</em>
+                                                            </section>
+                            <section class="span4">
+                                                                    <em>No private properties found</em>
+                                                            </section>
+                            <section class="span4">
+                                <em>N/A</em>
+                            </section>
+                        </section>
+                    </section>
+                </div>
+                <aside class="span4 detailsbar">
+                                        
+                    
+                    <dl>
+                        <dt>File</dt>
+                            <dd><a href="../files/Plugin.NetCommons.Routing.NetCommonsRouter.html"><div class="path-wrapper">Plugin/NetCommons/Routing/NetCommonsRouter.php</div></a></dd>
+                                                <dt>Package</dt>
+                            <dd><div class="namespace-wrapper">Default</div></dd>
+                                                <dt>Class hierarchy</dt>
+                            <dd class="hierarchy">
+                                                                                                                                                                    <div class="namespace-wrapper">\NetCommonsRouter</div>
+                            </dd>
+
+                        
+                        
+                        
+                        
+                                                                        </dl>
+                    <h2>Tags</h2>
+                    <table class="table table-condensed">
+                                            <tr><td colspan="2"><em>None found</em></td></tr>
+                                        </table>
+                </aside>
+            </div>
+
+                        
+                                    <a id="properties" name="properties"></a>
+            <div class="row-fluid">
+                <div class="span8 content class">
+                    <h2>Properties</h2>
+                </div>
+                <aside class="span4 detailsbar"></aside>
+            </div>
+
+                                    <div class="row-fluid">
+        <div class="span8 content class">
+            <a id="property_params" name="property_params" class="anchor"></a>
+            <article class="property">
+                <h3 class="public ">$params</h3>
+                <pre class="signature">$params : mixed</pre>
+                <p><em>Request params</em></p>
+                
+
+                                <h4>Type</h4>
+                mixed
+                                            </article>
+        </div>
+        <aside class="span4 detailsbar">
+            <h1><i class="icon-arrow-down"></i></h1>
+                        <dl>
+                                                            </dl>
+            <h2>Tags</h2>
+            <table class="table table-condensed">
+                                    <tr><td colspan="2"><em>None found</em></td></tr>
+                            </table>
+        </aside>
+    </div>
+
+                                                            
+                                    <a id="methods" name="methods"></a>
+            <div class="row-fluid">
+                <div class="span8 content class"><h2>Methods</h2></div>
+                <aside class="span4 detailsbar"></aside>
+            </div>
+
+                                    <div class="row-fluid">
+        <div class="span8 content class">
+            <a id="method_parse" name="method_parse" class="anchor"></a>
+            <article class="method">
+                <h3 class="public ">parse()</h3>
+                <a href="#source-view" role="button" class="pull-right btn" data-toggle="modal" style="font-size: 1.1em; padding: 9px 14px"><i class="icon-code"></i></a>
+                <pre class="signature" style="margin-right: 54px;">parse(string  <span class="argument">$url = null</span>) : mixed</pre>
+                <p><em>parse</em></p>
+                
+
+                                    <h4>Parameters</h4>
+                    <table class="table table-condensed table-hover">
+                                                    <tr>
+                                <td>string</td>
+                                <td>$url </td>
+                                <td><p>The URL to attempt to parse.</p></td>
+                            </tr>
+                                            </table>
+                
+                
+                                    <h4>Returns</h4>
+                    mixed
+                                            &mdash; <p>Boolean false on failure, otherwise an array or parameters</p>
+                                    				
+                            </article>
+        </div>
+        <aside class="span4 detailsbar">
+            <h1><i class="icon-arrow-down"></i></h1>
+                            <span class="label label-info">static</span>
+                                                            <dl>
+                                                                            </dl>
+            <h2>Tags</h2>
+            <table class="table table-condensed">
+                                    <tr><td colspan="2"><em>None found</em></td></tr>
+                            </table>
+        </aside>
+    </div>
+
+                                    <div class="row-fluid">
+        <div class="span8 content class">
+            <a id="method_connectBlock" name="method_connectBlock" class="anchor"></a>
+            <article class="method">
+                <h3 class="public ">connectBlock()</h3>
+                <a href="#source-view" role="button" class="pull-right btn" data-toggle="modal" style="font-size: 1.1em; padding: 9px 14px"><i class="icon-code"></i></a>
+                <pre class="signature" style="margin-right: 54px;">connectBlock(string  <span class="argument">$route</span>, array  <span class="argument">$defaults = array()</span>, array  <span class="argument">$options = array()</span>) : array</pre>
+                <p><em>NetCommons3用にRouter::connectを一括で登録する</em></p>
+                
+
+                                    <h4>Parameters</h4>
+                    <table class="table table-condensed table-hover">
+                                                    <tr>
+                                <td>string</td>
+                                <td>$route </td>
+                                <td><p>A string describing the template of the route</p></td>
+                            </tr>
+                                                    <tr>
+                                <td>array</td>
+                                <td>$defaults </td>
+                                <td><p>An array describing the default route parameters. These parameters will be used by default
+and can supply routing parameters that are not dynamic. See above.</p></td>
+                            </tr>
+                                                    <tr>
+                                <td>array</td>
+                                <td>$options </td>
+                                <td><p>An array matching the named elements in the route to regular expressions which that
+element should match. Also contains additional parameters such as which routed parameters should be
+shifted into the passed arguments, supplying patterns for routing parameters and supplying the name of a
+custom routing class.</p></td>
+                            </tr>
+                                            </table>
+                
+                
+                                    <h4>Returns</h4>
+                    array
+                                            &mdash; <p>Array of routes</p>
+                                    				
+                            </article>
+        </div>
+        <aside class="span4 detailsbar">
+            <h1><i class="icon-arrow-down"></i></h1>
+                            <span class="label label-info">static</span>
+                                                            <dl>
+                                                                                            <dt>See also</dt>
+                                                                <dd><a href=""><span class="namespace-wrapper">\routes</span></a></dd>
+                                            <dd><a href=""><span class="namespace-wrapper">\parse().</span></a></dd>
+                                            <dd><a href=""><span class="namespace-wrapper">\Router::conncet()</span></a></dd>
+                                                                </dl>
+            <h2>Tags</h2>
+            <table class="table table-condensed">
+                                    <tr><td colspan="2"><em>None found</em></td></tr>
+                            </table>
+        </aside>
+    </div>
+
+                                    <div class="row-fluid">
+        <div class="span8 content class">
+            <a id="method_getGeneralPlugins" name="method_getGeneralPlugins" class="anchor"></a>
+            <article class="method">
+                <h3 class="public ">getGeneralPlugins()</h3>
+                <a href="#source-view" role="button" class="pull-right btn" data-toggle="modal" style="font-size: 1.1em; padding: 9px 14px"><i class="icon-code"></i></a>
+                <pre class="signature" style="margin-right: 54px;">getGeneralPlugins() : array</pre>
+                <p><em>一般プラグインの取得</em></p>
+                
+
+                
+                
+                                    <h4>Returns</h4>
+                    array
+                                    				
+                            </article>
+        </div>
+        <aside class="span4 detailsbar">
+            <h1><i class="icon-arrow-down"></i></h1>
+                            <span class="label label-info">static</span>
+                                                            <dl>
+                                                                            </dl>
+            <h2>Tags</h2>
+            <table class="table table-condensed">
+                                    <tr><td colspan="2"><em>None found</em></td></tr>
+                            </table>
+        </aside>
+    </div>
+
+                                    <div class="row-fluid">
+        <div class="span8 content class">
+            <a id="method_getPagePermalinkOptions" name="method_getPagePermalinkOptions" class="anchor"></a>
+            <article class="method">
+                <h3 class="public ">getPagePermalinkOptions()</h3>
+                <a href="#source-view" role="button" class="pull-right btn" data-toggle="modal" style="font-size: 1.1em; padding: 9px 14px"><i class="icon-code"></i></a>
+                <pre class="signature" style="margin-right: 54px;">getPagePermalinkOptions() : array</pre>
+                <p><em>pagePermalink用のOptions取得</em></p>
+                
+
+                
+                
+                                    <h4>Returns</h4>
+                    array
+                                    				
+                            </article>
+        </div>
+        <aside class="span4 detailsbar">
+            <h1><i class="icon-arrow-down"></i></h1>
+                            <span class="label label-info">static</span>
+                                                            <dl>
+                                                                            </dl>
+            <h2>Tags</h2>
+            <table class="table table-condensed">
+                                    <tr><td colspan="2"><em>None found</em></td></tr>
+                            </table>
+        </aside>
+    </div>
+
+                                    <div class="row-fluid">
+        <div class="span8 content class">
+            <a id="method_getSpacePermalinkOptions" name="method_getSpacePermalinkOptions" class="anchor"></a>
+            <article class="method">
+                <h3 class="public ">getSpacePermalinkOptions()</h3>
+                <a href="#source-view" role="button" class="pull-right btn" data-toggle="modal" style="font-size: 1.1em; padding: 9px 14px"><i class="icon-code"></i></a>
+                <pre class="signature" style="margin-right: 54px;">getSpacePermalinkOptions() : array</pre>
+                <p><em>spacePermalink用のOptions取得</em></p>
+                
+
+                
+                
+                                    <h4>Returns</h4>
+                    array
+                                    				
+                            </article>
+        </div>
+        <aside class="span4 detailsbar">
+            <h1><i class="icon-arrow-down"></i></h1>
+                            <span class="label label-info">static</span>
+                                                            <dl>
+                                                                            </dl>
+            <h2>Tags</h2>
+            <table class="table table-condensed">
+                                    <tr><td colspan="2"><em>None found</em></td></tr>
+                            </table>
+        </aside>
+    </div>
+
+                                                                    </div>
+    </section>
+
+    <div id="source-view" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="source-view-label" aria-hidden="true">
+        <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+            <h3 id="source-view-label">NetCommonsRouter.php</h3>
+        </div>
+        <div class="modal-body">
+            <pre data-src="../files/Plugin/NetCommons/Routing/NetCommonsRouter.php.txt" class="language-php line-numbers"></pre>
+        </div>
+    </div>
+
+    <footer class="row-fluid">
+        <section class="span10 offset2">
+            <section class="row-fluid">
+                <section class="span10 offset1">
+                    <section class="row-fluid footer-sections">
+                        <section class="span4">
+                                                        <h1><i class="icon-code"></i></h1>
+                            <div>
+                                <ul>
+                                                                    </ul>
+                            </div>
+                        </section>
+                        <section class="span4">
+                                                        <h1><i class="icon-bar-chart"></i></h1>
+                            <div>
+                                <ul>
+                                    <li><a href="../graphs/class.html">Class Hierarchy Diagram</a></li>
+                                </ul>
+                            </div>
+                        </section>
+                        <section class="span4">
+                                                        <h1><i class="icon-pushpin"></i></h1>
+                            <div>
+                                <ul>
+                                    <li><a href="../reports/errors.html">Errors</a></li>
+                                    <li><a href="../reports/markers.html">Markers</a></li>
+                                </ul>
+                            </div>
+                        </section>
+                    </section>
+                </section>
+            </section>
+            <section class="row-fluid">
+                <section class="span10 offset1">
+                    <hr />
+                    Documentation is powered by <a href="http://www.phpdoc.org/">phpDocumentor </a> and authored
+                    on February 7th, 2017 at 04:36.
+                </section>
+            </section>
+        </section>
+    </footer>
+</div>
+
+</body>
+</html>
