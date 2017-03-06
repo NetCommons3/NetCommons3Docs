@@ -10,6 +10,8 @@
  */
 
 App::uses('AppHelper', 'View/Helper');
+App::uses('Like', 'Likes.Model');
+class_exists('Like');
 
 /**
  * Like Helper
