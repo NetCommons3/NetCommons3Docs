@@ -50,14 +50,14 @@ class CategoriesLanguage extends CategoriesAppModel {
  */
 	public $belongsTo = array(
 		'Category' => array(
-			'className' => 'Category',
+			'className' => 'Categories.Category',
 			'foreignKey' => 'category_id',
 			'conditions' => '',
 			'fields' => '',
 			'order' => ''
 		),
 		'Language' => array(
-			'className' => 'Language',
+			'className' => 'M17n.Language',
 			'foreignKey' => 'language_id',
 			'conditions' => '',
 			'fields' => '',
