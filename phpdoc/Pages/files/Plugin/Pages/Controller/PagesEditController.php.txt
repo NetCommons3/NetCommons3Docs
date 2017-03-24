@@ -579,7 +579,8 @@ class PagesEditController extends PagesAppController {
  * @return bool
  */
 	private function __hasDeleteThisPage() {
-		if (! Current::read('Space.is_m17n')) {
+		$activeLangs = $this->Language->getLanguages();
+		if (! Current::read('Space.is_m17n') && count($activeLangs) <= 1) {
 			return false;
 		}
 
@@ -588,12 +589,11 @@ class PagesEditController extends PagesAppController {
 			return false;
 		}
 
-		$activeLangs = $this->Language->getLanguages();
 		$activeLangIds = Hash::extract($activeLangs, '{n}.Language.id');
 
 		$pageIdsM17n = $this->Page->getPageIdsWithM17n(Current::read('Page.id'));
 
-		return !(bool)array_diff($activeLangIds, Hash::get($pageIdsM17n, Current::read('Page.id'), []));
+		return (bool)array_diff($activeLangIds, Hash::get($pageIdsM17n, Current::read('Page.id'), []));
 	}
 
 }
