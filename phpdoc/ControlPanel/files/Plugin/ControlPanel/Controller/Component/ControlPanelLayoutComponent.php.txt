@@ -62,9 +62,6 @@ class ControlPanelLayoutComponent extends Component {
 		//cancelUrlをセット
 		$controller->set('cancelUrl', '/');
 
-		$controller->set('isControlPanel', true);
-		$controller->set('hasControlPanel', true);
-
 		//ページHelperにセット
 		$controller->set('pluginsMenu', $this->plugins);
 

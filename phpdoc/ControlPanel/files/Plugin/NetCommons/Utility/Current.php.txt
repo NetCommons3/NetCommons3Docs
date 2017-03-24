@@ -273,6 +273,13 @@ class Current extends CurrentBase {
 	public static $request;
 
 /**
+ * Session object
+ *
+ * @var mixed
+ */
+	public static $session;
+
+/**
  * layout
  *
  * @var string
@@ -298,6 +305,7 @@ class Current extends CurrentBase {
 		}
 
 		self::$request = clone $controller->request;
+		self::$session = $controller->Session;
 		self::$layout = $controller->layout;
 
 		if (Hash::get(self::$current, 'User.modified') !== AuthComponent::user('modified')) {
@@ -369,7 +377,7 @@ class Current extends CurrentBase {
  * @return bool
  */
 	public static function hasSettingMode() {
-		return self::permission('page_editable');
+		return self::permission('page_editable', Current::read('Page.room_id'));
 	}
 
 /**
