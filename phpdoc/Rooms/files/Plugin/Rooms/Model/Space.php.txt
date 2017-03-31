@@ -25,6 +25,14 @@ App::uses('RoomsAppModel', 'Rooms.Model');
 class Space extends RoomsAppModel {
 
 /**
+ * スペースデータ
+ * ※publicにしているのは、UnitTestで使用するため
+ *
+ * @var array
+ */
+	public static $spaces;
+
+/**
  * Table name
  *
  * @var string
@@ -240,6 +248,21 @@ class Space extends RoomsAppModel {
 		}
 
 		return (string)Hash::get($spaceIds, $spaceId, '0');
+	}
+
+/**
+ * スペースデータ取得
+ *
+ * @return array スペースデータ配列
+ */
+	public function getSpaces() {
+		if (self::$spaces) {
+			return self::$spaces;
+		}
+		self::$spaces = $this->find('all', array(
+			'recursive' => -1
+		));
+		return self::$spaces;
 	}
 
 }

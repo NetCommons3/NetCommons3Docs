@@ -208,6 +208,7 @@ class RoomsSchema extends CakeSchema {
 		'room_id_root' => array('type' => 'integer', 'null' => true, 'default' => null, 'unsigned' => false),
 		'permalink' => array('type' => 'string', 'null' => false, 'default' => null, 'collate' => 'utf8_general_ci', 'charset' => 'utf8'),
 		'is_m17n' => array('type' => 'boolean', 'null' => true, 'default' => '0'),
+		'after_user_save_model' => array('type' => 'string', 'null' => true, 'default' => null, 'collate' => 'utf8_general_ci', 'charset' => 'utf8'),
 		'created_user' => array('type' => 'integer', 'null' => true, 'default' => null, 'unsigned' => false),
 		'created' => array('type' => 'datetime', 'null' => true, 'default' => null),
 		'modified_user' => array('type' => 'integer', 'null' => true, 'default' => null, 'unsigned' => false),
