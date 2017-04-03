@@ -39,6 +39,7 @@ class PageLayoutComponent extends Component {
  * @return void
  * @throws NotFoundException
  * @SuppressWarnings(PHPMD.CyclomaticComplexity)
+ * @SuppressWarnings(PHPMD.NPathComplexity)
  */
 	public function beforeRender(Controller $controller) {
 		// Ajax用
@@ -64,7 +65,8 @@ class PageLayoutComponent extends Component {
 
 		if (! array_key_exists('Pages.PageLayout', $controller->helpers)) {
 			$controller->helpers['Pages.PageLayout'] = array(
-				'page' => $this->_page
+				'page' => $this->_page,
+				'layoutSetting' => ($controller->layout === 'NetCommons.setting')
 			);
 		}
 
@@ -87,6 +89,11 @@ class PageLayoutComponent extends Component {
 		//表示言語フレームのセット
 		if ($controller->layout === 'NetCommons.setting' && Current::read('Frame.id')) {
 			$this->setFramePublicLang($controller);
+		}
+
+		//Layoutのセット
+		if (in_array($controller->layout, ['NetCommons.default', 'NetCommons.setting'], true)) {
+			$controller->layout = 'Pages.default';
 		}
 	}
 

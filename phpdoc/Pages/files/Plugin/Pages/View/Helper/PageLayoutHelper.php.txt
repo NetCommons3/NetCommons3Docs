@@ -60,6 +60,13 @@ class PageLayoutHelper extends AppHelper {
 	public $plugins;
 
 /**
+ * LayoutがNetCommons.settingかどうか
+ *
+ * @var array
+ */
+	public $layoutSetting;
+
+/**
  * Default Constructor
  *
  * @param View $View The View this helper is being attached to.
@@ -74,6 +81,8 @@ class PageLayoutHelper extends AppHelper {
 		$this->plugins = Hash::combine(
 			Current::read('PluginsRoom', array()), '{n}.Plugin.key', '{n}.Plugin'
 		);
+
+		$this->layoutSetting = Hash::get($settings, 'layoutSetting', false);
 	}
 
 /**
@@ -181,7 +190,7 @@ class PageLayoutHelper extends AppHelper {
 			'role' => 'main'
 		);
 
-		if ($this->_View->layout === 'NetCommons.setting') {
+		if ($this->layoutSetting) {
 			//Frame設定も含めたコンテンツElement
 			$element = $this->_View->element('Frames.setting_frame', array(
 				'view' => $this->_View->fetch('content')
@@ -226,14 +235,11 @@ class PageLayoutHelper extends AppHelper {
 		}
 
 		//ページコンテンツのセット
-		$this->_View->viewVars['pageContent'] = $this->Html->div(
-			array($this->containerSize(Container::TYPE_MAIN)), $element, $attributes
-		);
+		$this->_View->viewVars['pageContent'] = $this->_View->element('Pages.page_main', array(
+			'element' => $element,
+			'attributes' => $attributes
+		));
 
-		//Layoutのセット
-		$this->_View->layout = 'Pages.default';
-
-		//
 		if (Current::read('Page.is_container_fluid')) {
 			$this->_View->viewVars['pageContainerCss'] = 'container-fluid';
 		} else {
