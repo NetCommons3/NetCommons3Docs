@@ -46,6 +46,7 @@ class PageLayoutComponent extends Component {
 			return;
 		}
 
+		$this->_page = Current::read('PageLayout.page');
 		if (! $this->_page) {
 			//pathからページデータ取得
 			if (! isset($controller->viewVars['page'])) {
@@ -58,6 +59,7 @@ class PageLayoutComponent extends Component {
 			} else {
 				$this->_page = $controller->viewVars['page'];
 			}
+			Current::write('PageLayout.page', $this->_page);
 		}
 
 		if (! array_key_exists('Pages.PageLayout', $controller->helpers)) {
