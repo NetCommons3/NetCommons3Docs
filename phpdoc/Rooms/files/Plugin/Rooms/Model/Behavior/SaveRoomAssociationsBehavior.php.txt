@@ -322,7 +322,9 @@ class SaveRoomAssociationsBehavior extends ModelBehavior {
 			'Room' => 'Rooms.Room',
 		]);
 
-		$slug = OriginalKeyBehavior::generateKey('Page', $model->useDbConfig);
+		$slug = Hash::get(
+			$data, 'Page.permalink', OriginalKeyBehavior::generateKey('Page', $model->useDbConfig)
+		);
 		$page = Hash::merge($data, array(
 			'Page' => array(
 				'slug' => $slug,
