@@ -11,6 +11,7 @@
 
 App::uses('ModelBehavior', 'Model');
 App::uses('Space', 'Rooms.Model');
+App::uses('Page', 'Pages.Model');
 
 /**
  * SaveRoomAssociations Behavior
@@ -374,27 +375,20 @@ class SaveRoomAssociationsBehavior extends ModelBehavior {
  * @return string
  */
 	public function getParentPageId(Model $model, $page) {
+		$model->loadModels(['Room' => 'Rooms.Room']);
+
 		if (Hash::get($page, 'Room.parent_id') &&
 				! in_array((string)Hash::get($page, 'Room.parent_id'), Room::getSpaceRooms(), true)) {
-			$model->loadModels(['Room' => 'Rooms.Room']);
+			$parentRoomId = Hash::get($page, 'Room.parent_id');
 			$parentRoom = $model->Room->find('first', array(
 				'recursive' => -1,
-				'conditions' => array('id' => Hash::get($page, 'Room.parent_id'))
+				'conditions' => array('id' => $parentRoomId)
 			));
-
 			return Hash::get($parentRoom, 'Room.page_id_top');
+		} else {
+			$spaceId = Hash::get($page, 'Room.space_id');
+			return Space::getPageIdSpace($spaceId);
 		}
-
-		$spaceId = Hash::get($page, 'Room.space_id');
-		if ($spaceId === Space::PUBLIC_SPACE_ID) {
-			return Page::PUBLIC_ROOT_PAGE_ID;
-		} elseif ($spaceId === Space::PRIVATE_SPACE_ID) {
-			return Page::PRIVATE_ROOT_PAGE_ID;
-		} elseif ($spaceId === Space::COMMUNITY_SPACE_ID) {
-			return Page::ROOM_ROOT_PAGE_ID;
-		}
-
-		return false;
 	}
 
 /**
@@ -486,8 +480,10 @@ class SaveRoomAssociationsBehavior extends ModelBehavior {
 		]);
 
 		$result = $model->Room->find('all', array(
-			'recursive' => -1,
-			'conditions' => array('root_id' => null),
+			'recursive' => 0,
+			'conditions' => array(
+				'Room.id = Space.room_id_root'
+			),
 		));
 		$rooms = Hash::combine($result, '{n}.Room.id', '{n}');
 

@@ -251,6 +251,26 @@ class Space extends RoomsAppModel {
 	}
 
 /**
+ * SpaceのページIDを取得
+ *
+ * @param int $spaceId スペースID
+ * @return int
+ */
+	public static function getPageIdSpace($spaceId) {
+		$Space = ClassRegistry::init('Rooms.Space', true);
+
+		if (! Hash::get(self::$spaceIds, 'Page')) {
+			$spaces = $Space->find('list', array(
+				'recursive' => -1,
+				'fields' => array('id', 'page_id_top'),
+			));
+			self::$spaceIds['Page'] = $spaces;
+		}
+
+		return (string)self::$spaceIds['Page'][$spaceId];
+	}
+
+/**
  * スペースデータ取得
  *
  * @return array スペースデータ配列

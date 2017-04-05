@@ -140,7 +140,6 @@ class RoomsSchema extends CakeSchema {
 		'id' => array('type' => 'integer', 'null' => false, 'default' => null, 'unsigned' => false, 'key' => 'primary'),
 		'space_id' => array('type' => 'integer', 'null' => true, 'default' => null, 'unsigned' => false, 'key' => 'index'),
 		'page_id_top' => array('type' => 'integer', 'null' => true, 'default' => null, 'unsigned' => false),
-		'root_id' => array('type' => 'integer', 'null' => true, 'default' => null, 'unsigned' => false, 'key' => 'index'),
 		'parent_id' => array('type' => 'integer', 'null' => true, 'default' => null, 'unsigned' => false, 'key' => 'index'),
 		'lft' => array('type' => 'integer', 'null' => true, 'default' => null, 'unsigned' => false, 'key' => 'index'),
 		'rght' => array('type' => 'integer', 'null' => true, 'default' => null, 'unsigned' => false, 'key' => 'index'),
@@ -161,7 +160,6 @@ class RoomsSchema extends CakeSchema {
 			'lft' => array('column' => array('lft', 'id'), 'unique' => 0),
 			'rght' => array('column' => array('rght', 'id'), 'unique' => 0),
 			'default_participation' => array('column' => 'default_participation', 'unique' => 0),
-			'root_id' => array('column' => 'root_id', 'unique' => 0),
 			'parent_id' => array('column' => 'parent_id', 'unique' => 0)
 		),
 		'tableParameters' => array('charset' => 'utf8', 'collate' => 'utf8_general_ci', 'engine' => 'InnoDB')
@@ -206,6 +204,7 @@ class RoomsSchema extends CakeSchema {
 		'default_setting_action' => array('type' => 'string', 'null' => true, 'default' => null, 'collate' => 'utf8_general_ci', 'charset' => 'utf8'),
 		'room_disk_size' => array('type' => 'biginteger', 'null' => true, 'default' => null, 'unsigned' => false, 'comment' => '各ルームの容量。NULLの場合、無制限。'),
 		'room_id_root' => array('type' => 'integer', 'null' => true, 'default' => null, 'unsigned' => false),
+		'page_id_top' => array('type' => 'integer', 'null' => true, 'default' => null, 'unsigned' => false),
 		'permalink' => array('type' => 'string', 'null' => false, 'default' => null, 'collate' => 'utf8_general_ci', 'charset' => 'utf8'),
 		'is_m17n' => array('type' => 'boolean', 'null' => true, 'default' => '0'),
 		'after_user_save_model' => array('type' => 'string', 'null' => true, 'default' => null, 'collate' => 'utf8_general_ci', 'charset' => 'utf8'),

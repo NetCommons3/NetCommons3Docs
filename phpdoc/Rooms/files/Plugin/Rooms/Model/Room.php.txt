@@ -197,14 +197,6 @@ class Room extends RoomsAppModel {
 					'on' => 'update', // Limit validation to 'create' or 'update' operations
 				),
 			),
-			'root_id' => array(
-				'numeric' => array(
-					'rule' => array('numeric'),
-					'message' => __d('net_commons', 'Invalid request.'),
-					'allowEmpty' => true,
-					'on' => 'update', // Limit validation to 'create' or 'update' operations
-				),
-			),
 			'active' => array(
 				'boolean' => array(
 					'rule' => array('boolean'),

@@ -123,8 +123,6 @@ class RoomBehavior extends ModelBehavior {
 			),
 			'conditions' => array(
 				$model->Room->alias . '.space_id' => $spaceIds,
-				//$model->Room->alias . '.page_id_top NOT' => null,
-				//$model->Room->alias . '.root_id' => $rootIds,
 			),
 			'joins' => array(
 				array(

@@ -183,11 +183,6 @@ class RoomAddController extends RoomsAppController {
 			} else {
 				$pageId = null;
 			}
-			if (isset($room['Room']['root_id'])) {
-				$rootId = $room['Room']['root_id'];
-			} else {
-				$rootId = $roomId;
-			}
 
 			$referer = '/rooms/rooms/index/' . $spaceId;
 			if ($this->Session->read('RoomAdd.Room.id') &&
@@ -199,7 +194,6 @@ class RoomAddController extends RoomsAppController {
 				$this->request->data = Hash::merge($this->request->data,
 					$this->$model->createRoom(array(
 						'space_id' => $spaceId,
-						'root_id' => $rootId,
 						'parent_id' => $roomId,
 						'default_role_key' => $room['Room']['default_role_key'],
 					))
