@@ -91,13 +91,15 @@ class GetPageBehavior extends ModelBehavior {
  *
  * @param Model $model Model using this behavior
  * @param string $permalink Permalink
+ * @param string $spaceId Space id
  * @return array
  */
-	public function getPageWithFrame(Model $model, $permalink) {
+	public function getPageWithFrame(Model $model, $permalink, $spaceId) {
 		$model->loadModels([
 			'Box' => 'Boxes.Box',
 			'PagesLanguage' => 'Pages.PagesLanguage',
 			'PageContainer' => 'Pages.PageContainer',
+			'Space' => 'Rooms.Space',
 		]);
 
 		if ($permalink === '') {
@@ -106,7 +108,8 @@ class GetPageBehavior extends ModelBehavior {
 			);
 		} else {
 			$conditions = array(
-				'Page.permalink' => $permalink
+				'Page.permalink' => $permalink,
+				'Room.space_id' => $spaceId
 			);
 		}
 

@@ -10,6 +10,7 @@
  */
 
 App::uses('PagesAppController', 'Pages.Controller');
+App::uses('Space', 'Rooms.Model');
 
 /**
  * ページ表示 Controller
@@ -29,6 +30,7 @@ class PagesController extends PagesAppController {
  */
 	public $uses = array(
 		'Pages.Page',
+		'Rooms.Space',
 	);
 
 /**
@@ -59,7 +61,13 @@ class PagesController extends PagesAppController {
 		$paths = $this->params->params['pass'];
 		$path = implode('/', $paths);
 
-		$page = $this->Page->getPageWithFrame($path);
+		$spacePermalink = Hash::get($this->request->params, 'spacePermalink', '');
+		$space = $this->Space->find('first', array(
+			'recursive' => -1,
+			'conditions' => array('permalink' => $spacePermalink, 'id !=' => Space::WHOLE_SITE_ID)
+		));
+
+		$page = $this->Page->getPageWithFrame($path, $space['Space']['id']);
 		if (empty($page)) {
 			throw new NotFoundException();
 		}
