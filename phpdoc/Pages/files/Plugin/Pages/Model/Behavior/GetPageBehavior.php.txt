@@ -94,7 +94,7 @@ class GetPageBehavior extends ModelBehavior {
  * @param string $spaceId Space id
  * @return array
  */
-	public function getPageWithFrame(Model $model, $permalink, $spaceId) {
+	public function getPageWithFrame(Model $model, $permalink, $spaceId = null) {
 		$model->loadModels([
 			'Box' => 'Boxes.Box',
 			'PagesLanguage' => 'Pages.PagesLanguage',
