@@ -41,10 +41,11 @@ class PagesTreeBehavior extends TreeBehavior {
 		$recursive = 0;
 
 		if (isset($Model->belongsTo['Room'])) {
+			$Model->PagesLanguage->useDbConfig = $Model->useDbConfig;
 			$pageLangConditions = $Model->PagesLanguage->getConditions(array(
 				'PagesLanguage.page_id = Page.id',
-				'PagesLanguage.page_id = Page.id',
 			), true);
+
 			$Model->bindModel(array(
 				'belongsTo' => array(
 					'Space' => array(
