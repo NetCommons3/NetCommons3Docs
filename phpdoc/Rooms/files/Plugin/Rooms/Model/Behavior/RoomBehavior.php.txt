@@ -29,6 +29,15 @@ class RoomBehavior extends ModelBehavior {
 	public static $spaces;
 
 /**
+ * 参照できるスペースリストデータ
+ *
+ * @var array
+ */
+	public static $readableSpaces = [
+		Space::PUBLIC_SPACE_ID
+	];
+
+/**
  * Setup this behavior with the specified configuration settings.
  *
  * @param Model $model Model using this behavior
@@ -82,8 +91,7 @@ class RoomBehavior extends ModelBehavior {
 			$userId = Current::read('User.id');
 		}
 
-		$spaceIds = array();
-		$spaceIds[] = Space::PUBLIC_SPACE_ID;
+		$spaceIds = self::$readableSpaces;
 		if ($userId) {
 			$spaceIds[] = Space::COMMUNITY_SPACE_ID;
 			$joinType = 'INNER';
