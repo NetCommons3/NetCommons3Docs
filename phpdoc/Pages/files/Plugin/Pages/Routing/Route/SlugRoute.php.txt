@@ -31,29 +31,41 @@ class SlugRoute extends CakeRoute {
 			return false;
 		}
 
+		$Space = ClassRegistry::init('Rooms.Space');
 		if ($params['pass']) {
-			$Space = ClassRegistry::init('Rooms.Space');
-			$count = $Space->find('count', array(
+			$result = $Space->find('first', array(
 				'conditions' => array('permalink' => $params['pass'][0]),
 				'recursive' => -1
 			));
-			if ($count > 0) {
-				$params['spacePermalink'] = $params['pass'][0];
+			if ($result) {
+				$params['spacePermalink'] = $result['Space']['permalink'];
+				$params['spaceId'] = $result['Space']['id'];
 				unset($params['pass'][0]);
 			}
 			$params['pass'] = array_values($params['pass']);
+		}
+		if (! isset($params['spaceId'])) {
+			$result = $Space->find('first', array(
+				'conditions' => array('permalink' => '', 'id !=' => Space::WHOLE_SITE_ID),
+				'recursive' => -1
+			));
+			$params['spacePermalink'] = $result['Space']['permalink'];
+			$params['spaceId'] = $result['Space']['id'];
 		}
 
 		$path = implode('/', $params['pass']);
 		if ($path === '') {
 			$conditions = array('Page.lft' => '1');
 		} else {
-			$conditions = array('Page.permalink' => $path);
+			$conditions = array(
+				'Page.permalink' => $path,
+				'Room.space_id' => $params['spaceId']
+			);
 		}
 
 		$count = $PageModel->find('count', array(
 			'conditions' => $conditions,
-			'recursive' => -1
+			'recursive' => 0
 		));
 
 		if ($count) {
