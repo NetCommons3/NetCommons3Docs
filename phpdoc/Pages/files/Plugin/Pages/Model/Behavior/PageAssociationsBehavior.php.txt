@@ -208,40 +208,10 @@ class PageAssociationsBehavior extends ModelBehavior {
 			'BoxesPageContainer.container_type !=' => Container::TYPE_MAIN,
 			'Box.type' => $boxType
 		);
-		if (in_array($boxType, [Box::TYPE_WITH_ROOM, Box::TYPE_WITH_PAGE], true)) {
-			$conditions['Box.room_id'] = $page['Room']['id'];
-		}
 		$parentBoxesPages = $model->BoxesPageContainer->find('all', array(
 			'recursive' => 0,
 			'conditions' => $conditions
 		));
-
-		if (! $parentBoxesPages) {
-			$conditions = array(
-				'type' => $boxType,
-				'container_type !=' => Container::TYPE_MAIN,
-			);
-			if (in_array($boxType, [Box::TYPE_WITH_SPACE, Box::TYPE_WITH_ROOM, Box::TYPE_WITH_PAGE], true)) {
-				$conditions['space_id'] = $page['Room']['space_id'];
-			}
-			if (in_array($boxType, [Box::TYPE_WITH_ROOM, Box::TYPE_WITH_PAGE], true)) {
-				$conditions['room_id'] = $page['Room']['id'];
-			}
-			if (in_array($boxType, [Box::TYPE_WITH_PAGE], true)) {
-				$conditions['page_id'] = $page['Page']['id'];
-			}
-			$parentBoxesPages = $model->Box->find('all', array(
-				'recursive' => -1,
-				'conditions' => $conditions
-			));
-			foreach ($parentBoxesPages as $i => $box) {
-				$parentBoxesPages[$i]['BoxesPageContainer'] = array(
-					'container_type' => $box['Box']['container_type'],
-					'is_published' => false,
-					'weight' => $boxType,
-				);
-			}
-		}
 
 		return $parentBoxesPages;
 	}
