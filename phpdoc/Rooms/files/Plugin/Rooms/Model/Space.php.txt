@@ -273,6 +273,23 @@ class Space extends RoomsAppModel {
 /**
  * スペースデータ取得
  *
+ * @param int $spaceId スペースID
+ * @return array スペースデータ配列
+ */
+	public function getSpace($spaceId) {
+		$spaces = $this->getSpaces();
+
+		$space = Hash::extract($spaces, '{n}.' . $this->alias . '[id=' . $spaceId . ']');
+		if ($space) {
+			return $space[0];
+		} else {
+			return $space;
+		}
+	}
+
+/**
+ * スペースデータ取得
+ *
  * @return array スペースデータ配列
  */
 	public function getSpaces() {
