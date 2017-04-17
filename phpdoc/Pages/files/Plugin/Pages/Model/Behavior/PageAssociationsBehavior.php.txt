@@ -94,7 +94,7 @@ class PageAssociationsBehavior extends ModelBehavior {
 		$query = array(
 			'recursive' => -1,
 			'conditions' => array(
-				'page_id' => $model->getReferencePageId($model, $page),
+				'page_id' => $this->getReferencePageId($model, $page),
 			)
 		);
 		$pageContainers = $model->PageContainer->find('all', $query);
