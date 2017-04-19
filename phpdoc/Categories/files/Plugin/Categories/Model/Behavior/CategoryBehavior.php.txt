@@ -49,7 +49,7 @@ class CategoryBehavior extends ModelBehavior {
 			$model->Category->set($category['Category']);
 			if (! $model->Category->validates()) {
 				$model->validationErrors = Hash::merge(
-					$model->validationErrors, $model->CategoryOrder->validationErrors
+					$model->validationErrors, $model->Category->validationErrors
 				);
 				return false;
 			}
