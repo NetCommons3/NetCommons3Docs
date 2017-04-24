@@ -136,10 +136,10 @@
                                 <div class="accordion" style="margin-bottom: 0">
         <div class="accordion-group">
             <div class="accordion-heading">
-                                    <a class="accordion-toggle " data-toggle="collapse" data-target="#namespace-1917823860"></a>
+                                    <a class="accordion-toggle " data-toggle="collapse" data-target="#namespace-1620501509"></a>
                                 <a href="../namespaces/default.html" style="margin-left: 30px; padding-left: 0">\</a>
             </div>
-            <div id="namespace-1917823860" class="accordion-body collapse in">
+            <div id="namespace-1620501509" class="accordion-body collapse in">
                 <div class="accordion-inner">
 
                     
@@ -276,6 +276,8 @@ will inherit them.</p>
                                                                     <a href="../classes/UsersController.html#method_view" class="">view()</a><br />
                                                                     <a href="../classes/UsersController.html#method_edit" class="">edit()</a><br />
                                                                     <a href="../classes/UsersController.html#method_delete" class="">delete()</a><br />
+                                                                    <a href="../classes/UsersController.html#method_delete_disclaimer" class="">delete_disclaimer()</a><br />
+                                                                    <a href="../classes/UsersController.html#method_delete_confirm" class="">delete_confirm()</a><br />
                                                                     <a href="../classes/UsersController.html#method_download" class="">download()</a><br />
                                                                     <a href="../classes/UsersController.html#method_downloadNoImage" class="">downloadNoImage()</a><br />
                                                                     <a href="../classes/UsersController.html#method_search" class="">search()</a><br />
@@ -283,6 +285,7 @@ will inherit them.</p>
                                                             </section>
                             <section class="span4">
                                                                     <a href="../classes/UsersController.html#property_components" class="">$components</a><br />
+                                                                    <a href="../classes/UsersController.html#property_mail" class="">$mail</a><br />
                                                                     <a href="../classes/UsersController.html#property_displaField" class="">$displaField</a><br />
                                                                     <a href="../classes/UsersController.html#property_uses" class="">$uses</a><br />
                                                                     <a href="../classes/UsersController.html#property_helpers" class="">$helpers</a><br />
@@ -305,6 +308,7 @@ will inherit them.</p>
                         <section class="row-fluid private">
                             <section class="span4">
                                                                     <a href="../classes/UsersController.html#method___prepare" class="">__prepare()</a><br />
+                                                                    <a href="../classes/UsersController.html#method___useCancel" class="">__useCancel()</a><br />
                                                             </section>
                             <section class="span4">
                                                                     <em>No private properties found</em>
@@ -349,6 +353,14 @@ will inherit them.</p>
                                                                     <p>Shohei Nakajima <a href="mailto:nakajimashouhei@gmail.com">nakajimashouhei@gmail.com</a></p>
                                                             </td>
                         </tr>
+                                            <tr>
+                            <th>
+                                SuppressWarnings
+                            </th>
+                            <td>
+                                                                    <p>(PHPMD.ExcessiveClassComplexity)</p>
+                                                            </td>
+                        </tr>
                                         </table>
                 </aside>
             </div>
@@ -388,6 +400,30 @@ will inherit them.</p>
 
                                     <div class="row-fluid">
         <div class="span8 content class">
+            <a id="property_mail" name="property_mail" class="anchor"></a>
+            <article class="property">
+                <h3 class="public ">$mail</h3>
+                <pre class="signature">$mail : mixed</pre>
+                <p><em>NetCommonsMail</em></p>
+                <p>※テスト用に変数を定義する</p>
+
+                                <h4>Type</h4>
+                mixed
+                                            </article>
+        </div>
+        <aside class="span4 detailsbar">
+            <h1><i class="icon-arrow-down"></i></h1>
+                        <dl>
+                                                            </dl>
+            <h2>Tags</h2>
+            <table class="table table-condensed">
+                                    <tr><td colspan="2"><em>None found</em></td></tr>
+                            </table>
+        </aside>
+    </div>
+
+                                    <div class="row-fluid">
+        <div class="span8 content class">
             <a id="property_displaField" name="property_displaField" class="anchor"></a>
             <article class="property">
                 <h3 class="public ">$displaField</h3>
@@ -397,109 +433,7 @@ will inherit them.</p>
 
                                 <h4>Type</h4>
                 
-                
-Warning: Missing argument 1 for phpDocumentor\Descriptor\Collection::get(), called in /home/travis/build/NetCommons3/NetCommons3/vendors/twig/twig/lib/Twig/Template.php on line 672 and defined in /home/travis/build/NetCommons3/NetCommons3/vendors/phpdocumentor/phpdocumentor/src/phpDocumentor/Descriptor/Collection.php on line 72
-
-Call Stack:
-    0.0001     242536   1. {main}() /home/travis/build/NetCommons3/NetCommons3/vendors/phpdocumentor/phpdocumentor/bin/phpdoc:0
-    0.1446   12365224   2. phpDocumentor\Application->run() /home/travis/build/NetCommons3/NetCommons3/vendors/phpdocumentor/phpdocumentor/bin/phpdoc:24
-    0.1476   12663664   3. Symfony\Component\Console\Application->run() /home/travis/build/NetCommons3/NetCommons3/vendors/phpdocumentor/phpdocumentor/src/phpDocumentor/Application.php:183
-    0.1481   12664640   4. Symfony\Component\Console\Application->doRun() /home/travis/build/NetCommons3/NetCommons3/vendors/symfony/console/Application.php:123
-    0.1483   12665648   5. Symfony\Component\Console\Application->doRunCommand() /home/travis/build/NetCommons3/NetCommons3/vendors/symfony/console/Application.php:192
-    0.1483   12666232   6. Symfony\Component\Console\Command\Command->run() /home/travis/build/NetCommons3/NetCommons3/vendors/symfony/console/Application.php:846
-    0.1491   12673808   7. phpDocumentor\Command\Project\RunCommand->execute() /home/travis/build/NetCommons3/NetCommons3/vendors/symfony/console/Command/Command.php:264
-    8.2325   38230776   8. Symfony\Component\Console\Command\Command->run() /home/travis/build/NetCommons3/NetCommons3/vendors/phpdocumentor/phpdocumentor/src/phpDocumentor/Command/Project/RunCommand.php:275
-    8.2334   38234248   9. phpDocumentor\Transformer\Command\Project\TransformCommand->execute() /home/travis/build/NetCommons3/NetCommons3/vendors/symfony/console/Command/Command.php:264
-    8.5404   39044784  10. phpDocumentor\Console\Output\Output->writeTimedLog() /home/travis/build/NetCommons3/NetCommons3/vendors/phpdocumentor/phpdocumentor/src/phpDocumentor/Transformer/Command/Project/TransformCommand.php:206
-    8.5405   39044880  11. call_user_func_array:{/home/travis/build/NetCommons3/NetCommons3/vendors/phpdocumentor/phpdocumentor/src/phpDocumentor/Console/Output/Output.php:59}() /home/travis/build/NetCommons3/NetCommons3/vendors/phpdocumentor/phpdocumentor/src/phpDocumentor/Console/Output/Output.php:59
-    8.5405   39045456  12. phpDocumentor\Transformer\Transformer->execute() /home/travis/build/NetCommons3/NetCommons3/vendors/phpdocumentor/phpdocumentor/src/phpDocumentor/Console/Output/Output.php:59
-    8.5419   39067320  13. phpDocumentor\Transformer\Transformer->transformProject() /home/travis/build/NetCommons3/NetCommons3/vendors/phpdocumentor/phpdocumentor/src/phpDocumentor/Transformer/Transformer.php:141
-    9.1178   46034888  14. phpDocumentor\Transformer\Transformer->applyTransformationToProject() /home/travis/build/NetCommons3/NetCommons3/vendors/phpdocumentor/phpdocumentor/src/phpDocumentor/Transformer/Transformer.php:275
-    9.1181   46035240  15. phpDocumentor\Plugin\Twig\Writer\Twig->transform() /home/travis/build/NetCommons3/NetCommons3/vendors/phpdocumentor/phpdocumentor/src/phpDocumentor/Transformer/Transformer.php:312
-   15.0030   47097280  16. Twig_Environment->render() /home/travis/build/NetCommons3/NetCommons3/vendors/phpdocumentor/phpdocumentor/src/phpDocumentor/Plugin/Twig/Writer/Twig.php:116
-   15.0035   47112256  17. Twig_Template->render() /home/travis/build/NetCommons3/NetCommons3/vendors/twig/twig/lib/Twig/Environment.php:362
-   15.0035   47128880  18. Twig_Template->display() /home/travis/build/NetCommons3/NetCommons3/vendors/twig/twig/lib/Twig/Template.php:411
-   15.0036   47130320  19. Twig_Template->displayWithErrorHandling() /home/travis/build/NetCommons3/NetCommons3/vendors/twig/twig/lib/Twig/Template.php:403
-   15.0036   47130320  20. __TwigTemplate_2f7c8cbfec8aa9bcd362079e18b7df59770bd4d1473a22ba0891437d1f9cef37->doDisplay() /home/travis/build/NetCommons3/NetCommons3/vendors/twig/twig/lib/Twig/Template.php:432
-   15.0036   47130856  21. Twig_Template->display() /tmp/phpdoc-twig-cache/5f/5fa4a32796a70ee9b7b0a99b27a8e94022e93e3b637e2b53042c1a46dc71d0f7.php:26
-   15.0037   47132080  22. Twig_Template->displayWithErrorHandling() /home/travis/build/NetCommons3/NetCommons3/vendors/twig/twig/lib/Twig/Template.php:403
-   15.0037   47132080  23. __TwigTemplate_1e1a40415083917c3cd2c2ad808383ee9c8021d3b80772852dc67e54845d6404->doDisplay() /home/travis/build/NetCommons3/NetCommons3/vendors/twig/twig/lib/Twig/Template.php:432
-   15.0396   47313552  24. Twig_Template->displayBlock() /tmp/phpdoc-twig-cache/53/53a63c381b9affdc5ed3d55cca20acd1195915a905f7d95744851ed4b04f62d9.php:312
-   15.0396   47313696  25. __TwigTemplate_2f7c8cbfec8aa9bcd362079e18b7df59770bd4d1473a22ba0891437d1f9cef37->block_content() /home/travis/build/NetCommons3/NetCommons3/vendors/twig/twig/lib/Twig/Template.php:215
-   15.0667   47339592  26. Twig_Template->displayBlock() /tmp/phpdoc-twig-cache/5f/5fa4a32796a70ee9b7b0a99b27a8e94022e93e3b637e2b53042c1a46dc71d0f7.php:776
-   15.0667   47339752  27. __TwigTemplate_0d92786f805f2d213d572d37d451a0e8620e8b9ef6aa2b264a0639a4b1055411->block_property() /home/travis/build/NetCommons3/NetCommons3/vendors/twig/twig/lib/Twig/Template.php:215
-   15.0671   47471208  28. Twig_Template->getAttribute() /tmp/phpdoc-twig-cache/66/66440f1bb2926fd6afe9052c9a2b912a5064f101c3ad0eb111766612238b97bc.php:73
-   15.0671   47471856  29. phpDocumentor\Descriptor\Collection->get() /home/travis/build/NetCommons3/NetCommons3/vendors/twig/twig/lib/Twig/Template.php:672
-
-
-Notice: Undefined variable: index in /home/travis/build/NetCommons3/NetCommons3/vendors/phpdocumentor/phpdocumentor/src/phpDocumentor/Descriptor/Collection.php on line 74
-
-Call Stack:
-    0.0001     242536   1. {main}() /home/travis/build/NetCommons3/NetCommons3/vendors/phpdocumentor/phpdocumentor/bin/phpdoc:0
-    0.1446   12365224   2. phpDocumentor\Application->run() /home/travis/build/NetCommons3/NetCommons3/vendors/phpdocumentor/phpdocumentor/bin/phpdoc:24
-    0.1476   12663664   3. Symfony\Component\Console\Application->run() /home/travis/build/NetCommons3/NetCommons3/vendors/phpdocumentor/phpdocumentor/src/phpDocumentor/Application.php:183
-    0.1481   12664640   4. Symfony\Component\Console\Application->doRun() /home/travis/build/NetCommons3/NetCommons3/vendors/symfony/console/Application.php:123
-    0.1483   12665648   5. Symfony\Component\Console\Application->doRunCommand() /home/travis/build/NetCommons3/NetCommons3/vendors/symfony/console/Application.php:192
-    0.1483   12666232   6. Symfony\Component\Console\Command\Command->run() /home/travis/build/NetCommons3/NetCommons3/vendors/symfony/console/Application.php:846
-    0.1491   12673808   7. phpDocumentor\Command\Project\RunCommand->execute() /home/travis/build/NetCommons3/NetCommons3/vendors/symfony/console/Command/Command.php:264
-    8.2325   38230776   8. Symfony\Component\Console\Command\Command->run() /home/travis/build/NetCommons3/NetCommons3/vendors/phpdocumentor/phpdocumentor/src/phpDocumentor/Command/Project/RunCommand.php:275
-    8.2334   38234248   9. phpDocumentor\Transformer\Command\Project\TransformCommand->execute() /home/travis/build/NetCommons3/NetCommons3/vendors/symfony/console/Command/Command.php:264
-    8.5404   39044784  10. phpDocumentor\Console\Output\Output->writeTimedLog() /home/travis/build/NetCommons3/NetCommons3/vendors/phpdocumentor/phpdocumentor/src/phpDocumentor/Transformer/Command/Project/TransformCommand.php:206
-    8.5405   39044880  11. call_user_func_array:{/home/travis/build/NetCommons3/NetCommons3/vendors/phpdocumentor/phpdocumentor/src/phpDocumentor/Console/Output/Output.php:59}() /home/travis/build/NetCommons3/NetCommons3/vendors/phpdocumentor/phpdocumentor/src/phpDocumentor/Console/Output/Output.php:59
-    8.5405   39045456  12. phpDocumentor\Transformer\Transformer->execute() /home/travis/build/NetCommons3/NetCommons3/vendors/phpdocumentor/phpdocumentor/src/phpDocumentor/Console/Output/Output.php:59
-    8.5419   39067320  13. phpDocumentor\Transformer\Transformer->transformProject() /home/travis/build/NetCommons3/NetCommons3/vendors/phpdocumentor/phpdocumentor/src/phpDocumentor/Transformer/Transformer.php:141
-    9.1178   46034888  14. phpDocumentor\Transformer\Transformer->applyTransformationToProject() /home/travis/build/NetCommons3/NetCommons3/vendors/phpdocumentor/phpdocumentor/src/phpDocumentor/Transformer/Transformer.php:275
-    9.1181   46035240  15. phpDocumentor\Plugin\Twig\Writer\Twig->transform() /home/travis/build/NetCommons3/NetCommons3/vendors/phpdocumentor/phpdocumentor/src/phpDocumentor/Transformer/Transformer.php:312
-   15.0030   47097280  16. Twig_Environment->render() /home/travis/build/NetCommons3/NetCommons3/vendors/phpdocumentor/phpdocumentor/src/phpDocumentor/Plugin/Twig/Writer/Twig.php:116
-   15.0035   47112256  17. Twig_Template->render() /home/travis/build/NetCommons3/NetCommons3/vendors/twig/twig/lib/Twig/Environment.php:362
-   15.0035   47128880  18. Twig_Template->display() /home/travis/build/NetCommons3/NetCommons3/vendors/twig/twig/lib/Twig/Template.php:411
-   15.0036   47130320  19. Twig_Template->displayWithErrorHandling() /home/travis/build/NetCommons3/NetCommons3/vendors/twig/twig/lib/Twig/Template.php:403
-   15.0036   47130320  20. __TwigTemplate_2f7c8cbfec8aa9bcd362079e18b7df59770bd4d1473a22ba0891437d1f9cef37->doDisplay() /home/travis/build/NetCommons3/NetCommons3/vendors/twig/twig/lib/Twig/Template.php:432
-   15.0036   47130856  21. Twig_Template->display() /tmp/phpdoc-twig-cache/5f/5fa4a32796a70ee9b7b0a99b27a8e94022e93e3b637e2b53042c1a46dc71d0f7.php:26
-   15.0037   47132080  22. Twig_Template->displayWithErrorHandling() /home/travis/build/NetCommons3/NetCommons3/vendors/twig/twig/lib/Twig/Template.php:403
-   15.0037   47132080  23. __TwigTemplate_1e1a40415083917c3cd2c2ad808383ee9c8021d3b80772852dc67e54845d6404->doDisplay() /home/travis/build/NetCommons3/NetCommons3/vendors/twig/twig/lib/Twig/Template.php:432
-   15.0396   47313552  24. Twig_Template->displayBlock() /tmp/phpdoc-twig-cache/53/53a63c381b9affdc5ed3d55cca20acd1195915a905f7d95744851ed4b04f62d9.php:312
-   15.0396   47313696  25. __TwigTemplate_2f7c8cbfec8aa9bcd362079e18b7df59770bd4d1473a22ba0891437d1f9cef37->block_content() /home/travis/build/NetCommons3/NetCommons3/vendors/twig/twig/lib/Twig/Template.php:215
-   15.0667   47339592  26. Twig_Template->displayBlock() /tmp/phpdoc-twig-cache/5f/5fa4a32796a70ee9b7b0a99b27a8e94022e93e3b637e2b53042c1a46dc71d0f7.php:776
-   15.0667   47339752  27. __TwigTemplate_0d92786f805f2d213d572d37d451a0e8620e8b9ef6aa2b264a0639a4b1055411->block_property() /home/travis/build/NetCommons3/NetCommons3/vendors/twig/twig/lib/Twig/Template.php:215
-   15.0671   47471208  28. Twig_Template->getAttribute() /tmp/phpdoc-twig-cache/66/66440f1bb2926fd6afe9052c9a2b912a5064f101c3ad0eb111766612238b97bc.php:73
-   15.0671   47471856  29. phpDocumentor\Descriptor\Collection->get() /home/travis/build/NetCommons3/NetCommons3/vendors/twig/twig/lib/Twig/Template.php:672
-
-
-Notice: Undefined variable: index in /home/travis/build/NetCommons3/NetCommons3/vendors/phpdocumentor/phpdocumentor/src/phpDocumentor/Descriptor/Collection.php on line 78
-
-Call Stack:
-    0.0001     242536   1. {main}() /home/travis/build/NetCommons3/NetCommons3/vendors/phpdocumentor/phpdocumentor/bin/phpdoc:0
-    0.1446   12365224   2. phpDocumentor\Application->run() /home/travis/build/NetCommons3/NetCommons3/vendors/phpdocumentor/phpdocumentor/bin/phpdoc:24
-    0.1476   12663664   3. Symfony\Component\Console\Application->run() /home/travis/build/NetCommons3/NetCommons3/vendors/phpdocumentor/phpdocumentor/src/phpDocumentor/Application.php:183
-    0.1481   12664640   4. Symfony\Component\Console\Application->doRun() /home/travis/build/NetCommons3/NetCommons3/vendors/symfony/console/Application.php:123
-    0.1483   12665648   5. Symfony\Component\Console\Application->doRunCommand() /home/travis/build/NetCommons3/NetCommons3/vendors/symfony/console/Application.php:192
-    0.1483   12666232   6. Symfony\Component\Console\Command\Command->run() /home/travis/build/NetCommons3/NetCommons3/vendors/symfony/console/Application.php:846
-    0.1491   12673808   7. phpDocumentor\Command\Project\RunCommand->execute() /home/travis/build/NetCommons3/NetCommons3/vendors/symfony/console/Command/Command.php:264
-    8.2325   38230776   8. Symfony\Component\Console\Command\Command->run() /home/travis/build/NetCommons3/NetCommons3/vendors/phpdocumentor/phpdocumentor/src/phpDocumentor/Command/Project/RunCommand.php:275
-    8.2334   38234248   9. phpDocumentor\Transformer\Command\Project\TransformCommand->execute() /home/travis/build/NetCommons3/NetCommons3/vendors/symfony/console/Command/Command.php:264
-    8.5404   39044784  10. phpDocumentor\Console\Output\Output->writeTimedLog() /home/travis/build/NetCommons3/NetCommons3/vendors/phpdocumentor/phpdocumentor/src/phpDocumentor/Transformer/Command/Project/TransformCommand.php:206
-    8.5405   39044880  11. call_user_func_array:{/home/travis/build/NetCommons3/NetCommons3/vendors/phpdocumentor/phpdocumentor/src/phpDocumentor/Console/Output/Output.php:59}() /home/travis/build/NetCommons3/NetCommons3/vendors/phpdocumentor/phpdocumentor/src/phpDocumentor/Console/Output/Output.php:59
-    8.5405   39045456  12. phpDocumentor\Transformer\Transformer->execute() /home/travis/build/NetCommons3/NetCommons3/vendors/phpdocumentor/phpdocumentor/src/phpDocumentor/Console/Output/Output.php:59
-    8.5419   39067320  13. phpDocumentor\Transformer\Transformer->transformProject() /home/travis/build/NetCommons3/NetCommons3/vendors/phpdocumentor/phpdocumentor/src/phpDocumentor/Transformer/Transformer.php:141
-    9.1178   46034888  14. phpDocumentor\Transformer\Transformer->applyTransformationToProject() /home/travis/build/NetCommons3/NetCommons3/vendors/phpdocumentor/phpdocumentor/src/phpDocumentor/Transformer/Transformer.php:275
-    9.1181   46035240  15. phpDocumentor\Plugin\Twig\Writer\Twig->transform() /home/travis/build/NetCommons3/NetCommons3/vendors/phpdocumentor/phpdocumentor/src/phpDocumentor/Transformer/Transformer.php:312
-   15.0030   47097280  16. Twig_Environment->render() /home/travis/build/NetCommons3/NetCommons3/vendors/phpdocumentor/phpdocumentor/src/phpDocumentor/Plugin/Twig/Writer/Twig.php:116
-   15.0035   47112256  17. Twig_Template->render() /home/travis/build/NetCommons3/NetCommons3/vendors/twig/twig/lib/Twig/Environment.php:362
-   15.0035   47128880  18. Twig_Template->display() /home/travis/build/NetCommons3/NetCommons3/vendors/twig/twig/lib/Twig/Template.php:411
-   15.0036   47130320  19. Twig_Template->displayWithErrorHandling() /home/travis/build/NetCommons3/NetCommons3/vendors/twig/twig/lib/Twig/Template.php:403
-   15.0036   47130320  20. __TwigTemplate_2f7c8cbfec8aa9bcd362079e18b7df59770bd4d1473a22ba0891437d1f9cef37->doDisplay() /home/travis/build/NetCommons3/NetCommons3/vendors/twig/twig/lib/Twig/Template.php:432
-   15.0036   47130856  21. Twig_Template->display() /tmp/phpdoc-twig-cache/5f/5fa4a32796a70ee9b7b0a99b27a8e94022e93e3b637e2b53042c1a46dc71d0f7.php:26
-   15.0037   47132080  22. Twig_Template->displayWithErrorHandling() /home/travis/build/NetCommons3/NetCommons3/vendors/twig/twig/lib/Twig/Template.php:403
-   15.0037   47132080  23. __TwigTemplate_1e1a40415083917c3cd2c2ad808383ee9c8021d3b80772852dc67e54845d6404->doDisplay() /home/travis/build/NetCommons3/NetCommons3/vendors/twig/twig/lib/Twig/Template.php:432
-   15.0396   47313552  24. Twig_Template->displayBlock() /tmp/phpdoc-twig-cache/53/53a63c381b9affdc5ed3d55cca20acd1195915a905f7d95744851ed4b04f62d9.php:312
-   15.0396   47313696  25. __TwigTemplate_2f7c8cbfec8aa9bcd362079e18b7df59770bd4d1473a22ba0891437d1f9cef37->block_content() /home/travis/build/NetCommons3/NetCommons3/vendors/twig/twig/lib/Twig/Template.php:215
-   15.0667   47339592  26. Twig_Template->displayBlock() /tmp/phpdoc-twig-cache/5f/5fa4a32796a70ee9b7b0a99b27a8e94022e93e3b637e2b53042c1a46dc71d0f7.php:776
-   15.0667   47339752  27. __TwigTemplate_0d92786f805f2d213d572d37d451a0e8620e8b9ef6aa2b264a0639a4b1055411->block_property() /home/travis/build/NetCommons3/NetCommons3/vendors/twig/twig/lib/Twig/Template.php:215
-   15.0671   47471208  28. Twig_Template->getAttribute() /tmp/phpdoc-twig-cache/66/66440f1bb2926fd6afe9052c9a2b912a5064f101c3ad0eb111766612238b97bc.php:73
-   15.0671   47471856  29. phpDocumentor\Descriptor\Collection->get() /home/travis/build/NetCommons3/NetCommons3/vendors/twig/twig/lib/Twig/Template.php:672
-
-                            </article>
+                                            </article>
         </div>
         <aside class="span4 detailsbar">
             <h1><i class="icon-arrow-down"></i></h1>
@@ -627,6 +561,58 @@ Call Stack:
                 <a href="#source-view" role="button" class="pull-right btn" data-toggle="modal" style="font-size: 1.1em; padding: 9px 14px"><i class="icon-code"></i></a>
                 <pre class="signature" style="margin-right: 54px;">delete() : void</pre>
                 <p><em>delete method</em></p>
+                
+
+                
+                
+                				
+                            </article>
+        </div>
+        <aside class="span4 detailsbar">
+            <h1><i class="icon-arrow-down"></i></h1>
+                                                            <dl>
+                                                                            </dl>
+            <h2>Tags</h2>
+            <table class="table table-condensed">
+                                    <tr><td colspan="2"><em>None found</em></td></tr>
+                            </table>
+        </aside>
+    </div>
+
+                                    <div class="row-fluid">
+        <div class="span8 content class">
+            <a id="method_delete_disclaimer" name="method_delete_disclaimer" class="anchor"></a>
+            <article class="method">
+                <h3 class="public ">delete_disclaimer()</h3>
+                <a href="#source-view" role="button" class="pull-right btn" data-toggle="modal" style="font-size: 1.1em; padding: 9px 14px"><i class="icon-code"></i></a>
+                <pre class="signature" style="margin-right: 54px;">delete_disclaimer() : void</pre>
+                <p><em>退会規約 method</em></p>
+                
+
+                
+                
+                				
+                            </article>
+        </div>
+        <aside class="span4 detailsbar">
+            <h1><i class="icon-arrow-down"></i></h1>
+                                                            <dl>
+                                                                            </dl>
+            <h2>Tags</h2>
+            <table class="table table-condensed">
+                                    <tr><td colspan="2"><em>None found</em></td></tr>
+                            </table>
+        </aside>
+    </div>
+
+                                    <div class="row-fluid">
+        <div class="span8 content class">
+            <a id="method_delete_confirm" name="method_delete_confirm" class="anchor"></a>
+            <article class="method">
+                <h3 class="public ">delete_confirm()</h3>
+                <a href="#source-view" role="button" class="pull-right btn" data-toggle="modal" style="font-size: 1.1em; padding: 9px 14px"><i class="icon-code"></i></a>
+                <pre class="signature" style="margin-right: 54px;">delete_confirm() : void</pre>
+                <p><em>退会直前確認 method</em></p>
                 
 
                 
@@ -783,6 +769,34 @@ Controller::beforeFilter()のあと、アクション前に実行する</em></p>
         </aside>
     </div>
 
+                                    <div class="row-fluid">
+        <div class="span8 content class">
+            <a id="method___useCancel" name="method___useCancel" class="anchor"></a>
+            <article class="method">
+                <h3 class="private ">__useCancel()</h3>
+                <a href="#source-view" role="button" class="pull-right btn" data-toggle="modal" style="font-size: 1.1em; padding: 9px 14px"><i class="icon-code"></i></a>
+                <pre class="signature" style="margin-right: 54px;">__useCancel() : boolean</pre>
+                <p><em>退会処理が可能かどうかチェック</em></p>
+                
+
+                
+                
+                                    <h4>Returns</h4>
+                    boolean
+                                    				
+                            </article>
+        </div>
+        <aside class="span4 detailsbar">
+            <h1><i class="icon-arrow-down"></i></h1>
+                                                            <dl>
+                                                                            </dl>
+            <h2>Tags</h2>
+            <table class="table table-condensed">
+                                    <tr><td colspan="2"><em>None found</em></td></tr>
+                            </table>
+        </aside>
+    </div>
+
                                     </div>
     </section>
 
@@ -832,7 +846,7 @@ Controller::beforeFilter()のあと、アクション前に実行する</em></p>
                 <section class="span10 offset1">
                     <hr />
                     Documentation is powered by <a href="http://www.phpdoc.org/">phpDocumentor </a> and authored
-                    on April 19th, 2017 at 13:12.
+                    on April 24th, 2017 at 07:00.
                 </section>
             </section>
         </section>
