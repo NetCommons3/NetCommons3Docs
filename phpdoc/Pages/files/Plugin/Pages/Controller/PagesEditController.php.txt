@@ -454,6 +454,7 @@ class PagesEditController extends PagesAppController {
 			$treeList[] = $pageId;
 
 			$page = Hash::get($pages, $pageId);
+
 			$parentId = (int)$page['Page']['parent_id'];
 			$page['Page']['parent_id'] = (string)$parentId;
 			$page['Page']['type'] = '';
@@ -496,12 +497,33 @@ class PagesEditController extends PagesAppController {
 				'PagesLanguage' => array(
 					'name' => $page['PagesLanguage']['name']
 				),
+				'pageNameCss' => $this->__getPageNameCss($page, $pageId),
 			);
 		}
 
 		$this->set('parentList', $parentList);
 		$this->set('treeList', $treeList);
 		$this->set('pages', $pages);
+	}
+
+/**
+ * ページの識別する帯の取得
+ *
+ * @param array $page ページデータ
+ * @param int $pageId ページID
+ * @return array
+ */
+	private function __getPageNameCss($page, $pageId) {
+		if (Hash::get($page, 'Room.page_id_top') === (string)$pageId &&
+				Hash::get($page, 'Page.room_id') !== Space::getRoomIdRoot(Space::PUBLIC_SPACE_ID)) {
+			$pageNameCss = 'page-tree-room';
+		} elseif (Hash::get($page, 'ChildPage')) {
+			$pageNameCss = 'page-tree-node-page';
+		} else {
+			$pageNameCss = 'page-tree-leaf-page';
+		}
+
+		return $pageNameCss;
 	}
 
 /**
