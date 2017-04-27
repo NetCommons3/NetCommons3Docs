@@ -136,10 +136,10 @@
                                 <div class="accordion" style="margin-bottom: 0">
         <div class="accordion-group">
             <div class="accordion-heading">
-                                    <a class="accordion-toggle " data-toggle="collapse" data-target="#namespace-986816124"></a>
+                                    <a class="accordion-toggle " data-toggle="collapse" data-target="#namespace-1283379753"></a>
                                 <a href="../namespaces/default.html" style="margin-left: 30px; padding-left: 0">\</a>
             </div>
-            <div id="namespace-986816124" class="accordion-body collapse in">
+            <div id="namespace-1283379753" class="accordion-body collapse in">
                 <div class="accordion-inner">
 
                     
@@ -262,6 +262,7 @@ will inherit them.</p>
                                                                     <a href="../classes/MenuFormHelper.html#method_beforeRender" class="">beforeRender()</a><br />
                                                                     <a href="../classes/MenuFormHelper.html#method_checkboxMenuFramesRoom" class="">checkboxMenuFramesRoom()</a><br />
                                                                     <a href="../classes/MenuFormHelper.html#method_checkboxMenuFramesPage" class="">checkboxMenuFramesPage()</a><br />
+                                                                    <a href="../classes/MenuFormHelper.html#method_getRecursiveChildPageId" class="">getRecursiveChildPageId()</a><br />
                                                             </section>
                             <section class="span4">
                                                                     <a href="../classes/MenuFormHelper.html#property_parentPageIds" class="">$parentPageIds</a><br />
@@ -273,7 +274,8 @@ will inherit them.</p>
                         </section>
                         <section class="row-fluid protected">
                             <section class="span4">
-                                                                    <em>No protected methods found</em>
+                                                                    <a href="../classes/MenuFormHelper.html#method__getRoomPrefix" class="">_getRoomPrefix()</a><br />
+                                                                    <a href="../classes/MenuFormHelper.html#method__getPageNameCss" class="">_getPageNameCss()</a><br />
                                                             </section>
                             <section class="span4">
                                                                     <em>No protected properties found</em>
@@ -430,7 +432,7 @@ will inherit them.</p>
             <article class="method">
                 <h3 class="public ">checkboxMenuFramesRoom()</h3>
                 <a href="#source-view" role="button" class="pull-right btn" data-toggle="modal" style="font-size: 1.1em; padding: 9px 14px"><i class="icon-code"></i></a>
-                <pre class="signature" style="margin-right: 54px;">checkboxMenuFramesRoom(integer  <span class="argument">$roomId</span>, array  <span class="argument">$room</span>) : string</pre>
+                <pre class="signature" style="margin-right: 54px;">checkboxMenuFramesRoom(integer  <span class="argument">$roomId</span>, array  <span class="argument">$room</span>, integer  <span class="argument">$pageId</span>) : string</pre>
                 <p><em>MenuFramesRoomのチェックボックス表示</em></p>
                 
 
@@ -445,6 +447,11 @@ will inherit them.</p>
                                 <td>array</td>
                                 <td>$room </td>
                                 <td><p>ルームデータ</p></td>
+                            </tr>
+                                                    <tr>
+                                <td>integer</td>
+                                <td>$pageId </td>
+                                <td><p>Page.id</p></td>
                             </tr>
                                             </table>
                 
@@ -472,7 +479,7 @@ will inherit them.</p>
             <article class="method">
                 <h3 class="public ">checkboxMenuFramesPage()</h3>
                 <a href="#source-view" role="button" class="pull-right btn" data-toggle="modal" style="font-size: 1.1em; padding: 9px 14px"><i class="icon-code"></i></a>
-                <pre class="signature" style="margin-right: 54px;">checkboxMenuFramesPage(integer  <span class="argument">$roomId</span>, array  <span class="argument">$room</span>, integer  <span class="argument">$pageId</span>, array  <span class="argument">$menu</span>) : string</pre>
+                <pre class="signature" style="margin-right: 54px;">checkboxMenuFramesPage(integer  <span class="argument">$roomId</span>, array  <span class="argument">$room</span>, integer  <span class="argument">$pageId</span>, array  <span class="argument">$menu</span>, integer  <span class="argument">$rootRoomId</span>, array  <span class="argument">$rootRoom</span>) : string</pre>
                 <p><em>MenuFramesPageのチェックボックス表示</em></p>
                 
 
@@ -481,7 +488,7 @@ will inherit them.</p>
                                                     <tr>
                                 <td>integer</td>
                                 <td>$roomId </td>
-                                <td><p>Room.id</p></td>
+                                <td><p>ルームID</p></td>
                             </tr>
                                                     <tr>
                                 <td>array</td>
@@ -491,12 +498,22 @@ will inherit them.</p>
                                                     <tr>
                                 <td>integer</td>
                                 <td>$pageId </td>
-                                <td><p>Page.id</p></td>
+                                <td><p>ページID</p></td>
                             </tr>
                                                     <tr>
                                 <td>array</td>
                                 <td>$menu </td>
                                 <td><p>メニューデータ</p></td>
+                            </tr>
+                                                    <tr>
+                                <td>integer</td>
+                                <td>$rootRoomId </td>
+                                <td><p>ルートのルームID</p></td>
+                            </tr>
+                                                    <tr>
+                                <td>array</td>
+                                <td>$rootRoom </td>
+                                <td><p>ルートのルームデータ</p></td>
                             </tr>
                                             </table>
                 
@@ -518,7 +535,131 @@ will inherit them.</p>
         </aside>
     </div>
 
-                                                                    </div>
+                                    <div class="row-fluid">
+        <div class="span8 content class">
+            <a id="method_getRecursiveChildPageId" name="method_getRecursiveChildPageId" class="anchor"></a>
+            <article class="method">
+                <h3 class="public ">getRecursiveChildPageId()</h3>
+                <a href="#source-view" role="button" class="pull-right btn" data-toggle="modal" style="font-size: 1.1em; padding: 9px 14px"><i class="icon-code"></i></a>
+                <pre class="signature" style="margin-right: 54px;">getRecursiveChildPageId(integer  <span class="argument">$pageId</span>, array  <span class="argument">$result</span>) : string</pre>
+                <p><em>ChildPageのIdを取得する(再帰的に)</em></p>
+                
+
+                                    <h4>Parameters</h4>
+                    <table class="table table-condensed table-hover">
+                                                    <tr>
+                                <td>integer</td>
+                                <td>$pageId </td>
+                                <td><p>Page.id</p></td>
+                            </tr>
+                                                    <tr>
+                                <td>array</td>
+                                <td>$result </td>
+                                <td><p>再帰の結果配列</p></td>
+                            </tr>
+                                            </table>
+                
+                
+                                    <h4>Returns</h4>
+                    string
+                                            &mdash; <p>HTMLタグ</p>
+                                    				
+                            </article>
+        </div>
+        <aside class="span4 detailsbar">
+            <h1><i class="icon-arrow-down"></i></h1>
+                                                            <dl>
+                                                                            </dl>
+            <h2>Tags</h2>
+            <table class="table table-condensed">
+                                    <tr><td colspan="2"><em>None found</em></td></tr>
+                            </table>
+        </aside>
+    </div>
+
+                                                    <div class="row-fluid">
+        <div class="span8 content class">
+            <a id="method__getRoomPrefix" name="method__getRoomPrefix" class="anchor"></a>
+            <article class="method">
+                <h3 class="protected ">_getRoomPrefix()</h3>
+                <a href="#source-view" role="button" class="pull-right btn" data-toggle="modal" style="font-size: 1.1em; padding: 9px 14px"><i class="icon-code"></i></a>
+                <pre class="signature" style="margin-right: 54px;">_getRoomPrefix(integer  <span class="argument">$roomId</span>, array  <span class="argument">$room</span>) : array</pre>
+                <p><em>ルームチェックボックスのPrefixを返す</em></p>
+                
+
+                                    <h4>Parameters</h4>
+                    <table class="table table-condensed table-hover">
+                                                    <tr>
+                                <td>integer</td>
+                                <td>$roomId </td>
+                                <td><p>Room.id</p></td>
+                            </tr>
+                                                    <tr>
+                                <td>array</td>
+                                <td>$room </td>
+                                <td><p>ルームデータ</p></td>
+                            </tr>
+                                            </table>
+                
+                
+                                    <h4>Returns</h4>
+                    array
+                                    				
+                            </article>
+        </div>
+        <aside class="span4 detailsbar">
+            <h1><i class="icon-arrow-down"></i></h1>
+                                                            <dl>
+                                                                            </dl>
+            <h2>Tags</h2>
+            <table class="table table-condensed">
+                                    <tr><td colspan="2"><em>None found</em></td></tr>
+                            </table>
+        </aside>
+    </div>
+
+                                    <div class="row-fluid">
+        <div class="span8 content class">
+            <a id="method__getPageNameCss" name="method__getPageNameCss" class="anchor"></a>
+            <article class="method">
+                <h3 class="protected ">_getPageNameCss()</h3>
+                <a href="#source-view" role="button" class="pull-right btn" data-toggle="modal" style="font-size: 1.1em; padding: 9px 14px"><i class="icon-code"></i></a>
+                <pre class="signature" style="margin-right: 54px;">_getPageNameCss(array  <span class="argument">$room</span>, integer  <span class="argument">$pageId</span>) : array</pre>
+                <p><em>ページの識別する帯の取得</em></p>
+                
+
+                                    <h4>Parameters</h4>
+                    <table class="table table-condensed table-hover">
+                                                    <tr>
+                                <td>array</td>
+                                <td>$room </td>
+                                <td><p>ルームデータ</p></td>
+                            </tr>
+                                                    <tr>
+                                <td>integer</td>
+                                <td>$pageId </td>
+                                <td><p>ページID</p></td>
+                            </tr>
+                                            </table>
+                
+                
+                                    <h4>Returns</h4>
+                    array
+                                    				
+                            </article>
+        </div>
+        <aside class="span4 detailsbar">
+            <h1><i class="icon-arrow-down"></i></h1>
+                                                            <dl>
+                                                                            </dl>
+            <h2>Tags</h2>
+            <table class="table table-condensed">
+                                    <tr><td colspan="2"><em>None found</em></td></tr>
+                            </table>
+        </aside>
+    </div>
+
+                                                    </div>
     </section>
 
     <div id="source-view" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="source-view-label" aria-hidden="true">
@@ -567,7 +708,7 @@ will inherit them.</p>
                 <section class="span10 offset1">
                     <hr />
                     Documentation is powered by <a href="http://www.phpdoc.org/">phpDocumentor </a> and authored
-                    on April 18th, 2017 at 14:08.
+                    on April 27th, 2017 at 03:09.
                 </section>
             </section>
         </section>
