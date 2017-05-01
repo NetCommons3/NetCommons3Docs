@@ -55,10 +55,17 @@ class PluginsRoomsController extends RoomsAppController {
 	public function edit() {
 		if ($this->request->is('put')) {
 			//登録処理
-			$result = $this->PluginsRoom->savePluginsRoomsByRoomId(
-				$this->request->data['Room']['id'],
-				$this->request->data['PluginsRoom']['plugin_key']
-			);
+			if ($this->viewVars['activeRoomId'] === Space::getRoomIdRoot(Space::PRIVATE_SPACE_ID)) {
+				$result = $this->PluginsRoom->savePluginsRoomsByPrivateRoomId(
+					$this->request->data['Room']['id'],
+					$this->request->data['PluginsRoom']['plugin_key']
+				);
+			} else {
+				$result = $this->PluginsRoom->savePluginsRoomsByRoomId(
+					$this->request->data['Room']['id'],
+					$this->request->data['PluginsRoom']['plugin_key']
+				);
+			}
 			if ($result) {
 				$this->NetCommons->setFlashNotification(
 					__d('net_commons', 'Successfully saved.'), array('class' => 'success')

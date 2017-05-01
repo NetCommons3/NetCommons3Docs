@@ -66,6 +66,13 @@ class RoomsRolesUsersController extends RoomsAppController {
 		}
 		parent::beforeFilter();
 		$this->Security->unlockedActions = array('role_room_user');
+
+		$roomId = $this->viewVars['activeRoomId'];
+		$communityRoomId = Space::getRoomIdRoot(Space::COMMUNITY_SPACE_ID);
+		$privateRoomId = Space::getRoomIdRoot(Space::PRIVATE_SPACE_ID);
+		if (in_array($roomId, [$communityRoomId, $privateRoomId], true)) {
+			return $this->throwBadRequest();
+		}
 	}
 
 /**

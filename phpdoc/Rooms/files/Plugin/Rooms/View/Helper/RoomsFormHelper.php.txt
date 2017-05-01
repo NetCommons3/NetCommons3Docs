@@ -164,7 +164,9 @@ class RoomsFormHelper extends AppHelper {
 		$output .= '</li>';
 
 		$communityRoomId = Space::getRoomIdRoot(Space::COMMUNITY_SPACE_ID);
-		if (Hash::get($this->_View->request->data, 'Room.id') !== $communityRoomId) {
+		$privateRoomId = Space::getRoomIdRoot(Space::PRIVATE_SPACE_ID);
+		$noRoomsRolesUsers = [$privateRoomId, $communityRoomId];
+		if (! in_array(Hash::get($this->_View->request->data, 'Room.id'), $noRoomsRolesUsers, true)) {
 			if ($this->_View->params['controller'] === 'rooms_roles_users') {
 				$class = 'active';
 			} else {
@@ -273,6 +275,22 @@ class RoomsFormHelper extends AppHelper {
 				),
 				array('iconSize' => 'btn-xs space-edit-rooms-roles-users')
 			);
+		} elseif ($spaceId === Space::PRIVATE_SPACE_ID) {
+			$output .= sprintf(
+				__d('rooms', 'The setting of %s space.'),
+				$this->Rooms->roomName($space)
+			);
+
+			$button .= $this->LinkButton->edit(
+				__d('rooms', 'Select the plugins to join'),
+				array(
+					'controller' => 'plugins_rooms',
+					'action' => 'edit',
+					'key' => $space['Space']['id'],
+					'key2' => $space['Room']['id']
+				),
+				array('iconSize' => 'btn-xs space-edit-rooms-roles-users')
+			);
 		} else {
 			$output .= sprintf(
 				__d('rooms', 'The setting of %s space.'),
@@ -362,7 +380,7 @@ class RoomsFormHelper extends AppHelper {
 			$roomNames = Hash::extract($this->_View->viewVars['parentRooms'], $pathName);
 		}
 		if ($this->_View->request->params['controller'] === 'room_add') {
-			if (count($roomNames) === 1) {
+			if (! $roomNames) {
 				$label = __d('rooms', 'Open for all members');
 			} else {
 				$label = sprintf(

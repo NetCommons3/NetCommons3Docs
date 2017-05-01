@@ -62,19 +62,21 @@ class RoomsHelper extends AppHelper {
 	public function roomsNavi($activeSpaceId) {
 		$output = '';
 
+		$roomNames = [];
+
 		if (isset($this->_View->viewVars['parentRooms'])) {
 			$pathName = '{n}.RoomsLanguage.{n}[language_id=' . Current::read('Language.id') . '].name';
 			$roomNames = Hash::extract($this->_View->viewVars['parentRooms'], $pathName);
 		}
 
-		if (isset($roomNames)) {
-			array_shift($roomNames);
+		if ($roomNames) {
+			//array_shift($roomNames);
 			$output = implode(self::ROOM_NAME_PAUSE, array_map('h', $roomNames));
 		} else {
 			$output = $this->roomName($this->_View->viewVars['spaces'][$activeSpaceId]);
 		}
 		if ($this->_View->request->params['controller'] === 'room_add') {
-			if (count($roomNames) === 1) {
+			if (! $roomNames) {
 				$output .= self::ROOM_NAME_PAUSE . __d('rooms', 'Add new room');
 			} else {
 				$output .= self::ROOM_NAME_PAUSE . __d('rooms', 'Add new subroom');

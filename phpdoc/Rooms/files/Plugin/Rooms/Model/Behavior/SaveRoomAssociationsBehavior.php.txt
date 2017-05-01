@@ -331,8 +331,8 @@ class SaveRoomAssociationsBehavior extends ModelBehavior {
 				'slug' => $slug,
 				'permalink' => $slug,
 				'room_id' => $data['Room']['id'],
-				'root_id' => $model->getParentPageId($data),
-				'parent_id' => $model->getParentPageId($data)
+				'root_id' => $this->_getParentPageId($model, $data),
+				'parent_id' => $this->_getParentPageId($model, $data)
 			),
 			//'PagesLanguage' => array(
 			//	'language_id' => Current::read('Language.id'),
@@ -374,7 +374,7 @@ class SaveRoomAssociationsBehavior extends ModelBehavior {
  * @param array $page ページデータ
  * @return string
  */
-	public function getParentPageId(Model $model, $page) {
+	protected function _getParentPageId(Model $model, $page) {
 		$model->loadModels(['Room' => 'Rooms.Room']);
 
 		if (Hash::get($page, 'Room.parent_id') &&
@@ -530,6 +530,106 @@ class SaveRoomAssociationsBehavior extends ModelBehavior {
 		);
 
 		return $rolesRoomsUsers;
+	}
+
+/**
+ * ルームに対応したのページ登録処理
+ *
+ * 呼び出しもとでトランザクションを開始する
+ *
+ * @param Model $model 呼び出し元のモデル
+ * @param array $room received post data
+ * @return bool True on success, false on validation errors
+ * @throws InternalErrorException
+ */
+	public function savePageLanguage(Model $model, $room) {
+		$model->loadModels([
+			'PagesLanguage' => 'Pages.PagesLanguage',
+		]);
+
+		$roomLanguages = Hash::get($room, 'RoomsLanguage', array());
+		foreach ($roomLanguages as $roomLanguage) {
+			$pageLanguage = $model->PagesLanguage->find('first', array(
+				'recursive' => -1,
+				'fields' => array('id', 'page_id', 'language_id'),
+				'conditions' => array(
+					'page_id' => Hash::get($room, 'Room.page_id_top'),
+					'language_id' => $roomLanguage['language_id'],
+				)
+			));
+			if (! $pageLanguage) {
+				$pageLanguage['PagesLanguage'] = array(
+					'id' => null,
+					'page_id' => Hash::get($room, 'Room.page_id_top'),
+					'language_id' => $roomLanguage['language_id'],
+					'is_origin' => ($roomLanguage['language_id'] == Current::read('Language.id'))
+				);
+			}
+			$pageLanguage['PagesLanguage']['name'] = $roomLanguage['name'];
+
+			$model->PagesLanguage->Behaviors->disable('M17n');
+			$model->PagesLanguage->create(false);
+			$pageLanguage = $model->PagesLanguage->save($pageLanguage);
+			if (! $pageLanguage) {
+				throw new InternalErrorException(__d('net_commons', 'Internal Server Error'));
+			}
+			$model->PagesLanguage->Behaviors->enable('M17n');
+		}
+
+		return true;
+	}
+
+/**
+ * プライベートルームの登録処理
+ *
+ * 呼び出しもとでトランザクションを開始する
+ *
+ * @param Model $model 呼び出し元のモデル
+ * @param array $room received post data
+ * @return bool True on success, false on validation errors
+ * @throws InternalErrorException
+ */
+	public function savePrivateSpaceRoom(Model $model, $room) {
+		$model->loadModels([
+			'PagesLanguage' => 'Pages.PagesLanguage',
+			'RoomsLanguage' => 'Rooms.RoomsLanguage',
+		]);
+
+		$db = $model->getDataSource();
+
+		$roomId = Hash::get($room, 'Room.id');
+
+		//プライベートのIDを取得
+		$rooms = $model->Room->children($roomId, false, ['Room.id', 'Room.page_id_top'], 'Room.rght');
+		$roomIds = Hash::extract($rooms, '{n}.Room.id');
+		$pageIds = Hash::extract($rooms, '{n}.Room.page_id_top');
+
+		$roomLanguages = Hash::get($room, 'RoomsLanguage', array());
+		foreach ($roomLanguages as $roomLanguage) {
+			$update = array(
+				'RoomsLanguage.name' => $db->value($roomLanguage['name'], 'string'),
+			);
+			$conditions = array(
+				'RoomsLanguage.language_id' => $roomLanguage['language_id'],
+				'RoomsLanguage.room_id' => $roomIds
+			);
+			if (! $model->RoomsLanguage->updateAll($update, $conditions)) {
+				throw new InternalErrorException(__d('net_commons', 'Internal Server Error'));
+			}
+
+			$update = array(
+				'PagesLanguage.name' => $db->value($roomLanguage['name'], 'string'),
+			);
+			$conditions = array(
+				'PagesLanguage.language_id' => $roomLanguage['language_id'],
+				'PagesLanguage.page_id' => $pageIds
+			);
+			if (! $model->PagesLanguage->updateAll($update, $conditions)) {
+				throw new InternalErrorException(__d('net_commons', 'Internal Server Error'));
+			}
+		}
+
+		return true;
 	}
 
 }

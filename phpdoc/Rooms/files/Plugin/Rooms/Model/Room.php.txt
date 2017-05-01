@@ -490,34 +490,11 @@ class Room extends RoomsAppModel {
 			}
 
 			if (Hash::get($room, 'Room.page_id_top')) {
-				$roomLanguages = Hash::get($room, 'RoomsLanguage', array());
-				foreach ($roomLanguages as $roomLanguage) {
-					$pageLanguage = $this->PagesLanguage->find('first', array(
-						'recursive' => -1,
-						'fields' => array('id', 'page_id', 'language_id'),
-						'conditions' => array(
-							'page_id' => Hash::get($room, 'Room.page_id_top'),
-							'language_id' => $roomLanguage['language_id'],
-						)
-					));
-					if (! $pageLanguage) {
-						$pageLanguage['PagesLanguage'] = array(
-							'id' => null,
-							'page_id' => Hash::get($room, 'Room.page_id_top'),
-							'language_id' => $roomLanguage['language_id'],
-							'is_origin' => ($roomLanguage['language_id'] == Current::read('Language.id'))
-						);
-					}
-					$pageLanguage['PagesLanguage']['name'] = $roomLanguage['name'];
+				$this->savePageLanguage($room);
+			}
 
-					$this->PagesLanguage->Behaviors->disable('M17n');
-					$this->PagesLanguage->create(false);
-					$pageLanguage = $this->PagesLanguage->save($pageLanguage);
-					if (! $pageLanguage) {
-						throw new InternalErrorException(__d('net_commons', 'Internal Server Error'));
-					}
-					$this->PagesLanguage->Behaviors->enable('M17n');
-				}
+			if (Hash::get($room, 'Room.id') === Space::getRoomIdRoot(Space::PRIVATE_SPACE_ID)) {
+				$this->savePrivateSpaceRoom($room);
 			}
 
 			//トランザクションCommit

@@ -10,6 +10,7 @@
  */
 
 App::uses('AppController', 'Controller');
+App::uses('Space', 'Rooms.Model');
 
 /**
  * RoomsApp Controller
@@ -47,6 +48,7 @@ class RoomsAppController extends AppController {
  */
 	public $uses = array(
 		'Rooms.Room',
+		'Rooms.Space',
 	);
 
 /**
@@ -92,25 +94,62 @@ class RoomsAppController extends AppController {
 
 		//ルームデータチェック＆セット
 		if ($this->params['action'] !== 'index') {
-			if ($this->Session->read('RoomAdd.Room.id')) {
-				$roomId = $this->Session->read('RoomAdd.Room.parent_id');
-			} elseif ($this->request->is('post')) {
-				$roomId = Hash::get($this->data, 'Room.parent_id');
-			} elseif ($this->request->is('put') || $this->request->is('delete')) {
-				$roomId = Hash::get($this->data, 'Room.id');
-			} else {
-				$roomId = Hash::get($this->params['pass'], '1');
-			}
-			$room = $this->Room->findById($roomId);
-			if (! $room) {
-				return $this->setAction('throwBadRequest');
-			}
-			$this->set('room', $room);
-			$this->set('activeRoomId', $roomId);
-			$this->set('activeSpaceId', $room['Space']['id']);
+			//ルームデータのセット
+			$this->_setRoom();
 
+			//親ルームデータのセット
+			$this->_setParentRooms();
+		}
+	}
+
+/**
+ * ルームデータをセットする
+ *
+ * @return void
+ */
+	protected function _setRoom() {
+		if ($this->Session->read('RoomAdd.Room.id')) {
+			$roomId = $this->Session->read('RoomAdd.Room.parent_id');
+		} elseif ($this->request->is('post')) {
+			$roomId = Hash::get($this->data, 'Room.parent_id');
+		} elseif ($this->request->is('put') || $this->request->is('delete')) {
+			$roomId = Hash::get($this->data, 'Room.id');
+		} else {
+			$roomId = Hash::get($this->params['pass'], '1');
+		}
+		$room = $this->Room->findById($roomId);
+		if (! $room) {
+			return $this->setAction('throwBadRequest');
+		}
+		$this->set('room', $room);
+		$this->set('activeRoomId', $roomId);
+		$this->set('activeSpaceId', $room['Space']['id']);
+	}
+
+/**
+ * 親ルームデータをセットする
+ *
+ * @return void
+ */
+	protected function _setParentRooms() {
+		$roomId = $this->viewVars['activeRoomId'];
+
+		$spaceRoomIds = $this->Space->find('list', [
+			'recursive' => -1,
+			'fields' => ['id', 'room_id_root']
+		]);
+		if (! in_array($roomId, $spaceRoomIds, true)) {
 			$parentRooms = $this->Room->getPath($roomId, null, 1);
+			//サイト全体のルームIDを削除する
+			if (Hash::get($parentRooms, '0.Space.id') === Space::WHOLE_SITE_ID) {
+				unset($parentRooms[0]);
+			}
+			//if (in_array(Hash::get($parentRooms, '1.Room.id'), $spaceRoomIds, true)) {
+			//	unset($parentRooms[1]);
+			//}
 			$this->set('parentRooms', $parentRooms);
+		} else {
+			$this->set('parentRooms', null);
 		}
 	}
 
