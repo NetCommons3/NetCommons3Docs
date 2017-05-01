@@ -533,6 +533,25 @@ class SaveRoomAssociationsBehavior extends ModelBehavior {
 	}
 
 /**
+ * Room.page_id_topに対するページ名を編集できるかどうか
+ * スペースのroom_id_rootのroom_idに対しては編集不可とする
+ *
+ * @param Model $model 呼び出し前のモデル
+ * @param array $room ルームデータ
+ * @return string
+ */
+	protected function _hasEditablePage(Model $model, $room) {
+		$model->loadModels([
+			'Room' => 'Rooms.Room'
+		]);
+
+		$spaces = $model->getSpaces();
+		$roomIds = Hash::extract($spaces, '{n}.Space.room_id_root');
+
+		return !(bool)in_array($room['Room']['id'], $roomIds, true);
+	}
+
+/**
  * ルームに対応したのページ登録処理
  *
  * 呼び出しもとでトランザクションを開始する
@@ -546,6 +565,10 @@ class SaveRoomAssociationsBehavior extends ModelBehavior {
 		$model->loadModels([
 			'PagesLanguage' => 'Pages.PagesLanguage',
 		]);
+
+		if (! $this->_hasEditablePage($model, $room)) {
+			return true;
+		}
 
 		$roomLanguages = Hash::get($room, 'RoomsLanguage', array());
 		foreach ($roomLanguages as $roomLanguage) {
