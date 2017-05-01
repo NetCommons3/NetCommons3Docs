@@ -136,10 +136,10 @@
                                 <div class="accordion" style="margin-bottom: 0">
         <div class="accordion-group">
             <div class="accordion-heading">
-                                    <a class="accordion-toggle " data-toggle="collapse" data-target="#namespace-955416817"></a>
+                                    <a class="accordion-toggle " data-toggle="collapse" data-target="#namespace-1042305426"></a>
                                 <a href="../namespaces/default.html" style="margin-left: 30px; padding-left: 0">\</a>
             </div>
-            <div id="namespace-955416817" class="accordion-body collapse in">
+            <div id="namespace-1042305426" class="accordion-body collapse in">
                 <div class="accordion-inner">
 
                     
@@ -280,6 +280,8 @@
                                                                     <a href="../classes/SavePageBehavior.html#method_savePage" class="">savePage()</a><br />
                                                                     <a href="../classes/SavePageBehavior.html#method_saveTheme" class="">saveTheme()</a><br />
                                                                     <a href="../classes/SavePageBehavior.html#method_saveMove" class="">saveMove()</a><br />
+                                                                    <a href="../classes/SavePageBehavior.html#method_updateRoomName" class="">updateRoomName()</a><br />
+                                                                    <a href="../classes/SavePageBehavior.html#method_hasEditableRoomNameByPage" class="">hasEditableRoomNameByPage()</a><br />
                                                             </section>
                             <section class="span4">
                                                                     <em>No public properties found</em>
@@ -640,6 +642,100 @@ Should be set to false if database/table does not support transactions.</li>
         </aside>
     </div>
 
+                                    <div class="row-fluid">
+        <div class="span8 content class">
+            <a id="method_updateRoomName" name="method_updateRoomName" class="anchor"></a>
+            <article class="method">
+                <h3 class="public ">updateRoomName()</h3>
+                <a href="#source-view" role="button" class="pull-right btn" data-toggle="modal" style="font-size: 1.1em; padding: 9px 14px"><i class="icon-code"></i></a>
+                <pre class="signature" style="margin-right: 54px;">updateRoomName(\Model  <span class="argument">$model</span>, array  <span class="argument">$page</span>) : boolean</pre>
+                <p><em>page_id_topに対するルーム名を更新する
+ただし、page_id_topがSpace.page_id_topであれば、更新しない</em></p>
+                
+
+                                    <h4>Parameters</h4>
+                    <table class="table table-condensed table-hover">
+                                                    <tr>
+                                <td>\Model</td>
+                                <td>$model </td>
+                                <td><p>Model using this behavior</p></td>
+                            </tr>
+                                                    <tr>
+                                <td>array</td>
+                                <td>$page </td>
+                                <td><p>request data</p></td>
+                            </tr>
+                                            </table>
+                
+                                    <h4>Throws</h4>
+                    <dl>
+                                                    <dt>\InternalErrorException</dt>
+                            <dd></dd>
+                                                                    </dl>
+                
+                                    <h4>Returns</h4>
+                    boolean
+                                    				
+                            </article>
+        </div>
+        <aside class="span4 detailsbar">
+            <h1><i class="icon-arrow-down"></i></h1>
+                                                            <dl>
+                                                                            </dl>
+            <h2>Tags</h2>
+            <table class="table table-condensed">
+                                    <tr><td colspan="2"><em>None found</em></td></tr>
+                            </table>
+        </aside>
+    </div>
+
+                                    <div class="row-fluid">
+        <div class="span8 content class">
+            <a id="method_hasEditableRoomNameByPage" name="method_hasEditableRoomNameByPage" class="anchor"></a>
+            <article class="method">
+                <h3 class="public ">hasEditableRoomNameByPage()</h3>
+                <a href="#source-view" role="button" class="pull-right btn" data-toggle="modal" style="font-size: 1.1em; padding: 9px 14px"><i class="icon-code"></i></a>
+                <pre class="signature" style="margin-right: 54px;">hasEditableRoomNameByPage(\Model  <span class="argument">$model</span>, integer  <span class="argument">$pageId</span>) : boolean</pre>
+                <p><em>page_id_topに対するルーム名を更新する
+ただし、page_id_topがSpace.page_id_topであれば、更新しない</em></p>
+                
+
+                                    <h4>Parameters</h4>
+                    <table class="table table-condensed table-hover">
+                                                    <tr>
+                                <td>\Model</td>
+                                <td>$model </td>
+                                <td><p>Model using this behavior</p></td>
+                            </tr>
+                                                    <tr>
+                                <td>integer</td>
+                                <td>$pageId </td>
+                                <td><p>ページID</p></td>
+                            </tr>
+                                            </table>
+                
+                                    <h4>Throws</h4>
+                    <dl>
+                                                    <dt>\InternalErrorException</dt>
+                            <dd></dd>
+                                                                    </dl>
+                
+                                    <h4>Returns</h4>
+                    boolean
+                                    				
+                            </article>
+        </div>
+        <aside class="span4 detailsbar">
+            <h1><i class="icon-arrow-down"></i></h1>
+                                                            <dl>
+                                                                            </dl>
+            <h2>Tags</h2>
+            <table class="table table-condensed">
+                                    <tr><td colspan="2"><em>None found</em></td></tr>
+                            </table>
+        </aside>
+    </div>
+
                                                                     <div class="row-fluid">
         <div class="span8 content class">
             <a id="method___updatePageIdTopMove" name="method___updatePageIdTopMove" class="anchor"></a>
@@ -735,7 +831,7 @@ Should be set to false if database/table does not support transactions.</li>
                 <section class="span10 offset1">
                     <hr />
                     Documentation is powered by <a href="http://www.phpdoc.org/">phpDocumentor </a> and authored
-                    on April 27th, 2017 at 04:12.
+                    on May 1st, 2017 at 11:17.
                 </section>
             </section>
         </section>

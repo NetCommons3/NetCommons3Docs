@@ -87,6 +87,18 @@ class PagesEditController extends PagesAppController {
 			return $this->setAction('throwBadRequest');
 		}
 		$this->set('room', $room);
+		if (Current::read('Space.room_id_root')) {
+			$this->Room->unbindModel(array(
+				'belongsTo' => array('ParentRoom'),
+				'hasMany' => array('ChildRoom')
+			));
+			$conditions = ['Room.id' => Current::read('Space.room_id_root')];
+			$spaceRoom = $this->Room->find('first', ['conditions' => $conditions]);
+			if (! $spaceRoom) {
+				return $this->setAction('throwBadRequest');
+			}
+			$this->set('spaceRoom', $spaceRoom);
+		}
 
 		//parentPathの名前セット
 		$this->__setParentPageName();
@@ -538,11 +550,11 @@ class PagesEditController extends PagesAppController {
 
 		$parentPathName = $this->Page->getParentNodeName(Current::read('Page.id'));
 		if (! Current::read('Space.permalink')) {
-			$room = Hash::extract(
-				$this->viewVars['room'],
+			$spaceRoom = Hash::extract(
+				$this->viewVars['spaceRoom'],
 				'RoomsLanguage.{n}[language_id=' . Current::read('Language.id') . ']'
 			);
-			array_unshift($parentPathName, Hash::get($room, '0.name'));
+			array_unshift($parentPathName, Hash::get($spaceRoom, '0.name'));
 		}
 		$this->set('parentPathName', implode(' / ', $parentPathName));
 

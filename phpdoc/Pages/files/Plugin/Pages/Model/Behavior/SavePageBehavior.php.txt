@@ -118,6 +118,8 @@ class SavePageBehavior extends ModelBehavior {
 			if (! $model->PagesLanguage->save(null, false)) {
 				throw new InternalErrorException(__d('net_commons', 'Internal Server Error'));
 			}
+
+			$this->updateRoomName($model, $model->data);
 		}
 
 		if ($created) {
@@ -284,6 +286,100 @@ class SavePageBehavior extends ModelBehavior {
 		}
 
 		return true;
+	}
+
+/**
+ * page_id_topに対するルーム名を更新する
+ * ただし、page_id_topがSpace.page_id_topであれば、更新しない
+ *
+ * @param Model $model Model using this behavior
+ * @param array $page request data
+ * @return bool
+ * @throws InternalErrorException
+ */
+	public function updateRoomName(Model $model, $page) {
+		$model->loadModels([
+			'Room' => 'Rooms.Room',
+			'RoomsLanguage' => 'Rooms.RoomsLanguage',
+			'Space' => 'Rooms.Space',
+		]);
+
+		if (! Hash::get($page, 'Page.id') ||
+				! Hash::get($page, 'Page.room_id') ||
+				! Hash::get($page, 'PagesLanguage.language_id')) {
+			return true;
+		}
+
+		if (! $this->hasEditableRoomNameByPage($model, Hash::get($page, 'Page.room_id'))) {
+			return true;
+		}
+
+		if (isset($model->data['PagesLanguage'])) {
+			$db = $model->getDataSource();
+
+			$pageName = $db->value($model->data['PagesLanguage']['name'], 'string');
+			$update = array(
+				$model->RoomsLanguage->alias . '.name' => $pageName,
+			);
+			$conditions = array(
+				$model->RoomsLanguage->alias . '.room_id' => Hash::get($page, 'Page.room_id'),
+				$model->RoomsLanguage->alias . '.language_id' => Hash::get($page, 'PagesLanguage.language_id'),
+			);
+			if (! $model->RoomsLanguage->updateAll($update, $conditions)) {
+				throw new InternalErrorException(__d('net_commons', 'Internal Server Error'));
+			}
+		}
+
+		return true;
+	}
+
+/**
+ * page_id_topに対するルーム名を更新する
+ * ただし、page_id_topがSpace.page_id_topであれば、更新しない
+ *
+ * @param Model $model Model using this behavior
+ * @param int $pageId ページID
+ * @return bool
+ * @throws InternalErrorException
+ */
+	public function hasEditableRoomNameByPage(Model $model, $pageId) {
+		$model->loadModels([
+			'Room' => 'Rooms.Room',
+			'RoomsLanguage' => 'Rooms.RoomsLanguage',
+			'Space' => 'Rooms.Space',
+		]);
+
+		if (! $pageId) {
+			return false;
+		}
+
+		return (bool)$model->find('count', array(
+			'recursive' => -1,
+			'joins' => array(
+				array(
+					'table' => $model->Room->table,
+					'alias' => $model->Room->alias,
+					'type' => 'INNER',
+					'conditions' => array(
+						$model->Room->alias . '.id' . ' = ' . $model->alias . '.room_id',
+					),
+				),
+				array(
+					'table' => $model->Space->table,
+					'alias' => $model->Space->alias,
+					'type' => 'INNER',
+					'conditions' => array(
+						$model->Space->alias . '.id' . ' = ' . $model->Room->alias . '.space_id',
+					),
+				),
+			),
+			'conditions' => [
+				$model->alias . '.id' => $pageId,
+				$model->Room->alias . '.page_id_top' . ' = ' . $model->alias . '.id',
+				$model->Space->alias . '.room_id_root' . ' != ' . $model->Room->alias . '.id',
+				$model->Space->alias . '.page_id_top' . ' != ' . $model->Room->alias . '.page_id_top',
+			]
+		));
 	}
 
 }
