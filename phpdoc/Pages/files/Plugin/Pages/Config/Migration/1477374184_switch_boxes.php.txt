@@ -32,10 +32,28 @@ class SwitchBoxes extends CakeMigration {
  */
 	public $migration = array(
 		'up' => array(
-			//page_containers登録処理は、Boxesプラグインで行う
+			'create_table' => array(
+				'page_containers' => array(
+					'id' => array('type' => 'integer', 'null' => false, 'default' => null, 'unsigned' => false, 'key' => 'primary'),
+					'page_id' => array('type' => 'integer', 'null' => true, 'default' => null, 'unsigned' => false),
+					'container_type' => array('type' => 'integer', 'null' => true, 'default' => null, 'length' => 4, 'unsigned' => false, 'comment' => 'コンテナータイプ.  1:Header, 2:Major, 3:Main, 4:Minor, 5:Footer'),
+					'is_published' => array('type' => 'boolean', 'null' => true, 'default' => null, 'comment' => 'コンテナーの表示・非表示'),
+					'is_configured' => array('type' => 'boolean', 'null' => false, 'default' => '0', 'comment' => '設定したかどうか。1の場合、サイト管理もしくはルームで変更しても反映させない。'),
+					'created_user' => array('type' => 'integer', 'null' => true, 'default' => null, 'unsigned' => false),
+					'created' => array('type' => 'datetime', 'null' => true, 'default' => null),
+					'modified_user' => array('type' => 'integer', 'null' => true, 'default' => null, 'unsigned' => false),
+					'modified' => array('type' => 'datetime', 'null' => true, 'default' => null),
+					'indexes' => array(
+						'PRIMARY' => array('column' => 'id', 'unique' => 1),
+					),
+					'tableParameters' => array('charset' => 'utf8', 'collate' => 'utf8_general_ci', 'engine' => 'InnoDB'),
+				),
+			),
 		),
 		'down' => array(
-			//page_containers登録処理は、Boxesプラグインで行う
+			'drop_table' => array(
+				'page_containers'
+			),
 		),
 	);
 
