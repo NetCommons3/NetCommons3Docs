@@ -136,10 +136,10 @@
                                 <div class="accordion" style="margin-bottom: 0">
         <div class="accordion-group">
             <div class="accordion-heading">
-                                    <a class="accordion-toggle " data-toggle="collapse" data-target="#namespace-482585668"></a>
+                                    <a class="accordion-toggle " data-toggle="collapse" data-target="#namespace-614717117"></a>
                                 <a href="../namespaces/default.html" style="margin-left: 30px; padding-left: 0">\</a>
             </div>
-            <div id="namespace-482585668" class="accordion-body collapse in">
+            <div id="namespace-614717117" class="accordion-body collapse in">
                 <div class="accordion-inner">
 
                     
@@ -714,7 +714,7 @@ will inherit them.</p>
             <article class="method">
                 <h3 class="public ">hasChildPage()</h3>
                 <a href="#source-view" role="button" class="pull-right btn" data-toggle="modal" style="font-size: 1.1em; padding: 9px 14px"><i class="icon-code"></i></a>
-                <pre class="signature" style="margin-right: 54px;">hasChildPage(integer  <span class="argument">$pageId</span>) : boolean</pre>
+                <pre class="signature" style="margin-right: 54px;">hasChildPage(integer  <span class="argument">$menu</span>, boolean  <span class="argument">$hasTreeList = false</span>) : boolean</pre>
                 <p><em>子ページを持っているかどうか</em></p>
                 
 
@@ -722,8 +722,13 @@ will inherit them.</p>
                     <table class="table table-condensed table-hover">
                                                     <tr>
                                 <td>integer</td>
-                                <td>$pageId </td>
-                                <td><p>ページID</p></td>
+                                <td>$menu </td>
+                                <td><p>メニューデータ</p></td>
+                            </tr>
+                                                    <tr>
+                                <td>boolean</td>
+                                <td>$hasTreeList </td>
+                                <td><p>$treeList4Dispに持っているかどうか</p></td>
                             </tr>
                                             </table>
                 
@@ -739,7 +744,14 @@ will inherit them.</p>
                                                                             </dl>
             <h2>Tags</h2>
             <table class="table table-condensed">
-                                    <tr><td colspan="2"><em>None found</em></td></tr>
+                                    <tr>
+                        <th>
+                            SuppressWarnings
+                        </th>
+                        <td>
+                                                                                            <p>(PHPMD.BooleanArgumentFlag)</p>
+                                                    </td>
+                    </tr>
                             </table>
         </aside>
     </div>
@@ -871,7 +883,7 @@ will inherit them.</p>
                 <section class="span10 offset1">
                     <hr />
                     Documentation is powered by <a href="http://www.phpdoc.org/">phpDocumentor </a> and authored
-                    on April 29th, 2017 at 01:44.
+                    on May 2nd, 2017 at 03:57.
                 </section>
             </section>
         </section>
