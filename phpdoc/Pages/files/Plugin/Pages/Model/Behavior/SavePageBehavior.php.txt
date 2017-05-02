@@ -310,7 +310,7 @@ class SavePageBehavior extends ModelBehavior {
 			return true;
 		}
 
-		if (! $this->hasEditableRoomNameByPage($model, Hash::get($page, 'Page.room_id'))) {
+		if (! $this->hasEditableRoomNameByPage($model, Hash::get($page, 'Page.id'))) {
 			return true;
 		}
 
