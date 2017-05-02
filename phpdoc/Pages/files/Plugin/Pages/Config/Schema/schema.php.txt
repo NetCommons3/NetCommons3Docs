@@ -52,7 +52,7 @@ class PagesSchema extends CakeSchema {
  */
 	public $page_containers = array(
 		'id' => array('type' => 'integer', 'null' => false, 'default' => null, 'unsigned' => false, 'key' => 'primary'),
-		'page_id' => array('type' => 'integer', 'null' => true, 'default' => null, 'unsigned' => false),
+		'page_id' => array('type' => 'integer', 'null' => true, 'default' => null, 'unsigned' => false, 'key' => 'index'),
 		'container_type' => array('type' => 'integer', 'null' => true, 'default' => null, 'length' => 4, 'unsigned' => false, 'comment' => 'コンテナータイプ.  1:Header, 2:Major, 3:Main, 4:Minor, 5:Footer'),
 		'is_published' => array('type' => 'boolean', 'null' => true, 'default' => null, 'comment' => 'コンテナーの表示・非表示'),
 		'is_configured' => array('type' => 'boolean', 'null' => false, 'default' => '0', 'comment' => '設定したかどうか。1の場合、サイト管理もしくはルームで変更しても反映させない。'),
@@ -61,7 +61,8 @@ class PagesSchema extends CakeSchema {
 		'modified_user' => array('type' => 'integer', 'null' => true, 'default' => null, 'unsigned' => false),
 		'modified' => array('type' => 'datetime', 'null' => true, 'default' => null),
 		'indexes' => array(
-			'PRIMARY' => array('column' => 'id', 'unique' => 1)
+			'PRIMARY' => array('column' => 'id', 'unique' => 1),
+			'page_id' => array('column' => array('page_id', 'container_type'), 'unique' => 0)
 		),
 		'tableParameters' => array('charset' => 'utf8', 'collate' => 'utf8_general_ci', 'engine' => 'InnoDB')
 	);
