@@ -190,7 +190,7 @@ class PageLayoutHelper extends AppHelper {
 			'role' => 'main'
 		);
 
-		if ($this->layoutSetting) {
+		if ($this->layoutSetting && Current::read('Frame')) {
 			//Frame設定も含めたコンテンツElement
 			$element = $this->_View->element('Frames.setting_frame', array(
 				'view' => $this->_View->fetch('content')
