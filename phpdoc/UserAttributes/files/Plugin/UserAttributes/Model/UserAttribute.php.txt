@@ -20,6 +20,7 @@ App::uses('UserAttributesAppModel', 'UserAttributes.Model');
  *
  * @author Shohei Nakajima <nakajimashouhei@gmail.com>
  * @package NetCommons\UserAttributes\Model
+ * @SuppressWarnings(PHPMD.ExcessiveClassComplexity)
  */
 class UserAttribute extends UserAttributesAppModel {
 
@@ -43,6 +44,13 @@ class UserAttribute extends UserAttributesAppModel {
  * @var const
  */
 	const LOGIN_ID_FIELD = 'username';
+
+/**
+ * eメールフィールド
+ *
+ * @var const
+ */
+	const EMAIL_FIELD = 'email';
 
 /**
  * パスワードフィールド
@@ -244,6 +252,10 @@ class UserAttribute extends UserAttributesAppModel {
 				//ログインIDとパスワードは、強制的に編集可にする。
 				$result['UserAttributesRole']['self_editable'] = true;
 				$result['UserAttributeSetting']['only_administrator_editable'] = false;
+
+			} elseif ($userAttribute['UserAttribute']['key'] === 'email') {
+				//emailは必須とする
+				$result['UserAttributeSetting']['required'] = true;
 
 			} elseif ($userAttribute['UserAttribute']['key'] === 'role_key') {
 				//権限の設定
