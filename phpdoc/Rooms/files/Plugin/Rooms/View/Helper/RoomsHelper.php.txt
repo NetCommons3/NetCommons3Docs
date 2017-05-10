@@ -93,11 +93,16 @@ class RoomsHelper extends AppHelper {
  * @param bool $tabType タブの種類（tabs or pills）
  * @param string|null $urls URLオプション
  * @return string HTML
+ * @SuppressWarnings(PHPMD.CyclomaticComplexity)
  */
 	public function spaceTabs($activeSpaceId, $tabType = 'tabs', $urls = null) {
 		$output = '';
 		$output .= '<ul class="nav nav-' . $tabType . '" role="tablist">';
 		foreach ($this->_View->viewVars['spaces'] as $space) {
+			if (is_array($urls) && ! isset($urls[$space['Space']['id']])) {
+				continue;
+			}
+
 			if ($space['Space']['default_setting_action']) {
 				if ($space['Space']['id'] === $activeSpaceId) {
 					$listClass = ' class="active"';
