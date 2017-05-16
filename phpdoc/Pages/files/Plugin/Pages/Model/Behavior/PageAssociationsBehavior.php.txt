@@ -158,17 +158,14 @@ class PageAssociationsBehavior extends ModelBehavior {
 				'weight' => '1',
 			),
 			'Box' => array(
-				'page_id' => true
+				'page_id' => true,
+				'type' => Box::TYPE_WITH_PAGE
 			),
 		);
 
 		foreach ($parentBoxesPages as $boxPage) {
 			$containerType = $boxPage['BoxesPageContainer']['container_type'];
-			if (! $boxPage['Box']['page_id']) {
-				$boxId = $boxPage['Box']['id'];
-			} else {
-				$boxId = $page['Box'][$containerType]['Box']['id'];
-			}
+			$boxId = $this->__getBoxId($model, $page, $boxPage);
 			$pageContaireId = $page['PageContainer'][$containerType]['PageContainer']['id'];
 
 			$data = array(
@@ -214,6 +211,40 @@ class PageAssociationsBehavior extends ModelBehavior {
 		));
 
 		return $parentBoxesPages;
+	}
+
+/**
+ * box_idの取得処理
+ *
+ * @param Model $model ビヘイビア呼び出し前のモデル
+ * @param array $page ページデータ
+ * @param array $boxPage ボックスページデータ
+ * @return int
+ */
+	private function __getBoxId(Model $model, $page, $boxPage) {
+		$model->loadModels([
+			'Box' => 'Boxes.Box',
+		]);
+
+		$containerType = $boxPage['BoxesPageContainer']['container_type'];
+		if (in_array($boxPage['Box']['type'], [Box::TYPE_WITH_SITE, Box::TYPE_WITH_SPACE], true)) {
+			$boxId = $boxPage['Box']['id'];
+		} elseif ($boxPage['Box']['type'] === Box::TYPE_WITH_ROOM) {
+			$box = $model->Box->find('first', [
+				'recursive' => -1,
+				'fields' => 'Box.id',
+				'conditions' => array(
+					'type' => Box::TYPE_WITH_ROOM,
+					'room_id' => $page['Box'][$containerType]['Box']['room_id'],
+					'container_type' => $containerType,
+				)
+			]);
+			$boxId = Hash::get($box, 'Box.id');
+		} else {
+			$boxId = $page['Box'][$containerType]['Box']['id'];
+		}
+
+		return $boxId;
 	}
 
 /**
