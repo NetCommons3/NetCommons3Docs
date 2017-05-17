@@ -111,7 +111,7 @@ class RoomsComponent extends Component {
 		$result = array();
 		foreach ($getSpaces as $spaceId) {
 			//ルームデータ取得
-			$controller->Paginator->settings = $controller->Room->getRoomsCondtions(
+			$controller->Paginator->settings = $controller->Room->getRoomsConditions(
 				$spaceId,
 				array('limit' => 1000, 'maxLimit' => 1000)
 			);
