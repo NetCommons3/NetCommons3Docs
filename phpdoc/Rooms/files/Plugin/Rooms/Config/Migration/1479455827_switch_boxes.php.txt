@@ -96,11 +96,26 @@ class SwitchBoxes extends NetCommonsMigration {
  * @SuppressWarnings(PHPMD.CyclomaticComplexity)
  */
 	public function before($direction) {
-		$this->Room = ClassRegistry::init('Rooms.Room');
-		$this->RolesRoom = ClassRegistry::init('Rooms.RolesRoom');
-		$this->Space = ClassRegistry::init('Rooms.Space');
-		$this->RoomsLanguage = ClassRegistry::init('Rooms.RoomsLanguage');
-		$this->RolesRoomsUser = ClassRegistry::init('Rooms.RolesRoomsUser');
+		$this->Room = ClassRegistry::init([
+			'class' => 'Rooms.Room',
+			'testing' => ($this->connection === 'test')
+		]);
+		$this->RolesRoom = ClassRegistry::init([
+			'class' => 'Rooms.RolesRoom',
+			'testing' => ($this->connection === 'test')
+		]);
+		$this->Space = ClassRegistry::init([
+			'class' => 'Rooms.Space',
+			'testing' => ($this->connection === 'test')
+		]);
+		$this->RoomsLanguage = ClassRegistry::init([
+			'class' => 'Rooms.RoomsLanguage',
+			'testing' => ($this->connection === 'test')
+		]);
+		$this->RolesRoomsUser = ClassRegistry::init([
+			'class' => 'Rooms.RolesRoomsUser',
+			'testing' => ($this->connection === 'test')
+		]);
 
 		if ($direction === 'down') {
 			$this->wholeSiteRoom = $this->Room->find('first', array(
@@ -111,7 +126,7 @@ class SwitchBoxes extends NetCommonsMigration {
 			));
 		}
 
-		$this->Room->begin();
+		//$this->Room->begin();
 
 		//Roomテーブルの登録
 		if (! $this->__saveRoom($direction)) {
@@ -156,11 +171,11 @@ class SwitchBoxes extends NetCommonsMigration {
 			}
 		}
 
-		if (! $this->Room->recover()) {
+		if ($this->Room->useDbConfig !== 'test' && ! $this->Room->recover()) {
 			return false;
 		}
 
-		$this->Room->commit();
+		//$this->Room->commit();
 		return true;
 	}
 
