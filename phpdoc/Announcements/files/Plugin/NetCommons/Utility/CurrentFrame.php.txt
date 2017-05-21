@@ -55,7 +55,11 @@ class CurrentFrame {
  * @return void
  */
 	public function clear() {
-		foreach (['Room', 'Frame', 'Block', 'BlockRolePermission'] as $model) {
+		$models = [
+			'Room', 'RoomRolePermission', 'RolesRoom', 'Frame', 'Block', 'BlockRolePermission',
+			'RolesRoomsUser', 'Permission'
+		];
+		foreach ($models as $model) {
 			if (isset(Current::$current[$model])) {
 				unset(Current::$current[$model]);
 			}
@@ -75,6 +79,8 @@ class CurrentFrame {
 		} elseif (! Hash::get(Current::$request->params, 'requested') &&
 					Hash::get(Current::$request->data, 'Frame.id')) {
 			$frameId = Current::$request->data['Frame']['id'];
+		} elseif (Hash::get(Current::$request->params, 'frame_id')) {
+			$frameId = Hash::get(Current::$request->params, 'frame_id');
 		} elseif (Hash::get(Current::$request->params, '?.frame_id')) {
 			$frameId = Hash::get(Current::$request->params, '?.frame_id');
 		} elseif (isset(Current::$request->query['frame_id'])) {
@@ -200,6 +206,7 @@ class CurrentFrame {
 				'Block.id' => $blockId,
 			),
 		));
+
 		//Block、Room、Language, Plugin更新
 		Current::setCurrent($result, ['Block', 'Room', 'BlocksLanguage', 'Plugin']);
 
@@ -237,6 +244,7 @@ class CurrentFrame {
  * Set BlockRolePermissions
  *
  * @return void
+ * @SuppressWarnings(PHPMD.CyclomaticComplexity)
  */
 	public function setBlockRolePermissions() {
 		$this->BlockRolePermission = ClassRegistry::init('Blocks.BlockRolePermission');
@@ -269,7 +277,7 @@ class CurrentFrame {
 			$permission, Hash::get(Current::$current, 'RoomRolePermission', array())
 		);
 		if (isset(Current::$current['BlockRolePermission'])) {
-			$permission = Hash::merge($permission, Current::$current['BlockRolePermission']);
+			$permission = Hash::merge($permission, Current::$current['BlockRolePermission'], []);
 		} elseif (! Current::read('Room.need_approval')) {
 			$setPermissions = array(
 				'content_publishable' => array('value' => true),
@@ -287,12 +295,21 @@ class CurrentFrame {
 						),
 					),
 				));
-				$setPermissions['content_publishable']['value'] = !(bool)Hash::get(
+
+				$useWorkflow = (bool)Hash::get(
 					$blockSetting, BlockSettingBehavior::FIELD_USE_WORKFLOW, '0'
 				);
-				$setPermissions['content_comment_publishable']['value'] = !(bool)Hash::get(
+				if ($useWorkflow) {
+					$publishable = Hash::get($permission, 'content_publishable.value');
+					$setPermissions['content_publishable']['value'] = $publishable;
+				}
+				$useApproval = (bool)Hash::get(
 					$blockSetting, BlockSettingBehavior::FIELD_USE_COMMENT_APPROVAL, '0'
 				);
+				if ($useApproval) {
+					$publishable = Hash::get($permission, 'content_comment_publishable.value');
+					$setPermissions['content_comment_publishable']['value'] = $publishable;
+				}
 			}
 			$permission = Hash::merge($permission, $setPermissions);
 		}
