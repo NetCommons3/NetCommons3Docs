@@ -126,6 +126,7 @@ class RolesRoomsUser extends RoomsAppModel {
 		$this->loadModels([
 			'Room' => 'Rooms.Room',
 			'RoomRole' => 'Rooms.RoomRole',
+			'RolesRoom' => 'Rooms.RolesRoom',
 		]);
 
 		if (! array_key_exists('Room.id', $conditions)) {
@@ -407,6 +408,11 @@ class RolesRoomsUser extends RoomsAppModel {
  * @return array
  */
 	public function getSpaceRolesRoomsUsers() {
+		$this->loadModels([
+			'RoomRole' => 'Rooms.RoomRole',
+			'RolesRoom' => 'Rooms.RolesRoom',
+		]);
+
 		$spaceRolesRoomIds = $this->RolesRoom->find('all', array(
 			'recursive' => -1,
 			'conditions' => array(

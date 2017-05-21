@@ -96,25 +96,12 @@ class SwitchBoxes extends NetCommonsMigration {
  * @SuppressWarnings(PHPMD.CyclomaticComplexity)
  */
 	public function before($direction) {
-		$this->Room = ClassRegistry::init([
-			'class' => 'Rooms.Room',
-			'testing' => ($this->connection === 'test')
-		]);
-		$this->RolesRoom = ClassRegistry::init([
-			'class' => 'Rooms.RolesRoom',
-			'testing' => ($this->connection === 'test')
-		]);
-		$this->Space = ClassRegistry::init([
-			'class' => 'Rooms.Space',
-			'testing' => ($this->connection === 'test')
-		]);
-		$this->RoomsLanguage = ClassRegistry::init([
-			'class' => 'Rooms.RoomsLanguage',
-			'testing' => ($this->connection === 'test')
-		]);
-		$this->RolesRoomsUser = ClassRegistry::init([
-			'class' => 'Rooms.RolesRoomsUser',
-			'testing' => ($this->connection === 'test')
+		$this->loadModels([
+			'Room' => 'Rooms.Room',
+			'RolesRoom' => 'Rooms.RolesRoom',
+			'Space' => 'Rooms.Space',
+			'RoomsLanguage' => 'Rooms.RoomsLanguage',
+			'RolesRoomsUser' => 'Rooms.RolesRoomsUser',
 		]);
 
 		if ($direction === 'down') {
@@ -171,7 +158,9 @@ class SwitchBoxes extends NetCommonsMigration {
 			}
 		}
 
-		if ($this->Room->useDbConfig !== 'test' && ! $this->Room->recover()) {
+		if ($this->Room->useDbConfig !== 'test' &&
+				Configure::read('NetCommons.installed') &&
+				! $this->Room->recover()) {
 			return false;
 		}
 
@@ -272,6 +261,7 @@ class SwitchBoxes extends NetCommonsMigration {
 				'Room.root_id' => null,
 				'Room.id !=' => $this->wholeSiteRoom['Room']['id'],
 			);
+			$this->Room->unbindModel(['belongsTo' => ['ParentRoom']]);
 			if (! $this->Room->updateAll($update, $conditions)) {
 				return false;
 			}

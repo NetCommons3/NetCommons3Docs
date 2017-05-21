@@ -25,6 +25,20 @@ App::uses('RoomsAppModel', 'Rooms.Model');
 class Space extends RoomsAppModel {
 
 /**
+ * インスタンス
+ *
+ * @var array
+ */
+	public static $instanceRoom = null;
+
+/**
+ * インスタンス
+ *
+ * @var array
+ */
+	public static $instanceSpace = null;
+
+/**
  * スペースデータ
  * ※publicにしているのは、UnitTestで使用するため
  *
@@ -202,14 +216,37 @@ class Space extends RoomsAppModel {
 	}
 
 /**
+ * インスタンスの取得
+ *
+ * @param string $spaceModel モデル名(Migrationで使用)
+ * @param array $options ClassRegistryオプション
+ * @return object RoomSpaceルームのデフォルト値配列
+ */
+	public static function getInstance($spaceModel = 'Space', $options = []) {
+		$options['class'] = 'Rooms.' . $spaceModel;
+		if ($spaceModel === 'Space') {
+			if (! self::$instanceSpace) {
+				self::$instanceSpace = ClassRegistry::init($options, true);
+			}
+			return self::$instanceSpace;
+		} else {
+			if (! self::$instanceRoom) {
+				self::$instanceRoom = ClassRegistry::init($options, true);
+			}
+			return self::$instanceRoom;
+		}
+	}
+
+/**
  * SpaceのルームIDを取得
  *
  * @param int $spaceId スペースID
  * @param string $spaceModel モデル名(Migrationで使用)
+ * @param array $options ClassRegistryオプション
  * @return int
  */
-	public static function getRoomIdRoot($spaceId, $spaceModel = 'Space') {
-		$Space = ClassRegistry::init('Rooms.' . $spaceModel, true);
+	public static function getRoomIdRoot($spaceId, $spaceModel = 'Space', $options = []) {
+		$Space = self::getInstance($spaceModel, $options);
 		if ($spaceModel === 'Space') {
 			if (! Hash::get(self::$spaceIds, 'Space')) {
 				$spaces = $Space->find('list', array(

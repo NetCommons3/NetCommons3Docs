@@ -54,8 +54,11 @@ class RecoverRolesRoomsUsersForSpaceRooms extends NetCommonsMigration {
  * @return bool Should process continue
  */
 	public function after($direction) {
-		$this->RolesRoomsUser = ClassRegistry::init('Rooms.RolesRoomsUser');
-		$this->RolesRoomsUser->setMasterDataSource();
+		$this->loadModels([
+			'RolesRoomsUser' => 'Rooms.RolesRoomsUser',
+			'Space' => 'Rooms.Space',
+		]);
+		//$this->RolesRoomsUser->setMasterDataSource();
 
 		$spaceRolesRoomIds = $this->RolesRoomsUser->getSpaceRolesRoomsUsers();
 

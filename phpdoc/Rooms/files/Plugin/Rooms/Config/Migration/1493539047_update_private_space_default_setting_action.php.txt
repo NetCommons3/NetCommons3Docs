@@ -56,11 +56,13 @@ class UpdatePrivateSpaceDefaultSettingAction extends NetCommonsMigration {
  * @return bool Should process continue
  */
 	public function after($direction) {
-		$Space = ClassRegistry::init('Rooms.Space');
-		$Space->setMasterDataSource();
+		$this->loadModels([
+			'Space' => 'Rooms.Space'
+		]);
+		//$this->Space->setMasterDataSource();
 
-		$Space->id = Space::PRIVATE_SPACE_ID;
-		$Space->saveField('default_setting_action', 'rooms/index/3', false);
+		$this->Space->id = Space::PRIVATE_SPACE_ID;
+		$this->Space->saveField('default_setting_action', 'rooms/index/3', false);
 
 		return true;
 	}
