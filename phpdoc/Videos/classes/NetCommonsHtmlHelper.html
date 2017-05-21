@@ -136,10 +136,10 @@
                                 <div class="accordion" style="margin-bottom: 0">
         <div class="accordion-group">
             <div class="accordion-heading">
-                                    <a class="accordion-toggle " data-toggle="collapse" data-target="#namespace-2022676746"></a>
+                                    <a class="accordion-toggle " data-toggle="collapse" data-target="#namespace-153485946"></a>
                                 <a href="../namespaces/default.html" style="margin-left: 30px; padding-left: 0">\</a>
             </div>
-            <div id="namespace-2022676746" class="accordion-body collapse in">
+            <div id="namespace-153485946" class="accordion-body collapse in">
                 <div class="accordion-inner">
 
                     
@@ -528,7 +528,7 @@ NetCommonsHtml::mailHelp()<br>
             <article class="method">
                 <h3 class="public ">json()</h3>
                 <a href="#source-view" role="button" class="pull-right btn" data-toggle="modal" style="font-size: 1.1em; padding: 9px 14px"><i class="icon-code"></i></a>
-                <pre class="signature" style="margin-right: 54px;">json(array  <span class="argument">$results = array()</span>, string  <span class="argument">$name = &#039;OK&#039;</span>, integer  <span class="argument">$status = 200</span>) : string</pre>
+                <pre class="signature" style="margin-right: 54px;">json(array  <span class="argument">$results = array()</span>, string  <span class="argument">$name = &#039;OK&#039;</span>, integer  <span class="argument">$status = 200</span>, boolean  <span class="argument">$camelConv = true</span>) : string</pre>
                 <p><em>Google JSON Style Guideに沿ってJSON形式の出力</em></p>
                 
 
@@ -549,6 +549,11 @@ NetCommonsHtml::mailHelp()<br>
                                 <td>$status </td>
                                 <td><p>ステータスコード</p></td>
                             </tr>
+                                                    <tr>
+                                <td>boolean</td>
+                                <td>$camelConv </td>
+                                <td><p>キャメル形式にコンバートするかどうか</p></td>
+                            </tr>
                                             </table>
                 
                 
@@ -566,7 +571,14 @@ NetCommonsHtml::mailHelp()<br>
                                                                 </dl>
             <h2>Tags</h2>
             <table class="table table-condensed">
-                                    <tr><td colspan="2"><em>None found</em></td></tr>
+                                    <tr>
+                        <th>
+                            SuppressWarnings
+                        </th>
+                        <td>
+                                                                                            <p>(PHPMD.BooleanArgumentFlag)</p>
+                                                    </td>
+                    </tr>
                             </table>
         </aside>
     </div>
@@ -799,7 +811,7 @@ NetCommonsHtml::mailHelp()<br>
                 <section class="span10 offset1">
                     <hr />
                     Documentation is powered by <a href="http://www.phpdoc.org/">phpDocumentor </a> and authored
-                    on May 1st, 2017 at 10:12.
+                    on May 21st, 2017 at 17:34.
                 </section>
             </section>
         </section>
