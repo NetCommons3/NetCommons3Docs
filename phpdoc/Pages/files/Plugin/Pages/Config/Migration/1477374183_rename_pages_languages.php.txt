@@ -95,7 +95,7 @@ class RenamePagesLanguages extends CakeMigration {
  * @throws InternalErrorException
  */
 	public function after($direction) {
-		$db = ConnectionManager::getDataSource('master');
+		$db = ConnectionManager::getDataSource($this->connection);
 		$db->begin();
 		try {
 			$PagesLanguage = $this->generateModel('PagesLanguage');
