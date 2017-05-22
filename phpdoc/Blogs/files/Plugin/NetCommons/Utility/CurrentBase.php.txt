@@ -86,7 +86,6 @@
  * 		[id] => 1
  * 		[space_id] => 2
  * 		[page_id_top] => 1
- * 		[root_id] =>
  * 		[parent_id] =>
  * 		[lft] => 1
  * 		[rght] => 2
@@ -233,6 +232,13 @@ class CurrentBase {
 	public static $current = array();
 
 /**
+ * Current data
+ *
+ * @var array
+ */
+	public static $originalCurrent = array();
+
+/**
  * Permission data
  *
  * @var array
@@ -320,7 +326,7 @@ class CurrentBase {
 			return false;
 		}
 		if (! $roomId) {
-			$roomId = Hash::get(self::$current, 'Room.id');
+			$roomId = self::read('Room.id');
 		}
 
 		$path = 'Permission.' . $key . '.value';
