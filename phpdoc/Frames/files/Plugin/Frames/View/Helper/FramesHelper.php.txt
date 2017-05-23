@@ -77,12 +77,17 @@ class FramesHelper extends AppHelper {
  * フレームの編集画面のリンク
  *
  * @param array $frame Frameデータ
+ * @param string $settingAction デフォルトセッティングアクション
  * @return string
  */
-	public function frameSettingLink($frame) {
+	public function frameSettingLink($frame, $settingAction = null) {
 		$html = '';
+		if (is_null($settingAction)) {
+			$action = Hash::get($this->plugins, $frame['plugin_key'] . '.default_setting_action');
+		} else {
+			$action = $settingAction;
+		}
 
-		$action = Hash::get($this->plugins, $frame['plugin_key'] . '.default_setting_action');
 		if ($action) {
 			$title = '<span class="glyphicon glyphicon-cog" aria-hidden="true"> </span> ';
 			$title .= '<span class="sr-only">' . __d('frames', 'Show flame setting') . '</span>';
