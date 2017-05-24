@@ -220,7 +220,13 @@ class PageLayoutHelper extends AppHelper {
 						'plugin_key' => Current::read('Plugin.key'),
 					))
 				);
-				$element = $this->_View->element('Frames.frame', array(
+
+				if (isset($this->settings['frameElement'])) {
+					$frameElement = $this->settings['frameElement'];
+				} else {
+					$frameElement = 'Frames.frame';
+				}
+				$element = $this->_View->element($frameElement, array(
 					'frame' => $frame,
 					'view' => $this->_View->fetch('content'),
 					'centerContent' => true,

@@ -33,6 +33,13 @@ class PageLayoutComponent extends Component {
 	protected $_page = null;
 
 /**
+ * フレームエレメント
+ *
+ * @var string
+ */
+	public $frameElement = 'Frames.frame';
+
+/**
  * beforeRender
  *
  * @param Controller $controller Controller
@@ -68,7 +75,8 @@ class PageLayoutComponent extends Component {
 		if (! array_key_exists('Pages.PageLayout', $controller->helpers)) {
 			$controller->helpers['Pages.PageLayout'] = array(
 				'page' => $this->_page,
-				'layoutSetting' => ($controller->layout === 'NetCommons.setting')
+				'layoutSetting' => ($controller->layout === 'NetCommons.setting'),
+				'frameElement' => $this->frameElement,
 			);
 		}
 

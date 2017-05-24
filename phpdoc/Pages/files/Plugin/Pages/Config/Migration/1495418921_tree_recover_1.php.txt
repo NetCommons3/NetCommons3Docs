@@ -56,7 +56,7 @@ class TreeRecover1 extends NetCommonsMigration {
 	public function after($direction) {
 		$this->loadModels(['Page' => 'Pages.Page']);
 
-		if ($this->connection !== 'test') {
+		if ($this->connection !== 'test' && Configure::read('NetCommons.installed')) {
 			$this->Page->setMasterDataSource();
 			$this->Page->recover();
 		}
