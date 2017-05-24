@@ -173,6 +173,26 @@ class RoomsRolesFormComponent extends Component {
 			}
 		}
 
+		// 'joins' => 'RolesRoomsUser'でユーザーの重複を絞るが、WHERE句のroom_id条件と意味が違ってくるため、別途条件指定。
+		// 一度取得してIN句だと、全員参加ルームの場合、データ量が多いのでサブクエリを使用する。
+		$queryRoomIdValue = $readableFieldValue = null;
+		$subQuery = $this->__getSubQuery($controller);
+		if ($subQuery) {
+			// @see https://github.com/NetCommons3/Users/blob/3.1.0/Controller/Component/UserSearchCompComponent.php#L98
+			$queryRoomIdValue = Hash::get($controller->request->query, ['room_id']);
+			$controller->request->query['room_id'] = $subQuery;
+
+			/* @var $UserSearch UserSearch */
+			$UserSearch = ClassRegistry::init('Users.UserSearch');
+			// @see https://github.com/NetCommons3/Users/blob/3.1.0/Model/UserSearch.php#L332
+			$readableFieldValue = $UserSearch->readableFields['room_id'];
+			$UserSearch->readableFields['room_id']['field'] = 0;
+
+			// 同じインスタンスを使用するようClassRegistry::addObjectしとく。
+			// @see https://github.com/NetCommons3/Users/blob/3.1.0/Controller/Component/UserSearchCompComponent.php#L88
+			ClassRegistry::addObject('UserSearch', $UserSearch);
+		}
+
 		$controller->UserSearchComp->search(array(
 			'fields' => self::$findFields,
 			'joins' => array(
@@ -180,7 +200,7 @@ class RoomsRolesFormComponent extends Component {
 					'conditions' => array(
 						'RolesRoomsUser.room_id' => $room['Room']['id'],
 					)
-				)
+				),
 			),
 			'limit' => $this->limit,
 			'displayFields' => self::$displaFields,
@@ -190,6 +210,9 @@ class RoomsRolesFormComponent extends Component {
 				'search' => (bool)($controller->request->query || $room['Room']['default_participation'])
 			)
 		));
+
+		// PHPMD.CyclomaticComplexity に引っかかるのでメソッド化
+		$this->__restoreValueForSubQuery($controller, $subQuery, $queryRoomIdValue, $readableFieldValue);
 
 		$controller->request->data = $room;
 		$controller->request->data['RolesRoomsUser'] = Hash::combine(
@@ -320,5 +343,82 @@ class RoomsRolesFormComponent extends Component {
 		return Hash::merge(array('RolesRoomsUser' => $tmpData), $data);
 	}
 
+/**
+ * room_id条件のサブクエリ―取得
+ *
+ * @param Controller $controller コントローラ
+ * @return array
+ */
+	private function __getSubQuery($controller) {
+		/* @var $UserSearch UserSearch */
+		$UserSearch = ClassRegistry::init('Users.UserSearch');
+		// UserSearch::readableFieldsに設定されていないと条件は無視されるっぽい。
+		// @see https://github.com/NetCommons3/Users/blob/3.1.0/Model/UserSearch.php#L308
+		if (!isset($UserSearch->readableFields['room_id'])) {
+			return null;
+		}
+
+		$room = $controller->viewVars['room'];
+		/* @var $Room Room */
+		$Room = ClassRegistry::init('Rooms.Room');
+		$parentRoom = $Room->getParentNode($room['Room']['id'], 'id', -1);
+		$db = $controller->RolesRoomsUser->getDataSource();
+		$subQueries = [];
+
+		if ($parentRoom['Room']['id'] != Space::getRoomIdRoot(Space::COMMUNITY_SPACE_ID)) {
+			$query = [
+				'fields' => ['ParentRolesRoomsUser.id'],
+				'table' => $db->fullTableName($controller->RolesRoomsUser),
+				'alias' => 'ParentRolesRoomsUser',
+				'conditions' => [
+					'ParentRolesRoomsUser.room_id' => $parentRoom['Room']['id'],
+					'ParentRolesRoomsUser.user_id = User.id',
+				],
+			];
+			$parentRoomSubQuery = $db->buildStatement($query, $controller->RolesRoomsUser);
+			$subQueries[] = 'EXISTS (' . $parentRoomSubQuery . ') ';
+		}
+
+		$queryRoomIdValue = Hash::get($controller->request->query, ['room_id']);
+		if ($queryRoomIdValue) {
+			$query = [
+				'fields' => ['ConditionRolesRoomsUser.id'],
+				'table' => $db->fullTableName($controller->RolesRoomsUser),
+				'alias' => 'ConditionRolesRoomsUser',
+				'conditions' => [
+					'ConditionRolesRoomsUser.room_id' => $queryRoomIdValue,
+					'ConditionRolesRoomsUser.user_id = User.id',
+				],
+			];
+			$conditionSubQuery = $db->buildStatement($query, $controller->RolesRoomsUser);
+			$subQueries[] = 'EXISTS (' . $conditionSubQuery . ') ';
+		}
+
+		if ($subQueries) {
+			$subQuery = implode(' AND ', $subQueries);
+			return $db->expression($subQuery);
+		}
+
+		return null;
+	}
+
+/**
+ * サブクエリ―設定時に書き換えた値を戻す
+ *
+ * @param Controller $controller コントローラ
+ * @param mix $subQuery Sub query
+ * @param string $roomId Room id of Requestry
+ * @param string $field UserSearch::readableFieldValue
+ * @return void
+ */
+	private function __restoreValueForSubQuery($controller, $subQuery, $roomId, $field) {
+		if ($subQuery) {
+			$controller->request->query['room_id'] = $roomId;
+			/* @var $UserSearch UserSearch */
+			$UserSearch = ClassRegistry::init('Users.UserSearch');
+			$UserSearch->readableFields['room_id'] = $field;
+			ClassRegistry::removeObject('UserSearch');
+		}
+	}
 }
 
