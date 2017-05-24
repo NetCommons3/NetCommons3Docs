@@ -299,9 +299,15 @@ class RolesRoomsUser extends RoomsAppModel {
 			//RolesRoomsUserデータの登録
 			foreach ($data['RolesRoomsUser'] as $rolesRoomsUser) {
 				if (Hash::get($rolesRoomsUser, 'delete')) {
-					if ($rolesRoomsUser['id'] && ! $this->delete($rolesRoomsUser['id'])) {
+					if (!$rolesRoomsUser['id']) {
+						continue;
+					}
+
+					// PHPMD.CyclomaticComplexity に引っかかるのでメソッド化
+					if (!$this->__deleteUserForRoom($rolesRoomsUser)) {
 						throw new InternalErrorException(__d('net_commons', 'Internal Server Error'));
 					}
+
 				} else {
 					$this->create(false);
 					$this->set($rolesRoomsUser);
@@ -471,6 +477,43 @@ class RolesRoomsUser extends RoomsAppModel {
 		}
 
 		$this->setSlaveDataSource();
+
+		return true;
+	}
+
+/**
+ * Delete RolesRoomsUser data
+ *
+ * @param array $rolesRoomsUser RolesRoomsUser data
+ * @return bool
+ */
+	private function __deleteUserForRoom($rolesRoomsUser) {
+		if (! $this->delete($rolesRoomsUser['id'])) {
+			return false;
+		}
+
+		/* @var $Room Room */
+		$Room = ClassRegistry::init('Rooms.Room');
+		$query = [
+			'fields' => [
+				'Room.id',
+			],
+			'conditions' => [
+				'Room.space_id' => Space::COMMUNITY_SPACE_ID,
+				'Room.parent_id' => $rolesRoomsUser['room_id'],
+			],
+			'recursive' => -1,
+			'callbacks' => false,
+		];
+		$subRoomIdList = $Room->find('list', $query);
+
+		$conditions = [
+			'RolesRoomsUser.room_id' => $subRoomIdList,
+			'RolesRoomsUser.user_id' => $rolesRoomsUser['user_id'],
+		];
+		if (!$this->deleteAll($conditions, false)) {
+			return false;
+		}
 
 		return true;
 	}
