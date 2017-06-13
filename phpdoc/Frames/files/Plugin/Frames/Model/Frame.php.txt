@@ -98,6 +98,8 @@ class Frame extends FramesAppModel {
 
 			$belongsTo = $this->Block->bindModelBlockLang();
 			$this->bindModel($belongsTo, true);
+			$this->BlocksLanguage->useDbConfig = $this->useDbConfig;
+
 		}
 		return $query;
 	}
