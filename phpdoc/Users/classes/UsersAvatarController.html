@@ -136,10 +136,10 @@
                                 <div class="accordion" style="margin-bottom: 0">
         <div class="accordion-group">
             <div class="accordion-heading">
-                                    <a class="accordion-toggle " data-toggle="collapse" data-target="#namespace-1680707698"></a>
+                                    <a class="accordion-toggle " data-toggle="collapse" data-target="#namespace-307095975"></a>
                                 <a href="../namespaces/default.html" style="margin-left: 30px; padding-left: 0">\</a>
             </div>
-            <div id="namespace-1680707698" class="accordion-body collapse in">
+            <div id="namespace-307095975" class="accordion-body collapse in">
                 <div class="accordion-inner">
 
                     
@@ -252,211 +252,9 @@
                                             </nav>
                     <a href="#source-view" role="button" class="pull-right btn" data-toggle="modal"><i class="icon-code"></i></a>
 
-                    <h1><small>\</small>Current</h1>
-                    <p><em>Current Utility</em></p>
-                    <p>NetCommonsの機能として必要な情報を保持します。<br>
-<a href="./NetCommonsAppController.html#method_beforeFilter">NetCommonsAppController::beforeFilter</a>
-で初期処理が呼び出され、値が設定されます。<br>
-値を取得する時は、<a href="#method_read">readメソッド</a>を使用します。<br>
-権限を取得する時は、<a href="#method_permission">permissionメソッド</a>を使用します。<br></p>
-<h4>保持データ</h4>
-<pre><code>Array(
-    [User] =&gt; Array(
-        [id] =&gt; 1
-        [username] =&gt; admin
-        [key] =&gt; 640f981d6104fd21463d674f18477348
-        [avatar] =&gt;
-        [avatar_file_id] =&gt;
-        [is_avatar_public] =&gt;
-        [handlename] =&gt; admin
-        [is_handlename_public] =&gt;
-        [is_name_public] =&gt;
-        [email] =&gt;
-        [is_email_public] =&gt;
-
-        ・・・
-
-        [Role] =&gt; Array(
-            [id] =&gt; 1
-            [language_id] =&gt; 2
-            [key] =&gt; system_administrator
-            [type] =&gt; 1
-            [name] =&gt; システム管理者
-            [is_system] =&gt; 1
-        )
-    )
-
-    [Language] =&gt; Array(
-        [id] =&gt; 2
-        [code] =&gt; ja
-        [weight] =&gt; 2
-        [is_active] =&gt; 1
-    )
-
-    [PluginsRole] =&gt; Array(
-        [13] =&gt; Array(
-            [id] =&gt; 13
-            [role_key] =&gt; system_administrator
-            [plugin_key] =&gt; rooms
-        )
-
-        [20] =&gt; Array(
-            [id] =&gt; 20
-            [role_key] =&gt; system_administrator
-            [plugin_key] =&gt; user_manager
-        )
-
-    )
-
-    [Page] =&gt; Array(
-        [id] =&gt; 1
-        [room_id] =&gt; 1
-        [parent_id] =&gt;
-        [lft] =&gt; 1
-        [rght] =&gt; 2
-        [permalink] =&gt;
-        [slug] =&gt;
-        [is_published] =&gt; 1
-        [from] =&gt;
-        [to] =&gt;
-        [is_container_fluid] =&gt;
-    )
-
-    [Room] =&gt; Array(
-        [id] =&gt; 1
-        [space_id] =&gt; 2
-        [page_id_top] =&gt; 1
-        [parent_id] =&gt;
-        [lft] =&gt; 1
-        [rght] =&gt; 2
-        [active] =&gt; 1
-        [default_role_key] =&gt; visitor
-        [need_approval] =&gt; 1
-        [default_participation] =&gt; 1
-        [page_layout_permitted] =&gt; 1
-    )
-
-    [ParentPage] =&gt; Array(
-        ・・・
-    )
-
-    [RolesRoomsUser] =&gt; Array(
-        ・・・
-    )
-
-    [RolesRoom] =&gt; Array(
-        ・・・
-    )
-
-・・・
-
-    [Permission] =&gt; Array(
-        [page_editable] =&gt; Array(
-            [id] =&gt; 9
-            [role_key] =&gt; room_administrator
-            [type] =&gt; room_role
-            [permission] =&gt; page_editable
-            [value] =&gt; 1
-            [fixed] =&gt; 1
-            [roles_room_id] =&gt; 1
-        )
-
-        [block_editable] =&gt; Array(
-            ・・・
-        )
-
-        [content_readable] =&gt; Array(
-            ・・・
-        )
-
-        [content_creatable] =&gt; Array(
-            ・・・
-        )
-
-        [content_editable] =&gt; Array(
-            ・・・
-        )
-
-        [content_publishable] =&gt; Array(
-            ・・・
-        )
-
-        [content_comment_creatable] =&gt; Array(
-            ・・・
-        )
-
-        [content_comment_editable] =&gt; Array(
-            ・・・
-        )
-
-        [content_comment_publishable] =&gt; Array(
-            ・・・
-        )
-
-        [block_permission_editable] =&gt; Array(
-            ・・・
-        )
-
-        [html_not_limited] =&gt; Array(
-            ・・・
-        )
-
-    )
-
-    [Plugin] =&gt; Array(
-        [id] =&gt; 5
-        [language_id] =&gt; 2
-        [key] =&gt; announcements
-        [name] =&gt; お知らせ
-        [namespace] =&gt; netcommons/announcements
-        [weight] =&gt;
-        [type] =&gt; 1
-        [default_action] =&gt; announcements/view
-        [default_setting_action] =&gt; announcement_blocks/index
-    )
-
-    [Frame] =&gt; Array(
-        [id] =&gt; 1
-        [language_id] =&gt; 2
-        [room_id] =&gt; 1
-        [box_id] =&gt; 3
-        [plugin_key] =&gt; announcements
-        [block_id] =&gt; 1
-        [key] =&gt; frame_1
-        [name] =&gt; お知らせ
-        [header_type] =&gt; default
-        [translation_engine] =&gt;
-        [is_first_auto_translation] =&gt;
-        [is_auto_translated] =&gt;
-        [weight] =&gt; 1
-        [is_deleted] =&gt;
-    )
-
-    [Box] =&gt; Array(
-        [id] =&gt; 3
-        [container_id] =&gt; 3
-        [type] =&gt; 4
-        [space_id] =&gt;
-        [room_id] =&gt; 1
-        [page_id] =&gt; 1
-        [weight] =&gt; 1
-    )
-
-    [Block] =&gt; Array(
-        [id] =&gt; 1
-        [language_id] =&gt; 2
-        [room_id] =&gt; 1
-        [plugin_key] =&gt; announcements
-        [key] =&gt; block_1
-        [name] =&gt; NetCommons 3! セッティングモードで編集しよう.
-        [public_type] =&gt; 1
-        [from] =&gt;
-        [to] =&gt;
-        [translation_engine] =&gt;
-        [is_auto_translated] =&gt;
-        [is_first_auto_translation] =&gt;
-    )
-)</code></pre>
+                    <h1><small>\</small>UsersAvatarController</h1>
+                    <p><em>UsersAvatarController</em></p>
+                    
                     
                                         
                     <section id="summary">
@@ -474,34 +272,14 @@
                         </section>
                         <section class="row-fluid public">
                             <section class="span4">
-                                                                    <a href="../classes/CurrentBase.html#method_read" class="">read()</a><br />
-                                                                    <a href="../classes/CurrentBase.html#method_write" class="">write()</a><br />
-                                                                    <a href="../classes/CurrentBase.html#method_remove" class="">remove()</a><br />
-                                                                    <a href="../classes/CurrentBase.html#method_permission" class="">permission()</a><br />
-                                                                    <a href="../classes/Current.html#method_initialize" class="">initialize()</a><br />
-                                                                    <a href="../classes/Current.html#method_terminate" class="">terminate()</a><br />
-                                                                    <a href="../classes/Current.html#method_isLogin" class="">isLogin()</a><br />
-                                                                    <a href="../classes/Current.html#method_isSettingMode" class="">isSettingMode()</a><br />
-                                                                    <a href="../classes/Current.html#method_hasSettingMode" class="">hasSettingMode()</a><br />
-                                                                    <a href="../classes/Current.html#method_isControlPanel" class="">isControlPanel()</a><br />
-                                                                    <a href="../classes/Current.html#method_hasControlPanel" class="">hasControlPanel()</a><br />
-                                                                    <a href="../classes/Current.html#method_allowSystemPlugin" class="">allowSystemPlugin()</a><br />
-                                                                    <a href="../classes/Current.html#method_setCurrent" class="">setCurrent()</a><br />
+                                                                    <a href="../classes/UsersAvatarController.html#method_beforeRender" class="">beforeRender()</a><br />
+                                                                    <a href="../classes/UsersAvatarController.html#method_download" class="">download()</a><br />
                                                             </section>
                             <section class="span4">
-                                                                    <a href="../classes/CurrentBase.html#property_current" class="">$current</a><br />
-                                                                    <a href="../classes/CurrentBase.html#property_originalCurrent" class="">$originalCurrent</a><br />
-                                                                    <a href="../classes/CurrentBase.html#property_permission" class="">$permission</a><br />
-                                                                    <a href="../classes/Current.html#property_request" class="">$request</a><br />
-                                                                    <a href="../classes/Current.html#property_session" class="">$session</a><br />
-                                                                    <a href="../classes/Current.html#property_layout" class="">$layout</a><br />
+                                                                    <a href="../classes/UsersAvatarController.html#property_components" class="">$components</a><br />
                                                             </section>
                             <section class="span4">
-                                                                    <a href="../classes/Current.html#constant_SETTING_MODE_WORD" class="">SETTING_MODE_WORD</a><br />
-                                                                    <a href="../classes/Current.html#constant_PLUGIN_USERS" class="">PLUGIN_USERS</a><br />
-                                                                    <a href="../classes/Current.html#constant_PLUGIN_GROUPS" class="">PLUGIN_GROUPS</a><br />
-                                                                    <a href="../classes/Current.html#constant_PLUGIN_WYSIWYG" class="">PLUGIN_WYSIWYG</a><br />
-                                                                    <a href="../classes/Current.html#constant_PLUGIN_PAGES" class="">PLUGIN_PAGES</a><br />
+                                                                    <em>No constants found</em>
                                                             </section>
                         </section>
                         <section class="row-fluid protected">
@@ -509,8 +287,7 @@
                                                                     <em>No protected methods found</em>
                                                             </section>
                             <section class="span4">
-                                                                    <a href="../classes/Current.html#property__isSettingMode" class="">$_isSettingMode</a><br />
-                                                                    <a href="../classes/Current.html#property__instance" class="">$_instance</a><br />
+                                                                    <em>No protected properties found</em>
                                                             </section>
                             <section class="span4">
                                 <em>N/A</em>
@@ -518,7 +295,12 @@
                         </section>
                         <section class="row-fluid private">
                             <section class="span4">
-                                                                    <em>No private methods found</em>
+                                                                    <a href="../classes/UsersAvatarController.html#method___downloadNoImage" class="">__downloadNoImage()</a><br />
+                                                                    <a href="../classes/UsersAvatarController.html#method___getSimpleModel" class="">__getSimpleModel()</a><br />
+                                                                    <a href="../classes/UsersAvatarController.html#method___getBindParamsForUser" class="">__getBindParamsForUser()</a><br />
+                                                                    <a href="../classes/UsersAvatarController.html#method___getQueryForUser" class="">__getQueryForUser()</a><br />
+                                                                    <a href="../classes/UsersAvatarController.html#method___getBindParamsForUserAttributeSetting" class="">__getBindParamsForUserAttributeSetting()</a><br />
+                                                                    <a href="../classes/UsersAvatarController.html#method___getQueryForUserAttributeSetting" class="">__getQueryForUserAttributeSetting()</a><br />
                                                             </section>
                             <section class="span4">
                                                                     <em>No private properties found</em>
@@ -534,14 +316,14 @@
                     
                     <dl>
                         <dt>File</dt>
-                            <dd><a href="../files/Plugin.NetCommons.Utility.Current.html"><div class="path-wrapper">Plugin/NetCommons/Utility/Current.php</div></a></dd>
+                            <dd><a href="../files/Plugin.Users.Controller.UsersAvatarController.html"><div class="path-wrapper">Plugin/Users/Controller/UsersAvatarController.php</div></a></dd>
                                                 <dt>Package</dt>
-                            <dd><div class="namespace-wrapper">NetCommons\Utility</div></dd>
+                            <dd><div class="namespace-wrapper">Default</div></dd>
                                                 <dt>Class hierarchy</dt>
                             <dd class="hierarchy">
                                                                                                                                                                                                                                                                                                 
-                                        <div class="namespace-wrapper"><a href="../classes/CurrentBase.html">\CurrentBase</a></div>
-                                                                                                    <div class="namespace-wrapper">\Current</div>
+                                        <div class="namespace-wrapper">\Controller</div>
+                                                                                                    <div class="namespace-wrapper">\UsersAvatarController</div>
                             </dd>
 
                         
@@ -551,132 +333,12 @@
                                                                         </dl>
                     <h2>Tags</h2>
                     <table class="table table-condensed">
-                                            <tr>
-                            <th>
-                                author
-                            </th>
-                            <td>
-                                                                    <p>Shohei Nakajima <a href="mailto:nakajimashouhei@gmail.com">nakajimashouhei@gmail.com</a></p>
-                                                            </td>
-                        </tr>
+                                            <tr><td colspan="2"><em>None found</em></td></tr>
                                         </table>
                 </aside>
             </div>
 
-                                    <a id="constants" name="constants"></a>
-            <div class="row-fluid">
-                <div class="span8 content class">
-                    <h2>Constants</h2>
-                </div>
-                <aside class="span4 detailsbar"></aside>
-            </div>
-
-                                <div class="row-fluid">
-        <div class="span8 content class">
-            <a id="constant_SETTING_MODE_WORD" name="constant_SETTING_MODE_WORD" class="anchor"></a>
-            <article id="constant_SETTING_MODE_WORD" class="constant">
-                <h3 class="">SETTING_MODE_WORD</h3>
-                <pre class="signature">SETTING_MODE_WORD</pre>
-                <p><em>Constant setting mode value</em></p>
-                
-            </article>
-        </div>
-        <aside class="span4 detailsbar">
-            <h1><i class="icon-arrow-down"></i></h1>
-                        <dl>
-                                                                            </dl>
-            <h2>Tags</h2>
-            <table class="table table-condensed">
-                                    <tr><td colspan="2"><em>None found</em></td></tr>
-                            </table>
-        </aside>
-    </div>
-
-                                    <div class="row-fluid">
-        <div class="span8 content class">
-            <a id="constant_PLUGIN_USERS" name="constant_PLUGIN_USERS" class="anchor"></a>
-            <article id="constant_PLUGIN_USERS" class="constant">
-                <h3 class="">PLUGIN_USERS</h3>
-                <pre class="signature">PLUGIN_USERS</pre>
-                <p><em>Usersプラグイン名の定数</em></p>
-                
-            </article>
-        </div>
-        <aside class="span4 detailsbar">
-            <h1><i class="icon-arrow-down"></i></h1>
-                        <dl>
-                                                                            </dl>
-            <h2>Tags</h2>
-            <table class="table table-condensed">
-                                    <tr><td colspan="2"><em>None found</em></td></tr>
-                            </table>
-        </aside>
-    </div>
-
-                                    <div class="row-fluid">
-        <div class="span8 content class">
-            <a id="constant_PLUGIN_GROUPS" name="constant_PLUGIN_GROUPS" class="anchor"></a>
-            <article id="constant_PLUGIN_GROUPS" class="constant">
-                <h3 class="">PLUGIN_GROUPS</h3>
-                <pre class="signature">PLUGIN_GROUPS</pre>
-                <p><em>Groupsプラグイン名の定数</em></p>
-                
-            </article>
-        </div>
-        <aside class="span4 detailsbar">
-            <h1><i class="icon-arrow-down"></i></h1>
-                        <dl>
-                                                                            </dl>
-            <h2>Tags</h2>
-            <table class="table table-condensed">
-                                    <tr><td colspan="2"><em>None found</em></td></tr>
-                            </table>
-        </aside>
-    </div>
-
-                                    <div class="row-fluid">
-        <div class="span8 content class">
-            <a id="constant_PLUGIN_WYSIWYG" name="constant_PLUGIN_WYSIWYG" class="anchor"></a>
-            <article id="constant_PLUGIN_WYSIWYG" class="constant">
-                <h3 class="">PLUGIN_WYSIWYG</h3>
-                <pre class="signature">PLUGIN_WYSIWYG</pre>
-                <p><em>Wysiwygプラグイン名の定数</em></p>
-                
-            </article>
-        </div>
-        <aside class="span4 detailsbar">
-            <h1><i class="icon-arrow-down"></i></h1>
-                        <dl>
-                                                                            </dl>
-            <h2>Tags</h2>
-            <table class="table table-condensed">
-                                    <tr><td colspan="2"><em>None found</em></td></tr>
-                            </table>
-        </aside>
-    </div>
-
-                                    <div class="row-fluid">
-        <div class="span8 content class">
-            <a id="constant_PLUGIN_PAGES" name="constant_PLUGIN_PAGES" class="anchor"></a>
-            <article id="constant_PLUGIN_PAGES" class="constant">
-                <h3 class="">PLUGIN_PAGES</h3>
-                <pre class="signature">PLUGIN_PAGES</pre>
-                <p><em>Pagesプラグイン名の定数</em></p>
-                
-            </article>
-        </div>
-        <aside class="span4 detailsbar">
-            <h1><i class="icon-arrow-down"></i></h1>
-                        <dl>
-                                                                            </dl>
-            <h2>Tags</h2>
-            <table class="table table-condensed">
-                                    <tr><td colspan="2"><em>None found</em></td></tr>
-                            </table>
-        </aside>
-    </div>
-
-                            
+                        
                                     <a id="properties" name="properties"></a>
             <div class="row-fluid">
                 <div class="span8 content class">
@@ -687,11 +349,11 @@
 
                                     <div class="row-fluid">
         <div class="span8 content class">
-            <a id="property_current" name="property_current" class="anchor"></a>
+            <a id="property_components" name="property_components" class="anchor"></a>
             <article class="property">
-                <h3 class="public ">$current</h3>
-                <pre class="signature">$current : array</pre>
-                <p><em>Current data</em></p>
+                <h3 class="public ">$components</h3>
+                <pre class="signature">$components : array</pre>
+                <p><em>use component</em></p>
                 
 
                                 <h4>Type</h4>
@@ -701,8 +363,6 @@
         <aside class="span4 detailsbar">
             <h1><i class="icon-arrow-down"></i></h1>
                         <dl>
-                                    <dt>Inherited from</dt>
-                    <dd><a href="../classes/CurrentBase.html"><div class="path-wrapper">\CurrentBase</div></a></dd>
                                                             </dl>
             <h2>Tags</h2>
             <table class="table table-condensed">
@@ -711,179 +371,7 @@
         </aside>
     </div>
 
-                                    <div class="row-fluid">
-        <div class="span8 content class">
-            <a id="property_originalCurrent" name="property_originalCurrent" class="anchor"></a>
-            <article class="property">
-                <h3 class="public ">$originalCurrent</h3>
-                <pre class="signature">$originalCurrent : array</pre>
-                <p><em>Current data</em></p>
-                
-
-                                <h4>Type</h4>
-                array
-                                            </article>
-        </div>
-        <aside class="span4 detailsbar">
-            <h1><i class="icon-arrow-down"></i></h1>
-                        <dl>
-                                    <dt>Inherited from</dt>
-                    <dd><a href="../classes/CurrentBase.html"><div class="path-wrapper">\CurrentBase</div></a></dd>
-                                                            </dl>
-            <h2>Tags</h2>
-            <table class="table table-condensed">
-                                    <tr><td colspan="2"><em>None found</em></td></tr>
-                            </table>
-        </aside>
-    </div>
-
-                                    <div class="row-fluid">
-        <div class="span8 content class">
-            <a id="property_permission" name="property_permission" class="anchor"></a>
-            <article class="property">
-                <h3 class="public ">$permission</h3>
-                <pre class="signature">$permission : array</pre>
-                <p><em>Permission data</em></p>
-                
-
-                                <h4>Type</h4>
-                array
-                                            </article>
-        </div>
-        <aside class="span4 detailsbar">
-            <h1><i class="icon-arrow-down"></i></h1>
-                        <dl>
-                                    <dt>Inherited from</dt>
-                    <dd><a href="../classes/CurrentBase.html"><div class="path-wrapper">\CurrentBase</div></a></dd>
-                                                            </dl>
-            <h2>Tags</h2>
-            <table class="table table-condensed">
-                                    <tr><td colspan="2"><em>None found</em></td></tr>
-                            </table>
-        </aside>
-    </div>
-
-                                    <div class="row-fluid">
-        <div class="span8 content class">
-            <a id="property_request" name="property_request" class="anchor"></a>
-            <article class="property">
-                <h3 class="public ">$request</h3>
-                <pre class="signature">$request : mixed</pre>
-                <p><em>Request object</em></p>
-                
-
-                                <h4>Type</h4>
-                mixed
-                                            </article>
-        </div>
-        <aside class="span4 detailsbar">
-            <h1><i class="icon-arrow-down"></i></h1>
-                        <dl>
-                                                            </dl>
-            <h2>Tags</h2>
-            <table class="table table-condensed">
-                                    <tr><td colspan="2"><em>None found</em></td></tr>
-                            </table>
-        </aside>
-    </div>
-
-                                    <div class="row-fluid">
-        <div class="span8 content class">
-            <a id="property_session" name="property_session" class="anchor"></a>
-            <article class="property">
-                <h3 class="public ">$session</h3>
-                <pre class="signature">$session : mixed</pre>
-                <p><em>Session object</em></p>
-                
-
-                                <h4>Type</h4>
-                mixed
-                                            </article>
-        </div>
-        <aside class="span4 detailsbar">
-            <h1><i class="icon-arrow-down"></i></h1>
-                        <dl>
-                                                            </dl>
-            <h2>Tags</h2>
-            <table class="table table-condensed">
-                                    <tr><td colspan="2"><em>None found</em></td></tr>
-                            </table>
-        </aside>
-    </div>
-
-                                    <div class="row-fluid">
-        <div class="span8 content class">
-            <a id="property_layout" name="property_layout" class="anchor"></a>
-            <article class="property">
-                <h3 class="public ">$layout</h3>
-                <pre class="signature">$layout : string</pre>
-                <p><em>layout</em></p>
-                
-
-                                <h4>Type</h4>
-                string
-                                            </article>
-        </div>
-        <aside class="span4 detailsbar">
-            <h1><i class="icon-arrow-down"></i></h1>
-                        <dl>
-                                                            </dl>
-            <h2>Tags</h2>
-            <table class="table table-condensed">
-                                    <tr><td colspan="2"><em>None found</em></td></tr>
-                            </table>
-        </aside>
-    </div>
-
-                                                    <div class="row-fluid">
-        <div class="span8 content class">
-            <a id="property__isSettingMode" name="property__isSettingMode" class="anchor"></a>
-            <article class="property">
-                <h3 class="protected ">$_isSettingMode</h3>
-                <pre class="signature">$_isSettingMode : boolean</pre>
-                <p><em>is setting mode true</em></p>
-                
-
-                                <h4>Type</h4>
-                boolean
-                                            </article>
-        </div>
-        <aside class="span4 detailsbar">
-            <h1><i class="icon-arrow-down"></i></h1>
-                        <dl>
-                                                            </dl>
-            <h2>Tags</h2>
-            <table class="table table-condensed">
-                                    <tr><td colspan="2"><em>None found</em></td></tr>
-                            </table>
-        </aside>
-    </div>
-
-                                    <div class="row-fluid">
-        <div class="span8 content class">
-            <a id="property__instance" name="property__instance" class="anchor"></a>
-            <article class="property">
-                <h3 class="protected ">$_instance</h3>
-                <pre class="signature">$_instance : mixed</pre>
-                <p><em>Instance object</em></p>
-                
-
-                                <h4>Type</h4>
-                mixed
-                                            </article>
-        </div>
-        <aside class="span4 detailsbar">
-            <h1><i class="icon-arrow-down"></i></h1>
-                        <dl>
-                                                            </dl>
-            <h2>Tags</h2>
-            <table class="table table-condensed">
-                                    <tr><td colspan="2"><em>None found</em></td></tr>
-                            </table>
-        </aside>
-    </div>
-
-                                            
+                                                            
                                     <a id="methods" name="methods"></a>
             <div class="row-fluid">
                 <div class="span8 content class"><h2>Methods</h2></div>
@@ -892,43 +380,23 @@
 
                                     <div class="row-fluid">
         <div class="span8 content class">
-            <a id="method_read" name="method_read" class="anchor"></a>
+            <a id="method_beforeRender" name="method_beforeRender" class="anchor"></a>
             <article class="method">
-                <h3 class="public ">read()</h3>
+                <h3 class="public ">beforeRender()</h3>
                 <a href="#source-view" role="button" class="pull-right btn" data-toggle="modal" style="font-size: 1.1em; padding: 9px 14px"><i class="icon-code"></i></a>
-                <pre class="signature" style="margin-right: 54px;">read(string|null  <span class="argument">$key = null</span>, mixed  <span class="argument">$default = null</span>) : array|null</pre>
-                <p><em>指定された$keyの値を返します。</em></p>
-                <p>現在のBlockKeyを取得したい場合</p>
-<pre><code>Cuurent::read('Block.key')</code></pre>
+                <pre class="signature" style="margin-right: 54px;">beforeRender() : void</pre>
+                <p><em>beforeRender</em></p>
+                
 
-                                    <h4>Parameters</h4>
-                    <table class="table table-condensed table-hover">
-                                                    <tr>
-                                <td>string|null</td>
-                                <td>$key </td>
-                                <td><p>Hashクラスのpath</p></td>
-                            </tr>
-                                                    <tr>
-                                <td>mixed</td>
-                                <td>$default </td>
-                                <td><p>デフォルト値</p></td>
-                            </tr>
-                                            </table>
                 
                 
-                                    <h4>Returns</h4>
-                    array|null
-                                            &mdash; <p>Current data.</p>
-                                    				
+                				
                             </article>
         </div>
         <aside class="span4 detailsbar">
             <h1><i class="icon-arrow-down"></i></h1>
-                            <span class="label label-info">static</span>
                                                             <dl>
-                                                    <dt>Inherited from</dt>
-                    <dd><a href="../classes/CurrentBase.html"><div class="path-wrapper">\CurrentBase</div></a></dd>
-                                                            </dl>
+                                                                            </dl>
             <h2>Tags</h2>
             <table class="table table-condensed">
                                     <tr><td colspan="2"><em>None found</em></td></tr>
@@ -938,26 +406,56 @@
 
                                     <div class="row-fluid">
         <div class="span8 content class">
-            <a id="method_write" name="method_write" class="anchor"></a>
+            <a id="method_download" name="method_download" class="anchor"></a>
             <article class="method">
-                <h3 class="public ">write()</h3>
+                <h3 class="public ">download()</h3>
                 <a href="#source-view" role="button" class="pull-right btn" data-toggle="modal" style="font-size: 1.1em; padding: 9px 14px"><i class="icon-code"></i></a>
-                <pre class="signature" style="margin-right: 54px;">write(string|null  <span class="argument">$key</span>, \mixted  <span class="argument">$value</span>) : void</pre>
-                <p><em>指定された$keyの値をセットします</em></p>
-                <p>現在のBlockKeyをセットしたい場合</p>
-<pre><code>Cuurent::write('Block.key', 'block_key)</code></pre>
+                <pre class="signature" style="margin-right: 54px;">download() : void</pre>
+                <p><em>download method</em></p>
+                
+
+                
+                                    <h4>Throws</h4>
+                    <dl>
+                                                    <dt>\NotFoundException</dt>
+                            <dd></dd>
+                                                                    </dl>
+                
+                				
+                            </article>
+        </div>
+        <aside class="span4 detailsbar">
+            <h1><i class="icon-arrow-down"></i></h1>
+                                                            <dl>
+                                                                            </dl>
+            <h2>Tags</h2>
+            <table class="table table-condensed">
+                                    <tr><td colspan="2"><em>None found</em></td></tr>
+                            </table>
+        </aside>
+    </div>
+
+                                                                    <div class="row-fluid">
+        <div class="span8 content class">
+            <a id="method___downloadNoImage" name="method___downloadNoImage" class="anchor"></a>
+            <article class="method">
+                <h3 class="private ">__downloadNoImage()</h3>
+                <a href="#source-view" role="button" class="pull-right btn" data-toggle="modal" style="font-size: 1.1em; padding: 9px 14px"><i class="icon-code"></i></a>
+                <pre class="signature" style="margin-right: 54px;">__downloadNoImage(\Model  <span class="argument">$User</span>, array  <span class="argument">$user</span>) : void</pre>
+                <p><em>download method</em></p>
+                
 
                                     <h4>Parameters</h4>
                     <table class="table table-condensed table-hover">
                                                     <tr>
-                                <td>string|null</td>
-                                <td>$key </td>
-                                <td><p>Hashクラスのpath、nullの場合、Hash::mergeする</p></td>
+                                <td>\Model</td>
+                                <td>$User </td>
+                                <td><p>User model(AppModel)</p></td>
                             </tr>
                                                     <tr>
-                                <td>\mixted</td>
-                                <td>$value </td>
-                                <td><p>セットする値</p></td>
+                                <td>array</td>
+                                <td>$user </td>
+                                <td><p>User data</p></td>
                             </tr>
                                             </table>
                 
@@ -967,130 +465,6 @@
         </div>
         <aside class="span4 detailsbar">
             <h1><i class="icon-arrow-down"></i></h1>
-                            <span class="label label-info">static</span>
-                                                            <dl>
-                                                    <dt>Inherited from</dt>
-                    <dd><a href="../classes/CurrentBase.html"><div class="path-wrapper">\CurrentBase</div></a></dd>
-                                                            </dl>
-            <h2>Tags</h2>
-            <table class="table table-condensed">
-                                    <tr><td colspan="2"><em>None found</em></td></tr>
-                            </table>
-        </aside>
-    </div>
-
-                                    <div class="row-fluid">
-        <div class="span8 content class">
-            <a id="method_remove" name="method_remove" class="anchor"></a>
-            <article class="method">
-                <h3 class="public ">remove()</h3>
-                <a href="#source-view" role="button" class="pull-right btn" data-toggle="modal" style="font-size: 1.1em; padding: 9px 14px"><i class="icon-code"></i></a>
-                <pre class="signature" style="margin-right: 54px;">remove(string|null  <span class="argument">$key = null</span>) : array|null</pre>
-                <p><em>指定された$keyの値を削除します。</em></p>
-                <p>現在のBlockKeyを削除したい場合</p>
-<pre><code>Cuurent::remove('Block.key')</code></pre>
-
-                                    <h4>Parameters</h4>
-                    <table class="table table-condensed table-hover">
-                                                    <tr>
-                                <td>string|null</td>
-                                <td>$key </td>
-                                <td><p>Hashクラスのpath</p></td>
-                            </tr>
-                                            </table>
-                
-                
-                                    <h4>Returns</h4>
-                    array|null
-                                            &mdash; <p>Current data.</p>
-                                    				
-                            </article>
-        </div>
-        <aside class="span4 detailsbar">
-            <h1><i class="icon-arrow-down"></i></h1>
-                            <span class="label label-info">static</span>
-                                                            <dl>
-                                                    <dt>Inherited from</dt>
-                    <dd><a href="../classes/CurrentBase.html"><div class="path-wrapper">\CurrentBase</div></a></dd>
-                                                            </dl>
-            <h2>Tags</h2>
-            <table class="table table-condensed">
-                                    <tr><td colspan="2"><em>None found</em></td></tr>
-                            </table>
-        </aside>
-    </div>
-
-                                    <div class="row-fluid">
-        <div class="span8 content class">
-            <a id="method_permission" name="method_permission" class="anchor"></a>
-            <article class="method">
-                <h3 class="public ">permission()</h3>
-                <a href="#source-view" role="button" class="pull-right btn" data-toggle="modal" style="font-size: 1.1em; padding: 9px 14px"><i class="icon-code"></i></a>
-                <pre class="signature" style="margin-right: 54px;">permission(string  <span class="argument">$key</span>, integer|null  <span class="argument">$roomId = null</span>) : boolean</pre>
-                <p><em>指定された$key(権限名文字列)の値を返します。</em></p>
-                <pre><code>Current::permission('content_publishable')</code></pre>
-
-                                    <h4>Parameters</h4>
-                    <table class="table table-condensed table-hover">
-                                                    <tr>
-                                <td>string</td>
-                                <td>$key </td>
-                                <td><p>Hashクラスのpath</p></td>
-                            </tr>
-                                                    <tr>
-                                <td>integer|null</td>
-                                <td>$roomId </td>
-                                <td><p>ルームID</p></td>
-                            </tr>
-                                            </table>
-                
-                
-                                    <h4>Returns</h4>
-                    boolean
-                                            &mdash; <p>permission value</p>
-                                    				
-                            </article>
-        </div>
-        <aside class="span4 detailsbar">
-            <h1><i class="icon-arrow-down"></i></h1>
-                            <span class="label label-info">static</span>
-                                                            <dl>
-                                                    <dt>Inherited from</dt>
-                    <dd><a href="../classes/CurrentBase.html"><div class="path-wrapper">\CurrentBase</div></a></dd>
-                                                            </dl>
-            <h2>Tags</h2>
-            <table class="table table-condensed">
-                                    <tr><td colspan="2"><em>None found</em></td></tr>
-                            </table>
-        </aside>
-    </div>
-
-                                    <div class="row-fluid">
-        <div class="span8 content class">
-            <a id="method_initialize" name="method_initialize" class="anchor"></a>
-            <article class="method">
-                <h3 class="public ">initialize()</h3>
-                <a href="#source-view" role="button" class="pull-right btn" data-toggle="modal" style="font-size: 1.1em; padding: 9px 14px"><i class="icon-code"></i></a>
-                <pre class="signature" style="margin-right: 54px;">initialize(\Controller  <span class="argument">$controller</span>) : void</pre>
-                <p><em>setup current data</em></p>
-                
-
-                                    <h4>Parameters</h4>
-                    <table class="table table-condensed table-hover">
-                                                    <tr>
-                                <td>\Controller</td>
-                                <td>$controller </td>
-                                <td><p>コントローラ</p></td>
-                            </tr>
-                                            </table>
-                
-                
-                				
-                            </article>
-        </div>
-        <aside class="span4 detailsbar">
-            <h1><i class="icon-arrow-down"></i></h1>
-                            <span class="label label-info">static</span>
                                                             <dl>
                                                                             </dl>
             <h2>Tags</h2>
@@ -1102,220 +476,29 @@
 
                                     <div class="row-fluid">
         <div class="span8 content class">
-            <a id="method_terminate" name="method_terminate" class="anchor"></a>
+            <a id="method___getSimpleModel" name="method___getSimpleModel" class="anchor"></a>
             <article class="method">
-                <h3 class="public ">terminate()</h3>
+                <h3 class="private ">__getSimpleModel()</h3>
                 <a href="#source-view" role="button" class="pull-right btn" data-toggle="modal" style="font-size: 1.1em; padding: 9px 14px"><i class="icon-code"></i></a>
-                <pre class="signature" style="margin-right: 54px;">terminate(\Controller  <span class="argument">$controller</span>) : void</pre>
-                <p><em>setup current data</em></p>
-                
-
-                                    <h4>Parameters</h4>
-                    <table class="table table-condensed table-hover">
-                                                    <tr>
-                                <td>\Controller</td>
-                                <td>$controller </td>
-                                <td><p>コントローラ</p></td>
-                            </tr>
-                                            </table>
-                
-                
-                				
-                            </article>
-        </div>
-        <aside class="span4 detailsbar">
-            <h1><i class="icon-arrow-down"></i></h1>
-                            <span class="label label-info">static</span>
-                                                            <dl>
-                                                                            </dl>
-            <h2>Tags</h2>
-            <table class="table table-condensed">
-                                    <tr><td colspan="2"><em>None found</em></td></tr>
-                            </table>
-        </aside>
-    </div>
-
-                                    <div class="row-fluid">
-        <div class="span8 content class">
-            <a id="method_isLogin" name="method_isLogin" class="anchor"></a>
-            <article class="method">
-                <h3 class="public ">isLogin()</h3>
-                <a href="#source-view" role="button" class="pull-right btn" data-toggle="modal" style="font-size: 1.1em; padding: 9px 14px"><i class="icon-code"></i></a>
-                <pre class="signature" style="margin-right: 54px;">isLogin() : boolean</pre>
-                <p><em>ログインチェック</em></p>
-                
-
-                
-                
-                                    <h4>Returns</h4>
-                    boolean
-                                    				
-                            </article>
-        </div>
-        <aside class="span4 detailsbar">
-            <h1><i class="icon-arrow-down"></i></h1>
-                            <span class="label label-info">static</span>
-                                                            <dl>
-                                                                            </dl>
-            <h2>Tags</h2>
-            <table class="table table-condensed">
-                                    <tr><td colspan="2"><em>None found</em></td></tr>
-                            </table>
-        </aside>
-    </div>
-
-                                    <div class="row-fluid">
-        <div class="span8 content class">
-            <a id="method_isSettingMode" name="method_isSettingMode" class="anchor"></a>
-            <article class="method">
-                <h3 class="public ">isSettingMode()</h3>
-                <a href="#source-view" role="button" class="pull-right btn" data-toggle="modal" style="font-size: 1.1em; padding: 9px 14px"><i class="icon-code"></i></a>
-                <pre class="signature" style="margin-right: 54px;">isSettingMode(boolean|null  <span class="argument">$settingMode = null</span>) : boolean</pre>
-                <p><em>セッティングモードチェック</em></p>
-                
-
-                                    <h4>Parameters</h4>
-                    <table class="table table-condensed table-hover">
-                                                    <tr>
-                                <td>boolean|null</td>
-                                <td>$settingMode </td>
-                                <td><p>セッティングモードの状態変更</p></td>
-                            </tr>
-                                            </table>
-                
-                
-                                    <h4>Returns</h4>
-                    boolean
-                                    				
-                            </article>
-        </div>
-        <aside class="span4 detailsbar">
-            <h1><i class="icon-arrow-down"></i></h1>
-                            <span class="label label-info">static</span>
-                                                            <dl>
-                                                                            </dl>
-            <h2>Tags</h2>
-            <table class="table table-condensed">
-                                    <tr><td colspan="2"><em>None found</em></td></tr>
-                            </table>
-        </aside>
-    </div>
-
-                                    <div class="row-fluid">
-        <div class="span8 content class">
-            <a id="method_hasSettingMode" name="method_hasSettingMode" class="anchor"></a>
-            <article class="method">
-                <h3 class="public ">hasSettingMode()</h3>
-                <a href="#source-view" role="button" class="pull-right btn" data-toggle="modal" style="font-size: 1.1em; padding: 9px 14px"><i class="icon-code"></i></a>
-                <pre class="signature" style="margin-right: 54px;">hasSettingMode() : boolean</pre>
-                <p><em>セッティングモードの有無</em></p>
-                
-
-                
-                
-                                    <h4>Returns</h4>
-                    boolean
-                                    				
-                            </article>
-        </div>
-        <aside class="span4 detailsbar">
-            <h1><i class="icon-arrow-down"></i></h1>
-                            <span class="label label-info">static</span>
-                                                            <dl>
-                                                                            </dl>
-            <h2>Tags</h2>
-            <table class="table table-condensed">
-                                    <tr><td colspan="2"><em>None found</em></td></tr>
-                            </table>
-        </aside>
-    </div>
-
-                                    <div class="row-fluid">
-        <div class="span8 content class">
-            <a id="method_isControlPanel" name="method_isControlPanel" class="anchor"></a>
-            <article class="method">
-                <h3 class="public ">isControlPanel()</h3>
-                <a href="#source-view" role="button" class="pull-right btn" data-toggle="modal" style="font-size: 1.1em; padding: 9px 14px"><i class="icon-code"></i></a>
-                <pre class="signature" style="margin-right: 54px;">isControlPanel() : boolean</pre>
-                <p><em>コントロールパネルチェック</em></p>
-                
-
-                
-                
-                                    <h4>Returns</h4>
-                    boolean
-                                    				
-                            </article>
-        </div>
-        <aside class="span4 detailsbar">
-            <h1><i class="icon-arrow-down"></i></h1>
-                            <span class="label label-info">static</span>
-                                                            <dl>
-                                                                            </dl>
-            <h2>Tags</h2>
-            <table class="table table-condensed">
-                                    <tr><td colspan="2"><em>None found</em></td></tr>
-                            </table>
-        </aside>
-    </div>
-
-                                    <div class="row-fluid">
-        <div class="span8 content class">
-            <a id="method_hasControlPanel" name="method_hasControlPanel" class="anchor"></a>
-            <article class="method">
-                <h3 class="public ">hasControlPanel()</h3>
-                <a href="#source-view" role="button" class="pull-right btn" data-toggle="modal" style="font-size: 1.1em; padding: 9px 14px"><i class="icon-code"></i></a>
-                <pre class="signature" style="margin-right: 54px;">hasControlPanel() : boolean</pre>
-                <p><em>コントロールパネルの有無</em></p>
-                
-
-                
-                
-                                    <h4>Returns</h4>
-                    boolean
-                                    				
-                            </article>
-        </div>
-        <aside class="span4 detailsbar">
-            <h1><i class="icon-arrow-down"></i></h1>
-                            <span class="label label-info">static</span>
-                                                            <dl>
-                                                                            </dl>
-            <h2>Tags</h2>
-            <table class="table table-condensed">
-                                    <tr><td colspan="2"><em>None found</em></td></tr>
-                            </table>
-        </aside>
-    </div>
-
-                                    <div class="row-fluid">
-        <div class="span8 content class">
-            <a id="method_allowSystemPlugin" name="method_allowSystemPlugin" class="anchor"></a>
-            <article class="method">
-                <h3 class="public ">allowSystemPlugin()</h3>
-                <a href="#source-view" role="button" class="pull-right btn" data-toggle="modal" style="font-size: 1.1em; padding: 9px 14px"><i class="icon-code"></i></a>
-                <pre class="signature" style="margin-right: 54px;">allowSystemPlugin(string  <span class="argument">$pluginKey</span>) : boolean</pre>
-                <p><em>管理系プラグインの許可</em></p>
+                <pre class="signature" style="margin-right: 54px;">__getSimpleModel(string  <span class="argument">$modelName</span>) : void</pre>
+                <p><em>download method</em></p>
                 
 
                                     <h4>Parameters</h4>
                     <table class="table table-condensed table-hover">
                                                     <tr>
                                 <td>string</td>
-                                <td>$pluginKey </td>
-                                <td><p>プラグインkey</p></td>
+                                <td>$modelName </td>
+                                <td><p>Model name</p></td>
                             </tr>
                                             </table>
                 
                 
-                                    <h4>Returns</h4>
-                    boolean
-                                    				
+                				
                             </article>
         </div>
         <aside class="span4 detailsbar">
             <h1><i class="icon-arrow-down"></i></h1>
-                            <span class="label label-info">static</span>
                                                             <dl>
                                                                             </dl>
             <h2>Tags</h2>
@@ -1327,27 +510,14 @@
 
                                     <div class="row-fluid">
         <div class="span8 content class">
-            <a id="method_setCurrent" name="method_setCurrent" class="anchor"></a>
+            <a id="method___getBindParamsForUser" name="method___getBindParamsForUser" class="anchor"></a>
             <article class="method">
-                <h3 class="public ">setCurrent()</h3>
+                <h3 class="private ">__getBindParamsForUser()</h3>
                 <a href="#source-view" role="button" class="pull-right btn" data-toggle="modal" style="font-size: 1.1em; padding: 9px 14px"><i class="icon-code"></i></a>
-                <pre class="signature" style="margin-right: 54px;">setCurrent(array  <span class="argument">$results</span>, array  <span class="argument">$forceMargeModels = array()</span>) : void</pre>
-                <p><em>取得した結果を$currentにセットする</em></p>
+                <pre class="signature" style="margin-right: 54px;">__getBindParamsForUser() : void</pre>
+                <p><em>get bind params for User</em></p>
                 
 
-                                    <h4>Parameters</h4>
-                    <table class="table table-condensed table-hover">
-                                                    <tr>
-                                <td>array</td>
-                                <td>$results </td>
-                                <td><p>取得結果</p></td>
-                            </tr>
-                                                    <tr>
-                                <td>array</td>
-                                <td>$forceMargeModels </td>
-                                <td><p>既に取得済みでも強制でマージするModelのリスト</p></td>
-                            </tr>
-                                            </table>
                 
                 
                 				
@@ -1355,7 +525,6 @@
         </div>
         <aside class="span4 detailsbar">
             <h1><i class="icon-arrow-down"></i></h1>
-                            <span class="label label-info">static</span>
                                                             <dl>
                                                                             </dl>
             <h2>Tags</h2>
@@ -1365,16 +534,102 @@
         </aside>
     </div>
 
-                                                                    </div>
+                                    <div class="row-fluid">
+        <div class="span8 content class">
+            <a id="method___getQueryForUser" name="method___getQueryForUser" class="anchor"></a>
+            <article class="method">
+                <h3 class="private ">__getQueryForUser()</h3>
+                <a href="#source-view" role="button" class="pull-right btn" data-toggle="modal" style="font-size: 1.1em; padding: 9px 14px"><i class="icon-code"></i></a>
+                <pre class="signature" style="margin-right: 54px;">__getQueryForUser() : void</pre>
+                <p><em>get query for User</em></p>
+                
+
+                
+                
+                				
+                            </article>
+        </div>
+        <aside class="span4 detailsbar">
+            <h1><i class="icon-arrow-down"></i></h1>
+                                                            <dl>
+                                                                            </dl>
+            <h2>Tags</h2>
+            <table class="table table-condensed">
+                                    <tr><td colspan="2"><em>None found</em></td></tr>
+                            </table>
+        </aside>
+    </div>
+
+                                    <div class="row-fluid">
+        <div class="span8 content class">
+            <a id="method___getBindParamsForUserAttributeSetting" name="method___getBindParamsForUserAttributeSetting" class="anchor"></a>
+            <article class="method">
+                <h3 class="private ">__getBindParamsForUserAttributeSetting()</h3>
+                <a href="#source-view" role="button" class="pull-right btn" data-toggle="modal" style="font-size: 1.1em; padding: 9px 14px"><i class="icon-code"></i></a>
+                <pre class="signature" style="margin-right: 54px;">__getBindParamsForUserAttributeSetting(array  <span class="argument">$user</span>) : void</pre>
+                <p><em>get bind params for UserAttributeSetting</em></p>
+                
+
+                                    <h4>Parameters</h4>
+                    <table class="table table-condensed table-hover">
+                                                    <tr>
+                                <td>array</td>
+                                <td>$user </td>
+                                <td><p>User data</p></td>
+                            </tr>
+                                            </table>
+                
+                
+                				
+                            </article>
+        </div>
+        <aside class="span4 detailsbar">
+            <h1><i class="icon-arrow-down"></i></h1>
+                                                            <dl>
+                                                                            </dl>
+            <h2>Tags</h2>
+            <table class="table table-condensed">
+                                    <tr><td colspan="2"><em>None found</em></td></tr>
+                            </table>
+        </aside>
+    </div>
+
+                                    <div class="row-fluid">
+        <div class="span8 content class">
+            <a id="method___getQueryForUserAttributeSetting" name="method___getQueryForUserAttributeSetting" class="anchor"></a>
+            <article class="method">
+                <h3 class="private ">__getQueryForUserAttributeSetting()</h3>
+                <a href="#source-view" role="button" class="pull-right btn" data-toggle="modal" style="font-size: 1.1em; padding: 9px 14px"><i class="icon-code"></i></a>
+                <pre class="signature" style="margin-right: 54px;">__getQueryForUserAttributeSetting() : void</pre>
+                <p><em>get query for UserAttributeSetting</em></p>
+                
+
+                
+                
+                				
+                            </article>
+        </div>
+        <aside class="span4 detailsbar">
+            <h1><i class="icon-arrow-down"></i></h1>
+                                                            <dl>
+                                                                            </dl>
+            <h2>Tags</h2>
+            <table class="table table-condensed">
+                                    <tr><td colspan="2"><em>None found</em></td></tr>
+                            </table>
+        </aside>
+    </div>
+
+                                    </div>
     </section>
 
     <div id="source-view" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="source-view-label" aria-hidden="true">
         <div class="modal-header">
             <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
-            <h3 id="source-view-label">Current.php</h3>
+            <h3 id="source-view-label">UsersAvatarController.php</h3>
         </div>
         <div class="modal-body">
-            <pre data-src="../files/Plugin/NetCommons/Utility/Current.php.txt" class="language-php line-numbers"></pre>
+            <pre data-src="../files/Plugin/Users/Controller/UsersAvatarController.php.txt" class="language-php line-numbers"></pre>
         </div>
     </div>
 
