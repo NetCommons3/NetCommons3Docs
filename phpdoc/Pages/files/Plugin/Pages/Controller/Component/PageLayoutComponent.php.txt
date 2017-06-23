@@ -30,7 +30,7 @@ class PageLayoutComponent extends Component {
  *
  * @var string
  */
-	protected $_page = null;
+	protected static $_page = null;
 
 /**
  * フレームエレメント
@@ -54,8 +54,7 @@ class PageLayoutComponent extends Component {
 			return;
 		}
 
-		$this->_page = Current::read('PageLayout.page');
-		if (! $this->_page) {
+		if (!self::$_page) {
 			//pathからページデータ取得
 			if (! isset($controller->viewVars['page'])) {
 				$this->Page = ClassRegistry::init('Pages.Page');
@@ -65,16 +64,15 @@ class PageLayoutComponent extends Component {
 				if (empty($page)) {
 					throw new NotFoundException();
 				}
-				$this->_page = $page;
+				self::$_page = $page;
 			} else {
-				$this->_page = $controller->viewVars['page'];
+				self::$_page = $controller->viewVars['page'];
 			}
-			Current::write('PageLayout.page', $this->_page);
 		}
 
 		if (! array_key_exists('Pages.PageLayout', $controller->helpers)) {
 			$controller->helpers['Pages.PageLayout'] = array(
-				'page' => $this->_page,
+				'page' => self::$_page,
 				'layoutSetting' => ($controller->layout === 'NetCommons.setting'),
 				'frameElement' => $this->frameElement,
 			);
@@ -85,7 +83,7 @@ class PageLayoutComponent extends Component {
 			return;
 		}
 
-		$controller->set('page', $this->_page);
+		$controller->set('page', self::$_page);
 		$controller->set('modal', $this->modal);
 
 		//メタデータのセット
