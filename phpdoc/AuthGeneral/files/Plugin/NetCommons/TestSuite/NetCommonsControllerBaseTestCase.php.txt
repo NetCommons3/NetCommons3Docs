@@ -20,6 +20,7 @@ App::uses('NetCommonsTestSuite', 'NetCommons.TestSuite');
 App::uses('NetCommonsCakeTestCase', 'NetCommons.TestSuite');
 App::uses('Role', 'Roles.Model');
 App::uses('SiteSettingUtil', 'SiteManager.Utility');
+App::uses('OriginalKeyBehavior', 'NetCommons.Model/Behavior');
 
 /**
  * NetCommonsControllerTestCase
@@ -67,22 +68,24 @@ class NetCommonsControllerBaseTestCase extends ControllerTestCase {
 		'plugin.blocks.block',
 		'plugin.blocks.block_role_permission',
 		'plugin.blocks.block_setting',
+		'plugin.blocks.blocks_language',
 		'plugin.boxes.box',
-		'plugin.boxes.boxes_page',
+		'plugin.boxes.boxes_page_container',
 		'plugin.categories.category',
-		'plugin.containers.container',
-		'plugin.containers.containers_page',
 		'plugin.data_types.data_type',
 		'plugin.data_types.data_type_choice',
 		'plugin.files.upload_file',
 		'plugin.files.upload_files_content',
 		'plugin.frames.frame',
+		'plugin.frames.frame_public_language',
+		'plugin.frames.frames_language',
 		'plugin.m17n.language',
 		'plugin.mails.mail_queue',
 		'plugin.mails.mail_queue_user',
 		'plugin.mails.mail_setting',
-		'plugin.pages.languages_page',
+		'plugin.pages.pages_language',
 		'plugin.pages.page',
+		'plugin.pages.page_container',
 		'plugin.plugin_manager.plugin',
 		'plugin.plugin_manager.plugins_role',
 		'plugin.plugin_manager.plugins_room',
@@ -159,6 +162,10 @@ class NetCommonsControllerBaseTestCase extends ControllerTestCase {
 		CakeSession::write('Auth.User', null);
 
 		Current::$current = array();
+		Current::$permission = array();
+
+		OriginalKeyBehavior::$isUnitRandomKey = false;
+
 		SiteSettingUtil::reset();
 		parent::tearDown();
 	}
@@ -217,6 +224,21 @@ class NetCommonsControllerBaseTestCase extends ControllerTestCase {
 		$method->setAccessible(true);
 		$result = $method->invokeArgs($instance, $params);
 		return $result;
+	}
+
+/**
+ * Viewの結果をスペース等のパースを行う
+ *
+ * @param string $view Viewの結果
+ * @return string
+ */
+	protected function _parseView($view) {
+		$view = preg_replace('/[>][\s\t]+([^a-z])/u', '>$1', $view);
+		$view = preg_replace('/[\s\t]+</u', '<', $view);
+		$view = preg_replace('/[\s\t]+/u', ' ', $view);
+		$view = str_replace("\n", '', $view);
+		$view = trim($view);
+		return $view;
 	}
 
 /**

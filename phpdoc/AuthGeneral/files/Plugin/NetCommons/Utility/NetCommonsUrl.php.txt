@@ -17,6 +17,7 @@ App::uses('Page', 'Pages.Model');
  *
  * @author Shohei Nakajima <nakajimashouhei@gmail.com>
  * @package NetCommons\NetCommons\Utility
+ * @SuppressWarnings(PHPMD.ExcessiveClassComplexity)
  */
 class NetCommonsUrl {
 
@@ -24,26 +25,38 @@ class NetCommonsUrl {
  * ページに戻るURLを生成
  *
  * @param bool $settingMode セッティングモード
+ * @param array $options URLオプション
  * @param bool|array $full If (bool) true, the full base URL will be prepended to the result.
  * @return string Full translated URL with base path.
  * @SuppressWarnings(PHPMD.BooleanArgumentFlag)
  */
-	public static function backToPageUrl($settingMode = false, $full = false) {
+	public static function backToPageUrl($settingMode = false, $options = [], $full = false) {
 		$page['Page'] = Current::read('Page');
 
 		$url = '/';
 		if (! Current::isControlPanel()) {
-			if ($settingMode) {
+			if ($settingMode || $settingMode === null && Current::isSettingMode()) {
 				$url .= Current::SETTING_MODE_WORD . '/';
 			}
 
-			if (Hash::get($page, 'Page.parent_id') === Page::PUBLIC_ROOT_PAGE_ID &&
-					Hash::get($page, 'Page.id') === Current::read('Room.page_id_top')) {
-				$url .= '';
+			if (Hash::get($page, 'Page.full_permalink')) {
+				$url .= h(Hash::get($page, 'Page.full_permalink'));
 			} else {
-				$url .= h(Hash::get($page, 'Page.permalink'));
+				if (Current::read('Space.permalink')) {
+					$url .= Current::read('Space.permalink') . '/';
+				}
+				if (Hash::get($page, 'Page.id') === Current::read('TopPage.id')) {
+					$url .= '';
+				} else {
+					$url .= h(Hash::get($page, 'Page.permalink'));
+				}
 			}
 		}
+
+		if (isset($options['frame_id'])) {
+			$url .= '?frame_id=' . $options['frame_id'];
+		}
+
 		return $url;
 	}
 
@@ -61,8 +74,17 @@ class NetCommonsUrl {
 			if (Current::read('Block.id')) {
 				$url .= '/' . Current::read('Block.id');
 			}
+
+			$urlQuery = '';
 			if (Current::read('Frame.id')) {
-				$url .= '?frame_id=' . Current::read('Frame.id');
+				$urlQuery .= '&frame_id=' . Current::read('Frame.id');
+			}
+			if (Current::read('Page.id') && ! Current::read('Box.page_id')) {
+				$urlQuery .= '&page_id=' . Current::read('Page.id');
+			}
+
+			if ($urlQuery) {
+				$url = $url . '?' . substr($urlQuery, 1);
 			}
 		}
 		return $url;
@@ -120,6 +142,17 @@ class NetCommonsUrl {
 		if (isset($params['frame_id'])) {
 			$query['?']['frame_id'] = $params['frame_id'];
 			unset($params['frame_id']);
+
+			if (Current::read('Page.id') && ! Current::read('Box.page_id')) {
+				//デフォルト、Current::readの値を使用
+				$url['?']['page_id'] = Current::read('Page.id');
+				$params = Hash::remove($params, 'page_id');
+			}
+		}
+
+		if (isset($params['page_id'])) {
+			$query['?']['page_id'] = $params['page_id'];
+			unset($params['page_id']);
 		}
 		return Hash::merge($url, $query, $params);
 	}
@@ -213,6 +246,8 @@ class NetCommonsUrl {
  * @param bool $isArray 配列で戻すかどうか
  * @return array|string block url
  * @SuppressWarnings(PHPMD.BooleanArgumentFlag)
+ * @SuppressWarnings(PHPMD.CyclomaticComplexity)
+ * @SuppressWarnings(PHPMD.NPathComplexity)
  */
 	public static function blockUrl($url = array(), $isArray = true) {
 		if (!is_array($url)) {
@@ -237,6 +272,15 @@ class NetCommonsUrl {
 		} elseif (Current::read('Frame.id')) {
 			//デフォルト、Current::readの値を使用
 			$url['?']['frame_id'] = Current::read('Frame.id');
+		}
+
+		if (isset($url['page_id'])) {
+			//$url['page_id']がある場合、パラメータとするように設定
+			$url['?']['page_id'] = $url['page_id'];
+			unset($url['page_id']);
+		} elseif (Current::read('Page.id') && ! Current::read('Box.page_id')) {
+			//デフォルト、Current::readの値を使用
+			$url['?']['page_id'] = Current::read('Page.id');
 		}
 
 		if ($isArray) {

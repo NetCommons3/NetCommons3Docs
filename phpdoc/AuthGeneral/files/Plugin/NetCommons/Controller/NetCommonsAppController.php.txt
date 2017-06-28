@@ -97,6 +97,7 @@ class NetCommonsAppController extends Controller {
 		'Html' => array(
 			'className' => 'NetCommons.SingletonViewBlockHtml'
 		),
+		'M17n.M17n',
 		'NetCommons.BackTo',
 		'NetCommons.Button',
 		'NetCommons.LinkButton',
@@ -128,28 +129,11 @@ class NetCommonsAppController extends Controller {
 	}
 
 /**
- * beforeFilter
+ * 事前準備
  *
  * @return void
  */
-	public function beforeFilter() {
-		Security::setHash('sha512');
-
-		//言語の取得
-		if (isset($this->request->query['language'])) {
-			Configure::write('Config.language', $this->request->query['language']);
-			$this->Session->write('Config.language', $this->request->query['language']);
-		} elseif ($this->Session->check('Config.language')) {
-			Configure::write('Config.language', $this->Session->read('Config.language'));
-		}
-
-		//カレントデータセット
-		Current::initialize($this);
-
-		if (! $this->AccessCtrl->allowAccess()) {
-			return;
-		}
-
+	private function __prepare() {
 		if (Current::read('Block') &&
 				! $this->Components->loaded('NetCommons.Permission')) {
 			$this->Components->load('NetCommons.Permission');
@@ -161,19 +145,82 @@ class NetCommonsAppController extends Controller {
 			$this->theme = $theme;
 		}
 
-		$this->Auth->allow('index', 'view', 'emptyRender', 'download', 'throwBadRequest');
-
 		if ($this->RequestHandler->accepts('json')) {
 			$this->viewClass = 'Json';
 			$this->layout = false;
 		}
 
-		if (in_array($this->params['action'], ['emptyRender', 'throwBadRequest'])) {
+		if (in_array($this->params['action'], ['emptyRender', 'throwBadRequest', 'emptyFrame'])) {
 			$this->params['pass'] = array();
 		}
+	}
+
+/**
+ * beforeFilter
+ *
+ * @return void
+ */
+	public function beforeFilter() {
+		if (empty($this->request->params['requested'])) {
+			$this->request->allowMethod('get', 'post', 'put', 'delete');
+		}
+
+		Security::setHash('sha512');
+
+		//言語のセット
+		$this->_setLanguage();
+
+		//カレントデータセット
+		Current::initialize($this);
+
+		if (! $this->AccessCtrl->allowAccess()) {
+			return;
+		}
+
+		$this->Auth->allow('index', 'view', 'emptyRender', 'download', 'throwBadRequest', 'emptyFrame');
+
+		$this->__prepare();
 
 		//モバイルかどうかの判定処理
 		Configure::write('isMobile', $this->MobileDetect->detect('isMobile'));
+
+		if ($this->params['plugin'] !== 'frames' &&
+				Current::read('Frame.id') && ! Current::read('FramePublicLanguage.is_public')) {
+			return $this->setAction('emptyFrame');
+		}
+	}
+
+/**
+ * Called after the controller action is run and rendered.
+ *
+ * @return void
+ * @link http://book.cakephp.org/2.0/ja/controllers.html#request-life-cycle-callbacks
+ */
+	public function afterFilter() {
+		//カレントデータセット
+		Current::terminate($this);
+	}
+
+/**
+ * リクエストもしくはSessionから言語をセットする。
+ *
+ * @return void
+ */
+	protected function _setLanguage() {
+		if (isset($this->request->query['language']) &&
+				! array_key_exists('search', $this->request->query)) {
+			Configure::write('Config.language', $this->request->query['language']);
+			$this->Session->write('Config.language', $this->request->query['language']);
+
+		} elseif ($this->Session->check('Config.language')) {
+			Configure::write('Config.language', $this->Session->read('Config.language'));
+		}
+
+		//多言語の切り替えボックス
+		$languages = $this->Language->getLanguages();
+		$this->set('switchLanguages', $languages);
+
+		$this->set('hasSwitchLang', count($languages) > 1);
 	}
 
 /**
@@ -276,6 +323,19 @@ class NetCommonsAppController extends Controller {
  */
 	public function emptyRender() {
 		$this->autoRender = false;
+	}
+
+/**
+ * Empty render
+ *
+ * @return void
+ */
+	public function emptyFrame() {
+		if (Current::isSettingMode() || $this->layout === 'NetCommons.setting') {
+			$this->view = 'Frames.Frames/emptyRender';
+		} else {
+			$this->autoRender = false;
+		}
 	}
 
 }

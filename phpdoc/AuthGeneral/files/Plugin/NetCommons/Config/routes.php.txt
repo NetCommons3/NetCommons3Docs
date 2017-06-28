@@ -34,32 +34,33 @@ if (! Current::isSettingMode()) {
 $indexParams = $params + array('action' => 'index');
 
 $plugins = CakePlugin::loaded();
-if ($plugins) {
+$managerPlugins = Configure::read('ManagerPlugins');
+if (! $managerPlugins) {
+	$managerPlugins = array();
+}
+$routingPlugins = [];
+foreach ($plugins as $key => $value) {
+	if (in_array($value, $managerPlugins, true)) {
+		continue;
+	}
+	$routingPlugins[$key] = Inflector::underscore($value);
+}
+
+if ($routingPlugins) {
 	App::uses('PluginShortRoute', 'Routing/Route');
 
-	$managerPlugins = Configure::read('ManagerPlugins');
-	if (! $managerPlugins) {
-		$managerPlugins = array();
-	}
-
-	foreach ($plugins as $key => $value) {
-		if (in_array($value, $managerPlugins, true)) {
-			continue;
-		}
-		$plugins[$key] = Inflector::underscore($value);
-	}
-	$pluginPattern = implode('|', $plugins);
+	$pluginPattern = implode('|', $routingPlugins);
 	$options = array(
 		'plugin' => $pluginPattern,
 		'block_id' => '[0-9]+',
 		'key' => '[a-zA-Z0-9_]+', //_は、UnitTestで使用するため
 	);
-	$shortParams = array('routeClass' => 'PluginShortRoute', 'plugin' => $pluginPattern);
+	$shortOptions = array('routeClass' => 'PluginShortRoute', 'plugin' => $pluginPattern);
 
 	Router::connect(
 		'/' . Current::SETTING_MODE_WORD . '/:plugin',
 		$indexParams,
-		$shortParams
+		$shortOptions
 	);
 	Router::connect(
 		'/' . Current::SETTING_MODE_WORD . '/:plugin/:controller',
@@ -81,6 +82,7 @@ if ($plugins) {
 		$params,
 		$options
 	);
+
 	Router::connect(
 		'/:plugin/:controller/:action/:block_id',
 		$params,

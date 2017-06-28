@@ -15,6 +15,7 @@ CakeLog::drop('stderr');
 App::uses('Current', 'NetCommons.Utility');
 App::uses('NetCommonsTestSuite', 'NetCommons.TestSuite');
 App::uses('SiteSettingUtil', 'SiteManager.Utility');
+App::uses('OriginalKeyBehavior', 'NetCommons.Model/Behavior');
 
 /**
  * NetCommonsCakeTestCase class
@@ -61,20 +62,22 @@ class NetCommonsCakeTestCase extends CakeTestCase {
 		'plugin.blocks.block',
 		'plugin.blocks.block_role_permission',
 		'plugin.blocks.block_setting',
+		'plugin.blocks.blocks_language',
 		'plugin.boxes.box',
-		'plugin.boxes.boxes_page',
-		'plugin.containers.container',
-		'plugin.containers.containers_page',
+		'plugin.boxes.boxes_page_container',
 		'plugin.data_types.data_type',
 		'plugin.data_types.data_type_choice',
 		'plugin.files.upload_file',
 		'plugin.files.upload_files_content',
 		'plugin.frames.frame',
+		'plugin.frames.frame_public_language',
+		'plugin.frames.frames_language',
 		'plugin.m17n.language',
 		'plugin.mails.mail_queue',
 		'plugin.mails.mail_queue_user',
 		'plugin.mails.mail_setting',
 		'plugin.pages.page',
+		'plugin.pages.page_container',
 		'plugin.plugin_manager.plugin',
 		//'plugin.plugin_manager.plugins_role',
 		//'plugin.roles.default_role_permission',
@@ -148,6 +151,11 @@ class NetCommonsCakeTestCase extends CakeTestCase {
 		Configure::write('NetCommons.installed', false);
 		Configure::write('Config.language', null);
 		SiteSettingUtil::reset();
+
+		Current::$current = array();
+		Current::$permission = array();
+
+		OriginalKeyBehavior::$isUnitRandomKey = false;
 
 		parent::tearDown();
 	}

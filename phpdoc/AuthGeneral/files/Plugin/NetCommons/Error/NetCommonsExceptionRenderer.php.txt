@@ -61,33 +61,126 @@ class NetCommonsExceptionRenderer extends ExceptionRenderer {
  */
 	public function error400($error) {
 		$message = $error->getMessage();
-		if (! Configure::read('debug') && $error instanceof CakeException) {
-			$message = __d('net_commons', 'Not Found');
-		}
 		$this->controller->response->statusCode($error->getCode());
 
 		if ($message === 'The request has been black-holed') {
-			$message = __d('net_commons', 'The request has been black-holed');
 			$redirect = $this->controller->request->referer(true);
-		} elseif ($message === 'Permission denied' ||
-				in_array($this->controller->params['action'], ['index', 'view'])) {
-			$message = __d('net_commons', 'Permission denied');
-			$redirect = Router::url('/auth/login');
+
+		} elseif ($message === 'Not found file') {
+			$this->controller->autoRender = false;
+			$this->_shutdown();
+			$this->controller->response->send();
+			return;
+
+		} elseif ($message === 'Bad ip address') {
 			$this->controller->Session->destroy();
+			$redirect = null;
+
+		} elseif ($message === 'Under maintenance') {
+			$redirect = '/net_commons/site_close/index';
+			$this->controller->Session->destroy();
+
+		} elseif ($this->_is403And404($error)) {
+			list($redirect, $redirectUrl) = $this->_get403And404Redirect();
 			if (! $this->controller->request->is('ajax')) {
-				$this->controller->Auth->redirectUrl($this->controller->request->here(false));
+				$this->controller->Auth->redirectUrl($redirectUrl);
 			}
+
 		} else {
-			$redirect = Router::url('/');
+			$redirect = '/';
 			$this->controller->Session->destroy();
+		}
+		if (isset($redirect)) {
+			$redirect = Router::url($redirect);
 		}
 
 		$results = array(
-			'message' => h($message),
+			'message' => $this->_get400Message($error),
 			'redirect' => $redirect,
 			'interval' => '3'
 		);
-		$this->__setError('NetCommons.error400', $error, $results);
+		$this->_setError('NetCommons.error400', $error, $results);
+	}
+
+/**
+ * エラーメッセージ取得
+ *
+ * @param Exception $error Exception
+ * @return string $message
+ */
+	protected function _get400Message($error) {
+		$message = $error->getMessage();
+		if (! Configure::read('debug') && $error instanceof CakeException) {
+			$message = 'Not Found';
+		}
+
+		if ($message === 'Under maintenance') {
+			$message = __d(
+				'net_commons', 'Under maintenance. Nobody is allowed to login except for administrators.'
+			);
+		} elseif ($this->_is403And404($error)) {
+			if ($this->controller->Auth->user()) {
+				$message = __d('net_commons', 'Permission denied. Bad account.');
+			} else {
+				$message = __d('net_commons', 'Permission denied. You must be logged.');
+			}
+		} else {
+			$message = __d('net_commons', $message);
+		}
+
+		return h($message);
+	}
+
+/**
+ * 403か404のエラーかチェックする
+ *
+ * @param Exception $error Exception
+ * @return bool
+ */
+	protected function _is403And404($error) {
+		return $error->getMessage() === 'Permission denied' ||
+				$error->getCode() === 403 ||
+				get_class($error) === 'MissingControllerException';
+	}
+
+/**
+ * リダイレクトURLを取得する。
+ *
+ * @return array array($redirect, $redirectUrl)
+ */
+	protected function _get403And404Redirect() {
+		if ($this->controller->Auth->user()) {
+			$referer = Router::parse($this->controller->request->referer(true));
+			$here = Router::parse($this->controller->request->here(false));
+
+			if ($referer['action'] === 'login' || $here['action'] === 'login') {
+				//テストでMockに差し替えが必要なための処理であるので、カバレッジレポートから除外する。
+				//@codeCoverageIgnoreStart
+				if (empty($this->SiteSetting)) {
+					$this->SiteSetting = ClassRegistry::init('SiteManager.SiteSetting');
+				}
+				//@codeCoverageIgnoreEnd
+				$redirect = $this->SiteSetting->getDefaultStartPage();
+				$redirectUrl = $redirect;
+			} else {
+				$redirect = '/';
+				$redirectUrl = '/';
+			}
+		} else {
+			$redirect = '/auth/login';
+			$this->controller->Session->destroy();
+
+			App::uses('Current', 'NetCommons.Utility');
+			if (in_array($this->controller->params['action'], ['index', 'view'], true)) {
+				$redirectUrl = $this->controller->request->here(false);
+			} elseif (Current::read('Page.permalink')) {
+				$redirectUrl = '/' . Current::read('Page.permalink');
+			} else {
+				$redirectUrl = '/';
+			}
+		}
+
+		return array($redirect, $redirectUrl);
 	}
 
 /**
@@ -100,19 +193,18 @@ class NetCommonsExceptionRenderer extends ExceptionRenderer {
 		$message = $error->getMessage();
 		if (! Configure::read('debug')) {
 			$message = __d('net_commons', 'An Internal Error Has Occurred.');
+			$code = 500;
+		} else {
+			$code = $error->getCode();
 		}
 
-		if ($error->getCode() > 500 && $error->getCode() < 506) {
-			$code = $error->getCode();
-		} else {
-			$code = 500;
-		}
 		$this->controller->response->statusCode($code);
 
 		$results = array(
+			'code' => $code,
 			'message' => h($message),
 		);
-		$this->__setError('NetCommons.error500', $error, $results);
+		$this->_setError('NetCommons.error500', $error, $results);
 	}
 
 /**
@@ -123,7 +215,7 @@ class NetCommonsExceptionRenderer extends ExceptionRenderer {
  * @param array $results viewにセットする配列
  * @return void
  */
-	private function __setError($template, $error, $results) {
+	protected function _setError($template, $error, $results) {
 		$url = $this->controller->request->here();
 
 		$name = preg_replace('/Exception$/', '', get_class($error));
