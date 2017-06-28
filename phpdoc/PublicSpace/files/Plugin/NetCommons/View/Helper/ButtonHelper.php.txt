@@ -69,7 +69,11 @@ class ButtonHelper extends FormHelper {
  */
 	public function button($title, $options = array()) {
 		$icon = Hash::get($options, 'icon');
+
 		if ($icon) {
+			if (Hash::get($options, 'mobileHide')) {
+				$title = '<span class="hidden-xs">' . $title . '</span>';
+			}
 			$title = '<span class="glyphicon ' . $icon . '" aria-hidden="true"></span> ' . $title;
 			$options = Hash::remove($options, 'icon');
 			$options = Hash::insert($options, 'escape', false);
@@ -89,6 +93,7 @@ class ButtonHelper extends FormHelper {
 			}
 			$options = Hash::insert($options, 'class', $class);
 		}
+
 		return $this->Form->button($title, $options);
 	}
 
@@ -117,9 +122,12 @@ class ButtonHelper extends FormHelper {
 		}
 		$title = '<span class="glyphicon glyphicon-trash" aria-hidden="true"> </span> ' . $title;
 
+		$btnType = Hash::get($options, 'btnType', 'btn-danger');
+		$options = Hash::remove($options, 'btnType');
+
 		$defaultOptions = array(
 			'name' => 'delete',
-			'class' => 'btn btn-danger' . $this->getButtonSize(),
+			'class' => 'btn ' . $btnType . $this->getButtonSize(),
 			'onclick' => 'return confirm(\'' . $confirm . '\')',
 			'ng-class' => '{disabled: sending}',
 		);
@@ -227,7 +235,7 @@ class ButtonHelper extends FormHelper {
 	public function cancelAndSave($cancelTitle, $saveTitle, $cancelUrl = null,
 									$cancelOptions = [], $saveOptions = []) {
 		if (! isset($cancelUrl)) {
-			$cancelUrl = NetCommonsUrl::backToPageUrl();
+			$cancelUrl = NetCommonsUrl::backToPageUrl(null);
 		}
 
 		$output = '';
@@ -251,7 +259,7 @@ class ButtonHelper extends FormHelper {
 		App::uses('WorkflowComponent', 'Workflow.Controller/Component');
 
 		if (! isset($cancelUrl)) {
-			$cancelUrl = NetCommonsUrl::backToPageUrl();
+			$cancelUrl = NetCommonsUrl::backToPageUrl(null);
 		}
 		$output = '';
 
