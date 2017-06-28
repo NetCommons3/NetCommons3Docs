@@ -152,7 +152,7 @@ class BackToHelper extends AppHelper {
  * @return string
  */
 	public function pageLinkButton($title, $options = array()) {
-		$url = NetCommonsUrl::backToPageUrl();
+		$url = NetCommonsUrl::backToPageUrl(null);
 		return $this->linkButton($title, $url, $options);
 	}
 
@@ -167,23 +167,6 @@ class BackToHelper extends AppHelper {
 	public function indexLinkButton($title, $defaultField = 'default_action', $options = array()) {
 		$url = NetCommonsUrl::backToIndexUrl($defaultField);
 		return $this->linkButton($title, $url, $options);
-	}
-
-/**
- * 一覧へボタンHTMLの出力
- * ※後で削除予定
- *
- * @param string $title タイトル文字列
- * @param array $options HTML属性オプション
- * @return string HTMLタグ
- */
-	public function listLinkButton($title, $options = array()) {
-		$options = Hash::merge(['icon' => 'arrow-left'], $options);
-		if (! is_string($title)) {
-			$title = __d('net_commons', 'To list');
-		}
-
-		return $this->pageLinkButton($title, $options);
 	}
 
 }
