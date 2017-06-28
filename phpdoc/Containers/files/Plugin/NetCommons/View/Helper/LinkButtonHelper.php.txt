@@ -52,6 +52,7 @@ class LinkButtonHelper extends FormHelper {
 				$url = array(
 					'action' => 'add',
 					'frame_id' => Current::read('Frame.id'),
+					//'page_id' => Current::read('Page.id'),
 				);
 				if (isset($this->_View->viewVars['addActionController'])) {
 					$url['controller'] = $this->_View->viewVars['addActionController'];
@@ -205,7 +206,7 @@ class LinkButtonHelper extends FormHelper {
 		$output = '';
 
 		if (! isset($url)) {
-			$url = NetCommonsUrl::backToPageUrl();
+			$url = NetCommonsUrl::backToPageUrl(null, ['frame_id' => Current::read('Frame.id')]);
 		}
 
 		//Linkオプションの設定

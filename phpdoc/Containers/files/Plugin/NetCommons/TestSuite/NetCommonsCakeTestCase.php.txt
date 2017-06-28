@@ -15,6 +15,7 @@ CakeLog::drop('stderr');
 App::uses('Current', 'NetCommons.Utility');
 App::uses('NetCommonsTestSuite', 'NetCommons.TestSuite');
 App::uses('SiteSettingUtil', 'SiteManager.Utility');
+App::uses('OriginalKeyBehavior', 'NetCommons.Model/Behavior');
 
 /**
  * NetCommonsCakeTestCase class
@@ -53,15 +54,6 @@ class NetCommonsCakeTestCase extends CakeTestCase {
 	protected $_isFixtureMerged = true;
 
 /**
- * CakePHPv2.5.7以前は強制的にtruncateされていたため、同テーブルで別名のFixtureが定義されていても動作していたが、
- * dropTables=falseにしないとtruncateしなくなった。
- *
- * @var bool
- * @see https://github.com/cakephp/cakephp/blob/2.8.7/lib/Cake/TestSuite/Fixture/CakeFixtureManager.php#L232-L234
- */
-	public $dropTables = false;
-
-/**
  * Fixtures
  *
  * @var array
@@ -70,6 +62,7 @@ class NetCommonsCakeTestCase extends CakeTestCase {
 		'plugin.blocks.block',
 		'plugin.blocks.block_role_permission',
 		'plugin.blocks.block_setting',
+		'plugin.blocks.blocks_language',
 		'plugin.boxes.box',
 		'plugin.boxes.boxes_page_container',
 		'plugin.data_types.data_type',
@@ -77,6 +70,8 @@ class NetCommonsCakeTestCase extends CakeTestCase {
 		'plugin.files.upload_file',
 		'plugin.files.upload_files_content',
 		'plugin.frames.frame',
+		'plugin.frames.frame_public_language',
+		'plugin.frames.frames_language',
 		'plugin.m17n.language',
 		'plugin.mails.mail_queue',
 		'plugin.mails.mail_queue_user',
@@ -159,6 +154,8 @@ class NetCommonsCakeTestCase extends CakeTestCase {
 
 		Current::$current = array();
 		Current::$permission = array();
+
+		OriginalKeyBehavior::$isUnitRandomKey = false;
 
 		parent::tearDown();
 	}

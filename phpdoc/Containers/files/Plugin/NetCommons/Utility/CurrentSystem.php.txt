@@ -47,23 +47,23 @@ class CurrentSystem {
 		}
 		$this->Language = ClassRegistry::init('M17n.Language');
 
-		Current::$m17n['Language'] = $this->Language->getLanguage();
-		foreach (Current::$m17n['Language'] as $language) {
-			if ($language['Language']['code'] === Configure::read('Config.language')) {
-				Current::$current = Hash::merge(Current::$current, $language);
-			}
+		$language = $this->Language->getLanguage('first', array(
+			'conditions' => array(
+				'code' => Configure::read('Config.language'),
+			)
+		));
+		if (! isset($language['Language'])) {
+			$language = $this->Language->getLanguage('first', array(
+				'order' => 'weight'
+			));
 		}
-	}
 
-/**
- * 言語データを取得
- *
- * @return void
- */
-	public function getLanguages() {
-		$this->setLanguage();
-
-		return Current::$m17n['Language'];
+		Current::$current['Language'] = $language['Language'];
+		if (is_object(Current::$session) && $this->Language->useDbConfig !== 'test' &&
+				$language['Language']['code'] !== Configure::write('Config.language')) {
+			Configure::write('Config.language', $language['Language']['code']);
+			Current::$session->write('Config.language', $language['Language']['code']);
+		}
 	}
 
 /**
@@ -90,10 +90,7 @@ class CurrentSystem {
 				'language_id' => Current::$current['Language']['id']
 			),
 		));
-		if (! $result) {
-			return;
-		}
-		Current::$current = Hash::merge(Current::$current, $result);
+		Current::setCurrent($result, true);
 	}
 
 /**

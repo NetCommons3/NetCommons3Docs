@@ -93,7 +93,6 @@ App::uses('Plugin', 'PluginManager.Model');
  * 		[id] => 1
  * 		[space_id] => 2
  * 		[page_id_top] => 1
- * 		[root_id] =>
  * 		[parent_id] =>
  * 		[lft] => 1
  * 		[rght] => 2
@@ -273,6 +272,13 @@ class Current extends CurrentBase {
 	public static $request;
 
 /**
+ * Session object
+ *
+ * @var mixed
+ */
+	public static $session;
+
+/**
  * layout
  *
  * @var string
@@ -287,13 +293,6 @@ class Current extends CurrentBase {
 	protected static $_instance;
 
 /**
- * M17n data
- *
- * @var array
- */
-	public static $m17n = array();
-
-/**
  * setup current data
  *
  * @param Controller $controller コントローラ
@@ -305,6 +304,7 @@ class Current extends CurrentBase {
 		}
 
 		self::$request = clone $controller->request;
+		self::$session = $controller->Session;
 		self::$layout = $controller->layout;
 
 		if (Hash::get(self::$current, 'User.modified') !== AuthComponent::user('modified')) {
@@ -334,43 +334,20 @@ class Current extends CurrentBase {
 
 		//会員権限に紐づくパーミッションのセット
 		(new CurrentPage())->setDefaultRolePermissions(Hash::get(self::$current, 'User.role_key'), true);
+
+		if (empty($controller->request->params['requested'])) {
+			self::$originalCurrent = self::$current;
+		}
 	}
 
 /**
- * 多言語のデータ取得
+ * setup current data
  *
- * @param string|null $languageId 言語ID
- * @param string|null $model モデル名
- * @param string|null $field フィールド名
- * @return mixed Currentデータ
+ * @param Controller $controller コントローラ
+ * @return void
  */
-	public static function readM17n($languageId, $model = null, $field = null) {
-		if (! isset(self::$m17n)) {
-			return self::$m17n;
-		}
-
-		if (! isset($model)) {
-			return self::$m17n;
-		}
-
-		if (! isset(self::$m17n[$model])) {
-			return null;
-		}
-		if (! isset($languageId)) {
-			return self::$m17n[$model];
-		}
-
-		$pathKey = $model . '.{n}.' . $model . '[language_id=' . $languageId . ']';
-		$result = Hash::extract(self::$m17n, $pathKey);
-		if (! $result) {
-			return null;
-		}
-
-		if (! isset($field)) {
-			return array($model => $result[0]);
-		} else {
-			return $result[0][$field];
-		}
+	public static function terminate(Controller $controller) {
+		self::$current = self::$originalCurrent;
 	}
 
 /**
@@ -413,7 +390,7 @@ class Current extends CurrentBase {
  * @return bool
  */
 	public static function hasSettingMode() {
-		return self::permission('page_editable');
+		return self::permission('page_editable', Current::read('Page.room_id'));
 	}
 
 /**
@@ -471,6 +448,30 @@ class Current extends CurrentBase {
 		//	return true;
 		//}
 		return Hash::check(Current::$current['PluginsRole'], '{n}[plugin_key=' . $pluginKey . ']');
+	}
+
+/**
+ * 取得した結果を$currentにセットする
+ *
+ * @param array $results 取得結果
+ * @param array $forceMargeModels 既に取得済みでも強制でマージするModelのリスト
+ * @return void
+ */
+	public static function setCurrent($results, $forceMargeModels = []) {
+		if (! $results) {
+			return;
+		}
+		$models = array_keys($results);
+
+		foreach ($models as $model) {
+			if (array_key_exists('id', $results[$model]) && ! Hash::get($results[$model], 'id')) {
+				continue;
+			}
+			if (! isset(Current::$current[$model]) ||
+					$forceMargeModels === true || in_array($model, $forceMargeModels, true)) {
+				Current::$current[$model] = $results[$model];
+			}
+		}
 	}
 
 }
