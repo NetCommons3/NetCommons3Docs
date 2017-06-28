@@ -9,6 +9,9 @@
  * @copyright Copyright 2014, NetCommons Project
  */
 
+App::uses('CurrentFrame', 'NetCommons.Utility');
+App::uses('Space', 'Rooms.Model');
+
 /**
  * CurrentPage Utility
  *
@@ -38,13 +41,15 @@ class CurrentPage {
 			}
 			$this->setRoom($roomId);
 		}
+
 		$this->setPage();
+		$this->setTopPage();
 		$this->setPageByRoomPageTopId();
 		$this->setRolesRoomsUser();
 		$this->setDefaultRolePermissions();
 		$this->setRoomRolePermissions();
 		$this->setPluginsRoom();
-		$this->setSpace();
+		//$this->setSpace();
 	}
 
 /**
@@ -62,7 +67,8 @@ class CurrentPage {
 				'Room.id' => Current::$current['Room']['id']
 			));
 			if ($result) {
-				Current::$current = Hash::merge(Current::$current, $result[0]);
+				unset($result[0]['Room']);
+				Current::setCurrent($result[0], true);
 			}
 		}
 	}
@@ -70,15 +76,25 @@ class CurrentPage {
 /**
  * Set BlockRolePermissions
  *
+ * @param string $roleKey ロールキー
+ * @param bool $isMerge マージするかどうか
  * @return void
+ * @SuppressWarnings(PHPMD.BooleanArgumentFlag)
  */
-	public function setDefaultRolePermissions() {
+	public function setDefaultRolePermissions($roleKey = null, $isMerge = false) {
 		$this->DefaultRolePermission = ClassRegistry::init('Roles.DefaultRolePermission');
 
-		if (isset(Current::$current['DefaultRolePermission'])) {
+		if (! isset(Current::$current['DefaultRolePermission'])) {
+			Current::$current['DefaultRolePermission'] = array();
+		}
+
+		if (! $roleKey && Current::$current['DefaultRolePermission']) {
 			return;
 		}
-		if (isset(Current::$current['RolesRoom'])) {
+
+		if ($roleKey) {
+			$roomRoleKey = $roleKey;
+		} elseif (isset(Current::$current['RolesRoom'])) {
 			$roomRoleKey = Current::$current['RolesRoom']['role_key'];
 		} else {
 			$roomRoleKey = self::DEFAULT_ROOM_ROLE_KEY;
@@ -90,9 +106,19 @@ class CurrentPage {
 			)
 		));
 		if ($result) {
-			Current::$current['DefaultRolePermission'] = Hash::combine(
+			$result = Hash::combine(
 				$result, '{n}.DefaultRolePermission.permission', '{n}.DefaultRolePermission'
 			);
+			Current::$current['DefaultRolePermission'] = Hash::merge(
+				Current::$current['DefaultRolePermission'], $result
+			);
+
+			if ($isMerge) {
+				if (! isset(Current::$current['Permission'])) {
+					Current::$current['Permission'] = array();
+				}
+				Current::$current['Permission'] = Hash::merge(Current::$current['Permission'], $result);
+			}
 		}
 	}
 
@@ -134,27 +160,36 @@ class CurrentPage {
 			if (Current::$request->params['controller'] === 'pages') {
 				$value = implode('/', Current::$request->params['pass']);
 				if ($value === '') {
-					$field = 'Page.root_id';
 					$value = Page::PUBLIC_ROOT_PAGE_ID;
+					$conditions = array('Page.root_id' => $value);
 				} else {
-					$field = 'Page.permalink';
+					$conditions = array(
+						'Page.permalink' => $value,
+						'Room.space_id' => Hash::get(
+							Current::$request->params, 'spaceId', Space::PUBLIC_SPACE_ID
+						),
+					);
 				}
 			} else {
-				$field = 'Page.id';
 				$value = Hash::get(Current::$request->params, 'pass.1', '');
 				if (! $value) {
 					$this->setRoom(Hash::get(Current::$request->params, 'pass.0', ''));
 					$value = Hash::get(Current::$current, 'Room.page_id_top', '');
 				}
+				$conditions = array('Page.id' => $value);
 			}
-			$conditions = array($field => $value);
+
+		} elseif (Hash::get(Current::$request->query, 'page_id')) {
+			$pageId = Hash::get(Current::$request->query, 'page_id');
+			$conditions = array('Page.id' => $pageId);
 
 		} elseif (in_array(Current::$request->params['plugin'],
 								[Current::PLUGIN_USERS, Current::PLUGIN_GROUPS], true) &&
 					! Current::$request->is('ajax')) {
 			$this->Room = ClassRegistry::init('Rooms.Room');
 			$result = $this->Room->getPrivateRoomByUserId(Current::read('User.id'));
-			Current::$current = Hash::merge(Current::$current, $result);
+			Current::setCurrent($result);
+
 			$conditions = array(
 				'Page.id' => Hash::get($result, 'Room.page_id_top', Page::PUBLIC_ROOT_PAGE_ID)
 			);
@@ -166,26 +201,69 @@ class CurrentPage {
 	}
 
 /**
+ * Set TopPage
+ *
+ * @return bool
+ */
+	public function setTopPage() {
+		$this->Page = ClassRegistry::init('Pages.Page');
+		if (isset(Current::$current['TopPage'])) {
+			return;
+		}
+
+		$result = $this->__getPage(array(
+			'recursive' => -1,
+			'conditions' => array(
+				'Page.room_id' => Space::getRoomIdRoot(Space::PUBLIC_SPACE_ID),
+				'Page.parent_id NOT' => null,
+			),
+			'order' => array('Page.lft' => 'asc')
+		));
+		Current::$current['TopPage'] = Hash::get($result, 'Page');
+	}
+
+/**
+ * ページ取得
+ *
+ * @param array $query クエリ
+ * @return array 条件配列
+ */
+	private function __getPage($query) {
+		$this->Page = ClassRegistry::init('Pages.Page');
+
+		if (! empty(Current::$request->params['requested'])) {
+			$this->Page->unbindModel(array(
+				'belongsTo' => array('Room'),
+			), true);
+			$this->Page->unbindModel(array(
+				'belongsTo' => array('Space'),
+			), true);
+		}
+
+		$result = $this->Page->find('first', $query);
+		return $result;
+	}
+
+/**
  * Set Page
  *
  * @return bool
  */
 	public function setPage() {
 		$this->Page = ClassRegistry::init('Pages.Page');
-
 		if (isset(Current::$current['Page'])) {
 			return;
 		}
 
 		$conditions = $this->__getPageConditions();
 		if ($conditions) {
-			$result = $this->Page->find('first', array(
+			$result = $this->__getPage(array(
 				'recursive' => 0,
 				'conditions' => $conditions,
 				'order' => array('Page.lft' => 'asc')
 			));
 
-			Current::$current = Hash::merge(Current::$current, $result);
+			Current::setCurrent($result);
 			if (isset(Current::$current['Page'])) {
 				return;
 			}
@@ -199,12 +277,14 @@ class CurrentPage {
 			$pageId = null;
 		}
 		if ($pageId) {
-			$result = $this->Page->find('first', array(
+			$result = $this->__getPage(array(
 				'recursive' => 0,
 				'conditions' => array('Page.id' => $pageId),
 			));
-			Current::$current = Hash::merge(Current::$current, $result);
+			Current::setCurrent($result);
 		}
+
+		(new CurrentFrame())->setBoxPageContainer();
 	}
 
 /**
@@ -225,7 +305,7 @@ class CurrentPage {
 			'conditions' => $conditions,
 		));
 
-		Current::$current = Hash::merge(Current::$current, $result);
+		Current::setCurrent($result);
 	}
 
 /**
@@ -239,7 +319,7 @@ class CurrentPage {
 		}
 		$this->PluginsRoom = ClassRegistry::init('PluginManager.PluginsRoom');
 
-		$result = $this->PluginsRoom->getPlugins(Current::read('Room.id'), Current::read('Language.id'));
+		$result = $this->PluginsRoom->getPlugins(Current::read('Room.id'));
 		Current::$current['PluginsRoom'] = $result;
 	}
 
@@ -259,7 +339,7 @@ class CurrentPage {
 			'recursive' => 0,
 			'conditions' => $conditions,
 		));
-		Current::$current = Hash::merge(Current::$current, $result);
+		Current::setCurrent($result);
 	}
 
 /**
@@ -267,20 +347,21 @@ class CurrentPage {
  *
  * @return void
  */
-	public function setSpace() {
-		if (!isset(Current::$current['Room'])) {
-			return;
-		}
+	//public function setSpace() {
+	//	if (! isset(Current::$current['Room'])) {
+	//		return;
+	//	}
+	//
+	//	$this->Space = ClassRegistry::init('Rooms.Space');
+	//	$conditions = array(
+	//		'Space.id' => Hash::get(Current::$current, 'Room.space_id')
+	//	);
+	//	$result = $this->Space->find('first', array(
+	//		'recursive' => 0,
+	//		'conditions' => $conditions,
+	//	));
+	//	Current::setCurrent($result, true);
+	//}
 
-		$this->Space = ClassRegistry::init('Rooms.Space');
-		$conditions = array(
-			'Space.id' => Hash::get(Current::$current, 'Room.space_id')
-		);
-		$result = $this->Space->find('first', array(
-			'recursive' => 0,
-			'conditions' => $conditions,
-		));
-		Current::$current = Hash::merge(Current::$current, $result);
-	}
 }
 

@@ -37,12 +37,14 @@ class NetCommonsTime {
 /**
  * @var int 現在日時 unixtime
  */
-	static protected $_now = null;
+	protected static $_now = null;
 
 /**
+ * Unitテストで自由に変更できるようするため、publicにする
+ *
  * @var string サイトデフォルトタイムゾーン
  */
-	static protected $_siteTimezone = null;
+	public static $siteTimezone = null;
 
 /**
  * サイトのデフォルトタイムゾーンを返す
@@ -50,11 +52,11 @@ class NetCommonsTime {
  * @return string タイムゾーン
  */
 	public function getSiteTimezone() {
-		if (self::$_siteTimezone === null) {
+		if (self::$siteTimezone === null) {
 			$SiteSetting = ClassRegistry::init('SiteManager.SiteSetting');
-			self::$_siteTimezone = $SiteSetting->getSiteTimezone();
+			self::$siteTimezone = $SiteSetting->getSiteTimezone();
 		}
-		return self::$_siteTimezone;
+		return self::$siteTimezone;
 	}
 
 /**
@@ -82,8 +84,10 @@ class NetCommonsTime {
 		$userDatetimeData = $data;
 		$convertKeyNameList = Hash::filter($convertKeyNameList);
 		foreach ($convertKeyNameList as $keyName) {
-			$_userDatetime = $this->toUserDatetime(Hash::get($data, $keyName));
-			$userDatetimeData = Hash::insert($userDatetimeData, $keyName, $_userDatetime);
+			if (Hash::get($data, $keyName)) {
+				$_userDatetime = $this->toUserDatetime(Hash::get($data, $keyName));
+				$userDatetimeData = Hash::insert($userDatetimeData, $keyName, $_userDatetime);
+			}
 		}
 		//
 		//foreach ($userDatetimeData as $key => $value) {
@@ -127,8 +131,10 @@ class NetCommonsTime {
 		$serverDatetimeData = $data;
 		$convertKeyNameList = Hash::filter($convertKeyNameList);
 		foreach ($convertKeyNameList as $keyName) {
-			$_serverDatetime = $this->toServerDatetime(Hash::get($data, $keyName), $userTimezone);
-			$serverDatetimeData = Hash::insert($serverDatetimeData, $keyName, $_serverDatetime);
+			if (Hash::get($data, $keyName)) {
+				$_serverDatetime = $this->toServerDatetime(Hash::get($data, $keyName), $userTimezone);
+				$serverDatetimeData = Hash::insert($serverDatetimeData, $keyName, $_serverDatetime);
+			}
 		}
 
 		//foreach ($serverDatetimeData as $key => $value) {
@@ -163,9 +169,10 @@ class NetCommonsTime {
  */
 	public function getUserTimezone() {
 		$userTimezone = Current::read('User.timezone');
-		if ($userTimezone === null) {
+		if (! $userTimezone) {
 			$userTimezone = $this->getSiteTimezone();
 		}
 		return $userTimezone;
 	}
 }
+
