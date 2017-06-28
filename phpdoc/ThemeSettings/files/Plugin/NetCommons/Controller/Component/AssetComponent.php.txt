@@ -37,9 +37,6 @@ class AssetComponent extends Component {
  */
 	public function getSiteTheme(Controller $controller) {
 		$theme = null;
-		if (! empty($controller->request->params['requested'])) {
-			return $theme;
-		}
 		if (Current::read('Page.theme')) {
 			return Current::read('Page.theme');
 		}
@@ -72,7 +69,7 @@ class AssetComponent extends Component {
 
 		$controller->Room = ClassRegistry::init('Rooms.Room');
 		$parentIds = $controller->Room->getPath(Current::read('Room.id'), array('id'));
-		$room = $controller->Page->find('first', array(
+		$room = $controller->Room->find('first', array(
 			'recursive' => -1,
 			'fields' => array('theme'),
 			'conditions' => array('id' => Hash::extract($parentIds, '{n}.Room.id'), 'theme !=' => null),

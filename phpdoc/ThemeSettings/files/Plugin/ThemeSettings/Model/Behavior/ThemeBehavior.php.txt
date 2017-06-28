@@ -48,6 +48,7 @@ class ThemeBehavior extends ModelBehavior {
 				$package['snapshot'] = Router::url('/') . 'theme_settings/img/snapshot_noimage.png';
 			}
 			$package['key'] = $path;
+			$package['name'] = __d('theme_settings', $package['name']);
 
 			$themes[] = $package;
 		}

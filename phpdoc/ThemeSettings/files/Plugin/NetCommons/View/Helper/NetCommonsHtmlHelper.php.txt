@@ -63,6 +63,9 @@ class NetCommonsHtmlHelper extends AppHelper {
 			$helper = $this->Date;
 		} elseif (in_array($method, ['handleLink', 'avatarLink'], true)) {
 			$helper = $this->_View->loadHelper('Users.DisplayUser');
+		} elseif (in_array($method, ['blockTitle', 'getBlockStatus'], true)) {
+			$this->css('/blocks/css/style.css');
+			$helper = $this->_View->loadHelper('Blocks.Blocks');
 		} else {
 			$helper = $this->Html;
 		}
@@ -111,10 +114,12 @@ class NetCommonsHtmlHelper extends AppHelper {
  * @param array $results 出力結果配列
  * @param string $name レスポンスメッセージ
  * @param int $status ステータスコード
+ * @param bool $camelConv キャメル形式にコンバートするかどうか
  * @return string JSON形式の文字列
  * @link https://google.github.io/styleguide/jsoncstyleguide.xml Google JSON Style Guide
+ * @SuppressWarnings(PHPMD.BooleanArgumentFlag)
  */
-	public function json($results = [], $name = 'OK', $status = 200) {
+	public function json($results = [], $name = 'OK', $status = 200, $camelConv = true) {
 		//if (! $results) {
 		//	$results = $this->_View->viewVars;
 		//}
@@ -123,7 +128,11 @@ class NetCommonsHtmlHelper extends AppHelper {
 			'code' => $status,
 		], $results);
 
-		$camelizeData = NetCommonsAppController::camelizeKeyRecursive($results);
+		if ($camelConv) {
+			$camelizeData = NetCommonsAppController::camelizeKeyRecursive($results);
+		} else {
+			$camelizeData = $results;
+		}
 
 		return json_encode($camelizeData);
 	}
@@ -146,6 +155,9 @@ class NetCommonsHtmlHelper extends AppHelper {
 			}
 			if (! isset($url['action'])) {
 				$url['action'] = $this->_View->request->params['action'];
+			}
+			if ($url['plugin'] === 'pages') {
+				$options['hasBlock'] = false;
 			}
 		}
 
@@ -200,70 +212,6 @@ class NetCommonsHtmlHelper extends AppHelper {
 		$url = $this->__getUrl($url, $options);
 		$output = $this->Html->link($title, $url, $options);
 		return $output;
-	}
-
-/**
- * タイトル（ブロックタイトル）の出力
- *
- * #### サンプル
- * ```
- * echo $this->NetCommonsHtml->blockTitle($bbs['name'])
- * ```
- * ##### 出力結果
- * ```
- * <h1>新しい掲示板 20160513074815</h1>
- * ```
- *
- * @param string $text タイトル
- * @param string $titleIcon タイトルアイコン
- * @param array $options HTML属性オプション
- * @return string `<h1>`タグ
- */
-	public function blockTitle($text = '', $titleIcon = null, $options = array()) {
-		$output = '';
-
-		$escape = Hash::get($options, 'escape', true);
-		if ($escape) {
-			$text = h($text);
-		}
-		$options = Hash::insert($options, 'escape', false);
-
-		if ($titleIcon) {
-			$text = $this->titleIcon($titleIcon) . ' ' . $text;
-		}
-
-		$output .= $this->Html->tag('h1', $text, $options);
-		return $output;
-	}
-
-/**
- * Creates a `<a>` tag for add link. The type attribute defaults
- * 後で削除予定(現状、ブロック設定の一覧のリンクで使っている)
- *
- * @param string $title The anchor's caption. Not automatically HTML encoded
- * @param mixed $url Link url
- * @param array $options Array of options and HTML attributes.
- * @return string A HTML button tag.
- * @link http://book.cakephp.org/2.0/en/core-libraries/helpers/form.html#FormHelper::button
- */
-	public function editLink($title = '', $url = null, $options = array()) {
-		//URLの設定
-		if (! isset($url['plugin'])) {
-			$url['plugin'] = $this->_View->request->params['plugin'];
-		}
-		if (! isset($url['controller'])) {
-			if (! isset($this->_View->viewVars['editActionController'])) {
-				$url['controller'] = $this->_View->request->params['controller'];
-			} else {
-				$url['controller'] = $this->_View->viewVars['editActionController'];
-			}
-		}
-		if (! isset($url['action'])) {
-			$url['action'] = 'edit';
-		}
-		$url = NetCommonsUrl::blockUrl($url);
-
-		return $this->Html->link($title, $url, $options);
 	}
 
 }
