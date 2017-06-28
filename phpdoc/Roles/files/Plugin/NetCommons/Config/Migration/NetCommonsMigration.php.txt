@@ -11,6 +11,7 @@
 
 App::uses('CakeMigration', 'Migrations.Lib');
 App::uses('I18n', 'I18n');
+App::uses('Space', 'Rooms.Model');
 
 /**
  * NetCommonsMigration
@@ -28,24 +29,103 @@ class NetCommonsMigration extends CakeMigration {
 	public $records = array();
 
 /**
+ * Run migration
+ *
+ * @param string $direction Direction of migration process (up or down)
+ * @return bool Status of the process
+ * @throws MigrationException
+ */
+	public function run($direction) {
+		if (class_exists('Space') &&
+				isset($this->records['Plugin']) && Hash::extract($this->records['Plugin'], '{n}[type=1]')) {
+			Space::getInstance('Space', ['testing' => ($this->connection === 'test')]);
+			Space::getInstance('Room', ['testing' => ($this->connection === 'test')]);
+		}
+
+		return parent::run($direction);
+	}
+
+/**
+ * This method will invoke the before/afterAction callbacks, it is good when
+ * you need track every action.
+ *
+ * @param string $callback Callback name, beforeMigration, beforeAction, afterAction
+ * 		or afterMigration.
+ * @param string $type Type of action. i.e: create_table, drop_table, etc.
+ * 		Or also can be the direction, for before and after Migration callbacks
+ * @param array $data Data to send to the callback
+ * @return void
+ * @throws MigrationException
+ */
+	protected function _invokeCallbacks($callback, $type, $data = array()) {
+		try {
+			parent::_invokeCallbacks($callback, $type, $data);
+		} catch (Exception $ex) {
+			CakeLog::error($ex);
+			throw $ex;
+		}
+	}
+
+/**
+ * Generate a instance of model for given options
+ *
+ * @param string $name Model name to be initialized
+ * @param string $table Table name to be initialized
+ * @param array $options Model constructor options
+ * @return Model
+ */
+	public function generateModel($name, $table = null, $options = array()) {
+		$Model = parent::generateModel($name, $table, $options);
+		$Model->unbindModel(array(
+			'belongsTo' => array('TrackableCreator', 'TrackableUpdater')
+		), false);
+		return $Model;
+	}
+
+/**
  * Update model records
  *
  * @param string $model model name to update
- * @param array $records records to be stored
+ * @param array $argRecords records to be stored
  * @param bool $clear 初期化するかどうか
  * @return bool Should process continue
  * @SuppressWarnings(PHPMD.BooleanArgumentFlag)
  */
-	public function updateRecords($model, $records, $clear = false) {
-		$Model = $this->generateModel($model);
+	public function updateRecords($model, $argRecords, $clear = false) {
+		if (isset($argRecords['class']) && isset($argRecords['records'])) {
+			$this->loadModels([
+				$model => $argRecords['class']
+			]);
+			$objModel = $this->$model;
+			$records = $argRecords['records'];
+		} else {
+			$records = $argRecords;
+			$objModel = $this->generateModel($model);
+		}
+
 		if ($clear) {
-			if (!$Model->deleteAll(array('1 = 1'), false, false)) {
+			if (!$objModel->deleteAll(array('1 = 1'), false, false)) {
 				return false;
 			}
 		}
+
 		foreach ($records as $record) {
-			$Model->create();
-			if (!$Model->save($record, false)) {
+			foreach ($record as $field => $foreign) {
+				if (! is_array($foreign)) {
+					continue;
+				}
+
+				foreach ($foreign as $model2 => $options) {
+					$objModel2 = $this->generateModel($model2);
+					$result = $objModel2->find('first', $options);
+					$record[$field] = Hash::get($result, $options['fields']);
+
+					continue;
+				}
+			}
+
+			$objModel->create();
+			if (!$objModel->save($record, false)) {
 				return false;
 			}
 		}
@@ -80,15 +160,23 @@ class NetCommonsMigration extends CakeMigration {
  * Load models
  *
  * @param array $models models to load
- * @param string $source data source
  * @return void
  */
-	public function loadModels(array $models = [], $source = 'master') {
+	public function loadModels(array $models = []) {
 		foreach ($models as $model => $class) {
-			$this->$model = ClassRegistry::init($class, true);
-			if ($this->$model->useDbConfig !== 'test') {
-				$this->$model->setDataSource($source);
+			if ($class === 'Rooms.Space') {
+				Space::getInstance('Space', ['testing' => ($this->connection === 'test')]);
+				Space::getInstance('Room', ['testing' => ($this->connection === 'test')]);
 			}
+
+			$this->$model = ClassRegistry::init([
+				'class' => $class,
+				'testing' => ($this->connection === 'test')
+			], true);
+			$this->$model->setDataSource($this->connection);
+			//if ($this->$model->useDbConfig !== 'test') {
+			//	$this->$model->setDataSource($source);
+			//}
 		}
 	}
 
