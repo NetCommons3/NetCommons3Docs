@@ -392,56 +392,6 @@ class SaveRoomAssociationsBehavior extends ModelBehavior {
 	}
 
 /**
- * 承認有無を切り替えた際の登録処理
- * 特に承認なし⇒承認ありに変更した場合、
- * BlockRolePermissionのcontent_publishableとcontent_comment_publishableを削除する
- *
- * @param Model $model 呼び出し元のモデル
- * @param array $data Room data
- * @return bool True on success
- * @throws InternalErrorException
- */
-	public function changeNeedApproval(Model $model, $data) {
-		$model->loadModels([
-			'Block' => 'Blocks.Block',
-			'BlockRolePermission' => 'Blocks.BlockRolePermission',
-			'Room' => 'Rooms.Room',
-		]);
-
-		if (! Hash::get($data, 'Room.need_approval') ||
-				! Hash::get($data, 'Room.id')) {
-			return true;
-		}
-
-		$result = $model->Room->find('first', array(
-			'recursive' => -1,
-			'fields' => array('need_approval'),
-			'conditions' => array('id' => Hash::get($data, 'Room.id')),
-		));
-		if (Hash::get($result, 'Room.need_approval') === Hash::get($data, 'Room.need_approval')) {
-			return true;
-		}
-		$blocks = $model->Block->find('list', array(
-			'recursive' => -1,
-			'fields' => array('id', 'key'),
-			'conditions' => array('room_id' => Hash::get($data, 'Room.id')),
-		));
-
-		$blockKeys = array_unique(array_values($blocks));
-		$conditions = array(
-			$model->BlockRolePermission->alias . '.block_key' => $blockKeys,
-			$model->BlockRolePermission->alias . '.permission' => array(
-				'content_publishable', 'content_comment_publishable'
-			),
-		);
-		if (! $model->BlockRolePermission->deleteAll($conditions, false)) {
-			throw new InternalErrorException(__d('net_commons', 'Internal Server Error'));
-		}
-
-		return true;
-	}
-
-/**
  * INSERT INTO ... SELETEのSQL生成
  *
  * @param string $tableName Table name

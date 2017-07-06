@@ -308,10 +308,6 @@ class Room extends RoomsAppModel {
 	public function beforeSave($options = array()) {
 		$room = Hash::get($this->data, 'Room');
 
-		if (Hash::get($room, 'id') && Hash::check($room, 'need_approval')) {
-			$this->changeNeedApproval($this->data);
-		}
-
 		if (Hash::get($room, 'id') && Hash::get($room, 'in_draft') &&
 			Hash::get($room, 'default_participation') !== Hash::get($options, 'preUpdate.Room.in_draft')) {
 
