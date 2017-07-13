@@ -53,16 +53,7 @@ class SavePageBehavior extends ModelBehavior {
 		}
 		$model->data['Page']['slug'] = $slug;
 
-		$permalink = $slug;
-		if ($model->data['Page']['room_id'] !== Space::getRoomIdRoot(Space::PUBLIC_SPACE_ID) &&
-				Hash::get($model->data, 'Page.id', false) !== Current::read('Room.page_id_top')) {
-			$roomPageTop = $model->Page->find('first', array(
-				'recursive' => -1,
-				'fields' => array('permalink'),
-				'conditions' => array('id' => Current::read('Room.page_id_top'))
-			));
-			$permalink = Hash::get($roomPageTop, 'Page.permalink') . '/' . $permalink;
-		}
+		$permalink = $model->getTopPagePermalink($model->data['Page']) . '/' . $slug;
 		if (substr($permalink, 0, 1) === '/') {
 			$permalink = substr($permalink, 1);
 		}

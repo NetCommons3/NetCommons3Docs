@@ -224,38 +224,30 @@ class GetPageBehavior extends ModelBehavior {
 	}
 
 /**
- * 親ノード名を取得
+ * ルーム内先頭のPage.permalinkを取得
  *
  * @param Model $model Model using this behavior
- * @param int $pageId ページID
- * @param bool $created 追加かどうか
- * @return array 親ノード名リスト
+ * @param array $page Page data
+ * @return string ルーム内先頭のPage.permalink
  */
-	public function getParentPermalink(Model $model, $pageId, $created) {
-		$model->loadModels([
-			'PagesLanguage' => 'Pages.PagesLanguage',
-		]);
-
-		$parentNode = $model->getPath($pageId);
-		$parentIds = Hash::extract($parentNode, '{n}.Page.id');
-		if ($created) {
-			$parentIds[] = $pageId;
+	public function getTopPagePermalink(Model $model, $page) {
+		if ($page['room_id'] === Space::getRoomIdRoot(Space::PUBLIC_SPACE_ID) ||
+			Hash::get($page, ['id'], false) === Current::read('Room.page_id_top')
+		) {
+			return '';
 		}
 
-		$pages = $model->find('list', array(
-			'recursive' => -1,
-			'fields' => array(
-				$model->alias . '.id',
-				$model->alias . '.slug',
-			),
-			'conditions' => array(
-				$model->alias . '.id' => Hash::extract($parentNode, '{n}.Page.id'),
-				$model->alias . '.parent_id NOT' => null,
-			),
-			'order' => array($model->alias . ' .lft' => 'asc')
-		));
+		$topPageOfRoom = $model->findById(
+			Current::read('Room.page_id_top'),
+			'permalink',
+			null,
+			-1
+		);
+		if (!$topPageOfRoom) {
+			return '';
+		}
 
-		return $pages;
+		return $topPageOfRoom['Page']['permalink'];
 	}
 
 }

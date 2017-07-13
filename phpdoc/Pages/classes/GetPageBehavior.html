@@ -136,10 +136,10 @@
                                 <div class="accordion" style="margin-bottom: 0">
         <div class="accordion-group">
             <div class="accordion-heading">
-                                    <a class="accordion-toggle " data-toggle="collapse" data-target="#namespace-1246370644"></a>
+                                    <a class="accordion-toggle " data-toggle="collapse" data-target="#namespace-717074154"></a>
                                 <a href="../namespaces/default.html" style="margin-left: 30px; padding-left: 0">\</a>
             </div>
-            <div id="namespace-1246370644" class="accordion-body collapse in">
+            <div id="namespace-717074154" class="accordion-body collapse in">
                 <div class="accordion-inner">
 
                     
@@ -279,7 +279,7 @@
                                                                     <a href="../classes/GetPageBehavior.html#method_getPageWithFrame" class="">getPageWithFrame()</a><br />
                                                                     <a href="../classes/GetPageBehavior.html#method_getTopPageId" class="">getTopPageId()</a><br />
                                                                     <a href="../classes/GetPageBehavior.html#method_getParentNodeName" class="">getParentNodeName()</a><br />
-                                                                    <a href="../classes/GetPageBehavior.html#method_getParentPermalink" class="">getParentPermalink()</a><br />
+                                                                    <a href="../classes/GetPageBehavior.html#method_getTopPagePermalink" class="">getTopPagePermalink()</a><br />
                                                             </section>
                             <section class="span4">
                                                                     <em>No public properties found</em>
@@ -563,12 +563,12 @@
 
                                     <div class="row-fluid">
         <div class="span8 content class">
-            <a id="method_getParentPermalink" name="method_getParentPermalink" class="anchor"></a>
+            <a id="method_getTopPagePermalink" name="method_getTopPagePermalink" class="anchor"></a>
             <article class="method">
-                <h3 class="public ">getParentPermalink()</h3>
+                <h3 class="public ">getTopPagePermalink()</h3>
                 <a href="#source-view" role="button" class="pull-right btn" data-toggle="modal" style="font-size: 1.1em; padding: 9px 14px"><i class="icon-code"></i></a>
-                <pre class="signature" style="margin-right: 54px;">getParentPermalink(\Model  <span class="argument">$model</span>, integer  <span class="argument">$pageId</span>, boolean  <span class="argument">$created</span>) : array</pre>
-                <p><em>親ノード名を取得</em></p>
+                <pre class="signature" style="margin-right: 54px;">getTopPagePermalink(\Model  <span class="argument">$model</span>, array  <span class="argument">$page</span>) : string</pre>
+                <p><em>ルーム内先頭のPage.permalinkを取得</em></p>
                 
 
                                     <h4>Parameters</h4>
@@ -579,21 +579,16 @@
                                 <td><p>Model using this behavior</p></td>
                             </tr>
                                                     <tr>
-                                <td>integer</td>
-                                <td>$pageId </td>
-                                <td><p>ページID</p></td>
-                            </tr>
-                                                    <tr>
-                                <td>boolean</td>
-                                <td>$created </td>
-                                <td><p>追加かどうか</p></td>
+                                <td>array</td>
+                                <td>$page </td>
+                                <td><p>Page data</p></td>
                             </tr>
                                             </table>
                 
                 
                                     <h4>Returns</h4>
-                    array
-                                            &mdash; <p>親ノード名リスト</p>
+                    string
+                                            &mdash; <p>ルーム内先頭のPage.permalink</p>
                                     				
                             </article>
         </div>
@@ -657,7 +652,7 @@
                 <section class="span10 offset1">
                     <hr />
                     Documentation is powered by <a href="http://www.phpdoc.org/">phpDocumentor </a> and authored
-                    on July 13th, 2017 at 05:06.
+                    on July 13th, 2017 at 08:20.
                 </section>
             </section>
         </section>
