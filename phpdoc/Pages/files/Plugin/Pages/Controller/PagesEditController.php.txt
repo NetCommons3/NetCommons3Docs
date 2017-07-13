@@ -465,9 +465,8 @@ class PagesEditController extends PagesAppController {
 		foreach ($pageTreeList as $pageId => $tree) {
 			$page = Hash::get($pages, $pageId);
 
-			// RootのParentPage.room_idはnullなので、issetも条件にした
-			if (isset($page['ParentPage']['room_id']) &&
-				$page['ParentPage']['room_id'] !== Current::read('Room.id')
+			if ($page['Page']['room_id'] !== Current::read('Room.id') &&
+				$page['Page']['id'] !== $page['Room']['page_id_top']
 			) {
 				unset($pages[$pageId]);
 				continue;
