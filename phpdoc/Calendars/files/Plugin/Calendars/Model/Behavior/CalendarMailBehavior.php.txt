@@ -32,10 +32,12 @@ class CalendarMailBehavior extends CalendarAppBehavior {
  * @param Model &$model モデル
  * @param int $eventId イベントID（繰り返しの場合は先頭のイベント）
  * @param bool $isMyPrivateRoom （プライベートルームの情報かどうか）
+ * @param array $workflowComment ワークフローコメント
  * @return void
  * @SuppressWarnings(PHPMD.BooleanArgumentFlag)
  */
-	public function sendWorkflowAndNoticeMail(Model &$model, $eventId, $isMyPrivateRoom) {
+	public function sendWorkflowAndNoticeMail(
+		Model &$model, $eventId, $isMyPrivateRoom, $workflowComment) {
 		$model->loadModels([
 			'Block' => 'Blocks.Block',
 			'CalendarEvent' => 'Calendars.CalendarEvent'
@@ -47,6 +49,7 @@ class CalendarMailBehavior extends CalendarAppBehavior {
 		if (! $data) {
 			return;
 		}
+		$data['WorkflowComment'] = $workflowComment;
 
 		$model->CalendarEvent->set($data);
 
