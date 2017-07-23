@@ -378,6 +378,7 @@ class Calendar extends CalendarsAppModel {
  * @throws InternalErrorException
  */
 	protected function _makeBlock($frame) {
+		$this->Block->create();
 		$block = $this->Block->save(array(
 			'room_id' => $frame['room_id'],
 			'plugin_key' => $frame['plugin_key'],
