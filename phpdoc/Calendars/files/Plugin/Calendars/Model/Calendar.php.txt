@@ -239,6 +239,7 @@ class Calendar extends CalendarsAppModel {
 			// まだない場合
 			if (empty($block)) {
 				// ブロックを作成する
+				$this->Block->create();
 				$block = $this->Block->save(array(
 					'room_id' => $roomId,
 					'plugin_key' => $pluginKey,
