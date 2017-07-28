@@ -239,7 +239,6 @@ class Calendar extends CalendarsAppModel {
 			// まだない場合
 			if (empty($block)) {
 				// ブロックを作成する
-				$this->Block->create();
 				$block = $this->Block->save(array(
 					'room_id' => $roomId,
 					'plugin_key' => $pluginKey,
@@ -379,7 +378,6 @@ class Calendar extends CalendarsAppModel {
  * @throws InternalErrorException
  */
 	protected function _makeBlock($frame) {
-		$this->Block->create();
 		$block = $this->Block->save(array(
 			'room_id' => $frame['room_id'],
 			'plugin_key' => $frame['plugin_key'],

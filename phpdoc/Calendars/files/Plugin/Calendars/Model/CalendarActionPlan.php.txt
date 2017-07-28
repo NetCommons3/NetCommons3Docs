@@ -547,6 +547,7 @@ class CalendarActionPlan extends CalendarsAppModel {
 
 		$this->begin();
 		$eventId = 0;
+		$this->aditionalData = $data['WorkflowComment'];
 
 		try {
 			//備忘）
@@ -619,7 +620,7 @@ class CalendarActionPlan extends CalendarsAppModel {
 			if (empty($planParam['model']) && empty($planParam['content_key'])) {
 
 				// 承認メール、公開通知メールの送信
-				$this->sendWorkflowAndNoticeMail($eventId, $isMyPrivateRoom, $data['WorkflowComment']);
+				$this->sendWorkflowAndNoticeMail($eventId, $isMyPrivateRoom);
 
 				$this->saveCalendarTopics($eventId);
 
