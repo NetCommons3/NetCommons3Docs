@@ -45,6 +45,17 @@ class PagesController extends PagesAppController {
 	);
 
 /**
+ * beforeRender
+ *
+ * @return void
+ */
+	public function beforeFilter() {
+		//CurrentPage::__getPageConditionsでページ表示として扱う
+		$this->request->params['pageView'] = true;
+		parent::beforeFilter();
+	}
+
+/**
  * index method
  *
  * @throws NotFoundException

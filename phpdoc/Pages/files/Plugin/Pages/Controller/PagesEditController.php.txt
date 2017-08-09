@@ -78,6 +78,8 @@ class PagesEditController extends PagesAppController {
  * @return void
  */
 	public function beforeFilter() {
+		//CurrentPage::__getPageConditionsでページ設定として扱う
+		$this->request->params['pageEdit'] = true;
 		parent::beforeFilter();
 
 		//ルームデータ取得
