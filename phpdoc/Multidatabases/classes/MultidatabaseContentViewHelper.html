@@ -136,10 +136,10 @@
                                 <div class="accordion" style="margin-bottom: 0">
         <div class="accordion-group">
             <div class="accordion-heading">
-                                    <a class="accordion-toggle " data-toggle="collapse" data-target="#namespace-1861663383"></a>
+                                    <a class="accordion-toggle " data-toggle="collapse" data-target="#namespace-983401504"></a>
                                 <a href="../namespaces/default.html" style="margin-left: 30px; padding-left: 0">\</a>
             </div>
-            <div id="namespace-1861663383" class="accordion-body collapse in">
+            <div id="namespace-983401504" class="accordion-body collapse in">
                 <div class="accordion-inner">
 
                     
@@ -279,6 +279,7 @@ will inherit them.</p>
                         <section class="row-fluid public">
                             <section class="span4">
                                                                     <a href="../classes/MultidatabaseContentViewHelper.html#method_beforeRender" class="">beforeRender()</a><br />
+                                                                    <a href="../classes/MultidatabaseContentViewHelper.html#method_chkItemHeaderMaxLength" class="">chkItemHeaderMaxLength()</a><br />
                                                                     <a href="../classes/MultidatabaseContentViewHelper.html#method_renderGroup" class="">renderGroup()</a><br />
                                                                     <a href="../classes/MultidatabaseContentViewHelper.html#method_renderContentFooter" class="">renderContentFooter()</a><br />
                                                                     <a href="../classes/MultidatabaseContentViewHelper.html#method_renderContentLayout" class="">renderContentLayout()</a><br />
@@ -435,11 +436,47 @@ will inherit them.</p>
 
                                     <div class="row-fluid">
         <div class="span8 content class">
+            <a id="method_chkItemHeaderMaxLength" name="method_chkItemHeaderMaxLength" class="anchor"></a>
+            <article class="method">
+                <h3 class="public ">chkItemHeaderMaxLength()</h3>
+                <a href="#source-view" role="button" class="pull-right btn" data-toggle="modal" style="font-size: 1.1em; padding: 9px 14px"><i class="icon-code"></i></a>
+                <pre class="signature" style="margin-right: 54px;">chkItemHeaderMaxLength(array  <span class="argument">$metadatas</span>) : integer</pre>
+                <p><em>メタデータ項目ヘッダーの最大文字数を取得する</em></p>
+                
+
+                                    <h4>Parameters</h4>
+                    <table class="table table-condensed table-hover">
+                                                    <tr>
+                                <td>array</td>
+                                <td>$metadatas </td>
+                                <td><p>メタデータ配列</p></td>
+                            </tr>
+                                            </table>
+                
+                
+                                    <h4>Returns</h4>
+                    integer
+                                    				
+                            </article>
+        </div>
+        <aside class="span4 detailsbar">
+            <h1><i class="icon-arrow-down"></i></h1>
+                                                            <dl>
+                                                                            </dl>
+            <h2>Tags</h2>
+            <table class="table table-condensed">
+                                    <tr><td colspan="2"><em>None found</em></td></tr>
+                            </table>
+        </aside>
+    </div>
+
+                                    <div class="row-fluid">
+        <div class="span8 content class">
             <a id="method_renderGroup" name="method_renderGroup" class="anchor"></a>
             <article class="method">
                 <h3 class="public ">renderGroup()</h3>
                 <a href="#source-view" role="button" class="pull-right btn" data-toggle="modal" style="font-size: 1.1em; padding: 9px 14px"><i class="icon-code"></i></a>
-                <pre class="signature" style="margin-right: 54px;">renderGroup(array  <span class="argument">$metadataGroups</span>, array  <span class="argument">$contents</span>, integer  <span class="argument">$position</span>, integer  <span class="argument">$colSize = 1</span>, null  <span class="argument">$viewMode = null</span>) : string</pre>
+                <pre class="signature" style="margin-right: 54px;">renderGroup(array  <span class="argument">$metadataGroups</span>, array  <span class="argument">$contents</span>, integer  <span class="argument">$position</span>, integer  <span class="argument">$colSize = 1</span>, integer  <span class="argument">$headerMaxLength = 5</span>, null  <span class="argument">$viewMode = null</span>) : string</pre>
                 <p><em>汎用データベースコンテンツ グループのHTMLを出力する(列)</em></p>
                 
 
@@ -464,6 +501,11 @@ will inherit them.</p>
                                 <td>integer</td>
                                 <td>$colSize </td>
                                 <td><p>列サイズ（1:1列,2:2列）</p></td>
+                            </tr>
+                                                    <tr>
+                                <td>integer</td>
+                                <td>$headerMaxLength </td>
+                                <td><p>ヘッダー最大文字数</p></td>
                             </tr>
                                                     <tr>
                                 <td>null</td>
@@ -797,7 +839,7 @@ will inherit them.</p>
                 <section class="span10 offset1">
                     <hr />
                     Documentation is powered by <a href="http://www.phpdoc.org/">phpDocumentor </a> and authored
-                    on June 28th, 2017 at 19:28.
+                    on August 13th, 2017 at 07:51.
                 </section>
             </section>
         </section>
