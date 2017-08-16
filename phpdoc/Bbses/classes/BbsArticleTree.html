@@ -136,10 +136,10 @@
                                 <div class="accordion" style="margin-bottom: 0">
         <div class="accordion-group">
             <div class="accordion-heading">
-                                    <a class="accordion-toggle " data-toggle="collapse" data-target="#namespace-1449577639"></a>
+                                    <a class="accordion-toggle " data-toggle="collapse" data-target="#namespace-542670643"></a>
                                 <a href="../namespaces/default.html" style="margin-left: 30px; padding-left: 0">\</a>
             </div>
-            <div id="namespace-1449577639" class="accordion-body collapse in">
+            <div id="namespace-542670643" class="accordion-body collapse in">
                 <div class="accordion-inner">
 
                     
@@ -284,6 +284,7 @@ will inherit them.</p>
                                                                     <a href="../classes/NetCommonsAppModel.html#method_rollback" class="">rollback()</a><br />
                                                                     <a href="../classes/NetCommonsAppModel.html#method_loadModels" class="">loadModels()</a><br />
                                                                     <a href="../classes/BbsArticleTree.html#method_beforeValidate" class="">beforeValidate()</a><br />
+                                                                    <a href="../classes/BbsArticleTree.html#method_afterFind" class="">afterFind()</a><br />
                                                                     <a href="../classes/BbsArticleTree.html#method_getMaxNo" class="">getMaxNo()</a><br />
                                                             </section>
                             <section class="span4">
@@ -1048,6 +1049,54 @@ validation rules can be defined in $validate.</em></p>
 
                                     <div class="row-fluid">
         <div class="span8 content class">
+            <a id="method_afterFind" name="method_afterFind" class="anchor"></a>
+            <article class="method">
+                <h3 class="public ">afterFind()</h3>
+                <a href="#source-view" role="button" class="pull-right btn" data-toggle="modal" style="font-size: 1.1em; padding: 9px 14px"><i class="icon-code"></i></a>
+                <pre class="signature" style="margin-right: 54px;">afterFind(array  <span class="argument">$results</span>, boolean  <span class="argument">$primary = false</span>) : mixed</pre>
+                <p><em>AfterFind Callback function</em></p>
+                
+
+                                    <h4>Parameters</h4>
+                    <table class="table table-condensed table-hover">
+                                                    <tr>
+                                <td>array</td>
+                                <td>$results </td>
+                                <td><p>found data records</p></td>
+                            </tr>
+                                                    <tr>
+                                <td>boolean</td>
+                                <td>$primary </td>
+                                <td><p>indicates whether or not the current model was the model that the query originated on or whether or not this model was queried as an association</p></td>
+                            </tr>
+                                            </table>
+                
+                
+                                    <h4>Returns</h4>
+                    mixed
+                                    				
+                            </article>
+        </div>
+        <aside class="span4 detailsbar">
+            <h1><i class="icon-arrow-down"></i></h1>
+                                                            <dl>
+                                                                            </dl>
+            <h2>Tags</h2>
+            <table class="table table-condensed">
+                                    <tr>
+                        <th>
+                            SuppressWarnings
+                        </th>
+                        <td>
+                                                                                            <p>(PHPMD.BooleanArgumentFlag)</p>
+                                                    </td>
+                    </tr>
+                            </table>
+        </aside>
+    </div>
+
+                                    <div class="row-fluid">
+        <div class="span8 content class">
             <a id="method_getMaxNo" name="method_getMaxNo" class="anchor"></a>
             <article class="method">
                 <h3 class="public ">getMaxNo()</h3>
@@ -1222,7 +1271,7 @@ validation rules can be defined in $validate.</em></p>
                 <section class="span10 offset1">
                     <hr />
                     Documentation is powered by <a href="http://www.phpdoc.org/">phpDocumentor </a> and authored
-                    on August 16th, 2017 at 02:25.
+                    on August 16th, 2017 at 11:54.
                 </section>
             </section>
         </section>
