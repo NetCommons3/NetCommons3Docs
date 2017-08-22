@@ -136,10 +136,10 @@
                                 <div class="accordion" style="margin-bottom: 0">
         <div class="accordion-group">
             <div class="accordion-heading">
-                                    <a class="accordion-toggle " data-toggle="collapse" data-target="#namespace-179775356"></a>
+                                    <a class="accordion-toggle " data-toggle="collapse" data-target="#namespace-1206528542"></a>
                                 <a href="../namespaces/default.html" style="margin-left: 30px; padding-left: 0">\</a>
             </div>
-            <div id="namespace-179775356" class="accordion-body collapse in">
+            <div id="namespace-1206528542" class="accordion-body collapse in">
                 <div class="accordion-inner">
 
                     
@@ -288,18 +288,15 @@ will inherit them.</p>
                                                                     <a href="../classes/NetCommonsAppModel.html#method_commit" class="">commit()</a><br />
                                                                     <a href="../classes/NetCommonsAppModel.html#method_rollback" class="">rollback()</a><br />
                                                                     <a href="../classes/NetCommonsAppModel.html#method_loadModels" class="">loadModels()</a><br />
+                                                                    <a href="../classes/MultidatabaseMetadata.html#method_beforeValidate" class="">beforeValidate()</a><br />
                                                                     <a href="../classes/MultidatabaseMetadata.html#method_getMetadata" class="">getMetadata()</a><br />
                                                                     <a href="../classes/MultidatabaseMetadata.html#method_getMetadatasColNo" class="">getMetadatasColNo()</a><br />
                                                                     <a href="../classes/MultidatabaseMetadata.html#method_getMetadatas" class="">getMetadatas()</a><br />
                                                                     <a href="../classes/MultidatabaseMetadata.html#method_getMetadataGroups" class="">getMetadataGroups()</a><br />
                                                                     <a href="../classes/MultidatabaseMetadata.html#method_mergeGroupToMetadatas" class="">mergeGroupToMetadatas()</a><br />
-                                                                    <a href="../classes/MultidatabaseMetadata.html#method_deleteMetadatas" class="">deleteMetadatas()</a><br />
                                                                     <a href="../classes/MultidatabaseMetadata.html#method_saveMetadatas" class="">saveMetadatas()</a><br />
-                                                                    <a href="../classes/MultidatabaseMetadata.html#method_getDeleteMetadatas" class="">getDeleteMetadatas()</a><br />
                                                                     <a href="../classes/MultidatabaseMetadata.html#method_getEditMetadatas" class="">getEditMetadatas()</a><br />
-                                                                    <a href="../classes/MultidatabaseMetadata.html#method_countMetadatas" class="">countMetadatas()</a><br />
-                                                                    <a href="../classes/MultidatabaseMetadata.html#method_getSearchMetadatas" class="">getSearchMetadatas()</a><br />
-                                                                    <a href="../classes/MultidatabaseMetadata.html#method_getInitMetadatas" class="">getInitMetadatas()</a><br />
+                                                                    <a href="../classes/MultidatabaseMetadata.html#method_doValidateMetadatas" class="">doValidateMetadatas()</a><br />
                                                             </section>
                             <section class="span4">
                                                                     <a href="../classes/NetCommonsAppModel.html#property_actsAs" class="">$actsAs</a><br />
@@ -331,6 +328,10 @@ will inherit them.</p>
                             <section class="span4">
                                                                     <a href="../classes/NetCommonsAppModel.html#method___getRandomlySlave" class="">__getRandomlySlave()</a><br />
                                                                     <a href="../classes/NetCommonsAppModel.html#method___changeDataSource" class="">__changeDataSource()</a><br />
+                                                                    <a href="../classes/MultidatabaseMetadata.html#method___deleteMetadatas" class="">__deleteMetadatas()</a><br />
+                                                                    <a href="../classes/MultidatabaseMetadata.html#method___getDeleteMetadatas" class="">__getDeleteMetadatas()</a><br />
+                                                                    <a href="../classes/MultidatabaseMetadata.html#method___diffBeforeMetadatas" class="">__diffBeforeMetadatas()</a><br />
+                                                                    <a href="../classes/MultidatabaseMetadata.html#method___makeValidation" class="">__makeValidation()</a><br />
                                                             </section>
                             <section class="span4">
                                                                     <a href="../classes/NetCommonsAppModel.html#property___changeDbConfig" class="">$__changeDbConfig</a><br />
@@ -1074,6 +1075,42 @@ schema data defaults are not merged.</p></td>
 
                                     <div class="row-fluid">
         <div class="span8 content class">
+            <a id="method_beforeValidate" name="method_beforeValidate" class="anchor"></a>
+            <article class="method">
+                <h3 class="public ">beforeValidate()</h3>
+                <a href="#source-view" role="button" class="pull-right btn" data-toggle="modal" style="font-size: 1.1em; padding: 9px 14px"><i class="icon-code"></i></a>
+                <pre class="signature" style="margin-right: 54px;">beforeValidate(array  <span class="argument">$options = array()</span>) : boolean</pre>
+                <p><em>Before validate</em></p>
+                
+
+                                    <h4>Parameters</h4>
+                    <table class="table table-condensed table-hover">
+                                                    <tr>
+                                <td>array</td>
+                                <td>$options </td>
+                                <td><p>オプション</p></td>
+                            </tr>
+                                            </table>
+                
+                
+                                    <h4>Returns</h4>
+                    boolean
+                                    				
+                            </article>
+        </div>
+        <aside class="span4 detailsbar">
+            <h1><i class="icon-arrow-down"></i></h1>
+                                                            <dl>
+                                                                            </dl>
+            <h2>Tags</h2>
+            <table class="table table-condensed">
+                                    <tr><td colspan="2"><em>None found</em></td></tr>
+                            </table>
+        </aside>
+    </div>
+
+                                    <div class="row-fluid">
+        <div class="span8 content class">
             <a id="method_getMetadata" name="method_getMetadata" class="anchor"></a>
             <article class="method">
                 <h3 class="public ">getMetadata()</h3>
@@ -1269,51 +1306,11 @@ $result[グループ][並び順] = $metadataを返す</em></p>
 
                                     <div class="row-fluid">
         <div class="span8 content class">
-            <a id="method_deleteMetadatas" name="method_deleteMetadatas" class="anchor"></a>
-            <article class="method">
-                <h3 class="public ">deleteMetadatas()</h3>
-                <a href="#source-view" role="button" class="pull-right btn" data-toggle="modal" style="font-size: 1.1em; padding: 9px 14px"><i class="icon-code"></i></a>
-                <pre class="signature" style="margin-right: 54px;">deleteMetadatas(array  <span class="argument">$metadataIds = array()</span>) : void</pre>
-                <p><em>Delete metadata
-メタデータを削除する</em></p>
-                
-
-                                    <h4>Parameters</h4>
-                    <table class="table table-condensed table-hover">
-                                                    <tr>
-                                <td>array</td>
-                                <td>$metadataIds </td>
-                                <td><p>メタデータID配列</p></td>
-                            </tr>
-                                            </table>
-                
-                                    <h4>Throws</h4>
-                    <dl>
-                                                    <dt>\InternalErrorException</dt>
-                            <dd></dd>
-                                                                    </dl>
-                
-                				
-                            </article>
-        </div>
-        <aside class="span4 detailsbar">
-            <h1><i class="icon-arrow-down"></i></h1>
-                                                            <dl>
-                                                                            </dl>
-            <h2>Tags</h2>
-            <table class="table table-condensed">
-                                    <tr><td colspan="2"><em>None found</em></td></tr>
-                            </table>
-        </aside>
-    </div>
-
-                                    <div class="row-fluid">
-        <div class="span8 content class">
             <a id="method_saveMetadatas" name="method_saveMetadatas" class="anchor"></a>
             <article class="method">
                 <h3 class="public ">saveMetadatas()</h3>
                 <a href="#source-view" role="button" class="pull-right btn" data-toggle="modal" style="font-size: 1.1em; padding: 9px 14px"><i class="icon-code"></i></a>
-                <pre class="signature" style="margin-right: 54px;">saveMetadatas(array  <span class="argument">$metadatas</span>) : void</pre>
+                <pre class="signature" style="margin-right: 54px;">saveMetadatas(array  <span class="argument">$data</span>) : void</pre>
                 <p><em>Save metadata (New/Update)
 メタデータを保存する（新規・更新）</em></p>
                 
@@ -1322,8 +1319,8 @@ $result[グループ][並び順] = $metadataを返す</em></p>
                     <table class="table table-condensed table-hover">
                                                     <tr>
                                 <td>array</td>
-                                <td>$metadatas </td>
-                                <td><p>メタデータ配列</p></td>
+                                <td>$data </td>
+                                <td><p>データ配列</p></td>
                             </tr>
                                             </table>
                 
@@ -1334,53 +1331,6 @@ $result[グループ][並び順] = $metadataを返す</em></p>
                                                                     </dl>
                 
                 				
-                            </article>
-        </div>
-        <aside class="span4 detailsbar">
-            <h1><i class="icon-arrow-down"></i></h1>
-                                                            <dl>
-                                                                            </dl>
-            <h2>Tags</h2>
-            <table class="table table-condensed">
-                                    <tr><td colspan="2"><em>None found</em></td></tr>
-                            </table>
-        </aside>
-    </div>
-
-                                    <div class="row-fluid">
-        <div class="span8 content class">
-            <a id="method_getDeleteMetadatas" name="method_getDeleteMetadatas" class="anchor"></a>
-            <article class="method">
-                <h3 class="public ">getDeleteMetadatas()</h3>
-                <a href="#source-view" role="button" class="pull-right btn" data-toggle="modal" style="font-size: 1.1em; padding: 9px 14px"><i class="icon-code"></i></a>
-                <pre class="signature" style="margin-right: 54px;">getDeleteMetadatas(integer|null  <span class="argument">$multidatabaseId = null</span>, array  <span class="argument">$currentMetadatas = array()</span>, string  <span class="argument">$type = &#039;all&#039;</span>) : array|boolean</pre>
-                <p><em>Get Metadata columns for delete
-削除対象のカラムNoを取得する</em></p>
-                
-
-                                    <h4>Parameters</h4>
-                    <table class="table table-condensed table-hover">
-                                                    <tr>
-                                <td>integer|null</td>
-                                <td>$multidatabaseId </td>
-                                <td><p>汎用データベースID</p></td>
-                            </tr>
-                                                    <tr>
-                                <td>array</td>
-                                <td>$currentMetadatas </td>
-                                <td><p>メタデータ配列</p></td>
-                            </tr>
-                                                    <tr>
-                                <td>string</td>
-                                <td>$type </td>
-                                <td><p>出力方法</p></td>
-                            </tr>
-                                            </table>
-                
-                
-                                    <h4>Returns</h4>
-                    array|boolean
-                                    				
                             </article>
         </div>
         <aside class="span4 detailsbar">
@@ -1433,98 +1383,26 @@ $result[グループ][並び順] = $metadataを返す</em></p>
 
                                     <div class="row-fluid">
         <div class="span8 content class">
-            <a id="method_countMetadatas" name="method_countMetadatas" class="anchor"></a>
+            <a id="method_doValidateMetadatas" name="method_doValidateMetadatas" class="anchor"></a>
             <article class="method">
-                <h3 class="public ">countMetadatas()</h3>
+                <h3 class="public ">doValidateMetadatas()</h3>
                 <a href="#source-view" role="button" class="pull-right btn" data-toggle="modal" style="font-size: 1.1em; padding: 9px 14px"><i class="icon-code"></i></a>
-                <pre class="signature" style="margin-right: 54px;">countMetadatas(array  <span class="argument">$metadatas</span>) : array|boolean</pre>
-                <p><em>Count metadatas
-件数カウント</em></p>
+                <pre class="signature" style="margin-right: 54px;">doValidateMetadatas(array  <span class="argument">$metadataGroups</span>) : boolean|array</pre>
+                <p><em>メタデータのバリデーションを行う</em></p>
                 
 
                                     <h4>Parameters</h4>
                     <table class="table table-condensed table-hover">
                                                     <tr>
                                 <td>array</td>
-                                <td>$metadatas </td>
-                                <td><p>メタデータ配列</p></td>
+                                <td>$metadataGroups </td>
+                                <td><p>メタデータグループ配列</p></td>
                             </tr>
                                             </table>
                 
                 
                                     <h4>Returns</h4>
-                    array|boolean
-                                            &mdash; <p>全体のメタデータ合計と各ポジションのメタデータ合計</p>
-                                    				
-                            </article>
-        </div>
-        <aside class="span4 detailsbar">
-            <h1><i class="icon-arrow-down"></i></h1>
-                                                            <dl>
-                                                                            </dl>
-            <h2>Tags</h2>
-            <table class="table table-condensed">
-                                    <tr><td colspan="2"><em>None found</em></td></tr>
-                            </table>
-        </aside>
-    </div>
-
-                                    <div class="row-fluid">
-        <div class="span8 content class">
-            <a id="method_getSearchMetadatas" name="method_getSearchMetadatas" class="anchor"></a>
-            <article class="method">
-                <h3 class="public ">getSearchMetadatas()</h3>
-                <a href="#source-view" role="button" class="pull-right btn" data-toggle="modal" style="font-size: 1.1em; padding: 9px 14px"><i class="icon-code"></i></a>
-                <pre class="signature" style="margin-right: 54px;">getSearchMetadatas(integer  <span class="argument">$multidatabaseId</span>) : array|boolean</pre>
-                <p><em>検索対象のメタデータフィールド一覧を取得する</em></p>
-                
-
-                                    <h4>Parameters</h4>
-                    <table class="table table-condensed table-hover">
-                                                    <tr>
-                                <td>integer</td>
-                                <td>$multidatabaseId </td>
-                                <td><p>汎用データベースID</p></td>
-                            </tr>
-                                            </table>
-                
-                                    <h4>Throws</h4>
-                    <dl>
-                                                    <dt>\InternalErrorException</dt>
-                            <dd></dd>
-                                                                    </dl>
-                
-                                    <h4>Returns</h4>
-                    array|boolean
-                                    				
-                            </article>
-        </div>
-        <aside class="span4 detailsbar">
-            <h1><i class="icon-arrow-down"></i></h1>
-                                                            <dl>
-                                                                            </dl>
-            <h2>Tags</h2>
-            <table class="table table-condensed">
-                                    <tr><td colspan="2"><em>None found</em></td></tr>
-                            </table>
-        </aside>
-    </div>
-
-                                    <div class="row-fluid">
-        <div class="span8 content class">
-            <a id="method_getInitMetadatas" name="method_getInitMetadatas" class="anchor"></a>
-            <article class="method">
-                <h3 class="public ">getInitMetadatas()</h3>
-                <a href="#source-view" role="button" class="pull-right btn" data-toggle="modal" style="font-size: 1.1em; padding: 9px 14px"><i class="icon-code"></i></a>
-                <pre class="signature" style="margin-right: 54px;">getInitMetadatas() : array</pre>
-                <p><em>Get initial metadatas
-初期データ</em></p>
-                
-
-                
-                
-                                    <h4>Returns</h4>
-                    array
+                    boolean|array
                                     				
                             </article>
         </div>
@@ -1629,6 +1507,163 @@ $result[グループ][並び順] = $metadataを返す</em></p>
         </aside>
     </div>
 
+                                    <div class="row-fluid">
+        <div class="span8 content class">
+            <a id="method___deleteMetadatas" name="method___deleteMetadatas" class="anchor"></a>
+            <article class="method">
+                <h3 class="private ">__deleteMetadatas()</h3>
+                <a href="#source-view" role="button" class="pull-right btn" data-toggle="modal" style="font-size: 1.1em; padding: 9px 14px"><i class="icon-code"></i></a>
+                <pre class="signature" style="margin-right: 54px;">__deleteMetadatas(string  <span class="argument">$multidatabaseKey = null</span>, array  <span class="argument">$metadataIdColNos = array()</span>) : void</pre>
+                <p><em>Delete metadata
+メタデータを削除する</em></p>
+                
+
+                                    <h4>Parameters</h4>
+                    <table class="table table-condensed table-hover">
+                                                    <tr>
+                                <td>string</td>
+                                <td>$multidatabaseKey </td>
+                                <td><p>汎用データベースKey</p></td>
+                            </tr>
+                                                    <tr>
+                                <td>array</td>
+                                <td>$metadataIdColNos </td>
+                                <td><p>メタデータID・カラムNo配列</p></td>
+                            </tr>
+                                            </table>
+                
+                                    <h4>Throws</h4>
+                    <dl>
+                                                    <dt>\InternalErrorException</dt>
+                            <dd></dd>
+                                                                    </dl>
+                
+                				
+                            </article>
+        </div>
+        <aside class="span4 detailsbar">
+            <h1><i class="icon-arrow-down"></i></h1>
+                                                            <dl>
+                                                                            </dl>
+            <h2>Tags</h2>
+            <table class="table table-condensed">
+                                    <tr><td colspan="2"><em>None found</em></td></tr>
+                            </table>
+        </aside>
+    </div>
+
+                                    <div class="row-fluid">
+        <div class="span8 content class">
+            <a id="method___getDeleteMetadatas" name="method___getDeleteMetadatas" class="anchor"></a>
+            <article class="method">
+                <h3 class="private ">__getDeleteMetadatas()</h3>
+                <a href="#source-view" role="button" class="pull-right btn" data-toggle="modal" style="font-size: 1.1em; padding: 9px 14px"><i class="icon-code"></i></a>
+                <pre class="signature" style="margin-right: 54px;">__getDeleteMetadatas(integer|null  <span class="argument">$multidatabaseId = null</span>, array  <span class="argument">$currentMetadatas = array()</span>) : array</pre>
+                <p><em>Get Metadata columns for delete
+削除対象のメタデータIDを取得する</em></p>
+                
+
+                                    <h4>Parameters</h4>
+                    <table class="table table-condensed table-hover">
+                                                    <tr>
+                                <td>integer|null</td>
+                                <td>$multidatabaseId </td>
+                                <td><p>汎用データベースID</p></td>
+                            </tr>
+                                                    <tr>
+                                <td>array</td>
+                                <td>$currentMetadatas </td>
+                                <td><p>メタデータ配列</p></td>
+                            </tr>
+                                            </table>
+                
+                
+                                    <h4>Returns</h4>
+                    array
+                                    				
+                            </article>
+        </div>
+        <aside class="span4 detailsbar">
+            <h1><i class="icon-arrow-down"></i></h1>
+                                                            <dl>
+                                                                            </dl>
+            <h2>Tags</h2>
+            <table class="table table-condensed">
+                                    <tr><td colspan="2"><em>None found</em></td></tr>
+                            </table>
+        </aside>
+    </div>
+
+                                    <div class="row-fluid">
+        <div class="span8 content class">
+            <a id="method___diffBeforeMetadatas" name="method___diffBeforeMetadatas" class="anchor"></a>
+            <article class="method">
+                <h3 class="private ">__diffBeforeMetadatas()</h3>
+                <a href="#source-view" role="button" class="pull-right btn" data-toggle="modal" style="font-size: 1.1em; padding: 9px 14px"><i class="icon-code"></i></a>
+                <pre class="signature" style="margin-right: 54px;">__diffBeforeMetadatas(array  <span class="argument">$beforeMetadatas</span>, array  <span class="argument">$currentMetadatas</span>) : array</pre>
+                <p><em>メタデータを比較して、変更前のみ存在するメタデータのIDとカラムNoを返す</em></p>
+                
+
+                                    <h4>Parameters</h4>
+                    <table class="table table-condensed table-hover">
+                                                    <tr>
+                                <td>array</td>
+                                <td>$beforeMetadatas </td>
+                                <td><p>メタデータ配列（変更前）</p></td>
+                            </tr>
+                                                    <tr>
+                                <td>array</td>
+                                <td>$currentMetadatas </td>
+                                <td><p>メタデータ配列（変更後/現在）</p></td>
+                            </tr>
+                                            </table>
+                
+                
+                                    <h4>Returns</h4>
+                    array
+                                    				
+                            </article>
+        </div>
+        <aside class="span4 detailsbar">
+            <h1><i class="icon-arrow-down"></i></h1>
+                                                            <dl>
+                                                                            </dl>
+            <h2>Tags</h2>
+            <table class="table table-condensed">
+                                    <tr><td colspan="2"><em>None found</em></td></tr>
+                            </table>
+        </aside>
+    </div>
+
+                                    <div class="row-fluid">
+        <div class="span8 content class">
+            <a id="method___makeValidation" name="method___makeValidation" class="anchor"></a>
+            <article class="method">
+                <h3 class="private ">__makeValidation()</h3>
+                <a href="#source-view" role="button" class="pull-right btn" data-toggle="modal" style="font-size: 1.1em; padding: 9px 14px"><i class="icon-code"></i></a>
+                <pre class="signature" style="margin-right: 54px;">__makeValidation() : array|boolean</pre>
+                <p><em>Make validation rules
+バリデーションルールの作成</em></p>
+                
+
+                
+                
+                                    <h4>Returns</h4>
+                    array|boolean
+                                    				
+                            </article>
+        </div>
+        <aside class="span4 detailsbar">
+            <h1><i class="icon-arrow-down"></i></h1>
+                                                            <dl>
+                                                                            </dl>
+            <h2>Tags</h2>
+            <table class="table table-condensed">
+                                    <tr><td colspan="2"><em>None found</em></td></tr>
+                            </table>
+        </aside>
+    </div>
+
                                     </div>
     </section>
 
@@ -1678,7 +1713,7 @@ $result[グループ][並び順] = $metadataを返す</em></p>
                 <section class="span10 offset1">
                     <hr />
                     Documentation is powered by <a href="http://www.phpdoc.org/">phpDocumentor </a> and authored
-                    on August 17th, 2017 at 09:23.
+                    on August 22nd, 2017 at 06:41.
                 </section>
             </section>
         </section>

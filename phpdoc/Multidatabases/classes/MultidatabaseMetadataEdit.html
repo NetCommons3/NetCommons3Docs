@@ -136,10 +136,10 @@
                                 <div class="accordion" style="margin-bottom: 0">
         <div class="accordion-group">
             <div class="accordion-heading">
-                                    <a class="accordion-toggle " data-toggle="collapse" data-target="#namespace-1888672014"></a>
+                                    <a class="accordion-toggle " data-toggle="collapse" data-target="#namespace-1074175757"></a>
                                 <a href="../namespaces/default.html" style="margin-left: 30px; padding-left: 0">\</a>
             </div>
-            <div id="namespace-1888672014" class="accordion-body collapse in">
+            <div id="namespace-1074175757" class="accordion-body collapse in">
                 <div class="accordion-inner">
 
                     
@@ -290,11 +290,11 @@ will inherit them.</p>
                                                                     <a href="../classes/NetCommonsAppModel.html#method_loadModels" class="">loadModels()</a><br />
                                                                     <a href="../classes/MultidatabaseMetadataEdit.html#method_makeSaveData" class="">makeSaveData()</a><br />
                                                                     <a href="../classes/MultidatabaseMetadataEdit.html#method_getColNos" class="">getColNos()</a><br />
-                                                                    <a href="../classes/MultidatabaseMetadataEdit.html#method_getDeleteMetadata" class="">getDeleteMetadata()</a><br />
                                                                     <a href="../classes/MultidatabaseMetadataEdit.html#method_getFreeColNo" class="">getFreeColNo()</a><br />
                                                                     <a href="../classes/MultidatabaseMetadataEdit.html#method_getSkipColNos" class="">getSkipColNos()</a><br />
                                                                     <a href="../classes/MultidatabaseMetadataEdit.html#method_getEmptyMetadata" class="">getEmptyMetadata()</a><br />
                                                                     <a href="../classes/MultidatabaseMetadataEdit.html#method_addColNo" class="">addColNo()</a><br />
+                                                                    <a href="../classes/MultidatabaseMetadataEdit.html#method_countMetadatas" class="">countMetadatas()</a><br />
                                                             </section>
                             <section class="span4">
                                                                     <a href="../classes/NetCommonsAppModel.html#property_actsAs" class="">$actsAs</a><br />
@@ -1125,7 +1125,7 @@ schema data defaults are not merged.</p></td>
             <article class="method">
                 <h3 class="public ">makeSaveData()</h3>
                 <a href="#source-view" role="button" class="pull-right btn" data-toggle="modal" style="font-size: 1.1em; padding: 9px 14px"><i class="icon-code"></i></a>
-                <pre class="signature" style="margin-right: 54px;">makeSaveData(array  <span class="argument">$multidatabase = array()</span>, array  <span class="argument">$metadatas = array()</span>) : array</pre>
+                <pre class="signature" style="margin-right: 54px;">makeSaveData(array  <span class="argument">$data</span>) : array</pre>
                 <p><em>Make save data
 保存データを作成</em></p>
                 
@@ -1134,13 +1134,8 @@ schema data defaults are not merged.</p></td>
                     <table class="table table-condensed table-hover">
                                                     <tr>
                                 <td>array</td>
-                                <td>$multidatabase </td>
-                                <td><p>汎用データベース配列</p></td>
-                            </tr>
-                                                    <tr>
-                                <td>array</td>
-                                <td>$metadatas </td>
-                                <td><p>メタデータ配列</p></td>
+                                <td>$data </td>
+                                <td><p>データ配列</p></td>
                             </tr>
                                             </table>
                 
@@ -1183,52 +1178,6 @@ schema data defaults are not merged.</p></td>
                 
                                     <h4>Returns</h4>
                     array
-                                    				
-                            </article>
-        </div>
-        <aside class="span4 detailsbar">
-            <h1><i class="icon-arrow-down"></i></h1>
-                                                            <dl>
-                                                                            </dl>
-            <h2>Tags</h2>
-            <table class="table table-condensed">
-                                    <tr><td colspan="2"><em>None found</em></td></tr>
-                            </table>
-        </aside>
-    </div>
-
-                                    <div class="row-fluid">
-        <div class="span8 content class">
-            <a id="method_getDeleteMetadata" name="method_getDeleteMetadata" class="anchor"></a>
-            <article class="method">
-                <h3 class="public ">getDeleteMetadata()</h3>
-                <a href="#source-view" role="button" class="pull-right btn" data-toggle="modal" style="font-size: 1.1em; padding: 9px 14px"><i class="icon-code"></i></a>
-                <pre class="signature" style="margin-right: 54px;">getDeleteMetadata(array  <span class="argument">$metadata</span>, array  <span class="argument">$colNos</span>, string  <span class="argument">$type</span>) : boolean|array</pre>
-                <p><em>削除対象のカラムを1件出力する</em></p>
-                
-
-                                    <h4>Parameters</h4>
-                    <table class="table table-condensed table-hover">
-                                                    <tr>
-                                <td>array</td>
-                                <td>$metadata </td>
-                                <td><p>メタデータ配列</p></td>
-                            </tr>
-                                                    <tr>
-                                <td>array</td>
-                                <td>$colNos </td>
-                                <td><p>カラムNo配列</p></td>
-                            </tr>
-                                                    <tr>
-                                <td>string</td>
-                                <td>$type </td>
-                                <td><p>種別</p></td>
-                            </tr>
-                                            </table>
-                
-                
-                                    <h4>Returns</h4>
-                    boolean|array
                                     				
                             </article>
         </div>
@@ -1397,6 +1346,44 @@ schema data defaults are not merged.</p></td>
         </aside>
     </div>
 
+                                    <div class="row-fluid">
+        <div class="span8 content class">
+            <a id="method_countMetadatas" name="method_countMetadatas" class="anchor"></a>
+            <article class="method">
+                <h3 class="public ">countMetadatas()</h3>
+                <a href="#source-view" role="button" class="pull-right btn" data-toggle="modal" style="font-size: 1.1em; padding: 9px 14px"><i class="icon-code"></i></a>
+                <pre class="signature" style="margin-right: 54px;">countMetadatas(array  <span class="argument">$metadatas</span>) : array|boolean</pre>
+                <p><em>Count metadatas
+件数カウント</em></p>
+                
+
+                                    <h4>Parameters</h4>
+                    <table class="table table-condensed table-hover">
+                                                    <tr>
+                                <td>array</td>
+                                <td>$metadatas </td>
+                                <td><p>メタデータ配列</p></td>
+                            </tr>
+                                            </table>
+                
+                
+                                    <h4>Returns</h4>
+                    array|boolean
+                                            &mdash; <p>全体のメタデータ合計と各ポジションのメタデータ合計</p>
+                                    				
+                            </article>
+        </div>
+        <aside class="span4 detailsbar">
+            <h1><i class="icon-arrow-down"></i></h1>
+                                                            <dl>
+                                                                            </dl>
+            <h2>Tags</h2>
+            <table class="table table-condensed">
+                                    <tr><td colspan="2"><em>None found</em></td></tr>
+                            </table>
+        </aside>
+    </div>
+
                                                     <div class="row-fluid">
         <div class="span8 content class">
             <a id="method__getDefaultValue" name="method__getDefaultValue" class="anchor"></a>
@@ -1536,7 +1523,7 @@ schema data defaults are not merged.</p></td>
                 <section class="span10 offset1">
                     <hr />
                     Documentation is powered by <a href="http://www.phpdoc.org/">phpDocumentor </a> and authored
-                    on August 17th, 2017 at 09:23.
+                    on August 22nd, 2017 at 06:41.
                 </section>
             </section>
         </section>
