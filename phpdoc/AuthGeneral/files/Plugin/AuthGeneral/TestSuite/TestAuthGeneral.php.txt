@@ -93,7 +93,10 @@ class TestAuthGeneral {
  * @return void
  */
 	public static function logout($test) {
-		CakeSession::write('Auth.User', null);
+		$reflectionClass = new ReflectionClass('AuthComponent');
+		$property = $reflectionClass->getProperty('_user');
+		$property->setAccessible(true);
+		$property->setValue($test->controller->Components->Auth, []);
 	}
 
 /**
@@ -104,22 +107,14 @@ class TestAuthGeneral {
  * @return void
  */
 	public static function login(CakeTestCase $test, $role = Role::ROOM_ROLE_KEY_ROOM_ADMINISTRATOR) {
-		$test->controller->Components->Auth
-			->staticExpects($test->any())
-			->method('user')
-			->will($test->returnCallback(function ($key = null) use ($role) {
-				CakeSession::write('Auth.User', self::$roles[$role]);
-				if (isset(self::$roles[$role][$key])) {
-					return self::$roles[$role][$key];
-				} else {
-					return self::$roles[$role];
-				}
-			}));
-
-		$test->controller->Components->Auth->login([
-			'username' => self::$roles[$role]['username'],
-			'password' => self::$roles[$role]['password'],
-		]);
+		$reflectionClass = new ReflectionClass('AuthComponent');
+		$property = $reflectionClass->getProperty('_user');
+		$property->setAccessible(true);
+		if (isset(self::$roles[$role])) {
+			$property->setValue($test->controller->Components->Auth, self::$roles[$role]);
+		} else {
+			$property->setValue($test->controller->Components->Auth, []);
+		}
 	}
 
 }
