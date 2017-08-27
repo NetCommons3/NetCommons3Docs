@@ -28,6 +28,7 @@ App::uses('OriginalKeyBehavior', 'NetCommons.Model/Behavior');
  * @author Shohei Nakajima <nakajimashouhei@gmail.com>
  * @package NetCommons\NetCommons\TestSuite
  * @codeCoverageIgnore
+ * @SuppressWarnings(PHPMD.CouplingBetweenObjects)
  */
 abstract class NetCommonsControllerBaseTestCase extends ControllerTestCase {
 
@@ -146,6 +147,8 @@ abstract class NetCommonsControllerBaseTestCase extends ControllerTestCase {
 		Configure::write('Config.language', 'ja');
 		(new CurrentSystem())->setLanguage();
 
+		AuthComponent::$sessionKey = false;
+
 		if ($this->_controller) {
 			$this->generateNc(Inflector::camelize($this->_controller));
 		}
@@ -160,6 +163,7 @@ abstract class NetCommonsControllerBaseTestCase extends ControllerTestCase {
 		Configure::write('NetCommons.installed', false);
 		Configure::write('Config.language', null);
 		CakeSession::write('Auth.User', null);
+		AuthComponent::$sessionKey = 'Auth.User';
 
 		Current::$current = array();
 		Current::$permission = array();
