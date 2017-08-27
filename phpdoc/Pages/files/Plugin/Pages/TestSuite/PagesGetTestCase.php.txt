@@ -18,7 +18,7 @@ App::uses('NetCommonsGetTest', 'NetCommons.TestSuite');
  * @package NetCommons\Pages\Test\Case\Controller\PagesEditController
  * @codeCoverageIgnore
  */
-class PagesGetTestCase extends NetCommonsGetTest {
+abstract class PagesGetTestCase extends NetCommonsGetTest {
 
 /**
  * Fixtures

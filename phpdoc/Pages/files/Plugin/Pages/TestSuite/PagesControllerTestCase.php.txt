@@ -19,7 +19,7 @@ App::uses('NetCommonsControllerTestCase', 'NetCommons.TestSuite');
  * @codeCoverageIgnore
  * @SuppressWarnings(PHPMD.NumberOfChildren)
  */
-class PagesControllerTestCase extends NetCommonsControllerTestCase {
+abstract class PagesControllerTestCase extends NetCommonsControllerTestCase {
 
 /**
  * Fixtures
