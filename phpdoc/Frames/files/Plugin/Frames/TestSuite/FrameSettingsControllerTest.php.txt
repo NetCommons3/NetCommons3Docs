@@ -18,7 +18,7 @@ App::uses('NetCommonsControllerTestCase', 'NetCommons.TestSuite');
  * @package NetCommons\Blocks\TestSuite
  * @codeCoverageIgnore
  */
-class FrameSettingsControllerTest extends NetCommonsControllerTestCase {
+abstract class FrameSettingsControllerTest extends NetCommonsControllerTestCase {
 
 /**
  * setUp method

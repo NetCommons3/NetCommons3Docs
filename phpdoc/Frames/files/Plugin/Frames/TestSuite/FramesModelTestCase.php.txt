@@ -20,7 +20,7 @@ App::uses('NetCommonsModelTestCase', 'NetCommons.TestSuite');
  * @package NetCommons\Frames\TestSuite
  * @codeCoverageIgnore
  */
-class FramesModelTestCase extends NetCommonsModelTestCase {
+abstract class FramesModelTestCase extends NetCommonsModelTestCase {
 
 /**
  * Fixtures

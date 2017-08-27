@@ -21,7 +21,7 @@ App::uses('Current', 'NetCommons.Utility');
  * @package NetCommons\Frames\TestSuite
  * @codeCoverageIgnore
  */
-class FramesGetTest extends NetCommonsGetTest {
+abstract class FramesGetTest extends NetCommonsGetTest {
 
 /**
  * Fixtures

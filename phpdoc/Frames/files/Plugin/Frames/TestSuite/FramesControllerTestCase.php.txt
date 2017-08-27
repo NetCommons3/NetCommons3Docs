@@ -17,7 +17,7 @@ App::uses('NetCommonsControllerTestCase', 'NetCommons.TestSuite');
  * @author Shohei Nakajima <nakajimashouhei@gmail.com>
  * @package NetCommons\Frames\TestSuite
  */
-class FramesControllerTestCase extends NetCommonsControllerTestCase {
+abstract class FramesControllerTestCase extends NetCommonsControllerTestCase {
 
 /**
  * Fixtures
