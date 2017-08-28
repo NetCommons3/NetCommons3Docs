@@ -78,9 +78,11 @@ class FramesHelper extends AppHelper {
  *
  * @param array $frame Frameデータ
  * @param string $settingAction デフォルトセッティングアクション
+ * @param string|null $title タイトル
+ * @param array|null $options リンクオプション
  * @return string
  */
-	public function frameSettingLink($frame, $settingAction = null) {
+	public function frameSettingLink($frame, $settingAction = null, $title = null, $options = []) {
 		$html = '';
 		if (is_null($settingAction)) {
 			$action = Hash::get($this->plugins, $frame['plugin_key'] . '.default_setting_action');
@@ -89,12 +91,17 @@ class FramesHelper extends AppHelper {
 		}
 
 		if ($action) {
-			$title = '<span class="glyphicon glyphicon-cog" aria-hidden="true"> </span> ';
-			$title .= '<span class="sr-only">' . __d('frames', 'Show flame setting') . '</span>';
+			if (! $title) {
+				$title = '<span class="glyphicon glyphicon-cog" aria-hidden="true"> </span> ';
+				$title .= '<span class="sr-only">' . __d('frames', 'Show flame setting') . '</span>';
+			}
 
-			$options = array(
-				'class' => 'btn btn-default btn-sm frame-btn pull-left',
-				'escapeTitle' => false
+			$options = array_merge(
+				array(
+					'class' => 'btn btn-default btn-sm frame-btn pull-left',
+					'escapeTitle' => false
+				),
+				$options
 			);
 
 			$url = '/' . $frame['plugin_key'] . '/' . $action . '?frame_id=' . $frame['id'];
