@@ -34,55 +34,103 @@ class TestAuthGeneral {
 			'role_key' => 'system_administrator',
 			'handlename' => 'handle of admin',
 			'email' => 'system_admin@exapmle.com',
+			'UserRoleSetting' => [
+				'id' => '1',
+				'role_key' => 'system_administrator',
+				'origin_role_key' => 'system_administrator',
+				'use_private_room' => '1',
+			],
 		],
 		Role::ROOM_ROLE_KEY_CHIEF_EDITOR => [
 			'id' => '2',
 			'username' => 'chief_editor',
 			'password' => 'chief_editor',
 			'role_key' => 'administrator',
-			'handlename' => 'chief_editor of admin'
+			'handlename' => 'chief_editor of admin',
+			'UserRoleSetting' => [
+				'id' => '2',
+				'role_key' => 'administrator',
+				'origin_role_key' => 'administrator',
+				'use_private_room' => '1',
+			],
 		],
 		Role::ROOM_ROLE_KEY_EDITOR => [
 			'id' => '3',
 			'username' => 'editor',
 			'password' => 'editor',
 			'role_key' => 'common_user',
-			'handlename' => 'editor of admin'
+			'handlename' => 'editor of admin',
+			'UserRoleSetting' => [
+				'id' => '3',
+				'role_key' => 'common_user',
+				'origin_role_key' => 'common_user',
+				'use_private_room' => '1',
+			],
 		],
 		Role::ROOM_ROLE_KEY_GENERAL_USER => [
 			'id' => '4',
 			'username' => 'general_user',
 			'password' => 'general_user',
 			'role_key' => 'common_user',
-			'handlename' => 'general_user of admin'
+			'handlename' => 'general_user of admin',
+			'UserRoleSetting' => [
+				'id' => '3',
+				'role_key' => 'common_user',
+				'origin_role_key' => 'common_user',
+				'use_private_room' => '1',
+			],
 		],
 		Role::ROOM_ROLE_KEY_VISITOR => [
 			'id' => '5',
 			'username' => 'visitor',
 			'password' => 'visitor',
 			'role_key' => 'common_user',
-			'handlename' => 'visitor of admin'
+			'handlename' => 'visitor of admin',
+			'UserRoleSetting' => [
+				'id' => '3',
+				'role_key' => 'common_user',
+				'origin_role_key' => 'common_user',
+				'use_private_room' => '1',
+			],
 		],
 		UserRole::USER_ROLE_KEY_SYSTEM_ADMINISTRATOR => [
 			'id' => '1',
 			'username' => 'admin',
 			'password' => 'admin',
 			'role_key' => 'system_administrator',
-			'handlename' => 'handle of admin'
+			'handlename' => 'handle of admin',
+			'UserRoleSetting' => [
+				'id' => '1',
+				'role_key' => 'system_administrator',
+				'origin_role_key' => 'system_administrator',
+				'use_private_room' => '1',
+			],
 		],
 		UserRole::USER_ROLE_KEY_ADMINISTRATOR => [
 			'id' => '2',
 			'username' => 'chief_editor',
 			'password' => 'chief_editor',
 			'role_key' => 'administrator',
-			'handlename' => 'chief_editor of admin'
+			'handlename' => 'chief_editor of admin',
+			'UserRoleSetting' => [
+				'id' => '2',
+				'role_key' => 'administrator',
+				'origin_role_key' => 'administrator',
+				'use_private_room' => '1',
+			],
 		],
 		UserRole::USER_ROLE_KEY_COMMON_USER => [
 			'id' => '4',
 			'username' => 'general_user',
 			'password' => 'general_user',
 			'role_key' => 'common_user',
-			'handlename' => 'general_user of admin'
+			'handlename' => 'general_user of admin',
+			'UserRoleSetting' => [
+				'id' => '3',
+				'role_key' => 'common_user',
+				'origin_role_key' => 'common_user',
+				'use_private_room' => '1',
+			],
 		],
 	];
 
