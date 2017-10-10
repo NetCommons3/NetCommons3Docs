@@ -104,7 +104,11 @@ class FramesHelper extends AppHelper {
 				$options
 			);
 
-			$url = '/' . $frame['plugin_key'] . '/' . $action . '?frame_id=' . $frame['id'];
+			if (substr($action, 0, 1) === '/') {
+				$url = $action . '?frame_id=' . $frame['id'];
+			} else {
+				$url = '/' . $frame['plugin_key'] . '/' . $action . '?frame_id=' . $frame['id'];
+			}
 			if (Current::read('Page.id') && ! Current::read('Box.page_id')) {
 				$url .= '&page_id=' . Current::read('Page.id');
 			}
