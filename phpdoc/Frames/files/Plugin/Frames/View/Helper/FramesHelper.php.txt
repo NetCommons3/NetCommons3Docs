@@ -61,7 +61,11 @@ class FramesHelper extends AppHelper {
 			$action = $frame['plugin_key'] . '/index';
 		}
 
-		$url = $frame['plugin_key'] . '/' . $action . '?frame_id=' . $frame['id'];
+		if (substr($action, 0, 1) === '/') {
+			$url = substr($action, 1) . '?frame_id=' . $frame['id'];
+		} else {
+			$url = $frame['plugin_key'] . '/' . $action . '?frame_id=' . $frame['id'];
+		}
 		if (Current::read('Page.id') && ! Current::read('Box.page_id')) {
 			$url .= '&page_id=' . Current::read('Page.id');
 		}
@@ -85,7 +89,11 @@ class FramesHelper extends AppHelper {
 	public function frameSettingLink($frame, $settingAction = null, $title = null, $options = []) {
 		$html = '';
 		if (is_null($settingAction)) {
-			$action = Hash::get($this->plugins, $frame['plugin_key'] . '.default_setting_action');
+			if (!empty($frame['default_setting_action'])) {
+				$action = $frame['default_setting_action'];
+			} else {
+				$action = Hash::get($this->plugins, $frame['plugin_key'] . '.default_setting_action');
+			}
 		} else {
 			$action = $settingAction;
 		}
@@ -109,6 +117,7 @@ class FramesHelper extends AppHelper {
 			} else {
 				$url = '/' . $frame['plugin_key'] . '/' . $action . '?frame_id=' . $frame['id'];
 			}
+
 			if (Current::read('Page.id') && ! Current::read('Box.page_id')) {
 				$url .= '&page_id=' . Current::read('Page.id');
 			}
