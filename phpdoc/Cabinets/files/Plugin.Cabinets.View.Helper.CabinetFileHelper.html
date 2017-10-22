@@ -3,8 +3,7 @@
 <head>
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0"/>
     <meta charset="utf-8"/>
-    <title>     &raquo; Compilation errors
-</title>
+    <title>API Documentation</title>
     <meta name="author" content=""/>
     <meta name="description" content=""/>
 
@@ -22,7 +21,55 @@
     <script src="../js/jquery.smooth-scroll.js"></script>
     <script src="../js/prism.min.js"></script>
     <!-- TODO: Add http://jscrollpane.kelvinluck.com/ to style the scrollbars for browsers not using webkit-->
-    
+        <script type="text/javascript">
+        function loadExternalCodeSnippets() {
+            Array.prototype.slice.call(document.querySelectorAll('pre[data-src]')).forEach(function (pre) {
+                var src = pre.getAttribute('data-src');
+                var extension = (src.match(/\.(\w+)$/) || [, ''])[1];
+                var language = 'php';
+
+                var code = document.createElement('code');
+                code.className = 'language-' + language;
+
+                pre.textContent = '';
+
+                code.textContent = 'Loading…';
+
+                pre.appendChild(code);
+
+                var xhr = new XMLHttpRequest();
+
+                xhr.open('GET', src, true);
+
+                xhr.onreadystatechange = function () {
+                    if (xhr.readyState == 4) {
+
+                        if (xhr.status < 400 && xhr.responseText) {
+                            code.textContent = xhr.responseText;
+
+                            Prism.highlightElement(code);
+                        }
+                        else if (xhr.status >= 400) {
+                            code.textContent = '✖ Error ' + xhr.status + ' while fetching file: ' + xhr.statusText;
+                        }
+                        else {
+                            code.textContent = '✖ Error: File does not exist or is empty';
+                        }
+                    }
+                };
+
+                xhr.send(null);
+            });
+        }
+
+        $(document).ready(function(){
+            loadExternalCodeSnippets();
+        });
+        $('#source-view').on('shown', function () {
+            loadExternalCodeSnippets();
+        })
+    </script>
+
     <link rel="shortcut icon" href="../images/favicon.ico"/>
     <link rel="apple-touch-icon" href="../images/apple-touch-icon.png"/>
     <link rel="apple-touch-icon" sizes="72x72" href="../images/apple-touch-icon-72x72.png"/>
@@ -86,204 +133,167 @@
 <div id="___" class="container-fluid">
         <section class="row-fluid">
         <div class="span2 sidebar">
+                                <div class="accordion" style="margin-bottom: 0">
+        <div class="accordion-group">
+            <div class="accordion-heading">
+                                    <a class="accordion-toggle " data-toggle="collapse" data-target="#namespace-1344346010"></a>
+                                <a href="../namespaces/default.html" style="margin-left: 30px; padding-left: 0">\</a>
+            </div>
+            <div id="namespace-1344346010" class="accordion-body collapse in">
+                <div class="accordion-inner">
 
-            <ul class="side-nav nav nav-list">
-                <li class="nav-header">Navigation</li>
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    </ul>
+                    
+                    <ul>
+                                                                                                    <li class="class"><a href="../classes/AccessCtrlComponent.html">AccessCtrlComponent</a></li>
+                                                    <li class="class"><a href="../classes/AddFieldsForM17n.html">AddFieldsForM17n</a></li>
+                                                    <li class="class"><a href="../classes/AddIndex.html">AddIndex</a></li>
+                                                    <li class="class"><a href="../classes/AddIsOriginalCopy.html">AddIsOriginalCopy</a></li>
+                                                    <li class="class"><a href="../classes/AddRecord.html">AddRecord</a></li>
+                                                    <li class="class"><a href="../classes/AddTableForM17n1.html">AddTableForM17n1</a></li>
+                                                    <li class="class"><a href="../classes/AddTableForM17n2.html">AddTableForM17n2</a></li>
+                                                    <li class="class"><a href="../classes/AddUseAuthKey.html">AddUseAuthKey</a></li>
+                                                    <li class="class"><a href="../classes/AlterCabinetsTotalSize.html">AlterCabinetsTotalSize</a></li>
+                                                    <li class="class"><a href="../classes/AppController.html">AppController</a></li>
+                                                    <li class="class"><a href="../classes/AppController.html">AppController</a></li>
+                                                    <li class="class"><a href="../classes/AppHelper.html">AppHelper</a></li>
+                                                    <li class="class"><a href="../classes/AppModel.html">AppModel</a></li>
+                                                    <li class="class"><a href="../classes/AppPaginatorComponent.html">AppPaginatorComponent</a></li>
+                                                    <li class="class"><a href="../classes/AppPaginatorHelper.html">AppPaginatorHelper</a></li>
+                                                    <li class="class"><a href="../classes/AssetComponent.html">AssetComponent</a></li>
+                                                    <li class="class"><a href="../classes/BackToHelper.html">BackToHelper</a></li>
+                                                    <li class="class"><a href="../classes/ButtonHelper.html">ButtonHelper</a></li>
+                                                    <li class="class"><a href="../classes/Cabinet.html">Cabinet</a></li>
+                                                    <li class="class"><a href="../classes/CabinetBlockRolePermissionsController.html">CabinetBlockRolePermissionsController</a></li>
+                                                    <li class="class"><a href="../classes/CabinetBlocksController.html">CabinetBlocksController</a></li>
+                                                    <li class="class"><a href="../classes/CabinetFile.html">CabinetFile</a></li>
+                                                    <li class="class"><a href="../classes/CabinetFileBehavior.html">CabinetFileBehavior</a></li>
+                                                    <li class="class"><a href="../classes/CabinetFileHelper.html">CabinetFileHelper</a></li>
+                                                    <li class="class"><a href="../classes/CabinetFilesController.html">CabinetFilesController</a></li>
+                                                    <li class="class"><a href="../classes/CabinetFilesEditController.html">CabinetFilesEditController</a></li>
+                                                    <li class="class"><a href="../classes/CabinetFileTree.html">CabinetFileTree</a></li>
+                                                    <li class="class"><a href="../classes/CabinetFolderBehavior.html">CabinetFolderBehavior</a></li>
+                                                    <li class="class"><a href="../classes/CabinetMailSettingsController.html">CabinetMailSettingsController</a></li>
+                                                    <li class="class"><a href="../classes/CabinetsAppController.html">CabinetsAppController</a></li>
+                                                    <li class="class"><a href="../classes/CabinetsAppModel.html">CabinetsAppModel</a></li>
+                                                    <li class="class"><a href="../classes/CabinetSetting.html">CabinetSetting</a></li>
+                                                    <li class="class"><a href="../classes/CabinetsFolderTreeHelper.html">CabinetsFolderTreeHelper</a></li>
+                                                    <li class="class"><a href="../classes/CabinetsSchema.html">CabinetsSchema</a></li>
+                                                    <li class="class"><a href="../classes/CabinetUnzipBehavior.html">CabinetUnzipBehavior</a></li>
+                                                    <li class="class"><a href="../classes/ComposerHelper.html">ComposerHelper</a></li>
+                                                    <li class="class"><a href="../classes/Current.html">Current</a></li>
+                                                    <li class="class"><a href="../classes/CurrentBase.html">CurrentBase</a></li>
+                                                    <li class="class"><a href="../classes/CurrentFrame.html">CurrentFrame</a></li>
+                                                    <li class="class"><a href="../classes/CurrentPage.html">CurrentPage</a></li>
+                                                    <li class="class"><a href="../classes/CurrentSystem.html">CurrentSystem</a></li>
+                                                    <li class="class"><a href="../classes/DateHelper.html">DateHelper</a></li>
+                                                    <li class="class"><a href="../classes/DatetimePickerHelper.html">DatetimePickerHelper</a></li>
+                                                    <li class="class"><a href="../classes/DeleteCabinetSettings.html">DeleteCabinetSettings</a></li>
+                                                    <li class="class"><a href="../classes/DisplayNumberHelper.html">DisplayNumberHelper</a></li>
+                                                    <li class="class"><a href="../classes/FormInputHelper.html">FormInputHelper</a></li>
+                                                    <li class="class"><a href="../classes/Init.html">Init</a></li>
+                                                    <li class="class"><a href="../classes/LinkButtonHelper.html">LinkButtonHelper</a></li>
+                                                    <li class="class"><a href="../classes/MessageFlashHelper.html">MessageFlashHelper</a></li>
+                                                    <li class="class"><a href="../classes/NetCommonsAppController.html">NetCommonsAppController</a></li>
+                                                    <li class="class"><a href="../classes/NetCommonsAppHelper.html">NetCommonsAppHelper</a></li>
+                                                    <li class="class"><a href="../classes/NetCommonsAppModel.html">NetCommonsAppModel</a></li>
+                                                    <li class="class"><a href="../classes/NetCommonsAppShell.html">NetCommonsAppShell</a></li>
+                                                    <li class="class"><a href="../classes/NetCommonsCakeTestCase.html">NetCommonsCakeTestCase</a></li>
+                                                    <li class="class"><a href="../classes/NetCommonsComponent.html">NetCommonsComponent</a></li>
+                                                    <li class="class"><a href="../classes/NetCommonsConsoleTestCase.html">NetCommonsConsoleTestCase</a></li>
+                                                    <li class="class"><a href="../classes/NetCommonsController.html">NetCommonsController</a></li>
+                                                    <li class="class"><a href="../classes/NetCommonsControllerBaseTestCase.html">NetCommonsControllerBaseTestCase</a></li>
+                                                    <li class="class"><a href="../classes/NetCommonsControllerTestCase.html">NetCommonsControllerTestCase</a></li>
+                                                    <li class="class"><a href="../classes/NetCommonsCurrentUtilityBase.html">NetCommonsCurrentUtilityBase</a></li>
+                                                    <li class="class"><a href="../classes/NetCommonsDeleteTest.html">NetCommonsDeleteTest</a></li>
+                                                    <li class="class"><a href="../classes/NetCommonsExceptionRenderer.html">NetCommonsExceptionRenderer</a></li>
+                                                    <li class="class"><a href="../classes/NetCommonsFormHelper.html">NetCommonsFormHelper</a></li>
+                                                    <li class="class"><a href="../classes/NetCommonsGetTest.html">NetCommonsGetTest</a></li>
+                                                    <li class="class"><a href="../classes/NetCommonsHelperTestCase.html">NetCommonsHelperTestCase</a></li>
+                                                    <li class="class"><a href="../classes/NetCommonsHtmlHelper.html">NetCommonsHtmlHelper</a></li>
+                                                    <li class="class"><a href="../classes/NetCommonsMigration.html">NetCommonsMigration</a></li>
+                                                    <li class="class"><a href="../classes/NetCommonsModelTestCase.html">NetCommonsModelTestCase</a></li>
+                                                    <li class="class"><a href="../classes/NetCommonsRoutesTestCase.html">NetCommonsRoutesTestCase</a></li>
+                                                    <li class="class"><a href="../classes/NetCommonsSaveTest.html">NetCommonsSaveTest</a></li>
+                                                    <li class="class"><a href="../classes/NetCommonsSecurity.html">NetCommonsSecurity</a></li>
+                                                    <li class="class"><a href="../classes/NetCommonsTestSuite.html">NetCommonsTestSuite</a></li>
+                                                    <li class="class"><a href="../classes/NetCommonsTime.html">NetCommonsTime</a></li>
+                                                    <li class="class"><a href="../classes/NetCommonsTimeComponent.html">NetCommonsTimeComponent</a></li>
+                                                    <li class="class"><a href="../classes/NetCommonsTimeHelper.html">NetCommonsTimeHelper</a></li>
+                                                    <li class="class"><a href="../classes/NetCommonsUrl.html">NetCommonsUrl</a></li>
+                                                    <li class="class"><a href="../classes/NetCommonsValidateTest.html">NetCommonsValidateTest</a></li>
+                                                    <li class="class"><a href="../classes/NetCommonsValidationRuleBehavior.html">NetCommonsValidationRuleBehavior</a></li>
+                                                    <li class="class"><a href="../classes/OriginalKeyBehavior.html">OriginalKeyBehavior</a></li>
+                                                    <li class="class"><a href="../classes/PermissionComponent.html">PermissionComponent</a></li>
+                                                    <li class="class"><a href="../classes/SingletonViewBlockHtmlHelper.html">SingletonViewBlockHtmlHelper</a></li>
+                                                    <li class="class"><a href="../classes/SiteCloseController.html">SiteCloseController</a></li>
+                                                    <li class="class"><a href="../classes/SnsButtonHelper.html">SnsButtonHelper</a></li>
+                                                    <li class="class"><a href="../classes/TableListHelper.html">TableListHelper</a></li>
+                                                    <li class="class"><a href="../classes/TitleIconHelper.html">TitleIconHelper</a></li>
+                                                    <li class="class"><a href="../classes/TokenHelper.html">TokenHelper</a></li>
+                                                    <li class="class"><a href="../classes/TrackableBehavior.html">TrackableBehavior</a></li>
+                                                    <li class="class"><a href="../classes/WizardHelper.html">WizardHelper</a></li>
+                                            </ul>
+                </div>
+            </div>
         </div>
+    </div>
 
-        <div class="span10 offset2">
-            <ul class="breadcrumb">
-                <li><a href="../"><i class="icon-remove-sign"></i></a><span class="divider">\</span></li>
-                <li>Compilation Errors</li>
-            </ul>
-
-                            <div class="alert alert-info">No errors have been found in this project.</div>
-            
-                            <div class="package-contents">
-                                    </div>
-                            <div class="package-contents">
-                                    </div>
-                            <div class="package-contents">
-                                    </div>
-                            <div class="package-contents">
-                                    </div>
-                            <div class="package-contents">
-                                    </div>
-                            <div class="package-contents">
-                                    </div>
-                            <div class="package-contents">
-                                    </div>
-                            <div class="package-contents">
-                                    </div>
-                            <div class="package-contents">
-                                    </div>
-                            <div class="package-contents">
-                                    </div>
-                            <div class="package-contents">
-                                    </div>
-                            <div class="package-contents">
-                                    </div>
-                            <div class="package-contents">
-                                    </div>
-                            <div class="package-contents">
-                                    </div>
-                            <div class="package-contents">
-                                    </div>
-                            <div class="package-contents">
-                                    </div>
-                            <div class="package-contents">
-                                    </div>
-                            <div class="package-contents">
-                                    </div>
-                            <div class="package-contents">
-                                    </div>
-                            <div class="package-contents">
-                                    </div>
-                            <div class="package-contents">
-                                    </div>
-                            <div class="package-contents">
-                                    </div>
-                            <div class="package-contents">
-                                    </div>
-                            <div class="package-contents">
-                                    </div>
-                            <div class="package-contents">
-                                    </div>
-                            <div class="package-contents">
-                                    </div>
-                            <div class="package-contents">
-                                    </div>
-                            <div class="package-contents">
-                                    </div>
-                            <div class="package-contents">
-                                    </div>
-                            <div class="package-contents">
-                                    </div>
-                            <div class="package-contents">
-                                    </div>
-                            <div class="package-contents">
-                                    </div>
-                            <div class="package-contents">
-                                    </div>
-                            <div class="package-contents">
-                                    </div>
-                            <div class="package-contents">
-                                    </div>
-                            <div class="package-contents">
-                                    </div>
-                            <div class="package-contents">
-                                    </div>
-                            <div class="package-contents">
-                                    </div>
-                            <div class="package-contents">
-                                    </div>
-                            <div class="package-contents">
-                                    </div>
-                            <div class="package-contents">
-                                    </div>
-                            <div class="package-contents">
-                                    </div>
-                            <div class="package-contents">
-                                    </div>
-                            <div class="package-contents">
-                                    </div>
-                            <div class="package-contents">
-                                    </div>
-                            <div class="package-contents">
-                                    </div>
-                            <div class="package-contents">
-                                    </div>
-                            <div class="package-contents">
-                                    </div>
-                            <div class="package-contents">
-                                    </div>
-                            <div class="package-contents">
-                                    </div>
-                            <div class="package-contents">
-                                    </div>
-                            <div class="package-contents">
-                                    </div>
-                            <div class="package-contents">
-                                    </div>
-                            <div class="package-contents">
-                                    </div>
-                            <div class="package-contents">
-                                    </div>
-                            <div class="package-contents">
-                                    </div>
-                            <div class="package-contents">
-                                    </div>
-                            <div class="package-contents">
-                                    </div>
-                            <div class="package-contents">
-                                    </div>
-                            <div class="package-contents">
-                                    </div>
-                            <div class="package-contents">
-                                    </div>
-                            <div class="package-contents">
-                                    </div>
-                            <div class="package-contents">
-                                    </div>
-                            <div class="package-contents">
-                                    </div>
-                            <div class="package-contents">
-                                    </div>
-                            <div class="package-contents">
-                                    </div>
-                            <div class="package-contents">
-                                    </div>
-                            <div class="package-contents">
-                                    </div>
-                            <div class="package-contents">
-                                    </div>
-                            <div class="package-contents">
-                                    </div>
-                            <div class="package-contents">
-                                    </div>
-                            <div class="package-contents">
-                                    </div>
-                            <div class="package-contents">
-                                    </div>
-                            <div class="package-contents">
-                                    </div>
-                            <div class="package-contents">
-                                    </div>
-                            <div class="package-contents">
-                                    </div>
-                            <div class="package-contents">
-                                    </div>
-                            <div class="package-contents">
-                                    </div>
-                            <div class="package-contents">
-                                    </div>
-                            <div class="package-contents">
-                                    </div>
-                            <div class="package-contents">
-                                    </div>
-                            <div class="package-contents">
-                                    </div>
-                            <div class="package-contents">
-                                    </div>
-                            <div class="package-contents">
-                                    </div>
-                            <div class="package-contents">
-                                    </div>
-                            <div class="package-contents">
-                                    </div>
-                            <div class="package-contents">
-                                    </div>
-                            <div class="package-contents">
-                                    </div>
-                            <div class="package-contents">
-                                    </div>
-                            <div class="package-contents">
-                                    </div>
-                            <div class="package-contents">
-                                    </div>
-                    </div>
+        </div>
     </section>
+    <section class="row-fluid">
+        <div class="span10 offset2">
+            <div class="row-fluid">
+                <div class="span8 content file">
+                    <nav>
+                                                                    </nav>
+
+                    <a href="#source-view" role="button" class="pull-right btn" data-toggle="modal"><i class="icon-code"></i></a>
+                    <h1><small>Plugin/Cabinets/View/Helper</small>CabinetFileHelper.php</h1>
+                    <p><em>Created by PhpStorm.</em></p>
+                    <p>User: ryuji
+Date: 15/03/06
+Time: 14:57</p>
+
+                    
+                    
+                                        <h2>Classes</h2>
+                    <table class="table table-hover">
+                                            <tr>
+                            <td><a href="../classes/CabinetFileHelper.html">CabinetFileHelper</a></td>
+                            <td><em>Class CabinetsFormatHelper</em></td>
+                        </tr>
+                                        </table>
+                                    </div>
+
+                <aside class="span4 detailsbar">
+                    <dl>
+                                                    <dt>Package</dt>
+                            <dd><div class="namespace-wrapper">\Default</div></dd>
+                        
+                        
+                    </dl>
+                    <h2>Tags</h2>
+                    <table class="table table-condensed">
+                                                    <tr><td colspan="2"><em>None found</em></td></tr>
+                                            </table>
+
+                </aside>
+            </div>
+
+            
+            
+        </div>
+    </section>
+
+    <div id="source-view" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="source-view-label" aria-hidden="true">
+        <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+            <h3 id="source-view-label"></h3>
+        </div>
+        <div class="modal-body">
+            <pre data-src="../files/Plugin/Cabinets/View/Helper/CabinetFileHelper.php.txt" class="language-php line-numbers"></pre>
+        </div>
+    </div>
 
     <footer class="row-fluid">
         <section class="span10 offset2">
