@@ -90,15 +90,18 @@ class CategoryHelper extends AppHelper {
  *   - `divider`: True is divider.
  *   - `displayMenu`: True is display menu. False is <li> tag only.
  *   - `displayEmpty`: True is empty display. False is not display.
+ * @param string $element String of element template name
+ *   - `dropdown_toggle_category`: Dropdown menu template
+ *   - `tab_category`: tab menu template
  * @return string HTML tags
  */
-	public function dropDownToggle($options = array()) {
-		//カレントCategoryId
-		if (isset($this->_View->params['named']['category_id'])) {
-			$currentCategoryId = $this->_View->params['named']['category_id'];
-		} else {
-			$currentCategoryId = '0';
+	public function dropDownToggle($options = array(), $element = 'dropdown_toggle_category') {
+		list($plugin, $elementFileName) = pluginSplit($element);
+		if (empty($plugin)) {
+			$plugin = 'Categories';
 		}
+		//カレントCategoryId
+		$currentCategoryId = Hash::get($this->_View->params['named'], 'category_id', null);
 
 		//URLのセット
 		if (! isset($options['url'])) {
@@ -141,7 +144,7 @@ class CategoryHelper extends AppHelper {
 			}
 		}
 
-		return $this->_View->element('Categories.dropdown_toggle_category', array(
+		return $this->_View->element($plugin . '.' . $elementFileName, array(
 			'currentCategoryId' => $currentCategoryId,
 			'options' => $options
 		));
