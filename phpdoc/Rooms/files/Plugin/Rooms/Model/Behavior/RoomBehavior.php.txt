@@ -173,7 +173,7 @@ class RoomBehavior extends ModelBehavior {
 		$model->Room->unbindModel(array(
 			'belongsTo' => array('ParentRoom'),
 			'hasMany' => array('ChildRoom')
-		));
+		), false);
 		$spaces = $model->Room->find('all', array(
 			'recursive' => 1,
 			'conditions' => array(
@@ -181,6 +181,33 @@ class RoomBehavior extends ModelBehavior {
 			),
 			'order' => 'Room.lft'
 		));
+		// 外したものを戻しておく
+		$model->Room->bindModel(array(
+			'belongsTo' => array(
+				'ParentRoom' => array(
+					'className' => 'Rooms.Room',
+					'foreignKey' => 'parent_id',
+					'conditions' => '',
+					'fields' => '',
+					'order' => ''
+				)
+			),
+			'hasMany' => array(
+				'ChildRoom' => array(
+					'className' => 'Rooms.Room',
+					'foreignKey' => 'parent_id',
+					'dependent' => false,
+					'conditions' => '',
+					'fields' => '',
+					'order' => '',
+					'limit' => '',
+					'offset' => '',
+					'exclusive' => '',
+					'finderQuery' => '',
+					'counterQuery' => ''
+				),
+			),
+		), false);
 
 		$spaces = Hash::combine($spaces, '{n}.Room.id', '{n}');
 
