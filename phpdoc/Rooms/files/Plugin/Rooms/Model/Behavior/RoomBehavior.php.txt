@@ -170,6 +170,8 @@ class RoomBehavior extends ModelBehavior {
 		}
 
 		//スペースデータ取得
+		$bindParentRoom = $model->Room->belongsTo['ParentRoom'];
+		$bindChildRoom = $model->Room->hasMany['ChildRoom'];
 		$model->Room->unbindModel(array(
 			'belongsTo' => array('ParentRoom'),
 			'hasMany' => array('ChildRoom')
@@ -183,30 +185,8 @@ class RoomBehavior extends ModelBehavior {
 		));
 		// 外したものを戻しておく
 		$model->Room->bindModel(array(
-			'belongsTo' => array(
-				'ParentRoom' => array(
-					'className' => 'Rooms.Room',
-					'foreignKey' => 'parent_id',
-					'conditions' => '',
-					'fields' => '',
-					'order' => ''
-				)
-			),
-			'hasMany' => array(
-				'ChildRoom' => array(
-					'className' => 'Rooms.Room',
-					'foreignKey' => 'parent_id',
-					'dependent' => false,
-					'conditions' => '',
-					'fields' => '',
-					'order' => '',
-					'limit' => '',
-					'offset' => '',
-					'exclusive' => '',
-					'finderQuery' => '',
-					'counterQuery' => ''
-				),
-			),
+			'belongsTo' => array('ParentRoom' => $bindParentRoom),
+			'hasMany' => array('ChildRoom' => $bindChildRoom),
 		), false);
 
 		$spaces = Hash::combine($spaces, '{n}.Room.id', '{n}');
