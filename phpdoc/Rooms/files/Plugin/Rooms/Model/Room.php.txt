@@ -247,25 +247,21 @@ class Room extends RoomsAppModel {
 		));
 
 		if (Hash::get($this->data, 'Room.space_id') === Space::PRIVATE_SPACE_ID) {
-			$this->validate = Hash::merge($this->validate, array(
-				'default_role_key' => array(
-					'inList' => array(
-						'rule' => array('inList', [Role::ROOM_ROLE_KEY_ROOM_ADMINISTRATOR]),
-						'message' => __d('net_commons', 'Invalid request.'),
-						'required' => true
-					),
+			$this->validate['default_role_key'] = array(
+				'inList' => array(
+					'rule' => array('inList', [Role::ROOM_ROLE_KEY_ROOM_ADMINISTRATOR]),
+					'message' => __d('net_commons', 'Invalid request.'),
+					'required' => true
 				),
-			));
+			);
 		} else {
-			$this->validate = Hash::merge($this->validate, array(
-				'default_role_key' => array(
-					'inList' => array(
-						'rule' => array('inList', self::$defaultRoleKeyList),
-						'message' => __d('net_commons', 'Invalid request.'),
-						'required' => true
-					),
+			$this->validate['default_role_key'] = array(
+				'inList' => array(
+					'rule' => array('inList', self::$defaultRoleKeyList),
+					'message' => __d('net_commons', 'Invalid request.'),
+					'required' => true
 				),
-			));
+			);
 		}
 
 		// * RoomsLanguageのバリデーション
