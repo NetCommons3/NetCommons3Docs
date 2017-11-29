@@ -16,6 +16,8 @@ App::uses('Current', 'NetCommons.Utility');
 App::uses('NetCommonsTestSuite', 'NetCommons.TestSuite');
 App::uses('SiteSettingUtil', 'SiteManager.Utility');
 App::uses('OriginalKeyBehavior', 'NetCommons.Model/Behavior');
+App::uses('TestAuthGeneral', 'AuthGeneral.TestSuite');
+App::uses('AuthComponent', 'Controller/Component');
 
 /**
  * NetCommonsCakeTestCase class
@@ -126,6 +128,8 @@ abstract class NetCommonsCakeTestCase extends CakeTestCase {
  * @return void
  */
 	public function setUp() {
+		$this->_clear();
+
 		parent::setUp();
 
 		Configure::write('NetCommons.installed', true);
@@ -142,7 +146,7 @@ abstract class NetCommonsCakeTestCase extends CakeTestCase {
  *
  * @return void
  */
-	public function tearDown() {
+	protected function _clear() {
 		if ($this->_modelName) {
 			$model = $this->_modelName;
 			unset($this->$model);
@@ -157,6 +161,19 @@ abstract class NetCommonsCakeTestCase extends CakeTestCase {
 
 		OriginalKeyBehavior::$isUnitRandomKey = false;
 
+		//throwが実行されるとログイン情報が残っているため、初期化する
+		$reflectionClass = new ReflectionClass('AuthComponent');
+		$property = $reflectionClass->getProperty('_user');
+		$property->setAccessible(true);
+		$property->setValue([]);
+	}
+
+/**
+ * tearDown method
+ *
+ * @return void
+ */
+	public function tearDown() {
 		parent::tearDown();
 	}
 
