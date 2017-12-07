@@ -136,10 +136,10 @@
                                 <div class="accordion" style="margin-bottom: 0">
         <div class="accordion-group">
             <div class="accordion-heading">
-                                    <a class="accordion-toggle " data-toggle="collapse" data-target="#namespace-147442994"></a>
+                                    <a class="accordion-toggle " data-toggle="collapse" data-target="#namespace-1474629516"></a>
                                 <a href="../namespaces/default.html" style="margin-left: 30px; padding-left: 0">\</a>
             </div>
-            <div id="namespace-147442994" class="accordion-body collapse in">
+            <div id="namespace-1474629516" class="accordion-body collapse in">
                 <div class="accordion-inner">
 
                     
@@ -232,10 +232,9 @@
                                             </nav>
                     <a href="#source-view" role="button" class="pull-right btn" data-toggle="modal"><i class="icon-code"></i></a>
 
-                    <h1><small>\</small>AppController</h1>
-                    <p><em>Application Controller</em></p>
-                    <p>Add your application-wide methods in the class below, your controllers
-will inherit them.</p>
+                    <h1><small>\</small>AuthenticatorPlugin</h1>
+                    <p><em>AuthenticatorPlugin Utility</em></p>
+                    
                     
                                         
                     <section id="summary">
@@ -253,7 +252,9 @@ will inherit them.</p>
                         </section>
                         <section class="row-fluid public">
                             <section class="span4">
-                                                                    <em>No public methods found</em>
+                                                                    <a href="../classes/AuthenticatorPlugin.html#method_getPlugins" class="">getPlugins()</a><br />
+                                                                    <a href="../classes/AuthenticatorPlugin.html#method_getAuthenticators" class="">getAuthenticators()</a><br />
+                                                                    <a href="../classes/AuthenticatorPlugin.html#method_getExternals" class="">getExternals()</a><br />
                                                             </section>
                             <section class="span4">
                                                                     <em>No public properties found</em>
@@ -291,31 +292,27 @@ will inherit them.</p>
                     
                     <dl>
                         <dt>File</dt>
-                            <dd><a href="../files/Controller.AppControllerOrig.html"><div class="path-wrapper">Controller/AppControllerOrig.php</div></a></dd>
+                            <dd><a href="../files/Plugin.Auth.Utility.AuthenticatorPlugin.html"><div class="path-wrapper">Plugin/Auth/Utility/AuthenticatorPlugin.php</div></a></dd>
                                                 <dt>Package</dt>
-                            <dd><div class="namespace-wrapper">app.Controller</div></dd>
+                            <dd><div class="namespace-wrapper">Auth\Utility</div></dd>
                                                 <dt>Class hierarchy</dt>
                             <dd class="hierarchy">
-                                                                                                                                                                                                                                                                                                
-                                        <div class="namespace-wrapper">\Controller</div>
-                                                                                                    <div class="namespace-wrapper">\AppController</div>
+                                                                                                                                                                    <div class="namespace-wrapper">\AuthenticatorPlugin</div>
                             </dd>
 
                         
                         
                         
-                                                                            <dt>See also</dt>
-                                                                                        <dd><a href="http://book.cakephp.org/2.0/en/controllers.html#the-app-controller"><span class="namespace-wrapper">http://book.cakephp.org/2.0/en/controllers.html#the-app-controller</span></a></dd>
-                                                    
+                        
                                                                         </dl>
                     <h2>Tags</h2>
                     <table class="table table-condensed">
                                             <tr>
                             <th>
-                                SuppressWarnings
+                                author
                             </th>
                             <td>
-                                                                    <p>(PHPMD.NumberOfChildren)</p>
+                                                                    <p>Mitsuru Mutaguchi <a href="mailto:mutaguchi@opensource-workshop.jp">mutaguchi@opensource-workshop.jp</a></p>
                                                             </td>
                         </tr>
                                         </table>
@@ -324,16 +321,112 @@ will inherit them.</p>
 
                         
                         
-                                </div>
+                                    <a id="methods" name="methods"></a>
+            <div class="row-fluid">
+                <div class="span8 content class"><h2>Methods</h2></div>
+                <aside class="span4 detailsbar"></aside>
+            </div>
+
+                                    <div class="row-fluid">
+        <div class="span8 content class">
+            <a id="method_getPlugins" name="method_getPlugins" class="anchor"></a>
+            <article class="method">
+                <h3 class="public ">getPlugins()</h3>
+                <a href="#source-view" role="button" class="pull-right btn" data-toggle="modal" style="font-size: 1.1em; padding: 9px 14px"><i class="icon-code"></i></a>
+                <pre class="signature" style="margin-right: 54px;">getPlugins() : array</pre>
+                <p><em>Return available authenticators (Camel)</em></p>
+                
+
+                
+                
+                                    <h4>Returns</h4>
+                    array
+                                            &mdash; <p>authenticators (Camel)</p>
+                                    				
+                            </article>
+        </div>
+        <aside class="span4 detailsbar">
+            <h1><i class="icon-arrow-down"></i></h1>
+                            <span class="label label-info">static</span>
+                                                            <dl>
+                                                                            </dl>
+            <h2>Tags</h2>
+            <table class="table table-condensed">
+                                    <tr><td colspan="2"><em>None found</em></td></tr>
+                            </table>
+        </aside>
+    </div>
+
+                                    <div class="row-fluid">
+        <div class="span8 content class">
+            <a id="method_getAuthenticators" name="method_getAuthenticators" class="anchor"></a>
+            <article class="method">
+                <h3 class="public ">getAuthenticators()</h3>
+                <a href="#source-view" role="button" class="pull-right btn" data-toggle="modal" style="font-size: 1.1em; padding: 9px 14px"><i class="icon-code"></i></a>
+                <pre class="signature" style="margin-right: 54px;">getAuthenticators() : array</pre>
+                <p><em>Return available authenticators (under_score)</em></p>
+                
+
+                
+                
+                                    <h4>Returns</h4>
+                    array
+                                            &mdash; <p>authenticators</p>
+                                    				
+                            </article>
+        </div>
+        <aside class="span4 detailsbar">
+            <h1><i class="icon-arrow-down"></i></h1>
+                            <span class="label label-info">static</span>
+                                                            <dl>
+                                                                            </dl>
+            <h2>Tags</h2>
+            <table class="table table-condensed">
+                                    <tr><td colspan="2"><em>None found</em></td></tr>
+                            </table>
+        </aside>
+    </div>
+
+                                    <div class="row-fluid">
+        <div class="span8 content class">
+            <a id="method_getExternals" name="method_getExternals" class="anchor"></a>
+            <article class="method">
+                <h3 class="public ">getExternals()</h3>
+                <a href="#source-view" role="button" class="pull-right btn" data-toggle="modal" style="font-size: 1.1em; padding: 9px 14px"><i class="icon-code"></i></a>
+                <pre class="signature" style="margin-right: 54px;">getExternals() : array</pre>
+                <p><em>AuthGeneral以外の外部認証プラグイン(AuthXXX)を取得</em></p>
+                
+
+                
+                
+                                    <h4>Returns</h4>
+                    array
+                                            &mdash; <p>external authenticators</p>
+                                    				
+                            </article>
+        </div>
+        <aside class="span4 detailsbar">
+            <h1><i class="icon-arrow-down"></i></h1>
+                            <span class="label label-info">static</span>
+                                                            <dl>
+                                                                            </dl>
+            <h2>Tags</h2>
+            <table class="table table-condensed">
+                                    <tr><td colspan="2"><em>None found</em></td></tr>
+                            </table>
+        </aside>
+    </div>
+
+                                                                    </div>
     </section>
 
     <div id="source-view" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="source-view-label" aria-hidden="true">
         <div class="modal-header">
             <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
-            <h3 id="source-view-label">AppControllerOrig.php</h3>
+            <h3 id="source-view-label">AuthenticatorPlugin.php</h3>
         </div>
         <div class="modal-body">
-            <pre data-src="../files/Controller/AppControllerOrig.php.txt" class="language-php line-numbers"></pre>
+            <pre data-src="../files/Plugin/Auth/Utility/AuthenticatorPlugin.php.txt" class="language-php line-numbers"></pre>
         </div>
     </div>
 
