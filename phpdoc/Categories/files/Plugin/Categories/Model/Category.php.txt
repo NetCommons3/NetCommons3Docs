@@ -135,6 +135,7 @@ class Category extends CategoriesAppModel {
 				),
 			)
 		), false);
+		$this->CategoryOrder->useDbConfig = $this->useDbConfig;
 
 		$belongsTo = $this->bindModelCategoryLang();
 		$this->bindModel($belongsTo, true);
@@ -169,6 +170,7 @@ class Category extends CategoriesAppModel {
 				),
 			)
 		), false);
+		$this->CategoryOrder->useDbConfig = $this->useDbConfig;
 
 		$belongsTo = $this->bindModelCategoryLang();
 		$this->bindModel($belongsTo, true);
