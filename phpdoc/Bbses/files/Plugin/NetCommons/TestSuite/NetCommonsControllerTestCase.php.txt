@@ -19,7 +19,7 @@ App::uses('NetCommonsCakeTestCase', 'NetCommons.TestSuite');
  * @package NetCommons\NetCommons\TestSuite
  * @codeCoverageIgnore
  */
-class NetCommonsControllerTestCase extends NetCommonsControllerBaseTestCase {
+abstract class NetCommonsControllerTestCase extends NetCommonsControllerBaseTestCase {
 
 /**
  * Load TestPlugin
@@ -77,7 +77,7 @@ class NetCommonsControllerTestCase extends NetCommonsControllerBaseTestCase {
  * @param array $paramsOptions リクエストパラメータオプション
  * @param string|null $exception Exception
  * @param string $return testActionの実行後の結果
- * @return void
+ * @return mixed
  */
 	protected function _testNcAction($url = [], $paramsOptions = [],
 										$exception = null, $return = 'view') {
