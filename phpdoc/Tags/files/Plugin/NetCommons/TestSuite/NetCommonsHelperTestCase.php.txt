@@ -24,7 +24,7 @@ App::uses('CurrentSystem', 'NetCommons.Utility');
  * @SuppressWarnings(PHPMD.NumberOfChildren)
  * @codeCoverageIgnore
  */
-class NetCommonsHelperTestCase extends NetCommonsCakeTestCase {
+abstract class NetCommonsHelperTestCase extends NetCommonsControllerTestCase {
 
 /**
  * Plugin name
@@ -74,10 +74,11 @@ class NetCommonsHelperTestCase extends NetCommonsCakeTestCase {
  * @param array $reqestData $helper->_View->request->dataに値をセットする配列
  * @param array $params $helper->_View->paramsに値をセットする配列
  * @param array $helpers ヘルパー配列
+ * @param array $validationErrors バリデーションエラー
  * @return void
  */
 	public function loadHelper($helper, $viewVars = [],
-								$reqestData = [], $params = [], $helpers = []) {
+						$reqestData = [], $params = [], $helpers = [], $validationErrors = null) {
 		list($plugin, $helper) = pluginSplit($helper);
 		if (! $plugin) {
 			$plugin = $this->plugin;
@@ -98,22 +99,11 @@ class NetCommonsHelperTestCase extends NetCommonsCakeTestCase {
 		$View = new View($Controller);
 		$View->plugin = Inflector::camelize($this->plugin);
 		$View->helpers = $helpers;
+		if ($validationErrors) {
+			$View->validationErrors = $validationErrors;
+		}
 		$View->loadHelpers();
 		$this->$helper = new $helperClass($View);
-	}
-
-/**
- * Assert input tag
- *
- * @param string $tagType タグタイプ(input or textearea or button)
- * @param string $name inputタグのname属性
- * @param string $value inputタグのvalue値
- * @param string $result Result data
- * @param string $message メッセージ
- * @return void
- */
-	public function assertInput($tagType, $name, $value, $result, $message = null) {
-		(new NetCommonsControllerTestCase())->assertInput($tagType, $name, $value, $result, $message);
 	}
 
 }

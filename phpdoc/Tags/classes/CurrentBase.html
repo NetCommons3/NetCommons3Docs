@@ -136,10 +136,10 @@
                                 <div class="accordion" style="margin-bottom: 0">
         <div class="accordion-group">
             <div class="accordion-heading">
-                                    <a class="accordion-toggle " data-toggle="collapse" data-target="#namespace-816810176"></a>
+                                    <a class="accordion-toggle " data-toggle="collapse" data-target="#namespace-926428519"></a>
                                 <a href="../namespaces/default.html" style="margin-left: 30px; padding-left: 0">\</a>
             </div>
-            <div id="namespace-816810176" class="accordion-body collapse in">
+            <div id="namespace-926428519" class="accordion-body collapse in">
                 <div class="accordion-inner">
 
                     
@@ -459,7 +459,9 @@
                         <section class="row-fluid public">
                             <section class="span4">
                                                                     <a href="../classes/CurrentBase.html#method_read" class="">read()</a><br />
+                                                                    <a href="../classes/CurrentBase.html#method_raedOriginal" class="">raedOriginal()</a><br />
                                                                     <a href="../classes/CurrentBase.html#method_write" class="">write()</a><br />
+                                                                    <a href="../classes/CurrentBase.html#method_writeOriginal" class="">writeOriginal()</a><br />
                                                                     <a href="../classes/CurrentBase.html#method_remove" class="">remove()</a><br />
                                                                     <a href="../classes/CurrentBase.html#method_permission" class="">permission()</a><br />
                                                             </section>
@@ -662,6 +664,50 @@
 
                                     <div class="row-fluid">
         <div class="span8 content class">
+            <a id="method_raedOriginal" name="method_raedOriginal" class="anchor"></a>
+            <article class="method">
+                <h3 class="public ">raedOriginal()</h3>
+                <a href="#source-view" role="button" class="pull-right btn" data-toggle="modal" style="font-size: 1.1em; padding: 9px 14px"><i class="icon-code"></i></a>
+                <pre class="signature" style="margin-right: 54px;">raedOriginal(string|null  <span class="argument">$key = null</span>, mixed  <span class="argument">$default = null</span>) : array|null</pre>
+                <p><em>指定された$keyの値を$originalCurrentから返します。</em></p>
+                <p>現在のBlockKeyを取得したい場合</p>
+<pre><code>Cuurent::readOrignal('Block.key')</code></pre>
+
+                                    <h4>Parameters</h4>
+                    <table class="table table-condensed table-hover">
+                                                    <tr>
+                                <td>string|null</td>
+                                <td>$key </td>
+                                <td><p>Hashクラスのpath</p></td>
+                            </tr>
+                                                    <tr>
+                                <td>mixed</td>
+                                <td>$default </td>
+                                <td><p>デフォルト値</p></td>
+                            </tr>
+                                            </table>
+                
+                
+                                    <h4>Returns</h4>
+                    array|null
+                                            &mdash; <p>Current data.</p>
+                                    				
+                            </article>
+        </div>
+        <aside class="span4 detailsbar">
+            <h1><i class="icon-arrow-down"></i></h1>
+                            <span class="label label-info">static</span>
+                                                            <dl>
+                                                                            </dl>
+            <h2>Tags</h2>
+            <table class="table table-condensed">
+                                    <tr><td colspan="2"><em>None found</em></td></tr>
+                            </table>
+        </aside>
+    </div>
+
+                                    <div class="row-fluid">
+        <div class="span8 content class">
             <a id="method_write" name="method_write" class="anchor"></a>
             <article class="method">
                 <h3 class="public ">write()</h3>
@@ -670,6 +716,47 @@
                 <p><em>指定された$keyの値をセットします</em></p>
                 <p>現在のBlockKeyをセットしたい場合</p>
 <pre><code>Cuurent::write('Block.key', 'block_key)</code></pre>
+
+                                    <h4>Parameters</h4>
+                    <table class="table table-condensed table-hover">
+                                                    <tr>
+                                <td>string|null</td>
+                                <td>$key </td>
+                                <td><p>Hashクラスのpath、nullの場合、Hash::mergeする</p></td>
+                            </tr>
+                                                    <tr>
+                                <td>\mixted</td>
+                                <td>$value </td>
+                                <td><p>セットする値</p></td>
+                            </tr>
+                                            </table>
+                
+                
+                				
+                            </article>
+        </div>
+        <aside class="span4 detailsbar">
+            <h1><i class="icon-arrow-down"></i></h1>
+                            <span class="label label-info">static</span>
+                                                            <dl>
+                                                                            </dl>
+            <h2>Tags</h2>
+            <table class="table table-condensed">
+                                    <tr><td colspan="2"><em>None found</em></td></tr>
+                            </table>
+        </aside>
+    </div>
+
+                                    <div class="row-fluid">
+        <div class="span8 content class">
+            <a id="method_writeOriginal" name="method_writeOriginal" class="anchor"></a>
+            <article class="method">
+                <h3 class="public ">writeOriginal()</h3>
+                <a href="#source-view" role="button" class="pull-right btn" data-toggle="modal" style="font-size: 1.1em; padding: 9px 14px"><i class="icon-code"></i></a>
+                <pre class="signature" style="margin-right: 54px;">writeOriginal(string|null  <span class="argument">$key</span>, \mixted  <span class="argument">$value</span>) : void</pre>
+                <p><em>指定された$keyの値を$originalCurrentにセットします</em></p>
+                <p>現在のBlockKeyをセットしたい場合</p>
+<pre><code>Cuurent::writeOriginal('Block.key', 'block_key)</code></pre>
 
                                     <h4>Parameters</h4>
                     <table class="table table-condensed table-hover">
@@ -832,7 +919,7 @@
                 <section class="span10 offset1">
                     <hr />
                     Documentation is powered by <a href="http://www.phpdoc.org/">phpDocumentor </a> and authored
-                    on June 28th, 2017 at 21:57.
+                    on January 27th, 2018 at 00:22.
                 </section>
             </section>
         </section>
