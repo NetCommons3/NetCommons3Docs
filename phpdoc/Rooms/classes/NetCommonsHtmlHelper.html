@@ -136,10 +136,10 @@
                                 <div class="accordion" style="margin-bottom: 0">
         <div class="accordion-group">
             <div class="accordion-heading">
-                                    <a class="accordion-toggle " data-toggle="collapse" data-target="#namespace-1240265350"></a>
+                                    <a class="accordion-toggle " data-toggle="collapse" data-target="#namespace-292823934"></a>
                                 <a href="../namespaces/default.html" style="margin-left: 30px; padding-left: 0">\</a>
             </div>
-            <div id="namespace-1240265350" class="accordion-body collapse in">
+            <div id="namespace-292823934" class="accordion-body collapse in">
                 <div class="accordion-inner">
 
                     
@@ -301,6 +301,7 @@ will inherit them.</p>
                                                                     <a href="../classes/NetCommonsHtmlHelper.html#method_image" class="">image()</a><br />
                                                                     <a href="../classes/NetCommonsHtmlHelper.html#method_url" class="">url()</a><br />
                                                                     <a href="../classes/NetCommonsHtmlHelper.html#method_link" class="">link()</a><br />
+                                                                    <a href="../classes/NetCommonsHtmlHelper.html#method_elementDisplayChange" class="">elementDisplayChange()</a><br />
                                                             </section>
                             <section class="span4">
                                                                     <a href="../classes/NetCommonsHtmlHelper.html#property_helpers" class="">$helpers</a><br />
@@ -746,6 +747,59 @@ NetCommonsHtml::mailHelp()<br>
         </aside>
     </div>
 
+                                    <div class="row-fluid">
+        <div class="span8 content class">
+            <a id="method_elementDisplayChange" name="method_elementDisplayChange" class="anchor"></a>
+            <article class="method">
+                <h3 class="public ">elementDisplayChange()</h3>
+                <a href="#source-view" role="button" class="pull-right btn" data-toggle="modal" style="font-size: 1.1em; padding: 9px 14px"><i class="icon-code"></i></a>
+                <pre class="signature" style="margin-right: 54px;">elementDisplayChange(string  <span class="argument">$displayType</span>) : string</pre>
+                <p><em>表示切替element
+displayTypeによってcss, js, elementを切り替えます。
+### 以下必要
+* NetCommonsHtmlHelper::elementDisplayChange()呼び出し
+* 対応するプラグインのframe_settings系テーブルに displayType 追加  ex) menu_frame_settings.display_type
+* 表示設定画面。基本はブロック設定画面にタブで「表示設定」を作る。メニュープラグインは例外。
+* frame_settings系テーブルのモデル
+* コントローラでframe_settings系のデータをviewにセット</em></p>
+                
+
+                                    <h4>Parameters</h4>
+                    <table class="table table-condensed table-hover">
+                                                    <tr>
+                                <td>string</td>
+                                <td>$displayType </td>
+                                <td><p>表示タイプ</p></td>
+                            </tr>
+                                            </table>
+                
+                
+                                    <h4>Returns</h4>
+                    string
+                                            &mdash; <p>HTMLタグ</p>
+                                    				
+                            </article>
+        </div>
+        <aside class="span4 detailsbar">
+            <h1><i class="icon-arrow-down"></i></h1>
+                                                            <dl>
+                                                                                            <dt>See also</dt>
+                                                                <dd><a href=""><span class="namespace-wrapper">参考：renderMain()、NetCommonsHtmlHelper::elementDisplayChange()呼び出し</span></a></dd>
+                                            <dd><a href=""><span class="namespace-wrapper">参考：renderMain()呼び出し</span></a></dd>
+                                            <dd><a href=""><span class="namespace-wrapper">参考：対応するプラグインのframe_settings系テーブルに displayType 追加</span></a></dd>
+                                            <dd><a href=""><span class="namespace-wrapper">参考：表示設定画面</span></a></dd>
+                                            <dd><a href=""><span class="namespace-wrapper">参考：frame_settings系テーブルのモデル</span></a></dd>
+                                            <dd><a href=""><span class="namespace-wrapper">参考：コントローラでframe_settings系のデータをセット</span></a></dd>
+                                            <dd><a href=""><span class="namespace-wrapper">参考：コントローラでframe_settings系のデータをviewにセット</span></a></dd>
+                                            <dd><a href=""><span class="namespace-wrapper">参考：Elements/Menusのディレクトリ構成</span></a></dd>
+                                                                </dl>
+            <h2>Tags</h2>
+            <table class="table table-condensed">
+                                    <tr><td colspan="2"><em>None found</em></td></tr>
+                            </table>
+        </aside>
+    </div>
+
                                                                     <div class="row-fluid">
         <div class="span8 content class">
             <a id="method___getUrl" name="method___getUrl" class="anchor"></a>
@@ -837,7 +891,7 @@ NetCommonsHtml::mailHelp()<br>
                 <section class="span10 offset1">
                     <hr />
                     Documentation is powered by <a href="http://www.phpdoc.org/">phpDocumentor </a> and authored
-                    on December 13th, 2017 at 08:28.
+                    on January 27th, 2018 at 00:03.
                 </section>
             </section>
         </section>
