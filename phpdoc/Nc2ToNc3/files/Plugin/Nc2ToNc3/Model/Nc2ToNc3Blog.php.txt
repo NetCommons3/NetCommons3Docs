@@ -457,3 +457,4 @@ class Nc2ToNc3Blog extends Nc2ToNc3AppModel {
 	}
 
 }
+
