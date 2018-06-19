@@ -21,54 +21,54 @@
     <script src="../js/jquery.smooth-scroll.js"></script>
     <script src="../js/prism.min.js"></script>
     <!-- TODO: Add http://jscrollpane.kelvinluck.com/ to style the scrollbars for browsers not using webkit-->
-        <script type="text/javascript">
-        function loadExternalCodeSnippets() {
-            Array.prototype.slice.call(document.querySelectorAll('pre[data-src]')).forEach(function (pre) {
-                var src = pre.getAttribute('data-src');
-                var extension = (src.match(/\.(\w+)$/) || [, ''])[1];
-                var language = 'php';
+    <script type="text/javascript">
+    function loadExternalCodeSnippets() {
+        Array.prototype.slice.call(document.querySelectorAll('pre[data-src]')).forEach(function (pre) {
+            var src = pre.getAttribute('data-src');
+            var extension = (src.match(/\.(\w+)$/) || [, ''])[1];
+            var language = 'php';
 
-                var code = document.createElement('code');
-                code.className = 'language-' + language;
+            var code = document.createElement('code');
+            code.className = 'language-' + language;
 
-                pre.textContent = '';
+            pre.textContent = '';
 
-                code.textContent = 'Loading…';
+            code.textContent = 'Loading…';
 
-                pre.appendChild(code);
+            pre.appendChild(code);
 
-                var xhr = new XMLHttpRequest();
+            var xhr = new XMLHttpRequest();
 
-                xhr.open('GET', src, true);
+            xhr.open('GET', src, true);
 
-                xhr.onreadystatechange = function () {
-                    if (xhr.readyState == 4) {
+            xhr.onreadystatechange = function () {
+                if (xhr.readyState == 4) {
 
-                        if (xhr.status < 400 && xhr.responseText) {
-                            code.textContent = xhr.responseText;
+                    if (xhr.status < 400 && xhr.responseText) {
+                        code.textContent = xhr.responseText;
 
-                            Prism.highlightElement(code);
-                        }
-                        else if (xhr.status >= 400) {
-                            code.textContent = '✖ Error ' + xhr.status + ' while fetching file: ' + xhr.statusText;
-                        }
-                        else {
-                            code.textContent = '✖ Error: File does not exist or is empty';
-                        }
+                        Prism.highlightElement(code);
                     }
-                };
+                    else if (xhr.status >= 400) {
+                        code.textContent = '✖ Error ' + xhr.status + ' while fetching file: ' + xhr.statusText;
+                    }
+                    else {
+                        code.textContent = '✖ Error: File does not exist or is empty';
+                    }
+                }
+            };
 
-                xhr.send(null);
-            });
-        }
-
-        $(document).ready(function(){
-            loadExternalCodeSnippets();
+            xhr.send(null);
         });
-        $('#source-view').on('shown', function () {
-            loadExternalCodeSnippets();
-        })
-    </script>
+    }
+
+    $(document).ready(function(){
+        loadExternalCodeSnippets();
+    });
+    $('#source-view').on('shown', function () {
+        loadExternalCodeSnippets();
+    })
+</script>
 
     <link rel="shortcut icon" href="../images/favicon.ico"/>
     <link rel="apple-touch-icon" href="../images/apple-touch-icon.png"/>
@@ -136,10 +136,10 @@
                                 <div class="accordion" style="margin-bottom: 0">
         <div class="accordion-group">
             <div class="accordion-heading">
-                                    <a class="accordion-toggle " data-toggle="collapse" data-target="#namespace-1408160707"></a>
+                                    <a class="accordion-toggle " data-toggle="collapse" data-target="#namespace-1593945956"></a>
                                 <a href="../namespaces/default.html" style="margin-left: 30px; padding-left: 0">\</a>
             </div>
-            <div id="namespace-1408160707" class="accordion-body collapse in">
+            <div id="namespace-1593945956" class="accordion-body collapse in">
                 <div class="accordion-inner">
 
                     
@@ -239,79 +239,528 @@
     <section class="row-fluid">
         <div class="span10 offset2">
             <div class="row-fluid">
-                <div class="span8 content file">
+                <div class="span8 content class">
                     <nav>
-                                                                    </nav>
-
+                                                <a href="../namespaces/default.html">\</a> <i class="icon-level-up"></i>
+                                            </nav>
                     <a href="#source-view" role="button" class="pull-right btn" data-toggle="modal"><i class="icon-code"></i></a>
-                    <h1><small>Plugin/Blogs/Controller</small>BlogBlocksController.php</h1>
-                    <p><em>BlogBlocks Controller</em></p>
-                    
 
+                    <h1><small>\</small>BlogOgpHelper</h1>
+                    <p><em>BlogOgpHelper.php</em></p>
+                    <p>Add your application-wide methods in the class below, your helpers
+will inherit them.</p>
                     
-                    
-                                        <h2>Classes</h2>
-                    <table class="table table-hover">
-                                            <tr>
-                            <td><a href="../classes/BlogBlocksController.html">BlogBlocksController</a></td>
-                            <td><em>BlogBlocks Controller</em></td>
-                        </tr>
-                                        </table>
-                                    </div>
-
+                                        
+                    <section id="summary">
+                        <h2>Summary</h2>
+                        <section class="row-fluid heading">
+                            <section class="span4">
+                                <a href="#methods">Methods</a>
+                            </section>
+                            <section class="span4">
+                                <a href="#properties">Properties</a>
+                            </section>
+                            <section class="span4">
+                                <a href="#constants">Constants</a>
+                            </section>
+                        </section>
+                        <section class="row-fluid public">
+                            <section class="span4">
+                                                                    <a href="../classes/BlogOgpHelper.html#method___construct" class="">__construct()</a><br />
+                                                                    <a href="../classes/BlogOgpHelper.html#method_ogpMetaByBlogEntry" class="">ogpMetaByBlogEntry()</a><br />
+                                                            </section>
+                            <section class="span4">
+                                                                    <a href="../classes/BlogOgpHelper.html#property_helpers" class="">$helpers</a><br />
+                                                            </section>
+                            <section class="span4">
+                                                                    <em>No constants found</em>
+                                                            </section>
+                        </section>
+                        <section class="row-fluid protected">
+                            <section class="span4">
+                                                                    <em>No protected methods found</em>
+                                                            </section>
+                            <section class="span4">
+                                                                    <em>No protected properties found</em>
+                                                            </section>
+                            <section class="span4">
+                                <em>N/A</em>
+                            </section>
+                        </section>
+                        <section class="row-fluid private">
+                            <section class="span4">
+                                                                    <a href="../classes/BlogOgpHelper.html#method___makeMeta" class="">__makeMeta()</a><br />
+                                                                    <a href="../classes/BlogOgpHelper.html#method___getLocalAccessUrl" class="">__getLocalAccessUrl()</a><br />
+                                                                    <a href="../classes/BlogOgpHelper.html#method___convertFullUrl" class="">__convertFullUrl()</a><br />
+                                                                    <a href="../classes/BlogOgpHelper.html#method___getOgImageParams" class="">__getOgImageParams()</a><br />
+                                                                    <a href="../classes/BlogOgpHelper.html#method___getOgpParams" class="">__getOgpParams()</a><br />
+                                                            </section>
+                            <section class="span4">
+                                                                    <a href="../classes/BlogOgpHelper.html#property___urlMap" class="">$__urlMap</a><br />
+                                                                    <a href="../classes/BlogOgpHelper.html#property___minSize" class="">$__minSize</a><br />
+                                                                    <a href="../classes/BlogOgpHelper.html#property___descriptionLength" class="">$__descriptionLength</a><br />
+                                                                    <a href="../classes/BlogOgpHelper.html#property___twitterCardType" class="">$__twitterCardType</a><br />
+                                                            </section>
+                            <section class="span4">
+                                <em>N/A</em>
+                            </section>
+                        </section>
+                    </section>
+                </div>
                 <aside class="span4 detailsbar">
+                                        
+                    
                     <dl>
-                                                    <dt>Package</dt>
-                            <dd><div class="namespace-wrapper">\Default</div></dd>
+                        <dt>File</dt>
+                            <dd><a href="../files/Plugin.Blogs.View.Helper.BlogOgpHelper.html"><div class="path-wrapper">Plugin/Blogs/View/Helper/BlogOgpHelper.php</div></a></dd>
+                                                <dt>Package</dt>
+                            <dd><div class="namespace-wrapper">Default</div></dd>
+                                                <dt>Class hierarchy</dt>
+                            <dd class="hierarchy">
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                        
+                                        <div class="namespace-wrapper">\Helper</div>
+                                                                    
+                                        <div class="namespace-wrapper"><a href="../classes/NetCommonsAppHelper.html">\NetCommonsAppHelper</a></div>
+                                                                    
+                                        <div class="namespace-wrapper"><a href="../classes/AppHelper.html">\AppHelper</a></div>
+                                                                                                    <div class="namespace-wrapper">\BlogOgpHelper</div>
+                            </dd>
+
                         
-                                                                                    <dt>See also</dt>
-                                                                                        <dd><a href="http://www.netcommons.org"><div class="namespace-wrapper">NetCommons Project</div></a></dd>
+                        
+                        
+                                                                            <dt>See also</dt>
+                                                                                        <dd><a href="http://www.netcommons.org"><span class="namespace-wrapper">NetCommons Project</span></a></dd>
                                                     
-                    </dl>
+                                                                        </dl>
                     <h2>Tags</h2>
                     <table class="table table-condensed">
-                                                    <tr>
-                                <th>
-                                    author
-                                </th>
-                                <td>
-                                                                            <p>Noriko Arai <a href="mailto:arai@nii.ac.jp">arai@nii.ac.jp</a></p>
-                                                                            <p>Shohei Nakajima <a href="mailto:nakajimashouhei@gmail.com">nakajimashouhei@gmail.com</a></p>
-                                                                    </td>
-                            </tr>
-                                                    <tr>
-                                <th>
-                                    license
-                                </th>
-                                <td>
-                                                                            <p><a href="http://www.netcommons.org/license.txt">http://www.netcommons.org/license.txt</a> NetCommons License</p>
-                                                                    </td>
-                            </tr>
-                                                    <tr>
-                                <th>
-                                    copyright
-                                </th>
-                                <td>
-                                                                            <p>Copyright 2014, NetCommons Project</p>
-                                                                    </td>
-                            </tr>
-                                            </table>
-
+                                            <tr>
+                            <th>
+                                author
+                            </th>
+                            <td>
+                                                                    <p>Ryuji AMANO <a href="mailto:ryuji@ryus.co.jp">ryuji@ryus.co.jp</a></p>
+                                                            </td>
+                        </tr>
+                                            <tr>
+                            <th>
+                                license
+                            </th>
+                            <td>
+                                                                    <p><a href="http://www.netcommons.org/license.txt">http://www.netcommons.org/license.txt</a> NetCommons License</p>
+                                                            </td>
+                        </tr>
+                                        </table>
                 </aside>
             </div>
 
-            
-            
+                        
+                                    <a id="properties" name="properties"></a>
+            <div class="row-fluid">
+                <div class="span8 content class">
+                    <h2>Properties</h2>
+                </div>
+                <aside class="span4 detailsbar"></aside>
+            </div>
+
+                                    <div class="row-fluid">
+        <div class="span8 content class">
+            <a id="property_helpers" name="property_helpers" class="anchor"></a>
+            <article class="property">
+                <h3 class="public ">$helpers</h3>
+                <pre class="signature">$helpers : array</pre>
+                <p><em>use helpers</em></p>
+                
+
+                                <h4>Type</h4>
+                array
+                &mdash; helpers                            </article>
         </div>
+        <aside class="span4 detailsbar">
+            <h1><i class="icon-arrow-down"></i></h1>
+                        <dl>
+                                                            </dl>
+            <h2>Tags</h2>
+            <table class="table table-condensed">
+                                    <tr><td colspan="2"><em>None found</em></td></tr>
+                            </table>
+        </aside>
+    </div>
+
+                                                                    <div class="row-fluid">
+        <div class="span8 content class">
+            <a id="property___urlMap" name="property___urlMap" class="anchor"></a>
+            <article class="property">
+                <h3 class="private ">$__urlMap</h3>
+                <pre class="signature">$__urlMap : array</pre>
+                <p><em>ローカルサーバから画像にアクセスするときにURL変換が必用な場合にURL変換マップを定義する</em></p>
+                
+
+                                <h4>Type</h4>
+                array
+                                            </article>
+        </div>
+        <aside class="span4 detailsbar">
+            <h1><i class="icon-arrow-down"></i></h1>
+                        <dl>
+                                                            </dl>
+            <h2>Tags</h2>
+            <table class="table table-condensed">
+                                    <tr><td colspan="2"><em>None found</em></td></tr>
+                            </table>
+        </aside>
+    </div>
+
+                                    <div class="row-fluid">
+        <div class="span8 content class">
+            <a id="property___minSize" name="property___minSize" class="anchor"></a>
+            <article class="property">
+                <h3 class="private ">$__minSize</h3>
+                <pre class="signature">$__minSize : array</pre>
+                <p><em>og:imageに使う画像の最低サイズを指定。</em></p>
+                
+
+                                <h4>Type</h4>
+                array
+                                            </article>
+        </div>
+        <aside class="span4 detailsbar">
+            <h1><i class="icon-arrow-down"></i></h1>
+                        <dl>
+                                                            </dl>
+            <h2>Tags</h2>
+            <table class="table table-condensed">
+                                    <tr><td colspan="2"><em>None found</em></td></tr>
+                            </table>
+        </aside>
+    </div>
+
+                                    <div class="row-fluid">
+        <div class="span8 content class">
+            <a id="property___descriptionLength" name="property___descriptionLength" class="anchor"></a>
+            <article class="property">
+                <h3 class="private ">$__descriptionLength</h3>
+                <pre class="signature">$__descriptionLength : integer</pre>
+                <p><em>og:description の長さを指定。</em></p>
+                
+
+                                <h4>Type</h4>
+                integer
+                                            </article>
+        </div>
+        <aside class="span4 detailsbar">
+            <h1><i class="icon-arrow-down"></i></h1>
+                        <dl>
+                                                            </dl>
+            <h2>Tags</h2>
+            <table class="table table-condensed">
+                                    <tr><td colspan="2"><em>None found</em></td></tr>
+                            </table>
+        </aside>
+    </div>
+
+                                    <div class="row-fluid">
+        <div class="span8 content class">
+            <a id="property___twitterCardType" name="property___twitterCardType" class="anchor"></a>
+            <article class="property">
+                <h3 class="private ">$__twitterCardType</h3>
+                <pre class="signature">$__twitterCardType : string</pre>
+                <p><em>Twitter Card type</em></p>
+                
+
+                                <h4>Type</h4>
+                string
+                                            </article>
+        </div>
+        <aside class="span4 detailsbar">
+            <h1><i class="icon-arrow-down"></i></h1>
+                        <dl>
+                                                            </dl>
+            <h2>Tags</h2>
+            <table class="table table-condensed">
+                                    <tr><td colspan="2"><em>None found</em></td></tr>
+                            </table>
+        </aside>
+    </div>
+
+                            
+                                    <a id="methods" name="methods"></a>
+            <div class="row-fluid">
+                <div class="span8 content class"><h2>Methods</h2></div>
+                <aside class="span4 detailsbar"></aside>
+            </div>
+
+                                    <div class="row-fluid">
+        <div class="span8 content class">
+            <a id="method___construct" name="method___construct" class="anchor"></a>
+            <article class="method">
+                <h3 class="public ">__construct()</h3>
+                <a href="#source-view" role="button" class="pull-right btn" data-toggle="modal" style="font-size: 1.1em; padding: 9px 14px"><i class="icon-code"></i></a>
+                <pre class="signature" style="margin-right: 54px;">__construct(\View  <span class="argument">$View</span>, array  <span class="argument">$settings = array()</span>) </pre>
+                <p><em>Default Constructor</em></p>
+                
+
+                                    <h4>Parameters</h4>
+                    <table class="table table-condensed table-hover">
+                                                    <tr>
+                                <td>\View</td>
+                                <td>$View </td>
+                                <td><p>The View this helper is being attached to.</p></td>
+                            </tr>
+                                                    <tr>
+                                <td>array</td>
+                                <td>$settings </td>
+                                <td><p>Configuration settings for the helper.</p></td>
+                            </tr>
+                                            </table>
+                
+                
+                				
+                            </article>
+        </div>
+        <aside class="span4 detailsbar">
+            <h1><i class="icon-arrow-down"></i></h1>
+                                                            <dl>
+                                                                            </dl>
+            <h2>Tags</h2>
+            <table class="table table-condensed">
+                                    <tr><td colspan="2"><em>None found</em></td></tr>
+                            </table>
+        </aside>
+    </div>
+
+                                    <div class="row-fluid">
+        <div class="span8 content class">
+            <a id="method_ogpMetaByBlogEntry" name="method_ogpMetaByBlogEntry" class="anchor"></a>
+            <article class="method">
+                <h3 class="public ">ogpMetaByBlogEntry()</h3>
+                <a href="#source-view" role="button" class="pull-right btn" data-toggle="modal" style="font-size: 1.1em; padding: 9px 14px"><i class="icon-code"></i></a>
+                <pre class="signature" style="margin-right: 54px;">ogpMetaByBlogEntry(array  <span class="argument">$blogEntry</span>) : string</pre>
+                <p><em>OGPタグ出力</em></p>
+                
+
+                                    <h4>Parameters</h4>
+                    <table class="table table-condensed table-hover">
+                                                    <tr>
+                                <td>array</td>
+                                <td>$blogEntry </td>
+                                <td><p>BlogEntry data</p></td>
+                            </tr>
+                                            </table>
+                
+                
+                                    <h4>Returns</h4>
+                    string
+                                            &mdash; <p>output html</p>
+                                    				
+                            </article>
+        </div>
+        <aside class="span4 detailsbar">
+            <h1><i class="icon-arrow-down"></i></h1>
+                                                            <dl>
+                                                                            </dl>
+            <h2>Tags</h2>
+            <table class="table table-condensed">
+                                    <tr><td colspan="2"><em>None found</em></td></tr>
+                            </table>
+        </aside>
+    </div>
+
+                                                                    <div class="row-fluid">
+        <div class="span8 content class">
+            <a id="method___makeMeta" name="method___makeMeta" class="anchor"></a>
+            <article class="method">
+                <h3 class="private ">__makeMeta()</h3>
+                <a href="#source-view" role="button" class="pull-right btn" data-toggle="modal" style="font-size: 1.1em; padding: 9px 14px"><i class="icon-code"></i></a>
+                <pre class="signature" style="margin-right: 54px;">__makeMeta(array  <span class="argument">$ogpParams</span>) : string</pre>
+                <p><em>Metaタグ生成</em></p>
+                
+
+                                    <h4>Parameters</h4>
+                    <table class="table table-condensed table-hover">
+                                                    <tr>
+                                <td>array</td>
+                                <td>$ogpParams </td>
+                                <td><p>property =&gt; contentの連想配列</p></td>
+                            </tr>
+                                            </table>
+                
+                
+                                    <h4>Returns</h4>
+                    string
+                                    				
+                            </article>
+        </div>
+        <aside class="span4 detailsbar">
+            <h1><i class="icon-arrow-down"></i></h1>
+                                                            <dl>
+                                                                            </dl>
+            <h2>Tags</h2>
+            <table class="table table-condensed">
+                                    <tr><td colspan="2"><em>None found</em></td></tr>
+                            </table>
+        </aside>
+    </div>
+
+                                    <div class="row-fluid">
+        <div class="span8 content class">
+            <a id="method___getLocalAccessUrl" name="method___getLocalAccessUrl" class="anchor"></a>
+            <article class="method">
+                <h3 class="private ">__getLocalAccessUrl()</h3>
+                <a href="#source-view" role="button" class="pull-right btn" data-toggle="modal" style="font-size: 1.1em; padding: 9px 14px"><i class="icon-code"></i></a>
+                <pre class="signature" style="margin-right: 54px;">__getLocalAccessUrl(string  <span class="argument">$imageUrl</span>) : string</pre>
+                <p><em>サーバからアクセス可能なローカルURLへ変換したURLを返す</em></p>
+                
+
+                                    <h4>Parameters</h4>
+                    <table class="table table-condensed table-hover">
+                                                    <tr>
+                                <td>string</td>
+                                <td>$imageUrl </td>
+                                <td><p>url</p></td>
+                            </tr>
+                                            </table>
+                
+                
+                                    <h4>Returns</h4>
+                    string
+                                            &mdash; <p>local url</p>
+                                    				
+                            </article>
+        </div>
+        <aside class="span4 detailsbar">
+            <h1><i class="icon-arrow-down"></i></h1>
+                                                            <dl>
+                                                                            </dl>
+            <h2>Tags</h2>
+            <table class="table table-condensed">
+                                    <tr><td colspan="2"><em>None found</em></td></tr>
+                            </table>
+        </aside>
+    </div>
+
+                                    <div class="row-fluid">
+        <div class="span8 content class">
+            <a id="method___convertFullUrl" name="method___convertFullUrl" class="anchor"></a>
+            <article class="method">
+                <h3 class="private ">__convertFullUrl()</h3>
+                <a href="#source-view" role="button" class="pull-right btn" data-toggle="modal" style="font-size: 1.1em; padding: 9px 14px"><i class="icon-code"></i></a>
+                <pre class="signature" style="margin-right: 54px;">__convertFullUrl(string  <span class="argument">$imageUrl</span>) : string</pre>
+                <p><em>img urlを絶対URLに変換する</em></p>
+                
+
+                                    <h4>Parameters</h4>
+                    <table class="table table-condensed table-hover">
+                                                    <tr>
+                                <td>string</td>
+                                <td>$imageUrl </td>
+                                <td><p>(http....image|/dir/dir../image|../../....image)</p></td>
+                            </tr>
+                                            </table>
+                
+                
+                                    <h4>Returns</h4>
+                    string
+                                    				
+                            </article>
+        </div>
+        <aside class="span4 detailsbar">
+            <h1><i class="icon-arrow-down"></i></h1>
+                                                            <dl>
+                                                                            </dl>
+            <h2>Tags</h2>
+            <table class="table table-condensed">
+                                    <tr><td colspan="2"><em>None found</em></td></tr>
+                            </table>
+        </aside>
+    </div>
+
+                                    <div class="row-fluid">
+        <div class="span8 content class">
+            <a id="method___getOgImageParams" name="method___getOgImageParams" class="anchor"></a>
+            <article class="method">
+                <h3 class="private ">__getOgImageParams()</h3>
+                <a href="#source-view" role="button" class="pull-right btn" data-toggle="modal" style="font-size: 1.1em; padding: 9px 14px"><i class="icon-code"></i></a>
+                <pre class="signature" style="margin-right: 54px;">__getOgImageParams(string  <span class="argument">$content</span>) : array</pre>
+                <p><em>og:image関連パラメータを取得</em></p>
+                
+
+                                    <h4>Parameters</h4>
+                    <table class="table table-condensed table-hover">
+                                                    <tr>
+                                <td>string</td>
+                                <td>$content </td>
+                                <td><p>imgタグを含むHTML</p></td>
+                            </tr>
+                                            </table>
+                
+                
+                                    <h4>Returns</h4>
+                    array
+                                            &mdash; <p>og:imageパラメータの連想配列
+セットする画像が見つかれば og:image, og:image:width,og:image:heightをキーとした連想配列
+セットする画像が見つからないときは空配列を返す</p>
+                                    				
+                            </article>
+        </div>
+        <aside class="span4 detailsbar">
+            <h1><i class="icon-arrow-down"></i></h1>
+                                                            <dl>
+                                                                            </dl>
+            <h2>Tags</h2>
+            <table class="table table-condensed">
+                                    <tr><td colspan="2"><em>None found</em></td></tr>
+                            </table>
+        </aside>
+    </div>
+
+                                    <div class="row-fluid">
+        <div class="span8 content class">
+            <a id="method___getOgpParams" name="method___getOgpParams" class="anchor"></a>
+            <article class="method">
+                <h3 class="private ">__getOgpParams()</h3>
+                <a href="#source-view" role="button" class="pull-right btn" data-toggle="modal" style="font-size: 1.1em; padding: 9px 14px"><i class="icon-code"></i></a>
+                <pre class="signature" style="margin-right: 54px;">__getOgpParams(array  <span class="argument">$blogEntry</span>) : array</pre>
+                <p><em>BlogEntryデータからOGPパラメータを返す</em></p>
+                
+
+                                    <h4>Parameters</h4>
+                    <table class="table table-condensed table-hover">
+                                                    <tr>
+                                <td>array</td>
+                                <td>$blogEntry </td>
+                                <td><p>BlogEntry data</p></td>
+                            </tr>
+                                            </table>
+                
+                
+                                    <h4>Returns</h4>
+                    array
+                                    				
+                            </article>
+        </div>
+        <aside class="span4 detailsbar">
+            <h1><i class="icon-arrow-down"></i></h1>
+                                                            <dl>
+                                                                            </dl>
+            <h2>Tags</h2>
+            <table class="table table-condensed">
+                                    <tr><td colspan="2"><em>None found</em></td></tr>
+                            </table>
+        </aside>
+    </div>
+
+                                    </div>
     </section>
 
     <div id="source-view" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="source-view-label" aria-hidden="true">
         <div class="modal-header">
             <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
-            <h3 id="source-view-label"></h3>
+            <h3 id="source-view-label">BlogOgpHelper.php</h3>
         </div>
         <div class="modal-body">
-            <pre data-src="../files/Plugin/Blogs/Controller/BlogBlocksController.php.txt" class="language-php line-numbers"></pre>
+            <pre data-src="../files/Plugin/Blogs/View/Helper/BlogOgpHelper.php.txt" class="language-php line-numbers"></pre>
         </div>
     </div>
 
