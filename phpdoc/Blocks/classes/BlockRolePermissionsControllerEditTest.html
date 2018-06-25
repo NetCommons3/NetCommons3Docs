@@ -136,10 +136,10 @@
                                 <div class="accordion" style="margin-bottom: 0">
         <div class="accordion-group">
             <div class="accordion-heading">
-                                    <a class="accordion-toggle " data-toggle="collapse" data-target="#namespace-921363194"></a>
+                                    <a class="accordion-toggle " data-toggle="collapse" data-target="#namespace-2104061352"></a>
                                 <a href="../namespaces/default.html" style="margin-left: 30px; padding-left: 0">\</a>
             </div>
-            <div id="namespace-921363194" class="accordion-body collapse in">
+            <div id="namespace-2104061352" class="accordion-body collapse in">
                 <div class="accordion-inner">
 
                     
@@ -308,6 +308,7 @@
                                                                     <a href="../classes/NetCommonsControllerTestCase.html#method__mockForReturnTrue" class="">_mockForReturnTrue()</a><br />
                                                                     <a href="../classes/NetCommonsControllerTestCase.html#method__mockForReturn" class="">_mockForReturn()</a><br />
                                                                     <a href="../classes/NetCommonsControllerTestCase.html#method__mockForReturnCallback" class="">_mockForReturnCallback()</a><br />
+                                                                    <a href="../classes/NetCommonsControllerBaseTestCase.html#method__clear" class="">_clear()</a><br />
                                                                     <a href="../classes/NetCommonsControllerBaseTestCase.html#method__testReflectionMethod" class="">_testReflectionMethod()</a><br />
                                                                     <a href="../classes/NetCommonsControllerBaseTestCase.html#method__parseView" class="">_parseView()</a><br />
                                                                     <a href="../classes/BlockRolePermissionsControllerEditTest.html#method__getPermissionData" class="">_getPermissionData()</a><br />
@@ -882,7 +883,7 @@ and not within each other (i.e., components on components)</li>
                 <h3 class="public ">assertDatetime()</h3>
                 <a href="#source-view" role="button" class="pull-right btn" data-toggle="modal" style="font-size: 1.1em; padding: 9px 14px"><i class="icon-code"></i></a>
                 <pre class="signature" style="margin-right: 54px;">assertDatetime(string  <span class="argument">$result</span>, string  <span class="argument">$message = null</span>) : void</pre>
-                <p><em>日時の評価</em></p>
+                <p><em>Assert Date time</em></p>
                 
 
                                     <h4>Parameters</h4>
@@ -890,7 +891,7 @@ and not within each other (i.e., components on components)</li>
                                                     <tr>
                                 <td>string</td>
                                 <td>$result </td>
-                                <td><p>期待値</p></td>
+                                <td><p>Result data</p></td>
                             </tr>
                                                     <tr>
                                 <td>string</td>
@@ -1157,14 +1158,14 @@ data will be used a GET params. If the <code>method</code> is POST, it will be u
 as POST data. By setting <code>$options['data']</code> to a string, you can simulate XML or JSON
 payloads to your controllers allowing you to test REST webservices.</li>
 <li><code>method</code> POST or GET. Defaults to POST.</li>
-<li><code>return</code> Specify the return type you want. Choose from:
-<ul>
+<li><code>return</code> Specify the return type you want. Choose from:<ul>
 <li><code>vars</code> Get the set view variables.</li>
 <li><code>view</code> Get the rendered view, without a layout.</li>
 <li><code>contents</code> Get the rendered view including the layout.</li>
 <li><code>result</code> Get the return value of the controller action. Useful
 for testing requestAction methods.</li>
-</ul></li>
+</ul>
+</li>
 <li><code>type</code> json or html, Defaults to html.</li>
 </ul>
 
@@ -1207,7 +1208,7 @@ for testing requestAction methods.</li>
             <article class="method">
                 <h3 class="protected ">_testNcAction()</h3>
                 <a href="#source-view" role="button" class="pull-right btn" data-toggle="modal" style="font-size: 1.1em; padding: 9px 14px"><i class="icon-code"></i></a>
-                <pre class="signature" style="margin-right: 54px;">_testNcAction(array  <span class="argument">$url = array()</span>, array  <span class="argument">$paramsOptions = array()</span>, string|null  <span class="argument">$exception = null</span>, string  <span class="argument">$return = &#039;view&#039;</span>) : void</pre>
+                <pre class="signature" style="margin-right: 54px;">_testNcAction(array  <span class="argument">$url = array()</span>, array  <span class="argument">$paramsOptions = array()</span>, string|null  <span class="argument">$exception = null</span>, string  <span class="argument">$return = &#039;view&#039;</span>) : mixed</pre>
                 <p><em>Assert input tag</em></p>
                 <h3>$returnについて</h3>
 <ul>
@@ -1241,7 +1242,9 @@ for testing requestAction methods.</li>
                                             </table>
                 
                 
-                				
+                                    <h4>Returns</h4>
+                    mixed
+                                    				
                             </article>
         </div>
         <aside class="span4 detailsbar">
@@ -1615,6 +1618,34 @@ for testing requestAction methods.</li>
 
                                     <div class="row-fluid">
         <div class="span8 content class">
+            <a id="method__clear" name="method__clear" class="anchor"></a>
+            <article class="method">
+                <h3 class="protected ">_clear()</h3>
+                <a href="#source-view" role="button" class="pull-right btn" data-toggle="modal" style="font-size: 1.1em; padding: 9px 14px"><i class="icon-code"></i></a>
+                <pre class="signature" style="margin-right: 54px;">_clear() : void</pre>
+                <p><em>初期化</em></p>
+                
+
+                
+                
+                				
+                            </article>
+        </div>
+        <aside class="span4 detailsbar">
+            <h1><i class="icon-arrow-down"></i></h1>
+                                                            <dl>
+                                                    <dt>Inherited from</dt>
+                    <dd><a href="../classes/NetCommonsControllerBaseTestCase.html"><div class="path-wrapper">\NetCommonsControllerBaseTestCase</div></a></dd>
+                                                            </dl>
+            <h2>Tags</h2>
+            <table class="table table-condensed">
+                                    <tr><td colspan="2"><em>None found</em></td></tr>
+                            </table>
+        </aside>
+    </div>
+
+                                    <div class="row-fluid">
+        <div class="span8 content class">
             <a id="method__testReflectionMethod" name="method__testReflectionMethod" class="anchor"></a>
             <article class="method">
                 <h3 class="protected ">_testReflectionMethod()</h3>
@@ -1826,7 +1857,7 @@ for testing requestAction methods.</li>
                 <section class="span10 offset1">
                     <hr />
                     Documentation is powered by <a href="http://www.phpdoc.org/">phpDocumentor </a> and authored
-                    on August 26th, 2017 at 07:28.
+                    on June 25th, 2018 at 09:04.
                 </section>
             </section>
         </section>
