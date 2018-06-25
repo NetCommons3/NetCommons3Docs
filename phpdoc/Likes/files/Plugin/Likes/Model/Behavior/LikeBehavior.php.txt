@@ -53,20 +53,6 @@ App::uses('Current', 'NetCommons.Utility');
 class LikeBehavior extends ModelBehavior {
 
 /**
- * Model name
- *
- * @var array
- */
-	private $__model;
-
-/**
- * Key field name
- *
- * @var array
- */
-	private $__field;
-
-/**
  * SetUp behavior
  *
  * Likeモデル、LikesUserモデルのアソシエーションで、別モデル、別フィールド名を指定することがます。<br>
@@ -78,45 +64,75 @@ class LikeBehavior extends ModelBehavior {
  */
 	public function setup(Model $model, $config = array()) {
 		if (isset($config['model'])) {
-			$this->__model = $config['model'];
+			$this->settings[$model->alias]['model'] = $config['model'];
 		} else {
-			$this->__model = $model->alias;
+			$this->settings[$model->alias]['model'] = $model->alias;
 		}
 
 		if (isset($config['field'])) {
-			$this->__field = $config['field'];
+			$this->settings[$model->alias]['field'] = $config['field'];
 		} else {
-			$this->__field = 'key';
+			$this->settings[$model->alias]['field'] = 'key';
 		}
-
-		$likesUserConditions = array(
-			'Like.id = LikesUser.like_id',
-		);
-		if (Current::read('User.id')) {
-			$likesUserConditions['LikesUser.user_id'] = Current::read('User.id');
-		} else {
-			$likesUserConditions['LikesUser.session_key'] = CakeSession::id();
-		}
-
-		$model->bindModel(array(
-			'belongsTo' => array(
-				'Like' => array(
-					'className' => 'Likes.Like',
-					'foreignKey' => false,
-					'conditions' => array(
-						'Like.plugin_key' => Inflector::underscore($model->plugin),
-						$this->__model . '.' . $this->__field . ' = ' . 'Like.content_key',
-					),
-				),
-				'LikesUser' => array(
-					'className' => 'Likes.LikesUser',
-					'foreignKey' => false,
-					'conditions' => $likesUserConditions,
-				),
-			)
-		), false);
 
 		parent::setup($model, $config);
 	}
+
+/**
+ * 検索時にタグの検索条件があったらJOINする
+ *
+ * @param Model $model タグ使用モデル
+ * @param array $query find条件
+ * @return array タグ検索条件を加えたfind条件
+ */
+	public function beforeFind(Model $model, $query) {
+		if (Hash::get($query, 'recursive') > -1) {
+			$joinTable = false;
+
+			$conditions = $query['conditions'];
+			if (is_array($conditions) === false) {
+				return $query;
+			}
+			$columns = array_keys($conditions);
+			// 条件あったらLikeテーブルとリンクテーブルをJOIN
+			if (preg_grep('/^Like\./', $columns) || preg_grep('/^LikesUser\./', $columns)) {
+				$joinTable = true;
+			}
+
+			if ($joinTable) {
+				$likesUserConditions = array(
+					'Like.id = LikesUser.like_id',
+				);
+				if (Current::read('User.id')) {
+					$likesUserConditions['LikesUser.user_id'] = Current::read('User.id');
+				} else {
+					$likesUserConditions['LikesUser.session_key'] = CakeSession::id();
+				}
+
+				$LikesUser = ClassRegistry::init('Likes.LikesUser');
+				$Like = ClassRegistry::init('Likes.Like');
+
+				$fieldName = $this->settings[$model->alias]['model'] . '.' .
+								$this->settings[$model->alias]['field'];
+				$query['joins'][] = [
+					'type' => 'LEFT',
+					'table' => $Like->table,
+					'alias' => $Like->alias,
+					'conditions' => [
+						'Like.plugin_key' => Inflector::underscore($model->plugin),
+						$fieldName . ' = ' . 'Like.content_key',
+					]
+				];
+				$query['joins'][] = [
+					'type' => 'LEFT',
+					'table' => $LikesUser->table,
+					'alias' => $LikesUser->alias,
+					'conditions' => $likesUserConditions,
+				];
+			}
+		}
+		return $query;
+	}
+
 }
 
