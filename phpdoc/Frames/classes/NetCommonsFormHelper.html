@@ -136,10 +136,10 @@
                                 <div class="accordion" style="margin-bottom: 0">
         <div class="accordion-group">
             <div class="accordion-heading">
-                                    <a class="accordion-toggle " data-toggle="collapse" data-target="#namespace-235608234"></a>
+                                    <a class="accordion-toggle " data-toggle="collapse" data-target="#namespace-595717881"></a>
                                 <a href="../namespaces/default.html" style="margin-left: 30px; padding-left: 0">\</a>
             </div>
-            <div id="namespace-235608234" class="accordion-body collapse in">
+            <div id="namespace-595717881" class="accordion-body collapse in">
                 <div class="accordion-inner">
 
                     
@@ -430,8 +430,8 @@ $paramsに以下を追加して、
 <a href="./FormInputHelper.html#method_checkbox">NetCommons.FormInputHelper::checkbox()</a>
 の結果を出力する。ただし、すでに$paramsにあれば、無視する。</p>
 <pre><code>$params[1] = array(
-    'class' =&gt; false,
-    'div' =&gt; array('class' =&gt; 'form-group')
+      'class' =&gt; false,
+      'div' =&gt; array('class' =&gt; 'form-group')
 )</code></pre>
 </li>
 <li>
@@ -458,10 +458,12 @@ NetCommonsForm::ngTitleIconPicker()<br>
 <a href="./DisplayNumberHelper.html#method_select">NetCommons.DisplayNumber::select()</a>
 の結果を出力する。</p>
 </li>
-<li><a id="method___call_others" name="method___call_others" class="anchor"></a>
+<li>
+<p><a id="method___call_others" name="method___call_others" class="anchor"></a>
 それ以外<br>
 <a href="http://book.cakephp.org/2.0/ja/core-libraries/helpers/form.html#formhelper">FormHelper</a>
-の各メソッドの結果を出力する。</li>
+の各メソッドの結果を出力する。</p>
+</li>
 </ul>
 
                                     <h4>Parameters</h4>
@@ -557,77 +559,83 @@ NetCommonsForm::ngTitleIconPicker()<br>
 <p><a id="method_input_help" name="method_input_help" class="anchor"></a>
 help=メッセージ（NCオリジナル）<br>
 このオプションは、ヘルプブロックを出力するオプション。<br></p>
-<ul>
-<li>入力
+</li>
+<li>
+<p>入力</p>
 <pre><code>echo $this-&gt;NetCommonsForm-&gt;input('Bbs.name',
-    array(
-        'type' =&gt; 'text',
-        'label' =&gt; __d('bbses', 'Bbs name'),
-        'required' =&gt; true,
-        'help' =&gt; '掲示板名を入力してください。',
-    )
-);</code></pre></li>
-<li>出力
+         array(
+             'type' =&gt; 'text',
+             'label' =&gt; __d('bbses', 'Bbs name'),
+             'required' =&gt; true,
+             'help' =&gt; '掲示板名を入力してください。',
+         )
+);</code></pre>
+</li>
+<li>
+<p>出力</p>
 <pre><code>&lt;div class="form-group"&gt;
-    &lt;label class="control-label" for="BbsName"&gt;
-        掲示板名
-        &lt;strong class="text-danger h4"&gt;*&lt;/strong&gt;
-    &lt;/label&gt;
-    &lt;input type="text" id="BbsName" class="form-control" name="data[Bbs][name]"&gt;
-    &lt;div class="help-block"&gt;掲示板名を入力してください。&lt;/div&gt;
-    &lt;div class="has-error"&gt;&lt;/div&gt;
-&lt;/div&gt;</code></pre></li>
-</ul>
+         &lt;label class="control-label" for="BbsName"&gt;
+             掲示板名
+             &lt;strong class="text-danger h4"&gt;*&lt;/strong&gt;
+         &lt;/label&gt;
+         &lt;input type="text" id="BbsName" class="form-control" name="data[Bbs][name]"&gt;
+         &lt;div class="help-block"&gt;掲示板名を入力してください。&lt;/div&gt;
+         &lt;div class="has-error"&gt;&lt;/div&gt;
+&lt;/div&gt;</code></pre>
 </li>
 <li>
 <p><a id="method_input_text" name="method_input_text" class="anchor"></a>
 type=text (typeを省略した場合、デフォルト値)<br>
 <a href="http://book.cakephp.org/2.0/ja/core-libraries/helpers/form.html#formhelper">FormHelper::input()</a>
 の結果を出力する。<br></p>
-<ul>
-<li>入力
+</li>
+<li>
+<p>入力</p>
 <pre><code>echo $this-&gt;NetCommonsForm-&gt;input('Bbs.name',
-    array(
-        'type' =&gt; 'text',
-        'label' =&gt; __d('bbses', 'Bbs name'),
-        'required' =&gt; true,
-    )
-);</code></pre></li>
-<li>出力
+         array(
+             'type' =&gt; 'text',
+             'label' =&gt; __d('bbses', 'Bbs name'),
+             'required' =&gt; true,
+         )
+);</code></pre>
+</li>
+<li>
+<p>出力</p>
 <pre><code>&lt;div class="form-group"&gt;
-    &lt;label for="BbsName" class="control-label"&gt;
-        掲示板名
-        &lt;strong class="text-danger h4"&gt;*&lt;/strong&gt;
-    &lt;/label&gt;
-    &lt;input name="data[Bbs][name]" class="form-control" maxlength="255" type="text" value="サンプル" id="BbsName"/&gt;
-    &lt;div class="has-error"&gt;&lt;/div&gt;
-&lt;/div&gt;</code></pre></li>
-</ul>
+         &lt;label for="BbsName" class="control-label"&gt;
+             掲示板名
+             &lt;strong class="text-danger h4"&gt;*&lt;/strong&gt;
+         &lt;/label&gt;
+         &lt;input name="data[Bbs][name]" class="form-control" maxlength="255" type="text" value="サンプル" id="BbsName"/&gt;
+         &lt;div class="has-error"&gt;&lt;/div&gt;
+&lt;/div&gt;</code></pre>
 </li>
 <li>
 <p><a id="method_input_textarea" name="method_input_textarea" class="anchor"></a>
 type=textarea<br>
 <a href="http://book.cakephp.org/2.0/ja/core-libraries/helpers/form.html#formhelper">FormHelper::input()</a>
 の結果を出力する。<br></p>
-<ul>
-<li>入力
+</li>
+<li>
+<p>入力</p>
 <pre><code>echo $this-&gt;NetCommonsForm-&gt;input('Bbs.name',
-    array(
-        'type' =&gt; 'textarea',
-        'label' =&gt; '内容',
-        'required' =&gt; true,
-    )
-);</code></pre></li>
-<li>出力
+         array(
+             'type' =&gt; 'textarea',
+             'label' =&gt; '内容',
+             'required' =&gt; true,
+         )
+);</code></pre>
+</li>
+<li>
+<p>出力</p>
 <pre><code>&lt;div class="form-group"&gt;
-    &lt;label class="control-label" for="BbsName"&gt;
-        内容
-        &lt;strong class="text-danger h4"&gt;*&lt;/strong&gt;
-    &lt;/label&gt;
-    &lt;textarea id="BbsName" rows="6" cols="30" class="form-control" name="data[Bbs][name]"&gt;&lt;/textarea&gt;
-    &lt;div class="has-error"&gt;&lt;/div&gt;
-&lt;/div&gt;</code></pre></li>
-</ul>
+         &lt;label class="control-label" for="BbsName"&gt;
+             内容
+             &lt;strong class="text-danger h4"&gt;*&lt;/strong&gt;
+         &lt;/label&gt;
+         &lt;textarea id="BbsName" rows="6" cols="30" class="form-control" name="data[Bbs][name]"&gt;&lt;/textarea&gt;
+         &lt;div class="has-error"&gt;&lt;/div&gt;
+&lt;/div&gt;</code></pre>
 </li>
 <li>
 <p><a id="method_input_radio" name="method_input_radio" class="anchor"></a>
@@ -659,52 +667,56 @@ type=hidden<br>
 <a href="./FormInputHelper.html#method_hidden">FormInputHelper::hidden()</a>
 の結果を出力する。</p>
 </li>
-<li><a id="method_input_datetime" name="method_input_datetime" class="anchor"></a>
+<li>
+<p><a id="method_input_datetime" name="method_input_datetime" class="anchor"></a>
 type=datetime<br>
 <a href="./DatetimePickerHelper.html">datetimepicker</a>
-の結果を出力する。<br>
-<ul>
-<li>入力
+の結果を出力する。<br></p>
+</li>
+<li>
+<p>入力</p>
 <pre><code>echo $this-&gt;NetCommonsForm-&gt;input('publish_start',
-    array(
-        'type' =&gt; 'datetime',
-        'required' =&gt; 'required',
-        'label' =&gt; __d('blogs', 'Published datetime')
-    )
-);</code></pre></li>
-<li>出力
+         array(
+             'type' =&gt; 'datetime',
+             'required' =&gt; 'required',
+             'label' =&gt; __d('blogs', 'Published datetime')
+         )
+);</code></pre>
+</li>
+<li>
+<p>出力</p>
 <pre><code>&lt;div class="form-group"&gt;
-    &lt;label for="BlogEntryPublishStart" class="control-label"&gt;公開日時
-        &lt;strong class="text-danger h4"&gt;*&lt;/strong&gt;
-    &lt;/label&gt;
-    &lt;input name="data[BlogEntry][publish_start]"
-        class="form-control"
-        datetimepicker="1"
-        convert_timezone="1"
-        ng-model="NetCommonsFormDatetimePickerModel_BlogEntry_publish_start"
-        value="2016-04-20 09:00:24"
-        ng-value="NetCommonsFormDatetimePickerModel_BlogEntry_publish_start"
-        ng-init="NetCommonsFormDatetimePickerModel_BlogEntry_publish_start=&amp;#039;2016-04-20 09:00:24&amp;#039;"
-        type="text" id="BlogEntryPublishStart"/&gt;
-    &lt;div class="has-error"&gt;&lt;/div&gt;
+         &lt;label for="BlogEntryPublishStart" class="control-label"&gt;公開日時
+             &lt;strong class="text-danger h4"&gt;*&lt;/strong&gt;
+         &lt;/label&gt;
+         &lt;input name="data[BlogEntry][publish_start]"
+             class="form-control"
+             datetimepicker="1"
+             convert_timezone="1"
+             ng-model="NetCommonsFormDatetimePickerModel_BlogEntry_publish_start"
+             value="2016-04-20 09:00:24"
+             ng-value="NetCommonsFormDatetimePickerModel_BlogEntry_publish_start"
+             ng-init="NetCommonsFormDatetimePickerModel_BlogEntry_publish_start=&amp;#039;2016-04-20 09:00:24&amp;#039;"
+             type="text" id="BlogEntryPublishStart"/&gt;
+         &lt;div class="has-error"&gt;&lt;/div&gt;
 &lt;/div&gt;</code></pre>
-<p><br></p></li>
-</ul></li>
+<p><br></p>
+</li>
 </ul>
 <h5>$optionsの内容の他に、下記のHTMLを強制的に出力する。</h5>
 <ul>
-<li>TimeZone関係のHTML
-<pre><code>&lt;input type="hidden"
-    name="data[_NetCommonsTime][user_timezone]"
-    value="Asia/Tokyo" id="_NetCommonsTimeUserTimezone"/&gt;
+<li>TimeZone関係のHTML<pre><code>&lt;input type="hidden"
+      name="data[_NetCommonsTime][user_timezone]"
+      value="Asia/Tokyo" id="_NetCommonsTimeUserTimezone"/&gt;
 &lt;input type="hidden"
-    name="data[_NetCommonsTime][convert_fields]"
-    value="BlogEntry.publish_start"
-    id="_NetCommonsTimeConvertFields"/&gt;</code></pre></li>
-<li>エラー発生時、入力ボックスの色を変えるためのdiv
-<pre><code>&lt;div class="has-error"&gt;
-    ・・・
-&lt;/div&gt;</code></pre></li>
+      name="data[_NetCommonsTime][convert_fields]"
+      value="BlogEntry.publish_start"
+      id="_NetCommonsTimeConvertFields"/&gt;</code></pre>
+</li>
+<li>エラー発生時、入力ボックスの色を変えるためのdiv<pre><code>&lt;div class="has-error"&gt;
+      ・・・
+&lt;/div&gt;</code></pre>
+</li>
 </ul>
 
                                     <h4>Parameters</h4>
@@ -712,7 +724,7 @@ type=datetime<br>
                                                     <tr>
                                 <td>string</td>
                                 <td>$fieldName </td>
-                                <td><p>フィールド名(&quot;Modelname.fieldname&quot;形式)</p></td>
+                                <td><p>フィールド名("Modelname.fieldname"形式)</p></td>
                             </tr>
                                                     <tr>
                                 <td>array</td>
@@ -720,39 +732,39 @@ type=datetime<br>
                                 <td><p>オプション配列</p>
 <h5>$optionsの初期値</h5>
 <ul>
-<li>共通
-<pre><code>array(
-    'error' =&gt; false,
-    'required' =&gt; null,
-    'label' =&gt; null,
-);</code></pre></li>
-<li>type=number の場合
-<pre><code>array(
-    'error' =&gt; false,
-    'required' =&gt; null,
-    'label' =&gt; null,
-    'min' =&gt; 0,
-    'div' =&gt; array('class' =&gt; 'form-group')
-);</code></pre></li>
+<li>共通<pre><code>array(
+      'error' =&gt; false,
+      'required' =&gt; null,
+      'label' =&gt; null,
+);</code></pre>
+</li>
+<li>type=number の場合<pre><code>array(
+      'error' =&gt; false,
+      'required' =&gt; null,
+      'label' =&gt; null,
+      'min' =&gt; 0,
+      'div' =&gt; array('class' =&gt; 'form-group')
+);</code></pre>
+</li>
 </ul>
 <h5>$optionsの値<br></h5>
 <p>基本的なオプションについては、<a href="http://book.cakephp.org/2.0/ja/core-libraries/helpers/form.html#id5">FormHelperのオプション</a>を参照。
 そのうち、下記が良く使われるオプションである。</p>
 <ul>
-<li>必須マークを付ける場合
-<pre><code>array(
-    'required' =&gt; true,
-);</code></pre></li>
+<li>必須マークを付ける場合<pre><code>array(
+      'required' =&gt; true,
+);</code></pre>
+</li>
 <li><a id="method_input_options_placeholder" name="method_input_options_placeholder" class="anchor"></a>
-プレースホルダーテキストを表示する場合
-<pre><code>array(
-    'placeholder' =&gt; 'アンケートを入力してください。',
-);</code></pre></li>
+プレースホルダーテキストを表示する場合<pre><code>array(
+      'placeholder' =&gt; 'アンケートを入力してください。',
+);</code></pre>
+</li>
 <li>ヘルプブロックを表示する場合（NetCommonsのみのオプション）<br>
-出力内容については、<a href="#method_input_help">こちら</a> を参照。
-<pre><code>array(
-    'help' =&gt; 'アンケートを入力してください。',
-);</code></pre></li>
+出力内容については、<a href="#method_input_help">こちら</a> を参照。<pre><code>array(
+      'help' =&gt; 'アンケートを入力してください。',
+);</code></pre>
+</li>
 </ul></td>
                             </tr>
                                             </table>
@@ -829,10 +841,10 @@ type=datetime<br>
                 <p><em>エラーの出力</em></p>
                 <h4>サンプル</h4>
 <ul>
-<li>入力
-<pre><code></code></pre></li>
-<li>出力
-<pre><code></code></pre></li>
+<li>入力<pre><code></code></pre>
+</li>
+<li>出力<pre><code></code></pre>
+</li>
 </ul>
 
                                     <h4>Parameters</h4>
@@ -840,7 +852,7 @@ type=datetime<br>
                                                     <tr>
                                 <td>string</td>
                                 <td>$fieldName </td>
-                                <td><p>フィールド名 &quot;Modelname.fieldname&quot;</p></td>
+                                <td><p>フィールド名 "Modelname.fieldname"</p></td>
                             </tr>
                                                     <tr>
                                 <td>string|array</td>
@@ -881,10 +893,10 @@ type=datetime<br>
                 <p><em>ヘルプブロックの表示</em></p>
                 <h4>サンプル</h4>
 <ul>
-<li>入力
-<pre><code></code></pre></li>
-<li>出力
-<pre><code></code></pre></li>
+<li>入力<pre><code></code></pre>
+</li>
+<li>出力<pre><code></code></pre>
+</li>
 </ul>
 
                                     <h4>Parameters</h4>
@@ -928,17 +940,17 @@ type=datetime<br>
                 <p><em>&lt;label&gt;タグの表示</em></p>
                 <h4>サンプル（$returnHtml=true）</h4>
 <ul>
-<li>入力
-<pre><code></code></pre></li>
-<li>出力
-<pre><code></code></pre></li>
+<li>入力<pre><code></code></pre>
+</li>
+<li>出力<pre><code></code></pre>
+</li>
 </ul>
 <h4>サンプル（$returnHtml=false）</h4>
 <ul>
-<li>入力
-<pre><code></code></pre></li>
-<li>出力
-<pre><code></code></pre></li>
+<li>入力<pre><code></code></pre>
+</li>
+<li>出力<pre><code></code></pre>
+</li>
 </ul>
 
                                     <h4>Parameters</h4>
@@ -946,7 +958,7 @@ type=datetime<br>
                                                     <tr>
                                 <td>string</td>
                                 <td>$fieldName </td>
-                                <td><p>フィールド名 &quot;Modelname.fieldname&quot;</p></td>
+                                <td><p>フィールド名 "Modelname.fieldname"</p></td>
                             </tr>
                                                     <tr>
                                 <td>string</td>
@@ -1048,7 +1060,7 @@ type=datetime<br>
                                                     <tr>
                                 <td>string</td>
                                 <td>$fieldName </td>
-                                <td><p>フィールド名(&quot;Modelname.fieldname&quot;形式)</p></td>
+                                <td><p>フィールド名("Modelname.fieldname"形式)</p></td>
                             </tr>
                                                     <tr>
                                 <td>array</td>
@@ -1124,7 +1136,7 @@ type=datetime<br>
                 <section class="span10 offset1">
                     <hr />
                     Documentation is powered by <a href="http://www.phpdoc.org/">phpDocumentor </a> and authored
-                    on January 26th, 2018 at 15:06.
+                    on June 25th, 2018 at 09:47.
                 </section>
             </section>
         </section>

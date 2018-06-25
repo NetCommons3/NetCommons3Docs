@@ -110,38 +110,75 @@ class Frame extends FramesAppModel {
  * @return array
  */
 	public function bindModelFrameLang() {
-		$belongsTo = array(
-			'belongsTo' => array(
-				'FramePublicLanguage' => array(
-					'className' => 'Frames.FramePublicLanguage',
-					'foreignKey' => false,
-					'conditions' => array(
-						'FramePublicLanguage.frame_id = Frame.id',
-						'FramePublicLanguage.language_id' => ['0', Current::read('Language.id', '0')],
-						'FramePublicLanguage.is_public' => true,
+		$this->loadModels([
+			'Language' => 'M17n.Language',
+		]);
+
+		$langs = $this->Language->getLanguage();
+		if (count($langs) > 1) {
+			$belongsTo = array(
+				'belongsTo' => array(
+					'FramePublicLanguage' => array(
+						'className' => 'Frames.FramePublicLanguage',
+						'foreignKey' => false,
+						'conditions' => array(
+							'FramePublicLanguage.frame_id = Frame.id',
+							'FramePublicLanguage.language_id' => ['0', Current::read('Language.id', '0')],
+							'FramePublicLanguage.is_public' => true,
+						),
+						'fields' => array(
+							'id', 'language_id', 'frame_id', 'is_public'
+						),
+						'order' => ''
 					),
-					'fields' => array(
-						'id', 'language_id', 'frame_id', 'is_public'
+					'FramesLanguage' => array(
+						'className' => 'Frames.FramesLanguage',
+						'foreignKey' => false,
+						'conditions' => array(
+							'FramesLanguage.frame_id = Frame.id',
+							'OR' => array(
+								'FramesLanguage.is_translation' => false,
+								'FramesLanguage.language_id' => Current::read('Language.id', '0'),
+							)
+						),
+						'fields' => array(
+							'id', 'language_id', 'frame_id', 'name', 'is_origin', 'is_translation', 'is_original_copy'
+						),
+						'order' => ''
 					),
-					'order' => ''
-				),
-				'FramesLanguage' => array(
-					'className' => 'Frames.FramesLanguage',
-					'foreignKey' => false,
-					'conditions' => array(
-						'FramesLanguage.frame_id = Frame.id',
-						'OR' => array(
-							'FramesLanguage.is_translation' => false,
+				)
+			);
+		} else {
+			$belongsTo = array(
+				'belongsTo' => array(
+					'FramePublicLanguage' => array(
+						'className' => 'Frames.FramePublicLanguage',
+						'foreignKey' => false,
+						'conditions' => array(
+							'FramePublicLanguage.frame_id = Frame.id',
+							'FramePublicLanguage.language_id' => ['0', Current::read('Language.id', '0')],
+							'FramePublicLanguage.is_public' => true,
+						),
+						'fields' => array(
+							'id', 'language_id', 'frame_id', 'is_public'
+						),
+						'order' => ''
+					),
+					'FramesLanguage' => array(
+						'className' => 'Frames.FramesLanguage',
+						'foreignKey' => false,
+						'conditions' => array(
+							'FramesLanguage.frame_id = Frame.id',
 							'FramesLanguage.language_id' => Current::read('Language.id', '0'),
-						)
+						),
+						'fields' => array(
+							'id', 'language_id', 'frame_id', 'name', 'is_origin', 'is_translation', 'is_original_copy'
+						),
+						'order' => ''
 					),
-					'fields' => array(
-						'id', 'language_id', 'frame_id', 'name', 'is_origin', 'is_translation', 'is_original_copy'
-					),
-					'order' => ''
-				),
-			)
-		);
+				)
+			);
+		}
 
 		return $belongsTo;
 	}
