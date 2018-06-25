@@ -66,6 +66,9 @@ class UserAttributeBehavior extends ModelBehavior {
 
 		$pluginsRoles = $model->PluginsRole->find('all', array(
 			'recursive' => -1,
+			'fields' => [
+				'id', 'role_key', 'plugin_key'
+			],
 			'conditions' => array(
 				'plugin_key' => 'user_manager',
 			)
