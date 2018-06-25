@@ -43,16 +43,45 @@ class ControlPanelLayoutComponent extends Component {
 		$controller->Plugin = ClassRegistry::init('PluginManager.Plugin', true);
 		$controller->PluginsRole = ClassRegistry::init('PluginManager.PluginsRole', true);
 
-		$controlPanel = $controller->Plugin->create(array(
+		$controlPanel[$controller->Plugin->alias] = [
 			'key' => 'control_panel',
 			'name' => __d('control_panel', 'Control Panel Top'),
 			'default_action' => 'control_panel/index'
-		));
+		];
 
-		$this->plugins = $controller->PluginsRole->getPlugins(
-			array(Plugin::PLUGIN_TYPE_FOR_SITE_MANAGER, Plugin::PLUGIN_TYPE_FOR_SYSTEM_MANGER),
-			Current::read('User.role_key'), 'INNER'
-		);
+		$this->plugins = $controller->Plugin->find('all', array(
+			'recursive' => -1,
+			'fields' => array(
+				$controller->Plugin->alias . '.key',
+				$controller->Plugin->alias . '.name',
+				//$controller->Plugin->alias . '.weight',
+				//$controller->Plugin->alias . '.type',
+				$controller->Plugin->alias . '.default_action',
+				//$controller->PluginsRole->alias . '.role_key',
+			),
+			'joins' => array(
+				array(
+					'table' => $controller->PluginsRole->table,
+					'alias' => $controller->PluginsRole->alias,
+					'type' => 'INNER',
+					'conditions' => array(
+						$controller->Plugin->alias . '.key' . ' = ' .
+							$controller->PluginsRole->alias . ' .plugin_key',
+					),
+				),
+			),
+			'conditions' => array(
+				$controller->Plugin->alias . '.type' => [
+					Plugin::PLUGIN_TYPE_FOR_SITE_MANAGER, Plugin::PLUGIN_TYPE_FOR_SYSTEM_MANGER
+				],
+				$controller->Plugin->alias . '.language_id' => Current::read('Language.id'),
+				$controller->PluginsRole->alias . '.role_key' => Current::read('User.role_key'),
+			),
+			'order' => array(
+				$controller->Plugin->alias . '.weight' => 'asc',
+				$controller->Plugin->alias . '.id' => 'desc'
+			),
+		));
 
 		array_unshift($this->plugins, $controlPanel);
 
@@ -66,17 +95,21 @@ class ControlPanelLayoutComponent extends Component {
 		$controller->set('pluginsMenu', $this->plugins);
 
 		if (isset($this->settings['plugin'])) {
-			$plugin = $this->settings['plugin'];
+			$pluginKey = $this->settings['plugin'];
 		} else {
-			$plugin = $controller->params['plugin'];
+			$pluginKey = $controller->params['plugin'];
 		}
-
-		$plugin = Hash::extract($this->plugins, '{n}.Plugin[key=' . $plugin . ']');
-		if (isset($plugin[0]['name'])) {
-			if (! isset($controller->viewVars['title'])) {
-				$controller->set('title', $plugin[0]['name']);
+		foreach ($this->plugins as $plugin) {
+			if ($plugin['Plugin']['key'] === $pluginKey) {
+				$pluginName = $plugin['Plugin']['name'];
+				break;
 			}
-			$controller->set('pageTitle', $plugin[0]['name']);
+		}
+		if (!empty($pluginName)) {
+			if (! isset($controller->viewVars['title'])) {
+				$controller->set('title', $pluginName);
+			}
+			$controller->set('pageTitle', $pluginName);
 		}
 	}
 
