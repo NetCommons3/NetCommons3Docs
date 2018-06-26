@@ -10,6 +10,7 @@
  */
 
 App::uses('NetCommonsGetTest', 'NetCommons.TestSuite');
+App::uses('GetPageBehavior', 'Pages.Model/Behavior');
 
 /**
  * PagesEditController::add()のテスト
@@ -69,6 +70,15 @@ abstract class PagesGetTestCase extends NetCommonsGetTest {
 	public function setUp() {
 		parent::setUp();
 		Current::$current['Language']['id'] = '2';
+
+		$reflectionClass = new ReflectionClass('GetPageBehavior');
+		$property = $reflectionClass->getProperty('__memoryPages');
+		$property->setAccessible(true);
+		$property->setValue('GetPageBehavior', []);
+
+		$property = $reflectionClass->getProperty('__memoryPageWithFrame');
+		$property->setAccessible(true);
+		$property->setValue('GetPageBehavior', []);
 	}
 
 }

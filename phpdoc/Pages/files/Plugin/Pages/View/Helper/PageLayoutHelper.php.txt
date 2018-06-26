@@ -46,6 +46,24 @@ class PageLayoutHelper extends AppHelper {
 	const COL_DEFAULT_SIZE = 3;
 
 /**
+ * コンテナー変数
+ *
+ * 何度も同じ処理をさせないために保持する
+ *
+ * @var array
+ */
+	protected static $_containers;
+
+/**
+ * プラグインデータ
+ *
+ * 何度も同じ処理をさせないために保持する
+ *
+ * @var array
+ */
+	protected static $_plugins;
+
+/**
  * Containers data
  *
  * @var array
@@ -75,12 +93,21 @@ class PageLayoutHelper extends AppHelper {
 	public function __construct(View $View, $settings = array()) {
 		parent::__construct($View, $settings);
 
-		$this->containers = Hash::combine(
-			Hash::get($settings, 'page.PageContainer', array()), '{n}.container_type', '{n}'
-		);
-		$this->plugins = Hash::combine(
-			Current::read('PluginsRoom', array()), '{n}.Plugin.key', '{n}.Plugin'
-		);
+		$isTestMock = (substr(get_class($this->_View->request), 0, 4) === 'Mock');
+
+		if (! self::$_containers || $isTestMock) {
+			self::$_containers = Hash::combine(
+				Hash::get($settings, 'page.PageContainer', array()), '{n}.container_type', '{n}'
+			);
+		}
+		$this->containers = self::$_containers;
+
+		if (! self::$_plugins || $isTestMock) {
+			self::$_plugins = Hash::combine(
+				Current::read('PluginsRoom', array()), '{n}.Plugin.key', '{n}.Plugin'
+			);
+		}
+		$this->plugins = self::$_plugins;
 
 		$this->layoutSetting = Hash::get($settings, 'layoutSetting', false);
 	}

@@ -12,6 +12,20 @@ App::uses('ClassRegistry', 'Utility');
 class SlugRoute extends CakeRoute {
 
 /**
+ * 何度も同じRouteチェックをさせないために、一度チェックしたものは、キャッシュする
+ *
+ * @var array
+ */
+	private $__executedRoute = [];
+
+/**
+ * 何度も同じRouteチェックをさせないために、一度チェックしたものは、キャッシュする
+ *
+ * @var array
+ */
+	private $__defaultSpacePermalink = null;
+
+/**
  * parse
  *
  * @param string $url The URL to attempt to parse.
@@ -31,9 +45,15 @@ class SlugRoute extends CakeRoute {
 			return false;
 		}
 
-		$Space = ClassRegistry::init('Rooms.Space');
+		$passKey = json_encode($params['pass']);
+		if (array_key_exists($passKey, $this->__executedRoute)) {
+			return $this->__executedRoute[$passKey];
+		}
+
+		$this->Space = ClassRegistry::init('Rooms.Space');
 		if ($params['pass']) {
-			$result = $Space->find('first', array(
+			$result = $this->Space->find('first', array(
+				'fields' => ['id', 'permalink'],
 				'conditions' => array('permalink' => $params['pass'][0]),
 				'recursive' => -1
 			));
@@ -45,10 +65,7 @@ class SlugRoute extends CakeRoute {
 			$params['pass'] = array_values($params['pass']);
 		}
 		if (! isset($params['spaceId'])) {
-			$result = $Space->find('first', array(
-				'conditions' => array('permalink' => '', 'id !=' => Space::WHOLE_SITE_ID),
-				'recursive' => -1
-			));
+			$result = $this->__findDefaultSpace();
 			$params['spacePermalink'] = $result['Space']['permalink'];
 			$params['spaceId'] = $result['Space']['id'];
 		}
@@ -63,17 +80,50 @@ class SlugRoute extends CakeRoute {
 			);
 		}
 
+		$Room = ClassRegistry::init('Rooms.Room');
 		$count = $PageModel->find('count', array(
 			'conditions' => $conditions,
-			'recursive' => 0
+			'recursive' => -1,
+			'joins' => [
+				[
+					'table' => $Room->table,
+					'alias' => $Room->alias,
+					'type' => 'INNER',
+					'conditions' => array(
+						$Room->alias . '.id' . ' = ' . $PageModel->alias . '.room_id',
+					),
+				]
+			],
 		));
 
 		if ($count) {
 			$params['pagePermalink'] = $params['pass'];
+			$this->__executedRoute[$passKey] = true;
 			return $params;
 		}
 
+		$this->__executedRoute[$passKey] = false;
 		return false;
+	}
+
+/**
+ * デフォルトのスペースデータ取得
+ *
+ * @return array
+ */
+	private function __findDefaultSpace() {
+		if ($this->__defaultSpacePermalink) {
+			return $this->__defaultSpacePermalink;
+		} else {
+			$result = $this->Space->find('first', array(
+				'fields' => ['id', 'permalink'],
+				'conditions' => array('permalink' => '', 'id !=' => Space::WHOLE_SITE_ID),
+				'recursive' => -1
+			));
+			$this->__defaultSpacePermalink = $result;
+		}
+
+		return $result;
 	}
 
 }

@@ -42,10 +42,10 @@ class PermissionComponent extends Component {
  *
  * @var string
  */
-	const CHECK_TYEP_GENERAL_PLUGIN = 'general_plugin',
-			CHECK_TYEP_CONTROL_PANEL = 'control_panel',
-			CHECK_TYEP_SYSTEM_PLUGIN = 'system_plugin',
-			CHECK_TYEP_NOCHECK_PLUGIN = 'no_check';
+	const CHECK_TYPE_GENERAL_PLUGIN = 'general_plugin',
+			CHECK_TYPE_CONTROL_PANEL = 'control_panel',
+			CHECK_TYPE_SYSTEM_PLUGIN = 'system_plugin',
+			CHECK_TYPE_NOCHECK_PLUGIN = 'no_check';
 
 /**
  * チェックタイプ
@@ -67,7 +67,7 @@ class PermissionComponent extends Component {
  *
  * @var string
  */
-	public $type = self::CHECK_TYEP_GENERAL_PLUGIN;
+	public $type = self::CHECK_TYPE_GENERAL_PLUGIN;
 
 /**
  * 許可アクションリスト
@@ -114,6 +114,13 @@ class PermissionComponent extends Component {
  * @var array
  */
 	public $allow = array('index,view' => null);
+
+/**
+ * SpaceComponent
+ *
+ * @var string|object
+ */
+	public $SpaceComponent = null;
 
 /**
  * Called before the Controller::beforeFilter().
@@ -170,17 +177,17 @@ class PermissionComponent extends Component {
  */
 	public function startup(Controller $controller) {
 		switch ($this->type) {
-			case self::CHECK_TYEP_SYSTEM_PLUGIN:
+			case self::CHECK_TYPE_SYSTEM_PLUGIN:
 				if (Current::allowSystemPlugin($controller->params['plugin'])) {
 					return;
 				}
 				break;
-			case self::CHECK_TYEP_CONTROL_PANEL:
+			case self::CHECK_TYPE_CONTROL_PANEL:
 				if (Current::hasControlPanel()) {
 					return;
 				}
 				break;
-			case self::CHECK_TYEP_GENERAL_PLUGIN:
+			case self::CHECK_TYPE_GENERAL_PLUGIN:
 				if (! $this->checkSpaceAccess($controller)) {
 					break;
 				}
@@ -188,12 +195,12 @@ class PermissionComponent extends Component {
 					break;
 				}
 				return;
-			case self::CHECK_TYEP_NOCHECK_PLUGIN:
+			case self::CHECK_TYPE_NOCHECK_PLUGIN:
 				return;
 		}
 
 		//if ($controller->Auth->user('id')) {
-			throw new ForbiddenException('Permission denied');
+			throw new ForbiddenException('This controller or action is permission denied');
 		//} else {
 		//	return $controller->redirect($controller->Auth->redirect());
 		//}
@@ -225,22 +232,25 @@ class PermissionComponent extends Component {
  * @return bool
  */
 	public function checkSpaceAccess(Controller $controller) {
-		try {
-			$Room = ClassRegistry::init('Rooms.Room');
-			$spaces = $Room->getSpaces();
-			if ($spaces && Current::read('Room')) {
-				$space = Hash::get($spaces, Hash::get(Current::read('Room'), 'space_id'));
+		$Room = ClassRegistry::init('Rooms.Room');
+		$spaces = $Room->getSpaces();
+		$curRoom = Current::read('Room');
+		if ($spaces && $curRoom) {
+			if (empty($this->SpaceComponent)) {
+				$space = $spaces[$curRoom['space_id']];
 				$plugin = Inflector::camelize($space['Space']['plugin_key']);
 				$this->SpaceComponent = $controller->Components->load($plugin . '.' . $plugin);
-				if (! method_exists($this->SpaceComponent, 'accessCheck')) {
-					return true;
-				}
-				if (! $this->SpaceComponent->accessCheck($controller)) {
-					return false;
-				}
+			} elseif (is_string($this->SpaceComponent)) {
+				$this->SpaceComponent = $controller->Components->load($this->SpaceComponent);
 			}
-		} catch (Exception $ex) {
-			CakeLog::error($ex);
+			$this->SpaceComponent->initialize($controller);
+			$this->SpaceComponent->startup($controller);
+			if (! method_exists($this->SpaceComponent, 'accessCheck')) {
+				return true;
+			}
+			if (! $this->SpaceComponent->accessCheck($controller)) {
+				return false;
+			}
 		}
 
 		if (! $this->checkBlockAccess($controller)) {
