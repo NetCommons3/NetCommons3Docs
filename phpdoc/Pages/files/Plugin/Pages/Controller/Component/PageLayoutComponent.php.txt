@@ -10,6 +10,7 @@
  */
 
 App::uses('Component', 'Controller');
+App::uses('Current', 'NetCommons.Utility');
 
 /**
  * ページLayout Component
@@ -38,6 +39,23 @@ class PageLayoutComponent extends Component {
  * @var string
  */
 	public $frameElement = 'Frames.frame';
+
+/**
+ * Called before the Controller::beforeFilter().
+ *
+ * @param Controller $controller Controller with components to initialize
+ * @return void
+ */
+	public function initialize(Controller $controller) {
+		//RequestActionの場合、スキップする
+		if (! empty($controller->request->params['requested'])) {
+			return;
+		}
+
+		if (isset($controller->request->query[Current::SETTING_MODE_WORD])) {
+			Current::isSettingMode((bool)$controller->request->query[Current::SETTING_MODE_WORD]);
+		}
+	}
 
 /**
  * beforeRender
