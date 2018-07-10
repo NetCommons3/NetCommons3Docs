@@ -12,3 +12,9 @@ Router::connect('/pages/pages_edit/:action/*', array(
 	'plugin' => 'pages', 'controller' => 'pages_edit'
 ));
 
+Router::connect('/pages/change_setting_mode', [
+	'plugin' => 'pages',
+	'controller' => 'pages',
+	'action' => 'change_setting_mode',
+]);
+

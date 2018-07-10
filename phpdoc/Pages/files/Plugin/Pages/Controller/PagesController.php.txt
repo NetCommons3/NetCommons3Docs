@@ -65,6 +65,7 @@ class PagesController extends PagesAppController {
 		if (Current::isSettingMode() && ! Current::permission('page_editable')) {
 			$paths = $this->params->params['pass'];
 			$path = implode('/', $paths);
+			Current::isSettingMode(false);
 			return $this->redirect('/' . $path);
 		}
 
@@ -83,6 +84,33 @@ class PagesController extends PagesAppController {
 			throw new NotFoundException();
 		}
 		$this->set('page', $page);
+	}
+
+/**
+ * セッティングモード切り替えアクション
+ *
+ * @return void
+ */
+	public function change_setting_mode() {
+		if (isset($this->request->query['mode'])) {
+			$settingMode = (bool)$this->request->query['mode'];
+		} else {
+			$settingMode = false;
+		}
+		$isSettingMode = Current::isSettingMode($settingMode);
+		$redirectUrl = $this->request->referer(true);
+
+		$pattern = preg_quote('/' . Current::SETTING_MODE_WORD . '/', '/');
+		if (preg_match('/' . $pattern . '/', $redirectUrl)) {
+			if (! $isSettingMode) {
+				$redirectUrl = preg_replace('/' . $pattern . '/', '/', $redirectUrl);
+			}
+		} else {
+			if ($isSettingMode) {
+				$redirectUrl = '/' . Current::SETTING_MODE_WORD . $redirectUrl;
+			}
+		}
+		$this->redirect($redirectUrl);
 	}
 
 }
