@@ -70,9 +70,9 @@ class FramesHelper extends AppHelper {
 			$url .= '&page_id=' . Current::read('Page.id');
 		}
 
-		if (Current::isSettingMode()) {
-			$url = Current::SETTING_MODE_WORD . '/' . $url;
-		}
+		//if (Current::isSettingMode()) {
+		//	$url = Current::SETTING_MODE_WORD . '/' . $url;
+		//}
 
 		return $url;
 	}
