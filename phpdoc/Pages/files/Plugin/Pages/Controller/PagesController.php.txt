@@ -11,6 +11,7 @@
 
 App::uses('PagesAppController', 'Pages.Controller');
 App::uses('Space', 'Rooms.Model');
+App::uses('NetCommonsUrl', 'NetCommons.Utility');
 
 /**
  * ページ表示 Controller
@@ -98,17 +99,10 @@ class PagesController extends PagesAppController {
 			$settingMode = false;
 		}
 		$isSettingMode = Current::isSettingMode($settingMode);
-		$redirectUrl = $this->request->referer(true);
-
-		$pattern = preg_quote('/' . Current::SETTING_MODE_WORD . '/', '/');
-		if (preg_match('/' . $pattern . '/', $redirectUrl)) {
-			if (! $isSettingMode) {
-				$redirectUrl = preg_replace('/' . $pattern . '/', '/', $redirectUrl);
-			}
+		if ($isSettingMode) {
+			$redirectUrl = NetCommonsUrl::backToPageUrl(true);
 		} else {
-			if ($isSettingMode) {
-				$redirectUrl = '/' . Current::SETTING_MODE_WORD . $redirectUrl;
-			}
+			$redirectUrl = NetCommonsUrl::backToPageUrl();
 		}
 		$this->redirect($redirectUrl);
 	}
