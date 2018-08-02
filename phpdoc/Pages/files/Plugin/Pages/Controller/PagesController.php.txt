@@ -52,7 +52,9 @@ class PagesController extends PagesAppController {
  */
 	public function beforeFilter() {
 		//CurrentPage::__getPageConditionsでページ表示として扱う
-		$this->request->params['pageView'] = true;
+		if ($this->params['action'] === 'index') {
+			$this->request->params['pageView'] = true;
+		}
 		parent::beforeFilter();
 	}
 
