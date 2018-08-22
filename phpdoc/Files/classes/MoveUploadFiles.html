@@ -136,10 +136,10 @@
                                 <div class="accordion" style="margin-bottom: 0">
         <div class="accordion-group">
             <div class="accordion-heading">
-                                    <a class="accordion-toggle " data-toggle="collapse" data-target="#namespace-1596813464"></a>
+                                    <a class="accordion-toggle " data-toggle="collapse" data-target="#namespace-1122706667"></a>
                                 <a href="../namespaces/default.html" style="margin-left: 30px; padding-left: 0">\</a>
             </div>
-            <div id="namespace-1596813464" class="accordion-body collapse in">
+            <div id="namespace-1122706667" class="accordion-body collapse in">
                 <div class="accordion-inner">
 
                     
@@ -249,8 +249,8 @@
                                             </nav>
                     <a href="#source-view" role="button" class="pull-right btn" data-toggle="modal"><i class="icon-code"></i></a>
 
-                    <h1><small>\</small>LinkButtonHelper</h1>
-                    <p><em>`&lt;a&gt;`のボタン Helper</em></p>
+                    <h1><small>\</small>MoveUploadFiles</h1>
+                    <p><em>Class app/webroot/filesからapp/Uploads/filesに移動</em></p>
                     
                     
                                         
@@ -269,14 +269,12 @@
                         </section>
                         <section class="row-fluid public">
                             <section class="span4">
-                                                                    <a href="../classes/LinkButtonHelper.html#method_add" class="">add()</a><br />
-                                                                    <a href="../classes/LinkButtonHelper.html#method_edit" class="">edit()</a><br />
-                                                                    <a href="../classes/LinkButtonHelper.html#method_search" class="">search()</a><br />
-                                                                    <a href="../classes/LinkButtonHelper.html#method_sort" class="">sort()</a><br />
-                                                                    <a href="../classes/LinkButtonHelper.html#method_toList" class="">toList()</a><br />
+                                                                    <a href="../classes/MoveUploadFiles.html#method_before" class="">before()</a><br />
+                                                                    <a href="../classes/MoveUploadFiles.html#method_after" class="">after()</a><br />
                                                             </section>
                             <section class="span4">
-                                                                    <a href="../classes/LinkButtonHelper.html#property_helpers" class="">$helpers</a><br />
+                                                                    <a href="../classes/MoveUploadFiles.html#property_description" class="">$description</a><br />
+                                                                    <a href="../classes/MoveUploadFiles.html#property_migration" class="">$migration</a><br />
                                                             </section>
                             <section class="span4">
                                                                     <em>No constants found</em>
@@ -295,7 +293,7 @@
                         </section>
                         <section class="row-fluid private">
                             <section class="span4">
-                                                                    <a href="../classes/LinkButtonHelper.html#method___getLinkHtml" class="">__getLinkHtml()</a><br />
+                                                                    <em>No private methods found</em>
                                                             </section>
                             <section class="span4">
                                                                     <em>No private properties found</em>
@@ -311,14 +309,14 @@
                     
                     <dl>
                         <dt>File</dt>
-                            <dd><a href="../files/Plugin.NetCommons.View.Helper.LinkButtonHelper.html"><div class="path-wrapper">Plugin/NetCommons/View/Helper/LinkButtonHelper.php</div></a></dd>
+                            <dd><a href="../files/Plugin.Files.Config.Migration.1534896546_move_upload_files.html"><div class="path-wrapper">Plugin/Files/Config/Migration/1534896546_move_upload_files.php</div></a></dd>
                                                 <dt>Package</dt>
-                            <dd><div class="namespace-wrapper">View\Helper</div></dd>
+                            <dd><div class="namespace-wrapper">Default</div></dd>
                                                 <dt>Class hierarchy</dt>
                             <dd class="hierarchy">
                                                                                                                                                                                                                                                                                                 
-                                        <div class="namespace-wrapper">\FormHelper</div>
-                                                                                                    <div class="namespace-wrapper">\LinkButtonHelper</div>
+                                        <div class="namespace-wrapper">\CakeMigration</div>
+                                                                                                    <div class="namespace-wrapper">\MoveUploadFiles</div>
                             </dd>
 
                         
@@ -344,11 +342,35 @@
 
                                     <div class="row-fluid">
         <div class="span8 content class">
-            <a id="property_helpers" name="property_helpers" class="anchor"></a>
+            <a id="property_description" name="property_description" class="anchor"></a>
             <article class="property">
-                <h3 class="public ">$helpers</h3>
-                <pre class="signature">$helpers : array</pre>
-                <p><em>使用するヘルパ</em></p>
+                <h3 class="public ">$description</h3>
+                <pre class="signature">$description : string</pre>
+                <p><em>Migration description</em></p>
+                
+
+                                <h4>Type</h4>
+                string
+                                            </article>
+        </div>
+        <aside class="span4 detailsbar">
+            <h1><i class="icon-arrow-down"></i></h1>
+                        <dl>
+                                                            </dl>
+            <h2>Tags</h2>
+            <table class="table table-condensed">
+                                    <tr><td colspan="2"><em>None found</em></td></tr>
+                            </table>
+        </aside>
+    </div>
+
+                                    <div class="row-fluid">
+        <div class="span8 content class">
+            <a id="property_migration" name="property_migration" class="anchor"></a>
+            <article class="property">
+                <h3 class="public ">$migration</h3>
+                <pre class="signature">$migration : array</pre>
+                <p><em>Actions to be performed</em></p>
                 
 
                                 <h4>Type</h4>
@@ -375,37 +397,27 @@
 
                                     <div class="row-fluid">
         <div class="span8 content class">
-            <a id="method_add" name="method_add" class="anchor"></a>
+            <a id="method_before" name="method_before" class="anchor"></a>
             <article class="method">
-                <h3 class="public ">add()</h3>
+                <h3 class="public ">before()</h3>
                 <a href="#source-view" role="button" class="pull-right btn" data-toggle="modal" style="font-size: 1.1em; padding: 9px 14px"><i class="icon-code"></i></a>
-                <pre class="signature" style="margin-right: 54px;">add(string  <span class="argument">$title = &#039;&#039;</span>, mixed  <span class="argument">$url = null</span>, array  <span class="argument">$options = array()</span>) : string</pre>
-                <p><em>追加ボタンHTMLの出力</em></p>
+                <pre class="signature" style="margin-right: 54px;">before(string  <span class="argument">$direction</span>) : boolean</pre>
+                <p><em>Before migration callback</em></p>
                 
 
                                     <h4>Parameters</h4>
                     <table class="table table-condensed table-hover">
                                                     <tr>
                                 <td>string</td>
-                                <td>$title </td>
-                                <td><p>タイトル</p></td>
-                            </tr>
-                                                    <tr>
-                                <td>mixed</td>
-                                <td>$url </td>
-                                <td><p>URL</p></td>
-                            </tr>
-                                                    <tr>
-                                <td>array</td>
-                                <td>$options </td>
-                                <td><p>HTML属性オプション</p></td>
+                                <td>$direction </td>
+                                <td><p>Direction of migration process (up or down)</p></td>
                             </tr>
                                             </table>
                 
                 
                                     <h4>Returns</h4>
-                    string
-                                            &mdash; <p>HTMLタグ</p>
+                    boolean
+                                            &mdash; <p>Should process continue</p>
                                     				
                             </article>
         </div>
@@ -422,37 +434,27 @@
 
                                     <div class="row-fluid">
         <div class="span8 content class">
-            <a id="method_edit" name="method_edit" class="anchor"></a>
+            <a id="method_after" name="method_after" class="anchor"></a>
             <article class="method">
-                <h3 class="public ">edit()</h3>
+                <h3 class="public ">after()</h3>
                 <a href="#source-view" role="button" class="pull-right btn" data-toggle="modal" style="font-size: 1.1em; padding: 9px 14px"><i class="icon-code"></i></a>
-                <pre class="signature" style="margin-right: 54px;">edit(string  <span class="argument">$title = &#039;&#039;</span>, mixed  <span class="argument">$url = null</span>, array  <span class="argument">$options = array()</span>) : string</pre>
-                <p><em>編集ボタンHTMLの出力</em></p>
+                <pre class="signature" style="margin-right: 54px;">after(string  <span class="argument">$direction</span>) : boolean</pre>
+                <p><em>After migration callback</em></p>
                 
 
                                     <h4>Parameters</h4>
                     <table class="table table-condensed table-hover">
                                                     <tr>
                                 <td>string</td>
-                                <td>$title </td>
-                                <td><p>タイトル</p></td>
-                            </tr>
-                                                    <tr>
-                                <td>mixed</td>
-                                <td>$url </td>
-                                <td><p>URL</p></td>
-                            </tr>
-                                                    <tr>
-                                <td>array</td>
-                                <td>$options </td>
-                                <td><p>HTML属性オプション</p></td>
+                                <td>$direction </td>
+                                <td><p>Direction of migration process (up or down)</p></td>
                             </tr>
                                             </table>
                 
                 
                                     <h4>Returns</h4>
-                    string
-                                            &mdash; <p>HTMLタグ</p>
+                    boolean
+                                            &mdash; <p>Should process continue</p>
                                     				
                             </article>
         </div>
@@ -467,204 +469,16 @@
         </aside>
     </div>
 
-                                    <div class="row-fluid">
-        <div class="span8 content class">
-            <a id="method_search" name="method_search" class="anchor"></a>
-            <article class="method">
-                <h3 class="public ">search()</h3>
-                <a href="#source-view" role="button" class="pull-right btn" data-toggle="modal" style="font-size: 1.1em; padding: 9px 14px"><i class="icon-code"></i></a>
-                <pre class="signature" style="margin-right: 54px;">search(string  <span class="argument">$title = &#039;&#039;</span>, mixed  <span class="argument">$url = null</span>, array  <span class="argument">$options = array()</span>) : string</pre>
-                <p><em>検索ボタンHTMLの出力</em></p>
-                
-
-                                    <h4>Parameters</h4>
-                    <table class="table table-condensed table-hover">
-                                                    <tr>
-                                <td>string</td>
-                                <td>$title </td>
-                                <td><p>タイトル</p></td>
-                            </tr>
-                                                    <tr>
-                                <td>mixed</td>
-                                <td>$url </td>
-                                <td><p>URL</p></td>
-                            </tr>
-                                                    <tr>
-                                <td>array</td>
-                                <td>$options </td>
-                                <td><p>HTML属性オプション</p></td>
-                            </tr>
-                                            </table>
-                
-                
-                                    <h4>Returns</h4>
-                    string
-                                            &mdash; <p>HTMLタグ</p>
-                                    				
-                            </article>
-        </div>
-        <aside class="span4 detailsbar">
-            <h1><i class="icon-arrow-down"></i></h1>
-                                                            <dl>
-                                                                            </dl>
-            <h2>Tags</h2>
-            <table class="table table-condensed">
-                                    <tr><td colspan="2"><em>None found</em></td></tr>
-                            </table>
-        </aside>
-    </div>
-
-                                    <div class="row-fluid">
-        <div class="span8 content class">
-            <a id="method_sort" name="method_sort" class="anchor"></a>
-            <article class="method">
-                <h3 class="public ">sort()</h3>
-                <a href="#source-view" role="button" class="pull-right btn" data-toggle="modal" style="font-size: 1.1em; padding: 9px 14px"><i class="icon-code"></i></a>
-                <pre class="signature" style="margin-right: 54px;">sort(string  <span class="argument">$title = &#039;&#039;</span>, mixed  <span class="argument">$url = null</span>, array  <span class="argument">$options = array()</span>) : string</pre>
-                <p><em>ソートボタンHTMLの出力</em></p>
-                
-
-                                    <h4>Parameters</h4>
-                    <table class="table table-condensed table-hover">
-                                                    <tr>
-                                <td>string</td>
-                                <td>$title </td>
-                                <td><p>タイトル</p></td>
-                            </tr>
-                                                    <tr>
-                                <td>mixed</td>
-                                <td>$url </td>
-                                <td><p>URL</p></td>
-                            </tr>
-                                                    <tr>
-                                <td>array</td>
-                                <td>$options </td>
-                                <td><p>HTML属性オプション</p></td>
-                            </tr>
-                                            </table>
-                
-                
-                                    <h4>Returns</h4>
-                    string
-                                            &mdash; <p>HTMLタグ</p>
-                                    				
-                            </article>
-        </div>
-        <aside class="span4 detailsbar">
-            <h1><i class="icon-arrow-down"></i></h1>
-                                                            <dl>
-                                                                            </dl>
-            <h2>Tags</h2>
-            <table class="table table-condensed">
-                                    <tr><td colspan="2"><em>None found</em></td></tr>
-                            </table>
-        </aside>
-    </div>
-
-                                    <div class="row-fluid">
-        <div class="span8 content class">
-            <a id="method_toList" name="method_toList" class="anchor"></a>
-            <article class="method">
-                <h3 class="public ">toList()</h3>
-                <a href="#source-view" role="button" class="pull-right btn" data-toggle="modal" style="font-size: 1.1em; padding: 9px 14px"><i class="icon-code"></i></a>
-                <pre class="signature" style="margin-right: 54px;">toList(string  <span class="argument">$title = &#039;&#039;</span>, mixed  <span class="argument">$url = null</span>, array  <span class="argument">$options = array()</span>) : string</pre>
-                <p><em>一覧へボタンHTMLの出力</em></p>
-                
-
-                                    <h4>Parameters</h4>
-                    <table class="table table-condensed table-hover">
-                                                    <tr>
-                                <td>string</td>
-                                <td>$title </td>
-                                <td><p>タイトル</p></td>
-                            </tr>
-                                                    <tr>
-                                <td>mixed</td>
-                                <td>$url </td>
-                                <td><p>URL</p></td>
-                            </tr>
-                                                    <tr>
-                                <td>array</td>
-                                <td>$options </td>
-                                <td><p>HTML属性オプション</p></td>
-                            </tr>
-                                            </table>
-                
-                
-                                    <h4>Returns</h4>
-                    string
-                                            &mdash; <p>HTMLタグ</p>
-                                    				
-                            </article>
-        </div>
-        <aside class="span4 detailsbar">
-            <h1><i class="icon-arrow-down"></i></h1>
-                                                            <dl>
-                                                                            </dl>
-            <h2>Tags</h2>
-            <table class="table table-condensed">
-                                    <tr><td colspan="2"><em>None found</em></td></tr>
-                            </table>
-        </aside>
-    </div>
-
-                                                                    <div class="row-fluid">
-        <div class="span8 content class">
-            <a id="method___getLinkHtml" name="method___getLinkHtml" class="anchor"></a>
-            <article class="method">
-                <h3 class="private ">__getLinkHtml()</h3>
-                <a href="#source-view" role="button" class="pull-right btn" data-toggle="modal" style="font-size: 1.1em; padding: 9px 14px"><i class="icon-code"></i></a>
-                <pre class="signature" style="margin-right: 54px;">__getLinkHtml(string  <span class="argument">$title</span>, mixed  <span class="argument">$url</span>, array  <span class="argument">$options</span>) : string</pre>
-                <p><em>ソートボタンHTMLの出力</em></p>
-                
-
-                                    <h4>Parameters</h4>
-                    <table class="table table-condensed table-hover">
-                                                    <tr>
-                                <td>string</td>
-                                <td>$title </td>
-                                <td><p>タイトル</p></td>
-                            </tr>
-                                                    <tr>
-                                <td>mixed</td>
-                                <td>$url </td>
-                                <td><p>URL</p></td>
-                            </tr>
-                                                    <tr>
-                                <td>array</td>
-                                <td>$options </td>
-                                <td><p>HTML属性オプション</p></td>
-                            </tr>
-                                            </table>
-                
-                
-                                    <h4>Returns</h4>
-                    string
-                                            &mdash; <p>HTMLタグ</p>
-                                    				
-                            </article>
-        </div>
-        <aside class="span4 detailsbar">
-            <h1><i class="icon-arrow-down"></i></h1>
-                                                            <dl>
-                                                                            </dl>
-            <h2>Tags</h2>
-            <table class="table table-condensed">
-                                    <tr><td colspan="2"><em>None found</em></td></tr>
-                            </table>
-        </aside>
-    </div>
-
-                                    </div>
+                                                                    </div>
     </section>
 
     <div id="source-view" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="source-view-label" aria-hidden="true">
         <div class="modal-header">
             <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
-            <h3 id="source-view-label">LinkButtonHelper.php</h3>
+            <h3 id="source-view-label">1534896546_move_upload_files.php</h3>
         </div>
         <div class="modal-body">
-            <pre data-src="../files/Plugin/NetCommons/View/Helper/LinkButtonHelper.php.txt" class="language-php line-numbers"></pre>
+            <pre data-src="../files/Plugin/Files/Config/Migration/1534896546_move_upload_files.php.txt" class="language-php line-numbers"></pre>
         </div>
     </div>
 
