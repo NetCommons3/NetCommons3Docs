@@ -92,8 +92,7 @@ class AnnouncementsController extends AnnouncementsAppController {
 			//初期データセット
 			if (! $this->request->data = $this->Announcement->getAnnouncement()) {
 				$this->request->data = $this->Announcement->createAll();
-				$this->request->data = Hash::merge($this->request->data,
-					$this->AnnouncementSetting->createBlockSetting());
+				$this->request->data += $this->AnnouncementSetting->createBlockSetting();
 			}
 			$this->request->data['Frame'] = Current::read('Frame');
 		}

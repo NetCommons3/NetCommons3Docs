@@ -75,7 +75,7 @@ class AnnouncementBlockRolePermissionsController extends AnnouncementsAppControl
 				return $this->redirect(NetCommonsUrl::backToIndexUrl('default_setting_action'));
 			}
 			$this->NetCommons->handleValidationError($this->AnnouncementSetting->validationErrors);
-			$this->request->data['BlockRolePermission'] = Hash::merge(
+			$this->request->data['BlockRolePermission'] = array_merge(
 				$permissions['BlockRolePermissions'],
 				$this->request->data['BlockRolePermission']
 			);

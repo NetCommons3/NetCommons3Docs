@@ -99,8 +99,7 @@ class AnnouncementBlocksController extends AnnouncementsAppController {
 		} else {
 			//初期データセット
 			$this->request->data = $this->Announcement->createAll();
-			$this->request->data = Hash::merge($this->request->data,
-					$this->AnnouncementSetting->createBlockSetting());
+			$this->request->data += $this->AnnouncementSetting->createBlockSetting();
 			$this->request->data['Frame'] = Current::read('Frame');
 		}
 	}
