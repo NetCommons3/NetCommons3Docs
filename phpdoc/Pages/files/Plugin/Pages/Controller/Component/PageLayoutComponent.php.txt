@@ -10,6 +10,7 @@
  */
 
 App::uses('Component', 'Controller');
+App::uses('PagesLanguage', 'Pages.Model');
 
 /**
  * ページLayout Component
