@@ -30,6 +30,10 @@ class SlugRoute extends CakeRoute {
  *
  * @param string $url The URL to attempt to parse.
  * @return mixed Boolean false on failure, otherwise an array or parameters
+ *
+ * 速度改善の修正に伴って発生したため抑制
+ * @SuppressWarnings(PHPMD.CyclomaticComplexity)
+ * @SuppressWarnings(PHPMD.NPathComplexity)
  */
 	public function parse($url) {
 		$params = parent::parse($url);
@@ -52,11 +56,14 @@ class SlugRoute extends CakeRoute {
 
 		$this->Space = ClassRegistry::init('Rooms.Space');
 		if ($params['pass']) {
-			$result = $this->Space->find('first', array(
-				'fields' => ['id', 'permalink'],
-				'conditions' => array('permalink' => $params['pass'][0]),
-				'recursive' => -1
-			));
+			$spaces = $this->Space->getSpaces();
+			$result = [];
+			foreach ($spaces as $row) {
+				if ($row['Space']['permalink'] == $params['pass'][0]) {
+					$result = $row;
+					break;
+				}
+			}
 			if ($result) {
 				$params['spacePermalink'] = $result['Space']['permalink'];
 				$params['spaceId'] = $result['Space']['id'];

@@ -161,9 +161,19 @@ class GetPageBehavior extends ModelBehavior {
 			'Space' => 'Rooms.Space',
 		]);
 
+		// permalinkがnullの場合、nullで検索をかけてしまうため
+		if (is_null($permalink)) {
+			return array('PageContainer' => array());
+		}
+
+		// トップページの場合空にする
+		if ($permalink == Current::read('TopPage.permalink')) {
+			$permalink = '';
+		}
+
 		if ($permalink === '') {
 			$conditions = array(
-				'Page.id' => Current::read('Room.page_id_top')
+				'Page.id' => Current::read('TopPage.id')
 			);
 		} else {
 			$conditions = array(
