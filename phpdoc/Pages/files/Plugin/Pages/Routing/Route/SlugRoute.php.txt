@@ -4,6 +4,7 @@
  */
 
 App::uses('ClassRegistry', 'Utility');
+App::uses('Page', 'Pages.Model');
 
 /**
  * Automatically slugs routes based on named parameters
@@ -79,7 +80,7 @@ class SlugRoute extends CakeRoute {
 
 		$path = implode('/', $params['pass']);
 		if ($path === '') {
-			$conditions = array('Page.lft' => '1');
+			$conditions = array('Page.sort_key' => Page::HOME_SORT_KEY);
 		} else {
 			$conditions = array(
 				'Page.permalink' => $path,

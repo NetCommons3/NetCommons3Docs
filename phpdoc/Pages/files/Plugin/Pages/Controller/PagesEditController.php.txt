@@ -187,8 +187,9 @@ class PagesEditController extends PagesAppController {
 				return $this->throwBadRequest();
 			}
 			//表示処理
-			$this->request->data = Hash::merge($this->request->data,
-				$this->PagesLanguage->getPagesLanguage(Current::read('Page.id'), Current::read('Language.id'))
+			$this->request->data = $this->PagesLanguage->getPagesLanguage(
+				Current::read('Page.id'),
+				Current::read('Language.id')
 			);
 
 			$this->request->data['Room'] = Current::read('Room');
@@ -378,8 +379,9 @@ class PagesEditController extends PagesAppController {
 
 		} else {
 			//表示処理
-			$this->request->data = Hash::merge($this->request->data,
-				$this->PagesLanguage->getPagesLanguage(Current::read('Page.id'), Current::read('Language.id'))
+			$this->request->data = $this->PagesLanguage->getPagesLanguage(
+				Current::read('Page.id'),
+				Current::read('Language.id')
 			);
 
 			if (! $this->request->data['PagesLanguage']['meta_title']) {
@@ -429,8 +431,9 @@ class PagesEditController extends PagesAppController {
 			$this->__prepareIndex(Current::read('Room.id'), array(
 				'NOT' => array(
 					'AND' => array(
-						'Page.lft >=' => Current::read('Page.lft'),
-						'Page.rght <=' => Current::read('Page.rght')
+						//'Page.lft >=' => Current::read('Page.lft'),
+						//Page.rght <=' => Current::read('Page.rght')
+						'Page.sort_key LIKE' => Current::read('Page.sort_key') . '%',
 					)
 				)
 			));

@@ -9,7 +9,8 @@
  * @copyright Copyright 2014, NetCommons Project
  */
 
-App::uses('TreeBehavior', 'Model/Behavior');
+//App::uses('TreeBehavior', 'Model/Behavior');
+App::uses('NetCommonsTreeBehavior', 'NetCommons.Model/Behavior');
 
 /**
  * Page Behavior
@@ -17,7 +18,7 @@ App::uses('TreeBehavior', 'Model/Behavior');
  * @author Shohei Nakajima <nakajimashouhei@gmail.com>
  * @package NetCommons\Pages\Model\Behavior
  */
-class PagesTreeBehavior extends TreeBehavior {
+class PagesTreeBehavior extends NetCommonsTreeBehavior {
 
 /**
  * A convenience method for returning a hierarchical array used for HTML select boxes

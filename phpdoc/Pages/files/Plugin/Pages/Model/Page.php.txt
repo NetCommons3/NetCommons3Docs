@@ -31,23 +31,30 @@ class Page extends PagesAppModel {
 /**
  * パブリックスペースのページID
  *
- * @var const
+ * @var string
  */
 	const PUBLIC_ROOT_PAGE_ID = '1';
 
 /**
  * プライベートスペースのページID
  *
- * @var const
+ * @var string
  */
 	const PRIVATE_ROOT_PAGE_ID = '2';
 
 /**
  * グループスペースのページID
  *
- * @var const
+ * @var string
  */
 	const ROOM_ROOT_PAGE_ID = '3';
+
+/**
+ * ホームのソートキー
+ *
+ * @var string
+ */
+	const HOME_SORT_KEY = '~00000001-00000001';
 
 /**
  * TreeParser

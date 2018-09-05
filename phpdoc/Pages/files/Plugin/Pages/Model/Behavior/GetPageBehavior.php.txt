@@ -85,7 +85,9 @@ class GetPageBehavior extends ModelBehavior {
 		$pages = $model->find('all', array(
 			'fields' => array(
 				'Page.id', 'Page.room_id', 'Page.root_id',
-				'Page.parent_id', 'Page.lft', 'Page.rght',
+				'Page.parent_id',
+				//'Page.lft', 'Page.rght',
+				'Page.weight', 'Page.sort_key', 'Page.child_count',
 				'Page.permalink', 'Page.slug',
 				// 'Page.is_container_fluid', 'Page.theme',
 				'Room.id',
@@ -297,7 +299,7 @@ class GetPageBehavior extends ModelBehavior {
 					),
 				),
 			),
-			'order' => array($model->alias . ' .lft' => 'asc')
+			'order' => array($model->alias . ' .sort_key' => 'asc')
 		));
 
 		return $pagesLanguages;

@@ -272,7 +272,7 @@ class SavePageBehavior extends ModelBehavior {
 			'conditions' => array(
 				'parent_id !=' => '',
 			),
-			'order' => array('lft' => 'asc'),
+			'order' => array('sort_key' => 'asc'),
 		));
 
 		if ($first['Page']['id'] === $data[$model->alias]['id']) {

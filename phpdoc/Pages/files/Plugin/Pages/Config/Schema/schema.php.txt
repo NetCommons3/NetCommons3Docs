@@ -77,8 +77,11 @@ class PagesSchema extends CakeSchema {
 		'room_id' => array('type' => 'integer', 'null' => false, 'default' => null, 'unsigned' => false, 'key' => 'index'),
 		'root_id' => array('type' => 'integer', 'null' => true, 'default' => null, 'unsigned' => false),
 		'parent_id' => array('type' => 'integer', 'null' => true, 'default' => null, 'unsigned' => false, 'key' => 'index'),
-		'lft' => array('type' => 'integer', 'null' => true, 'default' => null, 'unsigned' => false, 'key' => 'index'),
-		'rght' => array('type' => 'integer', 'null' => true, 'default' => null, 'unsigned' => false, 'key' => 'index'),
+		'lft' => array('type' => 'integer', 'null' => true, 'default' => null, 'unsigned' => false),
+		'rght' => array('type' => 'integer', 'null' => true, 'default' => null, 'unsigned' => false),
+		'weight' => array('type' => 'integer', 'null' => true, 'default' => null, 'unsigned' => false),
+		'sort_key' => array('type' => 'string', 'null' => true, 'default' => null, 'key' => 'index', 'collate' => 'utf8_general_ci', 'charset' => 'utf8'),
+		'child_count' => array('type' => 'integer', 'null' => true, 'default' => '0', 'unsigned' => false),
 		'permalink' => array('type' => 'text', 'null' => true, 'default' => null, 'key' => 'index', 'collate' => 'utf8_general_ci', 'charset' => 'utf8'),
 		'slug' => array('type' => 'string', 'null' => true, 'default' => null, 'collate' => 'utf8_general_ci', 'charset' => 'utf8'),
 		'is_container_fluid' => array('type' => 'boolean', 'null' => false, 'default' => '0'),
@@ -90,10 +93,10 @@ class PagesSchema extends CakeSchema {
 		'indexes' => array(
 			'PRIMARY' => array('column' => 'id', 'unique' => 1),
 			'room_id' => array('column' => 'room_id', 'unique' => 0),
-			'parent_id' => array('column' => 'parent_id', 'unique' => 0),
-			'lft' => array('column' => array('lft', 'rght'), 'unique' => 0),
 			'permalink' => array('column' => 'permalink', 'unique' => 0, 'length' => array('permalink' => '255')),
-			'rght' => array('column' => array('rght', 'id'), 'unique' => 0)
+			'parent_id_2' => array('column' => array('parent_id', 'sort_key', 'id'), 'unique' => 0),
+			'sort_key' => array('column' => array('sort_key', 'id'), 'unique' => 0),
+			'weight' => array('column' => array('parent_id', 'weight'), 'unique' => 0)
 		),
 		'tableParameters' => array('charset' => 'utf8', 'collate' => 'utf8_general_ci', 'engine' => 'InnoDB')
 	);
