@@ -136,10 +136,10 @@
                                 <div class="accordion" style="margin-bottom: 0">
         <div class="accordion-group">
             <div class="accordion-heading">
-                                    <a class="accordion-toggle " data-toggle="collapse" data-target="#namespace-842245370"></a>
+                                    <a class="accordion-toggle " data-toggle="collapse" data-target="#namespace-841978988"></a>
                                 <a href="../namespaces/default.html" style="margin-left: 30px; padding-left: 0">\</a>
             </div>
-            <div id="namespace-842245370" class="accordion-body collapse in">
+            <div id="namespace-841978988" class="accordion-body collapse in">
                 <div class="accordion-inner">
 
                     
@@ -288,6 +288,7 @@ will inherit them.</p>
                                                                     <a href="../classes/UploadFile.html#method_beforeSave" class="">beforeSave()</a><br />
                                                                     <a href="../classes/UploadFile.html#method_afterSave" class="">afterSave()</a><br />
                                                                     <a href="../classes/UploadFile.html#method_getFile" class="">getFile()</a><br />
+                                                                    <a href="../classes/UploadFile.html#method_getFileByContentKey" class="">getFileByContentKey()</a><br />
                                                                     <a href="../classes/UploadFile.html#method_countUp" class="">countUp()</a><br />
                                                                     <a href="../classes/UploadFile.html#method_registByFile" class="">registByFile()</a><br />
                                                                     <a href="../classes/UploadFile.html#method_makeLink" class="">makeLink()</a><br />
@@ -1421,6 +1422,52 @@ schema data defaults are not merged.</p></td>
 
                                     <div class="row-fluid">
         <div class="span8 content class">
+            <a id="method_getFileByContentKey" name="method_getFileByContentKey" class="anchor"></a>
+            <article class="method">
+                <h3 class="public ">getFileByContentKey()</h3>
+                <a href="#source-view" role="button" class="pull-right btn" data-toggle="modal" style="font-size: 1.1em; padding: 9px 14px"><i class="icon-code"></i></a>
+                <pre class="signature" style="margin-right: 54px;">getFileByContentKey(string  <span class="argument">$pluginKey</span>, string  <span class="argument">$contentKey</span>, string  <span class="argument">$fieldName</span>) : array|false</pre>
+                <p><em>ファイル情報取得</em></p>
+                <p>アバターなどは、UploadFilesContentを見る必要がないので、ContentKeyでファイル情報を取得できるようにする</p>
+
+                                    <h4>Parameters</h4>
+                    <table class="table table-condensed table-hover">
+                                                    <tr>
+                                <td>string</td>
+                                <td>$pluginKey </td>
+                                <td><p>プラグインキー</p></td>
+                            </tr>
+                                                    <tr>
+                                <td>string</td>
+                                <td>$contentKey </td>
+                                <td><p>コンテンツキー</p></td>
+                            </tr>
+                                                    <tr>
+                                <td>string</td>
+                                <td>$fieldName </td>
+                                <td><p>フィールド名</p></td>
+                            </tr>
+                                            </table>
+                
+                
+                                    <h4>Returns</h4>
+                    array|false
+                                    				
+                            </article>
+        </div>
+        <aside class="span4 detailsbar">
+            <h1><i class="icon-arrow-down"></i></h1>
+                                                            <dl>
+                                                                            </dl>
+            <h2>Tags</h2>
+            <table class="table table-condensed">
+                                    <tr><td colspan="2"><em>None found</em></td></tr>
+                            </table>
+        </aside>
+    </div>
+
+                                    <div class="row-fluid">
+        <div class="span8 content class">
             <a id="method_countUp" name="method_countUp" class="anchor"></a>
             <article class="method">
                 <h3 class="public ">countUp()</h3>
@@ -1881,7 +1928,7 @@ schema data defaults are not merged.</p></td>
                 <section class="span10 offset1">
                     <hr />
                     Documentation is powered by <a href="http://www.phpdoc.org/">phpDocumentor </a> and authored
-                    on September 6th, 2018 at 15:06.
+                    on September 8th, 2018 at 09:11.
                 </section>
             </section>
         </section>
