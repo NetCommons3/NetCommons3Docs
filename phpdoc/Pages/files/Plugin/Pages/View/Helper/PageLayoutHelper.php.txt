@@ -345,5 +345,73 @@ class PageLayoutHelper extends AppHelper {
 		return (bool)$result;
 	}
 
+/**
+ * Calls a controller's method from any location. Can be used to connect controllers together
+ * or tie plugins into a main application. requestAction can be used to return rendered views
+ * or fetch the return value from controller actions.
+ *
+ * Under the hood this method uses Router::reverse() to convert the $url parameter into a string
+ * URL. You should use URL formats that are compatible with Router::reverse()
+ *
+ * #### Passing POST and GET data
+ *
+ * POST and GET data can be simulated in requestAction. Use `$extra['url']` for
+ * GET data. The `$extra['data']` parameter allows POST data simulation.
+ *
+ * @param string|array $url String or array-based URL. Unlike other URL arrays in CakePHP, this
+ *    URL will not automatically handle passed and named arguments in the $url parameter.
+ * @param array $extra if array includes the key "return" it sets the AutoRender to true. Can
+ *    also be used to submit GET/POST data, and named/passed arguments.
+ * @return mixed Boolean true or false on success/failure, or contents
+ *    of rendered action if 'return' is set in $extra.
+ * @SuppressWarnings(PHPMD.CyclomaticComplexity)
+ * @SuppressWarnings(PHPMD.NPathComplexity)
+ */
+	public function requestAction($url, $extra = array()) {
+		if (empty($url)) {
+			return false;
+		}
+
+		if (($index = array_search('return', $extra)) !== false) {
+			$extra['return'] = 0;
+			$extra['autoRender'] = 1;
+			unset($extra[$index]);
+		}
+		$arrayUrl = is_array($url);
+		if ($arrayUrl && !isset($extra['url'])) {
+			$extra['url'] = array();
+		}
+		if ($arrayUrl && !isset($extra['data'])) {
+			$extra['data'] = array();
+		}
+		$extra += array('autoRender' => 0, 'return' => 1, 'bare' => 1, 'requested' => 1);
+		$data = isset($extra['data']) ? $extra['data'] : null;
+		unset($extra['data']);
+
+		if (is_string($url) && strpos($url, Router::fullBaseUrl()) === 0) {
+			$url = Router::normalize(str_replace(Router::fullBaseUrl(), '', $url));
+		}
+		if (is_string($url)) {
+			$request = new CakeRequest($url);
+		} elseif (is_array($url)) {
+			$params = $url + array('pass' => array(), 'named' => array(), 'base' => false);
+			$params = $extra + $params;
+			$request = new CakeRequest(Router::reverse($params));
+		}
+		if (isset($data)) {
+			$request->data = $data;
+		}
+
+		$dispatcherFilters = Configure::read('Dispatcher.filters');
+		Configure::write('Dispatcher.filters', []);
+
+		$dispatcher = new Dispatcher();
+		$result = $dispatcher->dispatch($request, new CakeResponse(), $extra);
+		Configure::write('Dispatcher.filters', $dispatcherFilters);
+
+		Router::popRequest();
+		return $result;
+	}
+
 }
 
