@@ -116,6 +116,13 @@ class PermissionComponent extends Component {
 	public $allow = array('index,view' => null);
 
 /**
+ * SpaceComponent
+ *
+ * @var string|object
+ */
+	public $SpaceComponent = null;
+
+/**
  * Called before the Controller::beforeFilter().
  *
  * @param Controller $controller Instantiating controller
@@ -223,24 +230,36 @@ class PermissionComponent extends Component {
  *
  * @param Controller $controller Controller with components to startup
  * @return bool
+ * @SuppressWarnings(PHPMD.CyclomaticComplexity)
  */
 	public function checkSpaceAccess(Controller $controller) {
-		try {
-			$Room = ClassRegistry::init('Rooms.Room');
-			$spaces = $Room->getSpaces();
-			if ($spaces && Current::read('Room')) {
-				$space = Hash::get($spaces, Hash::get(Current::read('Room'), 'space_id'));
-				$plugin = Inflector::camelize($space['Space']['plugin_key']);
+		$Space = ClassRegistry::init('Rooms.Space');
+		$getSpaces = $Space->getSpaces();
+		$spaces = array();
+		foreach ($getSpaces as $space) {
+			$spaces[$space['Space']['id']] = $space;
+		}
+		$curRoom = Current::read('Room');
+		if ($spaces && $curRoom) {
+			if (empty($this->SpaceComponent)) {
+				if (isset($spaces[$curRoom['space_id']])) {
+					$space = $spaces[$curRoom['space_id']];
+					$plugin = Inflector::camelize($space['Space']['plugin_key']);
+				} else {
+					$plugin = 'PublicSpace';
+				}
 				$this->SpaceComponent = $controller->Components->load($plugin . '.' . $plugin);
-				if (! method_exists($this->SpaceComponent, 'accessCheck')) {
-					return true;
-				}
-				if (! $this->SpaceComponent->accessCheck($controller)) {
-					return false;
-				}
+			} elseif (is_string($this->SpaceComponent)) {
+				$this->SpaceComponent = $controller->Components->load($this->SpaceComponent);
 			}
-		} catch (Exception $ex) {
-			CakeLog::error($ex);
+			$this->SpaceComponent->initialize($controller);
+			$this->SpaceComponent->startup($controller);
+			if (! method_exists($this->SpaceComponent, 'accessCheck')) {
+				return true;
+			}
+			if (! $this->SpaceComponent->accessCheck($controller)) {
+				return false;
+			}
 		}
 
 		if (! $this->checkBlockAccess($controller)) {

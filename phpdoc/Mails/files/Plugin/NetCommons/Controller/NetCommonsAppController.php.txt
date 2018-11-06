@@ -14,6 +14,7 @@ App::uses('Current', 'NetCommons.Utility');
 App::uses('NetCommonsUrl', 'NetCommons.Utility');
 App::uses('PermissionComponent', 'NetCommons.Controller/Component');
 App::uses('SiteSettingUtil', 'SiteManager.Utility');
+App::uses('User', 'Users.Model');
 
 /**
  * NetCommonsApp Controller
@@ -59,7 +60,11 @@ class NetCommonsAppController extends Controller {
 				'plugin' => 'pages',
 				'controller' => 'pages',
 				'action' => 'index',
-			)
+			),
+			'passwordHasher' => [
+				'className' => 'Simple',
+				'hashType' => User::PASSWORD_HASH_TYPE,
+			],
 		),
 		'DebugKit.Toolbar',
 		'Flash',
@@ -106,6 +111,15 @@ class NetCommonsAppController extends Controller {
 		'NetCommons.NetCommonsForm',
 		'NetCommons.NetCommonsHtml',
 	);
+
+/**
+ * リクエストの許可メソッド
+ *
+ * @var array
+ */
+	protected $_allowMethods = [
+		'get', 'post', 'put', 'delete'
+	];
 
 /**
  * Constructor.
@@ -162,7 +176,7 @@ class NetCommonsAppController extends Controller {
  */
 	public function beforeFilter() {
 		if (empty($this->request->params['requested'])) {
-			$this->request->allowMethod('get', 'post', 'put', 'delete');
+			$this->request->allowMethod($this->_allowMethods);
 		}
 
 		Security::setHash('sha512');
@@ -179,10 +193,18 @@ class NetCommonsAppController extends Controller {
 
 		$this->Auth->allow('index', 'view', 'emptyRender', 'download', 'throwBadRequest', 'emptyFrame');
 
+		if ($this->Components->loaded('Security')) {
+			$this->Components->Security->csrfExpires = '+' .
+				SiteSettingUtil::read('Session.ini.[session.gc_maxlifetime]') .
+				' second';
+		}
+
 		$this->__prepare();
 
 		//モバイルかどうかの判定処理
-		Configure::write('isMobile', $this->MobileDetect->detect('isMobile'));
+		if (Configure::read('isMobile') === null) {
+			Configure::write('isMobile', $this->MobileDetect->detect('isMobile'));
+		}
 
 		if ($this->params['plugin'] !== 'frames' &&
 				Current::read('Frame.id') && ! Current::read('FramePublicLanguage.is_public')) {
@@ -283,7 +305,9 @@ class NetCommonsAppController extends Controller {
 		$callback = ['Inflector', 'variable'];
 
 		foreach ($orig as $key => $value) {
-			if (is_array($value)) {
+			if ($key === 'validationErrors') {
+				$new[$key] = $value;
+			} elseif (is_array($value)) {
 				$new[call_user_func($callback, $key)] = self::camelizeKeyRecursive($value);
 			} else {
 				$new[call_user_func($callback, $key)] = $value;
