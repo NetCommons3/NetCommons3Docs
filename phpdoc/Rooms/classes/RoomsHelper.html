@@ -136,10 +136,10 @@
                                 <div class="accordion" style="margin-bottom: 0">
         <div class="accordion-group">
             <div class="accordion-heading">
-                                    <a class="accordion-toggle " data-toggle="collapse" data-target="#namespace-879687257"></a>
+                                    <a class="accordion-toggle " data-toggle="collapse" data-target="#namespace-1050631221"></a>
                                 <a href="../namespaces/default.html" style="margin-left: 30px; padding-left: 0">\</a>
             </div>
-            <div id="namespace-879687257" class="accordion-body collapse in">
+            <div id="namespace-1050631221" class="accordion-body collapse in">
                 <div class="accordion-inner">
 
                     
@@ -324,7 +324,7 @@ will inherit them.</p>
                         </section>
                         <section class="row-fluid protected">
                             <section class="span4">
-                                                                    <em>No protected methods found</em>
+                                                                    <a href="../classes/RoomsHelper.html#method__getUpDownBtnTag" class="">_getUpDownBtnTag()</a><br />
                                                             </section>
                             <section class="span4">
                                                                     <em>No protected properties found</em>
@@ -642,7 +642,7 @@ will inherit them.</p>
             <article class="method">
                 <h3 class="public ">roomName()</h3>
                 <a href="#source-view" role="button" class="pull-right btn" data-toggle="modal" style="font-size: 1.1em; padding: 9px 14px"><i class="icon-code"></i></a>
-                <pre class="signature" style="margin-right: 54px;">roomName(array  <span class="argument">$room</span>, integer|null  <span class="argument">$nest = null</span>) : string</pre>
+                <pre class="signature" style="margin-right: 54px;">roomName(array  <span class="argument">$room</span>, integer|null  <span class="argument">$nest = null</span>, boolean  <span class="argument">$withBtn = false</span>) : string</pre>
                 <p><em>ルーム名の出力</em></p>
                 
 
@@ -657,6 +657,11 @@ will inherit them.</p>
                                 <td>integer|null</td>
                                 <td>$nest </td>
                                 <td><p>インデント</p></td>
+                            </tr>
+                                                    <tr>
+                                <td>boolean</td>
+                                <td>$withBtn </td>
+                                <td><p>上下操作ボタンをつけるか否か（ルーム管理での一覧画面でしか使用しない）</p></td>
                             </tr>
                                             </table>
                 
@@ -673,7 +678,14 @@ will inherit them.</p>
                                                                             </dl>
             <h2>Tags</h2>
             <table class="table table-condensed">
-                                    <tr><td colspan="2"><em>None found</em></td></tr>
+                                    <tr>
+                        <th>
+                            SuppressWarnings
+                        </th>
+                        <td>
+                                                                                            <p>(PHPMD.BooleanArgumentFlag)</p>
+                                                    </td>
+                    </tr>
                             </table>
         </aside>
     </div>
@@ -861,7 +873,43 @@ will inherit them.</p>
         </aside>
     </div>
 
-                                                                    </div>
+                                                    <div class="row-fluid">
+        <div class="span8 content class">
+            <a id="method__getUpDownBtnTag" name="method__getUpDownBtnTag" class="anchor"></a>
+            <article class="method">
+                <h3 class="protected ">_getUpDownBtnTag()</h3>
+                <a href="#source-view" role="button" class="pull-right btn" data-toggle="modal" style="font-size: 1.1em; padding: 9px 14px"><i class="icon-code"></i></a>
+                <pre class="signature" style="margin-right: 54px;">_getUpDownBtnTag(array  <span class="argument">$room</span>) : string</pre>
+                <p><em>上下ボタンタグを返す</em></p>
+                
+
+                                    <h4>Parameters</h4>
+                    <table class="table table-condensed table-hover">
+                                                    <tr>
+                                <td>array</td>
+                                <td>$room </td>
+                                <td><p>ルーム情報</p></td>
+                            </tr>
+                                            </table>
+                
+                
+                                    <h4>Returns</h4>
+                    string
+                                    				
+                            </article>
+        </div>
+        <aside class="span4 detailsbar">
+            <h1><i class="icon-arrow-down"></i></h1>
+                                                            <dl>
+                                                                            </dl>
+            <h2>Tags</h2>
+            <table class="table table-condensed">
+                                    <tr><td colspan="2"><em>None found</em></td></tr>
+                            </table>
+        </aside>
+    </div>
+
+                                                    </div>
     </section>
 
     <div id="source-view" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="source-view-label" aria-hidden="true">
@@ -910,7 +958,7 @@ will inherit them.</p>
                 <section class="span10 offset1">
                     <hr />
                     Documentation is powered by <a href="http://www.phpdoc.org/">phpDocumentor </a> and authored
-                    on November 16th, 2018 at 10:05.
+                    on December 19th, 2018 at 03:42.
                 </section>
             </section>
         </section>
