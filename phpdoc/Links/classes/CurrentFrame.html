@@ -136,10 +136,10 @@
                                 <div class="accordion" style="margin-bottom: 0">
         <div class="accordion-group">
             <div class="accordion-heading">
-                                    <a class="accordion-toggle " data-toggle="collapse" data-target="#namespace-1939725848"></a>
+                                    <a class="accordion-toggle " data-toggle="collapse" data-target="#namespace-1318103441"></a>
                                 <a href="../namespaces/default.html" style="margin-left: 30px; padding-left: 0">\</a>
             </div>
-            <div id="namespace-1939725848" class="accordion-body collapse in">
+            <div id="namespace-1318103441" class="accordion-body collapse in">
                 <div class="accordion-inner">
 
                     
@@ -269,6 +269,7 @@
                             <section class="span4">
                                                                     <a href="../classes/CurrentFrame.html#method_initialize" class="">initialize()</a><br />
                                                                     <a href="../classes/CurrentFrame.html#method_clear" class="">clear()</a><br />
+                                                                    <a href="../classes/CurrentFrame.html#method_reset" class="">reset()</a><br />
                                                                     <a href="../classes/CurrentFrame.html#method_setFrame" class="">setFrame()</a><br />
                                                                     <a href="../classes/CurrentFrame.html#method_setBox" class="">setBox()</a><br />
                                                                     <a href="../classes/CurrentFrame.html#method_setBoxPageContainer" class="">setBoxPageContainer()</a><br />
@@ -295,11 +296,15 @@
                         </section>
                         <section class="row-fluid private">
                             <section class="span4">
+                                                                    <a href="../classes/CurrentFrame.html#method___getFrame" class="">__getFrame()</a><br />
                                                                     <a href="../classes/CurrentFrame.html#method___setCurrentBlockRolePermission" class="">__setCurrentBlockRolePermission()</a><br />
+                                                                    <a href="../classes/CurrentFrame.html#method___getCurrentBlockRolePermissionByBlockKey" class="">__getCurrentBlockRolePermissionByBlockKey()</a><br />
+                                                                    <a href="../classes/CurrentFrame.html#method___getBlockRolePermissionsByRoleRoomId" class="">__getBlockRolePermissionsByRoleRoomId()</a><br />
                                                                     <a href="../classes/CurrentFrame.html#method___getPermissionFromBlockSetting" class="">__getPermissionFromBlockSetting()</a><br />
                                                             </section>
                             <section class="span4">
                                                                     <a href="../classes/CurrentFrame.html#property___memoryCache" class="">$__memoryCache</a><br />
+                                                                    <a href="../classes/CurrentFrame.html#property___roomIds" class="">$__roomIds</a><br />
                                                             </section>
                             <section class="span4">
                                 <em>N/A</em>
@@ -428,6 +433,30 @@
         </aside>
     </div>
 
+                                    <div class="row-fluid">
+        <div class="span8 content class">
+            <a id="property___roomIds" name="property___roomIds" class="anchor"></a>
+            <article class="property">
+                <h3 class="private ">$__roomIds</h3>
+                <pre class="signature">$__roomIds : array</pre>
+                <p><em>ページ内で使用するフレームの所属するルームID</em></p>
+                
+
+                                <h4>Type</h4>
+                array
+                                            </article>
+        </div>
+        <aside class="span4 detailsbar">
+            <h1><i class="icon-arrow-down"></i></h1>
+                        <dl>
+                                                            </dl>
+            <h2>Tags</h2>
+            <table class="table table-condensed">
+                                    <tr><td colspan="2"><em>None found</em></td></tr>
+                            </table>
+        </aside>
+    </div>
+
                             
                                     <a id="methods" name="methods"></a>
             <div class="row-fluid">
@@ -456,7 +485,14 @@
                                                                             </dl>
             <h2>Tags</h2>
             <table class="table table-condensed">
-                                    <tr><td colspan="2"><em>None found</em></td></tr>
+                                    <tr>
+                        <th>
+                            SuppressWarnings
+                        </th>
+                        <td>
+                                                                                            <p>(PHPMD.CyclomaticComplexity)</p>
+                                                    </td>
+                    </tr>
                             </table>
         </aside>
     </div>
@@ -469,6 +505,32 @@
                 <a href="#source-view" role="button" class="pull-right btn" data-toggle="modal" style="font-size: 1.1em; padding: 9px 14px"><i class="icon-code"></i></a>
                 <pre class="signature" style="margin-right: 54px;">clear() : void</pre>
                 <p><em>setup current data</em></p>
+                
+
+                
+                
+                				
+                            </article>
+        </div>
+        <aside class="span4 detailsbar">
+            <h1><i class="icon-arrow-down"></i></h1>
+                                                            <dl>
+                                                                            </dl>
+            <h2>Tags</h2>
+            <table class="table table-condensed">
+                                    <tr><td colspan="2"><em>None found</em></td></tr>
+                            </table>
+        </aside>
+    </div>
+
+                                    <div class="row-fluid">
+        <div class="span8 content class">
+            <a id="method_reset" name="method_reset" class="anchor"></a>
+            <article class="method">
+                <h3 class="public ">reset()</h3>
+                <a href="#source-view" role="button" class="pull-right btn" data-toggle="modal" style="font-size: 1.1em; padding: 9px 14px"><i class="icon-code"></i></a>
+                <pre class="signature" style="margin-right: 54px;">reset() : void</pre>
+                <p><em>reset</em></p>
                 
 
                 
@@ -649,6 +711,42 @@
 
                                                                     <div class="row-fluid">
         <div class="span8 content class">
+            <a id="method___getFrame" name="method___getFrame" class="anchor"></a>
+            <article class="method">
+                <h3 class="private ">__getFrame()</h3>
+                <a href="#source-view" role="button" class="pull-right btn" data-toggle="modal" style="font-size: 1.1em; padding: 9px 14px"><i class="icon-code"></i></a>
+                <pre class="signature" style="margin-right: 54px;">__getFrame(string  <span class="argument">$frameId</span>) : array</pre>
+                <p><em>Get Frame</em></p>
+                
+
+                                    <h4>Parameters</h4>
+                    <table class="table table-condensed table-hover">
+                                                    <tr>
+                                <td>string</td>
+                                <td>$frameId </td>
+                                <td><p>フレームID</p></td>
+                            </tr>
+                                            </table>
+                
+                
+                                    <h4>Returns</h4>
+                    array
+                                    				
+                            </article>
+        </div>
+        <aside class="span4 detailsbar">
+            <h1><i class="icon-arrow-down"></i></h1>
+                                                            <dl>
+                                                                            </dl>
+            <h2>Tags</h2>
+            <table class="table table-condensed">
+                                    <tr><td colspan="2"><em>None found</em></td></tr>
+                            </table>
+        </aside>
+    </div>
+
+                                    <div class="row-fluid">
+        <div class="span8 content class">
             <a id="method___setCurrentBlockRolePermission" name="method___setCurrentBlockRolePermission" class="anchor"></a>
             <article class="method">
                 <h3 class="private ">__setCurrentBlockRolePermission()</h3>
@@ -665,6 +763,72 @@
                                                                     </dl>
                 
                 				
+                            </article>
+        </div>
+        <aside class="span4 detailsbar">
+            <h1><i class="icon-arrow-down"></i></h1>
+                                                            <dl>
+                                                                            </dl>
+            <h2>Tags</h2>
+            <table class="table table-condensed">
+                                    <tr><td colspan="2"><em>None found</em></td></tr>
+                            </table>
+        </aside>
+    </div>
+
+                                    <div class="row-fluid">
+        <div class="span8 content class">
+            <a id="method___getCurrentBlockRolePermissionByBlockKey" name="method___getCurrentBlockRolePermissionByBlockKey" class="anchor"></a>
+            <article class="method">
+                <h3 class="private ">__getCurrentBlockRolePermissionByBlockKey()</h3>
+                <a href="#source-view" role="button" class="pull-right btn" data-toggle="modal" style="font-size: 1.1em; padding: 9px 14px"><i class="icon-code"></i></a>
+                <pre class="signature" style="margin-right: 54px;">__getCurrentBlockRolePermissionByBlockKey() : array</pre>
+                <p><em>Get current BlockRolePermissionsByBlockKey</em></p>
+                
+
+                
+                                    <h4>Throws</h4>
+                    <dl>
+                                                    <dt>\InternalErrorException</dt>
+                            <dd></dd>
+                                                                    </dl>
+                
+                                    <h4>Returns</h4>
+                    array
+                                    				
+                            </article>
+        </div>
+        <aside class="span4 detailsbar">
+            <h1><i class="icon-arrow-down"></i></h1>
+                                                            <dl>
+                                                                            </dl>
+            <h2>Tags</h2>
+            <table class="table table-condensed">
+                                    <tr><td colspan="2"><em>None found</em></td></tr>
+                            </table>
+        </aside>
+    </div>
+
+                                    <div class="row-fluid">
+        <div class="span8 content class">
+            <a id="method___getBlockRolePermissionsByRoleRoomId" name="method___getBlockRolePermissionsByRoleRoomId" class="anchor"></a>
+            <article class="method">
+                <h3 class="private ">__getBlockRolePermissionsByRoleRoomId()</h3>
+                <a href="#source-view" role="button" class="pull-right btn" data-toggle="modal" style="font-size: 1.1em; padding: 9px 14px"><i class="icon-code"></i></a>
+                <pre class="signature" style="margin-right: 54px;">__getBlockRolePermissionsByRoleRoomId() : array</pre>
+                <p><em>Get current BlockRolePermissionsByRoleRoomId</em></p>
+                
+
+                
+                                    <h4>Throws</h4>
+                    <dl>
+                                                    <dt>\InternalErrorException</dt>
+                            <dd></dd>
+                                                                    </dl>
+                
+                                    <h4>Returns</h4>
+                    array
+                                    				
                             </article>
         </div>
         <aside class="span4 detailsbar">
@@ -761,7 +925,7 @@
                 <section class="span10 offset1">
                     <hr />
                     Documentation is powered by <a href="http://www.phpdoc.org/">phpDocumentor </a> and authored
-                    on August 28th, 2018 at 12:16.
+                    on December 26th, 2018 at 08:01.
                 </section>
             </section>
         </section>
