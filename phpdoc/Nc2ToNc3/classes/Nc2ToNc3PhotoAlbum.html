@@ -136,10 +136,10 @@
                                 <div class="accordion" style="margin-bottom: 0">
         <div class="accordion-group">
             <div class="accordion-heading">
-                                    <a class="accordion-toggle " data-toggle="collapse" data-target="#namespace-1084398307"></a>
+                                    <a class="accordion-toggle " data-toggle="collapse" data-target="#namespace-765154133"></a>
                                 <a href="../namespaces/default.html" style="margin-left: 30px; padding-left: 0">\</a>
             </div>
-            <div id="namespace-1084398307" class="accordion-body collapse in">
+            <div id="namespace-765154133" class="accordion-body collapse in">
                 <div class="accordion-inner">
 
                     
@@ -343,7 +343,7 @@
                                                                     <a href="../classes/Nc2ToNc3PhotoAlbum.html#property_actsAs" class="">$actsAs</a><br />
                                                             </section>
                             <section class="span4">
-                                                                    <em>No constants found</em>
+                                                                    <a href="../classes/Nc2ToNc3PhotoAlbum.html#constant_DUMMY_FRAME_KEY" class="">DUMMY_FRAME_KEY</a><br />
                                                             </section>
                         </section>
                         <section class="row-fluid protected">
@@ -361,6 +361,8 @@
                             <section class="span4">
                                                                     <a href="../classes/Nc2ToNc3PhotoAlbum.html#method___savePhotoAlbumFrameSettingFromNc2" class="">__savePhotoAlbumFrameSettingFromNc2()</a><br />
                                                                     <a href="../classes/Nc2ToNc3PhotoAlbum.html#method___savePhotoAlbumFromNc2" class="">__savePhotoAlbumFromNc2()</a><br />
+                                                                    <a href="../classes/Nc2ToNc3PhotoAlbum.html#method___getNc2PhotoalbumIdList" class="">__getNc2PhotoalbumIdList()</a><br />
+                                                                    <a href="../classes/Nc2ToNc3PhotoAlbum.html#method___writeCurrent" class="">__writeCurrent()</a><br />
                                                             </section>
                             <section class="span4">
                                                                     <em>No private properties found</em>
@@ -403,7 +405,36 @@
                 </aside>
             </div>
 
-                        
+                                    <a id="constants" name="constants"></a>
+            <div class="row-fluid">
+                <div class="span8 content class">
+                    <h2>Constants</h2>
+                </div>
+                <aside class="span4 detailsbar"></aside>
+            </div>
+
+                                <div class="row-fluid">
+        <div class="span8 content class">
+            <a id="constant_DUMMY_FRAME_KEY" name="constant_DUMMY_FRAME_KEY" class="anchor"></a>
+            <article id="constant_DUMMY_FRAME_KEY" class="constant">
+                <h3 class="">DUMMY_FRAME_KEY</h3>
+                <pre class="signature">DUMMY_FRAME_KEY</pre>
+                <p><em>NC3のダミーのフレームキー。NC2でモジュール未配置の場合に一時的に利用する</em></p>
+                
+            </article>
+        </div>
+        <aside class="span4 detailsbar">
+            <h1><i class="icon-arrow-down"></i></h1>
+                        <dl>
+                                                                            </dl>
+            <h2>Tags</h2>
+            <table class="table table-condensed">
+                                    <tr><td colspan="2"><em>None found</em></td></tr>
+                            </table>
+        </aside>
+    </div>
+
+                            
                                     <a id="properties" name="properties"></a>
             <div class="row-fluid">
                 <div class="span8 content class">
@@ -483,6 +514,11 @@ passed to behaviors by using the behavior name as index.</em></p>
                 
 
                 
+                                    <h4>Throws</h4>
+                    <dl>
+                                                    <dt>\Exception</dt>
+                            <dd></dd>
+                                                                    </dl>
                 
                                     <h4>Returns</h4>
                     boolean
@@ -1025,7 +1061,7 @@ passed to behaviors by using the behavior name as index.</em></p>
             <article class="method">
                 <h3 class="private ">__savePhotoAlbumFromNc2()</h3>
                 <a href="#source-view" role="button" class="pull-right btn" data-toggle="modal" style="font-size: 1.1em; padding: 9px 14px"><i class="icon-code"></i></a>
-                <pre class="signature" style="margin-right: 54px;">__savePhotoAlbumFromNc2(array  <span class="argument">$nc2PhotoalbumAlbums</span>) : boolean</pre>
+                <pre class="signature" style="margin-right: 54px;">__savePhotoAlbumFromNc2(array  <span class="argument">$nc2PhotoalbumIdList</span>) : boolean</pre>
                 <p><em>Save PhotoAlbum from Nc2.</em></p>
                 <p>PHPMD.ExcessiveMethodLengthに引っかかるが、PhotoAlbum::saveAlbumForAddとPhotoAlbumPhoto::savePhotoを
 分けたいので、とりあえずSuppressWarningsの定義で回避</p>
@@ -1034,8 +1070,8 @@ passed to behaviors by using the behavior name as index.</em></p>
                     <table class="table table-condensed table-hover">
                                                     <tr>
                                 <td>array</td>
-                                <td>$nc2PhotoalbumAlbums </td>
-                                <td><p>Nc2PhotoalbumAlbum data.</p></td>
+                                <td>$nc2PhotoalbumIdList </td>
+                                <td><p>[[nc3 room_id][] = photoalbum_id]</p></td>
                             </tr>
                                             </table>
                 
@@ -1065,6 +1101,89 @@ passed to behaviors by using the behavior name as index.</em></p>
                                                                                             <p>(PHPMD.ExcessiveMethodLength)</p>
                                                     </td>
                     </tr>
+                            </table>
+        </aside>
+    </div>
+
+                                    <div class="row-fluid">
+        <div class="span8 content class">
+            <a id="method___getNc2PhotoalbumIdList" name="method___getNc2PhotoalbumIdList" class="anchor"></a>
+            <article class="method">
+                <h3 class="private ">__getNc2PhotoalbumIdList()</h3>
+                <a href="#source-view" role="button" class="pull-right btn" data-toggle="modal" style="font-size: 1.1em; padding: 9px 14px"><i class="icon-code"></i></a>
+                <pre class="signature" style="margin-right: 54px;">__getNc2PhotoalbumIdList(array  <span class="argument">$nc2Photoalbums</span>) : array</pre>
+                <p><em>__getNc2PhotoalbumIdList</em></p>
+                
+
+                                    <h4>Parameters</h4>
+                    <table class="table table-condensed table-hover">
+                                                    <tr>
+                                <td>array</td>
+                                <td>$nc2Photoalbums </td>
+                                <td><p>Nc2Photoalbum data.</p></td>
+                            </tr>
+                                            </table>
+                
+                
+                                    <h4>Returns</h4>
+                    array
+                                            &mdash; <p>[[nc3 room_id][] = photoalbum_id]</p>
+                                    				
+                            </article>
+        </div>
+        <aside class="span4 detailsbar">
+            <h1><i class="icon-arrow-down"></i></h1>
+                                                            <dl>
+                                                                            </dl>
+            <h2>Tags</h2>
+            <table class="table table-condensed">
+                                    <tr><td colspan="2"><em>None found</em></td></tr>
+                            </table>
+        </aside>
+    </div>
+
+                                    <div class="row-fluid">
+        <div class="span8 content class">
+            <a id="method___writeCurrent" name="method___writeCurrent" class="anchor"></a>
+            <article class="method">
+                <h3 class="private ">__writeCurrent()</h3>
+                <a href="#source-view" role="button" class="pull-right btn" data-toggle="modal" style="font-size: 1.1em; padding: 9px 14px"><i class="icon-code"></i></a>
+                <pre class="signature" style="margin-right: 54px;">__writeCurrent(array  <span class="argument">$frameMap</span>, string  <span class="argument">$pluginKey</span>, string  <span class="argument">$nc3RoomId</span>) : void</pre>
+                <p><em>Write Current.</em></p>
+                
+
+                                    <h4>Parameters</h4>
+                    <table class="table table-condensed table-hover">
+                                                    <tr>
+                                <td>array</td>
+                                <td>$frameMap </td>
+                                <td><p>array data.</p></td>
+                            </tr>
+                                                    <tr>
+                                <td>string</td>
+                                <td>$pluginKey </td>
+                                <td><p>plugin key.</p></td>
+                            </tr>
+                                                    <tr>
+                                <td>string</td>
+                                <td>$nc3RoomId </td>
+                                <td><p>nc3 room id.</p></td>
+                            </tr>
+                                            </table>
+                
+                
+                				
+                            </article>
+        </div>
+        <aside class="span4 detailsbar">
+            <h1><i class="icon-arrow-down"></i></h1>
+                                                            <dl>
+                                                                                            <dt>See also</dt>
+                                                                <dd><a href=""><span class="namespace-wrapper">\Nc2ToNc3BaseBehavior::_writeCurrent()からコピー</span></a></dd>
+                                                                </dl>
+            <h2>Tags</h2>
+            <table class="table table-condensed">
+                                    <tr><td colspan="2"><em>None found</em></td></tr>
                             </table>
         </aside>
     </div>
@@ -1118,7 +1237,7 @@ passed to behaviors by using the behavior name as index.</em></p>
                 <section class="span10 offset1">
                     <hr />
                     Documentation is powered by <a href="http://www.phpdoc.org/">phpDocumentor </a> and authored
-                    on December 28th, 2018 at 02:20.
+                    on December 28th, 2018 at 07:54.
                 </section>
             </section>
         </section>
