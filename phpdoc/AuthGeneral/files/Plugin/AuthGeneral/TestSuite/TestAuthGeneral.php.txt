@@ -144,7 +144,9 @@ class TestAuthGeneral {
 		$reflectionClass = new ReflectionClass('AuthComponent');
 		$property = $reflectionClass->getProperty('_user');
 		$property->setAccessible(true);
-		$property->setValue($test->controller->Components->Auth, []);
+		if (isset($test->controller)) {
+			$property->setValue($test->controller->Components->Auth, []);
+		}
 	}
 
 /**
