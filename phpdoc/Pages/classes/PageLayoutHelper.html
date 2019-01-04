@@ -136,10 +136,10 @@
                                 <div class="accordion" style="margin-bottom: 0">
         <div class="accordion-group">
             <div class="accordion-heading">
-                                    <a class="accordion-toggle " data-toggle="collapse" data-target="#namespace-2089198477"></a>
+                                    <a class="accordion-toggle " data-toggle="collapse" data-target="#namespace-1966005001"></a>
                                 <a href="../namespaces/default.html" style="margin-left: 30px; padding-left: 0">\</a>
             </div>
-            <div id="namespace-2089198477" class="accordion-body collapse in">
+            <div id="namespace-1966005001" class="accordion-body collapse in">
                 <div class="accordion-inner">
 
                     
@@ -304,7 +304,12 @@ will inherit them.</p>
                         </section>
                         <section class="row-fluid protected">
                             <section class="span4">
-                                                                    <em>No protected methods found</em>
+                                                                    <a href="../classes/PageLayoutHelper.html#method__dispatch" class="">_dispatch()</a><br />
+                                                                    <a href="../classes/PageLayoutHelper.html#method__setParams" class="">_setParams()</a><br />
+                                                                    <a href="../classes/PageLayoutHelper.html#method__parseParams" class="">_parseParams()</a><br />
+                                                                    <a href="../classes/PageLayoutHelper.html#method__getController" class="">_getController()</a><br />
+                                                                    <a href="../classes/PageLayoutHelper.html#method__loadController" class="">_loadController()</a><br />
+                                                                    <a href="../classes/PageLayoutHelper.html#method__invoke" class="">_invoke()</a><br />
                                                             </section>
                             <section class="span4">
                                                                     <a href="../classes/PageLayoutHelper.html#property__containers" class="">$_containers</a><br />
@@ -353,7 +358,14 @@ will inherit them.</p>
                                                                         </dl>
                     <h2>Tags</h2>
                     <table class="table table-condensed">
-                                            <tr><td colspan="2"><em>None found</em></td></tr>
+                                            <tr>
+                            <th>
+                                SuppressWarnings
+                            </th>
+                            <td>
+                                                                    <p>(PHPMD.ExcessiveClassComplexity)</p>
+                                                            </td>
+                        </tr>
                                         </table>
                 </aside>
             </div>
@@ -847,22 +859,16 @@ Container::TYPE_MINOR or Container::TYPE_FOOTER</p></td>
             <article class="method">
                 <h3 class="public ">requestAction()</h3>
                 <a href="#source-view" role="button" class="pull-right btn" data-toggle="modal" style="font-size: 1.1em; padding: 9px 14px"><i class="icon-code"></i></a>
-                <pre class="signature" style="margin-right: 54px;">requestAction(string|array  <span class="argument">$url</span>, array  <span class="argument">$extra = array()</span>) : mixed</pre>
-                <p><em>Calls a controller&#039;s method from any location. Can be used to connect controllers together
-or tie plugins into a main application. requestAction can be used to return rendered views
-or fetch the return value from controller actions.</em></p>
-                <p>Under the hood this method uses Router::reverse() to convert the $url parameter into a string
-URL. You should use URL formats that are compatible with Router::reverse()</p>
-<h4>Passing POST and GET data</h4>
-<p>POST and GET data can be simulated in requestAction. Use <code>$extra['url']</code> for
-GET data. The <code>$extra['data']</code> parameter allows POST data simulation.</p>
+                <pre class="signature" style="margin-right: 54px;">requestAction(string  <span class="argument">$url</span>, array  <span class="argument">$extra = array()</span>) : boolean</pre>
+                <p><em>requestAction()のオーバライド</em></p>
+                <p>$urlは、/:plugin/:controller/:action?xxxx=yyyy&amp;xxxx2=yyyy2 形式とする。</p>
 
                                     <h4>Parameters</h4>
                     <table class="table table-condensed table-hover">
                                                     <tr>
-                                <td>string|array</td>
+                                <td>string</td>
                                 <td>$url </td>
-                                <td><p>String or array-based URL. Unlike other URL arrays in CakePHP, this
+                                <td><p>$url String or array-based URL. Unlike other URL arrays in CakePHP, this
 URL will not automatically handle passed and named arguments in the $url parameter.</p></td>
                             </tr>
                                                     <tr>
@@ -875,8 +881,8 @@ also be used to submit GET/POST data, and named/passed arguments.</p></td>
                 
                 
                                     <h4>Returns</h4>
-                    mixed
-                                            &mdash; <p>Boolean true or false on success/failure, or contents
+                    boolean
+                                            &mdash; <p>true or false on success/failure, or contents
 of rendered action if 'return' is set in $extra.</p>
                                     				
                             </article>
@@ -887,20 +893,269 @@ of rendered action if 'return' is set in $extra.</p>
                                                                             </dl>
             <h2>Tags</h2>
             <table class="table table-condensed">
-                                    <tr>
-                        <th>
-                            SuppressWarnings
-                        </th>
-                        <td>
-                                                                                            <p>(PHPMD.CyclomaticComplexity)</p>
-                                                                                            <p>(PHPMD.NPathComplexity)</p>
-                                                    </td>
-                    </tr>
+                                    <tr><td colspan="2"><em>None found</em></td></tr>
                             </table>
         </aside>
     </div>
 
-                                                                    </div>
+                                                    <div class="row-fluid">
+        <div class="span8 content class">
+            <a id="method__dispatch" name="method__dispatch" class="anchor"></a>
+            <article class="method">
+                <h3 class="protected ">_dispatch()</h3>
+                <a href="#source-view" role="button" class="pull-right btn" data-toggle="modal" style="font-size: 1.1em; padding: 9px 14px"><i class="icon-code"></i></a>
+                <pre class="signature" style="margin-right: 54px;">_dispatch(\CakeRequest  <span class="argument">$request</span>, \CakeResponse  <span class="argument">$response</span>) : string|null</pre>
+                <p><em>Dispatches and invokes given Request, handing over control to the involved controller. If the controller is set
+to autoRender, via Controller::$autoRender, then Dispatcher will render the view.</em></p>
+                <p>Actions in CakePHP can be any public method on a controller, that is not declared in Controller. If you
+want controller methods to be public and in-accessible by URL, then prefix them with a <code>_</code>.
+For example <code>public function _loadPosts() { }</code> would not be accessible via URL. Private and protected methods
+are also not accessible via URL.</p>
+<p>If no controller of given name can be found, invoke() will throw an exception.
+If the controller is found, and the action is not found an exception will be thrown.</p>
+
+                                    <h4>Parameters</h4>
+                    <table class="table table-condensed table-hover">
+                                                    <tr>
+                                <td>\CakeRequest</td>
+                                <td>$request </td>
+                                <td><p>Request object to dispatch.</p></td>
+                            </tr>
+                                                    <tr>
+                                <td>\CakeResponse</td>
+                                <td>$response </td>
+                                <td><p>Response object to put the results of the dispatch into.</p></td>
+                            </tr>
+                                            </table>
+                
+                                    <h4>Throws</h4>
+                    <dl>
+                                                    <dt>\MissingControllerException</dt>
+                            <dd><p>When the controller is missing.</p></dd>
+                                                                    </dl>
+                
+                                    <h4>Returns</h4>
+                    string|null
+                                            &mdash; <p>if <code>$request['return']</code> is set then it returns response body, null otherwise</p>
+                                    				
+                            </article>
+        </div>
+        <aside class="span4 detailsbar">
+            <h1><i class="icon-arrow-down"></i></h1>
+                                                            <dl>
+                                                                            </dl>
+            <h2>Tags</h2>
+            <table class="table table-condensed">
+                                    <tr><td colspan="2"><em>None found</em></td></tr>
+                            </table>
+        </aside>
+    </div>
+
+                                    <div class="row-fluid">
+        <div class="span8 content class">
+            <a id="method__setParams" name="method__setParams" class="anchor"></a>
+            <article class="method">
+                <h3 class="protected ">_setParams()</h3>
+                <a href="#source-view" role="button" class="pull-right btn" data-toggle="modal" style="font-size: 1.1em; padding: 9px 14px"><i class="icon-code"></i></a>
+                <pre class="signature" style="margin-right: 54px;">_setParams(\CakeRequest  <span class="argument">$request</span>, array  <span class="argument">$params</span>, array  <span class="argument">$additionalParams = array()</span>) : void</pre>
+                <p><em>Applies Routing and additionalParameters to the request to be dispatched.</em></p>
+                <p>If Routes have not been loaded they will be loaded, and app/Config/routes.php will be run.</p>
+
+                                    <h4>Parameters</h4>
+                    <table class="table table-condensed table-hover">
+                                                    <tr>
+                                <td>\CakeRequest</td>
+                                <td>$request </td>
+                                <td><p>Request object to dispatch.</p></td>
+                            </tr>
+                                                    <tr>
+                                <td>array</td>
+                                <td>$params </td>
+                                <td><p>リクエストにセットするパラメータ</p></td>
+                            </tr>
+                                                    <tr>
+                                <td>array</td>
+                                <td>$additionalParams </td>
+                                <td><p>Settings array ("bare", "return") which is melded with the GET and POST params</p></td>
+                            </tr>
+                                            </table>
+                
+                
+                				
+                            </article>
+        </div>
+        <aside class="span4 detailsbar">
+            <h1><i class="icon-arrow-down"></i></h1>
+                                                            <dl>
+                                                                            </dl>
+            <h2>Tags</h2>
+            <table class="table table-condensed">
+                                    <tr><td colspan="2"><em>None found</em></td></tr>
+                            </table>
+        </aside>
+    </div>
+
+                                    <div class="row-fluid">
+        <div class="span8 content class">
+            <a id="method__parseParams" name="method__parseParams" class="anchor"></a>
+            <article class="method">
+                <h3 class="protected ">_parseParams()</h3>
+                <a href="#source-view" role="button" class="pull-right btn" data-toggle="modal" style="font-size: 1.1em; padding: 9px 14px"><i class="icon-code"></i></a>
+                <pre class="signature" style="margin-right: 54px;">_parseParams(string  <span class="argument">$url</span>) : array|false</pre>
+                <p><em>Applies Routing and additionalParameters to the request to be dispatched.</em></p>
+                <p>If Routes have not been loaded they will be loaded, and app/Config/routes.php will be run.</p>
+
+                                    <h4>Parameters</h4>
+                    <table class="table table-condensed table-hover">
+                                                    <tr>
+                                <td>string</td>
+                                <td>$url </td>
+                                <td><p>$url String or array-based URL. Unlike other URL arrays in CakePHP, this
+URL will not automatically handle passed and named arguments in the $url parameter.</p></td>
+                            </tr>
+                                            </table>
+                
+                
+                                    <h4>Returns</h4>
+                    array|false
+                                    				
+                            </article>
+        </div>
+        <aside class="span4 detailsbar">
+            <h1><i class="icon-arrow-down"></i></h1>
+                                                            <dl>
+                                                                            </dl>
+            <h2>Tags</h2>
+            <table class="table table-condensed">
+                                    <tr><td colspan="2"><em>None found</em></td></tr>
+                            </table>
+        </aside>
+    </div>
+
+                                    <div class="row-fluid">
+        <div class="span8 content class">
+            <a id="method__getController" name="method__getController" class="anchor"></a>
+            <article class="method">
+                <h3 class="protected ">_getController()</h3>
+                <a href="#source-view" role="button" class="pull-right btn" data-toggle="modal" style="font-size: 1.1em; padding: 9px 14px"><i class="icon-code"></i></a>
+                <pre class="signature" style="margin-right: 54px;">_getController(\CakeRequest  <span class="argument">$request</span>, \CakeResponse  <span class="argument">$response</span>) : mixed</pre>
+                <p><em>Get controller to use, either plugin controller or application controller</em></p>
+                
+
+                                    <h4>Parameters</h4>
+                    <table class="table table-condensed table-hover">
+                                                    <tr>
+                                <td>\CakeRequest</td>
+                                <td>$request </td>
+                                <td><p>Request object</p></td>
+                            </tr>
+                                                    <tr>
+                                <td>\CakeResponse</td>
+                                <td>$response </td>
+                                <td><p>Response for the controller.</p></td>
+                            </tr>
+                                            </table>
+                
+                
+                                    <h4>Returns</h4>
+                    mixed
+                                            &mdash; <p>name of controller if not loaded, or object if loaded</p>
+                                    				
+                            </article>
+        </div>
+        <aside class="span4 detailsbar">
+            <h1><i class="icon-arrow-down"></i></h1>
+                                                            <dl>
+                                                                            </dl>
+            <h2>Tags</h2>
+            <table class="table table-condensed">
+                                    <tr><td colspan="2"><em>None found</em></td></tr>
+                            </table>
+        </aside>
+    </div>
+
+                                    <div class="row-fluid">
+        <div class="span8 content class">
+            <a id="method__loadController" name="method__loadController" class="anchor"></a>
+            <article class="method">
+                <h3 class="protected ">_loadController()</h3>
+                <a href="#source-view" role="button" class="pull-right btn" data-toggle="modal" style="font-size: 1.1em; padding: 9px 14px"><i class="icon-code"></i></a>
+                <pre class="signature" style="margin-right: 54px;">_loadController(\CakeRequest  <span class="argument">$request</span>) : string|boolean</pre>
+                <p><em>Load controller and return controller class name</em></p>
+                
+
+                                    <h4>Parameters</h4>
+                    <table class="table table-condensed table-hover">
+                                                    <tr>
+                                <td>\CakeRequest</td>
+                                <td>$request </td>
+                                <td><p>Request instance.</p></td>
+                            </tr>
+                                            </table>
+                
+                
+                                    <h4>Returns</h4>
+                    string|boolean
+                                            &mdash; <p>Name of controller class name</p>
+                                    				
+                            </article>
+        </div>
+        <aside class="span4 detailsbar">
+            <h1><i class="icon-arrow-down"></i></h1>
+                                                            <dl>
+                                                                            </dl>
+            <h2>Tags</h2>
+            <table class="table table-condensed">
+                                    <tr><td colspan="2"><em>None found</em></td></tr>
+                            </table>
+        </aside>
+    </div>
+
+                                    <div class="row-fluid">
+        <div class="span8 content class">
+            <a id="method__invoke" name="method__invoke" class="anchor"></a>
+            <article class="method">
+                <h3 class="protected ">_invoke()</h3>
+                <a href="#source-view" role="button" class="pull-right btn" data-toggle="modal" style="font-size: 1.1em; padding: 9px 14px"><i class="icon-code"></i></a>
+                <pre class="signature" style="margin-right: 54px;">_invoke(\Controller  <span class="argument">$controller</span>, \CakeRequest  <span class="argument">$request</span>) : \CakeResponse</pre>
+                <p><em>Initializes the components and models a controller will be using.</em></p>
+                <p>Triggers the controller action, and invokes the rendering if Controller::$autoRender
+is true and echo's the output. Otherwise the return value of the controller
+action are returned.</p>
+
+                                    <h4>Parameters</h4>
+                    <table class="table table-condensed table-hover">
+                                                    <tr>
+                                <td>\Controller</td>
+                                <td>$controller </td>
+                                <td><p>Controller to invoke</p></td>
+                            </tr>
+                                                    <tr>
+                                <td>\CakeRequest</td>
+                                <td>$request </td>
+                                <td><p>The request object to invoke the controller for.</p></td>
+                            </tr>
+                                            </table>
+                
+                
+                                    <h4>Returns</h4>
+                    \CakeResponse
+                                            &mdash; <p>the resulting response object</p>
+                                    				
+                            </article>
+        </div>
+        <aside class="span4 detailsbar">
+            <h1><i class="icon-arrow-down"></i></h1>
+                                                            <dl>
+                                                                            </dl>
+            <h2>Tags</h2>
+            <table class="table table-condensed">
+                                    <tr><td colspan="2"><em>None found</em></td></tr>
+                            </table>
+        </aside>
+    </div>
+
+                                                    </div>
     </section>
 
     <div id="source-view" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="source-view-label" aria-hidden="true">
@@ -949,7 +1204,7 @@ of rendered action if 'return' is set in $extra.</p>
                 <section class="span10 offset1">
                     <hr />
                     Documentation is powered by <a href="http://www.phpdoc.org/">phpDocumentor </a> and authored
-                    on November 15th, 2018 at 09:22.
+                    on January 4th, 2019 at 08:29.
                 </section>
             </section>
         </section>

@@ -10,6 +10,7 @@
  */
 
 App::uses('NetCommonsControllerTestCase', 'NetCommons.TestSuite');
+App::uses('PageLayoutComponent', 'Pages.Controller/Component');
 
 /**
  * PagesEditController::add()のテスト
@@ -61,6 +62,32 @@ abstract class PagesControllerTestCase extends NetCommonsControllerTestCase {
 		}
 		$this->fixtures = array_merge($this->__fixtures, $this->fixtures);
 		parent::__construct($name, $data, $dataName);
+	}
+
+/**
+ * setUp method
+ *
+ * @return void
+ */
+	public function setUp() {
+		parent::setUp();
+
+		$reflectionProperty = new ReflectionProperty('PageLayoutComponent', '_page');
+		$reflectionProperty->setAccessible(true);
+		$reflectionProperty->setValue(null);
+	}
+
+/**
+ * tearDown method
+ *
+ * @return void
+ */
+	public function tearDown() {
+		$reflectionProperty = new ReflectionProperty('PageLayoutComponent', '_page');
+		$reflectionProperty->setAccessible(true);
+		$reflectionProperty->setValue(null);
+
+		parent::tearDown();
 	}
 
 }
