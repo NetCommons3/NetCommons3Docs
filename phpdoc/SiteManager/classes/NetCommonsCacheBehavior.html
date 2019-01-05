@@ -136,10 +136,10 @@
                                 <div class="accordion" style="margin-bottom: 0">
         <div class="accordion-group">
             <div class="accordion-heading">
-                                    <a class="accordion-toggle " data-toggle="collapse" data-target="#namespace-1158677241"></a>
+                                    <a class="accordion-toggle " data-toggle="collapse" data-target="#namespace-630134281"></a>
                                 <a href="../namespaces/default.html" style="margin-left: 30px; padding-left: 0">\</a>
             </div>
-            <div id="namespace-1158677241" class="accordion-body collapse in">
+            <div id="namespace-630134281" class="accordion-body collapse in">
                 <div class="accordion-inner">
 
                     
@@ -290,6 +290,7 @@
                                                                     <a href="../classes/NetCommonsCacheBehavior.html#method_cacheRead" class="">cacheRead()</a><br />
                                                                     <a href="../classes/NetCommonsCacheBehavior.html#method_cacheWrite" class="">cacheWrite()</a><br />
                                                                     <a href="../classes/NetCommonsCacheBehavior.html#method_cacheFindQuery" class="">cacheFindQuery()</a><br />
+                                                                    <a href="../classes/NetCommonsCacheBehavior.html#method_cacheExistsQuery" class="">cacheExistsQuery()</a><br />
                                                                     <a href="../classes/NetCommonsCacheBehavior.html#method_cacheClear" class="">cacheClear()</a><br />
                                                             </section>
                             <section class="span4">
@@ -529,7 +530,7 @@
             <article class="method">
                 <h3 class="public ">cacheRead()</h3>
                 <a href="#source-view" role="button" class="pull-right btn" data-toggle="modal" style="font-size: 1.1em; padding: 9px 14px"><i class="icon-code"></i></a>
-                <pre class="signature" style="margin-right: 54px;">cacheRead(\Model  <span class="argument">$model</span>, string  <span class="argument">$mainKey</span>, string  <span class="argument">$subKey</span>) : array</pre>
+                <pre class="signature" style="margin-right: 54px;">cacheRead(\Model  <span class="argument">$model</span>, string  <span class="argument">$mainKey</span>, string|null  <span class="argument">$subKey = null</span>) : array</pre>
                 <p><em>キャッシュ変数からの読み込み</em></p>
                 
 
@@ -546,7 +547,7 @@
                                 <td><p>メインキー</p></td>
                             </tr>
                                                     <tr>
-                                <td>string</td>
+                                <td>string|null</td>
                                 <td>$subKey </td>
                                 <td><p>サブキー</p></td>
                             </tr>
@@ -575,7 +576,7 @@
             <article class="method">
                 <h3 class="public ">cacheWrite()</h3>
                 <a href="#source-view" role="button" class="pull-right btn" data-toggle="modal" style="font-size: 1.1em; padding: 9px 14px"><i class="icon-code"></i></a>
-                <pre class="signature" style="margin-right: 54px;">cacheWrite(\Model  <span class="argument">$model</span>, array  <span class="argument">$result</span>, string  <span class="argument">$mainKey</span>, string  <span class="argument">$subKey</span>) : void</pre>
+                <pre class="signature" style="margin-right: 54px;">cacheWrite(\Model  <span class="argument">$model</span>, array  <span class="argument">$result</span>, string  <span class="argument">$mainKey</span>, string|null  <span class="argument">$subKey = null</span>) : void</pre>
                 <p><em>キャッシュの書き込み</em></p>
                 
 
@@ -597,7 +598,7 @@
                                 <td><p>メインキー</p></td>
                             </tr>
                                                     <tr>
-                                <td>string</td>
+                                <td>string|null</td>
                                 <td>$subKey </td>
                                 <td><p>サブキー</p></td>
                             </tr>
@@ -651,6 +652,48 @@
                 
                                     <h4>Returns</h4>
                     array|false
+                                    				
+                            </article>
+        </div>
+        <aside class="span4 detailsbar">
+            <h1><i class="icon-arrow-down"></i></h1>
+                                                            <dl>
+                                                                            </dl>
+            <h2>Tags</h2>
+            <table class="table table-condensed">
+                                    <tr><td colspan="2"><em>None found</em></td></tr>
+                            </table>
+        </aside>
+    </div>
+
+                                    <div class="row-fluid">
+        <div class="span8 content class">
+            <a id="method_cacheExistsQuery" name="method_cacheExistsQuery" class="anchor"></a>
+            <article class="method">
+                <h3 class="public ">cacheExistsQuery()</h3>
+                <a href="#source-view" role="button" class="pull-right btn" data-toggle="modal" style="font-size: 1.1em; padding: 9px 14px"><i class="icon-code"></i></a>
+                <pre class="signature" style="margin-right: 54px;">cacheExistsQuery(\Model  <span class="argument">$model</span>, string  <span class="argument">$id</span>) : boolean</pre>
+                <p><em>$model-&gt;exists()に対して、キャッシュからの読み込み
+もし、キャッシュに無ければ、exists()で取得し、キャッシュに登録する。</em></p>
+                
+
+                                    <h4>Parameters</h4>
+                    <table class="table table-condensed table-hover">
+                                                    <tr>
+                                <td>\Model</td>
+                                <td>$model </td>
+                                <td><p>ビヘイビア呼び出し元モデル</p></td>
+                            </tr>
+                                                    <tr>
+                                <td>string</td>
+                                <td>$id </td>
+                                <td><p>数値型の文字列</p></td>
+                            </tr>
+                                            </table>
+                
+                
+                                    <h4>Returns</h4>
+                    boolean
                                     				
                             </article>
         </div>
@@ -748,7 +791,7 @@
                 <section class="span10 offset1">
                     <hr />
                     Documentation is powered by <a href="http://www.phpdoc.org/">phpDocumentor </a> and authored
-                    on January 5th, 2019 at 05:13.
+                    on January 5th, 2019 at 12:51.
                 </section>
             </section>
         </section>
