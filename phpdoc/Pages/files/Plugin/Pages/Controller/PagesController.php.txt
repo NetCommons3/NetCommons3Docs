@@ -77,7 +77,7 @@ class PagesController extends PagesAppController {
 		$path = implode('/', $paths);
 
 		$spacePermalink = Hash::get($this->request->params, 'spacePermalink', '');
-		$space = $this->Space->find('first', array(
+		$space = $this->Space->cacheFindQuery('first', array(
 			'recursive' => -1,
 			'conditions' => array('permalink' => $spacePermalink, 'id !=' => Space::WHOLE_SITE_ID)
 		));

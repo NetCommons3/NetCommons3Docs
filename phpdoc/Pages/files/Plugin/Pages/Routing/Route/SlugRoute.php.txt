@@ -123,7 +123,7 @@ class SlugRoute extends CakeRoute {
 		if ($this->__defaultSpacePermalink) {
 			return $this->__defaultSpacePermalink;
 		} else {
-			$result = $this->Space->find('first', array(
+			$result = $this->Space->cacheFindQuery('first', array(
 				'fields' => ['id', 'permalink'],
 				'conditions' => array('permalink' => '', 'id !=' => Space::WHOLE_SITE_ID),
 				'recursive' => -1
