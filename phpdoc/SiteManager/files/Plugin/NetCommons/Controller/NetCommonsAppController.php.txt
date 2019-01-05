@@ -131,6 +131,13 @@ class NetCommonsAppController extends Controller {
 	public function __construct($request = null, $response = null) {
 		parent::__construct($request, $response);
 
+		//Cakeでは、$uses,$component,$helpersが直近の継承しているものしか読み込まれないため、
+		//継承している親クラス全てを読み込む
+		$parentClass = get_class($this);
+		while ($parentClass = get_parent_class($parentClass)) {
+			$this->_mergeVars(['uses', 'components', 'helpers'], $parentClass, false);
+		}
+
 		if (in_array('Html', $this->helpers, true) &&
 				!isset($this->helpers['Html']['className'])) {
 			$this->helpers['Html']['className'] = 'NetCommons.SingletonViewBlockHtml';
@@ -305,7 +312,9 @@ class NetCommonsAppController extends Controller {
 		$callback = ['Inflector', 'variable'];
 
 		foreach ($orig as $key => $value) {
-			if (is_array($value)) {
+			if ($key === 'validationErrors') {
+				$new[$key] = $value;
+			} elseif (is_array($value)) {
 				$new[call_user_func($callback, $key)] = self::camelizeKeyRecursive($value);
 			} else {
 				$new[call_user_func($callback, $key)] = $value;
