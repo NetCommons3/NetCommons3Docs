@@ -210,8 +210,7 @@ class Category extends CategoriesAppModel {
 			'Language' => 'M17n.Language',
 		]);
 
-		$langs = $this->Language->getLanguage();
-		if (count($langs) > 1) {
+		if ($this->Language->isMultipleLang()) {
 			$conditions = [
 				'CategoriesLanguage.category_id = ' . $joinKey,
 				'OR' => array(
