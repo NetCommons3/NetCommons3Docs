@@ -64,7 +64,7 @@ class UserAttributeBehavior extends ModelBehavior {
 			'PluginsRole' => 'PluginManager.PluginsRole',
 		]);
 
-		$pluginsRoles = $model->PluginsRole->find('all', array(
+		$pluginsRoles = $model->PluginsRole->cacheFindQuery('all', array(
 			'recursive' => -1,
 			'fields' => [
 				'id', 'role_key', 'plugin_key'

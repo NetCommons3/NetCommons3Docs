@@ -66,10 +66,53 @@ class NetCommonsAppView extends View {
 		$remainingBlocks = count($this->Blocks->unclosed());
 
 		if ($initialBlocks !== $remainingBlocks) {
-			throw new CakeException(__d('cake_dev', 'The "%s" block was left open. Blocks are not allowed to cross files.', $this->Blocks->active()));
+			throw new CakeException(__d(
+				'cake_dev',
+				'The "%s" block was left open. Blocks are not allowed to cross files.',
+				$this->Blocks->active()
+			));
 		}
 
 		return $content;
+	}
+
+/**
+ * Renders an element and fires the before and afterRender callbacks for it
+ * and writes to the cache if a cache is used
+ *
+ * @param string $file Element file path
+ * @param array $data Data to render
+ * @param array $options Element options
+ * @return string
+ * @triggers View.beforeRender $this, array($file)
+ * @triggers View.afterRender $this, array($file, $element)
+ */
+	protected function _renderElement($file, $data, $options) {
+		$current = $this->_current;
+		$restore = $this->_currentType;
+		$this->_currentType = static::TYPE_ELEMENT;
+
+		//if ($options['callbacks']) {
+		//	$this->getEventManager()->dispatch(new CakeEvent('View.beforeRender', $this, array($file)));
+		//}
+
+		$element = $this->_render($file, array_merge($this->viewVars, $data));
+
+		//if ($options['callbacks']) {
+		//	$this->getEventManager()->dispatch(new CakeEvent('View.afterRender', $this, array($file, $element)));
+		//}
+
+		$this->_currentType = $restore;
+		$this->_current = $current;
+
+		if (isset($options['cache'])) {
+			Cache::write(
+				$this->elementCacheSettings['key'],
+				$element,
+				$this->elementCacheSettings['config']
+			);
+		}
+		return $element;
 	}
 
 }
