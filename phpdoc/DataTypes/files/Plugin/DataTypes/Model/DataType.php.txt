@@ -77,6 +77,15 @@ class DataType extends DataTypesAppModel {
 	);
 
 /**
+ * use behaviors
+ *
+ * @var array
+ */
+	public $actsAs = array(
+		'NetCommons.NetCommonsCache',
+	);
+
+/**
  * Called during validation operations, before validation. Please note that custom
  * validation rules can be defined in $validate.
  *
@@ -133,40 +142,42 @@ class DataType extends DataTypesAppModel {
 			'DataTypeChoice' => 'DataTypes.DataTypeChoice',
 		]);
 
+		$results = [];
+
 		//データ取得
-		$dataTypes = $this->find('all', array(
+		$dataTypes = $this->cacheFindQuery('all', array(
 			'recursive' => -1,
 			'conditions' => array(
 				$this->alias . '.language_id' => Current::read('Language.id'),
 				$this->alias . '.key' => $dataTypeKey
 			),
 		));
-		$dataTypes = Hash::combine($dataTypes, '{n}.' . $this->alias . '.key', '{n}');
+		foreach ($dataTypes as $dataType) {
+			$typeKey = $dataType[$this->alias]['key'];
+			$results[$typeKey] = $dataType;
+		}
 
 		//データ取得
-		$dataTypeChoices = $this->DataTypeChoice->find('all', array(
+		$dataTypeChoices = $this->DataTypeChoice->cacheFindQuery('all', array(
 			'recursive' => -1,
 			'conditions' => array(
 				$this->DataTypeChoice->alias . '.language_id' => Current::read('Language.id'),
 				$this->DataTypeChoice->alias . '.data_type_key' => $dataTypeKey
 			),
 		));
-		$dataTypeChoices = Hash::combine(
-			$dataTypeChoices,
-			'{n}.' . $this->DataTypeChoice->alias . '.id',
-			'{n}.' . $this->DataTypeChoice->alias,
-			'{n}.' . $this->DataTypeChoice->alias . '.data_type_key'
-		);
-		foreach ($dataTypeChoices as $key => $choices) {
-			$dataTypes[$key][$this->DataTypeChoice->alias] = $choices;
+		$alias = $this->DataTypeChoice->alias;
+		foreach ($dataTypeChoices as $choice) {
+			$typeKey = $choice[$this->DataTypeChoice->alias]['data_type_key'];
+			$primaryId = $choice[$this->DataTypeChoice->alias]['id'];
+
+			$results[$typeKey][$alias][$primaryId] = $choice[$alias];
 		}
 
 		$typeKey = self::DATA_TYPE_TIMEZONE;
-		if (isset($dataTypes[$typeKey])) {
-			$dataTypes[$typeKey][$this->DataTypeChoice->alias] = $this->DataTypeChoice->getTimezone();
+		if (isset($results[$typeKey])) {
+			$results[$typeKey][$this->DataTypeChoice->alias] = $this->DataTypeChoice->getTimezone();
 		}
-
-		return $dataTypes;
+		return $results;
 	}
 
 /**

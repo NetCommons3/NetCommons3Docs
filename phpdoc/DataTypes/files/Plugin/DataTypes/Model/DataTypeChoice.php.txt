@@ -27,7 +27,8 @@ class DataTypeChoice extends DataTypesAppModel {
  * @var array
  */
 	public $actsAs = array(
-		'DataTypes.Timezone'
+		'DataTypes.Timezone',
+		'NetCommons.NetCommonsCache',
 	);
 
 /**
