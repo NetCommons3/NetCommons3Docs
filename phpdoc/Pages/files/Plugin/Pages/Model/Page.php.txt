@@ -205,17 +205,18 @@ class Page extends PagesAppModel {
  * @SuppressWarnings(PHPMD.BooleanArgumentFlag)
  */
 	public function afterFind($results, $primary = false) {
-		if (Hash::extract($results, '{n}.Space')) {
-			foreach ($results as $i => $result) {
-				if ($result['Space']['permalink']) {
-					$results[$i]['Page']['full_permalink'] = $result['Space']['permalink'] . '/';
-				} else {
-					$results[$i]['Page']['full_permalink'] = '';
-				}
-				$results[$i]['Page']['full_permalink'] .= $result['Page']['permalink'];
+		foreach ($results as $i => $result) {
+			if (!isset($result['Space'])) {
+				break;
 			}
-		}
 
+			if ($result['Space']['permalink']) {
+				$results[$i]['Page']['full_permalink'] = $result['Space']['permalink'] . '/';
+			} else {
+				$results[$i]['Page']['full_permalink'] = '';
+			}
+			$results[$i]['Page']['full_permalink'] .= $result['Page']['permalink'];
+		}
 		return $results;
 	}
 
@@ -230,6 +231,10 @@ class Page extends PagesAppModel {
  */
 	public function beforeValidate($options = array()) {
 		$themes = $this->getThemes();
+		$themeNames = [];
+		foreach ($themes as $theme) {
+			$themeNames[] = $theme['name'];
+		}
 
 		$this->validate = Hash::merge($this->validate, array(
 			'slug' => array(
@@ -282,7 +287,7 @@ class Page extends PagesAppModel {
 			),
 			'theme' => array(
 				'inList' => array(
-					'rule' => array('inList', Hash::extract($themes, '{n}.name')),
+					'rule' => array('inList', $themeNames),
 					'message' => __d('net_commons', 'Invalid request.'),
 				),
 			),
