@@ -74,10 +74,10 @@ class NetCommonsCacheBehavior extends ModelBehavior {
  *
  * @param Model $model ビヘイビア呼び出し元モデル
  * @param string $mainKey メインキー
- * @param string $subKey サブキー
+ * @param string|null $subKey サブキー
  * @return array
  */
-	public function cacheRead(Model $model, $mainKey, $subKey) {
+	public function cacheRead(Model $model, $mainKey, $subKey = null) {
 		return $this->__cache[$model->alias]->read($mainKey, $subKey);
 	}
 
@@ -87,10 +87,10 @@ class NetCommonsCacheBehavior extends ModelBehavior {
  * @param Model $model ビヘイビア呼び出し元モデル
  * @param array $result 結果
  * @param string $mainKey メインキー
- * @param string $subKey サブキー
+ * @param string|null $subKey サブキー
  * @return void
  */
-	public function cacheWrite(Model $model, $result, $mainKey, $subKey) {
+	public function cacheWrite(Model $model, $result, $mainKey, $subKey = null) {
 		$this->__cache[$model->alias]->write($result, $mainKey, $subKey);
 	}
 
@@ -110,6 +110,25 @@ class NetCommonsCacheBehavior extends ModelBehavior {
 			//キャッシュの書き込み
 			$result = $model->find($type, $queryOptions);
 			$this->cacheWrite($model, $result, $type, $cacheKey);
+		}
+		return $result;
+	}
+
+/**
+ * $model->exists()に対して、キャッシュからの読み込み
+ * もし、キャッシュに無ければ、exists()で取得し、キャッシュに登録する。
+ *
+ * @param Model $model ビヘイビア呼び出し元モデル
+ * @param string $id 数値型の文字列
+ * @return bool
+ */
+	public function cacheExistsQuery(Model $model, $id) {
+		$cacheKey = (string)$id;
+		$result = $this->cacheRead($model, 'exists', $cacheKey);
+		if (! $result) {
+			//キャッシュの書き込み
+			$result = $model->exists($id);
+			$this->cacheWrite($model, $result, 'exists', $cacheKey);
 		}
 		return $result;
 	}
