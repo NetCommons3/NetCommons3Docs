@@ -49,7 +49,7 @@ class ControlPanelLayoutComponent extends Component {
 			'default_action' => 'control_panel/index'
 		];
 
-		$this->plugins = $controller->Plugin->find('all', array(
+		$this->plugins = $controller->Plugin->cacheFindQuery('all', array(
 			'recursive' => -1,
 			'fields' => array(
 				$controller->Plugin->alias . '.key',
