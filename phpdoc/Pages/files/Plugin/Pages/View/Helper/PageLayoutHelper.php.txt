@@ -17,6 +17,7 @@ App::uses('Current', 'NetCommons.Utility');
  * LayoutHelper
  *
  * @SuppressWarnings(PHPMD.ExcessiveClassComplexity)
+ * @SuppressWarnings(PHPMD.CouplingBetweenObjects)
  */
 class PageLayoutHelper extends AppHelper {
 
@@ -394,7 +395,9 @@ class PageLayoutHelper extends AppHelper {
 		}
 
 		$this->_setParams($request, $params, $extra);
+		Router::setRequestInfo($request);
 		$result = $this->_dispatch($request, new CakeResponse(), $extra);
+		Router::popRequest();
 		return $result;
 	}
 
