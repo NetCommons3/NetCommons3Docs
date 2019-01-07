@@ -41,6 +41,15 @@ class DefaultRolePermission extends RolesAppModel {
 	public $validate = array();
 
 /**
+ * Behaviors
+ *
+ * @var array
+ */
+	public $actsAs = array(
+		'NetCommons.NetCommonsCache',
+	);
+
+/**
  * Called during validation operations, before validation. Please note that custom
  * validation rules can be defined in $validate.
  *
@@ -95,7 +104,7 @@ class DefaultRolePermission extends RolesAppModel {
  * @return array
  */
 	public function getDefaultRolePermissions($roleKey, $permission, $type = self::TYPE_ROOM_ROLE) {
-		$result = $this->find('all', array(
+		$permissions = $this->cacheFindQuery('all', array(
 			'recursive' => -1,
 			'conditions' => array(
 				'permission' => $permission,
@@ -104,13 +113,16 @@ class DefaultRolePermission extends RolesAppModel {
 			)
 		));
 
-		if (! $result) {
-			return $result;
+		if (! $permissions) {
+			return $permissions;
 		}
 
-		return Hash::combine(
-			$result, '{n}.DefaultRolePermission.permission', '{n}.DefaultRolePermission'
-		);
+		$result = [];
+		foreach ($permissions as $permission) {
+			$key = $permission['DefaultRolePermission']['permission'];
+			$result[$key] = $permission['DefaultRolePermission'];
+		}
+		return $result;
 	}
 
 }
