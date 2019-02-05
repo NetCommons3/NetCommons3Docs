@@ -86,50 +86,40 @@ class LikeBehavior extends ModelBehavior {
  * @return array タグ検索条件を加えたfind条件
  */
 	public function beforeFind(Model $model, $query) {
-		if (Hash::get($query, 'recursive') > -1) {
-			$joinTable = false;
-
-			$conditions = $query['conditions'];
-			if (is_array($conditions) === false) {
-				return $query;
-			}
-			$columns = array_keys($conditions);
-			// 条件あったらLikeテーブルとリンクテーブルをJOIN
-			if (preg_grep('/^Like\./', $columns) || preg_grep('/^LikesUser\./', $columns)) {
-				$joinTable = true;
+		if (Hash::get($query, 'recursive', $model->recursive) > -1) {
+			$likesUserConditions = array(
+				'Like.id = LikesUser.like_id',
+			);
+			if (Current::read('User.id')) {
+				$likesUserConditions['LikesUser.user_id'] = Current::read('User.id');
+			} else {
+				$likesUserConditions['LikesUser.session_key'] = CakeSession::id();
 			}
 
-			if ($joinTable) {
-				$likesUserConditions = array(
-					'Like.id = LikesUser.like_id',
-				);
-				if (Current::read('User.id')) {
-					$likesUserConditions['LikesUser.user_id'] = Current::read('User.id');
-				} else {
-					$likesUserConditions['LikesUser.session_key'] = CakeSession::id();
-				}
+			$fieldName = $this->settings[$model->alias]['model'] . '.' .
+				$this->settings[$model->alias]['field'];
 
-				$LikesUser = ClassRegistry::init('Likes.LikesUser');
-				$Like = ClassRegistry::init('Likes.Like');
-
-				$fieldName = $this->settings[$model->alias]['model'] . '.' .
-								$this->settings[$model->alias]['field'];
-				$query['joins'][] = [
-					'type' => 'LEFT',
-					'table' => $Like->table,
-					'alias' => $Like->alias,
-					'conditions' => [
-						'Like.plugin_key' => Inflector::underscore($model->plugin),
-						$fieldName . ' = ' . 'Like.content_key',
-					]
-				];
-				$query['joins'][] = [
-					'type' => 'LEFT',
-					'table' => $LikesUser->table,
-					'alias' => $LikesUser->alias,
-					'conditions' => $likesUserConditions,
-				];
-			}
+			// joinではfieldsを指定しないと値を取得できない。
+			// fieldsはほぼNULLのため、fieldsを追加対応ができない。そのためbindModelで対応する
+			// bindModelの場合、うまいことfieldsを設定してくれる。
+			$model->bindModel(array(
+				'belongsTo' => array(
+					'Like' => array(
+						'className' => 'Likes.Like',
+						'foreignKey' => false,
+						'conditions' => array(
+							'Like.plugin_key' => Inflector::underscore($model->plugin),
+							//$this->__model . '.' . $this->__field . ' = ' . 'Like.content_key',
+							$fieldName . ' = ' . 'Like.content_key',
+						),
+					),
+					'LikesUser' => array(
+						'className' => 'Likes.LikesUser',
+						'foreignKey' => false,
+						'conditions' => $likesUserConditions,
+					),
+				)
+			), true);
 		}
 		return $query;
 	}
