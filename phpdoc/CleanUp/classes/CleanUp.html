@@ -136,10 +136,10 @@
                                 <div class="accordion" style="margin-bottom: 0">
         <div class="accordion-group">
             <div class="accordion-heading">
-                                    <a class="accordion-toggle " data-toggle="collapse" data-target="#namespace-681823343"></a>
+                                    <a class="accordion-toggle " data-toggle="collapse" data-target="#namespace-166778826"></a>
                                 <a href="../namespaces/default.html" style="margin-left: 30px; padding-left: 0">\</a>
             </div>
-            <div id="namespace-681823343" class="accordion-body collapse in">
+            <div id="namespace-166778826" class="accordion-body collapse in">
                 <div class="accordion-inner">
 
                     
@@ -281,6 +281,7 @@ will inherit them.</p>
                                                                     <a href="../classes/CleanUp.html#method_getCleanUpsAndUnknow" class="">getCleanUpsAndUnknow()</a><br />
                                                                     <a href="../classes/CleanUp.html#method_fileCleanUpExec" class="">fileCleanUpExec()</a><br />
                                                                     <a href="../classes/CleanUp.html#method_fileCleanUp" class="">fileCleanUp()</a><br />
+                                                                    <a href="../classes/CleanUp.html#method_getUploadFileParams" class="">getUploadFileParams()</a><br />
                                                             </section>
                             <section class="span4">
                                                                     <a href="../classes/NetCommonsAppModel.html#property_actsAs" class="">$actsAs</a><br />
@@ -316,8 +317,8 @@ will inherit them.</p>
                             <section class="span4">
                                                                     <a href="../classes/NetCommonsAppModel.html#method___getRandomlySlave" class="">__getRandomlySlave()</a><br />
                                                                     <a href="../classes/NetCommonsAppModel.html#method___changeDataSource" class="">__changeDataSource()</a><br />
-                                                                    <a href="../classes/CleanUp.html#method___getUploadFileParams" class="">__getUploadFileParams()</a><br />
                                                                     <a href="../classes/CleanUp.html#method___deleteUploadFiles" class="">__deleteUploadFiles()</a><br />
+                                                                    <a href="../classes/CleanUp.html#method___isOverDelayDate" class="">__isOverDelayDate()</a><br />
                                                                     <a href="../classes/CleanUp.html#method___deleteUploadFile" class="">__deleteUploadFile()</a><br />
                                                                     <a href="../classes/CleanUp.html#method___isUseUploadFile" class="">__isUseUploadFile()</a><br />
                                                             </section>
@@ -1359,6 +1360,45 @@ isLockFile ロックファイルの存在確認</em></p>
         </aside>
     </div>
 
+                                    <div class="row-fluid">
+        <div class="span8 content class">
+            <a id="method_getUploadFileParams" name="method_getUploadFileParams" class="anchor"></a>
+            <article class="method">
+                <h3 class="public ">getUploadFileParams()</h3>
+                <a href="#source-view" role="button" class="pull-right btn" data-toggle="modal" style="font-size: 1.1em; padding: 9px 14px"><i class="icon-code"></i></a>
+                <pre class="signature" style="margin-right: 54px;">getUploadFileParams(array  <span class="argument">$cleanUp</span>) : array</pre>
+                <p><em>アップロードファイルのfind条件 ゲット
+テスト利用のためpublicに変更</em></p>
+                
+
+                                    <h4>Parameters</h4>
+                    <table class="table table-condensed table-hover">
+                                                    <tr>
+                                <td>array</td>
+                                <td>$cleanUp </td>
+                                <td><p>request-&gt;data 1件</p></td>
+                            </tr>
+                                            </table>
+                
+                
+                                    <h4>Returns</h4>
+                    array
+                                    				
+                            </article>
+        </div>
+        <aside class="span4 detailsbar">
+            <h1><i class="icon-arrow-down"></i></h1>
+                                                            <dl>
+                                                                                            <dt>See also</dt>
+                                                                <dd><a href=""><span class="namespace-wrapper">よりコピー</span></a></dd>
+                                                                </dl>
+            <h2>Tags</h2>
+            <table class="table table-condensed">
+                                    <tr><td colspan="2"><em>None found</em></td></tr>
+                            </table>
+        </aside>
+    </div>
+
                                                     <div class="row-fluid">
         <div class="span8 content class">
             <a id="method__getDefaultValue" name="method__getDefaultValue" class="anchor"></a>
@@ -1555,44 +1595,6 @@ will enable only those callbacks.</li>
 
                                     <div class="row-fluid">
         <div class="span8 content class">
-            <a id="method___getUploadFileParams" name="method___getUploadFileParams" class="anchor"></a>
-            <article class="method">
-                <h3 class="private ">__getUploadFileParams()</h3>
-                <a href="#source-view" role="button" class="pull-right btn" data-toggle="modal" style="font-size: 1.1em; padding: 9px 14px"><i class="icon-code"></i></a>
-                <pre class="signature" style="margin-right: 54px;">__getUploadFileParams(array  <span class="argument">$cleanUp</span>) : array</pre>
-                <p><em>アップロードファイルのfind条件 ゲット</em></p>
-                
-
-                                    <h4>Parameters</h4>
-                    <table class="table table-condensed table-hover">
-                                                    <tr>
-                                <td>array</td>
-                                <td>$cleanUp </td>
-                                <td><p>request-&gt;data 1件</p></td>
-                            </tr>
-                                            </table>
-                
-                
-                                    <h4>Returns</h4>
-                    array
-                                    				
-                            </article>
-        </div>
-        <aside class="span4 detailsbar">
-            <h1><i class="icon-arrow-down"></i></h1>
-                                                            <dl>
-                                                                                            <dt>See also</dt>
-                                                                <dd><a href=""><span class="namespace-wrapper">よりコピー</span></a></dd>
-                                                                </dl>
-            <h2>Tags</h2>
-            <table class="table table-condensed">
-                                    <tr><td colspan="2"><em>None found</em></td></tr>
-                            </table>
-        </aside>
-    </div>
-
-                                    <div class="row-fluid">
-        <div class="span8 content class">
             <a id="method___deleteUploadFiles" name="method___deleteUploadFiles" class="anchor"></a>
             <article class="method">
                 <h3 class="private ">__deleteUploadFiles()</h3>
@@ -1624,6 +1626,44 @@ will enable only those callbacks.</li>
                                     <h4>Returns</h4>
                     integer
                                             &mdash; <p>削除対象件数</p>
+                                    				
+                            </article>
+        </div>
+        <aside class="span4 detailsbar">
+            <h1><i class="icon-arrow-down"></i></h1>
+                                                            <dl>
+                                                                            </dl>
+            <h2>Tags</h2>
+            <table class="table table-condensed">
+                                    <tr><td colspan="2"><em>None found</em></td></tr>
+                            </table>
+        </aside>
+    </div>
+
+                                    <div class="row-fluid">
+        <div class="span8 content class">
+            <a id="method___isOverDelayDate" name="method___isOverDelayDate" class="anchor"></a>
+            <article class="method">
+                <h3 class="private ">__isOverDelayDate()</h3>
+                <a href="#source-view" role="button" class="pull-right btn" data-toggle="modal" style="font-size: 1.1em; padding: 9px 14px"><i class="icon-code"></i></a>
+                <pre class="signature" style="margin-right: 54px;">__isOverDelayDate(array  <span class="argument">$uploadFile</span>) : boolean</pre>
+                <p><em>削除遅延日以上かどうか&lt;br /&gt;
+該当するファイルは削除対象外になります</em></p>
+                
+
+                                    <h4>Parameters</h4>
+                    <table class="table table-condensed table-hover">
+                                                    <tr>
+                                <td>array</td>
+                                <td>$uploadFile </td>
+                                <td><p>UploadFile</p></td>
+                            </tr>
+                                            </table>
+                
+                
+                                    <h4>Returns</h4>
+                    boolean
+                                            &mdash; <p>true:削除遅延日以上|false:使ってない</p>
                                     				
                             </article>
         </div>
@@ -1767,7 +1807,7 @@ will enable only those callbacks.</li>
                 <section class="span10 offset1">
                     <hr />
                     Documentation is powered by <a href="http://www.phpdoc.org/">phpDocumentor </a> and authored
-                    on February 19th, 2019 at 02:50.
+                    on February 19th, 2019 at 08:24.
                 </section>
             </section>
         </section>
