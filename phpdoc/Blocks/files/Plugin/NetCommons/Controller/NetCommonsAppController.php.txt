@@ -10,10 +10,13 @@
 
 App::uses('Controller', 'Controller');
 App::uses('Utility', 'Inflector');
-App::uses('Current', 'NetCommons.Utility');
+//App::uses('Current', 'NetCommons.Utility');
 App::uses('NetCommonsUrl', 'NetCommons.Utility');
 App::uses('PermissionComponent', 'NetCommons.Controller/Component');
 App::uses('SiteSettingUtil', 'SiteManager.Utility');
+App::uses('User', 'Users.Model');
+
+App::uses('CurrentLib', 'NetCommons.Lib');
 
 /**
  * NetCommonsApp Controller
@@ -59,9 +62,13 @@ class NetCommonsAppController extends Controller {
 				'plugin' => 'pages',
 				'controller' => 'pages',
 				'action' => 'index',
-			)
+			),
+			'passwordHasher' => [
+				'className' => 'Simple',
+				'hashType' => User::PASSWORD_HASH_TYPE,
+			],
 		),
-		'DebugKit.Toolbar',
+		//'DebugKit.Toolbar',
 		'Flash',
 		'MobileDetect.MobileDetect',
 		'NetCommons.Asset',
@@ -126,6 +133,13 @@ class NetCommonsAppController extends Controller {
 	public function __construct($request = null, $response = null) {
 		parent::__construct($request, $response);
 
+		//Cakeでは、$uses,$component,$helpersが直近の継承しているものしか読み込まれないため、
+		//継承している親クラス全てを読み込む
+		$parentClass = get_class($this);
+		while ($parentClass = get_parent_class($parentClass)) {
+			$this->_mergeVars(['uses', 'components', 'helpers'], $parentClass, false);
+		}
+
 		if (in_array('Html', $this->helpers, true) &&
 				!isset($this->helpers['Html']['className'])) {
 			$this->helpers['Html']['className'] = 'NetCommons.SingletonViewBlockHtml';
@@ -134,6 +148,12 @@ class NetCommonsAppController extends Controller {
 		//サイトの設定データセット
 		if (Configure::read('NetCommons.installed')) {
 			SiteSettingUtil::initialize();
+		}
+
+		//DebugKitは、debugモードがONのときのみロードするように修正
+		if (Configure::read('debug') &&
+				!in_array('DebugKit.Toolbar', $this->components, true) ) {
+			$this->components[] = 'DebugKit.Toolbar';
 		}
 	}
 
@@ -170,6 +190,8 @@ class NetCommonsAppController extends Controller {
  * @return void
  */
 	public function beforeFilter() {
+		parent::beforeFilter();
+
 		if (empty($this->request->params['requested'])) {
 			$this->request->allowMethod($this->_allowMethods);
 		}
@@ -180,7 +202,26 @@ class NetCommonsAppController extends Controller {
 		$this->_setLanguage();
 
 		//カレントデータセット
-		Current::initialize($this);
+if (empty($this->request->params['requested'])) {
+	$indent = '';
+} else {
+	$indent = '  ';
+}
+$startTime = microtime(true);
+		//@var $instance CurrentLib
+		$instance = CurrentLib::getInstance();
+		$instance->initialize($this);
+
+//$debug = CurrentLib::$current;
+//unset($debug['PluginsRoom']);
+//ksort($debug);
+//CakeLog::debug($indent . __METHOD__ . '(' . __LINE__ . ') ' . var_export($debug, true));
+//$debug = NcPermission::$permission;
+//ksort($debug);
+//CakeLog::debug($indent . __METHOD__ . '(' . __LINE__ . ') ' . var_export($debug, true));
+$endTime = microtime(true);
+CakeLog::debug($indent . __METHOD__ . '(' . __LINE__ . ') Current::initialize()');
+CakeLog::debug($indent . var_export(($endTime - $startTime), true));
 
 		if (! $this->AccessCtrl->allowAccess()) {
 			return;
@@ -215,7 +256,10 @@ class NetCommonsAppController extends Controller {
  */
 	public function afterFilter() {
 		//カレントデータセット
-		Current::terminate($this);
+		$instance = CurrentLib::getInstance();
+		$instance->terminate($this);
+
+		parent::afterFilter();
 	}
 
 /**
@@ -300,7 +344,9 @@ class NetCommonsAppController extends Controller {
 		$callback = ['Inflector', 'variable'];
 
 		foreach ($orig as $key => $value) {
-			if (is_array($value)) {
+			if ($key === 'validationErrors') {
+				$new[$key] = $value;
+			} elseif (is_array($value)) {
 				$new[call_user_func($callback, $key)] = self::camelizeKeyRecursive($value);
 			} else {
 				$new[call_user_func($callback, $key)] = $value;
@@ -325,6 +371,8 @@ class NetCommonsAppController extends Controller {
 		if ($this->request->is('ajax')) {
 			$this->NetCommons->setFlashNotification(__d('net_commons', 'Bad Request'), array(
 				'class' => 'danger',
+				'name' => 'Bad Request',
+				'message' => $message,
 				'interval' => NetCommonsComponent::ALERT_VALIDATE_ERROR_INTERVAL,
 				'error' => $message
 			), 400);

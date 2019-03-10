@@ -11,7 +11,6 @@
 
 App::uses('Component', 'Controller');
 App::uses('NetCommonsTime', 'NetCommons.Utility');
-App::uses('Block', 'Blocks.Model');
 
 /**
  * Permission Component
@@ -233,13 +232,25 @@ class PermissionComponent extends Component {
  * @SuppressWarnings(PHPMD.CyclomaticComplexity)
  */
 	public function checkSpaceAccess(Controller $controller) {
-		$Room = ClassRegistry::init('Rooms.Room');
-		$spaces = $Room->getSpaces();
+		$Space = ClassRegistry::init('Rooms.Space');
+		$getSpaces = $Space->getSpaces();
+		$spaces = array();
+		foreach ($getSpaces as $space) {
+			$spaces[$space['Space']['id']] = $space;
+		}
 		$curRoom = Current::read('Room');
 		if ($spaces && $curRoom) {
 			if (empty($this->SpaceComponent)) {
-				if (isset($spaces[$curRoom['space_id']])) {
-					$space = $spaces[$curRoom['space_id']];
+				if (isset($controller->params['space_id'])) {
+					//paramsは、Routerでセットされるものなので、
+					//その値が入ってるときは、そっちを優先してチェックする。
+					//NC3では使用していないが、NC3をカスタマイズした大規模システムの時に使用する場合がある。
+					$spaceId = $controller->params['space_id'];
+				} else {
+					$spaceId = $curRoom['space_id'];
+				}
+				if (isset($spaces[$spaceId])) {
+					$space = $spaces[$spaceId];
 					$plugin = Inflector::camelize($space['Space']['plugin_key']);
 				} else {
 					$plugin = 'PublicSpace';
@@ -278,6 +289,8 @@ class PermissionComponent extends Component {
  * @return bool
  */
 	public function checkBlockAccess(Controller $controller) {
+		App::uses('Block', 'Blocks.Model');
+
 		//ブロックがない場合、trueとする
 		if (! Current::read('Block')) {
 			return true;
