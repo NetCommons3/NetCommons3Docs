@@ -182,6 +182,8 @@ class NetCommonsAppController extends Controller {
  * @return void
  */
 	public function beforeFilter() {
+		parent::beforeFilter();
+
 		if (empty($this->request->params['requested'])) {
 			$this->request->allowMethod($this->_allowMethods);
 		}
@@ -228,6 +230,8 @@ class NetCommonsAppController extends Controller {
 	public function afterFilter() {
 		//カレントデータセット
 		Current::terminate($this);
+
+		parent::afterFilter();
 	}
 
 /**
@@ -339,6 +343,8 @@ class NetCommonsAppController extends Controller {
 		if ($this->request->is('ajax')) {
 			$this->NetCommons->setFlashNotification(__d('net_commons', 'Bad Request'), array(
 				'class' => 'danger',
+				'name' => 'Bad Request',
+				'message' => $message,
 				'interval' => NetCommonsComponent::ALERT_VALIDATE_ERROR_INTERVAL,
 				'error' => $message
 			), 400);
