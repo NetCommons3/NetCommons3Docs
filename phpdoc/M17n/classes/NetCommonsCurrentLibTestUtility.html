@@ -106,7 +106,7 @@
                         <ul class="dropdown-menu">
                             <li>
                                 <a href="../reports/errors.html">
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                <i class="icon-list-alt"></i>&#160;Errors <span class="label label-info pull-right">4</span>
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                <i class="icon-list-alt"></i>&#160;Errors <span class="label label-info pull-right">0</span>
                                 </a>
                             </li>
                             <li>
@@ -136,10 +136,10 @@
                                 <div class="accordion" style="margin-bottom: 0">
         <div class="accordion-group">
             <div class="accordion-heading">
-                                    <a class="accordion-toggle " data-toggle="collapse" data-target="#namespace-523069440"></a>
+                                    <a class="accordion-toggle " data-toggle="collapse" data-target="#namespace-826485304"></a>
                                 <a href="../namespaces/default.html" style="margin-left: 30px; padding-left: 0">\</a>
             </div>
-            <div id="namespace-523069440" class="accordion-body collapse in">
+            <div id="namespace-826485304" class="accordion-body collapse in">
                 <div class="accordion-inner">
 
                     
@@ -362,6 +362,15 @@ cipherSeed:
                                                                     
                                                             </td>
                         </tr>
+                                            <tr>
+                            <th>
+                                SuppressWarnings
+                            </th>
+                            <td>
+                                                                    <p>(PHPMD.TooManyPublicMethods)</p>
+                                                                    <p>(PHPMD.ExcessiveClassComplexity)</p>
+                                                            </td>
+                        </tr>
                                         </table>
                 </aside>
             </div>
@@ -460,19 +469,19 @@ cipherSeed:
             <article class="method">
                 <h3 class="public ">debugLogTestName()</h3>
                 <a href="#source-view" role="button" class="pull-right btn" data-toggle="modal" style="font-size: 1.1em; padding: 9px 14px"><i class="icon-code"></i></a>
-                <pre class="signature" style="margin-right: 54px;">debugLogTestName(  <span class="argument">$loginTitle</span>,   <span class="argument">$method</span>) : void</pre>
+                <pre class="signature" style="margin-right: 54px;">debugLogTestName(string  <span class="argument">$loginTitle</span>, string  <span class="argument">$method</span>) : void</pre>
                 <p><em>テスト名をdebugに出力</em></p>
                 
 
                                     <h4>Parameters</h4>
                     <table class="table table-condensed table-hover">
                                                     <tr>
-                                <td></td>
+                                <td>string</td>
                                 <td>$loginTitle </td>
                                 <td><p>ログインタイトル(ログインなし、管理者でログインなどをセットする)</p></td>
                             </tr>
                                                     <tr>
-                                <td></td>
+                                <td>string</td>
                                 <td>$method </td>
                                 <td><p>テストメソッド</p></td>
                             </tr>
@@ -757,16 +766,16 @@ cipherSeed:
             <article class="method">
                 <h3 class="public ">getTemporaryFileMock()</h3>
                 <a href="#source-view" role="button" class="pull-right btn" data-toggle="modal" style="font-size: 1.1em; padding: 9px 14px"><i class="icon-code"></i></a>
-                <pre class="signature" style="margin-right: 54px;">getTemporaryFileMock(  <span class="argument">$fileInfo</span>) : string</pre>
+                <pre class="signature" style="margin-right: 54px;">getTemporaryFileMock(array  <span class="argument">$fileInfo</span>) : string</pre>
                 <p><em>TemporaryFileのモックとしてFileを使って戻す</em></p>
                 
 
                                     <h4>Parameters</h4>
                     <table class="table table-condensed table-hover">
                                                     <tr>
-                                <td></td>
+                                <td>array</td>
                                 <td>$fileInfo </td>
-                                <td></td>
+                                <td><p>アップロードファイル情報</p></td>
                             </tr>
                                             </table>
                 
@@ -883,16 +892,16 @@ cipherSeed:
             <article class="method">
                 <h3 class="public ">settingMode()</h3>
                 <a href="#source-view" role="button" class="pull-right btn" data-toggle="modal" style="font-size: 1.1em; padding: 9px 14px"><i class="icon-code"></i></a>
-                <pre class="signature" style="margin-right: 54px;">settingMode(  <span class="argument">$setting</span>) : void</pre>
+                <pre class="signature" style="margin-right: 54px;">settingMode(boolean  <span class="argument">$setting</span>) : void</pre>
                 <p><em>セッティングモードの変更</em></p>
                 
 
                                     <h4>Parameters</h4>
                     <table class="table table-condensed table-hover">
                                                     <tr>
-                                <td></td>
+                                <td>boolean</td>
                                 <td>$setting </td>
-                                <td></td>
+                                <td><p>セッティングモード</p></td>
                             </tr>
                                             </table>
                 
@@ -945,7 +954,7 @@ cipherSeed:
             <article class="method">
                 <h3 class="public ">testControllerGetRequest()</h3>
                 <a href="#source-view" role="button" class="pull-right btn" data-toggle="modal" style="font-size: 1.1em; padding: 9px 14px"><i class="icon-code"></i></a>
-                <pre class="signature" style="margin-right: 54px;">testControllerGetRequest(\ControllerTestCase  <span class="argument">$test</span>, string  <span class="argument">$url</span>, array|false  <span class="argument">$expects</span>, string|false  <span class="argument">$exception</span>,   <span class="argument">$outputDebugTitle = false</span>) : void</pre>
+                <pre class="signature" style="margin-right: 54px;">testControllerGetRequest(\ControllerTestCase  <span class="argument">$test</span>, string  <span class="argument">$url</span>, array|false  <span class="argument">$expects</span>, string|false  <span class="argument">$exception</span>, string|false  <span class="argument">$outputDebugTitle = false</span>) : void</pre>
                 <p><em>コントローラのGETテスト</em></p>
                 
 
@@ -972,9 +981,9 @@ cipherSeed:
                                 <td><p>Exception文字列</p></td>
                             </tr>
                                                     <tr>
-                                <td></td>
+                                <td>string|false</td>
                                 <td>$outputDebugTitle </td>
-                                <td></td>
+                                <td><p>出力するdebugのタイトル</p></td>
                             </tr>
                                             </table>
                 
@@ -989,7 +998,14 @@ cipherSeed:
                                                                             </dl>
             <h2>Tags</h2>
             <table class="table table-condensed">
-                                    <tr><td colspan="2"><em>None found</em></td></tr>
+                                    <tr>
+                        <th>
+                            SuppressWarnings
+                        </th>
+                        <td>
+                                                                                            <p>(PHPMD.BooleanArgumentFlag)</p>
+                                                    </td>
+                    </tr>
                             </table>
         </aside>
     </div>
@@ -1220,7 +1236,7 @@ cipherSeed:
                 <section class="span10 offset1">
                     <hr />
                     Documentation is powered by <a href="http://www.phpdoc.org/">phpDocumentor </a> and authored
-                    on March 11th, 2019 at 11:16.
+                    on March 12th, 2019 at 07:08.
                 </section>
             </section>
         </section>
