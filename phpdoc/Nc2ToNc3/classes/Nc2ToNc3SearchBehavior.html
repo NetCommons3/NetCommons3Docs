@@ -136,10 +136,10 @@
                                 <div class="accordion" style="margin-bottom: 0">
         <div class="accordion-group">
             <div class="accordion-heading">
-                                    <a class="accordion-toggle " data-toggle="collapse" data-target="#namespace-1634407370"></a>
+                                    <a class="accordion-toggle " data-toggle="collapse" data-target="#namespace-1709899829"></a>
                                 <a href="../namespaces/default.html" style="margin-left: 30px; padding-left: 0">\</a>
             </div>
-            <div id="namespace-1634407370" class="accordion-body collapse in">
+            <div id="namespace-1709899829" class="accordion-body collapse in">
                 <div class="accordion-inner">
 
                     
@@ -1144,7 +1144,7 @@
             <article class="method">
                 <h3 class="public ">executionTimeEnd()</h3>
                 <a href="#source-view" role="button" class="pull-right btn" data-toggle="modal" style="font-size: 1.1em; padding: 9px 14px"><i class="icon-code"></i></a>
-                <pre class="signature" style="margin-right: 54px;">executionTimeEnd(\Model  <span class="argument">$model</span>, string  <span class="argument">$methodName</span>, float  <span class="argument">$timeStart</span>, float  <span class="argument">$executionFlushTime</span>) : void</pre>
+                <pre class="signature" style="margin-right: 54px;">executionTimeEnd(\Model  <span class="argument">$model</span>, string  <span class="argument">$methodName</span>, float  <span class="argument">$timeStart</span>, float  <span class="argument">$executionFlushTime</span>, boolean  <span class="argument">$isOutputLog = false</span>) : void</pre>
                 <p><em>実行時間の計測終了</em></p>
                 
 
@@ -1169,6 +1169,11 @@
                                 <td>float</td>
                                 <td>$executionFlushTime </td>
                                 <td><p>この実行時間(秒)を越えたらClassRegistry::flush()</p></td>
+                            </tr>
+                                                    <tr>
+                                <td>boolean</td>
+                                <td>$isOutputLog </td>
+                                <td><p>パフォーマンスログ出力. true:出力|false:出力しない</p></td>
                             </tr>
                                             </table>
                 
@@ -1965,7 +1970,7 @@ data[SearchFramesPlugin][created]:0</p>
             <article class="method">
                 <h3 class="protected ">_executionTimeEnd()</h3>
                 <a href="#source-view" role="button" class="pull-right btn" data-toggle="modal" style="font-size: 1.1em; padding: 9px 14px"><i class="icon-code"></i></a>
-                <pre class="signature" style="margin-right: 54px;">_executionTimeEnd(string  <span class="argument">$methodName</span>, float  <span class="argument">$timeStart</span>, float  <span class="argument">$executionFlushTime</span>) : void</pre>
+                <pre class="signature" style="margin-right: 54px;">_executionTimeEnd(string  <span class="argument">$methodName</span>, float  <span class="argument">$timeStart</span>, float  <span class="argument">$executionFlushTime</span>, boolean  <span class="argument">$isOutputLog = false</span>) : void</pre>
                 <p><em>実行時間の計測終了</em></p>
                 
 
@@ -1986,6 +1991,11 @@ data[SearchFramesPlugin][created]:0</p>
                                 <td>$executionFlushTime </td>
                                 <td><p>この実行時間(秒)を越えたらClassRegistry::flush()</p></td>
                             </tr>
+                                                    <tr>
+                                <td>boolean</td>
+                                <td>$isOutputLog </td>
+                                <td><p>パフォーマンスログ出力. true:出力|false:出力しない</p></td>
+                            </tr>
                                             </table>
                 
                 
@@ -2000,7 +2010,14 @@ data[SearchFramesPlugin][created]:0</p>
                                                             </dl>
             <h2>Tags</h2>
             <table class="table table-condensed">
-                                    <tr><td colspan="2"><em>None found</em></td></tr>
+                                    <tr>
+                        <th>
+                            SuppressWarnings
+                        </th>
+                        <td>
+                                                                                            <p>(PHPMD.BooleanArgumentFlag)</p>
+                                                    </td>
+                    </tr>
                             </table>
         </aside>
     </div>
@@ -2091,7 +2108,7 @@ data[SearchFramesPlugin][created]:0</p>
                 <section class="span10 offset1">
                     <hr />
                     Documentation is powered by <a href="http://www.phpdoc.org/">phpDocumentor </a> and authored
-                    on April 14th, 2019 at 06:56.
+                    on April 14th, 2019 at 09:16.
                 </section>
             </section>
         </section>
