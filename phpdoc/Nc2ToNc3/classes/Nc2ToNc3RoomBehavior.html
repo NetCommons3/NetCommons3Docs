@@ -136,10 +136,10 @@
                                 <div class="accordion" style="margin-bottom: 0">
         <div class="accordion-group">
             <div class="accordion-heading">
-                                    <a class="accordion-toggle " data-toggle="collapse" data-target="#namespace-1129388935"></a>
+                                    <a class="accordion-toggle " data-toggle="collapse" data-target="#namespace-380545431"></a>
                                 <a href="../namespaces/default.html" style="margin-left: 30px; padding-left: 0">\</a>
             </div>
-            <div id="namespace-1129388935" class="accordion-body collapse in">
+            <div id="namespace-380545431" class="accordion-body collapse in">
                 <div class="accordion-inner">
 
                     
@@ -350,6 +350,8 @@
                                                                     <a href="../classes/Nc2ToNc3BaseBehavior.html#method_convertChoiceValue" class="">convertChoiceValue()</a><br />
                                                                     <a href="../classes/Nc2ToNc3BaseBehavior.html#method_convertTitleIcon" class="">convertTitleIcon()</a><br />
                                                                     <a href="../classes/Nc2ToNc3BaseBehavior.html#method_convertTimezone" class="">convertTimezone()</a><br />
+                                                                    <a href="../classes/Nc2ToNc3BaseBehavior.html#method_executionTimeStart" class="">executionTimeStart()</a><br />
+                                                                    <a href="../classes/Nc2ToNc3BaseBehavior.html#method_executionTimeEnd" class="">executionTimeEnd()</a><br />
                                                                     <a href="../classes/Nc2ToNc3BaseBehavior.html#method_writeCurrent" class="">writeCurrent()</a><br />
                                                                     <a href="../classes/Nc2ToNc3BaseBehavior.html#method_removeUseCurrent" class="">removeUseCurrent()</a><br />
                                                                     <a href="../classes/Nc2ToNc3RoomBehavior.html#method_getLogArgument" class="">getLogArgument()</a><br />
@@ -390,6 +392,8 @@
                                                                     <a href="../classes/Nc2ToNc3BaseBehavior.html#method__convertWYSIWYG" class="">_convertWYSIWYG()</a><br />
                                                                     <a href="../classes/Nc2ToNc3BaseBehavior.html#method__writeCurrent" class="">_writeCurrent()</a><br />
                                                                     <a href="../classes/Nc2ToNc3BaseBehavior.html#method__removeUseCurrent" class="">_removeUseCurrent()</a><br />
+                                                                    <a href="../classes/Nc2ToNc3BaseBehavior.html#method__executionTimeStart" class="">_executionTimeStart()</a><br />
+                                                                    <a href="../classes/Nc2ToNc3BaseBehavior.html#method__executionTimeEnd" class="">_executionTimeEnd()</a><br />
                                                             </section>
                             <section class="span4">
                                                                     <em>No protected properties found</em>
@@ -1282,6 +1286,96 @@
                     string
                                             &mdash; <p>converted nc3 timezone.</p>
                                     				
+                            </article>
+        </div>
+        <aside class="span4 detailsbar">
+            <h1><i class="icon-arrow-down"></i></h1>
+                                                            <dl>
+                                                    <dt>Inherited from</dt>
+                    <dd><a href="../classes/Nc2ToNc3BaseBehavior.html"><div class="path-wrapper">\Nc2ToNc3BaseBehavior</div></a></dd>
+                                                            </dl>
+            <h2>Tags</h2>
+            <table class="table table-condensed">
+                                    <tr><td colspan="2"><em>None found</em></td></tr>
+                            </table>
+        </aside>
+    </div>
+
+                                    <div class="row-fluid">
+        <div class="span8 content class">
+            <a id="method_executionTimeStart" name="method_executionTimeStart" class="anchor"></a>
+            <article class="method">
+                <h3 class="public ">executionTimeStart()</h3>
+                <a href="#source-view" role="button" class="pull-right btn" data-toggle="modal" style="font-size: 1.1em; padding: 9px 14px"><i class="icon-code"></i></a>
+                <pre class="signature" style="margin-right: 54px;">executionTimeStart(\Model  <span class="argument">$model</span>) : float</pre>
+                <p><em>実行時間の計測開始時間</em></p>
+                
+
+                                    <h4>Parameters</h4>
+                    <table class="table table-condensed table-hover">
+                                                    <tr>
+                                <td>\Model</td>
+                                <td>$model </td>
+                                <td><p>Model using this behavior.</p></td>
+                            </tr>
+                                            </table>
+                
+                
+                                    <h4>Returns</h4>
+                    float
+                                            &mdash; <p>現在の Unix タイムスタンプのマイクロ秒</p>
+                                    				
+                            </article>
+        </div>
+        <aside class="span4 detailsbar">
+            <h1><i class="icon-arrow-down"></i></h1>
+                                                            <dl>
+                                                    <dt>Inherited from</dt>
+                    <dd><a href="../classes/Nc2ToNc3BaseBehavior.html"><div class="path-wrapper">\Nc2ToNc3BaseBehavior</div></a></dd>
+                                                            </dl>
+            <h2>Tags</h2>
+            <table class="table table-condensed">
+                                    <tr><td colspan="2"><em>None found</em></td></tr>
+                            </table>
+        </aside>
+    </div>
+
+                                    <div class="row-fluid">
+        <div class="span8 content class">
+            <a id="method_executionTimeEnd" name="method_executionTimeEnd" class="anchor"></a>
+            <article class="method">
+                <h3 class="public ">executionTimeEnd()</h3>
+                <a href="#source-view" role="button" class="pull-right btn" data-toggle="modal" style="font-size: 1.1em; padding: 9px 14px"><i class="icon-code"></i></a>
+                <pre class="signature" style="margin-right: 54px;">executionTimeEnd(\Model  <span class="argument">$model</span>, string  <span class="argument">$methodName</span>, float  <span class="argument">$timeStart</span>, float  <span class="argument">$executionFlushTime</span>) : void</pre>
+                <p><em>実行時間の計測終了</em></p>
+                
+
+                                    <h4>Parameters</h4>
+                    <table class="table table-condensed table-hover">
+                                                    <tr>
+                                <td>\Model</td>
+                                <td>$model </td>
+                                <td><p>Model using this behavior.</p></td>
+                            </tr>
+                                                    <tr>
+                                <td>string</td>
+                                <td>$methodName </td>
+                                <td><p>メソッド名</p></td>
+                            </tr>
+                                                    <tr>
+                                <td>float</td>
+                                <td>$timeStart </td>
+                                <td><p>計測開始時間(秒)</p></td>
+                            </tr>
+                                                    <tr>
+                                <td>float</td>
+                                <td>$executionFlushTime </td>
+                                <td><p>この実行時間(秒)を越えたらClassRegistry::flush()</p></td>
+                            </tr>
+                                            </table>
+                
+                
+                				
                             </article>
         </div>
         <aside class="span4 detailsbar">
@@ -2518,6 +2612,83 @@
         </aside>
     </div>
 
+                                    <div class="row-fluid">
+        <div class="span8 content class">
+            <a id="method__executionTimeStart" name="method__executionTimeStart" class="anchor"></a>
+            <article class="method">
+                <h3 class="protected ">_executionTimeStart()</h3>
+                <a href="#source-view" role="button" class="pull-right btn" data-toggle="modal" style="font-size: 1.1em; padding: 9px 14px"><i class="icon-code"></i></a>
+                <pre class="signature" style="margin-right: 54px;">_executionTimeStart() : float</pre>
+                <p><em>実行時間の計測開始時間</em></p>
+                
+
+                
+                
+                                    <h4>Returns</h4>
+                    float
+                                            &mdash; <p>現在の Unix タイムスタンプのマイクロ秒</p>
+                                    				
+                            </article>
+        </div>
+        <aside class="span4 detailsbar">
+            <h1><i class="icon-arrow-down"></i></h1>
+                                                            <dl>
+                                                    <dt>Inherited from</dt>
+                    <dd><a href="../classes/Nc2ToNc3BaseBehavior.html"><div class="path-wrapper">\Nc2ToNc3BaseBehavior</div></a></dd>
+                                                            </dl>
+            <h2>Tags</h2>
+            <table class="table table-condensed">
+                                    <tr><td colspan="2"><em>None found</em></td></tr>
+                            </table>
+        </aside>
+    </div>
+
+                                    <div class="row-fluid">
+        <div class="span8 content class">
+            <a id="method__executionTimeEnd" name="method__executionTimeEnd" class="anchor"></a>
+            <article class="method">
+                <h3 class="protected ">_executionTimeEnd()</h3>
+                <a href="#source-view" role="button" class="pull-right btn" data-toggle="modal" style="font-size: 1.1em; padding: 9px 14px"><i class="icon-code"></i></a>
+                <pre class="signature" style="margin-right: 54px;">_executionTimeEnd(string  <span class="argument">$methodName</span>, float  <span class="argument">$timeStart</span>, float  <span class="argument">$executionFlushTime</span>) : void</pre>
+                <p><em>実行時間の計測終了</em></p>
+                
+
+                                    <h4>Parameters</h4>
+                    <table class="table table-condensed table-hover">
+                                                    <tr>
+                                <td>string</td>
+                                <td>$methodName </td>
+                                <td><p>メソッド名</p></td>
+                            </tr>
+                                                    <tr>
+                                <td>float</td>
+                                <td>$timeStart </td>
+                                <td><p>計測開始時間(秒)</p></td>
+                            </tr>
+                                                    <tr>
+                                <td>float</td>
+                                <td>$executionFlushTime </td>
+                                <td><p>この実行時間(秒)を越えたらClassRegistry::flush()</p></td>
+                            </tr>
+                                            </table>
+                
+                
+                				
+                            </article>
+        </div>
+        <aside class="span4 detailsbar">
+            <h1><i class="icon-arrow-down"></i></h1>
+                                                            <dl>
+                                                    <dt>Inherited from</dt>
+                    <dd><a href="../classes/Nc2ToNc3BaseBehavior.html"><div class="path-wrapper">\Nc2ToNc3BaseBehavior</div></a></dd>
+                                                            </dl>
+            <h2>Tags</h2>
+            <table class="table table-condensed">
+                                    <tr><td colspan="2"><em>None found</em></td></tr>
+                            </table>
+        </aside>
+    </div>
+
                                                     <div class="row-fluid">
         <div class="span8 content class">
             <a id="method___setNc2DefaultEntryRoleAuthList" name="method___setNc2DefaultEntryRoleAuthList" class="anchor"></a>
@@ -2661,7 +2832,7 @@
                 <section class="span10 offset1">
                     <hr />
                     Documentation is powered by <a href="http://www.phpdoc.org/">phpDocumentor </a> and authored
-                    on April 5th, 2019 at 00:01.
+                    on April 14th, 2019 at 03:32.
                 </section>
             </section>
         </section>
