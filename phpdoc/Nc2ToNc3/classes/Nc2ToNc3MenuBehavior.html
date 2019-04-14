@@ -136,10 +136,10 @@
                                 <div class="accordion" style="margin-bottom: 0">
         <div class="accordion-group">
             <div class="accordion-heading">
-                                    <a class="accordion-toggle " data-toggle="collapse" data-target="#namespace-192122462"></a>
+                                    <a class="accordion-toggle " data-toggle="collapse" data-target="#namespace-719169486"></a>
                                 <a href="../namespaces/default.html" style="margin-left: 30px; padding-left: 0">\</a>
             </div>
-            <div id="namespace-192122462" class="accordion-body collapse in">
+            <div id="namespace-719169486" class="accordion-body collapse in">
                 <div class="accordion-inner">
 
                     
@@ -2033,7 +2033,11 @@ data[MenuFrameSetting][is_private_room_hidden]</p>
                 <h3 class="protected ">_executionTimeEnd()</h3>
                 <a href="#source-view" role="button" class="pull-right btn" data-toggle="modal" style="font-size: 1.1em; padding: 9px 14px"><i class="icon-code"></i></a>
                 <pre class="signature" style="margin-right: 54px;">_executionTimeEnd(string  <span class="argument">$methodName</span>, float  <span class="argument">$timeStart</span>, float  <span class="argument">$executionFlushTime</span>, boolean  <span class="argument">$isOutputLog = false</span>) : void</pre>
-                <p><em>実行時間の計測終了</em></p>
+                <p><em>実行時間の計測終了&lt;br&gt;
+&lt;br&gt;
+Nc2ToNc3Frame, Nc2ToNc3Announcement, Nc2ToNc3Menu, Nc2ToNc3Registration&lt;br&gt;
+にざっくり実装した処、実行速度が実装前より遅くなった。&lt;br&gt;
+Nc2ToNc3User, Nc2ToNc3Room, Nc2ToNc3Pageは実行速度が早くなった。</em></p>
                 
 
                                     <h4>Parameters</h4>
@@ -2164,7 +2168,7 @@ data[MenuFrameSetting][is_private_room_hidden]</p>
             <article class="method">
                 <h3 class="private ">__convertDisplayType()</h3>
                 <a href="#source-view" role="button" class="pull-right btn" data-toggle="modal" style="font-size: 1.1em; padding: 9px 14px"><i class="icon-code"></i></a>
-                <pre class="signature" style="margin-right: 54px;">__convertDisplayType(array  <span class="argument">$nc2MenuDetail</span>) : \Model</pre>
+                <pre class="signature" style="margin-right: 54px;">__convertDisplayType(array  <span class="argument">$nc2MenuDetail</span>) : string</pre>
                 <p><em>Convert to Nc3MenuFrameSetting display_type.</em></p>
                 
 
@@ -2179,8 +2183,8 @@ data[MenuFrameSetting][is_private_room_hidden]</p>
                 
                 
                                     <h4>Returns</h4>
-                    \Model
-                                            &mdash; <p>converted date.</p>
+                    string
+                                            &mdash; <p>nc2 template name.</p>
                                     				
                             </article>
         </div>
@@ -2244,7 +2248,7 @@ data[MenuFrameSetting][is_private_room_hidden]</p>
                 <section class="span10 offset1">
                     <hr />
                     Documentation is powered by <a href="http://www.phpdoc.org/">phpDocumentor </a> and authored
-                    on April 14th, 2019 at 09:16.
+                    on April 14th, 2019 at 16:09.
                 </section>
             </section>
         </section>
