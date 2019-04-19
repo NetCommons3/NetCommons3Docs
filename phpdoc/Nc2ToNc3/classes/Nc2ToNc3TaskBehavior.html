@@ -136,10 +136,10 @@
                                 <div class="accordion" style="margin-bottom: 0">
         <div class="accordion-group">
             <div class="accordion-heading">
-                                    <a class="accordion-toggle " data-toggle="collapse" data-target="#namespace-1838784482"></a>
+                                    <a class="accordion-toggle " data-toggle="collapse" data-target="#namespace-1149039209"></a>
                                 <a href="../namespaces/default.html" style="margin-left: 30px; padding-left: 0">\</a>
             </div>
-            <div id="namespace-1838784482" class="accordion-body collapse in">
+            <div id="namespace-1149039209" class="accordion-body collapse in">
                 <div class="accordion-inner">
 
                     
@@ -347,8 +347,6 @@
                                                                     <a href="../classes/Nc2ToNc3BaseBehavior.html#method_convertChoiceValue" class="">convertChoiceValue()</a><br />
                                                                     <a href="../classes/Nc2ToNc3BaseBehavior.html#method_convertTitleIcon" class="">convertTitleIcon()</a><br />
                                                                     <a href="../classes/Nc2ToNc3BaseBehavior.html#method_convertTimezone" class="">convertTimezone()</a><br />
-                                                                    <a href="../classes/Nc2ToNc3BaseBehavior.html#method_executionTimeStart" class="">executionTimeStart()</a><br />
-                                                                    <a href="../classes/Nc2ToNc3BaseBehavior.html#method_executionTimeEnd" class="">executionTimeEnd()</a><br />
                                                                     <a href="../classes/Nc2ToNc3BaseBehavior.html#method_writeCurrent" class="">writeCurrent()</a><br />
                                                                     <a href="../classes/Nc2ToNc3BaseBehavior.html#method_removeUseCurrent" class="">removeUseCurrent()</a><br />
                                                                     <a href="../classes/Nc2ToNc3TaskBehavior.html#method_getLogArgument" class="">getLogArgument()</a><br />
@@ -378,8 +376,6 @@
                                                                     <a href="../classes/Nc2ToNc3BaseBehavior.html#method__convertWYSIWYG" class="">_convertWYSIWYG()</a><br />
                                                                     <a href="../classes/Nc2ToNc3BaseBehavior.html#method__writeCurrent" class="">_writeCurrent()</a><br />
                                                                     <a href="../classes/Nc2ToNc3BaseBehavior.html#method__removeUseCurrent" class="">_removeUseCurrent()</a><br />
-                                                                    <a href="../classes/Nc2ToNc3BaseBehavior.html#method__executionTimeStart" class="">_executionTimeStart()</a><br />
-                                                                    <a href="../classes/Nc2ToNc3BaseBehavior.html#method__executionTimeEnd" class="">_executionTimeEnd()</a><br />
                                                                     <a href="../classes/Nc2ToNc3TaskBehavior.html#method__convertPriority" class="">_convertPriority()</a><br />
                                                             </section>
                             <section class="span4">
@@ -1061,101 +1057,6 @@
                     string
                                             &mdash; <p>converted nc3 timezone.</p>
                                     				
-                            </article>
-        </div>
-        <aside class="span4 detailsbar">
-            <h1><i class="icon-arrow-down"></i></h1>
-                                                            <dl>
-                                                    <dt>Inherited from</dt>
-                    <dd><a href="../classes/Nc2ToNc3BaseBehavior.html"><div class="path-wrapper">\Nc2ToNc3BaseBehavior</div></a></dd>
-                                                            </dl>
-            <h2>Tags</h2>
-            <table class="table table-condensed">
-                                    <tr><td colspan="2"><em>None found</em></td></tr>
-                            </table>
-        </aside>
-    </div>
-
-                                    <div class="row-fluid">
-        <div class="span8 content class">
-            <a id="method_executionTimeStart" name="method_executionTimeStart" class="anchor"></a>
-            <article class="method">
-                <h3 class="public ">executionTimeStart()</h3>
-                <a href="#source-view" role="button" class="pull-right btn" data-toggle="modal" style="font-size: 1.1em; padding: 9px 14px"><i class="icon-code"></i></a>
-                <pre class="signature" style="margin-right: 54px;">executionTimeStart(\Model  <span class="argument">$model</span>) : float</pre>
-                <p><em>実行時間の計測開始時間</em></p>
-                
-
-                                    <h4>Parameters</h4>
-                    <table class="table table-condensed table-hover">
-                                                    <tr>
-                                <td>\Model</td>
-                                <td>$model </td>
-                                <td><p>Model using this behavior.</p></td>
-                            </tr>
-                                            </table>
-                
-                
-                                    <h4>Returns</h4>
-                    float
-                                            &mdash; <p>現在の Unix タイムスタンプのマイクロ秒</p>
-                                    				
-                            </article>
-        </div>
-        <aside class="span4 detailsbar">
-            <h1><i class="icon-arrow-down"></i></h1>
-                                                            <dl>
-                                                    <dt>Inherited from</dt>
-                    <dd><a href="../classes/Nc2ToNc3BaseBehavior.html"><div class="path-wrapper">\Nc2ToNc3BaseBehavior</div></a></dd>
-                                                            </dl>
-            <h2>Tags</h2>
-            <table class="table table-condensed">
-                                    <tr><td colspan="2"><em>None found</em></td></tr>
-                            </table>
-        </aside>
-    </div>
-
-                                    <div class="row-fluid">
-        <div class="span8 content class">
-            <a id="method_executionTimeEnd" name="method_executionTimeEnd" class="anchor"></a>
-            <article class="method">
-                <h3 class="public ">executionTimeEnd()</h3>
-                <a href="#source-view" role="button" class="pull-right btn" data-toggle="modal" style="font-size: 1.1em; padding: 9px 14px"><i class="icon-code"></i></a>
-                <pre class="signature" style="margin-right: 54px;">executionTimeEnd(\Model  <span class="argument">$model</span>, string  <span class="argument">$methodName</span>, float  <span class="argument">$timeStart</span>, float  <span class="argument">$executionFlushTime</span>, boolean  <span class="argument">$isOutputLog = false</span>) : void</pre>
-                <p><em>実行時間の計測終了</em></p>
-                
-
-                                    <h4>Parameters</h4>
-                    <table class="table table-condensed table-hover">
-                                                    <tr>
-                                <td>\Model</td>
-                                <td>$model </td>
-                                <td><p>Model using this behavior.</p></td>
-                            </tr>
-                                                    <tr>
-                                <td>string</td>
-                                <td>$methodName </td>
-                                <td><p>メソッド名</p></td>
-                            </tr>
-                                                    <tr>
-                                <td>float</td>
-                                <td>$timeStart </td>
-                                <td><p>計測開始時間(秒)</p></td>
-                            </tr>
-                                                    <tr>
-                                <td>float</td>
-                                <td>$executionFlushTime </td>
-                                <td><p>この実行時間(秒)を越えたらClassRegistry::flush()</p></td>
-                            </tr>
-                                                    <tr>
-                                <td>boolean</td>
-                                <td>$isOutputLog </td>
-                                <td><p>パフォーマンスログ出力. true:出力|false:出力しない</p></td>
-                            </tr>
-                                            </table>
-                
-                
-                				
                             </article>
         </div>
         <aside class="span4 detailsbar">
@@ -1975,99 +1876,6 @@ data[TaskContent][task_key]:</p>
 
                                     <div class="row-fluid">
         <div class="span8 content class">
-            <a id="method__executionTimeStart" name="method__executionTimeStart" class="anchor"></a>
-            <article class="method">
-                <h3 class="protected ">_executionTimeStart()</h3>
-                <a href="#source-view" role="button" class="pull-right btn" data-toggle="modal" style="font-size: 1.1em; padding: 9px 14px"><i class="icon-code"></i></a>
-                <pre class="signature" style="margin-right: 54px;">_executionTimeStart() : float</pre>
-                <p><em>実行時間の計測開始時間</em></p>
-                
-
-                
-                
-                                    <h4>Returns</h4>
-                    float
-                                            &mdash; <p>現在の Unix タイムスタンプのマイクロ秒</p>
-                                    				
-                            </article>
-        </div>
-        <aside class="span4 detailsbar">
-            <h1><i class="icon-arrow-down"></i></h1>
-                                                            <dl>
-                                                    <dt>Inherited from</dt>
-                    <dd><a href="../classes/Nc2ToNc3BaseBehavior.html"><div class="path-wrapper">\Nc2ToNc3BaseBehavior</div></a></dd>
-                                                            </dl>
-            <h2>Tags</h2>
-            <table class="table table-condensed">
-                                    <tr><td colspan="2"><em>None found</em></td></tr>
-                            </table>
-        </aside>
-    </div>
-
-                                    <div class="row-fluid">
-        <div class="span8 content class">
-            <a id="method__executionTimeEnd" name="method__executionTimeEnd" class="anchor"></a>
-            <article class="method">
-                <h3 class="protected ">_executionTimeEnd()</h3>
-                <a href="#source-view" role="button" class="pull-right btn" data-toggle="modal" style="font-size: 1.1em; padding: 9px 14px"><i class="icon-code"></i></a>
-                <pre class="signature" style="margin-right: 54px;">_executionTimeEnd(string  <span class="argument">$methodName</span>, float  <span class="argument">$timeStart</span>, float  <span class="argument">$executionFlushTime</span>, boolean  <span class="argument">$isOutputLog = false</span>) : void</pre>
-                <p><em>実行時間の計測終了&lt;br&gt;
-&lt;br&gt;
-Nc2ToNc3Frame, Nc2ToNc3Announcement, Nc2ToNc3Menu, Nc2ToNc3Registration&lt;br&gt;
-にざっくり実装した処、実行速度が実装前より遅くなった。&lt;br&gt;
-Nc2ToNc3User, Nc2ToNc3Room, Nc2ToNc3Pageは実行速度が早くなった。</em></p>
-                
-
-                                    <h4>Parameters</h4>
-                    <table class="table table-condensed table-hover">
-                                                    <tr>
-                                <td>string</td>
-                                <td>$methodName </td>
-                                <td><p>メソッド名</p></td>
-                            </tr>
-                                                    <tr>
-                                <td>float</td>
-                                <td>$timeStart </td>
-                                <td><p>計測開始時間(秒)</p></td>
-                            </tr>
-                                                    <tr>
-                                <td>float</td>
-                                <td>$executionFlushTime </td>
-                                <td><p>この実行時間(秒)を越えたらClassRegistry::flush()</p></td>
-                            </tr>
-                                                    <tr>
-                                <td>boolean</td>
-                                <td>$isOutputLog </td>
-                                <td><p>パフォーマンスログ出力. true:出力|false:出力しない</p></td>
-                            </tr>
-                                            </table>
-                
-                
-                				
-                            </article>
-        </div>
-        <aside class="span4 detailsbar">
-            <h1><i class="icon-arrow-down"></i></h1>
-                                                            <dl>
-                                                    <dt>Inherited from</dt>
-                    <dd><a href="../classes/Nc2ToNc3BaseBehavior.html"><div class="path-wrapper">\Nc2ToNc3BaseBehavior</div></a></dd>
-                                                            </dl>
-            <h2>Tags</h2>
-            <table class="table table-condensed">
-                                    <tr>
-                        <th>
-                            SuppressWarnings
-                        </th>
-                        <td>
-                                                                                            <p>(PHPMD.BooleanArgumentFlag)</p>
-                                                    </td>
-                    </tr>
-                            </table>
-        </aside>
-    </div>
-
-                                    <div class="row-fluid">
-        <div class="span8 content class">
             <a id="method__convertPriority" name="method__convertPriority" class="anchor"></a>
             <article class="method">
                 <h3 class="protected ">_convertPriority()</h3>
@@ -2189,7 +1997,7 @@ Nc2ToNc3User, Nc2ToNc3Room, Nc2ToNc3Pageは実行速度が早くなった。</em
                 <section class="span10 offset1">
                     <hr />
                     Documentation is powered by <a href="http://www.phpdoc.org/">phpDocumentor </a> and authored
-                    on April 16th, 2019 at 10:34.
+                    on April 19th, 2019 at 14:20.
                 </section>
             </section>
         </section>
