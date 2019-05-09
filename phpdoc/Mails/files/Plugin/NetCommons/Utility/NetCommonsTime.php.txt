@@ -110,6 +110,11 @@ class NetCommonsTime {
  * @return string サーバタイムゾーンに変換された日時
  */
 	public function toServerDatetime($userDatetime, $userTimezone = null) {
+		if (! Validation::date($userDatetime) &&
+				! Validation::datetime($userDatetime)) {
+			//日時型じゃない場合、変換できないので、そのまま返す。
+			return $userDatetime;
+		}
 		if (! $userTimezone) {
 			$userTimezone = $this->getUserTimezone();
 		}
@@ -131,8 +136,9 @@ class NetCommonsTime {
 		$serverDatetimeData = $data;
 		$convertKeyNameList = Hash::filter($convertKeyNameList);
 		foreach ($convertKeyNameList as $keyName) {
-			if (Hash::get($data, $keyName)) {
-				$_serverDatetime = $this->toServerDatetime(Hash::get($data, $keyName), $userTimezone);
+			$date = Hash::get($data, $keyName);
+			if ($date) {
+				$_serverDatetime = $this->toServerDatetime($date, $userTimezone);
 				$serverDatetimeData = Hash::insert($serverDatetimeData, $keyName, $_serverDatetime);
 			}
 		}
@@ -190,5 +196,64 @@ class NetCommonsTime {
 		}
 		return true;
 	}
+
+/**
+ * Date Format
+ *
+ * @param datetime $date datetime
+ * @param null|string $format フォーマット
+ * @return array
+ */
+	public function dateFormat($date, $format = null) {
+		if (! Validation::datetime($date)) {
+			return null;
+		}
+		// ユーザタイムゾーンに変換
+		$date = $this->toUserDatetime($date);
+
+		if ($format) {
+			return date($format, strtotime($date));
+
+		} elseif ($this->_isToday($date)) {
+			return date('G:i', strtotime($date));
+
+		} elseif (! $this->_isThisYear($date)) {
+			return date('Y/m/d', strtotime($date));
+
+		} else {
+			return date('m/d', strtotime($date));
+		}
+	}
+
+/**
+ * ユーザタイムゾーンで今日の日付かの判定
+ *
+ * @param string $date user timezone datetime
+ * @return bool
+ */
+	protected function _isToday($date) {
+		$now = $this->getNowDatetime();
+		$nowUserDatetime = $this->toUserDatetime($now);
+
+		$dateYmd = date('Y-m-d', strtotime($date));
+		$nowYmd = date('Y-m-d', strtotime($nowUserDatetime));
+		return ($dateYmd === $nowYmd);
+	}
+
+/**
+ * ユーザタイムゾーンで今年の日時かの判定
+ *
+ * @param string $date user timezone datetime
+ * @return bool
+ */
+	protected function _isThisYear($date) {
+		$now = $this->getNowDatetime();
+		$nowUserDatetime = $this->toUserDatetime($now);
+
+		$dateYear = date('Y', strtotime($date));
+		$nowYear = date('Y', strtotime($nowUserDatetime));
+		return ($dateYear === $nowYear);
+	}
+
 }
 
