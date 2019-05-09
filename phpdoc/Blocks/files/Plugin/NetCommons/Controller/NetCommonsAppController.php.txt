@@ -14,7 +14,6 @@ App::uses('Utility', 'Inflector');
 App::uses('NetCommonsUrl', 'NetCommons.Utility');
 App::uses('PermissionComponent', 'NetCommons.Controller/Component');
 App::uses('SiteSettingUtil', 'SiteManager.Utility');
-App::uses('User', 'Users.Model');
 
 App::uses('CurrentLib', 'NetCommons.Lib');
 
@@ -63,10 +62,6 @@ class NetCommonsAppController extends Controller {
 				'controller' => 'pages',
 				'action' => 'index',
 			),
-			'passwordHasher' => [
-				'className' => 'Simple',
-				'hashType' => User::PASSWORD_HASH_TYPE,
-			],
 		),
 		//'DebugKit.Toolbar',
 		'Flash',
@@ -122,6 +117,13 @@ class NetCommonsAppController extends Controller {
 	protected $_allowMethods = [
 		'get', 'post', 'put', 'delete'
 	];
+
+/**
+ * CurrentLibライブラリ
+ *
+ * @var CurrentLib
+ */
+	public $CurrentLib = null;
 
 /**
  * Constructor.
@@ -201,27 +203,33 @@ class NetCommonsAppController extends Controller {
 		//言語のセット
 		$this->_setLanguage();
 
-		//カレントデータセット
-if (empty($this->request->params['requested'])) {
-	$indent = '';
-} else {
-	$indent = '  ';
-}
-$startTime = microtime(true);
-		//@var $instance CurrentLib
-		$instance = CurrentLib::getInstance();
-		$instance->initialize($this);
+		//if (empty($this->request->params['requested'])) {
+		//	$indent = '';
+		//} else {
+		//	$indent = '  ';
+		//}
+		//$startTime = microtime(true);
 
-//$debug = CurrentLib::$current;
-//unset($debug['PluginsRoom']);
-//ksort($debug);
-//CakeLog::debug($indent . __METHOD__ . '(' . __LINE__ . ') ' . var_export($debug, true));
-//$debug = NcPermission::$permission;
-//ksort($debug);
-//CakeLog::debug($indent . __METHOD__ . '(' . __LINE__ . ') ' . var_export($debug, true));
-$endTime = microtime(true);
-CakeLog::debug($indent . __METHOD__ . '(' . __LINE__ . ') Current::initialize()');
-CakeLog::debug($indent . var_export(($endTime - $startTime), true));
+		if (Configure::read('NetCommons.installed')) {
+			//カレントデータセット UnitTestでMockに差し替えられるようにメンバ変数としておく
+			//@codeCoverageIgnoreStart
+			if (empty($this->CurrentLib)) {
+				$this->CurrentLib = CurrentLib::getInstance();
+			}
+			//@codeCoverageIgnoreEnd
+			$this->CurrentLib->initialize($this);
+		}
+
+		//$debug = CurrentLib::$current;
+		//unset($debug['PluginsRoom']);
+		//ksort($debug);
+		//CakeLog::debug($indent . __METHOD__ . '(' . __LINE__ . ') ' . var_export($debug, true));
+		//$debug = NcPermission::$permission;
+		//ksort($debug);
+		//CakeLog::debug($indent . __METHOD__ . '(' . __LINE__ . ') ' . var_export($debug, true));
+		//$endTime = microtime(true);
+		//CakeLog::debug($indent . __METHOD__ . '(' . __LINE__ . ') Current::initialize()');
+		//CakeLog::debug($indent . var_export(($endTime - $startTime), true));
 
 		if (! $this->AccessCtrl->allowAccess()) {
 			return;
@@ -256,8 +264,14 @@ CakeLog::debug($indent . var_export(($endTime - $startTime), true));
  */
 	public function afterFilter() {
 		//カレントデータセット
-		$instance = CurrentLib::getInstance();
-		$instance->terminate($this);
+		if (Configure::read('NetCommons.installed')) {
+			//@codeCoverageIgnoreStart
+			if (empty($this->CurrentLib)) {
+				$this->CurrentLib = CurrentLib::getInstance();
+			}
+			//@codeCoverageIgnoreEnd
+			$this->CurrentLib->terminate($this);
+		}
 
 		parent::afterFilter();
 	}
