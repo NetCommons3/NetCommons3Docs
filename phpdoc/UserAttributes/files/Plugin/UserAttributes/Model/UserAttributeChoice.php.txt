@@ -108,7 +108,7 @@ class UserAttributeChoice extends UsersAppModel {
  * @see Model::save()
  */
 	public function beforeValidate($options = array()) {
-		$this->validate = Hash::merge($this->validate, array(
+		$this->validate = ValidateMerge::merge($this->validate, array(
 			'language_id' => array(
 				'numeric' => array(
 					'rule' => array('numeric'),
