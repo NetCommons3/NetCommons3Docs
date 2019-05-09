@@ -136,10 +136,10 @@
                                 <div class="accordion" style="margin-bottom: 0">
         <div class="accordion-group">
             <div class="accordion-heading">
-                                    <a class="accordion-toggle " data-toggle="collapse" data-target="#namespace-934750667"></a>
+                                    <a class="accordion-toggle " data-toggle="collapse" data-target="#namespace-1242120296"></a>
                                 <a href="../namespaces/default.html" style="margin-left: 30px; padding-left: 0">\</a>
             </div>
-            <div id="namespace-934750667" class="accordion-body collapse in">
+            <div id="namespace-1242120296" class="accordion-body collapse in">
                 <div class="accordion-inner">
 
                     
@@ -315,10 +315,9 @@
                                             </nav>
                     <a href="#source-view" role="button" class="pull-right btn" data-toggle="modal"><i class="icon-code"></i></a>
 
-                    <h1><small>\</small>MessageFlashHelper</h1>
-                    <p><em>メッセージ表示のためのHelper</em></p>
-                    <p>Add your application-wide methods in the class below, your helpers
-will inherit them.</p>
+                    <h1><small>\</small>ValidateMerge</h1>
+                    <p><em>Class ValidateMerge</em></p>
+                    
                     
                                         
                     <section id="summary">
@@ -336,10 +335,10 @@ will inherit them.</p>
                         </section>
                         <section class="row-fluid public">
                             <section class="span4">
-                                                                    <a href="../classes/MessageFlashHelper.html#method_description" class="">description()</a><br />
+                                                                    <a href="../classes/ValidateMerge.html#method_merge" class="">merge()</a><br />
                                                             </section>
                             <section class="span4">
-                                                                    <a href="../classes/MessageFlashHelper.html#property_helpers" class="">$helpers</a><br />
+                                                                    <em>No public properties found</em>
                                                             </section>
                             <section class="span4">
                                                                     <em>No constants found</em>
@@ -374,18 +373,12 @@ will inherit them.</p>
                     
                     <dl>
                         <dt>File</dt>
-                            <dd><a href="../files/Plugin.NetCommons.View.Helper.MessageFlashHelper.html"><div class="path-wrapper">Plugin/NetCommons/View/Helper/MessageFlashHelper.php</div></a></dd>
+                            <dd><a href="../files/Plugin.NetCommons.Utility.ValidateMerge.html"><div class="path-wrapper">Plugin/NetCommons/Utility/ValidateMerge.php</div></a></dd>
                                                 <dt>Package</dt>
-                            <dd><div class="namespace-wrapper">View\Helper</div></dd>
+                            <dd><div class="namespace-wrapper">Default</div></dd>
                                                 <dt>Class hierarchy</dt>
                             <dd class="hierarchy">
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                        
-                                        <div class="namespace-wrapper">\Helper</div>
-                                                                    
-                                        <div class="namespace-wrapper"><a href="../classes/NetCommonsAppHelper.html">\NetCommonsAppHelper</a></div>
-                                                                    
-                                        <div class="namespace-wrapper"><a href="../classes/AppHelper.html">\AppHelper</a></div>
-                                                                                                    <div class="namespace-wrapper">\MessageFlashHelper</div>
+                                                                                                                                                                    <div class="namespace-wrapper">\ValidateMerge</div>
                             </dd>
 
                         
@@ -401,41 +394,7 @@ will inherit them.</p>
             </div>
 
                         
-                                    <a id="properties" name="properties"></a>
-            <div class="row-fluid">
-                <div class="span8 content class">
-                    <h2>Properties</h2>
-                </div>
-                <aside class="span4 detailsbar"></aside>
-            </div>
-
-                                    <div class="row-fluid">
-        <div class="span8 content class">
-            <a id="property_helpers" name="property_helpers" class="anchor"></a>
-            <article class="property">
-                <h3 class="public ">$helpers</h3>
-                <pre class="signature">$helpers : array</pre>
-                <p><em>使用するHelpers</em></p>
-                <ul>
-<li><a href="../../NetCommons/classes/NetCommonsHtmlHelper.html">NetCommons.NetCommonsHtmlHelper</a></li>
-</ul>
-
-                                <h4>Type</h4>
-                array
-                                            </article>
-        </div>
-        <aside class="span4 detailsbar">
-            <h1><i class="icon-arrow-down"></i></h1>
-                        <dl>
-                                                            </dl>
-            <h2>Tags</h2>
-            <table class="table table-condensed">
-                                    <tr><td colspan="2"><em>None found</em></td></tr>
-                            </table>
-        </aside>
-    </div>
-
-                                                            
+                        
                                     <a id="methods" name="methods"></a>
             <div class="row-fluid">
                 <div class="span8 content class"><h2>Methods</h2></div>
@@ -444,51 +403,49 @@ will inherit them.</p>
 
                                     <div class="row-fluid">
         <div class="span8 content class">
-            <a id="method_description" name="method_description" class="anchor"></a>
+            <a id="method_merge" name="method_merge" class="anchor"></a>
             <article class="method">
-                <h3 class="public ">description()</h3>
+                <h3 class="public ">merge()</h3>
                 <a href="#source-view" role="button" class="pull-right btn" data-toggle="modal" style="font-size: 1.1em; padding: 9px 14px"><i class="icon-code"></i></a>
-                <pre class="signature" style="margin-right: 54px;">description(string  <span class="argument">$message</span>, array  <span class="argument">$options = array()</span>) : string</pre>
-                <p><em>画面説明の出力</em></p>
-                
+                <pre class="signature" style="margin-right: 54px;">merge(array  <span class="argument">$data</span>, array  <span class="argument">$merge</span>) : mixed</pre>
+                <p><em>merge</em></p>
+                <p>このメソッドは使わないで済むならつかない方がよいです（ファイルコメント参照）</p>
 
                                     <h4>Parameters</h4>
                     <table class="table table-condensed table-hover">
                                                     <tr>
-                                <td>string</td>
-                                <td>$message </td>
-                                <td><p>メッセージ</p></td>
+                                <td>array</td>
+                                <td>$data </td>
+                                <td><p>マージ元配列</p></td>
                             </tr>
                                                     <tr>
                                 <td>array</td>
-                                <td>$options </td>
-                                <td><p>オプション配列</p></td>
+                                <td>$merge </td>
+                                <td><p>マージする配列</p></td>
                             </tr>
                                             </table>
                 
                 
                                     <h4>Returns</h4>
-                    string
-                                            &mdash; <p>HTML出力</p>
-<h5>return サンプル</h5>
-<ul>
-<li>入力<pre><code>echo $this-&gt;MessageFlash-&gt;description('メッセージ内容');</code></pre>
-</li>
-<li>出力<pre><code>&lt;div class="well well-sm"&gt;
-      メッセージ内容
-&lt;/div&gt;</code></pre>
-</li>
-</ul>
+                    mixed
                                     				
                             </article>
         </div>
         <aside class="span4 detailsbar">
             <h1><i class="icon-arrow-down"></i></h1>
+                            <span class="label label-info">static</span>
                                                             <dl>
                                                                             </dl>
             <h2>Tags</h2>
             <table class="table table-condensed">
-                                    <tr><td colspan="2"><em>None found</em></td></tr>
+                                    <tr>
+                        <th>
+                            SuppressWarnings
+                        </th>
+                        <td>
+                                                                                            <p>(PHPMD.CyclomaticComplexity)</p>
+                                                    </td>
+                    </tr>
                             </table>
         </aside>
     </div>
@@ -499,10 +456,10 @@ will inherit them.</p>
     <div id="source-view" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="source-view-label" aria-hidden="true">
         <div class="modal-header">
             <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
-            <h3 id="source-view-label">MessageFlashHelper.php</h3>
+            <h3 id="source-view-label">ValidateMerge.php</h3>
         </div>
         <div class="modal-body">
-            <pre data-src="../files/Plugin/NetCommons/View/Helper/MessageFlashHelper.php.txt" class="language-php line-numbers"></pre>
+            <pre data-src="../files/Plugin/NetCommons/Utility/ValidateMerge.php.txt" class="language-php line-numbers"></pre>
         </div>
     </div>
 
