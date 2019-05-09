@@ -86,7 +86,7 @@ class Role extends RolesAppModel {
  * @see Model::save()
  */
 	public function beforeValidate($options = array()) {
-		$this->validate = Hash::merge(array(
+		$this->validate = ValidateMerge::merge(array(
 			'language_id' => array(
 				'numeric' => array(
 					'rule' => array('numeric'),
