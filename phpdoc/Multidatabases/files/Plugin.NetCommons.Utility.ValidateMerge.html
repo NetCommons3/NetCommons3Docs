@@ -136,10 +136,10 @@
                                 <div class="accordion" style="margin-bottom: 0">
         <div class="accordion-group">
             <div class="accordion-heading">
-                                    <a class="accordion-toggle " data-toggle="collapse" data-target="#namespace-2044785944"></a>
+                                    <a class="accordion-toggle " data-toggle="collapse" data-target="#namespace-1985957668"></a>
                                 <a href="../namespaces/default.html" style="margin-left: 30px; padding-left: 0">\</a>
             </div>
-            <div id="namespace-2044785944" class="accordion-body collapse in">
+            <div id="namespace-1985957668" class="accordion-body collapse in">
                 <div class="accordion-inner">
 
                     
@@ -272,17 +272,20 @@
                                                                     </nav>
 
                     <a href="#source-view" role="button" class="pull-right btn" data-toggle="modal"><i class="icon-code"></i></a>
-                    <h1><small>Plugin/Multidatabases/Config/Migration</small>1479374460_init.php</h1>
-                    <p><em>MultidatabaseInit Migration</em></p>
-                    
+                    <h1><small>Plugin/NetCommons/Utility</small>ValidateMerge.php</h1>
+                    <p><em>バリデートルール結合用クラス</em></p>
+                    <p>モデルやビヘイビアで $this-&gt;validate = Hash::merge($this-&gt;validate, [バリデートルール...]); で
+beforeValidate()がよばれるたびに配列要素が増え続ける問題に対処するために作成</p>
+<p>【注意】
+このクラスを使う前にバリデートルールをbeforeValidateでマージする必用があるかを検討しなおすこと。</p>
 
                     
                     
                                         <h2>Classes</h2>
                     <table class="table table-hover">
                                             <tr>
-                            <td><a href="../classes/Init.html">Init</a></td>
-                            <td><em>MultidatabaseInit Migration</em></td>
+                            <td><a href="../classes/ValidateMerge.html">ValidateMerge</a></td>
+                            <td><em>Class ValidateMerge</em></td>
                         </tr>
                                         </table>
                                     </div>
@@ -293,7 +296,9 @@
                             <dd><div class="namespace-wrapper">\Default</div></dd>
                         
                                                                                     <dt>See also</dt>
-                                                                                        <dd><a href="http://www.netcommons.org"><div class="namespace-wrapper">NetCommons Project</div></a></dd>
+                                                                                        <dd><a href=""><div class="namespace-wrapper">https://github.com/NetCommons3/NetCommons3/issues/1486#issuecomment-490684660</div></a></dd>
+                                                                                                                                            <dd><a href="http://researchmap.jp"><div class="namespace-wrapper">researchmap Project</div></a></dd>
+                                                            <dd><a href="http://www.netcommons.org"><div class="namespace-wrapper">NetCommons Project</div></a></dd>
                                                     
                     </dl>
                     <h2>Tags</h2>
@@ -303,7 +308,8 @@
                                     author
                                 </th>
                                 <td>
-                                                                            <p>Tomoyuki OHNO (Ricksoft Co., Ltd.) <a href="mailto:ohno.tomoyuki@ricksoft.jp">ohno.tomoyuki@ricksoft.jp</a></p>
+                                                                            <p>Japan Science and Technology Agency</p>
+                                                                            <p>National Institute of Informatics</p>
                                                                     </td>
                             </tr>
                                                     <tr>
@@ -311,7 +317,7 @@
                                     license
                                 </th>
                                 <td>
-                                                                            <p><a href="http://www.netcommons.org/license.txt">http://www.netcommons.org/license.txt</a> NetCommons License</p>
+                                                                            <p><a href="http://researchmap.jp/public/terms-of-service/">http://researchmap.jp/public/terms-of-service/</a> researchmap license</p>
                                                                     </td>
                             </tr>
                                                     <tr>
@@ -319,7 +325,7 @@
                                     copyright
                                 </th>
                                 <td>
-                                                                            <p>Copyright 2014, NetCommons Project</p>
+                                                                            <p>Copyright 2017, researchmap Project</p>
                                                                     </td>
                             </tr>
                                             </table>
@@ -338,7 +344,7 @@
             <h3 id="source-view-label"></h3>
         </div>
         <div class="modal-body">
-            <pre data-src="../files/Plugin/Multidatabases/Config/Migration/1479374460_init.php.txt" class="language-php line-numbers"></pre>
+            <pre data-src="../files/Plugin/NetCommons/Utility/ValidateMerge.php.txt" class="language-php line-numbers"></pre>
         </div>
     </div>
 
