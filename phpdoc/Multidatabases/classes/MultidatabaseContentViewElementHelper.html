@@ -136,10 +136,10 @@
                                 <div class="accordion" style="margin-bottom: 0">
         <div class="accordion-group">
             <div class="accordion-heading">
-                                    <a class="accordion-toggle " data-toggle="collapse" data-target="#namespace-2024140322"></a>
+                                    <a class="accordion-toggle " data-toggle="collapse" data-target="#namespace-415300624"></a>
                                 <a href="../namespaces/default.html" style="margin-left: 30px; padding-left: 0">\</a>
             </div>
-            <div id="namespace-2024140322" class="accordion-body collapse in">
+            <div id="namespace-415300624" class="accordion-body collapse in">
                 <div class="accordion-inner">
 
                     
@@ -650,7 +650,7 @@ will inherit them.</p>
             <article class="method">
                 <h3 class="private ">__renderViewElementFileReqAuth()</h3>
                 <a href="#source-view" role="button" class="pull-right btn" data-toggle="modal" style="font-size: 1.1em; padding: 9px 14px"><i class="icon-code"></i></a>
-                <pre class="signature" style="margin-right: 54px;">__renderViewElementFileReqAuth(array  <span class="argument">$content</span>, integer  <span class="argument">$colNo</span>) : string</pre>
+                <pre class="signature" style="margin-right: 54px;">__renderViewElementFileReqAuth(array  <span class="argument">$content</span>, integer  <span class="argument">$colNo</span>, array  <span class="argument">$fileInfo</span>) : string</pre>
                 <p><em>ファイルアップロードの値を出力する（認証が必要な場合）</em></p>
                 
 
@@ -665,6 +665,11 @@ will inherit them.</p>
                                 <td>integer</td>
                                 <td>$colNo </td>
                                 <td><p>カラムNo</p></td>
+                            </tr>
+                                                    <tr>
+                                <td>array</td>
+                                <td>$fileInfo </td>
+                                <td><p>ダウンロードファイル</p></td>
                             </tr>
                                             </table>
                 
@@ -984,7 +989,7 @@ will inherit them.</p>
             <article class="method">
                 <h3 class="private ">__getFileInfo()</h3>
                 <a href="#source-view" role="button" class="pull-right btn" data-toggle="modal" style="font-size: 1.1em; padding: 9px 14px"><i class="icon-code"></i></a>
-                <pre class="signature" style="margin-right: 54px;">__getFileInfo(array  <span class="argument">$content</span>, integer  <span class="argument">$colNo</span>) : boolean</pre>
+                <pre class="signature" style="margin-right: 54px;">__getFileInfo(array  <span class="argument">$content</span>, integer  <span class="argument">$colNo</span>) : boolean|array</pre>
                 <p><em>ダウンロードファイルが存在するかチェックする</em></p>
                 
 
@@ -1004,7 +1009,7 @@ will inherit them.</p>
                 
                 
                                     <h4>Returns</h4>
-                    boolean
+                    boolean|array
                                     				
                             </article>
         </div>
@@ -1068,7 +1073,7 @@ will inherit them.</p>
                 <section class="span10 offset1">
                     <hr />
                     Documentation is powered by <a href="http://www.phpdoc.org/">phpDocumentor </a> and authored
-                    on June 16th, 2019 at 09:57.
+                    on June 16th, 2019 at 10:12.
                 </section>
             </section>
         </section>
