@@ -66,6 +66,7 @@ class CategoryEditComponent extends Component {
 						'CategoriesLanguage' => array(
 							'id' => null,
 							'name' => $post['CategoriesLanguage']['name'],
+							'language_id' => Current::read('Language.id'),
 						),
 						'CategoryOrder' => array(
 							'id' => null,
