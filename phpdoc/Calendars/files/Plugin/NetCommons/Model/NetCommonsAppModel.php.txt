@@ -11,6 +11,7 @@
  */
 
 App::uses('Model', 'Model');
+App::uses('ValidateMerge', 'NetCommons.Utility');
 
 /**
  * NetCommonsApp Model
@@ -30,6 +31,7 @@ App::uses('Model', 'Model');
  * @author Takako Miyagawa <nekoget@gmail.com>
  * @package NetCommons\NetCommons\Model
  * @SuppressWarnings(PHPMD.NumberOfChildren)
+ * @SuppressWarnings(PHPMD.ExcessiveClassComplexity)
  */
 class NetCommonsAppModel extends Model {
 
@@ -400,5 +402,71 @@ class NetCommonsAppModel extends Model {
 		$options = $this->_setAliasData($options);
 		return $options;
 	}
+
+/**
+ * cakephpの登録処理をオーバーライド
+ *
+ * cakephpのsave時にcreated,modifiedの項目にセットする時間が、date_default_timezone_setに影響してしまうため、
+ * 登録直前にUTCに変更し、登録後にdate_default_timezone_setを元に戻すため、オーバライドする
+ *
+ * @param array $data Data to save.
+ * @param array $options can have following keys:
+ *
+ *   - validate: Set to true/false to enable or disable validation.
+ *   - fieldList: An array of fields you want to allow for saving.
+ *   - callbacks: Set to false to disable callbacks. Using 'before' or 'after'
+ *      will enable only those callbacks.
+ *   - `counterCache`: Boolean to control updating of counter caches (if any)
+ *
+ * @return mixed On success Model::$data if its not empty or true, false on failure
+ * @throws PDOException
+ * @link https://book.cakephp.org/2.0/en/models/saving-your-data.html
+ */
+	protected function _doSave($data = null, $options = array()) {
+		$nowDefaultTz = date_default_timezone_get();
+
+		date_default_timezone_set('UTC');
+		$result = parent::_doSave($data, $options);
+		date_default_timezone_set($nowDefaultTz);
+
+		return $result;
+	}
+
+/**
+ * Findの結果をキャッシュする際、afterFindは実行させたいので、CakeのModelを継承して、カスタマイズする。
+ *
+ * @param string $type Type of find operation (all / first / count / neighbors / list / threaded)
+ * @param array $query Option fields (conditions / fields / joins / limit / offset / order / page / group / callbacks)
+ * @return array
+ * @see Model::_readDataSource()
+ */
+	protected function _readDataSource($type, $query) {
+		if (! $this->Behaviors->enabled('NetCommons.NetCommonsCache') ||
+				! isset($query['cacheKey'])) {
+			//キャッシュを使用しない場合、親のメソッドを呼ぶ
+			return parent::_readDataSource($type, $query);
+		} else {
+			//キャッシュを使用する場合、キャッシュの有無を確かめ、
+			//キャッシュがあれば、キャッシュの内容を使用し、無ければ、DBから取得する。
+			//その後の処理は、親と同じ処理。
+			$results = $this->cacheRead($type, $query['cacheKey']);
+			if (! $results) {
+				$results = $this->getDataSource()->read($this, $query);
+				$this->cacheWrite($results, $type, $query['cacheKey']);
+			}
+			$this->resetAssociations();
+
+			if ($query['callbacks'] === true || $query['callbacks'] === 'after') {
+				$results = $this->_filterResults($results);
+			}
+
+			$this->findQueryType = null;
+
+			if ($this->findMethods[$type] === true) {
+				return $this->{'_find' . ucfirst($type)}('after', $query, $results);
+			}
+		}
+	}
+
 }
 
