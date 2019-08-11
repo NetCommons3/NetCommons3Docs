@@ -1,0 +1,1232 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0"/>
+    <meta charset="utf-8"/>
+    <title>API Documentation</title>
+    <meta name="author" content=""/>
+    <meta name="description" content=""/>
+
+    <link href="../css/bootstrap-combined.no-icons.min.css" rel="stylesheet">
+    <link href="../css/font-awesome.min.css" rel="stylesheet">
+    <link href="../css/prism.css" rel="stylesheet" media="all"/>
+    <link href="../css/template.css" rel="stylesheet" media="all"/>
+    
+    <!--[if lt IE 9]>
+    <script src="../js/html5.js"></script>
+    <![endif]-->
+    <script src="../js/jquery-1.11.0.min.js"></script>
+    <script src="../js/ui/1.10.4/jquery-ui.min.js"></script>
+    <script src="../js/bootstrap.min.js"></script>
+    <script src="../js/jquery.smooth-scroll.js"></script>
+    <script src="../js/prism.min.js"></script>
+    <!-- TODO: Add http://jscrollpane.kelvinluck.com/ to style the scrollbars for browsers not using webkit-->
+    <script type="text/javascript">
+    function loadExternalCodeSnippets() {
+        Array.prototype.slice.call(document.querySelectorAll('pre[data-src]')).forEach(function (pre) {
+            var src = pre.getAttribute('data-src');
+            var extension = (src.match(/\.(\w+)$/) || [, ''])[1];
+            var language = 'php';
+
+            var code = document.createElement('code');
+            code.className = 'language-' + language;
+
+            pre.textContent = '';
+
+            code.textContent = 'Loading…';
+
+            pre.appendChild(code);
+
+            var xhr = new XMLHttpRequest();
+
+            xhr.open('GET', src, true);
+
+            xhr.onreadystatechange = function () {
+                if (xhr.readyState == 4) {
+
+                    if (xhr.status < 400 && xhr.responseText) {
+                        code.textContent = xhr.responseText;
+
+                        Prism.highlightElement(code);
+                    }
+                    else if (xhr.status >= 400) {
+                        code.textContent = '✖ Error ' + xhr.status + ' while fetching file: ' + xhr.statusText;
+                    }
+                    else {
+                        code.textContent = '✖ Error: File does not exist or is empty';
+                    }
+                }
+            };
+
+            xhr.send(null);
+        });
+    }
+
+    $(document).ready(function(){
+        loadExternalCodeSnippets();
+    });
+    $('#source-view').on('shown', function () {
+        loadExternalCodeSnippets();
+    })
+</script>
+
+    <link rel="shortcut icon" href="../images/favicon.ico"/>
+    <link rel="apple-touch-icon" href="../images/apple-touch-icon.png"/>
+    <link rel="apple-touch-icon" sizes="72x72" href="../images/apple-touch-icon-72x72.png"/>
+    <link rel="apple-touch-icon" sizes="114x114" href="../images/apple-touch-icon-114x114.png"/>
+</head>
+<body>
+
+<div class="navbar navbar-fixed-top">
+    <div class="navbar-inner">
+        <div class="container">
+            <a class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
+                <i class="icon-ellipsis-vertical"></i>
+            </a>
+            <a class="brand" href="../index.html">API Documentation</a>
+
+            <div class="nav-collapse">
+                <ul class="nav pull-right">
+                                        <li class="dropdown" id="charts-menu">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                            Charts <b class="caret"></b>
+                        </a>
+                        <ul class="dropdown-menu">
+                            <li>
+                                <a href="../graphs/class.html">
+                                    <i class="icon-list-alt"></i>&#160;Class hierarchy diagram
+                                </a>
+                            </li>
+                        </ul>
+                    </li>
+                    <li class="dropdown" id="reports-menu">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                            Reports <b class="caret"></b>
+                        </a>
+                        <ul class="dropdown-menu">
+                            <li>
+                                <a href="../reports/errors.html">
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                            <i class="icon-list-alt"></i>&#160;Errors <span class="label label-info pull-right">0</span>
+                                </a>
+                            </li>
+                            <li>
+                                <a href="../reports/markers.html">
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                            <i class="icon-list-alt"></i>&#160;Markers <span class="label label-info pull-right">0</span>
+                                </a>
+                            </li>
+                            <li>
+                                <a href="../reports/deprecated.html">
+                                                                                                            <i class="icon-list-alt"></i>&#160;Deprecated <span class="label label-info pull-right">0</span>
+                                </a>
+                            </li>
+                        </ul>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+    <!--<div class="go_to_top">-->
+    <!--<a href="#___" style="color: inherit">Back to top&#160;&#160;<i class="icon-upload icon-white"></i></a>-->
+    <!--</div>-->
+</div>
+
+<div id="___" class="container-fluid">
+        <section class="row-fluid">
+        <div class="span2 sidebar">
+                                <div class="accordion" style="margin-bottom: 0">
+        <div class="accordion-group">
+            <div class="accordion-heading">
+                                    <a class="accordion-toggle " data-toggle="collapse" data-target="#namespace-95881904"></a>
+                                <a href="../namespaces/default.html" style="margin-left: 30px; padding-left: 0">\</a>
+            </div>
+            <div id="namespace-95881904" class="accordion-body collapse in">
+                <div class="accordion-inner">
+
+                    
+                    <ul>
+                                                                                                    <li class="class"><a href="../classes/AccessCtrlComponent.html">AccessCtrlComponent</a></li>
+                                                    <li class="class"><a href="../classes/AppController.html">AppController</a></li>
+                                                    <li class="class"><a href="../classes/AppController.html">AppController</a></li>
+                                                    <li class="class"><a href="../classes/AppHelper.html">AppHelper</a></li>
+                                                    <li class="class"><a href="../classes/AppModel.html">AppModel</a></li>
+                                                    <li class="class"><a href="../classes/AppPaginatorComponent.html">AppPaginatorComponent</a></li>
+                                                    <li class="class"><a href="../classes/AppPaginatorHelper.html">AppPaginatorHelper</a></li>
+                                                    <li class="class"><a href="../classes/AppView.html">AppView</a></li>
+                                                    <li class="class"><a href="../classes/AssetComponent.html">AssetComponent</a></li>
+                                                    <li class="class"><a href="../classes/BackToHelper.html">BackToHelper</a></li>
+                                                    <li class="class"><a href="../classes/ButtonHelper.html">ButtonHelper</a></li>
+                                                    <li class="class"><a href="../classes/ComposerHelper.html">ComposerHelper</a></li>
+                                                    <li class="class"><a href="../classes/ControlPanel.html">ControlPanel</a></li>
+                                                    <li class="class"><a href="../classes/ControlPanelAppController.html">ControlPanelAppController</a></li>
+                                                    <li class="class"><a href="../classes/ControlPanelController.html">ControlPanelController</a></li>
+                                                    <li class="class"><a href="../classes/ControlPanelLayoutComponent.html">ControlPanelLayoutComponent</a></li>
+                                                    <li class="class"><a href="../classes/CurrentLib.html">CurrentLib</a></li>
+                                                    <li class="class"><a href="../classes/CurrentLibBlock.html">CurrentLibBlock</a></li>
+                                                    <li class="class"><a href="../classes/CurrentLibFrame.html">CurrentLibFrame</a></li>
+                                                    <li class="class"><a href="../classes/CurrentLibLanguage.html">CurrentLibLanguage</a></li>
+                                                    <li class="class"><a href="../classes/CurrentLibPage.html">CurrentLibPage</a></li>
+                                                    <li class="class"><a href="../classes/CurrentLibPermission.html">CurrentLibPermission</a></li>
+                                                    <li class="class"><a href="../classes/CurrentLibPlugin.html">CurrentLibPlugin</a></li>
+                                                    <li class="class"><a href="../classes/CurrentLibRoom.html">CurrentLibRoom</a></li>
+                                                    <li class="class"><a href="../classes/CurrentLibUser.html">CurrentLibUser</a></li>
+                                                    <li class="class"><a href="../classes/DateHelper.html">DateHelper</a></li>
+                                                    <li class="class"><a href="../classes/DatetimePickerHelper.html">DatetimePickerHelper</a></li>
+                                                    <li class="class"><a href="../classes/DisplayNumberHelper.html">DisplayNumberHelper</a></li>
+                                                    <li class="class"><a href="../classes/FormInputHelper.html">FormInputHelper</a></li>
+                                                    <li class="class"><a href="../classes/LibAppObject.html">LibAppObject</a></li>
+                                                    <li class="class"><a href="../classes/LinkButtonHelper.html">LinkButtonHelper</a></li>
+                                                    <li class="class"><a href="../classes/MessageFlashHelper.html">MessageFlashHelper</a></li>
+                                                    <li class="class"><a href="../classes/NcPermission.html">NcPermission</a></li>
+                                                    <li class="class"><a href="../classes/NetCommonsAppController.html">NetCommonsAppController</a></li>
+                                                    <li class="class"><a href="../classes/NetCommonsAppHelper.html">NetCommonsAppHelper</a></li>
+                                                    <li class="class"><a href="../classes/NetCommonsAppModel.html">NetCommonsAppModel</a></li>
+                                                    <li class="class"><a href="../classes/NetCommonsAppShell.html">NetCommonsAppShell</a></li>
+                                                    <li class="class"><a href="../classes/NetCommonsAppView.html">NetCommonsAppView</a></li>
+                                                    <li class="class"><a href="../classes/NetCommonsCache.html">NetCommonsCache</a></li>
+                                                    <li class="class"><a href="../classes/NetCommonsCacheBehavior.html">NetCommonsCacheBehavior</a></li>
+                                                    <li class="class"><a href="../classes/NetCommonsCakeTestCase.html">NetCommonsCakeTestCase</a></li>
+                                                    <li class="class"><a href="../classes/NetCommonsComponent.html">NetCommonsComponent</a></li>
+                                                    <li class="class"><a href="../classes/NetCommonsConsoleTestCase.html">NetCommonsConsoleTestCase</a></li>
+                                                    <li class="class"><a href="../classes/NetCommonsController.html">NetCommonsController</a></li>
+                                                    <li class="class"><a href="../classes/NetCommonsControllerBaseTestCase.html">NetCommonsControllerBaseTestCase</a></li>
+                                                    <li class="class"><a href="../classes/NetCommonsControllerTestCase.html">NetCommonsControllerTestCase</a></li>
+                                                    <li class="class"><a href="../classes/NetCommonsCurrentLibTestRun.html">NetCommonsCurrentLibTestRun</a></li>
+                                                    <li class="class"><a href="../classes/NetCommonsCurrentLibTestUtility.html">NetCommonsCurrentLibTestUtility</a></li>
+                                                    <li class="class"><a href="../classes/NetCommonsDeleteTest.html">NetCommonsDeleteTest</a></li>
+                                                    <li class="class"><a href="../classes/NetCommonsExceptionRenderer.html">NetCommonsExceptionRenderer</a></li>
+                                                    <li class="class"><a href="../classes/NetCommonsFormHelper.html">NetCommonsFormHelper</a></li>
+                                                    <li class="class"><a href="../classes/NetCommonsGetTest.html">NetCommonsGetTest</a></li>
+                                                    <li class="class"><a href="../classes/NetCommonsHelperTestCase.html">NetCommonsHelperTestCase</a></li>
+                                                    <li class="class"><a href="../classes/NetCommonsHtmlHelper.html">NetCommonsHtmlHelper</a></li>
+                                                    <li class="class"><a href="../classes/NetCommonsMigration.html">NetCommonsMigration</a></li>
+                                                    <li class="class"><a href="../classes/NetCommonsModelTestCase.html">NetCommonsModelTestCase</a></li>
+                                                    <li class="class"><a href="../classes/NetCommonsRoutesTestCase.html">NetCommonsRoutesTestCase</a></li>
+                                                    <li class="class"><a href="../classes/NetCommonsSaveTest.html">NetCommonsSaveTest</a></li>
+                                                    <li class="class"><a href="../classes/NetCommonsSecurity.html">NetCommonsSecurity</a></li>
+                                                    <li class="class"><a href="../classes/NetCommonsTestSuite.html">NetCommonsTestSuite</a></li>
+                                                    <li class="class"><a href="../classes/NetCommonsTime.html">NetCommonsTime</a></li>
+                                                    <li class="class"><a href="../classes/NetCommonsTimeComponent.html">NetCommonsTimeComponent</a></li>
+                                                    <li class="class"><a href="../classes/NetCommonsTimeHelper.html">NetCommonsTimeHelper</a></li>
+                                                    <li class="class"><a href="../classes/NetCommonsTreeBehavior.html">NetCommonsTreeBehavior</a></li>
+                                                    <li class="class"><a href="../classes/NetCommonsTreeBehaviorCase.html">NetCommonsTreeBehaviorCase</a></li>
+                                                    <li class="class"><a href="../classes/NetCommonsUrl.html">NetCommonsUrl</a></li>
+                                                    <li class="class"><a href="../classes/NetCommonsValidateTest.html">NetCommonsValidateTest</a></li>
+                                                    <li class="class"><a href="../classes/NetCommonsValidationRuleBehavior.html">NetCommonsValidationRuleBehavior</a></li>
+                                                    <li class="class"><a href="../classes/OriginalKeyBehavior.html">OriginalKeyBehavior</a></li>
+                                                    <li class="class"><a href="../classes/PermissionComponent.html">PermissionComponent</a></li>
+                                                    <li class="class"><a href="../classes/SettingMode.html">SettingMode</a></li>
+                                                    <li class="class"><a href="../classes/SingletonViewBlockHtmlHelper.html">SingletonViewBlockHtmlHelper</a></li>
+                                                    <li class="class"><a href="../classes/SiteCloseController.html">SiteCloseController</a></li>
+                                                    <li class="class"><a href="../classes/SnsButtonHelper.html">SnsButtonHelper</a></li>
+                                                    <li class="class"><a href="../classes/TableListHelper.html">TableListHelper</a></li>
+                                                    <li class="class"><a href="../classes/TitleIconHelper.html">TitleIconHelper</a></li>
+                                                    <li class="class"><a href="../classes/TokenHelper.html">TokenHelper</a></li>
+                                                    <li class="class"><a href="../classes/TrackableBehavior.html">TrackableBehavior</a></li>
+                                                    <li class="class"><a href="../classes/ValidateMerge.html">ValidateMerge</a></li>
+                                                    <li class="class"><a href="../classes/WizardHelper.html">WizardHelper</a></li>
+                                            </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+
+        </div>
+    </section>
+    <section class="row-fluid">
+        <div class="span10 offset2">
+            <div class="row-fluid">
+                <div class="span8 content class">
+                    <nav>
+                                                <a href="../namespaces/default.html">\</a> <i class="icon-level-up"></i>
+                                            </nav>
+                    <a href="#source-view" role="button" class="pull-right btn" data-toggle="modal"><i class="icon-code"></i></a>
+
+                    <h1><small>\</small>NetCommonsCurrentLibTestUtility</h1>
+                    <p><em>Fixture test_schema.sqlを読み込むんでテストするためのユーティリティ</em></p>
+                    <p>Security:
+salt: &gt;
+2a95829d8ad63ca6cb49baaa52e772270dc174a79e090ee0851505c65b21d3ac9d14287e39a2f30fc4606ff1c9b45c7376b02a0b5a5ef0af82cc9f4d344107ec
+cipherSeed:
+"142354242720272028881904983643200749000"</p>
+                    
+                                        
+                    <section id="summary">
+                        <h2>Summary</h2>
+                        <section class="row-fluid heading">
+                            <section class="span4">
+                                <a href="#methods">Methods</a>
+                            </section>
+                            <section class="span4">
+                                <a href="#properties">Properties</a>
+                            </section>
+                            <section class="span4">
+                                <a href="#constants">Constants</a>
+                            </section>
+                        </section>
+                        <section class="row-fluid public">
+                            <section class="span4">
+                                                                    <a href="../classes/NetCommonsCurrentLibTestUtility.html#method_debugLogTestName" class="">debugLogTestName()</a><br />
+                                                                    <a href="../classes/NetCommonsCurrentLibTestUtility.html#method_loadTables" class="">loadTables()</a><br />
+                                                                    <a href="../classes/NetCommonsCurrentLibTestUtility.html#method_loadedTables" class="">loadedTables()</a><br />
+                                                                    <a href="../classes/NetCommonsCurrentLibTestUtility.html#method_canLoadTables" class="">canLoadTables()</a><br />
+                                                                    <a href="../classes/NetCommonsCurrentLibTestUtility.html#method_getFixturePath" class="">getFixturePath()</a><br />
+                                                                    <a href="../classes/NetCommonsCurrentLibTestUtility.html#method_getSchemaFile" class="">getSchemaFile()</a><br />
+                                                                    <a href="../classes/NetCommonsCurrentLibTestUtility.html#method_getTmpDir" class="">getTmpDir()</a><br />
+                                                                    <a href="../classes/NetCommonsCurrentLibTestUtility.html#method_getUploadDir" class="">getUploadDir()</a><br />
+                                                                    <a href="../classes/NetCommonsCurrentLibTestUtility.html#method_prepareUploadDir" class="">prepareUploadDir()</a><br />
+                                                                    <a href="../classes/NetCommonsCurrentLibTestUtility.html#method_clearUploadDir" class="">clearUploadDir()</a><br />
+                                                                    <a href="../classes/NetCommonsCurrentLibTestUtility.html#method_getTemporaryFileMock" class="">getTemporaryFileMock()</a><br />
+                                                                    <a href="../classes/NetCommonsCurrentLibTestUtility.html#method_dropTables" class="">dropTables()</a><br />
+                                                                    <a href="../classes/NetCommonsCurrentLibTestUtility.html#method_login" class="">login()</a><br />
+                                                                    <a href="../classes/NetCommonsCurrentLibTestUtility.html#method_logout" class="">logout()</a><br />
+                                                                    <a href="../classes/NetCommonsCurrentLibTestUtility.html#method_settingMode" class="">settingMode()</a><br />
+                                                                    <a href="../classes/NetCommonsCurrentLibTestUtility.html#method_resetCurrentLib" class="">resetCurrentLib()</a><br />
+                                                                    <a href="../classes/NetCommonsCurrentLibTestUtility.html#method_testControllerGetRequest" class="">testControllerGetRequest()</a><br />
+                                                                    <a href="../classes/NetCommonsCurrentLibTestUtility.html#method_testControllerPostRequest" class="">testControllerPostRequest()</a><br />
+                                                                    <a href="../classes/NetCommonsCurrentLibTestUtility.html#method_testJsonControllerPostRequest" class="">testJsonControllerPostRequest()</a><br />
+                                                            </section>
+                            <section class="span4">
+                                                                    <em>No public properties found</em>
+                                                            </section>
+                            <section class="span4">
+                                                                    <em>No constants found</em>
+                                                            </section>
+                        </section>
+                        <section class="row-fluid protected">
+                            <section class="span4">
+                                                                    <em>No protected methods found</em>
+                                                            </section>
+                            <section class="span4">
+                                                                    <em>No protected properties found</em>
+                                                            </section>
+                            <section class="span4">
+                                <em>N/A</em>
+                            </section>
+                        </section>
+                        <section class="row-fluid private">
+                            <section class="span4">
+                                                                    <a href="../classes/NetCommonsCurrentLibTestUtility.html#method___resetOldCurrentUtility" class="">__resetOldCurrentUtility()</a><br />
+                                                                    <a href="../classes/NetCommonsCurrentLibTestUtility.html#method___assertController" class="">__assertController()</a><br />
+                                                            </section>
+                            <section class="span4">
+                                                                    <a href="../classes/NetCommonsCurrentLibTestUtility.html#property___dropTablesSql" class="">$__dropTablesSql</a><br />
+                                                                    <a href="../classes/NetCommonsCurrentLibTestUtility.html#property___loadedTables" class="">$__loadedTables</a><br />
+                                                                    <a href="../classes/NetCommonsCurrentLibTestUtility.html#property___users" class="">$__users</a><br />
+                                                            </section>
+                            <section class="span4">
+                                <em>N/A</em>
+                            </section>
+                        </section>
+                    </section>
+                </div>
+                <aside class="span4 detailsbar">
+                                        
+                    
+                    <dl>
+                        <dt>File</dt>
+                            <dd><a href="../files/Plugin.NetCommons.TestSuite.NetCommonsCurrentLibTestUtility.html"><div class="path-wrapper">Plugin/NetCommons/TestSuite/NetCommonsCurrentLibTestUtility.php</div></a></dd>
+                                                <dt>Package</dt>
+                            <dd><div class="namespace-wrapper">NetCommons\TestSuite</div></dd>
+                                                <dt>Class hierarchy</dt>
+                            <dd class="hierarchy">
+                                                                                                                                                                    <div class="namespace-wrapper">\NetCommonsCurrentLibTestUtility</div>
+                            </dd>
+
+                        
+                        
+                        
+                        
+                                                                        </dl>
+                    <h2>Tags</h2>
+                    <table class="table table-condensed">
+                                            <tr>
+                            <th>
+                                codeCoverageIgnore
+                            </th>
+                            <td>
+                                                                    
+                                                            </td>
+                        </tr>
+                                            <tr>
+                            <th>
+                                SuppressWarnings
+                            </th>
+                            <td>
+                                                                    <p>(PHPMD.TooManyPublicMethods)</p>
+                                                                    <p>(PHPMD.ExcessiveClassComplexity)</p>
+                                                            </td>
+                        </tr>
+                                        </table>
+                </aside>
+            </div>
+
+                        
+                                    <a id="properties" name="properties"></a>
+            <div class="row-fluid">
+                <div class="span8 content class">
+                    <h2>Properties</h2>
+                </div>
+                <aside class="span4 detailsbar"></aside>
+            </div>
+
+                                                                    <div class="row-fluid">
+        <div class="span8 content class">
+            <a id="property___dropTablesSql" name="property___dropTablesSql" class="anchor"></a>
+            <article class="property">
+                <h3 class="private ">$__dropTablesSql</h3>
+                <pre class="signature">$__dropTablesSql : string</pre>
+                <p><em>drop tableの構文文字列</em></p>
+                
+
+                                <h4>Type</h4>
+                string
+                                            </article>
+        </div>
+        <aside class="span4 detailsbar">
+            <h1><i class="icon-arrow-down"></i></h1>
+                        <dl>
+                                                            </dl>
+            <h2>Tags</h2>
+            <table class="table table-condensed">
+                                    <tr><td colspan="2"><em>None found</em></td></tr>
+                            </table>
+        </aside>
+    </div>
+
+                                    <div class="row-fluid">
+        <div class="span8 content class">
+            <a id="property___loadedTables" name="property___loadedTables" class="anchor"></a>
+            <article class="property">
+                <h3 class="private ">$__loadedTables</h3>
+                <pre class="signature">$__loadedTables : string</pre>
+                <p><em>ロードしているか否か</em></p>
+                
+
+                                <h4>Type</h4>
+                string
+                                            </article>
+        </div>
+        <aside class="span4 detailsbar">
+            <h1><i class="icon-arrow-down"></i></h1>
+                        <dl>
+                                                            </dl>
+            <h2>Tags</h2>
+            <table class="table table-condensed">
+                                    <tr><td colspan="2"><em>None found</em></td></tr>
+                            </table>
+        </aside>
+    </div>
+
+                                    <div class="row-fluid">
+        <div class="span8 content class">
+            <a id="property___users" name="property___users" class="anchor"></a>
+            <article class="property">
+                <h3 class="private ">$__users</h3>
+                <pre class="signature">$__users : string</pre>
+                <p><em>drop tableの構文文字列</em></p>
+                
+
+                                <h4>Type</h4>
+                string
+                                            </article>
+        </div>
+        <aside class="span4 detailsbar">
+            <h1><i class="icon-arrow-down"></i></h1>
+                        <dl>
+                                                            </dl>
+            <h2>Tags</h2>
+            <table class="table table-condensed">
+                                    <tr><td colspan="2"><em>None found</em></td></tr>
+                            </table>
+        </aside>
+    </div>
+
+                            
+                                    <a id="methods" name="methods"></a>
+            <div class="row-fluid">
+                <div class="span8 content class"><h2>Methods</h2></div>
+                <aside class="span4 detailsbar"></aside>
+            </div>
+
+                                    <div class="row-fluid">
+        <div class="span8 content class">
+            <a id="method_debugLogTestName" name="method_debugLogTestName" class="anchor"></a>
+            <article class="method">
+                <h3 class="public ">debugLogTestName()</h3>
+                <a href="#source-view" role="button" class="pull-right btn" data-toggle="modal" style="font-size: 1.1em; padding: 9px 14px"><i class="icon-code"></i></a>
+                <pre class="signature" style="margin-right: 54px;">debugLogTestName(string  <span class="argument">$loginTitle</span>, string  <span class="argument">$method</span>) : void</pre>
+                <p><em>テスト名をdebugに出力</em></p>
+                
+
+                                    <h4>Parameters</h4>
+                    <table class="table table-condensed table-hover">
+                                                    <tr>
+                                <td>string</td>
+                                <td>$loginTitle </td>
+                                <td><p>ログインタイトル(ログインなし、管理者でログインなどをセットする)</p></td>
+                            </tr>
+                                                    <tr>
+                                <td>string</td>
+                                <td>$method </td>
+                                <td><p>テストメソッド</p></td>
+                            </tr>
+                                            </table>
+                
+                
+                				
+                            </article>
+        </div>
+        <aside class="span4 detailsbar">
+            <h1><i class="icon-arrow-down"></i></h1>
+                            <span class="label label-info">static</span>
+                                                            <dl>
+                                                                            </dl>
+            <h2>Tags</h2>
+            <table class="table table-condensed">
+                                    <tr><td colspan="2"><em>None found</em></td></tr>
+                            </table>
+        </aside>
+    </div>
+
+                                    <div class="row-fluid">
+        <div class="span8 content class">
+            <a id="method_loadTables" name="method_loadTables" class="anchor"></a>
+            <article class="method">
+                <h3 class="public ">loadTables()</h3>
+                <a href="#source-view" role="button" class="pull-right btn" data-toggle="modal" style="font-size: 1.1em; padding: 9px 14px"><i class="icon-code"></i></a>
+                <pre class="signature" style="margin-right: 54px;">loadTables() : void</pre>
+                <p><em>テーブルのロード</em></p>
+                
+
+                
+                
+                				
+                            </article>
+        </div>
+        <aside class="span4 detailsbar">
+            <h1><i class="icon-arrow-down"></i></h1>
+                            <span class="label label-info">static</span>
+                                                            <dl>
+                                                                            </dl>
+            <h2>Tags</h2>
+            <table class="table table-condensed">
+                                    <tr><td colspan="2"><em>None found</em></td></tr>
+                            </table>
+        </aside>
+    </div>
+
+                                    <div class="row-fluid">
+        <div class="span8 content class">
+            <a id="method_loadedTables" name="method_loadedTables" class="anchor"></a>
+            <article class="method">
+                <h3 class="public ">loadedTables()</h3>
+                <a href="#source-view" role="button" class="pull-right btn" data-toggle="modal" style="font-size: 1.1em; padding: 9px 14px"><i class="icon-code"></i></a>
+                <pre class="signature" style="margin-right: 54px;">loadedTables() : void</pre>
+                <p><em>テーブルのロードしているか否か</em></p>
+                
+
+                
+                
+                				
+                            </article>
+        </div>
+        <aside class="span4 detailsbar">
+            <h1><i class="icon-arrow-down"></i></h1>
+                            <span class="label label-info">static</span>
+                                                            <dl>
+                                                                            </dl>
+            <h2>Tags</h2>
+            <table class="table table-condensed">
+                                    <tr><td colspan="2"><em>None found</em></td></tr>
+                            </table>
+        </aside>
+    </div>
+
+                                    <div class="row-fluid">
+        <div class="span8 content class">
+            <a id="method_canLoadTables" name="method_canLoadTables" class="anchor"></a>
+            <article class="method">
+                <h3 class="public ">canLoadTables()</h3>
+                <a href="#source-view" role="button" class="pull-right btn" data-toggle="modal" style="font-size: 1.1em; padding: 9px 14px"><i class="icon-code"></i></a>
+                <pre class="signature" style="margin-right: 54px;">canLoadTables() : boolean</pre>
+                <p><em>テーブルをロードできるか否か</em></p>
+                
+
+                
+                
+                                    <h4>Returns</h4>
+                    boolean
+                                    				
+                            </article>
+        </div>
+        <aside class="span4 detailsbar">
+            <h1><i class="icon-arrow-down"></i></h1>
+                            <span class="label label-info">static</span>
+                                                            <dl>
+                                                                            </dl>
+            <h2>Tags</h2>
+            <table class="table table-condensed">
+                                    <tr><td colspan="2"><em>None found</em></td></tr>
+                            </table>
+        </aside>
+    </div>
+
+                                    <div class="row-fluid">
+        <div class="span8 content class">
+            <a id="method_getFixturePath" name="method_getFixturePath" class="anchor"></a>
+            <article class="method">
+                <h3 class="public ">getFixturePath()</h3>
+                <a href="#source-view" role="button" class="pull-right btn" data-toggle="modal" style="font-size: 1.1em; padding: 9px 14px"><i class="icon-code"></i></a>
+                <pre class="signature" style="margin-right: 54px;">getFixturePath() : string</pre>
+                <p><em>Fixtureのパスを返す</em></p>
+                
+
+                
+                
+                                    <h4>Returns</h4>
+                    string
+                                    				
+                            </article>
+        </div>
+        <aside class="span4 detailsbar">
+            <h1><i class="icon-arrow-down"></i></h1>
+                            <span class="label label-info">static</span>
+                                                            <dl>
+                                                                            </dl>
+            <h2>Tags</h2>
+            <table class="table table-condensed">
+                                    <tr><td colspan="2"><em>None found</em></td></tr>
+                            </table>
+        </aside>
+    </div>
+
+                                    <div class="row-fluid">
+        <div class="span8 content class">
+            <a id="method_getSchemaFile" name="method_getSchemaFile" class="anchor"></a>
+            <article class="method">
+                <h3 class="public ">getSchemaFile()</h3>
+                <a href="#source-view" role="button" class="pull-right btn" data-toggle="modal" style="font-size: 1.1em; padding: 9px 14px"><i class="icon-code"></i></a>
+                <pre class="signature" style="margin-right: 54px;">getSchemaFile() : string</pre>
+                <p><em>スキーマファイルのフルパスを返す</em></p>
+                
+
+                
+                
+                                    <h4>Returns</h4>
+                    string
+                                    				
+                            </article>
+        </div>
+        <aside class="span4 detailsbar">
+            <h1><i class="icon-arrow-down"></i></h1>
+                            <span class="label label-info">static</span>
+                                                            <dl>
+                                                                            </dl>
+            <h2>Tags</h2>
+            <table class="table table-condensed">
+                                    <tr><td colspan="2"><em>None found</em></td></tr>
+                            </table>
+        </aside>
+    </div>
+
+                                    <div class="row-fluid">
+        <div class="span8 content class">
+            <a id="method_getTmpDir" name="method_getTmpDir" class="anchor"></a>
+            <article class="method">
+                <h3 class="public ">getTmpDir()</h3>
+                <a href="#source-view" role="button" class="pull-right btn" data-toggle="modal" style="font-size: 1.1em; padding: 9px 14px"><i class="icon-code"></i></a>
+                <pre class="signature" style="margin-right: 54px;">getTmpDir() : string</pre>
+                <p><em>tmpディレクトリのパスを返す</em></p>
+                
+
+                
+                
+                                    <h4>Returns</h4>
+                    string
+                                    				
+                            </article>
+        </div>
+        <aside class="span4 detailsbar">
+            <h1><i class="icon-arrow-down"></i></h1>
+                            <span class="label label-info">static</span>
+                                                            <dl>
+                                                                            </dl>
+            <h2>Tags</h2>
+            <table class="table table-condensed">
+                                    <tr><td colspan="2"><em>None found</em></td></tr>
+                            </table>
+        </aside>
+    </div>
+
+                                    <div class="row-fluid">
+        <div class="span8 content class">
+            <a id="method_getUploadDir" name="method_getUploadDir" class="anchor"></a>
+            <article class="method">
+                <h3 class="public ">getUploadDir()</h3>
+                <a href="#source-view" role="button" class="pull-right btn" data-toggle="modal" style="font-size: 1.1em; padding: 9px 14px"><i class="icon-code"></i></a>
+                <pre class="signature" style="margin-right: 54px;">getUploadDir() : string</pre>
+                <p><em>アップロードディレクトリのパスを返す</em></p>
+                
+
+                
+                
+                                    <h4>Returns</h4>
+                    string
+                                    				
+                            </article>
+        </div>
+        <aside class="span4 detailsbar">
+            <h1><i class="icon-arrow-down"></i></h1>
+                            <span class="label label-info">static</span>
+                                                            <dl>
+                                                                            </dl>
+            <h2>Tags</h2>
+            <table class="table table-condensed">
+                                    <tr><td colspan="2"><em>None found</em></td></tr>
+                            </table>
+        </aside>
+    </div>
+
+                                    <div class="row-fluid">
+        <div class="span8 content class">
+            <a id="method_prepareUploadDir" name="method_prepareUploadDir" class="anchor"></a>
+            <article class="method">
+                <h3 class="public ">prepareUploadDir()</h3>
+                <a href="#source-view" role="button" class="pull-right btn" data-toggle="modal" style="font-size: 1.1em; padding: 9px 14px"><i class="icon-code"></i></a>
+                <pre class="signature" style="margin-right: 54px;">prepareUploadDir() : string</pre>
+                <p><em>アップロードディレクトリのパスをセットする</em></p>
+                
+
+                
+                
+                                    <h4>Returns</h4>
+                    string
+                                    				
+                            </article>
+        </div>
+        <aside class="span4 detailsbar">
+            <h1><i class="icon-arrow-down"></i></h1>
+                            <span class="label label-info">static</span>
+                                                            <dl>
+                                                                            </dl>
+            <h2>Tags</h2>
+            <table class="table table-condensed">
+                                    <tr><td colspan="2"><em>None found</em></td></tr>
+                            </table>
+        </aside>
+    </div>
+
+                                    <div class="row-fluid">
+        <div class="span8 content class">
+            <a id="method_clearUploadDir" name="method_clearUploadDir" class="anchor"></a>
+            <article class="method">
+                <h3 class="public ">clearUploadDir()</h3>
+                <a href="#source-view" role="button" class="pull-right btn" data-toggle="modal" style="font-size: 1.1em; padding: 9px 14px"><i class="icon-code"></i></a>
+                <pre class="signature" style="margin-right: 54px;">clearUploadDir() : string</pre>
+                <p><em>アップロードディレクトリのパスをセットする</em></p>
+                
+
+                
+                
+                                    <h4>Returns</h4>
+                    string
+                                    				
+                            </article>
+        </div>
+        <aside class="span4 detailsbar">
+            <h1><i class="icon-arrow-down"></i></h1>
+                            <span class="label label-info">static</span>
+                                                            <dl>
+                                                                            </dl>
+            <h2>Tags</h2>
+            <table class="table table-condensed">
+                                    <tr><td colspan="2"><em>None found</em></td></tr>
+                            </table>
+        </aside>
+    </div>
+
+                                    <div class="row-fluid">
+        <div class="span8 content class">
+            <a id="method_getTemporaryFileMock" name="method_getTemporaryFileMock" class="anchor"></a>
+            <article class="method">
+                <h3 class="public ">getTemporaryFileMock()</h3>
+                <a href="#source-view" role="button" class="pull-right btn" data-toggle="modal" style="font-size: 1.1em; padding: 9px 14px"><i class="icon-code"></i></a>
+                <pre class="signature" style="margin-right: 54px;">getTemporaryFileMock(array  <span class="argument">$fileInfo</span>) : string</pre>
+                <p><em>TemporaryFileのモックとしてFileを使って戻す</em></p>
+                
+
+                                    <h4>Parameters</h4>
+                    <table class="table table-condensed table-hover">
+                                                    <tr>
+                                <td>array</td>
+                                <td>$fileInfo </td>
+                                <td><p>アップロードファイル情報</p></td>
+                            </tr>
+                                            </table>
+                
+                
+                                    <h4>Returns</h4>
+                    string
+                                    				
+                            </article>
+        </div>
+        <aside class="span4 detailsbar">
+            <h1><i class="icon-arrow-down"></i></h1>
+                            <span class="label label-info">static</span>
+                                                            <dl>
+                                                                            </dl>
+            <h2>Tags</h2>
+            <table class="table table-condensed">
+                                    <tr><td colspan="2"><em>None found</em></td></tr>
+                            </table>
+        </aside>
+    </div>
+
+                                    <div class="row-fluid">
+        <div class="span8 content class">
+            <a id="method_dropTables" name="method_dropTables" class="anchor"></a>
+            <article class="method">
+                <h3 class="public ">dropTables()</h3>
+                <a href="#source-view" role="button" class="pull-right btn" data-toggle="modal" style="font-size: 1.1em; padding: 9px 14px"><i class="icon-code"></i></a>
+                <pre class="signature" style="margin-right: 54px;">dropTables() : void</pre>
+                <p><em>テーブルの削除</em></p>
+                
+
+                
+                
+                				
+                            </article>
+        </div>
+        <aside class="span4 detailsbar">
+            <h1><i class="icon-arrow-down"></i></h1>
+                            <span class="label label-info">static</span>
+                                                            <dl>
+                                                                            </dl>
+            <h2>Tags</h2>
+            <table class="table table-condensed">
+                                    <tr><td colspan="2"><em>None found</em></td></tr>
+                            </table>
+        </aside>
+    </div>
+
+                                    <div class="row-fluid">
+        <div class="span8 content class">
+            <a id="method_login" name="method_login" class="anchor"></a>
+            <article class="method">
+                <h3 class="public ">login()</h3>
+                <a href="#source-view" role="button" class="pull-right btn" data-toggle="modal" style="font-size: 1.1em; padding: 9px 14px"><i class="icon-code"></i></a>
+                <pre class="signature" style="margin-right: 54px;">login(string|integer  <span class="argument">$userId</span>) : void</pre>
+                <p><em>ログイン</em></p>
+                
+
+                                    <h4>Parameters</h4>
+                    <table class="table table-condensed table-hover">
+                                                    <tr>
+                                <td>string|integer</td>
+                                <td>$userId </td>
+                                <td><p>ユーザID</p></td>
+                            </tr>
+                                            </table>
+                
+                
+                				
+                            </article>
+        </div>
+        <aside class="span4 detailsbar">
+            <h1><i class="icon-arrow-down"></i></h1>
+                            <span class="label label-info">static</span>
+                                                            <dl>
+                                                                            </dl>
+            <h2>Tags</h2>
+            <table class="table table-condensed">
+                                    <tr><td colspan="2"><em>None found</em></td></tr>
+                            </table>
+        </aside>
+    </div>
+
+                                    <div class="row-fluid">
+        <div class="span8 content class">
+            <a id="method_logout" name="method_logout" class="anchor"></a>
+            <article class="method">
+                <h3 class="public ">logout()</h3>
+                <a href="#source-view" role="button" class="pull-right btn" data-toggle="modal" style="font-size: 1.1em; padding: 9px 14px"><i class="icon-code"></i></a>
+                <pre class="signature" style="margin-right: 54px;">logout() : void</pre>
+                <p><em>ログアウト</em></p>
+                
+
+                
+                
+                				
+                            </article>
+        </div>
+        <aside class="span4 detailsbar">
+            <h1><i class="icon-arrow-down"></i></h1>
+                            <span class="label label-info">static</span>
+                                                            <dl>
+                                                                            </dl>
+            <h2>Tags</h2>
+            <table class="table table-condensed">
+                                    <tr><td colspan="2"><em>None found</em></td></tr>
+                            </table>
+        </aside>
+    </div>
+
+                                    <div class="row-fluid">
+        <div class="span8 content class">
+            <a id="method_settingMode" name="method_settingMode" class="anchor"></a>
+            <article class="method">
+                <h3 class="public ">settingMode()</h3>
+                <a href="#source-view" role="button" class="pull-right btn" data-toggle="modal" style="font-size: 1.1em; padding: 9px 14px"><i class="icon-code"></i></a>
+                <pre class="signature" style="margin-right: 54px;">settingMode(boolean  <span class="argument">$setting</span>) : void</pre>
+                <p><em>セッティングモードの変更</em></p>
+                
+
+                                    <h4>Parameters</h4>
+                    <table class="table table-condensed table-hover">
+                                                    <tr>
+                                <td>boolean</td>
+                                <td>$setting </td>
+                                <td><p>セッティングモード</p></td>
+                            </tr>
+                                            </table>
+                
+                
+                				
+                            </article>
+        </div>
+        <aside class="span4 detailsbar">
+            <h1><i class="icon-arrow-down"></i></h1>
+                            <span class="label label-info">static</span>
+                                                            <dl>
+                                                                            </dl>
+            <h2>Tags</h2>
+            <table class="table table-condensed">
+                                    <tr><td colspan="2"><em>None found</em></td></tr>
+                            </table>
+        </aside>
+    </div>
+
+                                    <div class="row-fluid">
+        <div class="span8 content class">
+            <a id="method_resetCurrentLib" name="method_resetCurrentLib" class="anchor"></a>
+            <article class="method">
+                <h3 class="public ">resetCurrentLib()</h3>
+                <a href="#source-view" role="button" class="pull-right btn" data-toggle="modal" style="font-size: 1.1em; padding: 9px 14px"><i class="icon-code"></i></a>
+                <pre class="signature" style="margin-right: 54px;">resetCurrentLib() : void</pre>
+                <p><em>Currentライブラリのリセット</em></p>
+                
+
+                
+                
+                				
+                            </article>
+        </div>
+        <aside class="span4 detailsbar">
+            <h1><i class="icon-arrow-down"></i></h1>
+                            <span class="label label-info">static</span>
+                                                            <dl>
+                                                                            </dl>
+            <h2>Tags</h2>
+            <table class="table table-condensed">
+                                    <tr><td colspan="2"><em>None found</em></td></tr>
+                            </table>
+        </aside>
+    </div>
+
+                                    <div class="row-fluid">
+        <div class="span8 content class">
+            <a id="method_testControllerGetRequest" name="method_testControllerGetRequest" class="anchor"></a>
+            <article class="method">
+                <h3 class="public ">testControllerGetRequest()</h3>
+                <a href="#source-view" role="button" class="pull-right btn" data-toggle="modal" style="font-size: 1.1em; padding: 9px 14px"><i class="icon-code"></i></a>
+                <pre class="signature" style="margin-right: 54px;">testControllerGetRequest(\ControllerTestCase  <span class="argument">$test</span>, string  <span class="argument">$url</span>, array|false  <span class="argument">$expects</span>, string|false  <span class="argument">$exception</span>, string|false  <span class="argument">$outputDebugTitle = false</span>) : void</pre>
+                <p><em>コントローラのGETテスト</em></p>
+                
+
+                                    <h4>Parameters</h4>
+                    <table class="table table-condensed table-hover">
+                                                    <tr>
+                                <td>\ControllerTestCase</td>
+                                <td>$test </td>
+                                <td><p>コントローラテストクラス</p></td>
+                            </tr>
+                                                    <tr>
+                                <td>string</td>
+                                <td>$url </td>
+                                <td><p>テストするURL</p></td>
+                            </tr>
+                                                    <tr>
+                                <td>array|false</td>
+                                <td>$expects </td>
+                                <td><p>期待値リスト</p></td>
+                            </tr>
+                                                    <tr>
+                                <td>string|false</td>
+                                <td>$exception </td>
+                                <td><p>Exception文字列</p></td>
+                            </tr>
+                                                    <tr>
+                                <td>string|false</td>
+                                <td>$outputDebugTitle </td>
+                                <td><p>出力するdebugのタイトル</p></td>
+                            </tr>
+                                            </table>
+                
+                
+                				
+                            </article>
+        </div>
+        <aside class="span4 detailsbar">
+            <h1><i class="icon-arrow-down"></i></h1>
+                            <span class="label label-info">static</span>
+                                                            <dl>
+                                                                            </dl>
+            <h2>Tags</h2>
+            <table class="table table-condensed">
+                                    <tr>
+                        <th>
+                            SuppressWarnings
+                        </th>
+                        <td>
+                                                                                            <p>(PHPMD.BooleanArgumentFlag)</p>
+                                                    </td>
+                    </tr>
+                            </table>
+        </aside>
+    </div>
+
+                                    <div class="row-fluid">
+        <div class="span8 content class">
+            <a id="method_testControllerPostRequest" name="method_testControllerPostRequest" class="anchor"></a>
+            <article class="method">
+                <h3 class="public ">testControllerPostRequest()</h3>
+                <a href="#source-view" role="button" class="pull-right btn" data-toggle="modal" style="font-size: 1.1em; padding: 9px 14px"><i class="icon-code"></i></a>
+                <pre class="signature" style="margin-right: 54px;">testControllerPostRequest(\ControllerTestCase  <span class="argument">$test</span>, string  <span class="argument">$url</span>, array  <span class="argument">$post</span>, array|false  <span class="argument">$expects</span>, string|false  <span class="argument">$exception</span>) : void</pre>
+                <p><em>コントローラのPOSTテスト</em></p>
+                <p>Mockにせずに登録処理を実行するが、saveした結果まではチェックしない。</p>
+
+                                    <h4>Parameters</h4>
+                    <table class="table table-condensed table-hover">
+                                                    <tr>
+                                <td>\ControllerTestCase</td>
+                                <td>$test </td>
+                                <td><p>コントローラテストクラス</p></td>
+                            </tr>
+                                                    <tr>
+                                <td>string</td>
+                                <td>$url </td>
+                                <td><p>テストするURL</p></td>
+                            </tr>
+                                                    <tr>
+                                <td>array</td>
+                                <td>$post </td>
+                                <td><p>POSTの内容</p></td>
+                            </tr>
+                                                    <tr>
+                                <td>array|false</td>
+                                <td>$expects </td>
+                                <td><p>期待値リスト</p></td>
+                            </tr>
+                                                    <tr>
+                                <td>string|false</td>
+                                <td>$exception </td>
+                                <td><p>Exception文字列</p></td>
+                            </tr>
+                                            </table>
+                
+                
+                				
+                            </article>
+        </div>
+        <aside class="span4 detailsbar">
+            <h1><i class="icon-arrow-down"></i></h1>
+                            <span class="label label-info">static</span>
+                                                            <dl>
+                                                                            </dl>
+            <h2>Tags</h2>
+            <table class="table table-condensed">
+                                    <tr><td colspan="2"><em>None found</em></td></tr>
+                            </table>
+        </aside>
+    </div>
+
+                                    <div class="row-fluid">
+        <div class="span8 content class">
+            <a id="method_testJsonControllerPostRequest" name="method_testJsonControllerPostRequest" class="anchor"></a>
+            <article class="method">
+                <h3 class="public ">testJsonControllerPostRequest()</h3>
+                <a href="#source-view" role="button" class="pull-right btn" data-toggle="modal" style="font-size: 1.1em; padding: 9px 14px"><i class="icon-code"></i></a>
+                <pre class="signature" style="margin-right: 54px;">testJsonControllerPostRequest(\ControllerTestCase  <span class="argument">$test</span>, string  <span class="argument">$url</span>, array  <span class="argument">$post</span>, array|false  <span class="argument">$expects</span>, string|false  <span class="argument">$exception</span>) : void</pre>
+                <p><em>コントローラのPOSTテスト</em></p>
+                <p>Mockにせずに登録処理を実行するが、saveした結果まではチェックしない。</p>
+
+                                    <h4>Parameters</h4>
+                    <table class="table table-condensed table-hover">
+                                                    <tr>
+                                <td>\ControllerTestCase</td>
+                                <td>$test </td>
+                                <td><p>コントローラテストクラス</p></td>
+                            </tr>
+                                                    <tr>
+                                <td>string</td>
+                                <td>$url </td>
+                                <td><p>テストするURL</p></td>
+                            </tr>
+                                                    <tr>
+                                <td>array</td>
+                                <td>$post </td>
+                                <td><p>POSTの内容</p></td>
+                            </tr>
+                                                    <tr>
+                                <td>array|false</td>
+                                <td>$expects </td>
+                                <td><p>期待値リスト</p></td>
+                            </tr>
+                                                    <tr>
+                                <td>string|false</td>
+                                <td>$exception </td>
+                                <td><p>Exception文字列</p></td>
+                            </tr>
+                                            </table>
+                
+                
+                				
+                            </article>
+        </div>
+        <aside class="span4 detailsbar">
+            <h1><i class="icon-arrow-down"></i></h1>
+                            <span class="label label-info">static</span>
+                                                            <dl>
+                                                                            </dl>
+            <h2>Tags</h2>
+            <table class="table table-condensed">
+                                    <tr><td colspan="2"><em>None found</em></td></tr>
+                            </table>
+        </aside>
+    </div>
+
+                                                                    <div class="row-fluid">
+        <div class="span8 content class">
+            <a id="method___resetOldCurrentUtility" name="method___resetOldCurrentUtility" class="anchor"></a>
+            <article class="method">
+                <h3 class="private ">__resetOldCurrentUtility()</h3>
+                <a href="#source-view" role="button" class="pull-right btn" data-toggle="modal" style="font-size: 1.1em; padding: 9px 14px"><i class="icon-code"></i></a>
+                <pre class="signature" style="margin-right: 54px;">__resetOldCurrentUtility() : void</pre>
+                <p><em>旧Currentのリセット</em></p>
+                
+
+                
+                
+                				
+                            </article>
+        </div>
+        <aside class="span4 detailsbar">
+            <h1><i class="icon-arrow-down"></i></h1>
+                            <span class="label label-info">static</span>
+                                                            <dl>
+                                                                            </dl>
+            <h2>Tags</h2>
+            <table class="table table-condensed">
+                                    <tr><td colspan="2"><em>None found</em></td></tr>
+                            </table>
+        </aside>
+    </div>
+
+                                    <div class="row-fluid">
+        <div class="span8 content class">
+            <a id="method___assertController" name="method___assertController" class="anchor"></a>
+            <article class="method">
+                <h3 class="private ">__assertController()</h3>
+                <a href="#source-view" role="button" class="pull-right btn" data-toggle="modal" style="font-size: 1.1em; padding: 9px 14px"><i class="icon-code"></i></a>
+                <pre class="signature" style="margin-right: 54px;">__assertController(\ControllerTestCase  <span class="argument">$test</span>, array|false  <span class="argument">$expects</span>) : void</pre>
+                <p><em>コントローラの検証</em></p>
+                
+
+                                    <h4>Parameters</h4>
+                    <table class="table table-condensed table-hover">
+                                                    <tr>
+                                <td>\ControllerTestCase</td>
+                                <td>$test </td>
+                                <td><p>コントローラテストクラス</p></td>
+                            </tr>
+                                                    <tr>
+                                <td>array|false</td>
+                                <td>$expects </td>
+                                <td><p>期待値リスト</p></td>
+                            </tr>
+                                            </table>
+                
+                
+                				
+                            </article>
+        </div>
+        <aside class="span4 detailsbar">
+            <h1><i class="icon-arrow-down"></i></h1>
+                            <span class="label label-info">static</span>
+                                                            <dl>
+                                                                            </dl>
+            <h2>Tags</h2>
+            <table class="table table-condensed">
+                                    <tr><td colspan="2"><em>None found</em></td></tr>
+                            </table>
+        </aside>
+    </div>
+
+                                    </div>
+    </section>
+
+    <div id="source-view" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="source-view-label" aria-hidden="true">
+        <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+            <h3 id="source-view-label">NetCommonsCurrentLibTestUtility.php</h3>
+        </div>
+        <div class="modal-body">
+            <pre data-src="../files/Plugin/NetCommons/TestSuite/NetCommonsCurrentLibTestUtility.php.txt" class="language-php line-numbers"></pre>
+        </div>
+    </div>
+
+    <footer class="row-fluid">
+        <section class="span10 offset2">
+            <section class="row-fluid">
+                <section class="span10 offset1">
+                    <section class="row-fluid footer-sections">
+                        <section class="span4">
+                                                        <h1><i class="icon-code"></i></h1>
+                            <div>
+                                <ul>
+                                                                    </ul>
+                            </div>
+                        </section>
+                        <section class="span4">
+                                                        <h1><i class="icon-bar-chart"></i></h1>
+                            <div>
+                                <ul>
+                                    <li><a href="../graphs/class.html">Class Hierarchy Diagram</a></li>
+                                </ul>
+                            </div>
+                        </section>
+                        <section class="span4">
+                                                        <h1><i class="icon-pushpin"></i></h1>
+                            <div>
+                                <ul>
+                                    <li><a href="../reports/errors.html">Errors</a></li>
+                                    <li><a href="../reports/markers.html">Markers</a></li>
+                                </ul>
+                            </div>
+                        </section>
+                    </section>
+                </section>
+            </section>
+            <section class="row-fluid">
+                <section class="span10 offset1">
+                    <hr />
+                    Documentation is powered by <a href="http://www.phpdoc.org/">phpDocumentor </a> and authored
+                    on August 11th, 2019 at 06:11.
+                </section>
+            </section>
+        </section>
+    </footer>
+</div>
+
+</body>
+</html>
