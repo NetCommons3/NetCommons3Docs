@@ -106,6 +106,8 @@ class NcPermission extends LibAppObject {
 		//UnitTestで使用するため、下のcontrollerのチェック前に行う。
 		if (isset(CurrentLib::$permission[$roomId]['Permission'][$key]['value'])) {
 			return CurrentLib::$permission[$roomId]['Permission'][$key]['value'];
+		} elseif (isset(CurrentLib::$permission['0']['Permission'][$key]['value'])) {
+			return CurrentLib::$permission['0']['Permission'][$key]['value'];
 		}
 
 		//コントローラがない場合、初期データが取得されていないため、falseとする。
@@ -120,14 +122,14 @@ class NcPermission extends LibAppObject {
 
 		// * デフォルトロールパーミッションデータのセット
 		$permissions = $this->CurrentLibPermission->findDefaultRolePermissions($roomRoleKey);
-		foreach ($permissions as $key => $permission) {
-			$this->write($roomId, $key, $permission['value']);
+		foreach ($permissions as $perm => $permission) {
+			$this->write($roomId, $perm, $permission['value']);
 		}
 
 		// * ルームロールパーミッションデータのセット
 		$permissions = $this->CurrentLibRoom->findRoomRolePermissions($roomId);
-		foreach ($permissions as $key => $permission) {
-			$this->write($roomId, $key, $permission['value']);
+		foreach ($permissions as $perm => $permission) {
+			$this->write($roomId, $perm, $permission['value']);
 		}
 
 		if (!isset(CurrentLib::$permission[$roomId]['Permission'][$key]['value'])) {
