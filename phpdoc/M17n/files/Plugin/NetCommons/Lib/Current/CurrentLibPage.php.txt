@@ -259,6 +259,14 @@ class CurrentLibPage extends LibAppObject {
 			'callbacks' => false,
 		]);
 
+		//@codeCoverageIgnoreStart
+		if (empty($topPageId['Page']['id'])) {
+			//トップページのデータが存在しないことは通常あり得ないがが、UnitTestではあり得るので、
+			//その場合、空で抜ける。
+			return [];
+		}
+		//@codeCoverageIgnoreEnd
+
 		$this->__cache[$this->Page->alias]->write($topPageId['Page']['id'], 'current', 'top_page_id');
 
 		$topPage = $this->Page->find('first', [
@@ -283,6 +291,13 @@ class CurrentLibPage extends LibAppObject {
  */
 	public function isTopPageId($pageId) {
 		$topPage = $this->findTopPage();
+		//@codeCoverageIgnoreStart
+		if (! $topPage) {
+			//トップページのデータが存在しないことは通常あり得ないがが、UnitTestではあり得るので、
+			//その場合、空で抜ける。
+			return false;
+		}
+		//@codeCoverageIgnoreEnd
 		return $topPage['Page']['id'] == $pageId;
 	}
 
@@ -306,7 +321,19 @@ class CurrentLibPage extends LibAppObject {
  * @return array
  */
 	public function setCurrentPage($page) {
-		$this->__currentPage = $page;
+		if (isset($this->__currentPage['Page']['id'])) {
+			$isChangePage = $this->__currentPage['Page']['id'] !== $page['Page']['id'];
+		} else {
+			$isChangePage = true;
+		}
+		if ($isChangePage) {
+			$this->__currentPage = $page;
+			if (isset($this->__curPageContainer)) {
+				//既にコンテナーが取得されている場合、再取得を行う
+				$this->__curPageContainer = null;
+				$this->findCurrentPageContainer();
+			}
+		}
 	}
 
 /**
@@ -321,6 +348,14 @@ class CurrentLibPage extends LibAppObject {
 		}
 
 		$topPage = $this->findTopPage();
+		//@codeCoverageIgnoreStart
+		if (! $topPage) {
+			//トップページのデータが存在しないことは通常あり得ないがが、UnitTestではあり得るので、
+			//その場合、空で抜ける。
+			return [];
+		}
+		//@codeCoverageIgnoreEnd
+
 		if (! $pageId || $pageId === $topPage['Page']['id']) {
 			$page = $topPage;
 		} else {
@@ -647,6 +682,11 @@ class CurrentLibPage extends LibAppObject {
 	public function getPageIdByPermalink($permalink, $spaceId = null) {
 		if ($permalink == '') {
 			$page = $this->findTopPage();
+			if ($page) {
+				return $page['Page']['id'];
+			} else {
+				return false;
+			}
 		} else {
 			if ($spaceId) {
 				//引数にスペースIDがある場合は、そっちを優先する
@@ -655,10 +695,18 @@ class CurrentLibPage extends LibAppObject {
 			} else {
 				$spaceId = Space::PUBLIC_SPACE_ID;
 			}
-			$page = $this->Page->find('first', [
+			$pages = $this->Page->find('all', [
 				'recursive' => -1,
-				'fields' => ['Page.id'],
+				'fields' => ['Page.id', 'Page.room_id', 'PagesLanguage.language_id'],
 				'joins' => [
+					[
+						'type' => 'LEFT',
+						'table' => $this->PagesLanguage->table,
+						'alias' => $this->PagesLanguage->alias,
+						'conditions' => [
+							'PagesLanguage.page_id' . ' = ' . 'Page.id'
+						],
+					],
 					[
 						'table' => $this->Room->table,
 						'alias' => $this->Room->alias,
@@ -674,7 +722,40 @@ class CurrentLibPage extends LibAppObject {
 				],
 				'callbacks' => false,
 			]);
+			if (count($pages) > 1) {
+				//２レコード取得できた場合、該当言語の方を表示させる
+				foreach ($pages as $page) {
+					if ($page['PagesLanguage']['language_id'] == $this->__langId) {
+						return $page['Page']['id'];
+					}
+				}
+				//ヒットしなければ、最初の方を返す。
+				return $pages[0]['Page']['id'];
+			} elseif (count($pages) === 1) {
+				//１レコードしかヒットしなかった場合、そのページIDを返す
+				return $pages[0]['Page']['id'];
+			} else {
+				return false;
+			}
 		}
+	}
+
+/**
+ * 対象ルームのトップページのページIDを取得
+ *
+ * @param string|int $roomId ルームID
+ * @return string|int|false ページID
+ */
+	public function getPageIdByRoomWeightTop($roomId) {
+		$page = $this->Page->find('first', [
+			'recursive' => -1,
+			'fields' => ['Page.id'],
+			'conditions' => [
+				'Page.room_id' => $roomId,
+				'Page.weight' => 1,
+			],
+			'callbacks' => false,
+		]);
 
 		if ($page) {
 			return $page['Page']['id'];
