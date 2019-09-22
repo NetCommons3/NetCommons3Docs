@@ -23,6 +23,7 @@ App::uses('AuthComponent', 'Controller/Component');
  * NetCommonsCakeTestCase class
  *
  * @package NetCommons\NetCommons\TestSuite
+ * @SuppressWarnings(PHPMD.NumberOfChildren)
  * @codeCoverageIgnore
  */
 abstract class NetCommonsCakeTestCase extends CakeTestCase {
@@ -156,8 +157,7 @@ abstract class NetCommonsCakeTestCase extends CakeTestCase {
 		Configure::write('Config.language', null);
 		SiteSettingUtil::reset();
 
-		Current::$current = array();
-		Current::$permission = array();
+		Current::resetInstance();
 
 		OriginalKeyBehavior::$isUnitRandomKey = false;
 
