@@ -42,12 +42,12 @@ class NetCommonsUrl {
 			if (Hash::get($page, 'Page.full_permalink')) {
 				$url .= h(Hash::get($page, 'Page.full_permalink'));
 			} else {
-				if (Current::read('Space.permalink')) {
-					$url .= Current::read('Space.permalink') . '/';
-				}
 				if (Hash::get($page, 'Page.id') === Current::read('TopPage.id')) {
 					$url .= '';
 				} else {
+					if (Current::read('Space.permalink')) {
+						$url .= Current::read('Space.permalink') . '/';
+					}
 					$url .= h(Hash::get($page, 'Page.permalink'));
 				}
 			}
@@ -72,20 +72,19 @@ class NetCommonsUrl {
 	public static function backToIndexUrl($defaultField = 'default_action', $full = false) {
 		if (Current::read('Frame.' . $defaultField)) {
 			$defaultAction = Current::read('Frame.' . $defaultField);
-			$url = $defaultAction;
 		} else {
 			$defaultAction = Current::read('Plugin.' . $defaultField);
-			if (substr($defaultAction, 0, 1) === '/') {
-				$url = $defaultAction;
-			} else {
-				$url = '/' . Current::read('Plugin.key') . '/' . $defaultAction;
-			}
+		}
+		if (substr($defaultAction, 0, 1) === '/') {
+			$url = $defaultAction;
+		} else {
+			$url = '/' . Current::read('Plugin.key') . '/' . $defaultAction;
 		}
 
 		if ($defaultAction && ! Current::isControlPanel()) {
-			if (Current::read('Block.id')) {
-				$url .= '/' . Current::read('Block.id');
-			}
+			//if (Current::read('Block.id')) {
+			//	$url .= '/' . Current::read('Block.id');
+			//}
 
 			$urlQuery = '';
 			if (Current::read('Frame.id')) {
