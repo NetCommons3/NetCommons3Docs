@@ -18,6 +18,7 @@ App::uses('NetCommonsCakeTestCase', 'NetCommons.TestSuite');
  * @author Shohei Nakajima <nakajimashouhei@gmail.com>
  * @package NetCommons\NetCommons\TestSuite
  * @codeCoverageIgnore
+ * @SuppressWarnings(PHPMD.ExcessiveClassComplexity)
  */
 abstract class NetCommonsControllerTestCase extends NetCommonsControllerBaseTestCase {
 
@@ -245,7 +246,8 @@ abstract class NetCommonsControllerTestCase extends NetCommonsControllerBaseTest
 	protected function _mockForReturn($mockModel, $mockMethod, $return, $count = 1) {
 		list($mockPlugin, $mockModel) = pluginSplit($mockModel);
 
-		if (substr(get_class($this->controller->$mockModel), 0, strlen('Mock_')) !== 'Mock_') {
+		if (empty($this->controller->$mockModel) ||
+				substr(get_class($this->controller->$mockModel), 0, strlen('Mock_')) !== 'Mock_') {
 			$this->controller->$mockModel = $this->getMockForModel(
 				$mockPlugin . '.' . $mockModel,
 				array($mockMethod),
@@ -275,7 +277,8 @@ abstract class NetCommonsControllerTestCase extends NetCommonsControllerBaseTest
 	protected function _mockForReturnCallback($mockModel, $mockMethod, $callback) {
 		list($mockPlugin, $mockModel) = pluginSplit($mockModel);
 
-		if (substr(get_class($this->controller->$mockModel), 0, strlen('Mock_')) !== 'Mock_') {
+		if (empty($this->controller->$mockModel) ||
+				substr(get_class($this->controller->$mockModel), 0, strlen('Mock_')) !== 'Mock_') {
 			$this->controller->$mockModel = $this->getMockForModel(
 				$mockPlugin . '.' . $mockModel, array($mockMethod)
 			);
