@@ -136,10 +136,10 @@
                                 <div class="accordion" style="margin-bottom: 0">
         <div class="accordion-group">
             <div class="accordion-heading">
-                                    <a class="accordion-toggle " data-toggle="collapse" data-target="#namespace-1816499541"></a>
+                                    <a class="accordion-toggle " data-toggle="collapse" data-target="#namespace-1616929070"></a>
                                 <a href="../namespaces/default.html" style="margin-left: 30px; padding-left: 0">\</a>
             </div>
-            <div id="namespace-1816499541" class="accordion-body collapse in">
+            <div id="namespace-1616929070" class="accordion-body collapse in">
                 <div class="accordion-inner">
 
                     
@@ -284,6 +284,9 @@
                                                                     <a href="../classes/CurrentLibFrame.html#method_getBoxIdByFrameInRequest" class="">getBoxIdByFrameInRequest()</a><br />
                                                                     <a href="../classes/CurrentLibFrame.html#method_findFramesByBoxIds" class="">findFramesByBoxIds()</a><br />
                                                                     <a href="../classes/CurrentLibFrame.html#method_findFrameById" class="">findFrameById()</a><br />
+                                                                    <a href="../classes/CurrentLibFrame.html#method_setBlockInFrame" class="">setBlockInFrame()</a><br />
+                                                                    <a href="../classes/CurrentLibFrame.html#method_isSameRoomAndPluginByRequestBlockAndFrameBlock" class="">isSameRoomAndPluginByRequestBlockAndFrameBlock()</a><br />
+                                                                    <a href="../classes/CurrentLibFrame.html#method_isSameBlockByRequestBlockAndFrameBlock" class="">isSameBlockByRequestBlockAndFrameBlock()</a><br />
                                                             </section>
                             <section class="span4">
                                                                     <a href="../classes/CurrentLibFrame.html#property_uses" class="">$uses</a><br />
@@ -1100,6 +1103,127 @@
         </aside>
     </div>
 
+                                    <div class="row-fluid">
+        <div class="span8 content class">
+            <a id="method_setBlockInFrame" name="method_setBlockInFrame" class="anchor"></a>
+            <article class="method">
+                <h3 class="public ">setBlockInFrame()</h3>
+                <a href="#source-view" role="button" class="pull-right btn" data-toggle="modal" style="font-size: 1.1em; padding: 9px 14px"><i class="icon-code"></i></a>
+                <pre class="signature" style="margin-right: 54px;">setBlockInFrame(string|integer  <span class="argument">$frameId</span>, array  <span class="argument">$block</span>) : void</pre>
+                <p><em>フレームデータの中にBlockをセットする</em></p>
+                
+
+                                    <h4>Parameters</h4>
+                    <table class="table table-condensed table-hover">
+                                                    <tr>
+                                <td>string|integer</td>
+                                <td>$frameId </td>
+                                <td><p>フレームID</p></td>
+                            </tr>
+                                                    <tr>
+                                <td>array</td>
+                                <td>$block </td>
+                                <td><p>ブロックデータ</p></td>
+                            </tr>
+                                            </table>
+                
+                
+                				
+                            </article>
+        </div>
+        <aside class="span4 detailsbar">
+            <h1><i class="icon-arrow-down"></i></h1>
+                                                            <dl>
+                                                                            </dl>
+            <h2>Tags</h2>
+            <table class="table table-condensed">
+                                    <tr><td colspan="2"><em>None found</em></td></tr>
+                            </table>
+        </aside>
+    </div>
+
+                                    <div class="row-fluid">
+        <div class="span8 content class">
+            <a id="method_isSameRoomAndPluginByRequestBlockAndFrameBlock" name="method_isSameRoomAndPluginByRequestBlockAndFrameBlock" class="anchor"></a>
+            <article class="method">
+                <h3 class="public ">isSameRoomAndPluginByRequestBlockAndFrameBlock()</h3>
+                <a href="#source-view" role="button" class="pull-right btn" data-toggle="modal" style="font-size: 1.1em; padding: 9px 14px"><i class="icon-code"></i></a>
+                <pre class="signature" style="margin-right: 54px;">isSameRoomAndPluginByRequestBlockAndFrameBlock(array  <span class="argument">$frame</span>, array  <span class="argument">$block</span>) : boolean</pre>
+                <p><em>リクエストのBlockとFrameのBlockが同じプラグインと同じルームかどうかチェックする。</em></p>
+                
+
+                                    <h4>Parameters</h4>
+                    <table class="table table-condensed table-hover">
+                                                    <tr>
+                                <td>array</td>
+                                <td>$frame </td>
+                                <td><p>フレームデータ</p></td>
+                            </tr>
+                                                    <tr>
+                                <td>array</td>
+                                <td>$block </td>
+                                <td><p>ブロックデータ</p></td>
+                            </tr>
+                                            </table>
+                
+                
+                                    <h4>Returns</h4>
+                    boolean
+                                    				
+                            </article>
+        </div>
+        <aside class="span4 detailsbar">
+            <h1><i class="icon-arrow-down"></i></h1>
+                                                            <dl>
+                                                                            </dl>
+            <h2>Tags</h2>
+            <table class="table table-condensed">
+                                    <tr><td colspan="2"><em>None found</em></td></tr>
+                            </table>
+        </aside>
+    </div>
+
+                                    <div class="row-fluid">
+        <div class="span8 content class">
+            <a id="method_isSameBlockByRequestBlockAndFrameBlock" name="method_isSameBlockByRequestBlockAndFrameBlock" class="anchor"></a>
+            <article class="method">
+                <h3 class="public ">isSameBlockByRequestBlockAndFrameBlock()</h3>
+                <a href="#source-view" role="button" class="pull-right btn" data-toggle="modal" style="font-size: 1.1em; padding: 9px 14px"><i class="icon-code"></i></a>
+                <pre class="signature" style="margin-right: 54px;">isSameBlockByRequestBlockAndFrameBlock(array  <span class="argument">$frame</span>, array  <span class="argument">$block</span>) : boolean</pre>
+                <p><em>リクエストのBlockとFrameのBlockが同じかどうかチェックする</em></p>
+                
+
+                                    <h4>Parameters</h4>
+                    <table class="table table-condensed table-hover">
+                                                    <tr>
+                                <td>array</td>
+                                <td>$frame </td>
+                                <td><p>フレームデータ</p></td>
+                            </tr>
+                                                    <tr>
+                                <td>array</td>
+                                <td>$block </td>
+                                <td><p>ブロックデータ</p></td>
+                            </tr>
+                                            </table>
+                
+                
+                                    <h4>Returns</h4>
+                    boolean
+                                    				
+                            </article>
+        </div>
+        <aside class="span4 detailsbar">
+            <h1><i class="icon-arrow-down"></i></h1>
+                                                            <dl>
+                                                                            </dl>
+            <h2>Tags</h2>
+            <table class="table table-condensed">
+                                    <tr><td colspan="2"><em>None found</em></td></tr>
+                            </table>
+        </aside>
+    </div>
+
                                                     <div class="row-fluid">
         <div class="span8 content class">
             <a id="method__loadLibs" name="method__loadLibs" class="anchor"></a>
@@ -1375,7 +1499,7 @@
                 <section class="span10 offset1">
                     <hr />
                     Documentation is powered by <a href="http://www.phpdoc.org/">phpDocumentor </a> and authored
-                    on May 9th, 2019 at 04:40.
+                    on September 23rd, 2019 at 13:47.
                 </section>
             </section>
         </section>
