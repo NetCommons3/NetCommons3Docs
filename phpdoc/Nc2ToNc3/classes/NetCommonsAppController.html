@@ -1,0 +1,1055 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0"/>
+    <meta charset="utf-8"/>
+    <title>API Documentation</title>
+    <meta name="author" content=""/>
+    <meta name="description" content=""/>
+
+    <link href="../css/bootstrap-combined.no-icons.min.css" rel="stylesheet">
+    <link href="../css/font-awesome.min.css" rel="stylesheet">
+    <link href="../css/prism.css" rel="stylesheet" media="all"/>
+    <link href="../css/template.css" rel="stylesheet" media="all"/>
+    
+    <!--[if lt IE 9]>
+    <script src="../js/html5.js"></script>
+    <![endif]-->
+    <script src="../js/jquery-1.11.0.min.js"></script>
+    <script src="../js/ui/1.10.4/jquery-ui.min.js"></script>
+    <script src="../js/bootstrap.min.js"></script>
+    <script src="../js/jquery.smooth-scroll.js"></script>
+    <script src="../js/prism.min.js"></script>
+    <!-- TODO: Add http://jscrollpane.kelvinluck.com/ to style the scrollbars for browsers not using webkit-->
+    <script type="text/javascript">
+    function loadExternalCodeSnippets() {
+        Array.prototype.slice.call(document.querySelectorAll('pre[data-src]')).forEach(function (pre) {
+            var src = pre.getAttribute('data-src');
+            var extension = (src.match(/\.(\w+)$/) || [, ''])[1];
+            var language = 'php';
+
+            var code = document.createElement('code');
+            code.className = 'language-' + language;
+
+            pre.textContent = '';
+
+            code.textContent = 'Loading…';
+
+            pre.appendChild(code);
+
+            var xhr = new XMLHttpRequest();
+
+            xhr.open('GET', src, true);
+
+            xhr.onreadystatechange = function () {
+                if (xhr.readyState == 4) {
+
+                    if (xhr.status < 400 && xhr.responseText) {
+                        code.textContent = xhr.responseText;
+
+                        Prism.highlightElement(code);
+                    }
+                    else if (xhr.status >= 400) {
+                        code.textContent = '✖ Error ' + xhr.status + ' while fetching file: ' + xhr.statusText;
+                    }
+                    else {
+                        code.textContent = '✖ Error: File does not exist or is empty';
+                    }
+                }
+            };
+
+            xhr.send(null);
+        });
+    }
+
+    $(document).ready(function(){
+        loadExternalCodeSnippets();
+    });
+    $('#source-view').on('shown', function () {
+        loadExternalCodeSnippets();
+    })
+</script>
+
+    <link rel="shortcut icon" href="../images/favicon.ico"/>
+    <link rel="apple-touch-icon" href="../images/apple-touch-icon.png"/>
+    <link rel="apple-touch-icon" sizes="72x72" href="../images/apple-touch-icon-72x72.png"/>
+    <link rel="apple-touch-icon" sizes="114x114" href="../images/apple-touch-icon-114x114.png"/>
+</head>
+<body>
+
+<div class="navbar navbar-fixed-top">
+    <div class="navbar-inner">
+        <div class="container">
+            <a class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
+                <i class="icon-ellipsis-vertical"></i>
+            </a>
+            <a class="brand" href="../index.html">API Documentation</a>
+
+            <div class="nav-collapse">
+                <ul class="nav pull-right">
+                                        <li class="dropdown" id="charts-menu">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                            Charts <b class="caret"></b>
+                        </a>
+                        <ul class="dropdown-menu">
+                            <li>
+                                <a href="../graphs/class.html">
+                                    <i class="icon-list-alt"></i>&#160;Class hierarchy diagram
+                                </a>
+                            </li>
+                        </ul>
+                    </li>
+                    <li class="dropdown" id="reports-menu">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                            Reports <b class="caret"></b>
+                        </a>
+                        <ul class="dropdown-menu">
+                            <li>
+                                <a href="../reports/errors.html">
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    <i class="icon-list-alt"></i>&#160;Errors <span class="label label-info pull-right">3</span>
+                                </a>
+                            </li>
+                            <li>
+                                <a href="../reports/markers.html">
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    <i class="icon-list-alt"></i>&#160;Markers <span class="label label-info pull-right">9</span>
+                                </a>
+                            </li>
+                            <li>
+                                <a href="../reports/deprecated.html">
+                                                                                                            <i class="icon-list-alt"></i>&#160;Deprecated <span class="label label-info pull-right">0</span>
+                                </a>
+                            </li>
+                        </ul>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+    <!--<div class="go_to_top">-->
+    <!--<a href="#___" style="color: inherit">Back to top&#160;&#160;<i class="icon-upload icon-white"></i></a>-->
+    <!--</div>-->
+</div>
+
+<div id="___" class="container-fluid">
+        <section class="row-fluid">
+        <div class="span2 sidebar">
+                                <div class="accordion" style="margin-bottom: 0">
+        <div class="accordion-group">
+            <div class="accordion-heading">
+                                    <a class="accordion-toggle " data-toggle="collapse" data-target="#namespace-1598155199"></a>
+                                <a href="../namespaces/default.html" style="margin-left: 30px; padding-left: 0">\</a>
+            </div>
+            <div id="namespace-1598155199" class="accordion-body collapse in">
+                <div class="accordion-inner">
+
+                    
+                    <ul>
+                                                                                                    <li class="class"><a href="../classes/AccessCtrlComponent.html">AccessCtrlComponent</a></li>
+                                                    <li class="class"><a href="../classes/AddRecord.html">AddRecord</a></li>
+                                                    <li class="class"><a href="../classes/AppController.html">AppController</a></li>
+                                                    <li class="class"><a href="../classes/AppController.html">AppController</a></li>
+                                                    <li class="class"><a href="../classes/AppHelper.html">AppHelper</a></li>
+                                                    <li class="class"><a href="../classes/AppModel.html">AppModel</a></li>
+                                                    <li class="class"><a href="../classes/AppPaginatorComponent.html">AppPaginatorComponent</a></li>
+                                                    <li class="class"><a href="../classes/AppPaginatorHelper.html">AppPaginatorHelper</a></li>
+                                                    <li class="class"><a href="../classes/AppView.html">AppView</a></li>
+                                                    <li class="class"><a href="../classes/AssetComponent.html">AssetComponent</a></li>
+                                                    <li class="class"><a href="../classes/BackToHelper.html">BackToHelper</a></li>
+                                                    <li class="class"><a href="../classes/ButtonHelper.html">ButtonHelper</a></li>
+                                                    <li class="class"><a href="../classes/ComposerHelper.html">ComposerHelper</a></li>
+                                                    <li class="class"><a href="../classes/ControlPanel.html">ControlPanel</a></li>
+                                                    <li class="class"><a href="../classes/CurrentLib.html">CurrentLib</a></li>
+                                                    <li class="class"><a href="../classes/CurrentLibBlock.html">CurrentLibBlock</a></li>
+                                                    <li class="class"><a href="../classes/CurrentLibFrame.html">CurrentLibFrame</a></li>
+                                                    <li class="class"><a href="../classes/CurrentLibLanguage.html">CurrentLibLanguage</a></li>
+                                                    <li class="class"><a href="../classes/CurrentLibPage.html">CurrentLibPage</a></li>
+                                                    <li class="class"><a href="../classes/CurrentLibPermission.html">CurrentLibPermission</a></li>
+                                                    <li class="class"><a href="../classes/CurrentLibPlugin.html">CurrentLibPlugin</a></li>
+                                                    <li class="class"><a href="../classes/CurrentLibRoom.html">CurrentLibRoom</a></li>
+                                                    <li class="class"><a href="../classes/CurrentLibUser.html">CurrentLibUser</a></li>
+                                                    <li class="class"><a href="../classes/DateHelper.html">DateHelper</a></li>
+                                                    <li class="class"><a href="../classes/DatetimePickerHelper.html">DatetimePickerHelper</a></li>
+                                                    <li class="class"><a href="../classes/DisplayNumberHelper.html">DisplayNumberHelper</a></li>
+                                                    <li class="class"><a href="../classes/FormInputHelper.html">FormInputHelper</a></li>
+                                                    <li class="class"><a href="../classes/Initial.html">Initial</a></li>
+                                                    <li class="class"><a href="../classes/LibAppObject.html">LibAppObject</a></li>
+                                                    <li class="class"><a href="../classes/LinkButtonHelper.html">LinkButtonHelper</a></li>
+                                                    <li class="class"><a href="../classes/MessageFlashHelper.html">MessageFlashHelper</a></li>
+                                                    <li class="class"><a href="../classes/Nc2Authenticate.html">Nc2Authenticate</a></li>
+                                                    <li class="class"><a href="../classes/Nc2Mysql.html">Nc2Mysql</a></li>
+                                                    <li class="class"><a href="../classes/Nc2ToNc3.html">Nc2ToNc3</a></li>
+                                                    <li class="class"><a href="../classes/Nc2ToNc3AccessCounter.html">Nc2ToNc3AccessCounter</a></li>
+                                                    <li class="class"><a href="../classes/Nc2ToNc3Announcement.html">Nc2ToNc3Announcement</a></li>
+                                                    <li class="class"><a href="../classes/Nc2ToNc3AppController.html">Nc2ToNc3AppController</a></li>
+                                                    <li class="class"><a href="../classes/Nc2ToNc3AppModel.html">Nc2ToNc3AppModel</a></li>
+                                                    <li class="class"><a href="../classes/Nc2ToNc3BaseBehavior.html">Nc2ToNc3BaseBehavior</a></li>
+                                                    <li class="class"><a href="../classes/Nc2ToNc3Bbs.html">Nc2ToNc3Bbs</a></li>
+                                                    <li class="class"><a href="../classes/Nc2ToNc3BbsBehavior.html">Nc2ToNc3BbsBehavior</a></li>
+                                                    <li class="class"><a href="../classes/Nc2ToNc3Blog.html">Nc2ToNc3Blog</a></li>
+                                                    <li class="class"><a href="../classes/Nc2ToNc3BlogBehavior.html">Nc2ToNc3BlogBehavior</a></li>
+                                                    <li class="class"><a href="../classes/Nc2ToNc3Cabinet.html">Nc2ToNc3Cabinet</a></li>
+                                                    <li class="class"><a href="../classes/Nc2ToNc3CabinetBehavior.html">Nc2ToNc3CabinetBehavior</a></li>
+                                                    <li class="class"><a href="../classes/Nc2ToNc3Calendar.html">Nc2ToNc3Calendar</a></li>
+                                                    <li class="class"><a href="../classes/Nc2ToNc3CalendarBehavior.html">Nc2ToNc3CalendarBehavior</a></li>
+                                                    <li class="class"><a href="../classes/Nc2ToNc3Category.html">Nc2ToNc3Category</a></li>
+                                                    <li class="class"><a href="../classes/Nc2ToNc3CircularNotice.html">Nc2ToNc3CircularNotice</a></li>
+                                                    <li class="class"><a href="../classes/Nc2ToNc3CircularNoticeBehavior.html">Nc2ToNc3CircularNoticeBehavior</a></li>
+                                                    <li class="class"><a href="../classes/Nc2ToNc3ContentComment.html">Nc2ToNc3ContentComment</a></li>
+                                                    <li class="class"><a href="../classes/Nc2ToNc3Controller.html">Nc2ToNc3Controller</a></li>
+                                                    <li class="class"><a href="../classes/Nc2ToNc3Faq.html">Nc2ToNc3Faq</a></li>
+                                                    <li class="class"><a href="../classes/Nc2ToNc3FaqBehavior.html">Nc2ToNc3FaqBehavior</a></li>
+                                                    <li class="class"><a href="../classes/Nc2ToNc3Frame.html">Nc2ToNc3Frame</a></li>
+                                                    <li class="class"><a href="../classes/Nc2ToNc3FrameBehavior.html">Nc2ToNc3FrameBehavior</a></li>
+                                                    <li class="class"><a href="../classes/Nc2ToNc3Iframe.html">Nc2ToNc3Iframe</a></li>
+                                                    <li class="class"><a href="../classes/Nc2ToNc3IframeBehavior.html">Nc2ToNc3IframeBehavior</a></li>
+                                                    <li class="class"><a href="../classes/Nc2ToNc3Link.html">Nc2ToNc3Link</a></li>
+                                                    <li class="class"><a href="../classes/Nc2ToNc3LinkBehavior.html">Nc2ToNc3LinkBehavior</a></li>
+                                                    <li class="class"><a href="../classes/Nc2ToNc3Map.html">Nc2ToNc3Map</a></li>
+                                                    <li class="class"><a href="../classes/Nc2ToNc3Menu.html">Nc2ToNc3Menu</a></li>
+                                                    <li class="class"><a href="../classes/Nc2ToNc3MenuBehavior.html">Nc2ToNc3MenuBehavior</a></li>
+                                                    <li class="class"><a href="../classes/Nc2ToNc3Multidatabase.html">Nc2ToNc3Multidatabase</a></li>
+                                                    <li class="class"><a href="../classes/Nc2ToNc3MultidatabaseBehavior.html">Nc2ToNc3MultidatabaseBehavior</a></li>
+                                                    <li class="class"><a href="../classes/Nc2ToNc3Page.html">Nc2ToNc3Page</a></li>
+                                                    <li class="class"><a href="../classes/Nc2ToNc3PageBaseBehavior.html">Nc2ToNc3PageBaseBehavior</a></li>
+                                                    <li class="class"><a href="../classes/Nc2ToNc3PageBehavior.html">Nc2ToNc3PageBehavior</a></li>
+                                                    <li class="class"><a href="../classes/Nc2ToNc3PhotoAlbum.html">Nc2ToNc3PhotoAlbum</a></li>
+                                                    <li class="class"><a href="../classes/Nc2ToNc3PhotoAlbumBehavior.html">Nc2ToNc3PhotoAlbumBehavior</a></li>
+                                                    <li class="class"><a href="../classes/Nc2ToNc3Plugin.html">Nc2ToNc3Plugin</a></li>
+                                                    <li class="class"><a href="../classes/Nc2ToNc3QuestionBaseBehavior.html">Nc2ToNc3QuestionBaseBehavior</a></li>
+                                                    <li class="class"><a href="../classes/Nc2ToNc3Questionnaire.html">Nc2ToNc3Questionnaire</a></li>
+                                                    <li class="class"><a href="../classes/Nc2ToNc3QuestionnaireBehavior.html">Nc2ToNc3QuestionnaireBehavior</a></li>
+                                                    <li class="class"><a href="../classes/Nc2ToNc3Quiz.html">Nc2ToNc3Quiz</a></li>
+                                                    <li class="class"><a href="../classes/Nc2ToNc3QuizBehavior.html">Nc2ToNc3QuizBehavior</a></li>
+                                                    <li class="class"><a href="../classes/Nc2ToNc3Registration.html">Nc2ToNc3Registration</a></li>
+                                                    <li class="class"><a href="../classes/Nc2ToNc3RegistrationBehavior.html">Nc2ToNc3RegistrationBehavior</a></li>
+                                                    <li class="class"><a href="../classes/Nc2ToNc3Reservation.html">Nc2ToNc3Reservation</a></li>
+                                                    <li class="class"><a href="../classes/Nc2ToNc3ReservationBehavior.html">Nc2ToNc3ReservationBehavior</a></li>
+                                                    <li class="class"><a href="../classes/Nc2ToNc3Room.html">Nc2ToNc3Room</a></li>
+                                                    <li class="class"><a href="../classes/Nc2ToNc3RoomBaseBehavior.html">Nc2ToNc3RoomBaseBehavior</a></li>
+                                                    <li class="class"><a href="../classes/Nc2ToNc3RoomBehavior.html">Nc2ToNc3RoomBehavior</a></li>
+                                                    <li class="class"><a href="../classes/Nc2ToNc3RoomRole.html">Nc2ToNc3RoomRole</a></li>
+                                                    <li class="class"><a href="../classes/Nc2ToNc3RssReader.html">Nc2ToNc3RssReader</a></li>
+                                                    <li class="class"><a href="../classes/Nc2ToNc3RssReaderBehavior.html">Nc2ToNc3RssReaderBehavior</a></li>
+                                                    <li class="class"><a href="../classes/Nc2ToNc3Schema.html">Nc2ToNc3Schema</a></li>
+                                                    <li class="class"><a href="../classes/Nc2ToNc3Search.html">Nc2ToNc3Search</a></li>
+                                                    <li class="class"><a href="../classes/Nc2ToNc3SearchBehavior.html">Nc2ToNc3SearchBehavior</a></li>
+                                                    <li class="class"><a href="../classes/Nc2ToNc3Shell.html">Nc2ToNc3Shell</a></li>
+                                                    <li class="class"><a href="../classes/Nc2ToNc3Task.html">Nc2ToNc3Task</a></li>
+                                                    <li class="class"><a href="../classes/Nc2ToNc3TaskBehavior.html">Nc2ToNc3TaskBehavior</a></li>
+                                                    <li class="class"><a href="../classes/Nc2ToNc3Topic.html">Nc2ToNc3Topic</a></li>
+                                                    <li class="class"><a href="../classes/Nc2ToNc3TopicBehavior.html">Nc2ToNc3TopicBehavior</a></li>
+                                                    <li class="class"><a href="../classes/Nc2ToNc3Upload.html">Nc2ToNc3Upload</a></li>
+                                                    <li class="class"><a href="../classes/Nc2ToNc3User.html">Nc2ToNc3User</a></li>
+                                                    <li class="class"><a href="../classes/Nc2ToNc3UserAttribute.html">Nc2ToNc3UserAttribute</a></li>
+                                                    <li class="class"><a href="../classes/Nc2ToNc3UserAttributeBaseBehavior.html">Nc2ToNc3UserAttributeBaseBehavior</a></li>
+                                                    <li class="class"><a href="../classes/Nc2ToNc3UserAttributeBehavior.html">Nc2ToNc3UserAttributeBehavior</a></li>
+                                                    <li class="class"><a href="../classes/Nc2ToNc3UserBaseBehavior.html">Nc2ToNc3UserBaseBehavior</a></li>
+                                                    <li class="class"><a href="../classes/Nc2ToNc3UserBehavior.html">Nc2ToNc3UserBehavior</a></li>
+                                                    <li class="class"><a href="../classes/Nc2ToNc3UserRole.html">Nc2ToNc3UserRole</a></li>
+                                                    <li class="class"><a href="../classes/Nc2ToNc3UserValidationBehavior.html">Nc2ToNc3UserValidationBehavior</a></li>
+                                                    <li class="class"><a href="../classes/Nc2ToNc3Video.html">Nc2ToNc3Video</a></li>
+                                                    <li class="class"><a href="../classes/Nc2ToNc3VideoBehavior.html">Nc2ToNc3VideoBehavior</a></li>
+                                                    <li class="class"><a href="../classes/Nc2ToNc3WysiwygBehavior.html">Nc2ToNc3WysiwygBehavior</a></li>
+                                                    <li class="class"><a href="../classes/NcPermission.html">NcPermission</a></li>
+                                                    <li class="class"><a href="../classes/NetCommonsAppController.html">NetCommonsAppController</a></li>
+                                                    <li class="class"><a href="../classes/NetCommonsAppHelper.html">NetCommonsAppHelper</a></li>
+                                                    <li class="class"><a href="../classes/NetCommonsAppModel.html">NetCommonsAppModel</a></li>
+                                                    <li class="class"><a href="../classes/NetCommonsAppShell.html">NetCommonsAppShell</a></li>
+                                                    <li class="class"><a href="../classes/NetCommonsAppView.html">NetCommonsAppView</a></li>
+                                                    <li class="class"><a href="../classes/NetCommonsCache.html">NetCommonsCache</a></li>
+                                                    <li class="class"><a href="../classes/NetCommonsCacheBehavior.html">NetCommonsCacheBehavior</a></li>
+                                                    <li class="class"><a href="../classes/NetCommonsCakeTestCase.html">NetCommonsCakeTestCase</a></li>
+                                                    <li class="class"><a href="../classes/NetCommonsComponent.html">NetCommonsComponent</a></li>
+                                                    <li class="class"><a href="../classes/NetCommonsConsoleTestCase.html">NetCommonsConsoleTestCase</a></li>
+                                                    <li class="class"><a href="../classes/NetCommonsController.html">NetCommonsController</a></li>
+                                                    <li class="class"><a href="../classes/NetCommonsControllerBaseTestCase.html">NetCommonsControllerBaseTestCase</a></li>
+                                                    <li class="class"><a href="../classes/NetCommonsControllerTestCase.html">NetCommonsControllerTestCase</a></li>
+                                                    <li class="class"><a href="../classes/NetCommonsCurrentLibTestRun.html">NetCommonsCurrentLibTestRun</a></li>
+                                                    <li class="class"><a href="../classes/NetCommonsCurrentLibTestUtility.html">NetCommonsCurrentLibTestUtility</a></li>
+                                                    <li class="class"><a href="../classes/NetCommonsDeleteTest.html">NetCommonsDeleteTest</a></li>
+                                                    <li class="class"><a href="../classes/NetCommonsExceptionRenderer.html">NetCommonsExceptionRenderer</a></li>
+                                                    <li class="class"><a href="../classes/NetCommonsFormHelper.html">NetCommonsFormHelper</a></li>
+                                                    <li class="class"><a href="../classes/NetCommonsGetTest.html">NetCommonsGetTest</a></li>
+                                                    <li class="class"><a href="../classes/NetCommonsHelperTestCase.html">NetCommonsHelperTestCase</a></li>
+                                                    <li class="class"><a href="../classes/NetCommonsHtmlHelper.html">NetCommonsHtmlHelper</a></li>
+                                                    <li class="class"><a href="../classes/NetCommonsMigration.html">NetCommonsMigration</a></li>
+                                                    <li class="class"><a href="../classes/NetCommonsModelTestCase.html">NetCommonsModelTestCase</a></li>
+                                                    <li class="class"><a href="../classes/NetCommonsRoutesTestCase.html">NetCommonsRoutesTestCase</a></li>
+                                                    <li class="class"><a href="../classes/NetCommonsSaveTest.html">NetCommonsSaveTest</a></li>
+                                                    <li class="class"><a href="../classes/NetCommonsSecurity.html">NetCommonsSecurity</a></li>
+                                                    <li class="class"><a href="../classes/NetCommonsTestSuite.html">NetCommonsTestSuite</a></li>
+                                                    <li class="class"><a href="../classes/NetCommonsTime.html">NetCommonsTime</a></li>
+                                                    <li class="class"><a href="../classes/NetCommonsTimeComponent.html">NetCommonsTimeComponent</a></li>
+                                                    <li class="class"><a href="../classes/NetCommonsTimeHelper.html">NetCommonsTimeHelper</a></li>
+                                                    <li class="class"><a href="../classes/NetCommonsTreeBehavior.html">NetCommonsTreeBehavior</a></li>
+                                                    <li class="class"><a href="../classes/NetCommonsTreeBehaviorCase.html">NetCommonsTreeBehaviorCase</a></li>
+                                                    <li class="class"><a href="../classes/NetCommonsUrl.html">NetCommonsUrl</a></li>
+                                                    <li class="class"><a href="../classes/NetCommonsValidateTest.html">NetCommonsValidateTest</a></li>
+                                                    <li class="class"><a href="../classes/NetCommonsValidationRuleBehavior.html">NetCommonsValidationRuleBehavior</a></li>
+                                                    <li class="class"><a href="../classes/OriginalKeyBehavior.html">OriginalKeyBehavior</a></li>
+                                                    <li class="class"><a href="../classes/PermissionComponent.html">PermissionComponent</a></li>
+                                                    <li class="class"><a href="../classes/SettingMode.html">SettingMode</a></li>
+                                                    <li class="class"><a href="../classes/SingletonViewBlockHtmlHelper.html">SingletonViewBlockHtmlHelper</a></li>
+                                                    <li class="class"><a href="../classes/SiteCloseController.html">SiteCloseController</a></li>
+                                                    <li class="class"><a href="../classes/SnsButtonHelper.html">SnsButtonHelper</a></li>
+                                                    <li class="class"><a href="../classes/TableListHelper.html">TableListHelper</a></li>
+                                                    <li class="class"><a href="../classes/TitleIconHelper.html">TitleIconHelper</a></li>
+                                                    <li class="class"><a href="../classes/TokenHelper.html">TokenHelper</a></li>
+                                                    <li class="class"><a href="../classes/TrackableBehavior.html">TrackableBehavior</a></li>
+                                                    <li class="class"><a href="../classes/ValidateMerge.html">ValidateMerge</a></li>
+                                                    <li class="class"><a href="../classes/WizardHelper.html">WizardHelper</a></li>
+                                            </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+
+        </div>
+    </section>
+    <section class="row-fluid">
+        <div class="span10 offset2">
+            <div class="row-fluid">
+                <div class="span8 content class">
+                    <nav>
+                                                <a href="../namespaces/default.html">\</a> <i class="icon-level-up"></i>
+                                            </nav>
+                    <a href="#source-view" role="button" class="pull-right btn" data-toggle="modal"><i class="icon-code"></i></a>
+
+                    <h1><small>\</small>NetCommonsAppController</h1>
+                    <p><em>NetCommonsApp Controller</em></p>
+                    
+                    
+                                        
+                    <section id="summary">
+                        <h2>Summary</h2>
+                        <section class="row-fluid heading">
+                            <section class="span4">
+                                <a href="#methods">Methods</a>
+                            </section>
+                            <section class="span4">
+                                <a href="#properties">Properties</a>
+                            </section>
+                            <section class="span4">
+                                <a href="#constants">Constants</a>
+                            </section>
+                        </section>
+                        <section class="row-fluid public">
+                            <section class="span4">
+                                                                    <a href="../classes/NetCommonsAppController.html#method___construct" class="">__construct()</a><br />
+                                                                    <a href="../classes/NetCommonsAppController.html#method_beforeFilter" class="">beforeFilter()</a><br />
+                                                                    <a href="../classes/NetCommonsAppController.html#method_afterFilter" class="">afterFilter()</a><br />
+                                                                    <a href="../classes/NetCommonsAppController.html#method_beforeRender" class="">beforeRender()</a><br />
+                                                                    <a href="../classes/NetCommonsAppController.html#method_beforeRedirect" class="">beforeRedirect()</a><br />
+                                                                    <a href="../classes/NetCommonsAppController.html#method_camelizeKeyRecursive" class="">camelizeKeyRecursive()</a><br />
+                                                                    <a href="../classes/NetCommonsAppController.html#method_throwBadRequest" class="">throwBadRequest()</a><br />
+                                                                    <a href="../classes/NetCommonsAppController.html#method_emptyRender" class="">emptyRender()</a><br />
+                                                                    <a href="../classes/NetCommonsAppController.html#method_emptyFrame" class="">emptyFrame()</a><br />
+                                                            </section>
+                            <section class="span4">
+                                                                    <a href="../classes/NetCommonsAppController.html#property_layout" class="">$layout</a><br />
+                                                                    <a href="../classes/NetCommonsAppController.html#property_theme" class="">$theme</a><br />
+                                                                    <a href="../classes/NetCommonsAppController.html#property_components" class="">$components</a><br />
+                                                                    <a href="../classes/NetCommonsAppController.html#property_uses" class="">$uses</a><br />
+                                                                    <a href="../classes/NetCommonsAppController.html#property_helpers" class="">$helpers</a><br />
+                                                                    <a href="../classes/NetCommonsAppController.html#property_CurrentLib" class="">$CurrentLib</a><br />
+                                                            </section>
+                            <section class="span4">
+                                                                    <em>No constants found</em>
+                                                            </section>
+                        </section>
+                        <section class="row-fluid protected">
+                            <section class="span4">
+                                                                    <a href="../classes/NetCommonsAppController.html#method__setLanguage" class="">_setLanguage()</a><br />
+                                                            </section>
+                            <section class="span4">
+                                                                    <a href="../classes/NetCommonsAppController.html#property__allowMethods" class="">$_allowMethods</a><br />
+                                                            </section>
+                            <section class="span4">
+                                <em>N/A</em>
+                            </section>
+                        </section>
+                        <section class="row-fluid private">
+                            <section class="span4">
+                                                                    <a href="../classes/NetCommonsAppController.html#method___prepare" class="">__prepare()</a><br />
+                                                                    <a href="../classes/NetCommonsAppController.html#method___loadCurrentLib" class="">__loadCurrentLib()</a><br />
+                                                            </section>
+                            <section class="span4">
+                                                                    <em>No private properties found</em>
+                                                            </section>
+                            <section class="span4">
+                                <em>N/A</em>
+                            </section>
+                        </section>
+                    </section>
+                </div>
+                <aside class="span4 detailsbar">
+                                        
+                    
+                    <dl>
+                        <dt>File</dt>
+                            <dd><a href="../files/Plugin.NetCommons.Controller.NetCommonsAppController.html"><div class="path-wrapper">Plugin/NetCommons/Controller/NetCommonsAppController.php</div></a></dd>
+                                                <dt>Package</dt>
+                            <dd><div class="namespace-wrapper">NetCommons\Controller</div></dd>
+                                                <dt>Class hierarchy</dt>
+                            <dd class="hierarchy">
+                                                                                                                                                                                                                                                                                                
+                                        <div class="namespace-wrapper">\Controller</div>
+                                                                                                    <div class="namespace-wrapper">\NetCommonsAppController</div>
+                            </dd>
+
+                        
+                        
+                        
+                        
+                                                                        </dl>
+                    <h2>Tags</h2>
+                    <table class="table table-condensed">
+                                            <tr>
+                            <th>
+                                author
+                            </th>
+                            <td>
+                                                                    <p>Shohei Nakajima <a href="mailto:nakajimashouhei@gmail.com">nakajimashouhei@gmail.com</a></p>
+                                                            </td>
+                        </tr>
+                                        </table>
+                </aside>
+            </div>
+
+                        
+                                    <a id="properties" name="properties"></a>
+            <div class="row-fluid">
+                <div class="span8 content class">
+                    <h2>Properties</h2>
+                </div>
+                <aside class="span4 detailsbar"></aside>
+            </div>
+
+                                    <div class="row-fluid">
+        <div class="span8 content class">
+            <a id="property_layout" name="property_layout" class="anchor"></a>
+            <article class="property">
+                <h3 class="public ">$layout</h3>
+                <pre class="signature">$layout : string</pre>
+                <p><em>use layout</em></p>
+                
+
+                                <h4>Type</h4>
+                string
+                                            </article>
+        </div>
+        <aside class="span4 detailsbar">
+            <h1><i class="icon-arrow-down"></i></h1>
+                        <dl>
+                                                            </dl>
+            <h2>Tags</h2>
+            <table class="table table-condensed">
+                                    <tr><td colspan="2"><em>None found</em></td></tr>
+                            </table>
+        </aside>
+    </div>
+
+                                    <div class="row-fluid">
+        <div class="span8 content class">
+            <a id="property_theme" name="property_theme" class="anchor"></a>
+            <article class="property">
+                <h3 class="public ">$theme</h3>
+                <pre class="signature">$theme : string</pre>
+                <p><em>use theme</em></p>
+                
+
+                                <h4>Type</h4>
+                string
+                                            </article>
+        </div>
+        <aside class="span4 detailsbar">
+            <h1><i class="icon-arrow-down"></i></h1>
+                        <dl>
+                                                            </dl>
+            <h2>Tags</h2>
+            <table class="table table-condensed">
+                                    <tr><td colspan="2"><em>None found</em></td></tr>
+                            </table>
+        </aside>
+    </div>
+
+                                    <div class="row-fluid">
+        <div class="span8 content class">
+            <a id="property_components" name="property_components" class="anchor"></a>
+            <article class="property">
+                <h3 class="public ">$components</h3>
+                <pre class="signature">$components : array</pre>
+                <p><em>use components</em></p>
+                
+
+                                <h4>Type</h4>
+                array
+                                            </article>
+        </div>
+        <aside class="span4 detailsbar">
+            <h1><i class="icon-arrow-down"></i></h1>
+                        <dl>
+                                                            </dl>
+            <h2>Tags</h2>
+            <table class="table table-condensed">
+                                    <tr><td colspan="2"><em>None found</em></td></tr>
+                            </table>
+        </aside>
+    </div>
+
+                                    <div class="row-fluid">
+        <div class="span8 content class">
+            <a id="property_uses" name="property_uses" class="anchor"></a>
+            <article class="property">
+                <h3 class="public ">$uses</h3>
+                <pre class="signature">$uses : array</pre>
+                <p><em>use model</em></p>
+                
+
+                                <h4>Type</h4>
+                array
+                                            </article>
+        </div>
+        <aside class="span4 detailsbar">
+            <h1><i class="icon-arrow-down"></i></h1>
+                        <dl>
+                                                            </dl>
+            <h2>Tags</h2>
+            <table class="table table-condensed">
+                                    <tr><td colspan="2"><em>None found</em></td></tr>
+                            </table>
+        </aside>
+    </div>
+
+                                    <div class="row-fluid">
+        <div class="span8 content class">
+            <a id="property_helpers" name="property_helpers" class="anchor"></a>
+            <article class="property">
+                <h3 class="public ">$helpers</h3>
+                <pre class="signature">$helpers : array</pre>
+                <p><em>use helpers</em></p>
+                
+
+                                <h4>Type</h4>
+                array
+                                            </article>
+        </div>
+        <aside class="span4 detailsbar">
+            <h1><i class="icon-arrow-down"></i></h1>
+                        <dl>
+                                                            </dl>
+            <h2>Tags</h2>
+            <table class="table table-condensed">
+                                    <tr><td colspan="2"><em>None found</em></td></tr>
+                            </table>
+        </aside>
+    </div>
+
+                                    <div class="row-fluid">
+        <div class="span8 content class">
+            <a id="property_CurrentLib" name="property_CurrentLib" class="anchor"></a>
+            <article class="property">
+                <h3 class="public ">$CurrentLib</h3>
+                <pre class="signature">$CurrentLib : \CurrentLib</pre>
+                <p><em>CurrentLibライブラリ</em></p>
+                
+
+                                <h4>Type</h4>
+                <a href="../classes/CurrentLib.html">\CurrentLib</a>
+                                            </article>
+        </div>
+        <aside class="span4 detailsbar">
+            <h1><i class="icon-arrow-down"></i></h1>
+                        <dl>
+                                                            </dl>
+            <h2>Tags</h2>
+            <table class="table table-condensed">
+                                    <tr><td colspan="2"><em>None found</em></td></tr>
+                            </table>
+        </aside>
+    </div>
+
+                                                    <div class="row-fluid">
+        <div class="span8 content class">
+            <a id="property__allowMethods" name="property__allowMethods" class="anchor"></a>
+            <article class="property">
+                <h3 class="protected ">$_allowMethods</h3>
+                <pre class="signature">$_allowMethods : array</pre>
+                <p><em>リクエストの許可メソッド</em></p>
+                
+
+                                <h4>Type</h4>
+                array
+                                            </article>
+        </div>
+        <aside class="span4 detailsbar">
+            <h1><i class="icon-arrow-down"></i></h1>
+                        <dl>
+                                                            </dl>
+            <h2>Tags</h2>
+            <table class="table table-condensed">
+                                    <tr><td colspan="2"><em>None found</em></td></tr>
+                            </table>
+        </aside>
+    </div>
+
+                                            
+                                    <a id="methods" name="methods"></a>
+            <div class="row-fluid">
+                <div class="span8 content class"><h2>Methods</h2></div>
+                <aside class="span4 detailsbar"></aside>
+            </div>
+
+                                    <div class="row-fluid">
+        <div class="span8 content class">
+            <a id="method___construct" name="method___construct" class="anchor"></a>
+            <article class="method">
+                <h3 class="public ">__construct()</h3>
+                <a href="#source-view" role="button" class="pull-right btn" data-toggle="modal" style="font-size: 1.1em; padding: 9px 14px"><i class="icon-code"></i></a>
+                <pre class="signature" style="margin-right: 54px;">__construct(\CakeRequest  <span class="argument">$request = null</span>, \CakeResponse  <span class="argument">$response = null</span>) </pre>
+                <p><em>Constructor.</em></p>
+                
+
+                                    <h4>Parameters</h4>
+                    <table class="table table-condensed table-hover">
+                                                    <tr>
+                                <td>\CakeRequest</td>
+                                <td>$request </td>
+                                <td><p>Request object for this controller. Can be null for testing,
+but expect that features that use the request parameters will not work.</p></td>
+                            </tr>
+                                                    <tr>
+                                <td>\CakeResponse</td>
+                                <td>$response </td>
+                                <td><p>Response object for this controller.</p></td>
+                            </tr>
+                                            </table>
+                
+                
+                				
+                            </article>
+        </div>
+        <aside class="span4 detailsbar">
+            <h1><i class="icon-arrow-down"></i></h1>
+                                                            <dl>
+                                                                            </dl>
+            <h2>Tags</h2>
+            <table class="table table-condensed">
+                                    <tr><td colspan="2"><em>None found</em></td></tr>
+                            </table>
+        </aside>
+    </div>
+
+                                    <div class="row-fluid">
+        <div class="span8 content class">
+            <a id="method_beforeFilter" name="method_beforeFilter" class="anchor"></a>
+            <article class="method">
+                <h3 class="public ">beforeFilter()</h3>
+                <a href="#source-view" role="button" class="pull-right btn" data-toggle="modal" style="font-size: 1.1em; padding: 9px 14px"><i class="icon-code"></i></a>
+                <pre class="signature" style="margin-right: 54px;">beforeFilter() : void</pre>
+                <p><em>beforeFilter</em></p>
+                
+
+                
+                
+                				
+                            </article>
+        </div>
+        <aside class="span4 detailsbar">
+            <h1><i class="icon-arrow-down"></i></h1>
+                                                            <dl>
+                                                                            </dl>
+            <h2>Tags</h2>
+            <table class="table table-condensed">
+                                    <tr><td colspan="2"><em>None found</em></td></tr>
+                            </table>
+        </aside>
+    </div>
+
+                                    <div class="row-fluid">
+        <div class="span8 content class">
+            <a id="method_afterFilter" name="method_afterFilter" class="anchor"></a>
+            <article class="method">
+                <h3 class="public ">afterFilter()</h3>
+                <a href="#source-view" role="button" class="pull-right btn" data-toggle="modal" style="font-size: 1.1em; padding: 9px 14px"><i class="icon-code"></i></a>
+                <pre class="signature" style="margin-right: 54px;">afterFilter() : void</pre>
+                <p><em>Called after the controller action is run and rendered.</em></p>
+                
+
+                
+                
+                				
+                            </article>
+        </div>
+        <aside class="span4 detailsbar">
+            <h1><i class="icon-arrow-down"></i></h1>
+                                                            <dl>
+                                                                                            <dt>See also</dt>
+                                                                <dd><a href="http://book.cakephp.org/2.0/ja/controllers.html#request-life-cycle-callbacks"><span class="namespace-wrapper">http://book.cakephp.org/2.0/ja/controllers.html#request-life-cycle-callbacks</span></a></dd>
+                                                                </dl>
+            <h2>Tags</h2>
+            <table class="table table-condensed">
+                                    <tr><td colspan="2"><em>None found</em></td></tr>
+                            </table>
+        </aside>
+    </div>
+
+                                    <div class="row-fluid">
+        <div class="span8 content class">
+            <a id="method_beforeRender" name="method_beforeRender" class="anchor"></a>
+            <article class="method">
+                <h3 class="public ">beforeRender()</h3>
+                <a href="#source-view" role="button" class="pull-right btn" data-toggle="modal" style="font-size: 1.1em; padding: 9px 14px"><i class="icon-code"></i></a>
+                <pre class="signature" style="margin-right: 54px;">beforeRender() : void</pre>
+                <p><em>beforeRender</em></p>
+                
+
+                
+                
+                				
+                            </article>
+        </div>
+        <aside class="span4 detailsbar">
+            <h1><i class="icon-arrow-down"></i></h1>
+                                                            <dl>
+                                                                            </dl>
+            <h2>Tags</h2>
+            <table class="table table-condensed">
+                                    <tr><td colspan="2"><em>None found</em></td></tr>
+                            </table>
+        </aside>
+    </div>
+
+                                    <div class="row-fluid">
+        <div class="span8 content class">
+            <a id="method_beforeRedirect" name="method_beforeRedirect" class="anchor"></a>
+            <article class="method">
+                <h3 class="public ">beforeRedirect()</h3>
+                <a href="#source-view" role="button" class="pull-right btn" data-toggle="modal" style="font-size: 1.1em; padding: 9px 14px"><i class="icon-code"></i></a>
+                <pre class="signature" style="margin-right: 54px;">beforeRedirect(string|array  <span class="argument">$url</span>, integer  <span class="argument">$status = null</span>, boolean  <span class="argument">$exit = true</span>) : mixed</pre>
+                <p><em>The beforeRedirect method is invoked when the controller&#039;s redirect method is called but before any
+further action.</em></p>
+                <p>If this method returns false the controller will not continue on to redirect the request.
+The $url, $status and $exit variables have same meaning as for the controller's method. You can also
+return a string which will be interpreted as the URL to redirect to or return associative array with
+key 'url' and optionally 'status' and 'exit'.</p>
+
+                                    <h4>Parameters</h4>
+                    <table class="table table-condensed table-hover">
+                                                    <tr>
+                                <td>string|array</td>
+                                <td>$url </td>
+                                <td><p>A string or array-based URL pointing to another location within the app,
+or an absolute URL</p></td>
+                            </tr>
+                                                    <tr>
+                                <td>integer</td>
+                                <td>$status </td>
+                                <td><p>Optional HTTP status code (eg: 404)</p></td>
+                            </tr>
+                                                    <tr>
+                                <td>boolean</td>
+                                <td>$exit </td>
+                                <td><p>If true, exit() will be called after the redirect</p></td>
+                            </tr>
+                                            </table>
+                
+                                    <h4>Throws</h4>
+                    <dl>
+                                                    <dt>\Exception</dt>
+                            <dd></dd>
+                                                                    </dl>
+                
+                                    <h4>Returns</h4>
+                    mixed
+                                            &mdash; <p>false to stop redirection event,
+string controllers a new redirection URL or
+array with the keys url, status and exit to be used by the redirect method.</p>
+                                    				
+                            </article>
+        </div>
+        <aside class="span4 detailsbar">
+            <h1><i class="icon-arrow-down"></i></h1>
+                                                            <dl>
+                                                                                            <dt>See also</dt>
+                                                                <dd><a href="http://book.cakephp.org/2.0/en/controllers.html#request-life-cycle-callbacks"><span class="namespace-wrapper">http://book.cakephp.org/2.0/en/controllers.html#request-life-cycle-callbacks</span></a></dd>
+                                                                </dl>
+            <h2>Tags</h2>
+            <table class="table table-condensed">
+                                    <tr>
+                        <th>
+                            SuppressWarnings
+                        </th>
+                        <td>
+                                                                                            <p>(PHPMD.BooleanArgumentFlag)</p>
+                                                    </td>
+                    </tr>
+                            </table>
+        </aside>
+    </div>
+
+                                    <div class="row-fluid">
+        <div class="span8 content class">
+            <a id="method_camelizeKeyRecursive" name="method_camelizeKeyRecursive" class="anchor"></a>
+            <article class="method">
+                <h3 class="public ">camelizeKeyRecursive()</h3>
+                <a href="#source-view" role="button" class="pull-right btn" data-toggle="modal" style="font-size: 1.1em; padding: 9px 14px"><i class="icon-code"></i></a>
+                <pre class="signature" style="margin-right: 54px;">camelizeKeyRecursive(array  <span class="argument">$orig</span>) : array</pre>
+                <p><em>camelizeKeyRecursive</em></p>
+                
+
+                                    <h4>Parameters</h4>
+                    <table class="table table-condensed table-hover">
+                                                    <tr>
+                                <td>array</td>
+                                <td>$orig </td>
+                                <td><p>data to camelize</p></td>
+                            </tr>
+                                            </table>
+                
+                
+                                    <h4>Returns</h4>
+                    array
+                                            &mdash; <p>camelized data</p>
+                                    				
+                            </article>
+        </div>
+        <aside class="span4 detailsbar">
+            <h1><i class="icon-arrow-down"></i></h1>
+                            <span class="label label-info">static</span>
+                                                            <dl>
+                                                                            </dl>
+            <h2>Tags</h2>
+            <table class="table table-condensed">
+                                    <tr><td colspan="2"><em>None found</em></td></tr>
+                            </table>
+        </aside>
+    </div>
+
+                                    <div class="row-fluid">
+        <div class="span8 content class">
+            <a id="method_throwBadRequest" name="method_throwBadRequest" class="anchor"></a>
+            <article class="method">
+                <h3 class="public ">throwBadRequest()</h3>
+                <a href="#source-view" role="button" class="pull-right btn" data-toggle="modal" style="font-size: 1.1em; padding: 9px 14px"><i class="icon-code"></i></a>
+                <pre class="signature" style="margin-right: 54px;">throwBadRequest(string|null  <span class="argument">$message = null</span>) : void</pre>
+                <p><em>throw bad request</em></p>
+                
+
+                                    <h4>Parameters</h4>
+                    <table class="table table-condensed table-hover">
+                                                    <tr>
+                                <td>string|null</td>
+                                <td>$message </td>
+                                <td><p>メッセージ</p></td>
+                            </tr>
+                                            </table>
+                
+                                    <h4>Throws</h4>
+                    <dl>
+                                                    <dt>\BadRequestException</dt>
+                            <dd></dd>
+                                                                    </dl>
+                
+                				
+                            </article>
+        </div>
+        <aside class="span4 detailsbar">
+            <h1><i class="icon-arrow-down"></i></h1>
+                                                            <dl>
+                                                                            </dl>
+            <h2>Tags</h2>
+            <table class="table table-condensed">
+                                    <tr><td colspan="2"><em>None found</em></td></tr>
+                            </table>
+        </aside>
+    </div>
+
+                                    <div class="row-fluid">
+        <div class="span8 content class">
+            <a id="method_emptyRender" name="method_emptyRender" class="anchor"></a>
+            <article class="method">
+                <h3 class="public ">emptyRender()</h3>
+                <a href="#source-view" role="button" class="pull-right btn" data-toggle="modal" style="font-size: 1.1em; padding: 9px 14px"><i class="icon-code"></i></a>
+                <pre class="signature" style="margin-right: 54px;">emptyRender() : void</pre>
+                <p><em>Empty render</em></p>
+                
+
+                
+                
+                				
+                            </article>
+        </div>
+        <aside class="span4 detailsbar">
+            <h1><i class="icon-arrow-down"></i></h1>
+                                                            <dl>
+                                                                            </dl>
+            <h2>Tags</h2>
+            <table class="table table-condensed">
+                                    <tr><td colspan="2"><em>None found</em></td></tr>
+                            </table>
+        </aside>
+    </div>
+
+                                    <div class="row-fluid">
+        <div class="span8 content class">
+            <a id="method_emptyFrame" name="method_emptyFrame" class="anchor"></a>
+            <article class="method">
+                <h3 class="public ">emptyFrame()</h3>
+                <a href="#source-view" role="button" class="pull-right btn" data-toggle="modal" style="font-size: 1.1em; padding: 9px 14px"><i class="icon-code"></i></a>
+                <pre class="signature" style="margin-right: 54px;">emptyFrame() : void</pre>
+                <p><em>Empty render</em></p>
+                
+
+                
+                
+                				
+                            </article>
+        </div>
+        <aside class="span4 detailsbar">
+            <h1><i class="icon-arrow-down"></i></h1>
+                                                            <dl>
+                                                                            </dl>
+            <h2>Tags</h2>
+            <table class="table table-condensed">
+                                    <tr><td colspan="2"><em>None found</em></td></tr>
+                            </table>
+        </aside>
+    </div>
+
+                                                    <div class="row-fluid">
+        <div class="span8 content class">
+            <a id="method__setLanguage" name="method__setLanguage" class="anchor"></a>
+            <article class="method">
+                <h3 class="protected ">_setLanguage()</h3>
+                <a href="#source-view" role="button" class="pull-right btn" data-toggle="modal" style="font-size: 1.1em; padding: 9px 14px"><i class="icon-code"></i></a>
+                <pre class="signature" style="margin-right: 54px;">_setLanguage() : void</pre>
+                <p><em>リクエストもしくはSessionから言語をセットする。</em></p>
+                
+
+                
+                
+                				
+                            </article>
+        </div>
+        <aside class="span4 detailsbar">
+            <h1><i class="icon-arrow-down"></i></h1>
+                                                            <dl>
+                                                                            </dl>
+            <h2>Tags</h2>
+            <table class="table table-condensed">
+                                    <tr><td colspan="2"><em>None found</em></td></tr>
+                            </table>
+        </aside>
+    </div>
+
+                                                    <div class="row-fluid">
+        <div class="span8 content class">
+            <a id="method___prepare" name="method___prepare" class="anchor"></a>
+            <article class="method">
+                <h3 class="private ">__prepare()</h3>
+                <a href="#source-view" role="button" class="pull-right btn" data-toggle="modal" style="font-size: 1.1em; padding: 9px 14px"><i class="icon-code"></i></a>
+                <pre class="signature" style="margin-right: 54px;">__prepare() : void</pre>
+                <p><em>事前準備</em></p>
+                
+
+                
+                
+                				
+                            </article>
+        </div>
+        <aside class="span4 detailsbar">
+            <h1><i class="icon-arrow-down"></i></h1>
+                                                            <dl>
+                                                                            </dl>
+            <h2>Tags</h2>
+            <table class="table table-condensed">
+                                    <tr><td colspan="2"><em>None found</em></td></tr>
+                            </table>
+        </aside>
+    </div>
+
+                                    <div class="row-fluid">
+        <div class="span8 content class">
+            <a id="method___loadCurrentLib" name="method___loadCurrentLib" class="anchor"></a>
+            <article class="method">
+                <h3 class="private ">__loadCurrentLib()</h3>
+                <a href="#source-view" role="button" class="pull-right btn" data-toggle="modal" style="font-size: 1.1em; padding: 9px 14px"><i class="icon-code"></i></a>
+                <pre class="signature" style="margin-right: 54px;">__loadCurrentLib() : void</pre>
+                <p><em>CurrentLibをロードする</em></p>
+                
+
+                
+                
+                				
+                            </article>
+        </div>
+        <aside class="span4 detailsbar">
+            <h1><i class="icon-arrow-down"></i></h1>
+                                                            <dl>
+                                                                            </dl>
+            <h2>Tags</h2>
+            <table class="table table-condensed">
+                                    <tr><td colspan="2"><em>None found</em></td></tr>
+                            </table>
+        </aside>
+    </div>
+
+                                    </div>
+    </section>
+
+    <div id="source-view" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="source-view-label" aria-hidden="true">
+        <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+            <h3 id="source-view-label">NetCommonsAppController.php</h3>
+        </div>
+        <div class="modal-body">
+            <pre data-src="../files/Plugin/NetCommons/Controller/NetCommonsAppController.php.txt" class="language-php line-numbers"></pre>
+        </div>
+    </div>
+
+    <footer class="row-fluid">
+        <section class="span10 offset2">
+            <section class="row-fluid">
+                <section class="span10 offset1">
+                    <section class="row-fluid footer-sections">
+                        <section class="span4">
+                                                        <h1><i class="icon-code"></i></h1>
+                            <div>
+                                <ul>
+                                                                    </ul>
+                            </div>
+                        </section>
+                        <section class="span4">
+                                                        <h1><i class="icon-bar-chart"></i></h1>
+                            <div>
+                                <ul>
+                                    <li><a href="../graphs/class.html">Class Hierarchy Diagram</a></li>
+                                </ul>
+                            </div>
+                        </section>
+                        <section class="span4">
+                                                        <h1><i class="icon-pushpin"></i></h1>
+                            <div>
+                                <ul>
+                                    <li><a href="../reports/errors.html">Errors</a></li>
+                                    <li><a href="../reports/markers.html">Markers</a></li>
+                                </ul>
+                            </div>
+                        </section>
+                    </section>
+                </section>
+            </section>
+            <section class="row-fluid">
+                <section class="span10 offset1">
+                    <hr />
+                    Documentation is powered by <a href="http://www.phpdoc.org/">phpDocumentor </a> and authored
+                    on September 27th, 2019 at 23:25.
+                </section>
+            </section>
+        </section>
+    </footer>
+</div>
+
+</body>
+</html>
