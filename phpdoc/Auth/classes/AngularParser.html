@@ -136,10 +136,10 @@
                                 <div class="accordion" style="margin-bottom: 0">
         <div class="accordion-group">
             <div class="accordion-heading">
-                                    <a class="accordion-toggle " data-toggle="collapse" data-target="#namespace-119398500"></a>
+                                    <a class="accordion-toggle " data-toggle="collapse" data-target="#namespace-567239555"></a>
                                 <a href="../namespaces/default.html" style="margin-left: 30px; padding-left: 0">\</a>
             </div>
-            <div id="namespace-119398500" class="accordion-body collapse in">
+            <div id="namespace-567239555" class="accordion-body collapse in">
                 <div class="accordion-inner">
 
                     
@@ -253,8 +253,8 @@
                                             </nav>
                     <a href="#source-view" role="button" class="pull-right btn" data-toggle="modal"><i class="icon-code"></i></a>
 
-                    <h1><small>\</small>NetCommonsUrl</h1>
-                    <p><em>NetCommons Utility</em></p>
+                    <h1><small>\</small>AngularParser</h1>
+                    <p><em>Angularに対するパーサ処理</em></p>
                     
                     
                                         
@@ -273,13 +273,7 @@
                         </section>
                         <section class="row-fluid public">
                             <section class="span4">
-                                                                    <a href="../classes/NetCommonsUrl.html#method_backToPageUrl" class="">backToPageUrl()</a><br />
-                                                                    <a href="../classes/NetCommonsUrl.html#method_backToIndexUrl" class="">backToIndexUrl()</a><br />
-                                                                    <a href="../classes/NetCommonsUrl.html#method_actionUrl" class="">actionUrl()</a><br />
-                                                                    <a href="../classes/NetCommonsUrl.html#method_actionUrlAsArray" class="">actionUrlAsArray()</a><br />
-                                                                    <a href="../classes/NetCommonsUrl.html#method_userActionUrl" class="">userActionUrl()</a><br />
-                                                                    <a href="../classes/NetCommonsUrl.html#method_url" class="">url()</a><br />
-                                                                    <a href="../classes/NetCommonsUrl.html#method_blockUrl" class="">blockUrl()</a><br />
+                                                                    <a href="../classes/AngularParser.html#method_parse" class="">parse()</a><br />
                                                             </section>
                             <section class="span4">
                                                                     <em>No public properties found</em>
@@ -301,7 +295,7 @@
                         </section>
                         <section class="row-fluid private">
                             <section class="span4">
-                                                                    <a href="../classes/NetCommonsUrl.html#method___getCommonAction" class="">__getCommonAction()</a><br />
+                                                                    <em>No private methods found</em>
                                                             </section>
                             <section class="span4">
                                                                     <em>No private properties found</em>
@@ -317,12 +311,12 @@
                     
                     <dl>
                         <dt>File</dt>
-                            <dd><a href="../files/Plugin.NetCommons.Utility.NetCommonsUrl.html"><div class="path-wrapper">Plugin/NetCommons/Utility/NetCommonsUrl.php</div></a></dd>
+                            <dd><a href="../files/Plugin.NetCommons.Lib.AngularParser.html"><div class="path-wrapper">Plugin/NetCommons/Lib/AngularParser.php</div></a></dd>
                                                 <dt>Package</dt>
-                            <dd><div class="namespace-wrapper">NetCommons\Utility</div></dd>
+                            <dd><div class="namespace-wrapper">NetCommons\Lib</div></dd>
                                                 <dt>Class hierarchy</dt>
                             <dd class="hierarchy">
-                                                                                                                                                                    <div class="namespace-wrapper">\NetCommonsUrl</div>
+                                                                                                                                                                    <div class="namespace-wrapper">\AngularParser</div>
                             </dd>
 
                         
@@ -340,14 +334,6 @@
                                                                     <p>Shohei Nakajima <a href="mailto:nakajimashouhei@gmail.com">nakajimashouhei@gmail.com</a></p>
                                                             </td>
                         </tr>
-                                            <tr>
-                            <th>
-                                SuppressWarnings
-                            </th>
-                            <td>
-                                                                    <p>(PHPMD.ExcessiveClassComplexity)</p>
-                                                            </td>
-                        </tr>
                                         </table>
                 </aside>
             </div>
@@ -362,389 +348,26 @@
 
                                     <div class="row-fluid">
         <div class="span8 content class">
-            <a id="method_backToPageUrl" name="method_backToPageUrl" class="anchor"></a>
+            <a id="method_parse" name="method_parse" class="anchor"></a>
             <article class="method">
-                <h3 class="public ">backToPageUrl()</h3>
+                <h3 class="public ">parse()</h3>
                 <a href="#source-view" role="button" class="pull-right btn" data-toggle="modal" style="font-size: 1.1em; padding: 9px 14px"><i class="icon-code"></i></a>
-                <pre class="signature" style="margin-right: 54px;">backToPageUrl(boolean  <span class="argument">$settingMode = false</span>, array  <span class="argument">$options = array()</span>, boolean|array  <span class="argument">$full = false</span>) : string</pre>
-                <p><em>ページに戻るURLを生成</em></p>
+                <pre class="signature" style="margin-right: 54px;">parse(  <span class="argument">$values</span>) : boolean</pre>
+                <p><em>Angularで使用できない文字のパーサ処理</em></p>
                 
 
                                     <h4>Parameters</h4>
                     <table class="table table-condensed table-hover">
                                                     <tr>
-                                <td>boolean</td>
-                                <td>$settingMode </td>
-                                <td><p>セッティングモード</p></td>
-                            </tr>
-                                                    <tr>
-                                <td>array</td>
-                                <td>$options </td>
-                                <td><p>URLオプション</p></td>
-                            </tr>
-                                                    <tr>
-                                <td>boolean|array</td>
-                                <td>$full </td>
-                                <td><p>If (bool) true, the full base URL will be prepended to the result.</p></td>
+                                <td></td>
+                                <td>$values </td>
+                                <td></td>
                             </tr>
                                             </table>
                 
                 
                                     <h4>Returns</h4>
-                    string
-                                            &mdash; <p>Full translated URL with base path.</p>
-                                    				
-                            </article>
-        </div>
-        <aside class="span4 detailsbar">
-            <h1><i class="icon-arrow-down"></i></h1>
-                            <span class="label label-info">static</span>
-                                                            <dl>
-                                                                            </dl>
-            <h2>Tags</h2>
-            <table class="table table-condensed">
-                                    <tr>
-                        <th>
-                            SuppressWarnings
-                        </th>
-                        <td>
-                                                                                            <p>(PHPMD.BooleanArgumentFlag)</p>
-                                                    </td>
-                    </tr>
-                            </table>
-        </aside>
-    </div>
-
-                                    <div class="row-fluid">
-        <div class="span8 content class">
-            <a id="method_backToIndexUrl" name="method_backToIndexUrl" class="anchor"></a>
-            <article class="method">
-                <h3 class="public ">backToIndexUrl()</h3>
-                <a href="#source-view" role="button" class="pull-right btn" data-toggle="modal" style="font-size: 1.1em; padding: 9px 14px"><i class="icon-code"></i></a>
-                <pre class="signature" style="margin-right: 54px;">backToIndexUrl(string  <span class="argument">$defaultField = &#039;default_action&#039;</span>, boolean|array  <span class="argument">$full = false</span>) : string</pre>
-                <p><em>デフォルトのアクションに戻るURLを生成</em></p>
-                
-
-                                    <h4>Parameters</h4>
-                    <table class="table table-condensed table-hover">
-                                                    <tr>
-                                <td>string</td>
-                                <td>$defaultField </td>
-                                <td><p>Plugin table's default action field. The value is "default_action" or "default_setting_action"</p></td>
-                            </tr>
-                                                    <tr>
-                                <td>boolean|array</td>
-                                <td>$full </td>
-                                <td><p>If (bool) true, the full base URL will be prepended to the result.</p></td>
-                            </tr>
-                                            </table>
-                
-                
-                                    <h4>Returns</h4>
-                    string
-                                            &mdash; <p>Full translated URL with base path.</p>
-                                    				
-                            </article>
-        </div>
-        <aside class="span4 detailsbar">
-            <h1><i class="icon-arrow-down"></i></h1>
-                            <span class="label label-info">static</span>
-                                                            <dl>
-                                                                            </dl>
-            <h2>Tags</h2>
-            <table class="table table-condensed">
-                                    <tr>
-                        <th>
-                            SuppressWarnings
-                        </th>
-                        <td>
-                                                                                            <p>(PHPMD.BooleanArgumentFlag)</p>
-                                                                                            <p>(PHPMD.CyclomaticComplexity)</p>
-                                                    </td>
-                    </tr>
-                            </table>
-        </aside>
-    </div>
-
-                                    <div class="row-fluid">
-        <div class="span8 content class">
-            <a id="method_actionUrl" name="method_actionUrl" class="anchor"></a>
-            <article class="method">
-                <h3 class="public ">actionUrl()</h3>
-                <a href="#source-view" role="button" class="pull-right btn" data-toggle="modal" style="font-size: 1.1em; padding: 9px 14px"><i class="icon-code"></i></a>
-                <pre class="signature" style="margin-right: 54px;">actionUrl(array  <span class="argument">$params = array()</span>, boolean|array  <span class="argument">$full = false</span>) : string</pre>
-                <p><em>NetCommonsプラグインのアクションURLを生成</em></p>
-                
-
-                                    <h4>Parameters</h4>
-                    <table class="table table-condensed table-hover">
-                                                    <tr>
-                                <td>array</td>
-                                <td>$params </td>
-                                <td><p>Action url array</p></td>
-                            </tr>
-                                                    <tr>
-                                <td>boolean|array</td>
-                                <td>$full </td>
-                                <td><p>If (bool) true, the full base URL will be prepended to the result.</p></td>
-                            </tr>
-                                            </table>
-                
-                
-                                    <h4>Returns</h4>
-                    string
-                                            &mdash; <p>Full translated URL with base path.</p>
-                                    				
-                            </article>
-        </div>
-        <aside class="span4 detailsbar">
-            <h1><i class="icon-arrow-down"></i></h1>
-                            <span class="label label-info">static</span>
-                                                            <dl>
-                                                                            </dl>
-            <h2>Tags</h2>
-            <table class="table table-condensed">
-                                    <tr>
-                        <th>
-                            SuppressWarnings
-                        </th>
-                        <td>
-                                                                                            <p>(PHPMD.BooleanArgumentFlag)</p>
-                                                    </td>
-                    </tr>
-                            </table>
-        </aside>
-    </div>
-
-                                    <div class="row-fluid">
-        <div class="span8 content class">
-            <a id="method_actionUrlAsArray" name="method_actionUrlAsArray" class="anchor"></a>
-            <article class="method">
-                <h3 class="public ">actionUrlAsArray()</h3>
-                <a href="#source-view" role="button" class="pull-right btn" data-toggle="modal" style="font-size: 1.1em; padding: 9px 14px"><i class="icon-code"></i></a>
-                <pre class="signature" style="margin-right: 54px;">actionUrlAsArray(array  <span class="argument">$params = array()</span>, boolean|array  <span class="argument">$full = false</span>) : array</pre>
-                <p><em>NetCommonsプラグインのアクションURL配列を生成</em></p>
-                
-
-                                    <h4>Parameters</h4>
-                    <table class="table table-condensed table-hover">
-                                                    <tr>
-                                <td>array</td>
-                                <td>$params </td>
-                                <td><p>Action url array</p></td>
-                            </tr>
-                                                    <tr>
-                                <td>boolean|array</td>
-                                <td>$full </td>
-                                <td><p>If (bool) true, the full base URL will be prepended to the result.</p></td>
-                            </tr>
-                                            </table>
-                
-                
-                                    <h4>Returns</h4>
-                    array
-                                            &mdash; <p>Full translated URL with base path as array.</p>
-                                    				
-                            </article>
-        </div>
-        <aside class="span4 detailsbar">
-            <h1><i class="icon-arrow-down"></i></h1>
-                            <span class="label label-info">static</span>
-                                                            <dl>
-                                                                            </dl>
-            <h2>Tags</h2>
-            <table class="table table-condensed">
-                                    <tr>
-                        <th>
-                            SuppressWarnings
-                        </th>
-                        <td>
-                                                                                            <p>(PHPMD.BooleanArgumentFlag)</p>
-                                                                                            <p>(PHPMD.CyclomaticComplexity)</p>
-                                                                                            <p>(PHPMD.NPathComplexity)</p>
-                                                    </td>
-                    </tr>
-                            </table>
-        </aside>
-    </div>
-
-                                    <div class="row-fluid">
-        <div class="span8 content class">
-            <a id="method_userActionUrl" name="method_userActionUrl" class="anchor"></a>
-            <article class="method">
-                <h3 class="public ">userActionUrl()</h3>
-                <a href="#source-view" role="button" class="pull-right btn" data-toggle="modal" style="font-size: 1.1em; padding: 9px 14px"><i class="icon-code"></i></a>
-                <pre class="signature" style="margin-right: 54px;">userActionUrl(array  <span class="argument">$params = array()</span>, boolean|array  <span class="argument">$full = false</span>) : string</pre>
-                <p><em>ユーザのアクションURLを生成</em></p>
-                
-
-                                    <h4>Parameters</h4>
-                    <table class="table table-condensed table-hover">
-                                                    <tr>
-                                <td>array</td>
-                                <td>$params </td>
-                                <td><p>Action url array</p></td>
-                            </tr>
-                                                    <tr>
-                                <td>boolean|array</td>
-                                <td>$full </td>
-                                <td><p>If (bool) true, the full base URL will be prepended to the result.</p></td>
-                            </tr>
-                                            </table>
-                
-                
-                                    <h4>Returns</h4>
-                    string
-                                            &mdash; <p>Full translated URL with base path.</p>
-                                    				
-                            </article>
-        </div>
-        <aside class="span4 detailsbar">
-            <h1><i class="icon-arrow-down"></i></h1>
-                            <span class="label label-info">static</span>
-                                                            <dl>
-                                                                            </dl>
-            <h2>Tags</h2>
-            <table class="table table-condensed">
-                                    <tr>
-                        <th>
-                            SuppressWarnings
-                        </th>
-                        <td>
-                                                                                            <p>(PHPMD.BooleanArgumentFlag)</p>
-                                                    </td>
-                    </tr>
-                            </table>
-        </aside>
-    </div>
-
-                                    <div class="row-fluid">
-        <div class="span8 content class">
-            <a id="method_url" name="method_url" class="anchor"></a>
-            <article class="method">
-                <h3 class="public ">url()</h3>
-                <a href="#source-view" role="button" class="pull-right btn" data-toggle="modal" style="font-size: 1.1em; padding: 9px 14px"><i class="icon-code"></i></a>
-                <pre class="signature" style="margin-right: 54px;">url(array  <span class="argument">$params = array()</span>, boolean|array  <span class="argument">$full = false</span>) : string</pre>
-                <p><em>URLを生成</em></p>
-                
-
-                                    <h4>Parameters</h4>
-                    <table class="table table-condensed table-hover">
-                                                    <tr>
-                                <td>array</td>
-                                <td>$params </td>
-                                <td><p>Action url array</p></td>
-                            </tr>
-                                                    <tr>
-                                <td>boolean|array</td>
-                                <td>$full </td>
-                                <td><p>If (bool) true, the full base URL will be prepended to the result.</p></td>
-                            </tr>
-                                            </table>
-                
-                
-                                    <h4>Returns</h4>
-                    string
-                                            &mdash; <p>Full translated URL with base path.</p>
-                                    				
-                            </article>
-        </div>
-        <aside class="span4 detailsbar">
-            <h1><i class="icon-arrow-down"></i></h1>
-                            <span class="label label-info">static</span>
-                                                            <dl>
-                                                                            </dl>
-            <h2>Tags</h2>
-            <table class="table table-condensed">
-                                    <tr>
-                        <th>
-                            SuppressWarnings
-                        </th>
-                        <td>
-                                                                                            <p>(PHPMD.BooleanArgumentFlag)</p>
-                                                    </td>
-                    </tr>
-                            </table>
-        </aside>
-    </div>
-
-                                    <div class="row-fluid">
-        <div class="span8 content class">
-            <a id="method_blockUrl" name="method_blockUrl" class="anchor"></a>
-            <article class="method">
-                <h3 class="public ">blockUrl()</h3>
-                <a href="#source-view" role="button" class="pull-right btn" data-toggle="modal" style="font-size: 1.1em; padding: 9px 14px"><i class="icon-code"></i></a>
-                <pre class="signature" style="margin-right: 54px;">blockUrl(array  <span class="argument">$url = array()</span>, boolean  <span class="argument">$isArray = true</span>) : array|string</pre>
-                <p><em>BlockのURLを生成</em></p>
-                
-
-                                    <h4>Parameters</h4>
-                    <table class="table table-condensed table-hover">
-                                                    <tr>
-                                <td>array</td>
-                                <td>$url </td>
-                                <td><p>An array specifying any of the following: 'controller', 'action',
-and/or 'plugin', in addition to named arguments (keyed array elements),
-and standard URL arguments (indexed array elements).
-'autoSetting': Current::SETTING_MODE_WORDを付ける処理を自動で行う。デフォルトfalse</p></td>
-                            </tr>
-                                                    <tr>
-                                <td>boolean</td>
-                                <td>$isArray </td>
-                                <td><p>配列で戻すかどうか</p></td>
-                            </tr>
-                                            </table>
-                
-                
-                                    <h4>Returns</h4>
-                    array|string
-                                            &mdash; <p>block url</p>
-                                    				
-                            </article>
-        </div>
-        <aside class="span4 detailsbar">
-            <h1><i class="icon-arrow-down"></i></h1>
-                            <span class="label label-info">static</span>
-                                                            <dl>
-                                                                            </dl>
-            <h2>Tags</h2>
-            <table class="table table-condensed">
-                                    <tr>
-                        <th>
-                            SuppressWarnings
-                        </th>
-                        <td>
-                                                                                            <p>(PHPMD.BooleanArgumentFlag)</p>
-                                                                                            <p>(PHPMD.CyclomaticComplexity)</p>
-                                                                                            <p>(PHPMD.NPathComplexity)</p>
-                                                    </td>
-                    </tr>
-                            </table>
-        </aside>
-    </div>
-
-                                                                    <div class="row-fluid">
-        <div class="span8 content class">
-            <a id="method___getCommonAction" name="method___getCommonAction" class="anchor"></a>
-            <article class="method">
-                <h3 class="private ">__getCommonAction()</h3>
-                <a href="#source-view" role="button" class="pull-right btn" data-toggle="modal" style="font-size: 1.1em; padding: 9px 14px"><i class="icon-code"></i></a>
-                <pre class="signature" style="margin-right: 54px;">__getCommonAction(array  <span class="argument">$params</span>) : array</pre>
-                <p><em>NetCommonsプラグインのアクションURL配列を生成</em></p>
-                
-
-                                    <h4>Parameters</h4>
-                    <table class="table table-condensed table-hover">
-                                                    <tr>
-                                <td>array</td>
-                                <td>$params </td>
-                                <td><p>Action url array</p></td>
-                            </tr>
-                                            </table>
-                
-                
-                                    <h4>Returns</h4>
-                    array
+                    boolean
                                     				
                             </article>
         </div>
@@ -760,16 +383,16 @@ and standard URL arguments (indexed array elements).
         </aside>
     </div>
 
-                                    </div>
+                                                                    </div>
     </section>
 
     <div id="source-view" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="source-view-label" aria-hidden="true">
         <div class="modal-header">
             <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
-            <h3 id="source-view-label">NetCommonsUrl.php</h3>
+            <h3 id="source-view-label">AngularParser.php</h3>
         </div>
         <div class="modal-body">
-            <pre data-src="../files/Plugin/NetCommons/Utility/NetCommonsUrl.php.txt" class="language-php line-numbers"></pre>
+            <pre data-src="../files/Plugin/NetCommons/Lib/AngularParser.php.txt" class="language-php line-numbers"></pre>
         </div>
     </div>
 
