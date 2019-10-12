@@ -1,0 +1,1219 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0"/>
+    <meta charset="utf-8"/>
+    <title>API Documentation</title>
+    <meta name="author" content=""/>
+    <meta name="description" content=""/>
+
+    <link href="../css/bootstrap-combined.no-icons.min.css" rel="stylesheet">
+    <link href="../css/font-awesome.min.css" rel="stylesheet">
+    <link href="../css/prism.css" rel="stylesheet" media="all"/>
+    <link href="../css/template.css" rel="stylesheet" media="all"/>
+    
+    <!--[if lt IE 9]>
+    <script src="../js/html5.js"></script>
+    <![endif]-->
+    <script src="../js/jquery-1.11.0.min.js"></script>
+    <script src="../js/ui/1.10.4/jquery-ui.min.js"></script>
+    <script src="../js/bootstrap.min.js"></script>
+    <script src="../js/jquery.smooth-scroll.js"></script>
+    <script src="../js/prism.min.js"></script>
+    <!-- TODO: Add http://jscrollpane.kelvinluck.com/ to style the scrollbars for browsers not using webkit-->
+    <script type="text/javascript">
+    function loadExternalCodeSnippets() {
+        Array.prototype.slice.call(document.querySelectorAll('pre[data-src]')).forEach(function (pre) {
+            var src = pre.getAttribute('data-src');
+            var extension = (src.match(/\.(\w+)$/) || [, ''])[1];
+            var language = 'php';
+
+            var code = document.createElement('code');
+            code.className = 'language-' + language;
+
+            pre.textContent = '';
+
+            code.textContent = 'Loading…';
+
+            pre.appendChild(code);
+
+            var xhr = new XMLHttpRequest();
+
+            xhr.open('GET', src, true);
+
+            xhr.onreadystatechange = function () {
+                if (xhr.readyState == 4) {
+
+                    if (xhr.status < 400 && xhr.responseText) {
+                        code.textContent = xhr.responseText;
+
+                        Prism.highlightElement(code);
+                    }
+                    else if (xhr.status >= 400) {
+                        code.textContent = '✖ Error ' + xhr.status + ' while fetching file: ' + xhr.statusText;
+                    }
+                    else {
+                        code.textContent = '✖ Error: File does not exist or is empty';
+                    }
+                }
+            };
+
+            xhr.send(null);
+        });
+    }
+
+    $(document).ready(function(){
+        loadExternalCodeSnippets();
+    });
+    $('#source-view').on('shown', function () {
+        loadExternalCodeSnippets();
+    })
+</script>
+
+    <link rel="shortcut icon" href="../images/favicon.ico"/>
+    <link rel="apple-touch-icon" href="../images/apple-touch-icon.png"/>
+    <link rel="apple-touch-icon" sizes="72x72" href="../images/apple-touch-icon-72x72.png"/>
+    <link rel="apple-touch-icon" sizes="114x114" href="../images/apple-touch-icon-114x114.png"/>
+</head>
+<body>
+
+<div class="navbar navbar-fixed-top">
+    <div class="navbar-inner">
+        <div class="container">
+            <a class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
+                <i class="icon-ellipsis-vertical"></i>
+            </a>
+            <a class="brand" href="../index.html">API Documentation</a>
+
+            <div class="nav-collapse">
+                <ul class="nav pull-right">
+                                        <li class="dropdown" id="charts-menu">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                            Charts <b class="caret"></b>
+                        </a>
+                        <ul class="dropdown-menu">
+                            <li>
+                                <a href="../graphs/class.html">
+                                    <i class="icon-list-alt"></i>&#160;Class hierarchy diagram
+                                </a>
+                            </li>
+                        </ul>
+                    </li>
+                    <li class="dropdown" id="reports-menu">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                            Reports <b class="caret"></b>
+                        </a>
+                        <ul class="dropdown-menu">
+                            <li>
+                                <a href="../reports/errors.html">
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                <i class="icon-list-alt"></i>&#160;Errors <span class="label label-info pull-right">0</span>
+                                </a>
+                            </li>
+                            <li>
+                                <a href="../reports/markers.html">
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                <i class="icon-list-alt"></i>&#160;Markers <span class="label label-info pull-right">1</span>
+                                </a>
+                            </li>
+                            <li>
+                                <a href="../reports/deprecated.html">
+                                                                                                            <i class="icon-list-alt"></i>&#160;Deprecated <span class="label label-info pull-right">0</span>
+                                </a>
+                            </li>
+                        </ul>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+    <!--<div class="go_to_top">-->
+    <!--<a href="#___" style="color: inherit">Back to top&#160;&#160;<i class="icon-upload icon-white"></i></a>-->
+    <!--</div>-->
+</div>
+
+<div id="___" class="container-fluid">
+        <section class="row-fluid">
+        <div class="span2 sidebar">
+                                <div class="accordion" style="margin-bottom: 0">
+        <div class="accordion-group">
+            <div class="accordion-heading">
+                                    <a class="accordion-toggle " data-toggle="collapse" data-target="#namespace-1790815957"></a>
+                                <a href="../namespaces/default.html" style="margin-left: 30px; padding-left: 0">\</a>
+            </div>
+            <div id="namespace-1790815957" class="accordion-body collapse in">
+                <div class="accordion-inner">
+
+                    
+                    <ul>
+                                                                                                    <li class="class"><a href="../classes/AccessCtrlComponent.html">AccessCtrlComponent</a></li>
+                                                    <li class="class"><a href="../classes/AddAfterUserSaveModel.html">AddAfterUserSaveModel</a></li>
+                                                    <li class="class"><a href="../classes/AddAfterUserSaveModel2.html">AddAfterUserSaveModel2</a></li>
+                                                    <li class="class"><a href="../classes/AddColumnEndTime.html">AddColumnEndTime</a></li>
+                                                    <li class="class"><a href="../classes/AddFieldsForM17n.html">AddFieldsForM17n</a></li>
+                                                    <li class="class"><a href="../classes/AddIndex.html">AddIndex</a></li>
+                                                    <li class="class"><a href="../classes/AddIndex2.html">AddIndex2</a></li>
+                                                    <li class="class"><a href="../classes/AddIndexParentId.html">AddIndexParentId</a></li>
+                                                    <li class="class"><a href="../classes/AddIndexRoomsAndRolesRooms.html">AddIndexRoomsAndRolesRooms</a></li>
+                                                    <li class="class"><a href="../classes/AddIndexRootIdAndParticipation.html">AddIndexRootIdAndParticipation</a></li>
+                                                    <li class="class"><a href="../classes/AddIsM17n.html">AddIsM17n</a></li>
+                                                    <li class="class"><a href="../classes/AddIsM17n1.html">AddIsM17n1</a></li>
+                                                    <li class="class"><a href="../classes/AddIsOriginalCopy.html">AddIsOriginalCopy</a></li>
+                                                    <li class="class"><a href="../classes/AddIsOriginalCopy1.html">AddIsOriginalCopy1</a></li>
+                                                    <li class="class"><a href="../classes/AddPageIdTopForSpaces.html">AddPageIdTopForSpaces</a></li>
+                                                    <li class="class"><a href="../classes/AddPageIdTopForSpaces1.html">AddPageIdTopForSpaces1</a></li>
+                                                    <li class="class"><a href="../classes/AddPermalink.html">AddPermalink</a></li>
+                                                    <li class="class"><a href="../classes/AddPermalink1.html">AddPermalink1</a></li>
+                                                    <li class="class"><a href="../classes/AddRoomIdRoot.html">AddRoomIdRoot</a></li>
+                                                    <li class="class"><a href="../classes/AddRoomsDeleteTables.html">AddRoomsDeleteTables</a></li>
+                                                    <li class="class"><a href="../classes/AddTableForM17n1.html">AddTableForM17n1</a></li>
+                                                    <li class="class"><a href="../classes/AngularParser.html">AngularParser</a></li>
+                                                    <li class="class"><a href="../classes/AppController.html">AppController</a></li>
+                                                    <li class="class"><a href="../classes/AppController.html">AppController</a></li>
+                                                    <li class="class"><a href="../classes/AppHelper.html">AppHelper</a></li>
+                                                    <li class="class"><a href="../classes/AppModel.html">AppModel</a></li>
+                                                    <li class="class"><a href="../classes/AppPaginatorComponent.html">AppPaginatorComponent</a></li>
+                                                    <li class="class"><a href="../classes/AppPaginatorHelper.html">AppPaginatorHelper</a></li>
+                                                    <li class="class"><a href="../classes/AppView.html">AppView</a></li>
+                                                    <li class="class"><a href="../classes/AssetComponent.html">AssetComponent</a></li>
+                                                    <li class="class"><a href="../classes/BackToHelper.html">BackToHelper</a></li>
+                                                    <li class="class"><a href="../classes/ButtonHelper.html">ButtonHelper</a></li>
+                                                    <li class="class"><a href="../classes/ComposerHelper.html">ComposerHelper</a></li>
+                                                    <li class="class"><a href="../classes/ControlPanel.html">ControlPanel</a></li>
+                                                    <li class="class"><a href="../classes/CurrentLib.html">CurrentLib</a></li>
+                                                    <li class="class"><a href="../classes/CurrentLibBlock.html">CurrentLibBlock</a></li>
+                                                    <li class="class"><a href="../classes/CurrentLibFrame.html">CurrentLibFrame</a></li>
+                                                    <li class="class"><a href="../classes/CurrentLibLanguage.html">CurrentLibLanguage</a></li>
+                                                    <li class="class"><a href="../classes/CurrentLibPage.html">CurrentLibPage</a></li>
+                                                    <li class="class"><a href="../classes/CurrentLibPermission.html">CurrentLibPermission</a></li>
+                                                    <li class="class"><a href="../classes/CurrentLibPlugin.html">CurrentLibPlugin</a></li>
+                                                    <li class="class"><a href="../classes/CurrentLibRoom.html">CurrentLibRoom</a></li>
+                                                    <li class="class"><a href="../classes/CurrentLibUser.html">CurrentLibUser</a></li>
+                                                    <li class="class"><a href="../classes/DateHelper.html">DateHelper</a></li>
+                                                    <li class="class"><a href="../classes/DatetimePickerHelper.html">DatetimePickerHelper</a></li>
+                                                    <li class="class"><a href="../classes/DeleteNotUsedUsersShell.html">DeleteNotUsedUsersShell</a></li>
+                                                    <li class="class"><a href="../classes/DeleteRelatedRoomsShell.html">DeleteRelatedRoomsShell</a></li>
+                                                    <li class="class"><a href="../classes/DeleteRelatedRoomsTask.html">DeleteRelatedRoomsTask</a></li>
+                                                    <li class="class"><a href="../classes/DeleteRoomAssociationsBehavior.html">DeleteRoomAssociationsBehavior</a></li>
+                                                    <li class="class"><a href="../classes/DeleteRootIdInRoomsTable.html">DeleteRootIdInRoomsTable</a></li>
+                                                    <li class="class"><a href="../classes/DisplayNumberHelper.html">DisplayNumberHelper</a></li>
+                                                    <li class="class"><a href="../classes/FixSubroomDefaultParticipation.html">FixSubroomDefaultParticipation</a></li>
+                                                    <li class="class"><a href="../classes/FixSubroomDefaultParticipation2.html">FixSubroomDefaultParticipation2</a></li>
+                                                    <li class="class"><a href="../classes/FormInputHelper.html">FormInputHelper</a></li>
+                                                    <li class="class"><a href="../classes/ForNetcommonsTreeBehavior.html">ForNetcommonsTreeBehavior</a></li>
+                                                    <li class="class"><a href="../classes/ForNetcommonsTreeBehavior2.html">ForNetcommonsTreeBehavior2</a></li>
+                                                    <li class="class"><a href="../classes/ForNetcommonsTreeBehavior3.html">ForNetcommonsTreeBehavior3</a></li>
+                                                    <li class="class"><a href="../classes/ForSpeedUp.html">ForSpeedUp</a></li>
+                                                    <li class="class"><a href="../classes/ForSpeedUp2.html">ForSpeedUp2</a></li>
+                                                    <li class="class"><a href="../classes/ImprovePerformanceCurrent.html">ImprovePerformanceCurrent</a></li>
+                                                    <li class="class"><a href="../classes/Init.html">Init</a></li>
+                                                    <li class="class"><a href="../classes/LibAppObject.html">LibAppObject</a></li>
+                                                    <li class="class"><a href="../classes/LinkButtonHelper.html">LinkButtonHelper</a></li>
+                                                    <li class="class"><a href="../classes/MessageFlashHelper.html">MessageFlashHelper</a></li>
+                                                    <li class="class"><a href="../classes/NcPermission.html">NcPermission</a></li>
+                                                    <li class="class"><a href="../classes/NetCommonsAppController.html">NetCommonsAppController</a></li>
+                                                    <li class="class"><a href="../classes/NetCommonsAppHelper.html">NetCommonsAppHelper</a></li>
+                                                    <li class="class"><a href="../classes/NetCommonsAppModel.html">NetCommonsAppModel</a></li>
+                                                    <li class="class"><a href="../classes/NetCommonsAppShell.html">NetCommonsAppShell</a></li>
+                                                    <li class="class"><a href="../classes/NetCommonsAppView.html">NetCommonsAppView</a></li>
+                                                    <li class="class"><a href="../classes/NetCommonsCache.html">NetCommonsCache</a></li>
+                                                    <li class="class"><a href="../classes/NetCommonsCacheBehavior.html">NetCommonsCacheBehavior</a></li>
+                                                    <li class="class"><a href="../classes/NetCommonsCakeTestCase.html">NetCommonsCakeTestCase</a></li>
+                                                    <li class="class"><a href="../classes/NetCommonsComponent.html">NetCommonsComponent</a></li>
+                                                    <li class="class"><a href="../classes/NetCommonsConsoleTestCase.html">NetCommonsConsoleTestCase</a></li>
+                                                    <li class="class"><a href="../classes/NetCommonsController.html">NetCommonsController</a></li>
+                                                    <li class="class"><a href="../classes/NetCommonsControllerBaseTestCase.html">NetCommonsControllerBaseTestCase</a></li>
+                                                    <li class="class"><a href="../classes/NetCommonsControllerTestCase.html">NetCommonsControllerTestCase</a></li>
+                                                    <li class="class"><a href="../classes/NetCommonsCurrentLibTestRun.html">NetCommonsCurrentLibTestRun</a></li>
+                                                    <li class="class"><a href="../classes/NetCommonsCurrentLibTestUtility.html">NetCommonsCurrentLibTestUtility</a></li>
+                                                    <li class="class"><a href="../classes/NetCommonsDeleteTest.html">NetCommonsDeleteTest</a></li>
+                                                    <li class="class"><a href="../classes/NetCommonsExceptionRenderer.html">NetCommonsExceptionRenderer</a></li>
+                                                    <li class="class"><a href="../classes/NetCommonsFormHelper.html">NetCommonsFormHelper</a></li>
+                                                    <li class="class"><a href="../classes/NetCommonsGetTest.html">NetCommonsGetTest</a></li>
+                                                    <li class="class"><a href="../classes/NetCommonsHelperTestCase.html">NetCommonsHelperTestCase</a></li>
+                                                    <li class="class"><a href="../classes/NetCommonsHtmlHelper.html">NetCommonsHtmlHelper</a></li>
+                                                    <li class="class"><a href="../classes/NetCommonsMigration.html">NetCommonsMigration</a></li>
+                                                    <li class="class"><a href="../classes/NetCommonsModelTestCase.html">NetCommonsModelTestCase</a></li>
+                                                    <li class="class"><a href="../classes/NetCommonsRoutesTestCase.html">NetCommonsRoutesTestCase</a></li>
+                                                    <li class="class"><a href="../classes/NetCommonsSaveTest.html">NetCommonsSaveTest</a></li>
+                                                    <li class="class"><a href="../classes/NetCommonsSecurity.html">NetCommonsSecurity</a></li>
+                                                    <li class="class"><a href="../classes/NetCommonsTestSuite.html">NetCommonsTestSuite</a></li>
+                                                    <li class="class"><a href="../classes/NetCommonsTime.html">NetCommonsTime</a></li>
+                                                    <li class="class"><a href="../classes/NetCommonsTimeComponent.html">NetCommonsTimeComponent</a></li>
+                                                    <li class="class"><a href="../classes/NetCommonsTimeHelper.html">NetCommonsTimeHelper</a></li>
+                                                    <li class="class"><a href="../classes/NetCommonsTreeBehavior.html">NetCommonsTreeBehavior</a></li>
+                                                    <li class="class"><a href="../classes/NetCommonsTreeBehaviorCase.html">NetCommonsTreeBehaviorCase</a></li>
+                                                    <li class="class"><a href="../classes/NetCommonsUrl.html">NetCommonsUrl</a></li>
+                                                    <li class="class"><a href="../classes/NetCommonsValidateTest.html">NetCommonsValidateTest</a></li>
+                                                    <li class="class"><a href="../classes/NetCommonsValidationRuleBehavior.html">NetCommonsValidationRuleBehavior</a></li>
+                                                    <li class="class"><a href="../classes/OriginalKeyBehavior.html">OriginalKeyBehavior</a></li>
+                                                    <li class="class"><a href="../classes/PermissionComponent.html">PermissionComponent</a></li>
+                                                    <li class="class"><a href="../classes/PluginRecords.html">PluginRecords</a></li>
+                                                    <li class="class"><a href="../classes/PluginsRoomsController.html">PluginsRoomsController</a></li>
+                                                    <li class="class"><a href="../classes/Records.html">Records</a></li>
+                                                    <li class="class"><a href="../classes/RecoverRolesRoomsUsersForSpaceRooms.html">RecoverRolesRoomsUsersForSpaceRooms</a></li>
+                                                    <li class="class"><a href="../classes/RemoveUserNotInParentRoom.html">RemoveUserNotInParentRoom</a></li>
+                                                    <li class="class"><a href="../classes/RolesRoom.html">RolesRoom</a></li>
+                                                    <li class="class"><a href="../classes/RolesRoomsUser.html">RolesRoomsUser</a></li>
+                                                    <li class="class"><a href="../classes/Room.html">Room</a></li>
+                                                    <li class="class"><a href="../classes/RoomAddController.html">RoomAddController</a></li>
+                                                    <li class="class"><a href="../classes/RoomBehavior.html">RoomBehavior</a></li>
+                                                    <li class="class"><a href="../classes/RoomDeleteRelatedTable.html">RoomDeleteRelatedTable</a></li>
+                                                    <li class="class"><a href="../classes/RoomRole.html">RoomRole</a></li>
+                                                    <li class="class"><a href="../classes/RoomRolePermission.html">RoomRolePermission</a></li>
+                                                    <li class="class"><a href="../classes/RoomsAppController.html">RoomsAppController</a></li>
+                                                    <li class="class"><a href="../classes/RoomsAppModel.html">RoomsAppModel</a></li>
+                                                    <li class="class"><a href="../classes/RoomsComponent.html">RoomsComponent</a></li>
+                                                    <li class="class"><a href="../classes/RoomsController.html">RoomsController</a></li>
+                                                    <li class="class"><a href="../classes/RoomsControllerTestCase.html">RoomsControllerTestCase</a></li>
+                                                    <li class="class"><a href="../classes/RoomsFormComponent.html">RoomsFormComponent</a></li>
+                                                    <li class="class"><a href="../classes/RoomsFormHelper.html">RoomsFormHelper</a></li>
+                                                    <li class="class"><a href="../classes/RoomsHelper.html">RoomsHelper</a></li>
+                                                    <li class="class"><a href="../classes/RoomsLanguage.html">RoomsLanguage</a></li>
+                                                    <li class="class"><a href="../classes/RoomsLibCache.html">RoomsLibCache</a></li>
+                                                    <li class="class"><a href="../classes/RoomsLibCommandExec.html">RoomsLibCommandExec</a></li>
+                                                    <li class="class"><a href="../classes/RoomsLibDataSourceExecute.html">RoomsLibDataSourceExecute</a></li>
+                                                    <li class="class"><a href="../classes/RoomsLibDeleteRoomTables.html">RoomsLibDeleteRoomTables</a></li>
+                                                    <li class="class"><a href="../classes/RoomsLibForeignConditionsParser.html">RoomsLibForeignConditionsParser</a></li>
+                                                    <li class="class"><a href="../classes/RoomsLibLog.html">RoomsLibLog</a></li>
+                                                    <li class="class"><a href="../classes/RoomsMockMethods.html">RoomsMockMethods</a></li>
+                                                    <li class="class"><a href="../classes/RoomsRecords.html">RoomsRecords</a></li>
+                                                    <li class="class"><a href="../classes/RoomsRolesFormComponent.html">RoomsRolesFormComponent</a></li>
+                                                    <li class="class"><a href="../classes/RoomsRolesFormHelper.html">RoomsRolesFormHelper</a></li>
+                                                    <li class="class"><a href="../classes/RoomsRolesUsersController.html">RoomsRolesUsersController</a></li>
+                                                    <li class="class"><a href="../classes/RoomsSchema.html">RoomsSchema</a></li>
+                                                    <li class="class"><a href="../classes/SaveRoomAssociationsBehavior.html">SaveRoomAssociationsBehavior</a></li>
+                                                    <li class="class"><a href="../classes/SettingMode.html">SettingMode</a></li>
+                                                    <li class="class"><a href="../classes/SingletonViewBlockHtmlHelper.html">SingletonViewBlockHtmlHelper</a></li>
+                                                    <li class="class"><a href="../classes/SiteCloseController.html">SiteCloseController</a></li>
+                                                    <li class="class"><a href="../classes/SnsButtonHelper.html">SnsButtonHelper</a></li>
+                                                    <li class="class"><a href="../classes/Space.html">Space</a></li>
+                                                    <li class="class"><a href="../classes/SwitchBoxes.html">SwitchBoxes</a></li>
+                                                    <li class="class"><a href="../classes/TableListHelper.html">TableListHelper</a></li>
+                                                    <li class="class"><a href="../classes/TitleIconHelper.html">TitleIconHelper</a></li>
+                                                    <li class="class"><a href="../classes/TokenHelper.html">TokenHelper</a></li>
+                                                    <li class="class"><a href="../classes/TrackableBehavior.html">TrackableBehavior</a></li>
+                                                    <li class="class"><a href="../classes/UpdatePrivateSpaceDefaultSettingAction.html">UpdatePrivateSpaceDefaultSettingAction</a></li>
+                                                    <li class="class"><a href="../classes/ValidateMerge.html">ValidateMerge</a></li>
+                                                    <li class="class"><a href="../classes/WizardHelper.html">WizardHelper</a></li>
+                                            </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+
+        </div>
+    </section>
+    <section class="row-fluid">
+        <div class="span10 offset2">
+            <div class="row-fluid">
+                <div class="span8 content class">
+                    <nav>
+                                                <a href="../namespaces/default.html">\</a> <i class="icon-level-up"></i>
+                                            </nav>
+                    <a href="#source-view" role="button" class="pull-right btn" data-toggle="modal"><i class="icon-code"></i></a>
+
+                    <h1><small>\</small>RoomsLibDeleteRoomTables</h1>
+                    <p><em>ルーム削除時の関連テーブル削除処理に関するライブラリ</em></p>
+                    
+                    
+                                        
+                    <section id="summary">
+                        <h2>Summary</h2>
+                        <section class="row-fluid heading">
+                            <section class="span4">
+                                <a href="#methods">Methods</a>
+                            </section>
+                            <section class="span4">
+                                <a href="#properties">Properties</a>
+                            </section>
+                            <section class="span4">
+                                <a href="#constants">Constants</a>
+                            </section>
+                        </section>
+                        <section class="row-fluid public">
+                            <section class="span4">
+                                                                    <a href="../classes/RoomsLibDeleteRoomTables.html#method___construct" class="">__construct()</a><br />
+                                                                    <a href="../classes/RoomsLibDeleteRoomTables.html#method_getTableList" class="">getTableList()</a><br />
+                                                                    <a href="../classes/RoomsLibDeleteRoomTables.html#method_findDeleteTargetRelatedTables" class="">findDeleteTargetRelatedTables()</a><br />
+                                                                    <a href="../classes/RoomsLibDeleteRoomTables.html#method_expandToTablesFromForienConditions" class="">expandToTablesFromForienConditions()</a><br />
+                                                                    <a href="../classes/RoomsLibDeleteRoomTables.html#method_deleteRelatedTables" class="">deleteRelatedTables()</a><br />
+                                                                    <a href="../classes/RoomsLibDeleteRoomTables.html#method_deleteAvatar" class="">deleteAvatar()</a><br />
+                                                                    <a href="../classes/RoomsLibDeleteRoomTables.html#method_deleteUploadTables" class="">deleteUploadTables()</a><br />
+                                                            </section>
+                            <section class="span4">
+                                                                    <em>No public properties found</em>
+                                                            </section>
+                            <section class="span4">
+                                                                    <em>No constants found</em>
+                                                            </section>
+                        </section>
+                        <section class="row-fluid protected">
+                            <section class="span4">
+                                                                    <em>No protected methods found</em>
+                                                            </section>
+                            <section class="span4">
+                                                                    <em>No protected properties found</em>
+                                                            </section>
+                            <section class="span4">
+                                <em>N/A</em>
+                            </section>
+                        </section>
+                        <section class="row-fluid private">
+                            <section class="span4">
+                                                                    <a href="../classes/RoomsLibDeleteRoomTables.html#method___getColumns" class="">__getColumns()</a><br />
+                                                                    <a href="../classes/RoomsLibDeleteRoomTables.html#method___setRecursiveReletedTables" class="">__setRecursiveReletedTables()</a><br />
+                                                                    <a href="../classes/RoomsLibDeleteRoomTables.html#method___makeForeignKey" class="">__makeForeignKey()</a><br />
+                                                                    <a href="../classes/RoomsLibDeleteRoomTables.html#method___runDeleteRecursiveRelatedTables" class="">__runDeleteRecursiveRelatedTables()</a><br />
+                                                                    <a href="../classes/RoomsLibDeleteRoomTables.html#method___runDeleteUploadTables" class="">__runDeleteUploadTables()</a><br />
+                                                            </section>
+                            <section class="span4">
+                                                                    <a href="../classes/RoomsLibDeleteRoomTables.html#property___DataSource" class="">$__DataSource</a><br />
+                                                                    <a href="../classes/RoomsLibDeleteRoomTables.html#property___Model" class="">$__Model</a><br />
+                                                                    <a href="../classes/RoomsLibDeleteRoomTables.html#property___Shell" class="">$__Shell</a><br />
+                                                                    <a href="../classes/RoomsLibDeleteRoomTables.html#property___UploadFile" class="">$__UploadFile</a><br />
+                                                                    <a href="../classes/RoomsLibDeleteRoomTables.html#property___RoomsLibCache" class="">$__RoomsLibCache</a><br />
+                                                                    <a href="../classes/RoomsLibDeleteRoomTables.html#property___RoomsLibDataSourceExecute" class="">$__RoomsLibDataSourceExecute</a><br />
+                                                                    <a href="../classes/RoomsLibDeleteRoomTables.html#property___tables" class="">$__tables</a><br />
+                                                                    <a href="../classes/RoomsLibDeleteRoomTables.html#property___defIgnoreTables" class="">$__defIgnoreTables</a><br />
+                                                                    <a href="../classes/RoomsLibDeleteRoomTables.html#property___defIgnoreForeigns" class="">$__defIgnoreForeigns</a><br />
+                                                            </section>
+                            <section class="span4">
+                                <em>N/A</em>
+                            </section>
+                        </section>
+                    </section>
+                </div>
+                <aside class="span4 detailsbar">
+                                        
+                    
+                    <dl>
+                        <dt>File</dt>
+                            <dd><a href="../files/Plugin.Rooms.Lib.RoomsLibDeleteRoomTables.html"><div class="path-wrapper">Plugin/Rooms/Lib/RoomsLibDeleteRoomTables.php</div></a></dd>
+                                                <dt>Package</dt>
+                            <dd><div class="namespace-wrapper">Rooms\Lib</div></dd>
+                                                <dt>Class hierarchy</dt>
+                            <dd class="hierarchy">
+                                                                                                                                                                    <div class="namespace-wrapper">\RoomsLibDeleteRoomTables</div>
+                            </dd>
+
+                        
+                        
+                        
+                        
+                                                                        </dl>
+                    <h2>Tags</h2>
+                    <table class="table table-condensed">
+                                            <tr>
+                            <th>
+                                author
+                            </th>
+                            <td>
+                                                                    <p>Shohei Nakajima <a href="mailto:nakajimashouhei@gmail.com">nakajimashouhei@gmail.com</a></p>
+                                                            </td>
+                        </tr>
+                                        </table>
+                </aside>
+            </div>
+
+                        
+                                    <a id="properties" name="properties"></a>
+            <div class="row-fluid">
+                <div class="span8 content class">
+                    <h2>Properties</h2>
+                </div>
+                <aside class="span4 detailsbar"></aside>
+            </div>
+
+                                                                    <div class="row-fluid">
+        <div class="span8 content class">
+            <a id="property___DataSource" name="property___DataSource" class="anchor"></a>
+            <article class="property">
+                <h3 class="private ">$__DataSource</h3>
+                <pre class="signature">$__DataSource : \DataSource</pre>
+                <p><em>データソースオブジェクト</em></p>
+                
+
+                                <h4>Type</h4>
+                \DataSource
+                                            </article>
+        </div>
+        <aside class="span4 detailsbar">
+            <h1><i class="icon-arrow-down"></i></h1>
+                        <dl>
+                                                            </dl>
+            <h2>Tags</h2>
+            <table class="table table-condensed">
+                                    <tr><td colspan="2"><em>None found</em></td></tr>
+                            </table>
+        </aside>
+    </div>
+
+                                    <div class="row-fluid">
+        <div class="span8 content class">
+            <a id="property___Model" name="property___Model" class="anchor"></a>
+            <article class="property">
+                <h3 class="private ">$__Model</h3>
+                <pre class="signature">$__Model : \Model</pre>
+                <p><em>使用するモデル</em></p>
+                
+
+                                <h4>Type</h4>
+                \Model
+                                            </article>
+        </div>
+        <aside class="span4 detailsbar">
+            <h1><i class="icon-arrow-down"></i></h1>
+                        <dl>
+                                                            </dl>
+            <h2>Tags</h2>
+            <table class="table table-condensed">
+                                    <tr><td colspan="2"><em>None found</em></td></tr>
+                            </table>
+        </aside>
+    </div>
+
+                                    <div class="row-fluid">
+        <div class="span8 content class">
+            <a id="property___Shell" name="property___Shell" class="anchor"></a>
+            <article class="property">
+                <h3 class="private ">$__Shell</h3>
+                <pre class="signature">$__Shell : \Shell</pre>
+                <p><em>実行シェル</em></p>
+                
+
+                                <h4>Type</h4>
+                \Shell
+                                            </article>
+        </div>
+        <aside class="span4 detailsbar">
+            <h1><i class="icon-arrow-down"></i></h1>
+                        <dl>
+                                                            </dl>
+            <h2>Tags</h2>
+            <table class="table table-condensed">
+                                    <tr><td colspan="2"><em>None found</em></td></tr>
+                            </table>
+        </aside>
+    </div>
+
+                                    <div class="row-fluid">
+        <div class="span8 content class">
+            <a id="property___UploadFile" name="property___UploadFile" class="anchor"></a>
+            <article class="property">
+                <h3 class="private ">$__UploadFile</h3>
+                <pre class="signature">$__UploadFile : \UploadFile</pre>
+                <p><em>UploadFileモデル</em></p>
+                
+
+                                <h4>Type</h4>
+                \UploadFile
+                                            </article>
+        </div>
+        <aside class="span4 detailsbar">
+            <h1><i class="icon-arrow-down"></i></h1>
+                        <dl>
+                                                            </dl>
+            <h2>Tags</h2>
+            <table class="table table-condensed">
+                                    <tr><td colspan="2"><em>None found</em></td></tr>
+                            </table>
+        </aside>
+    </div>
+
+                                    <div class="row-fluid">
+        <div class="span8 content class">
+            <a id="property___RoomsLibCache" name="property___RoomsLibCache" class="anchor"></a>
+            <article class="property">
+                <h3 class="private ">$__RoomsLibCache</h3>
+                <pre class="signature">$__RoomsLibCache : \RoomsLibCache</pre>
+                <p><em>キャッシュオブジェクト</em></p>
+                
+
+                                <h4>Type</h4>
+                <a href="../classes/RoomsLibCache.html">\RoomsLibCache</a>
+                                            </article>
+        </div>
+        <aside class="span4 detailsbar">
+            <h1><i class="icon-arrow-down"></i></h1>
+                        <dl>
+                                                            </dl>
+            <h2>Tags</h2>
+            <table class="table table-condensed">
+                                    <tr><td colspan="2"><em>None found</em></td></tr>
+                            </table>
+        </aside>
+    </div>
+
+                                    <div class="row-fluid">
+        <div class="span8 content class">
+            <a id="property___RoomsLibDataSourceExecute" name="property___RoomsLibDataSourceExecute" class="anchor"></a>
+            <article class="property">
+                <h3 class="private ">$__RoomsLibDataSourceExecute</h3>
+                <pre class="signature">$__RoomsLibDataSourceExecute : \RoomsLibDataSourceExecute</pre>
+                <p><em>キャッシュオブジェクト</em></p>
+                
+
+                                <h4>Type</h4>
+                <a href="../classes/RoomsLibDataSourceExecute.html">\RoomsLibDataSourceExecute</a>
+                                            </article>
+        </div>
+        <aside class="span4 detailsbar">
+            <h1><i class="icon-arrow-down"></i></h1>
+                        <dl>
+                                                            </dl>
+            <h2>Tags</h2>
+            <table class="table table-condensed">
+                                    <tr><td colspan="2"><em>None found</em></td></tr>
+                            </table>
+        </aside>
+    </div>
+
+                                    <div class="row-fluid">
+        <div class="span8 content class">
+            <a id="property___tables" name="property___tables" class="anchor"></a>
+            <article class="property">
+                <h3 class="private ">$__tables</h3>
+                <pre class="signature">$__tables : array</pre>
+                <p><em>テーブル情報</em></p>
+                
+
+                                <h4>Type</h4>
+                array
+                                            </article>
+        </div>
+        <aside class="span4 detailsbar">
+            <h1><i class="icon-arrow-down"></i></h1>
+                        <dl>
+                                                            </dl>
+            <h2>Tags</h2>
+            <table class="table table-condensed">
+                                    <tr><td colspan="2"><em>None found</em></td></tr>
+                            </table>
+        </aside>
+    </div>
+
+                                    <div class="row-fluid">
+        <div class="span8 content class">
+            <a id="property___defIgnoreTables" name="property___defIgnoreTables" class="anchor"></a>
+            <article class="property">
+                <h3 class="private ">$__defIgnoreTables</h3>
+                <pre class="signature">$__defIgnoreTables : array</pre>
+                <p><em>除外するテーブル</em></p>
+                <p>※定数扱いだが、php7からconstに配列が使用できるが、php5はconstに配列が使えないためprivateのメンバー変数とする</p>
+
+                                <h4>Type</h4>
+                array
+                                            </article>
+        </div>
+        <aside class="span4 detailsbar">
+            <h1><i class="icon-arrow-down"></i></h1>
+                        <dl>
+                                                            </dl>
+            <h2>Tags</h2>
+            <table class="table table-condensed">
+                                    <tr><td colspan="2"><em>None found</em></td></tr>
+                            </table>
+        </aside>
+    </div>
+
+                                    <div class="row-fluid">
+        <div class="span8 content class">
+            <a id="property___defIgnoreForeigns" name="property___defIgnoreForeigns" class="anchor"></a>
+            <article class="property">
+                <h3 class="private ">$__defIgnoreForeigns</h3>
+                <pre class="signature">$__defIgnoreForeigns : array</pre>
+                <p><em>除外する外部キー</em></p>
+                <p>※定数扱いだが、php7からconstに配列が使用できるが、php5はconstに配列が使えないためprivateのメンバー変数とする</p>
+
+                                <h4>Type</h4>
+                array
+                                            </article>
+        </div>
+        <aside class="span4 detailsbar">
+            <h1><i class="icon-arrow-down"></i></h1>
+                        <dl>
+                                                            </dl>
+            <h2>Tags</h2>
+            <table class="table table-condensed">
+                                    <tr><td colspan="2"><em>None found</em></td></tr>
+                            </table>
+        </aside>
+    </div>
+
+                            
+                                    <a id="methods" name="methods"></a>
+            <div class="row-fluid">
+                <div class="span8 content class"><h2>Methods</h2></div>
+                <aside class="span4 detailsbar"></aside>
+            </div>
+
+                                    <div class="row-fluid">
+        <div class="span8 content class">
+            <a id="method___construct" name="method___construct" class="anchor"></a>
+            <article class="method">
+                <h3 class="public ">__construct()</h3>
+                <a href="#source-view" role="button" class="pull-right btn" data-toggle="modal" style="font-size: 1.1em; padding: 9px 14px"><i class="icon-code"></i></a>
+                <pre class="signature" style="margin-right: 54px;">__construct(\Model  <span class="argument">$Model</span>, \Shell|null  <span class="argument">$Shell = null</span>) : void</pre>
+                <p><em>コンストラクタ</em></p>
+                
+
+                                    <h4>Parameters</h4>
+                    <table class="table table-condensed table-hover">
+                                                    <tr>
+                                <td>\Model</td>
+                                <td>$Model </td>
+                                <td><p>モデル(当モデルは、MySQLのModelであれば何でも良い)</p></td>
+                            </tr>
+                                                    <tr>
+                                <td>\Shell|null</td>
+                                <td>$Shell </td>
+                                <td><p>実行シェル</p></td>
+                            </tr>
+                                            </table>
+                
+                
+                				
+                            </article>
+        </div>
+        <aside class="span4 detailsbar">
+            <h1><i class="icon-arrow-down"></i></h1>
+                                                            <dl>
+                                                                            </dl>
+            <h2>Tags</h2>
+            <table class="table table-condensed">
+                                    <tr><td colspan="2"><em>None found</em></td></tr>
+                            </table>
+        </aside>
+    </div>
+
+                                    <div class="row-fluid">
+        <div class="span8 content class">
+            <a id="method_getTableList" name="method_getTableList" class="anchor"></a>
+            <article class="method">
+                <h3 class="public ">getTableList()</h3>
+                <a href="#source-view" role="button" class="pull-right btn" data-toggle="modal" style="font-size: 1.1em; padding: 9px 14px"><i class="icon-code"></i></a>
+                <pre class="signature" style="margin-right: 54px;">getTableList() : array</pre>
+                <p><em>テーブルリストを取得する</em></p>
+                
+
+                
+                
+                                    <h4>Returns</h4>
+                    array
+                                    				
+                            </article>
+        </div>
+        <aside class="span4 detailsbar">
+            <h1><i class="icon-arrow-down"></i></h1>
+                                                            <dl>
+                                                                            </dl>
+            <h2>Tags</h2>
+            <table class="table table-condensed">
+                                    <tr><td colspan="2"><em>None found</em></td></tr>
+                            </table>
+        </aside>
+    </div>
+
+                                    <div class="row-fluid">
+        <div class="span8 content class">
+            <a id="method_findDeleteTargetRelatedTables" name="method_findDeleteTargetRelatedTables" class="anchor"></a>
+            <article class="method">
+                <h3 class="public ">findDeleteTargetRelatedTables()</h3>
+                <a href="#source-view" role="button" class="pull-right btn" data-toggle="modal" style="font-size: 1.1em; padding: 9px 14px"><i class="icon-code"></i></a>
+                <pre class="signature" style="margin-right: 54px;">findDeleteTargetRelatedTables(string  <span class="argument">$tableName</span>, string  <span class="argument">$fieldName</span>, string  <span class="argument">$foreignKey</span>) : array</pre>
+                <p><em>テーブルに対する関連するテーブルリストを取得する</em></p>
+                
+
+                                    <h4>Parameters</h4>
+                    <table class="table table-condensed table-hover">
+                                                    <tr>
+                                <td>string</td>
+                                <td>$tableName </td>
+                                <td><p>テーブル名</p></td>
+                            </tr>
+                                                    <tr>
+                                <td>string</td>
+                                <td>$fieldName </td>
+                                <td><p>カラム名</p></td>
+                            </tr>
+                                                    <tr>
+                                <td>string</td>
+                                <td>$foreignKey </td>
+                                <td><p>外部キーフィールド名</p></td>
+                            </tr>
+                                            </table>
+                
+                
+                                    <h4>Returns</h4>
+                    array
+                                    				
+                            </article>
+        </div>
+        <aside class="span4 detailsbar">
+            <h1><i class="icon-arrow-down"></i></h1>
+                                                            <dl>
+                                                                            </dl>
+            <h2>Tags</h2>
+            <table class="table table-condensed">
+                                    <tr><td colspan="2"><em>None found</em></td></tr>
+                            </table>
+        </aside>
+    </div>
+
+                                    <div class="row-fluid">
+        <div class="span8 content class">
+            <a id="method_expandToTablesFromForienConditions" name="method_expandToTablesFromForienConditions" class="anchor"></a>
+            <article class="method">
+                <h3 class="public ">expandToTablesFromForienConditions()</h3>
+                <a href="#source-view" role="button" class="pull-right btn" data-toggle="modal" style="font-size: 1.1em; padding: 9px 14px"><i class="icon-code"></i></a>
+                <pre class="signature" style="margin-right: 54px;">expandToTablesFromForienConditions(string  <span class="argument">$cacheKey</span>, string  <span class="argument">$tableName</span>, string  <span class="argument">$forienConditions</span>) : array</pre>
+                <p><em>外部フィールドキーの条件からテーブルリストに展開する</em></p>
+                
+
+                                    <h4>Parameters</h4>
+                    <table class="table table-condensed table-hover">
+                                                    <tr>
+                                <td>string</td>
+                                <td>$cacheKey </td>
+                                <td><p>キャッシュキー</p></td>
+                            </tr>
+                                                    <tr>
+                                <td>string</td>
+                                <td>$tableName </td>
+                                <td><p>テーブル名</p></td>
+                            </tr>
+                                                    <tr>
+                                <td>string</td>
+                                <td>$forienConditions </td>
+                                <td><p>外部フィールドの条件(変換後)</p></td>
+                            </tr>
+                                            </table>
+                
+                
+                                    <h4>Returns</h4>
+                    array
+                                    				
+                            </article>
+        </div>
+        <aside class="span4 detailsbar">
+            <h1><i class="icon-arrow-down"></i></h1>
+                                                            <dl>
+                                                                            </dl>
+            <h2>Tags</h2>
+            <table class="table table-condensed">
+                                    <tr><td colspan="2"><em>None found</em></td></tr>
+                            </table>
+        </aside>
+    </div>
+
+                                    <div class="row-fluid">
+        <div class="span8 content class">
+            <a id="method_deleteRelatedTables" name="method_deleteRelatedTables" class="anchor"></a>
+            <article class="method">
+                <h3 class="public ">deleteRelatedTables()</h3>
+                <a href="#source-view" role="button" class="pull-right btn" data-toggle="modal" style="font-size: 1.1em; padding: 9px 14px"><i class="icon-code"></i></a>
+                <pre class="signature" style="margin-right: 54px;">deleteRelatedTables(string  <span class="argument">$tableName</span>, string  <span class="argument">$fieldName</span>, string  <span class="argument">$value</span>, string  <span class="argument">$foreignConditions</span>) : void</pre>
+                <p><em>関連データを削除する</em></p>
+                
+
+                                    <h4>Parameters</h4>
+                    <table class="table table-condensed table-hover">
+                                                    <tr>
+                                <td>string</td>
+                                <td>$tableName </td>
+                                <td><p>テーブル名</p></td>
+                            </tr>
+                                                    <tr>
+                                <td>string</td>
+                                <td>$fieldName </td>
+                                <td><p>カラム名</p></td>
+                            </tr>
+                                                    <tr>
+                                <td>string</td>
+                                <td>$value </td>
+                                <td><p>値</p></td>
+                            </tr>
+                                                    <tr>
+                                <td>string</td>
+                                <td>$foreignConditions </td>
+                                <td><p>外部フィールドの条件</p></td>
+                            </tr>
+                                            </table>
+                
+                
+                				
+                            </article>
+        </div>
+        <aside class="span4 detailsbar">
+            <h1><i class="icon-arrow-down"></i></h1>
+                                                            <dl>
+                                                                            </dl>
+            <h2>Tags</h2>
+            <table class="table table-condensed">
+                                    <tr><td colspan="2"><em>None found</em></td></tr>
+                            </table>
+        </aside>
+    </div>
+
+                                    <div class="row-fluid">
+        <div class="span8 content class">
+            <a id="method_deleteAvatar" name="method_deleteAvatar" class="anchor"></a>
+            <article class="method">
+                <h3 class="public ">deleteAvatar()</h3>
+                <a href="#source-view" role="button" class="pull-right btn" data-toggle="modal" style="font-size: 1.1em; padding: 9px 14px"><i class="icon-code"></i></a>
+                <pre class="signature" style="margin-right: 54px;">deleteAvatar(string  <span class="argument">$tableName</span>, string  <span class="argument">$fieldName</span>, integer|string  <span class="argument">$userId</span>) : array</pre>
+                <p><em>アバターファイル削除処理を実行する</em></p>
+                <p>アップロードは、物理ファイルも消さないといけないので別処理とする。</p>
+
+                                    <h4>Parameters</h4>
+                    <table class="table table-condensed table-hover">
+                                                    <tr>
+                                <td>string</td>
+                                <td>$tableName </td>
+                                <td><p>テーブル名</p></td>
+                            </tr>
+                                                    <tr>
+                                <td>string</td>
+                                <td>$fieldName </td>
+                                <td><p>カラム名</p></td>
+                            </tr>
+                                                    <tr>
+                                <td>integer|string</td>
+                                <td>$userId </td>
+                                <td><p>会員ID</p></td>
+                            </tr>
+                                            </table>
+                
+                
+                                    <h4>Returns</h4>
+                    array
+                                    				
+                            </article>
+        </div>
+        <aside class="span4 detailsbar">
+            <h1><i class="icon-arrow-down"></i></h1>
+                                                            <dl>
+                                                                            </dl>
+            <h2>Tags</h2>
+            <table class="table table-condensed">
+                                    <tr><td colspan="2"><em>None found</em></td></tr>
+                            </table>
+        </aside>
+    </div>
+
+                                    <div class="row-fluid">
+        <div class="span8 content class">
+            <a id="method_deleteUploadTables" name="method_deleteUploadTables" class="anchor"></a>
+            <article class="method">
+                <h3 class="public ">deleteUploadTables()</h3>
+                <a href="#source-view" role="button" class="pull-right btn" data-toggle="modal" style="font-size: 1.1em; padding: 9px 14px"><i class="icon-code"></i></a>
+                <pre class="signature" style="margin-right: 54px;">deleteUploadTables(array  <span class="argument">$fileIds</span>) : array</pre>
+                <p><em>アップロードファイル削除処理を実行する</em></p>
+                
+
+                                    <h4>Parameters</h4>
+                    <table class="table table-condensed table-hover">
+                                                    <tr>
+                                <td>array</td>
+                                <td>$fileIds </td>
+                                <td><p>ファイルIDリスト</p></td>
+                            </tr>
+                                            </table>
+                
+                
+                                    <h4>Returns</h4>
+                    array
+                                    				
+                            </article>
+        </div>
+        <aside class="span4 detailsbar">
+            <h1><i class="icon-arrow-down"></i></h1>
+                                                            <dl>
+                                                                            </dl>
+            <h2>Tags</h2>
+            <table class="table table-condensed">
+                                    <tr><td colspan="2"><em>None found</em></td></tr>
+                            </table>
+        </aside>
+    </div>
+
+                                                                    <div class="row-fluid">
+        <div class="span8 content class">
+            <a id="method___getColumns" name="method___getColumns" class="anchor"></a>
+            <article class="method">
+                <h3 class="private ">__getColumns()</h3>
+                <a href="#source-view" role="button" class="pull-right btn" data-toggle="modal" style="font-size: 1.1em; padding: 9px 14px"><i class="icon-code"></i></a>
+                <pre class="signature" style="margin-right: 54px;">__getColumns(string  <span class="argument">$tableName</span>) : array</pre>
+                <p><em>カラム情報を取得する</em></p>
+                
+
+                                    <h4>Parameters</h4>
+                    <table class="table table-condensed table-hover">
+                                                    <tr>
+                                <td>string</td>
+                                <td>$tableName </td>
+                                <td><p>テーブル名</p></td>
+                            </tr>
+                                            </table>
+                
+                
+                                    <h4>Returns</h4>
+                    array
+                                    				
+                            </article>
+        </div>
+        <aside class="span4 detailsbar">
+            <h1><i class="icon-arrow-down"></i></h1>
+                                                            <dl>
+                                                                            </dl>
+            <h2>Tags</h2>
+            <table class="table table-condensed">
+                                    <tr><td colspan="2"><em>None found</em></td></tr>
+                            </table>
+        </aside>
+    </div>
+
+                                    <div class="row-fluid">
+        <div class="span8 content class">
+            <a id="method___setRecursiveReletedTables" name="method___setRecursiveReletedTables" class="anchor"></a>
+            <article class="method">
+                <h3 class="private ">__setRecursiveReletedTables()</h3>
+                <a href="#source-view" role="button" class="pull-right btn" data-toggle="modal" style="font-size: 1.1em; padding: 9px 14px"><i class="icon-code"></i></a>
+                <pre class="signature" style="margin-right: 54px;">__setRecursiveReletedTables(string  <span class="argument">$tableName</span>, string  <span class="argument">$fieldName</span>, string  <span class="argument">$foreignKey</span>,   <span class="argument">$retRelatedTables</span>) : void</pre>
+                <p><em>テーブルに対する関連するテーブルリストを再帰的に取得する</em></p>
+                
+
+                                    <h4>Parameters</h4>
+                    <table class="table table-condensed table-hover">
+                                                    <tr>
+                                <td>string</td>
+                                <td>$tableName </td>
+                                <td><p>テーブル名</p></td>
+                            </tr>
+                                                    <tr>
+                                <td>string</td>
+                                <td>$fieldName </td>
+                                <td><p>カラム名</p></td>
+                            </tr>
+                                                    <tr>
+                                <td>string</td>
+                                <td>$foreignKey </td>
+                                <td><p>外部キーフィールド名</p></td>
+                            </tr>
+                                                    <tr>
+                                <td></td>
+                                <td>$retRelatedTables </td>
+                                <td></td>
+                            </tr>
+                                            </table>
+                
+                
+                				
+                            </article>
+        </div>
+        <aside class="span4 detailsbar">
+            <h1><i class="icon-arrow-down"></i></h1>
+                                                            <dl>
+                                                                            </dl>
+            <h2>Tags</h2>
+            <table class="table table-condensed">
+                                    <tr><td colspan="2"><em>None found</em></td></tr>
+                            </table>
+        </aside>
+    </div>
+
+                                    <div class="row-fluid">
+        <div class="span8 content class">
+            <a id="method___makeForeignKey" name="method___makeForeignKey" class="anchor"></a>
+            <article class="method">
+                <h3 class="private ">__makeForeignKey()</h3>
+                <a href="#source-view" role="button" class="pull-right btn" data-toggle="modal" style="font-size: 1.1em; padding: 9px 14px"><i class="icon-code"></i></a>
+                <pre class="signature" style="margin-right: 54px;">__makeForeignKey(string  <span class="argument">$tableName</span>, string  <span class="argument">$fieldName</span>) : string</pre>
+                <p><em>外部キーのカラム名を生成する</em></p>
+                
+
+                                    <h4>Parameters</h4>
+                    <table class="table table-condensed table-hover">
+                                                    <tr>
+                                <td>string</td>
+                                <td>$tableName </td>
+                                <td><p>テーブル名</p></td>
+                            </tr>
+                                                    <tr>
+                                <td>string</td>
+                                <td>$fieldName </td>
+                                <td><p>カラム名</p></td>
+                            </tr>
+                                            </table>
+                
+                
+                                    <h4>Returns</h4>
+                    string
+                                    				
+                            </article>
+        </div>
+        <aside class="span4 detailsbar">
+            <h1><i class="icon-arrow-down"></i></h1>
+                                                            <dl>
+                                                                            </dl>
+            <h2>Tags</h2>
+            <table class="table table-condensed">
+                                    <tr><td colspan="2"><em>None found</em></td></tr>
+                            </table>
+        </aside>
+    </div>
+
+                                    <div class="row-fluid">
+        <div class="span8 content class">
+            <a id="method___runDeleteRecursiveRelatedTables" name="method___runDeleteRecursiveRelatedTables" class="anchor"></a>
+            <article class="method">
+                <h3 class="private ">__runDeleteRecursiveRelatedTables()</h3>
+                <a href="#source-view" role="button" class="pull-right btn" data-toggle="modal" style="font-size: 1.1em; padding: 9px 14px"><i class="icon-code"></i></a>
+                <pre class="signature" style="margin-right: 54px;">__runDeleteRecursiveRelatedTables(string  <span class="argument">$tableName</span>, string  <span class="argument">$fieldName</span>, array  <span class="argument">$values</span>, array  <span class="argument">$targetTableList</span>) : array</pre>
+                <p><em>再帰的に削除処理を実行する</em></p>
+                
+
+                                    <h4>Parameters</h4>
+                    <table class="table table-condensed table-hover">
+                                                    <tr>
+                                <td>string</td>
+                                <td>$tableName </td>
+                                <td><p>テーブル名</p></td>
+                            </tr>
+                                                    <tr>
+                                <td>string</td>
+                                <td>$fieldName </td>
+                                <td><p>カラム名</p></td>
+                            </tr>
+                                                    <tr>
+                                <td>array</td>
+                                <td>$values </td>
+                                <td><p>値</p></td>
+                            </tr>
+                                                    <tr>
+                                <td>array</td>
+                                <td>$targetTableList </td>
+                                <td><p>対象テーブルリスト</p></td>
+                            </tr>
+                                            </table>
+                
+                
+                                    <h4>Returns</h4>
+                    array
+                                    				
+                            </article>
+        </div>
+        <aside class="span4 detailsbar">
+            <h1><i class="icon-arrow-down"></i></h1>
+                                                            <dl>
+                                                                            </dl>
+            <h2>Tags</h2>
+            <table class="table table-condensed">
+                                    <tr><td colspan="2"><em>None found</em></td></tr>
+                            </table>
+        </aside>
+    </div>
+
+                                    <div class="row-fluid">
+        <div class="span8 content class">
+            <a id="method___runDeleteUploadTables" name="method___runDeleteUploadTables" class="anchor"></a>
+            <article class="method">
+                <h3 class="private ">__runDeleteUploadTables()</h3>
+                <a href="#source-view" role="button" class="pull-right btn" data-toggle="modal" style="font-size: 1.1em; padding: 9px 14px"><i class="icon-code"></i></a>
+                <pre class="signature" style="margin-right: 54px;">__runDeleteUploadTables(string  <span class="argument">$tableName</span>, string  <span class="argument">$fieldName</span>, array  <span class="argument">$values</span>) : array</pre>
+                <p><em>アップロードファイル削除処理を実行する</em></p>
+                <p>アップロードは、物理ファイルも消さないといけないので別処理とする。</p>
+
+                                    <h4>Parameters</h4>
+                    <table class="table table-condensed table-hover">
+                                                    <tr>
+                                <td>string</td>
+                                <td>$tableName </td>
+                                <td><p>テーブル名</p></td>
+                            </tr>
+                                                    <tr>
+                                <td>string</td>
+                                <td>$fieldName </td>
+                                <td><p>カラム名</p></td>
+                            </tr>
+                                                    <tr>
+                                <td>array</td>
+                                <td>$values </td>
+                                <td><p>値</p></td>
+                            </tr>
+                                            </table>
+                
+                
+                                    <h4>Returns</h4>
+                    array
+                                    				
+                            </article>
+        </div>
+        <aside class="span4 detailsbar">
+            <h1><i class="icon-arrow-down"></i></h1>
+                                                            <dl>
+                                                                            </dl>
+            <h2>Tags</h2>
+            <table class="table table-condensed">
+                                    <tr><td colspan="2"><em>None found</em></td></tr>
+                            </table>
+        </aside>
+    </div>
+
+                                    </div>
+    </section>
+
+    <div id="source-view" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="source-view-label" aria-hidden="true">
+        <div class="modal-header">
+            <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+            <h3 id="source-view-label">RoomsLibDeleteRoomTables.php</h3>
+        </div>
+        <div class="modal-body">
+            <pre data-src="../files/Plugin/Rooms/Lib/RoomsLibDeleteRoomTables.php.txt" class="language-php line-numbers"></pre>
+        </div>
+    </div>
+
+    <footer class="row-fluid">
+        <section class="span10 offset2">
+            <section class="row-fluid">
+                <section class="span10 offset1">
+                    <section class="row-fluid footer-sections">
+                        <section class="span4">
+                                                        <h1><i class="icon-code"></i></h1>
+                            <div>
+                                <ul>
+                                                                    </ul>
+                            </div>
+                        </section>
+                        <section class="span4">
+                                                        <h1><i class="icon-bar-chart"></i></h1>
+                            <div>
+                                <ul>
+                                    <li><a href="../graphs/class.html">Class Hierarchy Diagram</a></li>
+                                </ul>
+                            </div>
+                        </section>
+                        <section class="span4">
+                                                        <h1><i class="icon-pushpin"></i></h1>
+                            <div>
+                                <ul>
+                                    <li><a href="../reports/errors.html">Errors</a></li>
+                                    <li><a href="../reports/markers.html">Markers</a></li>
+                                </ul>
+                            </div>
+                        </section>
+                    </section>
+                </section>
+            </section>
+            <section class="row-fluid">
+                <section class="span10 offset1">
+                    <hr />
+                    Documentation is powered by <a href="http://www.phpdoc.org/">phpDocumentor </a> and authored
+                    on October 12th, 2019 at 05:50.
+                </section>
+            </section>
+        </section>
+    </footer>
+</div>
+
+</body>
+</html>
