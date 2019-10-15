@@ -136,10 +136,10 @@
                                 <div class="accordion" style="margin-bottom: 0">
         <div class="accordion-group">
             <div class="accordion-heading">
-                                    <a class="accordion-toggle " data-toggle="collapse" data-target="#namespace-471045556"></a>
+                                    <a class="accordion-toggle " data-toggle="collapse" data-target="#namespace-256315133"></a>
                                 <a href="../namespaces/default.html" style="margin-left: 30px; padding-left: 0">\</a>
             </div>
-            <div id="namespace-471045556" class="accordion-body collapse in">
+            <div id="namespace-256315133" class="accordion-body collapse in">
                 <div class="accordion-inner">
 
                     
@@ -292,6 +292,7 @@
                                                                     <a href="../classes/AttachmentBehavior.html#method_afterSave" class="">afterSave()</a><br />
                                                                     <a href="../classes/AttachmentBehavior.html#method_afterSaveByAttachment" class="">afterSaveByAttachment()</a><br />
                                                                     <a href="../classes/AttachmentBehavior.html#method_afterDelete" class="">afterDelete()</a><br />
+                                                                    <a href="../classes/AttachmentBehavior.html#method_deleteUploadFileByContentKeys" class="">deleteUploadFileByContentKeys()</a><br />
                                                                     <a href="../classes/AttachmentBehavior.html#method_uploadSettings" class="">uploadSettings()</a><br />
                                                                     <a href="../classes/AttachmentBehavior.html#method_attachFile" class="">attachFile()</a><br />
                                                                     <a href="../classes/AttachmentBehavior.html#method_downloadCountUp" class="">downloadCountUp()</a><br />
@@ -353,7 +354,14 @@
                                                                         </dl>
                     <h2>Tags</h2>
                     <table class="table table-condensed">
-                                            <tr><td colspan="2"><em>None found</em></td></tr>
+                                            <tr>
+                            <th>
+                                SuppressWarnings
+                            </th>
+                            <td>
+                                                                    <p>(PHPMD.TooManyPublicMethods)</p>
+                                                            </td>
+                        </tr>
                                         </table>
                 </aside>
             </div>
@@ -830,6 +838,47 @@
 
                                     <div class="row-fluid">
         <div class="span8 content class">
+            <a id="method_deleteUploadFileByContentKeys" name="method_deleteUploadFileByContentKeys" class="anchor"></a>
+            <article class="method">
+                <h3 class="public ">deleteUploadFileByContentKeys()</h3>
+                <a href="#source-view" role="button" class="pull-right btn" data-toggle="modal" style="font-size: 1.1em; padding: 9px 14px"><i class="icon-code"></i></a>
+                <pre class="signature" style="margin-right: 54px;">deleteUploadFileByContentKeys(\Model  <span class="argument">$model</span>, array  <span class="argument">$contentKeys</span>) : boolean</pre>
+                <p><em>content_keyからUploadFile, UploadFilesContent, および実ファイルの削除をおこなう。</em></p>
+                <p>ファイルを添付する元コンテンツの削除時に呼び出してください。</p>
+
+                                    <h4>Parameters</h4>
+                    <table class="table table-condensed table-hover">
+                                                    <tr>
+                                <td>\Model</td>
+                                <td>$model </td>
+                                <td><p>Model</p></td>
+                            </tr>
+                                                    <tr>
+                                <td>array</td>
+                                <td>$contentKeys </td>
+                                <td><p>content_keyリスト</p></td>
+                            </tr>
+                                            </table>
+                
+                
+                                    <h4>Returns</h4>
+                    boolean
+                                    				
+                            </article>
+        </div>
+        <aside class="span4 detailsbar">
+            <h1><i class="icon-arrow-down"></i></h1>
+                                                            <dl>
+                                                                            </dl>
+            <h2>Tags</h2>
+            <table class="table table-condensed">
+                                    <tr><td colspan="2"><em>None found</em></td></tr>
+                            </table>
+        </aside>
+    </div>
+
+                                    <div class="row-fluid">
+        <div class="span8 content class">
             <a id="method_uploadSettings" name="method_uploadSettings" class="anchor"></a>
             <article class="method">
                 <h3 class="public ">uploadSettings()</h3>
@@ -1148,7 +1197,7 @@
                 <section class="span10 offset1">
                     <hr />
                     Documentation is powered by <a href="http://www.phpdoc.org/">phpDocumentor </a> and authored
-                    on October 12th, 2019 at 01:34.
+                    on October 15th, 2019 at 08:38.
                 </section>
             </section>
         </section>
