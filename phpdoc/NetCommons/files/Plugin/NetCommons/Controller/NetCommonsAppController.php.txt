@@ -10,17 +10,19 @@
 
 App::uses('Controller', 'Controller');
 App::uses('Utility', 'Inflector');
-App::uses('Current', 'NetCommons.Utility');
+//App::uses('Current', 'NetCommons.Utility');
 App::uses('NetCommonsUrl', 'NetCommons.Utility');
 App::uses('PermissionComponent', 'NetCommons.Controller/Component');
 App::uses('SiteSettingUtil', 'SiteManager.Utility');
-App::uses('User', 'Users.Model');
+
+App::uses('CurrentLib', 'NetCommons.Lib');
 
 /**
  * NetCommonsApp Controller
  *
  * @author Shohei Nakajima <nakajimashouhei@gmail.com>
  * @package NetCommons\NetCommons\Controller
+ * @SuppressWarnings(PHPMD.ExcessiveClassComplexity)
  */
 class NetCommonsAppController extends Controller {
 
@@ -61,12 +63,8 @@ class NetCommonsAppController extends Controller {
 				'controller' => 'pages',
 				'action' => 'index',
 			),
-			'passwordHasher' => [
-				'className' => 'Simple',
-				'hashType' => User::PASSWORD_HASH_TYPE,
-			],
 		),
-		'DebugKit.Toolbar',
+		//'DebugKit.Toolbar',
 		'Flash',
 		'MobileDetect.MobileDetect',
 		'NetCommons.Asset',
@@ -122,6 +120,13 @@ class NetCommonsAppController extends Controller {
 	];
 
 /**
+ * CurrentLibライブラリ
+ *
+ * @var CurrentLib
+ */
+	public $CurrentLib = null;
+
+/**
  * Constructor.
  *
  * @param CakeRequest $request Request object for this controller. Can be null for testing,
@@ -146,6 +151,13 @@ class NetCommonsAppController extends Controller {
 		//サイトの設定データセット
 		if (Configure::read('NetCommons.installed')) {
 			SiteSettingUtil::initialize();
+		}
+
+		//DebugKitは、debugモードがONのときのみロードするように修正
+		if (Configure::read('debug') &&
+				!in_array('DebugKit.Toolbar', $this->components, true) &&
+				substr(get_class($this), 0, 5) !== 'Mock_') {
+			$this->components[] = 'DebugKit.Toolbar';
 		}
 	}
 
@@ -182,6 +194,8 @@ class NetCommonsAppController extends Controller {
  * @return void
  */
 	public function beforeFilter() {
+		parent::beforeFilter();
+
 		if (empty($this->request->params['requested'])) {
 			$this->request->allowMethod($this->_allowMethods);
 		}
@@ -191,8 +205,25 @@ class NetCommonsAppController extends Controller {
 		//言語のセット
 		$this->_setLanguage();
 
-		//カレントデータセット
-		Current::initialize($this);
+		//if (empty($this->request->params['requested'])) {
+		//	$indent = '';
+		//} else {
+		//	$indent = '  ';
+		//}
+		//$startTime = microtime(true);
+
+		$this->__loadCurrentLib();
+
+		//$debug = CurrentLib::$current;
+		//unset($debug['PluginsRoom']);
+		//ksort($debug);
+		//CakeLog::debug($indent . __METHOD__ . '(' . __LINE__ . ') ' . var_export($debug, true));
+		//$debug = NcPermission::$permission;
+		//ksort($debug);
+		//CakeLog::debug($indent . __METHOD__ . '(' . __LINE__ . ') ' . var_export($debug, true));
+		//$endTime = microtime(true);
+		//CakeLog::debug($indent . __METHOD__ . '(' . __LINE__ . ') Current::initialize()');
+		//CakeLog::debug($indent . var_export(($endTime - $startTime), true));
 
 		if (! $this->AccessCtrl->allowAccess()) {
 			return;
@@ -226,8 +257,21 @@ class NetCommonsAppController extends Controller {
  * @link http://book.cakephp.org/2.0/ja/controllers.html#request-life-cycle-callbacks
  */
 	public function afterFilter() {
+		// CakeErrorControllerだったらCurrentLib::terminate実行しない
+		if ($this instanceof CakeErrorController) {
+			return parent::afterFilter();
+		}
 		//カレントデータセット
-		Current::terminate($this);
+		if (Configure::read('NetCommons.installed')) {
+			//@codeCoverageIgnoreStart
+			if (empty($this->CurrentLib)) {
+				$this->CurrentLib = CurrentLib::getInstance();
+			}
+			//@codeCoverageIgnoreEnd
+			$this->CurrentLib->terminate($this);
+		}
+
+		parent::afterFilter();
 	}
 
 /**
@@ -250,6 +294,23 @@ class NetCommonsAppController extends Controller {
 		$this->set('switchLanguages', $languages);
 
 		$this->set('hasSwitchLang', count($languages) > 1);
+	}
+
+/**
+ * CurrentLibをロードする
+ *
+ * @return void
+ */
+	private function __loadCurrentLib() {
+		if (Configure::read('NetCommons.installed')) {
+			//カレントデータセット UnitTestでMockに差し替えられるようにメンバ変数としておく
+			//@codeCoverageIgnoreStart
+			if (empty($this->CurrentLib)) {
+				$this->CurrentLib = CurrentLib::getInstance();
+			}
+			//@codeCoverageIgnoreEnd
+			$this->CurrentLib->initialize($this);
+		}
 	}
 
 /**
@@ -339,6 +400,8 @@ class NetCommonsAppController extends Controller {
 		if ($this->request->is('ajax')) {
 			$this->NetCommons->setFlashNotification(__d('net_commons', 'Bad Request'), array(
 				'class' => 'danger',
+				'name' => 'Bad Request',
+				'message' => $message,
 				'interval' => NetCommonsComponent::ALERT_VALIDATE_ERROR_INTERVAL,
 				'error' => $message
 			), 400);
