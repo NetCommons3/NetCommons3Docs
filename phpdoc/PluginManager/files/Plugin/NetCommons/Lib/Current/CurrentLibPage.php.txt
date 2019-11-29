@@ -419,6 +419,9 @@ class CurrentLibPage extends LibAppObject {
  * @return string|null ページID。nullの場合、パラメータ等からpage_idが取得できなかった
  */
 	private function __getPageIdInRequest() {
+		if (!($this->_controller instanceof Controller)) {
+			return null;
+		}
 		if (isset($this->_controller->request->data['Page']['id'])) {
 			//POSTにpage_idが含まれている場合、それが優先とする
 			$pageId = $this->_controller->request->data['Page']['id'];
@@ -435,7 +438,8 @@ class CurrentLibPage extends LibAppObject {
 				$pageId = $this->_controller->request->params['pass'][1];
 			} else {
 				//URLのパスが、/:plugin/:controller/:action/(room_id)の場合、ルームの先頭のpage_id
-				$roomId = $this->_controller->request->params['pass'][0];
+				$roomId = isset($this->_controller->request->params['pass'][0]) ?
+					$this->_controller->request->params['pass'][0] : null;
 				$pageId = $this->__getPageIdByRoomId($roomId);
 			}
 		} elseif (isset($this->_controller->request->query['page_id'])) {
