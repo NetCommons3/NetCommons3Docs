@@ -390,14 +390,13 @@ class CurrentLib extends LibAppObject {
  * @return void
  */
 	private function __setCurrentUser() {
-		//ログイン情報が変わっている場合、ログイン情報の更新
-		$isLoginChanged = $this->CurrentLibUser->isLoginChanged();
-		if ($isLoginChanged) {
-			$this->CurrentLibUser->renewSessionUser();
-		}
+		////ログイン情報が変わっている場合、ログイン情報の更新
+		//$isLoginChanged = $this->CurrentLibUser->isLoginChanged();
+		//if ($isLoginChanged) {
+		//	$this->CurrentLibUser->renewSessionUser();
+		//}
 
-		if ($isLoginChanged ||
-				! isset(self::$current['User']) ||
+		if (! isset(self::$current['User']) ||
 				empty($this->_controller->request->params['requested'])) {
 			self::$current['User'] = $this->CurrentLibUser->getLoginUser();
 		}
@@ -464,7 +463,7 @@ class CurrentLib extends LibAppObject {
 				//Wysiwygの場合、ページ情報を取得する必要なし
 				if (isset($this->_controller->request->data['Room']['id'])) {
 					$roomId = $this->_controller->request->data['Room']['id'];
-				} else {
+				} elseif (!empty($this->_controller->request->params['pass'][0])) {
 					$roomId = $this->_controller->request->params['pass'][0];
 				}
 			}
@@ -573,8 +572,8 @@ class CurrentLib extends LibAppObject {
 				self::$current['Block'] = $block['Block'];
 				self::$current['BlocksLanguage'] = $block['BlocksLanguage'];
 				$roomId = $block['Block']['room_id'];
-			} elseif ($this->CurrentLibFrame->isSameRoomAndPluginByRequestBlockAndFrameBlock($frame, $block) &&
-					! $this->CurrentLibFrame->isSameBlockByRequestBlockAndFrameBlock($frame, $block)) {
+			} elseif (! $this->CurrentLibFrame->isSameBlockByRequestBlockAndFrameBlock($frame, $block) &&
+					$this->CurrentLibFrame->isSameRoomAndPluginByRequestBlockAndFrameBlock($frame, $block)) {
 				$this->CurrentLibFrame->setBlockInFrame($frame['Frame']['id'], $block);
 				self::$current['Block'] = $block['Block'];
 				self::$current['BlocksLanguage'] = $block['BlocksLanguage'];
@@ -646,7 +645,8 @@ class CurrentLib extends LibAppObject {
 		}
 
 		//ユーザのルーム権限データのセット
-		self::$current = array_merge(self::$current, $this->CurrentLibRoom->findUserRoomRoleByRoomId($roomId));
+		self::$current =
+			array_merge(self::$current, $this->CurrentLibRoom->findUserRoomRoleByRoomId($roomId));
 		$roomRoleKey = $this->CurrentLibRoom->getRoomRoleKeyByRoomId($roomId);
 		if (! $roomRoleKey) {
 			$roomRoleKey = Role::ROOM_ROLE_KEY_VISITOR;
