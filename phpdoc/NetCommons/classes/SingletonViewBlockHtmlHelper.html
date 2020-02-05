@@ -24,7 +24,7 @@
     <script type="text/javascript">
     function loadExternalCodeSnippets() {
         Array.prototype.slice.call(document.querySelectorAll('pre[data-src]')).forEach(function (pre) {
-            var src = pre.getAttribute('data-src');
+            var src = pre.getAttribute('data-src').replace( /\\/g, '/');
             var extension = (src.match(/\.(\w+)$/) || [, ''])[1];
             var language = 'php';
 
@@ -136,10 +136,10 @@
                                 <div class="accordion" style="margin-bottom: 0">
         <div class="accordion-group">
             <div class="accordion-heading">
-                                    <a class="accordion-toggle " data-toggle="collapse" data-target="#namespace-741050921"></a>
+                                    <a class="accordion-toggle " data-toggle="collapse" data-target="#namespace-200093558"></a>
                                 <a href="../namespaces/default.html" style="margin-left: 30px; padding-left: 0">\</a>
             </div>
-            <div id="namespace-741050921" class="accordion-body collapse in">
+            <div id="namespace-200093558" class="accordion-body collapse in">
                 <div class="accordion-inner">
 
                     
@@ -315,7 +315,7 @@
                         
                         
                         
-                        
+                                                
                                                                         </dl>
                     <h2>Tags</h2>
                     <table class="table table-condensed">
@@ -414,13 +414,15 @@ If CakePHP less than 2.6.0, css is not implemented</em></p>
                                             </table>
                 
                 
-                				
+                
                             </article>
         </div>
         <aside class="span4 detailsbar">
             <h1><i class="icon-arrow-down"></i></h1>
                                                             <dl>
-                                                                            </dl>
+                                                    <dt>Inherited from</dt>
+                    <dd><a href="../classes/SingletonViewBlockHtmlHelper.html"><div class="path-wrapper">\SingletonViewBlockHtmlHelper</div></a></dd>
+                                                            </dl>
             <h2>Tags</h2>
             <table class="table table-condensed">
                                     <tr><td colspan="2"><em>None found</em></td></tr>
@@ -462,13 +464,15 @@ rss, atom, or icon, the mime-type is returned.</p></td>
                                     <h4>Returns</h4>
                     string
                                             &mdash; <p>A completed <code>&lt;link /&gt;</code> element.</p>
-                                    				
+                                    
                             </article>
         </div>
         <aside class="span4 detailsbar">
             <h1><i class="icon-arrow-down"></i></h1>
                                                             <dl>
-                                                                                            <dt>See also</dt>
+                                                    <dt>Inherited from</dt>
+                    <dd><a href="../classes/SingletonViewBlockHtmlHelper.html"><div class="path-wrapper">\SingletonViewBlockHtmlHelper</div></a></dd>
+                                                                            <dt>See also</dt>
                                                                 <dd><a href="http://book.cakephp.org/2.0/en/core-libraries/helpers/html.html#HtmlHelper::meta"><span class="namespace-wrapper">http://book.cakephp.org/2.0/en/core-libraries/helpers/html.html#HtmlHelper::meta</span></a></dd>
                                                                 </dl>
             <h2>Tags</h2>
@@ -508,13 +512,15 @@ of your application. Otherwise, the path will be relative to your CSS path, usua
                                     <h4>Returns</h4>
                     string
                                             &mdash; <p>CSS <link /> or <style /> tag, depending on the type of link.</p>
-                                    				
+                                    
                             </article>
         </div>
         <aside class="span4 detailsbar">
             <h1><i class="icon-arrow-down"></i></h1>
                                                             <dl>
-                                                                                            <dt>See also</dt>
+                                                    <dt>Inherited from</dt>
+                    <dd><a href="../classes/SingletonViewBlockHtmlHelper.html"><div class="path-wrapper">\SingletonViewBlockHtmlHelper</div></a></dd>
+                                                                            <dt>See also</dt>
                                                                 <dd><a href="http://book.cakephp.org/2.0/en/core-libraries/helpers/html.html#HtmlHelper::css"><span class="namespace-wrapper">http://book.cakephp.org/2.0/en/core-libraries/helpers/html.html#HtmlHelper::css</span></a></dd>
                                                                 </dl>
             <h2>Tags</h2>
@@ -553,13 +559,15 @@ of your application. Otherwise, the path will be relative to your CSS path, usua
                     mixed
                                             &mdash; <p>String of <code>&lt;script /&gt;</code> tags or null if $inline is false or if $once is true and the file has been
 included before.</p>
-                                    				
+                                    
                             </article>
         </div>
         <aside class="span4 detailsbar">
             <h1><i class="icon-arrow-down"></i></h1>
                                                             <dl>
-                                                                                            <dt>See also</dt>
+                                                    <dt>Inherited from</dt>
+                    <dd><a href="../classes/SingletonViewBlockHtmlHelper.html"><div class="path-wrapper">\SingletonViewBlockHtmlHelper</div></a></dd>
+                                                                            <dt>See also</dt>
                                                                 <dd><a href="http://book.cakephp.org/2.0/en/core-libraries/helpers/html.html#HtmlHelper::script"><span class="namespace-wrapper">http://book.cakephp.org/2.0/en/core-libraries/helpers/html.html#HtmlHelper::script</span></a></dd>
                                                                 </dl>
             <h2>Tags</h2>
@@ -598,13 +606,15 @@ treated as HTML attributes.</p></td>
                                     <h4>Returns</h4>
                     mixed
                                             &mdash; <p>string or null depending on the value of <code>$options['block']</code></p>
-                                    				
+                                    
                             </article>
         </div>
         <aside class="span4 detailsbar">
             <h1><i class="icon-arrow-down"></i></h1>
                                                             <dl>
-                                                                                            <dt>See also</dt>
+                                                    <dt>Inherited from</dt>
+                    <dd><a href="../classes/SingletonViewBlockHtmlHelper.html"><div class="path-wrapper">\SingletonViewBlockHtmlHelper</div></a></dd>
+                                                                            <dt>See also</dt>
                                                                 <dd><a href="http://book.cakephp.org/2.0/en/core-libraries/helpers/html.html#HtmlHelper::scriptBlock"><span class="namespace-wrapper">http://book.cakephp.org/2.0/en/core-libraries/helpers/html.html#HtmlHelper::scriptBlock</span></a></dd>
                                                                 </dl>
             <h2>Tags</h2>
@@ -644,13 +654,15 @@ treated as HTML attributes.</p></td>
                                             </table>
                 
                 
-                				
+                
                             </article>
         </div>
         <aside class="span4 detailsbar">
             <h1><i class="icon-arrow-down"></i></h1>
                                                             <dl>
-                                                                            </dl>
+                                                    <dt>Inherited from</dt>
+                    <dd><a href="../classes/SingletonViewBlockHtmlHelper.html"><div class="path-wrapper">\SingletonViewBlockHtmlHelper</div></a></dd>
+                                                            </dl>
             <h2>Tags</h2>
             <table class="table table-condensed">
                                     <tr><td colspan="2"><em>None found</em></td></tr>
@@ -707,7 +719,7 @@ treated as HTML attributes.</p></td>
                 <section class="span10 offset1">
                     <hr />
                     Documentation is powered by <a href="http://www.phpdoc.org/">phpDocumentor </a> and authored
-                    on December 22nd, 2019 at 12:32.
+                    on February 5th, 2020 at 13:35.
                 </section>
             </section>
         </section>
