@@ -24,7 +24,7 @@
     <script type="text/javascript">
     function loadExternalCodeSnippets() {
         Array.prototype.slice.call(document.querySelectorAll('pre[data-src]')).forEach(function (pre) {
-            var src = pre.getAttribute('data-src');
+            var src = pre.getAttribute('data-src').replace( /\\/g, '/');
             var extension = (src.match(/\.(\w+)$/) || [, ''])[1];
             var language = 'php';
 
@@ -136,10 +136,10 @@
                                 <div class="accordion" style="margin-bottom: 0">
         <div class="accordion-group">
             <div class="accordion-heading">
-                                    <a class="accordion-toggle " data-toggle="collapse" data-target="#namespace-861679271"></a>
+                                    <a class="accordion-toggle " data-toggle="collapse" data-target="#namespace-1721762287"></a>
                                 <a href="../namespaces/default.html" style="margin-left: 30px; padding-left: 0">\</a>
             </div>
-            <div id="namespace-861679271" class="accordion-body collapse in">
+            <div id="namespace-1721762287" class="accordion-body collapse in">
                 <div class="accordion-inner">
 
                     
@@ -385,7 +385,7 @@ will inherit them.</p>
                         
                         
                         
-                        
+                                                
                                                                         </dl>
                     <h2>Tags</h2>
                     <table class="table table-condensed">
@@ -394,7 +394,7 @@ will inherit them.</p>
                                 author
                             </th>
                             <td>
-                                                                    <p>Kohei Teraguchi <a href="mailto:kteraguchi@commonsnet.org">kteraguchi@commonsnet.org</a></p>
+                                                                                                        <p>Kohei Teraguchi <a href="mailto:kteraguchi@commonsnet.org">kteraguchi@commonsnet.org</a></p>
                                                             </td>
                         </tr>
                                         </table>
@@ -414,7 +414,7 @@ will inherit them.</p>
             <a id="constant_PUBLIC_ROOT_PAGE_ID" name="constant_PUBLIC_ROOT_PAGE_ID" class="anchor"></a>
             <article id="constant_PUBLIC_ROOT_PAGE_ID" class="constant">
                 <h3 class="">PUBLIC_ROOT_PAGE_ID</h3>
-                <pre class="signature">PUBLIC_ROOT_PAGE_ID</pre>
+                <pre class="signature">PUBLIC_ROOT_PAGE_ID = &#039;1&#039; : string</pre>
                 <p><em>パブリックスペースのページID</em></p>
                 
             </article>
@@ -435,7 +435,7 @@ will inherit them.</p>
             <a id="constant_PRIVATE_ROOT_PAGE_ID" name="constant_PRIVATE_ROOT_PAGE_ID" class="anchor"></a>
             <article id="constant_PRIVATE_ROOT_PAGE_ID" class="constant">
                 <h3 class="">PRIVATE_ROOT_PAGE_ID</h3>
-                <pre class="signature">PRIVATE_ROOT_PAGE_ID</pre>
+                <pre class="signature">PRIVATE_ROOT_PAGE_ID = &#039;2&#039; : string</pre>
                 <p><em>プライベートスペースのページID</em></p>
                 
             </article>
@@ -456,7 +456,7 @@ will inherit them.</p>
             <a id="constant_ROOM_ROOT_PAGE_ID" name="constant_ROOM_ROOT_PAGE_ID" class="anchor"></a>
             <article id="constant_ROOM_ROOT_PAGE_ID" class="constant">
                 <h3 class="">ROOM_ROOT_PAGE_ID</h3>
-                <pre class="signature">ROOM_ROOT_PAGE_ID</pre>
+                <pre class="signature">ROOM_ROOT_PAGE_ID = &#039;3&#039; : string</pre>
                 <p><em>グループスペースのページID</em></p>
                 
             </article>
@@ -477,7 +477,7 @@ will inherit them.</p>
             <a id="constant_HOME_SORT_KEY" name="constant_HOME_SORT_KEY" class="anchor"></a>
             <article id="constant_HOME_SORT_KEY" class="constant">
                 <h3 class="">HOME_SORT_KEY</h3>
-                <pre class="signature">HOME_SORT_KEY</pre>
+                <pre class="signature">HOME_SORT_KEY = &#039;~00000001-00000001&#039; : string</pre>
                 <p><em>ホームのソートキー</em></p>
                 
             </article>
@@ -844,13 +844,15 @@ can also be an array of options, see above.</p></td>
                                             </table>
                 
                 
-                				
+                
                             </article>
         </div>
         <aside class="span4 detailsbar">
             <h1><i class="icon-arrow-down"></i></h1>
                                                             <dl>
-                                                                                            <dt>See also</dt>
+                                                    <dt>Inherited from</dt>
+                    <dd><a href="../classes/Page.html"><div class="path-wrapper">\Page</div></a></dd>
+                                                                            <dt>See also</dt>
                                                                 <dd><a href=""><span class="namespace-wrapper">\Model::__construct()</span></a></dd>
                                                                 </dl>
             <h2>Tags</h2>
@@ -879,7 +881,7 @@ can also be an array of options, see above.</p></td>
 
                 
                 
-                				
+                
                             </article>
         </div>
         <aside class="span4 detailsbar">
@@ -907,7 +909,7 @@ can also be an array of options, see above.</p></td>
 
                 
                 
-                				
+                
                             </article>
         </div>
         <aside class="span4 detailsbar">
@@ -938,7 +940,7 @@ can also be an array of options, see above.</p></td>
                                     <h4>Returns</h4>
                     \DataSource
                                             &mdash; <p>A DataSource object</p>
-                                    				
+                                    
                             </article>
         </div>
         <aside class="span4 detailsbar">
@@ -993,7 +995,7 @@ schema data defaults are not merged.</p></td>
                                     <h4>Returns</h4>
                     array
                                             &mdash; <p>The current Model::data; after merging $data and/or defaults from database</p>
-                                    				
+                                    
                             </article>
         </div>
         <aside class="span4 detailsbar">
@@ -1048,7 +1050,7 @@ schema data defaults are not merged.</p></td>
                                     <h4>Returns</h4>
                     array
                                             &mdash; <p>The current Model::data; after merging $data and/or defaults from database</p>
-                                    				
+                                    
                             </article>
         </div>
         <aside class="span4 detailsbar">
@@ -1085,7 +1087,7 @@ schema data defaults are not merged.</p></td>
 
                 
                 
-                				
+                
                             </article>
         </div>
         <aside class="span4 detailsbar">
@@ -1113,7 +1115,7 @@ schema data defaults are not merged.</p></td>
 
                 
                 
-                				
+                
                             </article>
         </div>
         <aside class="span4 detailsbar">
@@ -1154,7 +1156,7 @@ schema data defaults are not merged.</p></td>
                             <dd></dd>
                                                                     </dl>
                 
-                				
+                
                             </article>
         </div>
         <aside class="span4 detailsbar">
@@ -1190,7 +1192,7 @@ schema data defaults are not merged.</p></td>
                                             </table>
                 
                 
-                				
+                
                             </article>
         </div>
         <aside class="span4 detailsbar">
@@ -1231,13 +1233,15 @@ call, otherwise return the (modified) query data.</em></p>
                     mixed
                                             &mdash; <p>true if the operation should continue, false if it should abort; or, modified
 $query to continue with new $query</p>
-                                    				
+                                    
                             </article>
         </div>
         <aside class="span4 detailsbar">
             <h1><i class="icon-arrow-down"></i></h1>
                                                             <dl>
-                                                                                            <dt>See also</dt>
+                                                    <dt>Inherited from</dt>
+                    <dd><a href="../classes/Page.html"><div class="path-wrapper">\Page</div></a></dd>
+                                                                            <dt>See also</dt>
                                                                 <dd><a href="http://book.cakephp.org/2.0/en/models/callback-methods.html#beforefind"><span class="namespace-wrapper">http://book.cakephp.org/2.0/en/models/callback-methods.html#beforefind</span></a></dd>
                                                                 </dl>
             <h2>Tags</h2>
@@ -1275,13 +1279,15 @@ $query to continue with new $query</p>
                                     <h4>Returns</h4>
                     mixed
                                             &mdash; <p>Result of the find operation</p>
-                                    				
+                                    
                             </article>
         </div>
         <aside class="span4 detailsbar">
             <h1><i class="icon-arrow-down"></i></h1>
                                                             <dl>
-                                                                                            <dt>See also</dt>
+                                                    <dt>Inherited from</dt>
+                    <dd><a href="../classes/Page.html"><div class="path-wrapper">\Page</div></a></dd>
+                                                                            <dt>See also</dt>
                                                                 <dd><a href="http://book.cakephp.org/2.0/en/models/callback-methods.html#afterfind"><span class="namespace-wrapper">http://book.cakephp.org/2.0/en/models/callback-methods.html#afterfind</span></a></dd>
                                                                 </dl>
             <h2>Tags</h2>
@@ -1322,13 +1328,15 @@ validation rules can be defined in $validate.</em></p>
                                     <h4>Returns</h4>
                     boolean
                                             &mdash; <p>True if validate operation should continue, false to abort</p>
-                                    				
+                                    
                             </article>
         </div>
         <aside class="span4 detailsbar">
             <h1><i class="icon-arrow-down"></i></h1>
                                                             <dl>
-                                                                                            <dt>See also</dt>
+                                                    <dt>Inherited from</dt>
+                    <dd><a href="../classes/Page.html"><div class="path-wrapper">\Page</div></a></dd>
+                                                                            <dt>See also</dt>
                                                                 <dd><a href="http://book.cakephp.org/2.0/en/models/callback-methods.html#beforevalidate"><span class="namespace-wrapper">http://book.cakephp.org/2.0/en/models/callback-methods.html#beforevalidate</span></a></dd>
                                                                                                     <dd><a href=""><span class="namespace-wrapper">\Model::save()</span></a></dd>
                                                                 </dl>
@@ -1361,13 +1369,15 @@ validation rules can be defined in $validate.</em></p>
                 
                                     <h4>Returns</h4>
                     boolean
-                                    				
+                                    
                             </article>
         </div>
         <aside class="span4 detailsbar">
             <h1><i class="icon-arrow-down"></i></h1>
                                                             <dl>
-                                                                            </dl>
+                                                    <dt>Inherited from</dt>
+                    <dd><a href="../classes/Page.html"><div class="path-wrapper">\Page</div></a></dd>
+                                                            </dl>
             <h2>Tags</h2>
             <table class="table table-condensed">
                                     <tr><td colspan="2"><em>None found</em></td></tr>
@@ -1397,13 +1407,15 @@ validation rules can be defined in $validate.</em></p>
                 
                                     <h4>Returns</h4>
                     boolean
-                                    				
+                                    
                             </article>
         </div>
         <aside class="span4 detailsbar">
             <h1><i class="icon-arrow-down"></i></h1>
                                                             <dl>
-                                                                            </dl>
+                                                    <dt>Inherited from</dt>
+                    <dd><a href="../classes/Page.html"><div class="path-wrapper">\Page</div></a></dd>
+                                                            </dl>
             <h2>Tags</h2>
             <table class="table table-condensed">
                                     <tr><td colspan="2"><em>None found</em></td></tr>
@@ -1441,13 +1453,15 @@ validation rules can be defined in $validate.</em></p>
                             <dd></dd>
                                                                     </dl>
                 
-                				
+                
                             </article>
         </div>
         <aside class="span4 detailsbar">
             <h1><i class="icon-arrow-down"></i></h1>
                                                             <dl>
-                                                                                            <dt>See also</dt>
+                                                    <dt>Inherited from</dt>
+                    <dd><a href="../classes/Page.html"><div class="path-wrapper">\Page</div></a></dd>
+                                                                            <dt>See also</dt>
                                                                 <dd><a href="http://book.cakephp.org/2.0/en/models/callback-methods.html#aftersave"><span class="namespace-wrapper">http://book.cakephp.org/2.0/en/models/callback-methods.html#aftersave</span></a></dd>
                                                                                                     <dd><a href=""><span class="namespace-wrapper">\Model::save()</span></a></dd>
                                                                 </dl>
@@ -1473,13 +1487,15 @@ validation rules can be defined in $validate.</em></p>
                                     <h4>Returns</h4>
                     array
                                             &mdash; <p>ページデータ</p>
-                                    				
+                                    
                             </article>
         </div>
         <aside class="span4 detailsbar">
             <h1><i class="icon-arrow-down"></i></h1>
                                                             <dl>
-                                                                            </dl>
+                                                    <dt>Inherited from</dt>
+                    <dd><a href="../classes/Page.html"><div class="path-wrapper">\Page</div></a></dd>
+                                                            </dl>
             <h2>Tags</h2>
             <table class="table table-condensed">
                                     <tr><td colspan="2"><em>None found</em></td></tr>
@@ -1519,13 +1535,15 @@ validation rules can be defined in $validate.</em></p>
                 
                                     <h4>Returns</h4>
                     boolean
-                                    				
+                                    
                             </article>
         </div>
         <aside class="span4 detailsbar">
             <h1><i class="icon-arrow-down"></i></h1>
                                                             <dl>
-                                                                            </dl>
+                                                    <dt>Inherited from</dt>
+                    <dd><a href="../classes/Page.html"><div class="path-wrapper">\Page</div></a></dd>
+                                                            </dl>
             <h2>Tags</h2>
             <table class="table table-condensed">
                                     <tr><td colspan="2"><em>None found</em></td></tr>
@@ -1567,13 +1585,15 @@ validation rules can be defined in $validate.</em></p>
                                     <h4>Returns</h4>
                     mixed
                                             &mdash; <p>On success Model::$data if its not empty or true, false on failure</p>
-                                    				
+                                    
                             </article>
         </div>
         <aside class="span4 detailsbar">
             <h1><i class="icon-arrow-down"></i></h1>
                                                             <dl>
-                                                                            </dl>
+                                                    <dt>Inherited from</dt>
+                    <dd><a href="../classes/Page.html"><div class="path-wrapper">\Page</div></a></dd>
+                                                            </dl>
             <h2>Tags</h2>
             <table class="table table-condensed">
                                     <tr><td colspan="2"><em>None found</em></td></tr>
@@ -1596,7 +1616,7 @@ validation rules can be defined in $validate.</em></p>
                                     <h4>Returns</h4>
                     array
                                             &mdash; <p>デフォルト値をセットした配列</p>
-                                    				
+                                    
                             </article>
         </div>
         <aside class="span4 detailsbar">
@@ -1653,7 +1673,7 @@ will enable only those callbacks.</li>
                                     <h4>Returns</h4>
                     mixed
                                             &mdash; <p>On success Model::$data if its not empty or true, false on failure</p>
-                                    				
+                                    
                             </article>
         </div>
         <aside class="span4 detailsbar">
@@ -1698,7 +1718,7 @@ will enable only those callbacks.</li>
                 
                                     <h4>Returns</h4>
                     array
-                                    				
+                                    
                             </article>
         </div>
         <aside class="span4 detailsbar">
@@ -1731,7 +1751,7 @@ will enable only those callbacks.</li>
                                     <h4>Returns</h4>
                     string
                                             &mdash; <p>The name of the DataSource, as defined in app/Config/database.php</p>
-                                    				
+                                    
                             </article>
         </div>
         <aside class="span4 detailsbar">
@@ -1759,7 +1779,7 @@ will enable only those callbacks.</li>
 
                 
                 
-                				
+                
                             </article>
         </div>
         <aside class="span4 detailsbar">
@@ -1824,7 +1844,7 @@ will enable only those callbacks.</li>
                 <section class="span10 offset1">
                     <hr />
                     Documentation is powered by <a href="http://www.phpdoc.org/">phpDocumentor </a> and authored
-                    on January 27th, 2020 at 14:00.
+                    on February 20th, 2020 at 08:15.
                 </section>
             </section>
         </section>

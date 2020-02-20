@@ -24,7 +24,7 @@
     <script type="text/javascript">
     function loadExternalCodeSnippets() {
         Array.prototype.slice.call(document.querySelectorAll('pre[data-src]')).forEach(function (pre) {
-            var src = pre.getAttribute('data-src');
+            var src = pre.getAttribute('data-src').replace( /\\/g, '/');
             var extension = (src.match(/\.(\w+)$/) || [, ''])[1];
             var language = 'php';
 
@@ -136,10 +136,10 @@
                                 <div class="accordion" style="margin-bottom: 0">
         <div class="accordion-group">
             <div class="accordion-heading">
-                                    <a class="accordion-toggle " data-toggle="collapse" data-target="#namespace-521859796"></a>
+                                    <a class="accordion-toggle " data-toggle="collapse" data-target="#namespace-1261728523"></a>
                                 <a href="../namespaces/default.html" style="margin-left: 30px; padding-left: 0">\</a>
             </div>
-            <div id="namespace-521859796" class="accordion-body collapse in">
+            <div id="namespace-1261728523" class="accordion-body collapse in">
                 <div class="accordion-inner">
 
                     
@@ -367,7 +367,7 @@ will inherit them.</p>
                         
                         
                         
-                        
+                                                
                                                                         </dl>
                     <h2>Tags</h2>
                     <table class="table table-condensed">
@@ -376,8 +376,8 @@ will inherit them.</p>
                                 SuppressWarnings
                             </th>
                             <td>
-                                                                    <p>(PHPMD.ExcessiveClassComplexity)</p>
-                                                                    <p>(PHPMD.CouplingBetweenObjects)</p>
+                                                                                                        <p>(PHPMD.ExcessiveClassComplexity)</p>
+                                                                                                        <p>(PHPMD.CouplingBetweenObjects)</p>
                                                             </td>
                         </tr>
                                         </table>
@@ -397,7 +397,7 @@ will inherit them.</p>
             <a id="constant_COL_MAX_SIZE" name="constant_COL_MAX_SIZE" class="anchor"></a>
             <article id="constant_COL_MAX_SIZE" class="constant">
                 <h3 class="">COL_MAX_SIZE</h3>
-                <pre class="signature">COL_MAX_SIZE</pre>
+                <pre class="signature">COL_MAX_SIZE = 12 : integer</pre>
                 <p><em>Bootstrap col max size</em></p>
                 
             </article>
@@ -418,7 +418,7 @@ will inherit them.</p>
             <a id="constant_COL_DEFAULT_SIZE" name="constant_COL_DEFAULT_SIZE" class="anchor"></a>
             <article id="constant_COL_DEFAULT_SIZE" class="constant">
                 <h3 class="">COL_DEFAULT_SIZE</h3>
-                <pre class="signature">COL_DEFAULT_SIZE</pre>
+                <pre class="signature">COL_DEFAULT_SIZE = 3 : integer</pre>
                 <p><em>Bootstrap col-sm default size</em></p>
                 
             </article>
@@ -619,13 +619,15 @@ will inherit them.</p>
                                             </table>
                 
                 
-                				
+                
                             </article>
         </div>
         <aside class="span4 detailsbar">
             <h1><i class="icon-arrow-down"></i></h1>
                                                             <dl>
-                                                                            </dl>
+                                                    <dt>Inherited from</dt>
+                    <dd><a href="../classes/PageLayoutHelper.html"><div class="path-wrapper">\PageLayoutHelper</div></a></dd>
+                                                            </dl>
             <h2>Tags</h2>
             <table class="table table-condensed">
                                     <tr><td colspan="2"><em>None found</em></td></tr>
@@ -660,13 +662,15 @@ will inherit them.</p>
                 
                                     <h4>Returns</h4>
                     string
-                                    				
+                                    
                             </article>
         </div>
         <aside class="span4 detailsbar">
             <h1><i class="icon-arrow-down"></i></h1>
                                                             <dl>
-                                                                            </dl>
+                                                    <dt>Inherited from</dt>
+                    <dd><a href="../classes/PageLayoutHelper.html"><div class="path-wrapper">\PageLayoutHelper</div></a></dd>
+                                                            </dl>
             <h2>Tags</h2>
             <table class="table table-condensed">
                                     <tr><td colspan="2"><em>None found</em></td></tr>
@@ -694,13 +698,15 @@ will inherit them.</p>
                                             </table>
                 
                 
-                				
+                
                             </article>
         </div>
         <aside class="span4 detailsbar">
             <h1><i class="icon-arrow-down"></i></h1>
                                                             <dl>
-                                                                            </dl>
+                                                    <dt>Inherited from</dt>
+                    <dd><a href="../classes/PageLayoutHelper.html"><div class="path-wrapper">\PageLayoutHelper</div></a></dd>
+                                                            </dl>
             <h2>Tags</h2>
             <table class="table table-condensed">
                                     <tr><td colspan="2"><em>None found</em></td></tr>
@@ -728,13 +734,15 @@ will inherit them.</p>
                                             </table>
                 
                 
-                				
+                
                             </article>
         </div>
         <aside class="span4 detailsbar">
             <h1><i class="icon-arrow-down"></i></h1>
                                                             <dl>
-                                                                            </dl>
+                                                    <dt>Inherited from</dt>
+                    <dd><a href="../classes/PageLayoutHelper.html"><div class="path-wrapper">\PageLayoutHelper</div></a></dd>
+                                                            </dl>
             <h2>Tags</h2>
             <table class="table table-condensed">
                                     <tr><td colspan="2"><em>None found</em></td></tr>
@@ -763,13 +771,15 @@ but before the layout has been rendered.</em></p>
                                             </table>
                 
                 
-                				
+                
                             </article>
         </div>
         <aside class="span4 detailsbar">
             <h1><i class="icon-arrow-down"></i></h1>
                                                             <dl>
-                                                                            </dl>
+                                                    <dt>Inherited from</dt>
+                    <dd><a href="../classes/PageLayoutHelper.html"><div class="path-wrapper">\PageLayoutHelper</div></a></dd>
+                                                            </dl>
             <h2>Tags</h2>
             <table class="table table-condensed">
                                     <tr><td colspan="2"><em>None found</em></td></tr>
@@ -802,13 +812,15 @@ Container::TYPE_MINOR or Container::TYPE_FOOTER</p></td>
                                     <h4>Returns</h4>
                     string
                                             &mdash; <p>Html class attribute</p>
-                                    				
+                                    
                             </article>
         </div>
         <aside class="span4 detailsbar">
             <h1><i class="icon-arrow-down"></i></h1>
                                                             <dl>
-                                                                            </dl>
+                                                    <dt>Inherited from</dt>
+                    <dd><a href="../classes/PageLayoutHelper.html"><div class="path-wrapper">\PageLayoutHelper</div></a></dd>
+                                                            </dl>
             <h2>Tags</h2>
             <table class="table table-condensed">
                                     <tr><td colspan="2"><em>None found</em></td></tr>
@@ -846,13 +858,15 @@ Container::TYPE_MINOR or Container::TYPE_FOOTER</p></td>
                                     <h4>Returns</h4>
                     boolean
                                             &mdash; <p>The layout have container</p>
-                                    				
+                                    
                             </article>
         </div>
         <aside class="span4 detailsbar">
             <h1><i class="icon-arrow-down"></i></h1>
                                                             <dl>
-                                                                            </dl>
+                                                    <dt>Inherited from</dt>
+                    <dd><a href="../classes/PageLayoutHelper.html"><div class="path-wrapper">\PageLayoutHelper</div></a></dd>
+                                                            </dl>
             <h2>Tags</h2>
             <table class="table table-condensed">
                                     <tr>
@@ -898,13 +912,15 @@ also be used to submit GET/POST data, and named/passed arguments.</p></td>
                     boolean
                                             &mdash; <p>true or false on success/failure, or contents
 of rendered action if 'return' is set in $extra.</p>
-                                    				
+                                    
                             </article>
         </div>
         <aside class="span4 detailsbar">
             <h1><i class="icon-arrow-down"></i></h1>
                                                             <dl>
-                                                                            </dl>
+                                                    <dt>Inherited from</dt>
+                    <dd><a href="../classes/PageLayoutHelper.html"><div class="path-wrapper">\PageLayoutHelper</div></a></dd>
+                                                            </dl>
             <h2>Tags</h2>
             <table class="table table-condensed">
                                     <tr><td colspan="2"><em>None found</em></td></tr>
@@ -951,13 +967,15 @@ If the controller is found, and the action is not found an exception will be thr
                                     <h4>Returns</h4>
                     string|null
                                             &mdash; <p>if <code>$request['return']</code> is set then it returns response body, null otherwise</p>
-                                    				
+                                    
                             </article>
         </div>
         <aside class="span4 detailsbar">
             <h1><i class="icon-arrow-down"></i></h1>
                                                             <dl>
-                                                                            </dl>
+                                                    <dt>Inherited from</dt>
+                    <dd><a href="../classes/PageLayoutHelper.html"><div class="path-wrapper">\PageLayoutHelper</div></a></dd>
+                                                            </dl>
             <h2>Tags</h2>
             <table class="table table-condensed">
                                     <tr><td colspan="2"><em>None found</em></td></tr>
@@ -995,13 +1013,15 @@ If the controller is found, and the action is not found an exception will be thr
                                             </table>
                 
                 
-                				
+                
                             </article>
         </div>
         <aside class="span4 detailsbar">
             <h1><i class="icon-arrow-down"></i></h1>
                                                             <dl>
-                                                                            </dl>
+                                                    <dt>Inherited from</dt>
+                    <dd><a href="../classes/PageLayoutHelper.html"><div class="path-wrapper">\PageLayoutHelper</div></a></dd>
+                                                            </dl>
             <h2>Tags</h2>
             <table class="table table-condensed">
                                     <tr><td colspan="2"><em>None found</em></td></tr>
@@ -1032,13 +1052,15 @@ URL will not automatically handle passed and named arguments in the $url paramet
                 
                                     <h4>Returns</h4>
                     array|false
-                                    				
+                                    
                             </article>
         </div>
         <aside class="span4 detailsbar">
             <h1><i class="icon-arrow-down"></i></h1>
                                                             <dl>
-                                                                            </dl>
+                                                    <dt>Inherited from</dt>
+                    <dd><a href="../classes/PageLayoutHelper.html"><div class="path-wrapper">\PageLayoutHelper</div></a></dd>
+                                                            </dl>
             <h2>Tags</h2>
             <table class="table table-condensed">
                                     <tr><td colspan="2"><em>None found</em></td></tr>
@@ -1074,13 +1096,15 @@ URL will not automatically handle passed and named arguments in the $url paramet
                                     <h4>Returns</h4>
                     mixed
                                             &mdash; <p>name of controller if not loaded, or object if loaded</p>
-                                    				
+                                    
                             </article>
         </div>
         <aside class="span4 detailsbar">
             <h1><i class="icon-arrow-down"></i></h1>
                                                             <dl>
-                                                                            </dl>
+                                                    <dt>Inherited from</dt>
+                    <dd><a href="../classes/PageLayoutHelper.html"><div class="path-wrapper">\PageLayoutHelper</div></a></dd>
+                                                            </dl>
             <h2>Tags</h2>
             <table class="table table-condensed">
                                     <tr><td colspan="2"><em>None found</em></td></tr>
@@ -1111,13 +1135,15 @@ URL will not automatically handle passed and named arguments in the $url paramet
                                     <h4>Returns</h4>
                     string|boolean
                                             &mdash; <p>Name of controller class name</p>
-                                    				
+                                    
                             </article>
         </div>
         <aside class="span4 detailsbar">
             <h1><i class="icon-arrow-down"></i></h1>
                                                             <dl>
-                                                                            </dl>
+                                                    <dt>Inherited from</dt>
+                    <dd><a href="../classes/PageLayoutHelper.html"><div class="path-wrapper">\PageLayoutHelper</div></a></dd>
+                                                            </dl>
             <h2>Tags</h2>
             <table class="table table-condensed">
                                     <tr><td colspan="2"><em>None found</em></td></tr>
@@ -1155,13 +1181,15 @@ action are returned.</p>
                                     <h4>Returns</h4>
                     \CakeResponse
                                             &mdash; <p>the resulting response object</p>
-                                    				
+                                    
                             </article>
         </div>
         <aside class="span4 detailsbar">
             <h1><i class="icon-arrow-down"></i></h1>
                                                             <dl>
-                                                                            </dl>
+                                                    <dt>Inherited from</dt>
+                    <dd><a href="../classes/PageLayoutHelper.html"><div class="path-wrapper">\PageLayoutHelper</div></a></dd>
+                                                            </dl>
             <h2>Tags</h2>
             <table class="table table-condensed">
                                     <tr><td colspan="2"><em>None found</em></td></tr>
@@ -1218,7 +1246,7 @@ action are returned.</p>
                 <section class="span10 offset1">
                     <hr />
                     Documentation is powered by <a href="http://www.phpdoc.org/">phpDocumentor </a> and authored
-                    on January 27th, 2020 at 14:00.
+                    on February 20th, 2020 at 08:15.
                 </section>
             </section>
         </section>
