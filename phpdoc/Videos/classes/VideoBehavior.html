@@ -24,7 +24,7 @@
     <script type="text/javascript">
     function loadExternalCodeSnippets() {
         Array.prototype.slice.call(document.querySelectorAll('pre[data-src]')).forEach(function (pre) {
-            var src = pre.getAttribute('data-src');
+            var src = pre.getAttribute('data-src').replace( /\\/g, '/');
             var extension = (src.match(/\.(\w+)$/) || [, ''])[1];
             var language = 'php';
 
@@ -136,10 +136,10 @@
                                 <div class="accordion" style="margin-bottom: 0">
         <div class="accordion-group">
             <div class="accordion-heading">
-                                    <a class="accordion-toggle " data-toggle="collapse" data-target="#namespace-2070893684"></a>
+                                    <a class="accordion-toggle " data-toggle="collapse" data-target="#namespace-1440019348"></a>
                                 <a href="../namespaces/default.html" style="margin-left: 30px; padding-left: 0">\</a>
             </div>
-            <div id="namespace-2070893684" class="accordion-body collapse in">
+            <div id="namespace-1440019348" class="accordion-body collapse in">
                 <div class="accordion-inner">
 
                     
@@ -345,7 +345,7 @@
                         
                         
                         
-                        
+                                                
                                                                         </dl>
                     <h2>Tags</h2>
                     <table class="table table-condensed">
@@ -367,7 +367,7 @@
             <a id="constant_FFMPEG_PATHS" name="constant_FFMPEG_PATHS" class="anchor"></a>
             <article id="constant_FFMPEG_PATHS" class="constant">
                 <h3 class="">FFMPEG_PATHS</h3>
-                <pre class="signature">FFMPEG_PATHS</pre>
+                <pre class="signature">FFMPEG_PATHS = &#039;/usr/bin/ffmpeg,/usr/bin/avconv&#039; : string</pre>
                 <p><em>ffmpeg パス複数</em></p>
                 
             </article>
@@ -388,7 +388,7 @@
             <a id="constant_FFMPEG_OPTION" name="constant_FFMPEG_OPTION" class="anchor"></a>
             <article id="constant_FFMPEG_OPTION" class="constant">
                 <h3 class="">FFMPEG_OPTION</h3>
-                <pre class="signature">FFMPEG_OPTION</pre>
+                <pre class="signature">FFMPEG_OPTION = &#039;-ar 48000 -vcodec libx264 -pix_fmt yuv420p -r 30 -b 500k -strict -2&#039; : string</pre>
                 <p><em>ffmpeg オプション</em></p>
                 <h4>サンプルコード</h4>
 <pre><code class="language-php">    // 通常
@@ -415,7 +415,7 @@ const FFMPEG_OPTION = '-acodec libmp3lame -ab 128k -ar 44100 -ac 2 -vcodec libx2
             <a id="constant_FFMPEG_THUMBNAIL_OPTION" name="constant_FFMPEG_THUMBNAIL_OPTION" class="anchor"></a>
             <article id="constant_FFMPEG_THUMBNAIL_OPTION" class="constant">
                 <h3 class="">FFMPEG_THUMBNAIL_OPTION</h3>
-                <pre class="signature">FFMPEG_THUMBNAIL_OPTION</pre>
+                <pre class="signature">FFMPEG_THUMBNAIL_OPTION = &#039;-ss 1 -vframes 1 -f image2&#039; : string</pre>
                 <p><em>ffmpeg サムネイル オプション</em></p>
                 <h1>01 for CentOS, Ubuntu ffmpeg version 0.8.17-4:0.8.17-0ubuntu0.12.04.2</h1>
             </article>
@@ -436,7 +436,7 @@ const FFMPEG_OPTION = '-acodec libmp3lame -ab 128k -ar 44100 -ac 2 -vcodec libx2
             <a id="constant_SETTING_FFMPEG_PATH" name="constant_SETTING_FFMPEG_PATH" class="anchor"></a>
             <article id="constant_SETTING_FFMPEG_PATH" class="constant">
                 <h3 class="">SETTING_FFMPEG_PATH</h3>
-                <pre class="signature">SETTING_FFMPEG_PATH</pre>
+                <pre class="signature">SETTING_FFMPEG_PATH = &#039;ffmpegPath&#039; : string</pre>
                 <p><em>セッティングの種類(setSettingで利用)</em></p>
                 
             </article>
@@ -541,13 +541,15 @@ const FFMPEG_OPTION = '-acodec libmp3lame -ab 128k -ar 44100 -ac 2 -vcodec libx2
                                             </table>
                 
                 
-                				
+                
                             </article>
         </div>
         <aside class="span4 detailsbar">
             <h1><i class="icon-arrow-down"></i></h1>
                                                             <dl>
-                                                                                            <dt>See also</dt>
+                                                    <dt>Inherited from</dt>
+                    <dd><a href="../classes/VideoBehavior.html"><div class="path-wrapper">\VideoBehavior</div></a></dd>
+                                                                            <dt>See also</dt>
                                                                 <dd><a href="http://book.cakephp.org/2.0/ja/models/behaviors.html#ModelBehavior::setup"><span class="namespace-wrapper">http://book.cakephp.org/2.0/ja/models/behaviors.html#ModelBehavior::setup</span></a></dd>
                                                                 </dl>
             <h2>Tags</h2>
@@ -582,13 +584,15 @@ const FFMPEG_OPTION = '-acodec libmp3lame -ab 128k -ar 44100 -ac 2 -vcodec libx2
                                             </table>
                 
                 
-                				
+                
                             </article>
         </div>
         <aside class="span4 detailsbar">
             <h1><i class="icon-arrow-down"></i></h1>
                                                             <dl>
-                                                                            </dl>
+                                                    <dt>Inherited from</dt>
+                    <dd><a href="../classes/VideoBehavior.html"><div class="path-wrapper">\VideoBehavior</div></a></dd>
+                                                            </dl>
             <h2>Tags</h2>
             <table class="table table-condensed">
                                     <tr><td colspan="2"><em>None found</em></td></tr>
@@ -618,13 +622,15 @@ const FFMPEG_OPTION = '-acodec libmp3lame -ab 128k -ar 44100 -ac 2 -vcodec libx2
                 
                                     <h4>Returns</h4>
                     boolean
-                                    				
+                                    
                             </article>
         </div>
         <aside class="span4 detailsbar">
             <h1><i class="icon-arrow-down"></i></h1>
                                                             <dl>
-                                                                            </dl>
+                                                    <dt>Inherited from</dt>
+                    <dd><a href="../classes/VideoBehavior.html"><div class="path-wrapper">\VideoBehavior</div></a></dd>
+                                                            </dl>
             <h2>Tags</h2>
             <table class="table table-condensed">
                                     <tr><td colspan="2"><em>None found</em></td></tr>
@@ -665,13 +671,15 @@ const FFMPEG_OPTION = '-acodec libmp3lame -ab 128k -ar 44100 -ac 2 -vcodec libx2
                                     <h4>Returns</h4>
                     boolean
                                             &mdash; <p>true on success, false on error</p>
-                                    				
+                                    
                             </article>
         </div>
         <aside class="span4 detailsbar">
             <h1><i class="icon-arrow-down"></i></h1>
                                                             <dl>
-                                                                            </dl>
+                                                    <dt>Inherited from</dt>
+                    <dd><a href="../classes/VideoBehavior.html"><div class="path-wrapper">\VideoBehavior</div></a></dd>
+                                                            </dl>
             <h2>Tags</h2>
             <table class="table table-condensed">
                                     <tr><td colspan="2"><em>None found</em></td></tr>
@@ -714,13 +722,15 @@ const FFMPEG_OPTION = '-acodec libmp3lame -ab 128k -ar 44100 -ac 2 -vcodec libx2
                             <dd></dd>
                                                                     </dl>
                 
-                				
+                
                             </article>
         </div>
         <aside class="span4 detailsbar">
             <h1><i class="icon-arrow-down"></i></h1>
                                                             <dl>
-                                                                            </dl>
+                                                    <dt>Inherited from</dt>
+                    <dd><a href="../classes/VideoBehavior.html"><div class="path-wrapper">\VideoBehavior</div></a></dd>
+                                                            </dl>
             <h2>Tags</h2>
             <table class="table table-condensed">
                                     <tr><td colspan="2"><em>None found</em></td></tr>
@@ -756,13 +766,15 @@ const FFMPEG_OPTION = '-acodec libmp3lame -ab 128k -ar 44100 -ac 2 -vcodec libx2
                                     <h4>Returns</h4>
                     mixed
                                             &mdash; <p>int on success, false on error</p>
-                                    				
+                                    
                             </article>
         </div>
         <aside class="span4 detailsbar">
             <h1><i class="icon-arrow-down"></i></h1>
                                                             <dl>
-                                                                            </dl>
+                                                    <dt>Inherited from</dt>
+                    <dd><a href="../classes/VideoBehavior.html"><div class="path-wrapper">\VideoBehavior</div></a></dd>
+                                                            </dl>
             <h2>Tags</h2>
             <table class="table table-condensed">
                                     <tr><td colspan="2"><em>None found</em></td></tr>
@@ -800,13 +812,15 @@ const FFMPEG_OPTION = '-acodec libmp3lame -ab 128k -ar 44100 -ac 2 -vcodec libx2
                                             </table>
                 
                 
-                				
+                
                             </article>
         </div>
         <aside class="span4 detailsbar">
             <h1><i class="icon-arrow-down"></i></h1>
                                                             <dl>
-                                                                            </dl>
+                                                    <dt>Inherited from</dt>
+                    <dd><a href="../classes/VideoBehavior.html"><div class="path-wrapper">\VideoBehavior</div></a></dd>
+                                                            </dl>
             <h2>Tags</h2>
             <table class="table table-condensed">
                                     <tr><td colspan="2"><em>None found</em></td></tr>
@@ -863,7 +877,7 @@ const FFMPEG_OPTION = '-acodec libmp3lame -ab 128k -ar 44100 -ac 2 -vcodec libx2
                 <section class="span10 offset1">
                     <hr />
                     Documentation is powered by <a href="http://www.phpdoc.org/">phpDocumentor </a> and authored
-                    on November 28th, 2019 at 04:28.
+                    on February 27th, 2020 at 06:04.
                 </section>
             </section>
         </section>

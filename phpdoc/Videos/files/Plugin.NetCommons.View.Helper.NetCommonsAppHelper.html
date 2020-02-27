@@ -24,7 +24,7 @@
         <script type="text/javascript">
         function loadExternalCodeSnippets() {
             Array.prototype.slice.call(document.querySelectorAll('pre[data-src]')).forEach(function (pre) {
-                var src = pre.getAttribute('data-src');
+                var src = pre.getAttribute('data-src').replace( /\\/g, '/');
                 var extension = (src.match(/\.(\w+)$/) || [, ''])[1];
                 var language = 'php';
 
@@ -136,10 +136,10 @@
                                 <div class="accordion" style="margin-bottom: 0">
         <div class="accordion-group">
             <div class="accordion-heading">
-                                    <a class="accordion-toggle " data-toggle="collapse" data-target="#namespace-146461711"></a>
+                                    <a class="accordion-toggle " data-toggle="collapse" data-target="#namespace-1493472670"></a>
                                 <a href="../namespaces/default.html" style="margin-left: 30px; padding-left: 0">\</a>
             </div>
-            <div id="namespace-146461711" class="accordion-body collapse in">
+            <div id="namespace-1493472670" class="accordion-body collapse in">
                 <div class="accordion-inner">
 
                     
@@ -301,7 +301,7 @@ Redistributions of files must retain the above copyright notice.</p>
                                     copyright
                                 </th>
                                 <td>
-                                                                            <p>Copyright (c) Cake Software Foundation, Inc. (<a href="http://cakefoundation.org">http://cakefoundation.org</a>)</p>
+                                                                                                                    <p>Copyright (c) Cake Software Foundation, Inc. (<a href="http://cakefoundation.org">http://cakefoundation.org</a>)</p>
                                                                     </td>
                             </tr>
                                                     <tr>
@@ -309,7 +309,7 @@ Redistributions of files must retain the above copyright notice.</p>
                                     since
                                 </th>
                                 <td>
-                                                                            <p>CakePHP(tm) v 0.2.9</p>
+                                                                                                                    <p>CakePHP(tm) v 0.2.9</p>
                                                                     </td>
                             </tr>
                                                     <tr>
@@ -317,7 +317,7 @@ Redistributions of files must retain the above copyright notice.</p>
                                     license
                                 </th>
                                 <td>
-                                                                            <p><a href="http://www.opensource.org/licenses/mit-license.php">http://www.opensource.org/licenses/mit-license.php</a> MIT License</p>
+                                                                                                                    <p><a href="http://www.opensource.org/licenses/mit-license.php">http://www.opensource.org/licenses/mit-license.php</a> MIT License</p>
                                                                     </td>
                             </tr>
                                                     <tr>
@@ -325,7 +325,7 @@ Redistributions of files must retain the above copyright notice.</p>
                                     author
                                 </th>
                                 <td>
-                                                                            <p>Shohei Nakajima <a href="mailto:nakajimashouhei@gmail.com">nakajimashouhei@gmail.com</a></p>
+                                                                                                                    <p>Shohei Nakajima <a href="mailto:nakajimashouhei@gmail.com">nakajimashouhei@gmail.com</a></p>
                                                                     </td>
                             </tr>
                                             </table>
@@ -384,7 +384,7 @@ Redistributions of files must retain the above copyright notice.</p>
                 <section class="span10 offset1">
                     <hr />
                     Documentation is powered by <a href="http://www.phpdoc.org/">phpDocumentor </a> and authored
-                    on November 28th, 2019 at 04:28.
+                    on February 27th, 2020 at 06:04.
                 </section>
             </section>
         </section>

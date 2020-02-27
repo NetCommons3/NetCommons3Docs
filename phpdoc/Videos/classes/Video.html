@@ -24,7 +24,7 @@
     <script type="text/javascript">
     function loadExternalCodeSnippets() {
         Array.prototype.slice.call(document.querySelectorAll('pre[data-src]')).forEach(function (pre) {
-            var src = pre.getAttribute('data-src');
+            var src = pre.getAttribute('data-src').replace( /\\/g, '/');
             var extension = (src.match(/\.(\w+)$/) || [, ''])[1];
             var language = 'php';
 
@@ -136,10 +136,10 @@
                                 <div class="accordion" style="margin-bottom: 0">
         <div class="accordion-group">
             <div class="accordion-heading">
-                                    <a class="accordion-toggle " data-toggle="collapse" data-target="#namespace-472054721"></a>
+                                    <a class="accordion-toggle " data-toggle="collapse" data-target="#namespace-1975183174"></a>
                                 <a href="../namespaces/default.html" style="margin-left: 30px; padding-left: 0">\</a>
             </div>
-            <div id="namespace-472054721" class="accordion-body collapse in">
+            <div id="namespace-1975183174" class="accordion-body collapse in">
                 <div class="accordion-inner">
 
                     
@@ -382,7 +382,7 @@ will inherit them.</p>
                         
                         
                         
-                        
+                                                
                                                                         </dl>
                     <h2>Tags</h2>
                     <table class="table table-condensed">
@@ -391,7 +391,8 @@ will inherit them.</p>
                                 author
                             </th>
                             <td>
-                                                                    <p>Mitsuru Mutaguchi <a href="mailto:mutaguchi@opensource-workshop.jp">mutaguchi@opensource-workshop.jp</a></p>
+                                                                                                        <p>Mitsuru Mutaguchi <a href="mailto:mutaguchi@opensource-workshop.jp">mutaguchi@opensource-workshop.jp</a></p>
+                                                                                                        <p>Kazunori Sakamoto <a href="mailto:exkazuu@willbooster.com">exkazuu@willbooster.com</a></p>
                                                             </td>
                         </tr>
                                         </table>
@@ -411,7 +412,7 @@ will inherit them.</p>
             <a id="constant_VIDEO_FILE_FIELD" name="constant_VIDEO_FILE_FIELD" class="anchor"></a>
             <article id="constant_VIDEO_FILE_FIELD" class="constant">
                 <h3 class="">VIDEO_FILE_FIELD</h3>
-                <pre class="signature">VIDEO_FILE_FIELD</pre>
+                <pre class="signature">VIDEO_FILE_FIELD = &#039;video_file&#039; : string</pre>
                 <p><em></em></p>
                 
             </article>
@@ -432,7 +433,7 @@ will inherit them.</p>
             <a id="constant_THUMBNAIL_FIELD" name="constant_THUMBNAIL_FIELD" class="anchor"></a>
             <article id="constant_THUMBNAIL_FIELD" class="constant">
                 <h3 class="">THUMBNAIL_FIELD</h3>
-                <pre class="signature">THUMBNAIL_FIELD</pre>
+                <pre class="signature">THUMBNAIL_FIELD = &#039;thumbnail&#039; : string</pre>
                 <p><em></em></p>
                 
             </article>
@@ -453,7 +454,7 @@ will inherit them.</p>
             <a id="constant_VIDEO_EXTENSION" name="constant_VIDEO_EXTENSION" class="anchor"></a>
             <article id="constant_VIDEO_EXTENSION" class="constant">
                 <h3 class="">VIDEO_EXTENSION</h3>
-                <pre class="signature">VIDEO_EXTENSION</pre>
+                <pre class="signature">VIDEO_EXTENSION = &#039;mpeg,mpg,mpe,avi,mov,wmv,asf,flv,mp4&#039; : string</pre>
                 <p><em></em></p>
                 
             </article>
@@ -474,7 +475,7 @@ will inherit them.</p>
             <a id="constant_VIDEO_MIME_TYPE" name="constant_VIDEO_MIME_TYPE" class="anchor"></a>
             <article id="constant_VIDEO_MIME_TYPE" class="constant">
                 <h3 class="">VIDEO_MIME_TYPE</h3>
-                <pre class="signature">VIDEO_MIME_TYPE</pre>
+                <pre class="signature">VIDEO_MIME_TYPE = &#039;video/mpeg,video/x-mpeg,video/avi,video/msvideo,video/x-msvideo,video/quicktime,video/x-ms-wmv,video/x-ms-asf,video/x-flv,video/mp4&#039;</pre>
                 <p><em></em></p>
                 
             </article>
@@ -495,7 +496,7 @@ will inherit them.</p>
             <a id="constant_THUMBNAIL_EXTENSION" name="constant_THUMBNAIL_EXTENSION" class="anchor"></a>
             <article id="constant_THUMBNAIL_EXTENSION" class="constant">
                 <h3 class="">THUMBNAIL_EXTENSION</h3>
-                <pre class="signature">THUMBNAIL_EXTENSION</pre>
+                <pre class="signature">THUMBNAIL_EXTENSION = &#039;jpg,png,gif&#039; : string</pre>
                 <p><em></em></p>
                 
             </article>
@@ -516,7 +517,7 @@ will inherit them.</p>
             <a id="constant_THUMBNAIL_MIME_TYPE" name="constant_THUMBNAIL_MIME_TYPE" class="anchor"></a>
             <article id="constant_THUMBNAIL_MIME_TYPE" class="constant">
                 <h3 class="">THUMBNAIL_MIME_TYPE</h3>
-                <pre class="signature">THUMBNAIL_MIME_TYPE</pre>
+                <pre class="signature">THUMBNAIL_MIME_TYPE = &#039;image/jpeg,image/png,image/gif&#039; : string</pre>
                 <p><em></em></p>
                 
             </article>
@@ -1020,7 +1021,7 @@ can also be an array of options, see above.</p></td>
                                             </table>
                 
                 
-                				
+                
                             </article>
         </div>
         <aside class="span4 detailsbar">
@@ -1055,7 +1056,7 @@ can also be an array of options, see above.</p></td>
 
                 
                 
-                				
+                
                             </article>
         </div>
         <aside class="span4 detailsbar">
@@ -1083,7 +1084,7 @@ can also be an array of options, see above.</p></td>
 
                 
                 
-                				
+                
                             </article>
         </div>
         <aside class="span4 detailsbar">
@@ -1114,7 +1115,7 @@ can also be an array of options, see above.</p></td>
                                     <h4>Returns</h4>
                     \DataSource
                                             &mdash; <p>A DataSource object</p>
-                                    				
+                                    
                             </article>
         </div>
         <aside class="span4 detailsbar">
@@ -1169,7 +1170,7 @@ schema data defaults are not merged.</p></td>
                                     <h4>Returns</h4>
                     array
                                             &mdash; <p>The current Model::data; after merging $data and/or defaults from database</p>
-                                    				
+                                    
                             </article>
         </div>
         <aside class="span4 detailsbar">
@@ -1224,7 +1225,7 @@ schema data defaults are not merged.</p></td>
                                     <h4>Returns</h4>
                     array
                                             &mdash; <p>The current Model::data; after merging $data and/or defaults from database</p>
-                                    				
+                                    
                             </article>
         </div>
         <aside class="span4 detailsbar">
@@ -1261,7 +1262,7 @@ schema data defaults are not merged.</p></td>
 
                 
                 
-                				
+                
                             </article>
         </div>
         <aside class="span4 detailsbar">
@@ -1289,7 +1290,7 @@ schema data defaults are not merged.</p></td>
 
                 
                 
-                				
+                
                             </article>
         </div>
         <aside class="span4 detailsbar">
@@ -1330,7 +1331,7 @@ schema data defaults are not merged.</p></td>
                             <dd></dd>
                                                                     </dl>
                 
-                				
+                
                             </article>
         </div>
         <aside class="span4 detailsbar">
@@ -1366,7 +1367,7 @@ schema data defaults are not merged.</p></td>
                                             </table>
                 
                 
-                				
+                
                             </article>
         </div>
         <aside class="span4 detailsbar">
@@ -1407,13 +1408,15 @@ call, otherwise return the (modified) query data.</em></p>
                     mixed
                                             &mdash; <p>true if the operation should continue, false if it should abort; or, modified
 $query to continue with new $query</p>
-                                    				
+                                    
                             </article>
         </div>
         <aside class="span4 detailsbar">
             <h1><i class="icon-arrow-down"></i></h1>
                                                             <dl>
-                                                                                            <dt>See also</dt>
+                                                    <dt>Inherited from</dt>
+                    <dd><a href="../classes/Video.html"><div class="path-wrapper">\Video</div></a></dd>
+                                                                            <dt>See also</dt>
                                                                 <dd><a href="http://book.cakephp.org/2.0/en/models/callback-methods.html#beforefind"><span class="namespace-wrapper">http://book.cakephp.org/2.0/en/models/callback-methods.html#beforefind</span></a></dd>
                                                                 </dl>
             <h2>Tags</h2>
@@ -1447,13 +1450,15 @@ validation rules can be defined in $validate.</em></p>
                                     <h4>Returns</h4>
                     boolean
                                             &mdash; <p>True if validate operation should continue, false to abort</p>
-                                    				
+                                    
                             </article>
         </div>
         <aside class="span4 detailsbar">
             <h1><i class="icon-arrow-down"></i></h1>
                                                             <dl>
-                                                                                            <dt>See also</dt>
+                                                    <dt>Inherited from</dt>
+                    <dd><a href="../classes/Video.html"><div class="path-wrapper">\Video</div></a></dd>
+                                                                            <dt>See also</dt>
                                                                 <dd><a href="http://book.cakephp.org/2.0/ja/models/callback-methods.html#beforevalidate"><span class="namespace-wrapper">http://book.cakephp.org/2.0/ja/models/callback-methods.html#beforevalidate</span></a></dd>
                                                                                                     <dd><a href=""><span class="namespace-wrapper">\Model::save()</span></a></dd>
                                                                 </dl>
@@ -1478,13 +1483,15 @@ validation rules can be defined in $validate.</em></p>
                 
                                     <h4>Returns</h4>
                     integer
-                                    				
+                                    
                             </article>
         </div>
         <aside class="span4 detailsbar">
             <h1><i class="icon-arrow-down"></i></h1>
                                                             <dl>
-                                                                            </dl>
+                                                    <dt>Inherited from</dt>
+                    <dd><a href="../classes/Video.html"><div class="path-wrapper">\Video</div></a></dd>
+                                                            </dl>
             <h2>Tags</h2>
             <table class="table table-condensed">
                                     <tr><td colspan="2"><em>None found</em></td></tr>
@@ -1507,13 +1514,15 @@ validation rules can be defined in $validate.</em></p>
                                     <h4>Returns</h4>
                     array
                                             &mdash; <p>condition</p>
-                                    				
+                                    
                             </article>
         </div>
         <aside class="span4 detailsbar">
             <h1><i class="icon-arrow-down"></i></h1>
                                                             <dl>
-                                                                            </dl>
+                                                    <dt>Inherited from</dt>
+                    <dd><a href="../classes/Video.html"><div class="path-wrapper">\Video</div></a></dd>
+                                                            </dl>
             <h2>Tags</h2>
             <table class="table table-condensed">
                                     <tr><td colspan="2"><em>None found</em></td></tr>
@@ -1549,13 +1558,15 @@ validation rules can be defined in $validate.</em></p>
                                     <h4>Returns</h4>
                     mixed
                                             &mdash; <p>On success Model::$data if its not empty or true, false on failure</p>
-                                    				
+                                    
                             </article>
         </div>
         <aside class="span4 detailsbar">
             <h1><i class="icon-arrow-down"></i></h1>
                                                             <dl>
-                                                                            </dl>
+                                                    <dt>Inherited from</dt>
+                    <dd><a href="../classes/Video.html"><div class="path-wrapper">\Video</div></a></dd>
+                                                            </dl>
             <h2>Tags</h2>
             <table class="table table-condensed">
                                     <tr><td colspan="2"><em>None found</em></td></tr>
@@ -1596,13 +1607,15 @@ validation rules can be defined in $validate.</em></p>
                                     <h4>Returns</h4>
                     mixed
                                             &mdash; <p>On success Model::$data if its not empty or true, false on failure</p>
-                                    				
+                                    
                             </article>
         </div>
         <aside class="span4 detailsbar">
             <h1><i class="icon-arrow-down"></i></h1>
                                                             <dl>
-                                                                            </dl>
+                                                    <dt>Inherited from</dt>
+                    <dd><a href="../classes/Video.html"><div class="path-wrapper">\Video</div></a></dd>
+                                                            </dl>
             <h2>Tags</h2>
             <table class="table table-condensed">
                                     <tr><td colspan="2"><em>None found</em></td></tr>
@@ -1638,13 +1651,15 @@ validation rules can be defined in $validate.</em></p>
                                     <h4>Returns</h4>
                     mixed
                                             &mdash; <p>On success Model::$data if its not empty or true, false on failure</p>
-                                    				
+                                    
                             </article>
         </div>
         <aside class="span4 detailsbar">
             <h1><i class="icon-arrow-down"></i></h1>
                                                             <dl>
-                                                                            </dl>
+                                                    <dt>Inherited from</dt>
+                    <dd><a href="../classes/Video.html"><div class="path-wrapper">\Video</div></a></dd>
+                                                            </dl>
             <h2>Tags</h2>
             <table class="table table-condensed">
                                     <tr><td colspan="2"><em>None found</em></td></tr>
@@ -1667,7 +1682,7 @@ validation rules can be defined in $validate.</em></p>
                                     <h4>Returns</h4>
                     array
                                             &mdash; <p>デフォルト値をセットした配列</p>
-                                    				
+                                    
                             </article>
         </div>
         <aside class="span4 detailsbar">
@@ -1724,7 +1739,7 @@ will enable only those callbacks.</li>
                                     <h4>Returns</h4>
                     mixed
                                             &mdash; <p>On success Model::$data if its not empty or true, false on failure</p>
-                                    				
+                                    
                             </article>
         </div>
         <aside class="span4 detailsbar">
@@ -1769,7 +1784,7 @@ will enable only those callbacks.</li>
                 
                                     <h4>Returns</h4>
                     array
-                                    				
+                                    
                             </article>
         </div>
         <aside class="span4 detailsbar">
@@ -1802,7 +1817,7 @@ will enable only those callbacks.</li>
                                     <h4>Returns</h4>
                     string
                                             &mdash; <p>The name of the DataSource, as defined in app/Config/database.php</p>
-                                    				
+                                    
                             </article>
         </div>
         <aside class="span4 detailsbar">
@@ -1830,7 +1845,7 @@ will enable only those callbacks.</li>
 
                 
                 
-                				
+                
                             </article>
         </div>
         <aside class="span4 detailsbar">
@@ -1895,7 +1910,7 @@ will enable only those callbacks.</li>
                 <section class="span10 offset1">
                     <hr />
                     Documentation is powered by <a href="http://www.phpdoc.org/">phpDocumentor </a> and authored
-                    on November 28th, 2019 at 04:28.
+                    on February 27th, 2020 at 06:04.
                 </section>
             </section>
         </section>

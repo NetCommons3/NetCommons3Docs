@@ -24,7 +24,7 @@
     <script type="text/javascript">
     function loadExternalCodeSnippets() {
         Array.prototype.slice.call(document.querySelectorAll('pre[data-src]')).forEach(function (pre) {
-            var src = pre.getAttribute('data-src');
+            var src = pre.getAttribute('data-src').replace( /\\/g, '/');
             var extension = (src.match(/\.(\w+)$/) || [, ''])[1];
             var language = 'php';
 
@@ -136,10 +136,10 @@
                                 <div class="accordion" style="margin-bottom: 0">
         <div class="accordion-group">
             <div class="accordion-heading">
-                                    <a class="accordion-toggle " data-toggle="collapse" data-target="#namespace-1636357452"></a>
+                                    <a class="accordion-toggle " data-toggle="collapse" data-target="#namespace-1850573559"></a>
                                 <a href="../namespaces/default.html" style="margin-left: 30px; padding-left: 0">\</a>
             </div>
-            <div id="namespace-1636357452" class="accordion-body collapse in">
+            <div id="namespace-1850573559" class="accordion-body collapse in">
                 <div class="accordion-inner">
 
                     
@@ -292,6 +292,7 @@ will inherit them.</p>
                                                                     <a href="../classes/VideosController.html#method_view" class="">view()</a><br />
                                                                     <a href="../classes/VideosController.html#method_embed" class="">embed()</a><br />
                                                                     <a href="../classes/VideosController.html#method_download" class="">download()</a><br />
+                                                                    <a href="../classes/VideosController.html#method_get_play_counts" class="">get_play_counts()</a><br />
                                                             </section>
                             <section class="span4">
                                                                     <a href="../classes/VideosController.html#property_components" class="">$components</a><br />
@@ -364,7 +365,7 @@ will inherit them.</p>
                         
                         
                         
-                        
+                                                
                                                                         </dl>
                     <h2>Tags</h2>
                     <table class="table table-condensed">
@@ -373,7 +374,8 @@ will inherit them.</p>
                                 author
                             </th>
                             <td>
-                                                                    <p>Mitsuru Mutaguchi <a href="mailto:mutaguchi@opensource-workshop.jp">mutaguchi@opensource-workshop.jp</a></p>
+                                                                                                        <p>Mitsuru Mutaguchi <a href="mailto:mutaguchi@opensource-workshop.jp">mutaguchi@opensource-workshop.jp</a></p>
+                                                                                                        <p>Kazunori Sakamoto <a href="mailto:exkazuu@willbooster.com">exkazuu@willbooster.com</a></p>
                                                             </td>
                         </tr>
                                         </table>
@@ -393,7 +395,7 @@ will inherit them.</p>
             <a id="constant_START_LIMIT_RELATED_VIDEO" name="constant_START_LIMIT_RELATED_VIDEO" class="anchor"></a>
             <article id="constant_START_LIMIT_RELATED_VIDEO" class="constant">
                 <h3 class="">START_LIMIT_RELATED_VIDEO</h3>
-                <pre class="signature">START_LIMIT_RELATED_VIDEO</pre>
+                <pre class="signature">START_LIMIT_RELATED_VIDEO = 3 : integer</pre>
                 <p><em>関連動画 もっと見る start limit</em></p>
                 
             </article>
@@ -414,7 +416,7 @@ will inherit them.</p>
             <a id="constant_MAX_LIMIT_RELATED_VIDEO" name="constant_MAX_LIMIT_RELATED_VIDEO" class="anchor"></a>
             <article id="constant_MAX_LIMIT_RELATED_VIDEO" class="constant">
                 <h3 class="">MAX_LIMIT_RELATED_VIDEO</h3>
-                <pre class="signature">MAX_LIMIT_RELATED_VIDEO</pre>
+                <pre class="signature">MAX_LIMIT_RELATED_VIDEO = 10 : integer</pre>
                 <p><em>関連動画 もっと見る max limit</em></p>
                 
             </article>
@@ -458,7 +460,7 @@ will inherit them.</p>
                                                                             <dt>See also</dt>
                                                                 <dd><a href="http://book.cakephp.org/2.0/ja/controllers/components.html#configuring-components"><span class="namespace-wrapper">http://book.cakephp.org/2.0/ja/controllers/components.html#configuring-components</span></a></dd>
                                             <dd><a href="http://book.cakephp.org/2.0/ja/core-libraries/collections.html#id6"><span class="namespace-wrapper">デフォルトのプライオリティ 10</span></a></dd>
-                                                                                                    <dd><a href="../classes/NetCommonsAppController.html#property_components"><span class="namespace-wrapper">\NetCommonsAppController::components</span></a></dd>
+                                                                                                    <dd><a href="../classes/NetCommonsAppController.html#property_components"><span class="namespace-wrapper">\NetCommonsAppController::$components</span></a></dd>
                                             <dd><a href=""><span class="namespace-wrapper">\ContentCommentsComponent::beforeRender()</span></a></dd>
                                                                 </dl>
             <h2>Tags</h2>
@@ -534,7 +536,7 @@ will inherit them.</p>
             <h1><i class="icon-arrow-down"></i></h1>
                         <dl>
                                                                             <dt>See also</dt>
-                                                                <dd><a href="../classes/NetCommonsAppController.html#property_helpers"><span class="namespace-wrapper">\NetCommonsAppController::helpers</span></a></dd>
+                                                                <dd><a href="../classes/NetCommonsAppController.html#property_helpers"><span class="namespace-wrapper">\NetCommonsAppController::$helpers</span></a></dd>
                                                                 </dl>
             <h2>Tags</h2>
             <table class="table table-condensed">
@@ -900,13 +902,15 @@ will inherit them.</p>
 
                 
                 
-                				
+                
                             </article>
         </div>
         <aside class="span4 detailsbar">
             <h1><i class="icon-arrow-down"></i></h1>
                                                             <dl>
-                                                                                            <dt>See also</dt>
+                                                    <dt>Inherited from</dt>
+                    <dd><a href="../classes/VideosController.html"><div class="path-wrapper">\VideosController</div></a></dd>
+                                                                            <dt>See also</dt>
                                                                 <dd><a href="../classes/NetCommonsAppController.html#method_beforeFilter"><span class="namespace-wrapper">\NetCommonsAppController::beforeFilter()</span></a></dd>
                                                                 </dl>
             <h2>Tags</h2>
@@ -930,13 +934,15 @@ will inherit them.</p>
                 
                                     <h4>Returns</h4>
                     \CakeResponse
-                                    				
+                                    
                             </article>
         </div>
         <aside class="span4 detailsbar">
             <h1><i class="icon-arrow-down"></i></h1>
                                                             <dl>
-                                                                            </dl>
+                                                    <dt>Inherited from</dt>
+                    <dd><a href="../classes/VideosController.html"><div class="path-wrapper">\VideosController</div></a></dd>
+                                                            </dl>
             <h2>Tags</h2>
             <table class="table table-condensed">
                                     <tr><td colspan="2"><em>None found</em></td></tr>
@@ -958,13 +964,15 @@ will inherit them.</p>
                 
                                     <h4>Returns</h4>
                     \CakeResponse
-                                    				
+                                    
                             </article>
         </div>
         <aside class="span4 detailsbar">
             <h1><i class="icon-arrow-down"></i></h1>
                                                             <dl>
-                                                                            </dl>
+                                                    <dt>Inherited from</dt>
+                    <dd><a href="../classes/VideosController.html"><div class="path-wrapper">\VideosController</div></a></dd>
+                                                            </dl>
             <h2>Tags</h2>
             <table class="table table-condensed">
                                     <tr><td colspan="2"><em>None found</em></td></tr>
@@ -986,13 +994,15 @@ will inherit them.</p>
                 
                                     <h4>Returns</h4>
                     \CakeResponse
-                                    				
+                                    
                             </article>
         </div>
         <aside class="span4 detailsbar">
             <h1><i class="icon-arrow-down"></i></h1>
                                                             <dl>
-                                                                            </dl>
+                                                    <dt>Inherited from</dt>
+                    <dd><a href="../classes/VideosController.html"><div class="path-wrapper">\VideosController</div></a></dd>
+                                                            </dl>
             <h2>Tags</h2>
             <table class="table table-condensed">
                                     <tr><td colspan="2"><em>None found</em></td></tr>
@@ -1014,13 +1024,15 @@ will inherit them.</p>
                 
                                     <h4>Returns</h4>
                     \CakeResponse
-                                    				
+                                    
                             </article>
         </div>
         <aside class="span4 detailsbar">
             <h1><i class="icon-arrow-down"></i></h1>
                                                             <dl>
-                                                                            </dl>
+                                                    <dt>Inherited from</dt>
+                    <dd><a href="../classes/VideosController.html"><div class="path-wrapper">\VideosController</div></a></dd>
+                                                            </dl>
             <h2>Tags</h2>
             <table class="table table-condensed">
                                     <tr><td colspan="2"><em>None found</em></td></tr>
@@ -1049,15 +1061,45 @@ will inherit them.</p>
                 
                                     <h4>Returns</h4>
                     \CakeResponse
-                                    				
+                                    
                             </article>
         </div>
         <aside class="span4 detailsbar">
             <h1><i class="icon-arrow-down"></i></h1>
                                                             <dl>
-                                                                                            <dt>See also</dt>
+                                                    <dt>Inherited from</dt>
+                    <dd><a href="../classes/VideosController.html"><div class="path-wrapper">\VideosController</div></a></dd>
+                                                                            <dt>See also</dt>
                                                                 <dd><a href=""><span class="namespace-wrapper">\DownloadComponent::doDownload()</span></a></dd>
                                                                 </dl>
+            <h2>Tags</h2>
+            <table class="table table-condensed">
+                                    <tr><td colspan="2"><em>None found</em></td></tr>
+                            </table>
+        </aside>
+    </div>
+
+                                    <div class="row-fluid">
+        <div class="span8 content class">
+            <a id="method_get_play_counts" name="method_get_play_counts" class="anchor"></a>
+            <article class="method">
+                <h3 class="public ">get_play_counts()</h3>
+                <a href="#source-view" role="button" class="pull-right btn" data-toggle="modal" style="font-size: 1.1em; padding: 9px 14px"><i class="icon-code"></i></a>
+                <pre class="signature" style="margin-right: 54px;">get_play_counts() : void</pre>
+                <p><em>ファイルのダウンロード数の取得</em></p>
+                
+
+                
+                
+                
+                            </article>
+        </div>
+        <aside class="span4 detailsbar">
+            <h1><i class="icon-arrow-down"></i></h1>
+                                                            <dl>
+                                                    <dt>Inherited from</dt>
+                    <dd><a href="../classes/VideosController.html"><div class="path-wrapper">\VideosController</div></a></dd>
+                                                            </dl>
             <h2>Tags</h2>
             <table class="table table-condensed">
                                     <tr><td colspan="2"><em>None found</em></td></tr>
@@ -1090,13 +1132,15 @@ will inherit them.</p>
                                             </table>
                 
                 
-                				
+                
                             </article>
         </div>
         <aside class="span4 detailsbar">
             <h1><i class="icon-arrow-down"></i></h1>
                                                             <dl>
-                                                                            </dl>
+                                                    <dt>Inherited from</dt>
+                    <dd><a href="../classes/VideosController.html"><div class="path-wrapper">\VideosController</div></a></dd>
+                                                            </dl>
             <h2>Tags</h2>
             <table class="table table-condensed">
                                     <tr><td colspan="2"><em>None found</em></td></tr>
@@ -1132,13 +1176,15 @@ will inherit them.</p>
                                     <h4>Returns</h4>
                     array
                                             &mdash; <p>動画一覧及び、設定</p>
-                                    				
+                                    
                             </article>
         </div>
         <aside class="span4 detailsbar">
             <h1><i class="icon-arrow-down"></i></h1>
                                                             <dl>
-                                                                            </dl>
+                                                    <dt>Inherited from</dt>
+                    <dd><a href="../classes/VideosController.html"><div class="path-wrapper">\VideosController</div></a></dd>
+                                                            </dl>
             <h2>Tags</h2>
             <table class="table table-condensed">
                                     <tr><td colspan="2"><em>None found</em></td></tr>
@@ -1169,13 +1215,15 @@ will inherit them.</p>
                                     <h4>Returns</h4>
                     array
                                             &mdash; <p>ソート条件</p>
-                                    				
+                                    
                             </article>
         </div>
         <aside class="span4 detailsbar">
             <h1><i class="icon-arrow-down"></i></h1>
                                                             <dl>
-                                                                            </dl>
+                                                    <dt>Inherited from</dt>
+                    <dd><a href="../classes/VideosController.html"><div class="path-wrapper">\VideosController</div></a></dd>
+                                                            </dl>
             <h2>Tags</h2>
             <table class="table table-condensed">
                                     <tr><td colspan="2"><em>None found</em></td></tr>
@@ -1232,7 +1280,7 @@ will inherit them.</p>
                 <section class="span10 offset1">
                     <hr />
                     Documentation is powered by <a href="http://www.phpdoc.org/">phpDocumentor </a> and authored
-                    on November 28th, 2019 at 04:28.
+                    on February 27th, 2020 at 06:04.
                 </section>
             </section>
         </section>
