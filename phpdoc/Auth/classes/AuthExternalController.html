@@ -24,7 +24,7 @@
     <script type="text/javascript">
     function loadExternalCodeSnippets() {
         Array.prototype.slice.call(document.querySelectorAll('pre[data-src]')).forEach(function (pre) {
-            var src = pre.getAttribute('data-src');
+            var src = pre.getAttribute('data-src').replace( /\\/g, '/');
             var extension = (src.match(/\.(\w+)$/) || [, ''])[1];
             var language = 'php';
 
@@ -136,10 +136,10 @@
                                 <div class="accordion" style="margin-bottom: 0">
         <div class="accordion-group">
             <div class="accordion-heading">
-                                    <a class="accordion-toggle " data-toggle="collapse" data-target="#namespace-693027540"></a>
+                                    <a class="accordion-toggle " data-toggle="collapse" data-target="#namespace-76691803"></a>
                                 <a href="../namespaces/default.html" style="margin-left: 30px; padding-left: 0">\</a>
             </div>
-            <div id="namespace-693027540" class="accordion-body collapse in">
+            <div id="namespace-76691803" class="accordion-body collapse in">
                 <div class="accordion-inner">
 
                     
@@ -346,7 +346,7 @@ will inherit them.</p>
                         
                         
                         
-                        
+                                                
                                                                         </dl>
                     <h2>Tags</h2>
                     <table class="table table-condensed">
@@ -355,7 +355,7 @@ will inherit them.</p>
                                 author
                             </th>
                             <td>
-                                                                    <p>Mitsuru Mutaguchi <a href="mailto:mutaguchi@opensource-workshop.jp">mutaguchi@opensource-workshop.jp</a></p>
+                                                                                                        <p>Mitsuru Mutaguchi <a href="mailto:mutaguchi@opensource-workshop.jp">mutaguchi@opensource-workshop.jp</a></p>
                                                             </td>
                         </tr>
                                         </table>
@@ -584,13 +584,15 @@ will inherit them.</p>
 
                 
                 
-                				
+                
                             </article>
         </div>
         <aside class="span4 detailsbar">
             <h1><i class="icon-arrow-down"></i></h1>
                                                             <dl>
-                                                                            </dl>
+                                                    <dt>Inherited from</dt>
+                    <dd><a href="../classes/AuthExternalController.html"><div class="path-wrapper">\AuthExternalController</div></a></dd>
+                                                            </dl>
             <h2>Tags</h2>
             <table class="table table-condensed">
                                     <tr><td colspan="2"><em>None found</em></td></tr>
@@ -612,13 +614,15 @@ will inherit them.</p>
                 
                                     <h4>Returns</h4>
                     \CakeResponse
-                                    				
+                                    
                             </article>
         </div>
         <aside class="span4 detailsbar">
             <h1><i class="icon-arrow-down"></i></h1>
                                                             <dl>
-                                                                            </dl>
+                                                    <dt>Inherited from</dt>
+                    <dd><a href="../classes/AuthExternalController.html"><div class="path-wrapper">\AuthExternalController</div></a></dd>
+                                                            </dl>
             <h2>Tags</h2>
             <table class="table table-condensed">
                                     <tr><td colspan="2"><em>None found</em></td></tr>
@@ -641,13 +645,15 @@ will inherit them.</p>
                 
                                     <h4>Returns</h4>
                     \CakeResponse
-                                    				
+                                    
                             </article>
         </div>
         <aside class="span4 detailsbar">
             <h1><i class="icon-arrow-down"></i></h1>
                                                             <dl>
-                                                                                            <dt>See also</dt>
+                                                    <dt>Inherited from</dt>
+                    <dd><a href="../classes/AuthExternalController.html"><div class="path-wrapper">\AuthExternalController</div></a></dd>
+                                                                            <dt>See also</dt>
                                                                 <dd><a href="../classes/AuthController.html#method_beforeFilter"><span class="namespace-wrapper">オーバーライト用のため、ここではアクセスさせない</span></a></dd>
                                             <dd><a href=""><span class="namespace-wrapper">オーバーライト参考</span></a></dd>
                                                                 </dl>
@@ -673,7 +679,7 @@ will inherit them.</p>
                                     <h4>Returns</h4>
                     string
                                             &mdash; <p>Authentication adapter name</p>
-                                    				
+                                    
                             </article>
         </div>
         <aside class="span4 detailsbar">
@@ -705,7 +711,7 @@ will inherit them.</p>
                                     <h4>Returns</h4>
                     array
                                             &mdash; <p>authenticators</p>
-                                    				
+                                    
                             </article>
         </div>
         <aside class="span4 detailsbar">
@@ -736,7 +742,7 @@ will inherit them.</p>
                                     <h4>Returns</h4>
                     string
                                             &mdash; <p>or null</p>
-                                    				
+                                    
                             </article>
         </div>
         <aside class="span4 detailsbar">
@@ -768,13 +774,15 @@ will inherit them.</p>
                                     <h4>Returns</h4>
                     string
                                             &mdash; <p>リダイレクト先</p>
-                                    				
+                                    
                             </article>
         </div>
         <aside class="span4 detailsbar">
             <h1><i class="icon-arrow-down"></i></h1>
                                                             <dl>
-                                                                                            <dt>See also</dt>
+                                                    <dt>Inherited from</dt>
+                    <dd><a href="../classes/AuthExternalController.html"><div class="path-wrapper">\AuthExternalController</div></a></dd>
+                                                                            <dt>See also</dt>
                                                                 <dd><a href=""><span class="namespace-wrapper">オーバーライト参考</span></a></dd>
                                                                 </dl>
             <h2>Tags</h2>
@@ -798,13 +806,15 @@ will inherit them.</p>
                 
                                     <h4>Returns</h4>
                     \CakeResponse
-                                    				
+                                    
                             </article>
         </div>
         <aside class="span4 detailsbar">
             <h1><i class="icon-arrow-down"></i></h1>
                                                             <dl>
-                                                                            </dl>
+                                                    <dt>Inherited from</dt>
+                    <dd><a href="../classes/AuthExternalController.html"><div class="path-wrapper">\AuthExternalController</div></a></dd>
+                                                            </dl>
             <h2>Tags</h2>
             <table class="table table-condensed">
                                     <tr><td colspan="2"><em>None found</em></td></tr>
@@ -827,13 +837,15 @@ will inherit them.</p>
                                     <h4>Returns</h4>
                     array
                                             &mdash; <p>ユーザ情報</p>
-                                    				
+                                    
                             </article>
         </div>
         <aside class="span4 detailsbar">
             <h1><i class="icon-arrow-down"></i></h1>
                                                             <dl>
-                                                                            </dl>
+                                                    <dt>Inherited from</dt>
+                    <dd><a href="../classes/AuthExternalController.html"><div class="path-wrapper">\AuthExternalController</div></a></dd>
+                                                            </dl>
             <h2>Tags</h2>
             <table class="table table-condensed">
                                     <tr><td colspan="2"><em>None found</em></td></tr>
@@ -868,13 +880,15 @@ will inherit them.</p>
                 
                                     <h4>Returns</h4>
                     \CakeResponse
-                                    				
+                                    
                             </article>
         </div>
         <aside class="span4 detailsbar">
             <h1><i class="icon-arrow-down"></i></h1>
                                                             <dl>
-                                                                                            <dt>See also</dt>
+                                                    <dt>Inherited from</dt>
+                    <dd><a href="../classes/AuthExternalController.html"><div class="path-wrapper">\AuthExternalController</div></a></dd>
+                                                                            <dt>See also</dt>
                                                                 <dd><a href="../classes/AuthController.html#method_login"><span class="namespace-wrapper">よりコピー</span></a></dd>
                                                                 </dl>
             <h2>Tags</h2>
@@ -897,13 +911,15 @@ will inherit them.</p>
 
                 
                 
-                				
+                
                             </article>
         </div>
         <aside class="span4 detailsbar">
             <h1><i class="icon-arrow-down"></i></h1>
                                                             <dl>
-                                                                                            <dt>See also</dt>
+                                                    <dt>Inherited from</dt>
+                    <dd><a href="../classes/AuthExternalController.html"><div class="path-wrapper">\AuthExternalController</div></a></dd>
+                                                                            <dt>See also</dt>
                                                                 <dd><a href=""><span class="namespace-wrapper">オーバーライト参考</span></a></dd>
                                                                 </dl>
             <h2>Tags</h2>
@@ -929,13 +945,15 @@ will inherit them.</p>
                                     <h4>Returns</h4>
                     string
                                             &mdash; <p>IdPによる個人識別番号</p>
-                                    				
+                                    
                             </article>
         </div>
         <aside class="span4 detailsbar">
             <h1><i class="icon-arrow-down"></i></h1>
                                                             <dl>
-                                                                                            <dt>See also</dt>
+                                                    <dt>Inherited from</dt>
+                    <dd><a href="../classes/AuthExternalController.html"><div class="path-wrapper">\AuthExternalController</div></a></dd>
+                                                                            <dt>See also</dt>
                                                                 <dd><a href=""><span class="namespace-wrapper">オーバーライト参考</span></a></dd>
                                                                 </dl>
             <h2>Tags</h2>
@@ -994,7 +1012,7 @@ will inherit them.</p>
                 <section class="span10 offset1">
                     <hr />
                     Documentation is powered by <a href="http://www.phpdoc.org/">phpDocumentor </a> and authored
-                    on October 7th, 2019 at 01:10.
+                    on March 8th, 2020 at 15:03.
                 </section>
             </section>
         </section>

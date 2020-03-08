@@ -24,7 +24,7 @@
     <script type="text/javascript">
     function loadExternalCodeSnippets() {
         Array.prototype.slice.call(document.querySelectorAll('pre[data-src]')).forEach(function (pre) {
-            var src = pre.getAttribute('data-src');
+            var src = pre.getAttribute('data-src').replace( /\\/g, '/');
             var extension = (src.match(/\.(\w+)$/) || [, ''])[1];
             var language = 'php';
 
@@ -136,10 +136,10 @@
                                 <div class="accordion" style="margin-bottom: 0">
         <div class="accordion-group">
             <div class="accordion-heading">
-                                    <a class="accordion-toggle " data-toggle="collapse" data-target="#namespace-1337593091"></a>
+                                    <a class="accordion-toggle " data-toggle="collapse" data-target="#namespace-126979182"></a>
                                 <a href="../namespaces/default.html" style="margin-left: 30px; padding-left: 0">\</a>
             </div>
-            <div id="namespace-1337593091" class="accordion-body collapse in">
+            <div id="namespace-126979182" class="accordion-body collapse in">
                 <div class="accordion-inner">
 
                     
@@ -342,7 +342,7 @@ will inherit them.</p>
                         
                         
                         
-                        
+                                                
                                                                         </dl>
                     <h2>Tags</h2>
                     <table class="table table-condensed">
@@ -351,7 +351,7 @@ will inherit them.</p>
                                 author
                             </th>
                             <td>
-                                                                    <p>Shohei Nakajima <a href="mailto:nakajimashouhei@gmail.com">nakajimashouhei@gmail.com</a></p>
+                                                                                                        <p>Shohei Nakajima <a href="mailto:nakajimashouhei@gmail.com">nakajimashouhei@gmail.com</a></p>
                                                             </td>
                         </tr>
                                         </table>
@@ -371,7 +371,7 @@ will inherit them.</p>
             <a id="constant_WIZARD_ENTRY_KEY" name="constant_WIZARD_ENTRY_KEY" class="anchor"></a>
             <article id="constant_WIZARD_ENTRY_KEY" class="constant">
                 <h3 class="">WIZARD_ENTRY_KEY</h3>
-                <pre class="signature">WIZARD_ENTRY_KEY</pre>
+                <pre class="signature">WIZARD_ENTRY_KEY = &#039;entry_key&#039; : string</pre>
                 <p><em>ウィザード定数(新規登録キーの入力)</em></p>
                 
             </article>
@@ -392,7 +392,7 @@ will inherit them.</p>
             <a id="constant_WIZARD_REQUEST" name="constant_WIZARD_REQUEST" class="anchor"></a>
             <article id="constant_WIZARD_REQUEST" class="constant">
                 <h3 class="">WIZARD_REQUEST</h3>
-                <pre class="signature">WIZARD_REQUEST</pre>
+                <pre class="signature">WIZARD_REQUEST = &#039;request&#039; : string</pre>
                 <p><em>ウィザード定数(新規登録の受付)</em></p>
                 
             </article>
@@ -413,7 +413,7 @@ will inherit them.</p>
             <a id="constant_WIZARD_CONFIRM" name="constant_WIZARD_CONFIRM" class="anchor"></a>
             <article id="constant_WIZARD_CONFIRM" class="constant">
                 <h3 class="">WIZARD_CONFIRM</h3>
-                <pre class="signature">WIZARD_CONFIRM</pre>
+                <pre class="signature">WIZARD_CONFIRM = &#039;confirm&#039; : string</pre>
                 <p><em>ウィザード定数(新規登録の確認)</em></p>
                 
             </article>
@@ -434,7 +434,7 @@ will inherit them.</p>
             <a id="constant_WIZARD_COMPLETION" name="constant_WIZARD_COMPLETION" class="anchor"></a>
             <article id="constant_WIZARD_COMPLETION" class="constant">
                 <h3 class="">WIZARD_COMPLETION</h3>
-                <pre class="signature">WIZARD_COMPLETION</pre>
+                <pre class="signature">WIZARD_COMPLETION = &#039;completion&#039; : string</pre>
                 <p><em>ウィザード定数(新規登録の完了)</em></p>
                 
             </article>
@@ -558,13 +558,15 @@ will inherit them.</p>
 
                 
                 
-                				
+                
                             </article>
         </div>
         <aside class="span4 detailsbar">
             <h1><i class="icon-arrow-down"></i></h1>
                                                             <dl>
-                                                                            </dl>
+                                                    <dt>Inherited from</dt>
+                    <dd><a href="../classes/AutoUserRegistController.html"><div class="path-wrapper">\AutoUserRegistController</div></a></dd>
+                                                            </dl>
             <h2>Tags</h2>
             <table class="table table-condensed">
                                     <tr><td colspan="2"><em>None found</em></td></tr>
@@ -584,13 +586,15 @@ will inherit them.</p>
 
                 
                 
-                				
+                
                             </article>
         </div>
         <aside class="span4 detailsbar">
             <h1><i class="icon-arrow-down"></i></h1>
                                                             <dl>
-                                                                            </dl>
+                                                    <dt>Inherited from</dt>
+                    <dd><a href="../classes/AutoUserRegistController.html"><div class="path-wrapper">\AutoUserRegistController</div></a></dd>
+                                                            </dl>
             <h2>Tags</h2>
             <table class="table table-condensed">
                                     <tr><td colspan="2"><em>None found</em></td></tr>
@@ -610,13 +614,15 @@ will inherit them.</p>
 
                 
                 
-                				
+                
                             </article>
         </div>
         <aside class="span4 detailsbar">
             <h1><i class="icon-arrow-down"></i></h1>
                                                             <dl>
-                                                                            </dl>
+                                                    <dt>Inherited from</dt>
+                    <dd><a href="../classes/AutoUserRegistController.html"><div class="path-wrapper">\AutoUserRegistController</div></a></dd>
+                                                            </dl>
             <h2>Tags</h2>
             <table class="table table-condensed">
                                     <tr><td colspan="2"><em>None found</em></td></tr>
@@ -636,13 +642,15 @@ will inherit them.</p>
 
                 
                 
-                				
+                
                             </article>
         </div>
         <aside class="span4 detailsbar">
             <h1><i class="icon-arrow-down"></i></h1>
                                                             <dl>
-                                                                            </dl>
+                                                    <dt>Inherited from</dt>
+                    <dd><a href="../classes/AutoUserRegistController.html"><div class="path-wrapper">\AutoUserRegistController</div></a></dd>
+                                                            </dl>
             <h2>Tags</h2>
             <table class="table table-condensed">
                                     <tr><td colspan="2"><em>None found</em></td></tr>
@@ -662,13 +670,15 @@ will inherit them.</p>
 
                 
                 
-                				
+                
                             </article>
         </div>
         <aside class="span4 detailsbar">
             <h1><i class="icon-arrow-down"></i></h1>
                                                             <dl>
-                                                                            </dl>
+                                                    <dt>Inherited from</dt>
+                    <dd><a href="../classes/AutoUserRegistController.html"><div class="path-wrapper">\AutoUserRegistController</div></a></dd>
+                                                            </dl>
             <h2>Tags</h2>
             <table class="table table-condensed">
                                     <tr><td colspan="2"><em>None found</em></td></tr>
@@ -688,13 +698,15 @@ will inherit them.</p>
 
                 
                 
-                				
+                
                             </article>
         </div>
         <aside class="span4 detailsbar">
             <h1><i class="icon-arrow-down"></i></h1>
                                                             <dl>
-                                                                            </dl>
+                                                    <dt>Inherited from</dt>
+                    <dd><a href="../classes/AutoUserRegistController.html"><div class="path-wrapper">\AutoUserRegistController</div></a></dd>
+                                                            </dl>
             <h2>Tags</h2>
             <table class="table table-condensed">
                                     <tr><td colspan="2"><em>None found</em></td></tr>
@@ -714,13 +726,15 @@ will inherit them.</p>
 
                 
                 
-                				
+                
                             </article>
         </div>
         <aside class="span4 detailsbar">
             <h1><i class="icon-arrow-down"></i></h1>
                                                             <dl>
-                                                                            </dl>
+                                                    <dt>Inherited from</dt>
+                    <dd><a href="../classes/AutoUserRegistController.html"><div class="path-wrapper">\AutoUserRegistController</div></a></dd>
+                                                            </dl>
             <h2>Tags</h2>
             <table class="table table-condensed">
                                     <tr><td colspan="2"><em>None found</em></td></tr>
@@ -743,7 +757,7 @@ will inherit them.</p>
                                     <h4>Returns</h4>
                     string
                                             &mdash; <p>Authentication adapter name</p>
-                                    				
+                                    
                             </article>
         </div>
         <aside class="span4 detailsbar">
@@ -775,7 +789,7 @@ will inherit them.</p>
                                     <h4>Returns</h4>
                     array
                                             &mdash; <p>authenticators</p>
-                                    				
+                                    
                             </article>
         </div>
         <aside class="span4 detailsbar">
@@ -806,7 +820,7 @@ will inherit them.</p>
                                     <h4>Returns</h4>
                     string
                                             &mdash; <p>or null</p>
-                                    				
+                                    
                             </article>
         </div>
         <aside class="span4 detailsbar">
@@ -834,13 +848,15 @@ will inherit them.</p>
 
                 
                 
-                				
+                
                             </article>
         </div>
         <aside class="span4 detailsbar">
             <h1><i class="icon-arrow-down"></i></h1>
                                                             <dl>
-                                                                            </dl>
+                                                    <dt>Inherited from</dt>
+                    <dd><a href="../classes/AutoUserRegistController.html"><div class="path-wrapper">\AutoUserRegistController</div></a></dd>
+                                                            </dl>
             <h2>Tags</h2>
             <table class="table table-condensed">
                                     <tr><td colspan="2"><em>None found</em></td></tr>
@@ -897,7 +913,7 @@ will inherit them.</p>
                 <section class="span10 offset1">
                     <hr />
                     Documentation is powered by <a href="http://www.phpdoc.org/">phpDocumentor </a> and authored
-                    on October 7th, 2019 at 01:10.
+                    on March 8th, 2020 at 15:03.
                 </section>
             </section>
         </section>
