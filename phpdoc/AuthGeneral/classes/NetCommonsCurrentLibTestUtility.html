@@ -24,7 +24,7 @@
     <script type="text/javascript">
     function loadExternalCodeSnippets() {
         Array.prototype.slice.call(document.querySelectorAll('pre[data-src]')).forEach(function (pre) {
-            var src = pre.getAttribute('data-src');
+            var src = pre.getAttribute('data-src').replace( /\\/g, '/');
             var extension = (src.match(/\.(\w+)$/) || [, ''])[1];
             var language = 'php';
 
@@ -106,12 +106,12 @@
                         <ul class="dropdown-menu">
                             <li>
                                 <a href="../reports/errors.html">
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                            <i class="icon-list-alt"></i>&#160;Errors <span class="label label-info pull-right">0</span>
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                        <i class="icon-list-alt"></i>&#160;Errors <span class="label label-info pull-right">0</span>
                                 </a>
                             </li>
                             <li>
                                 <a href="../reports/markers.html">
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                            <i class="icon-list-alt"></i>&#160;Markers <span class="label label-info pull-right">0</span>
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                        <i class="icon-list-alt"></i>&#160;Markers <span class="label label-info pull-right">0</span>
                                 </a>
                             </li>
                             <li>
@@ -136,15 +136,16 @@
                                 <div class="accordion" style="margin-bottom: 0">
         <div class="accordion-group">
             <div class="accordion-heading">
-                                    <a class="accordion-toggle " data-toggle="collapse" data-target="#namespace-6855201"></a>
+                                    <a class="accordion-toggle " data-toggle="collapse" data-target="#namespace-973206108"></a>
                                 <a href="../namespaces/default.html" style="margin-left: 30px; padding-left: 0">\</a>
             </div>
-            <div id="namespace-6855201" class="accordion-body collapse in">
+            <div id="namespace-973206108" class="accordion-body collapse in">
                 <div class="accordion-inner">
 
                     
                     <ul>
                                                                                                     <li class="class"><a href="../classes/AccessCtrlComponent.html">AccessCtrlComponent</a></li>
+                                                    <li class="class"><a href="../classes/AngularParser.html">AngularParser</a></li>
                                                     <li class="class"><a href="../classes/AppController.html">AppController</a></li>
                                                     <li class="class"><a href="../classes/AppController.html">AppController</a></li>
                                                     <li class="class"><a href="../classes/AppHelper.html">AppHelper</a></li>
@@ -335,7 +336,7 @@ cipherSeed:
                         
                         
                         
-                        
+                                                
                                                                         </dl>
                     <h2>Tags</h2>
                     <table class="table table-condensed">
@@ -344,7 +345,7 @@ cipherSeed:
                                 codeCoverageIgnore
                             </th>
                             <td>
-                                                                    
+                                                                                                        
                                                             </td>
                         </tr>
                                             <tr>
@@ -352,8 +353,8 @@ cipherSeed:
                                 SuppressWarnings
                             </th>
                             <td>
-                                                                    <p>(PHPMD.TooManyPublicMethods)</p>
-                                                                    <p>(PHPMD.ExcessiveClassComplexity)</p>
+                                                                                                        <p>(PHPMD.TooManyPublicMethods)</p>
+                                                                                                        <p>(PHPMD.ExcessiveClassComplexity)</p>
                                                             </td>
                         </tr>
                                         </table>
@@ -473,14 +474,16 @@ cipherSeed:
                                             </table>
                 
                 
-                				
+                
                             </article>
         </div>
         <aside class="span4 detailsbar">
             <h1><i class="icon-arrow-down"></i></h1>
                             <span class="label label-info">static</span>
                                                             <dl>
-                                                                            </dl>
+                                                    <dt>Inherited from</dt>
+                    <dd><a href="../classes/NetCommonsCurrentLibTestUtility.html"><div class="path-wrapper">\NetCommonsCurrentLibTestUtility</div></a></dd>
+                                                            </dl>
             <h2>Tags</h2>
             <table class="table table-condensed">
                                     <tr><td colspan="2"><em>None found</em></td></tr>
@@ -500,14 +503,16 @@ cipherSeed:
 
                 
                 
-                				
+                
                             </article>
         </div>
         <aside class="span4 detailsbar">
             <h1><i class="icon-arrow-down"></i></h1>
                             <span class="label label-info">static</span>
                                                             <dl>
-                                                                            </dl>
+                                                    <dt>Inherited from</dt>
+                    <dd><a href="../classes/NetCommonsCurrentLibTestUtility.html"><div class="path-wrapper">\NetCommonsCurrentLibTestUtility</div></a></dd>
+                                                            </dl>
             <h2>Tags</h2>
             <table class="table table-condensed">
                                     <tr><td colspan="2"><em>None found</em></td></tr>
@@ -527,14 +532,16 @@ cipherSeed:
 
                 
                 
-                				
+                
                             </article>
         </div>
         <aside class="span4 detailsbar">
             <h1><i class="icon-arrow-down"></i></h1>
                             <span class="label label-info">static</span>
                                                             <dl>
-                                                                            </dl>
+                                                    <dt>Inherited from</dt>
+                    <dd><a href="../classes/NetCommonsCurrentLibTestUtility.html"><div class="path-wrapper">\NetCommonsCurrentLibTestUtility</div></a></dd>
+                                                            </dl>
             <h2>Tags</h2>
             <table class="table table-condensed">
                                     <tr><td colspan="2"><em>None found</em></td></tr>
@@ -556,14 +563,16 @@ cipherSeed:
                 
                                     <h4>Returns</h4>
                     boolean
-                                    				
+                                    
                             </article>
         </div>
         <aside class="span4 detailsbar">
             <h1><i class="icon-arrow-down"></i></h1>
                             <span class="label label-info">static</span>
                                                             <dl>
-                                                                            </dl>
+                                                    <dt>Inherited from</dt>
+                    <dd><a href="../classes/NetCommonsCurrentLibTestUtility.html"><div class="path-wrapper">\NetCommonsCurrentLibTestUtility</div></a></dd>
+                                                            </dl>
             <h2>Tags</h2>
             <table class="table table-condensed">
                                     <tr><td colspan="2"><em>None found</em></td></tr>
@@ -585,14 +594,16 @@ cipherSeed:
                 
                                     <h4>Returns</h4>
                     string
-                                    				
+                                    
                             </article>
         </div>
         <aside class="span4 detailsbar">
             <h1><i class="icon-arrow-down"></i></h1>
                             <span class="label label-info">static</span>
                                                             <dl>
-                                                                            </dl>
+                                                    <dt>Inherited from</dt>
+                    <dd><a href="../classes/NetCommonsCurrentLibTestUtility.html"><div class="path-wrapper">\NetCommonsCurrentLibTestUtility</div></a></dd>
+                                                            </dl>
             <h2>Tags</h2>
             <table class="table table-condensed">
                                     <tr><td colspan="2"><em>None found</em></td></tr>
@@ -614,14 +625,16 @@ cipherSeed:
                 
                                     <h4>Returns</h4>
                     string
-                                    				
+                                    
                             </article>
         </div>
         <aside class="span4 detailsbar">
             <h1><i class="icon-arrow-down"></i></h1>
                             <span class="label label-info">static</span>
                                                             <dl>
-                                                                            </dl>
+                                                    <dt>Inherited from</dt>
+                    <dd><a href="../classes/NetCommonsCurrentLibTestUtility.html"><div class="path-wrapper">\NetCommonsCurrentLibTestUtility</div></a></dd>
+                                                            </dl>
             <h2>Tags</h2>
             <table class="table table-condensed">
                                     <tr><td colspan="2"><em>None found</em></td></tr>
@@ -643,14 +656,16 @@ cipherSeed:
                 
                                     <h4>Returns</h4>
                     string
-                                    				
+                                    
                             </article>
         </div>
         <aside class="span4 detailsbar">
             <h1><i class="icon-arrow-down"></i></h1>
                             <span class="label label-info">static</span>
                                                             <dl>
-                                                                            </dl>
+                                                    <dt>Inherited from</dt>
+                    <dd><a href="../classes/NetCommonsCurrentLibTestUtility.html"><div class="path-wrapper">\NetCommonsCurrentLibTestUtility</div></a></dd>
+                                                            </dl>
             <h2>Tags</h2>
             <table class="table table-condensed">
                                     <tr><td colspan="2"><em>None found</em></td></tr>
@@ -672,14 +687,16 @@ cipherSeed:
                 
                                     <h4>Returns</h4>
                     string
-                                    				
+                                    
                             </article>
         </div>
         <aside class="span4 detailsbar">
             <h1><i class="icon-arrow-down"></i></h1>
                             <span class="label label-info">static</span>
                                                             <dl>
-                                                                            </dl>
+                                                    <dt>Inherited from</dt>
+                    <dd><a href="../classes/NetCommonsCurrentLibTestUtility.html"><div class="path-wrapper">\NetCommonsCurrentLibTestUtility</div></a></dd>
+                                                            </dl>
             <h2>Tags</h2>
             <table class="table table-condensed">
                                     <tr><td colspan="2"><em>None found</em></td></tr>
@@ -701,14 +718,16 @@ cipherSeed:
                 
                                     <h4>Returns</h4>
                     string
-                                    				
+                                    
                             </article>
         </div>
         <aside class="span4 detailsbar">
             <h1><i class="icon-arrow-down"></i></h1>
                             <span class="label label-info">static</span>
                                                             <dl>
-                                                                            </dl>
+                                                    <dt>Inherited from</dt>
+                    <dd><a href="../classes/NetCommonsCurrentLibTestUtility.html"><div class="path-wrapper">\NetCommonsCurrentLibTestUtility</div></a></dd>
+                                                            </dl>
             <h2>Tags</h2>
             <table class="table table-condensed">
                                     <tr><td colspan="2"><em>None found</em></td></tr>
@@ -730,14 +749,16 @@ cipherSeed:
                 
                                     <h4>Returns</h4>
                     string
-                                    				
+                                    
                             </article>
         </div>
         <aside class="span4 detailsbar">
             <h1><i class="icon-arrow-down"></i></h1>
                             <span class="label label-info">static</span>
                                                             <dl>
-                                                                            </dl>
+                                                    <dt>Inherited from</dt>
+                    <dd><a href="../classes/NetCommonsCurrentLibTestUtility.html"><div class="path-wrapper">\NetCommonsCurrentLibTestUtility</div></a></dd>
+                                                            </dl>
             <h2>Tags</h2>
             <table class="table table-condensed">
                                     <tr><td colspan="2"><em>None found</em></td></tr>
@@ -767,14 +788,16 @@ cipherSeed:
                 
                                     <h4>Returns</h4>
                     string
-                                    				
+                                    
                             </article>
         </div>
         <aside class="span4 detailsbar">
             <h1><i class="icon-arrow-down"></i></h1>
                             <span class="label label-info">static</span>
                                                             <dl>
-                                                                            </dl>
+                                                    <dt>Inherited from</dt>
+                    <dd><a href="../classes/NetCommonsCurrentLibTestUtility.html"><div class="path-wrapper">\NetCommonsCurrentLibTestUtility</div></a></dd>
+                                                            </dl>
             <h2>Tags</h2>
             <table class="table table-condensed">
                                     <tr><td colspan="2"><em>None found</em></td></tr>
@@ -794,14 +817,16 @@ cipherSeed:
 
                 
                 
-                				
+                
                             </article>
         </div>
         <aside class="span4 detailsbar">
             <h1><i class="icon-arrow-down"></i></h1>
                             <span class="label label-info">static</span>
                                                             <dl>
-                                                                            </dl>
+                                                    <dt>Inherited from</dt>
+                    <dd><a href="../classes/NetCommonsCurrentLibTestUtility.html"><div class="path-wrapper">\NetCommonsCurrentLibTestUtility</div></a></dd>
+                                                            </dl>
             <h2>Tags</h2>
             <table class="table table-condensed">
                                     <tr><td colspan="2"><em>None found</em></td></tr>
@@ -829,14 +854,16 @@ cipherSeed:
                                             </table>
                 
                 
-                				
+                
                             </article>
         </div>
         <aside class="span4 detailsbar">
             <h1><i class="icon-arrow-down"></i></h1>
                             <span class="label label-info">static</span>
                                                             <dl>
-                                                                            </dl>
+                                                    <dt>Inherited from</dt>
+                    <dd><a href="../classes/NetCommonsCurrentLibTestUtility.html"><div class="path-wrapper">\NetCommonsCurrentLibTestUtility</div></a></dd>
+                                                            </dl>
             <h2>Tags</h2>
             <table class="table table-condensed">
                                     <tr><td colspan="2"><em>None found</em></td></tr>
@@ -856,14 +883,16 @@ cipherSeed:
 
                 
                 
-                				
+                
                             </article>
         </div>
         <aside class="span4 detailsbar">
             <h1><i class="icon-arrow-down"></i></h1>
                             <span class="label label-info">static</span>
                                                             <dl>
-                                                                            </dl>
+                                                    <dt>Inherited from</dt>
+                    <dd><a href="../classes/NetCommonsCurrentLibTestUtility.html"><div class="path-wrapper">\NetCommonsCurrentLibTestUtility</div></a></dd>
+                                                            </dl>
             <h2>Tags</h2>
             <table class="table table-condensed">
                                     <tr><td colspan="2"><em>None found</em></td></tr>
@@ -891,14 +920,16 @@ cipherSeed:
                                             </table>
                 
                 
-                				
+                
                             </article>
         </div>
         <aside class="span4 detailsbar">
             <h1><i class="icon-arrow-down"></i></h1>
                             <span class="label label-info">static</span>
                                                             <dl>
-                                                                            </dl>
+                                                    <dt>Inherited from</dt>
+                    <dd><a href="../classes/NetCommonsCurrentLibTestUtility.html"><div class="path-wrapper">\NetCommonsCurrentLibTestUtility</div></a></dd>
+                                                            </dl>
             <h2>Tags</h2>
             <table class="table table-condensed">
                                     <tr><td colspan="2"><em>None found</em></td></tr>
@@ -918,14 +949,16 @@ cipherSeed:
 
                 
                 
-                				
+                
                             </article>
         </div>
         <aside class="span4 detailsbar">
             <h1><i class="icon-arrow-down"></i></h1>
                             <span class="label label-info">static</span>
                                                             <dl>
-                                                                            </dl>
+                                                    <dt>Inherited from</dt>
+                    <dd><a href="../classes/NetCommonsCurrentLibTestUtility.html"><div class="path-wrapper">\NetCommonsCurrentLibTestUtility</div></a></dd>
+                                                            </dl>
             <h2>Tags</h2>
             <table class="table table-condensed">
                                     <tr><td colspan="2"><em>None found</em></td></tr>
@@ -973,14 +1006,16 @@ cipherSeed:
                                             </table>
                 
                 
-                				
+                
                             </article>
         </div>
         <aside class="span4 detailsbar">
             <h1><i class="icon-arrow-down"></i></h1>
                             <span class="label label-info">static</span>
                                                             <dl>
-                                                                            </dl>
+                                                    <dt>Inherited from</dt>
+                    <dd><a href="../classes/NetCommonsCurrentLibTestUtility.html"><div class="path-wrapper">\NetCommonsCurrentLibTestUtility</div></a></dd>
+                                                            </dl>
             <h2>Tags</h2>
             <table class="table table-condensed">
                                     <tr>
@@ -1035,14 +1070,16 @@ cipherSeed:
                                             </table>
                 
                 
-                				
+                
                             </article>
         </div>
         <aside class="span4 detailsbar">
             <h1><i class="icon-arrow-down"></i></h1>
                             <span class="label label-info">static</span>
                                                             <dl>
-                                                                            </dl>
+                                                    <dt>Inherited from</dt>
+                    <dd><a href="../classes/NetCommonsCurrentLibTestUtility.html"><div class="path-wrapper">\NetCommonsCurrentLibTestUtility</div></a></dd>
+                                                            </dl>
             <h2>Tags</h2>
             <table class="table table-condensed">
                                     <tr><td colspan="2"><em>None found</em></td></tr>
@@ -1090,14 +1127,16 @@ cipherSeed:
                                             </table>
                 
                 
-                				
+                
                             </article>
         </div>
         <aside class="span4 detailsbar">
             <h1><i class="icon-arrow-down"></i></h1>
                             <span class="label label-info">static</span>
                                                             <dl>
-                                                                            </dl>
+                                                    <dt>Inherited from</dt>
+                    <dd><a href="../classes/NetCommonsCurrentLibTestUtility.html"><div class="path-wrapper">\NetCommonsCurrentLibTestUtility</div></a></dd>
+                                                            </dl>
             <h2>Tags</h2>
             <table class="table table-condensed">
                                     <tr><td colspan="2"><em>None found</em></td></tr>
@@ -1117,14 +1156,16 @@ cipherSeed:
 
                 
                 
-                				
+                
                             </article>
         </div>
         <aside class="span4 detailsbar">
             <h1><i class="icon-arrow-down"></i></h1>
                             <span class="label label-info">static</span>
                                                             <dl>
-                                                                            </dl>
+                                                    <dt>Inherited from</dt>
+                    <dd><a href="../classes/NetCommonsCurrentLibTestUtility.html"><div class="path-wrapper">\NetCommonsCurrentLibTestUtility</div></a></dd>
+                                                            </dl>
             <h2>Tags</h2>
             <table class="table table-condensed">
                                     <tr><td colspan="2"><em>None found</em></td></tr>
@@ -1157,14 +1198,16 @@ cipherSeed:
                                             </table>
                 
                 
-                				
+                
                             </article>
         </div>
         <aside class="span4 detailsbar">
             <h1><i class="icon-arrow-down"></i></h1>
                             <span class="label label-info">static</span>
                                                             <dl>
-                                                                            </dl>
+                                                    <dt>Inherited from</dt>
+                    <dd><a href="../classes/NetCommonsCurrentLibTestUtility.html"><div class="path-wrapper">\NetCommonsCurrentLibTestUtility</div></a></dd>
+                                                            </dl>
             <h2>Tags</h2>
             <table class="table table-condensed">
                                     <tr><td colspan="2"><em>None found</em></td></tr>
@@ -1221,7 +1264,7 @@ cipherSeed:
                 <section class="span10 offset1">
                     <hr />
                     Documentation is powered by <a href="http://www.phpdoc.org/">phpDocumentor </a> and authored
-                    on August 10th, 2019 at 11:00.
+                    on March 8th, 2020 at 15:08.
                 </section>
             </section>
         </section>
