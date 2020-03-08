@@ -24,7 +24,7 @@
     <script type="text/javascript">
     function loadExternalCodeSnippets() {
         Array.prototype.slice.call(document.querySelectorAll('pre[data-src]')).forEach(function (pre) {
-            var src = pre.getAttribute('data-src');
+            var src = pre.getAttribute('data-src').replace( /\\/g, '/');
             var extension = (src.match(/\.(\w+)$/) || [, ''])[1];
             var language = 'php';
 
@@ -136,10 +136,10 @@
                                 <div class="accordion" style="margin-bottom: 0">
         <div class="accordion-group">
             <div class="accordion-heading">
-                                    <a class="accordion-toggle " data-toggle="collapse" data-target="#namespace-1891099710"></a>
+                                    <a class="accordion-toggle " data-toggle="collapse" data-target="#namespace-1827918133"></a>
                                 <a href="../namespaces/default.html" style="margin-left: 30px; padding-left: 0">\</a>
             </div>
-            <div id="namespace-1891099710" class="accordion-body collapse in">
+            <div id="namespace-1827918133" class="accordion-body collapse in">
                 <div class="accordion-inner">
 
                     
@@ -425,7 +425,7 @@
                         
                         
                         
-                        
+                                                
                                                                         </dl>
                     <h2>Tags</h2>
                     <table class="table table-condensed">
@@ -434,7 +434,7 @@
                                 author
                             </th>
                             <td>
-                                                                    <p>Allcreator <a href="mailto:info@allcreator.net">info@allcreator.net</a></p>
+                                                                                                        <p>Allcreator <a href="mailto:info@allcreator.net">info@allcreator.net</a></p>
                                                             </td>
                         </tr>
                                         </table>
@@ -454,7 +454,7 @@
             <a id="constant_CALENDAR_PLAN_EDIT_THIS" name="constant_CALENDAR_PLAN_EDIT_THIS" class="anchor"></a>
             <article id="constant_CALENDAR_PLAN_EDIT_THIS" class="constant">
                 <h3 class="">CALENDAR_PLAN_EDIT_THIS</h3>
-                <pre class="signature">CALENDAR_PLAN_EDIT_THIS</pre>
+                <pre class="signature">CALENDAR_PLAN_EDIT_THIS = &#039;0&#039;</pre>
                 <p><em></em></p>
                 
             </article>
@@ -477,7 +477,7 @@
             <a id="constant_CALENDAR_PLAN_EDIT_AFTER" name="constant_CALENDAR_PLAN_EDIT_AFTER" class="anchor"></a>
             <article id="constant_CALENDAR_PLAN_EDIT_AFTER" class="constant">
                 <h3 class="">CALENDAR_PLAN_EDIT_AFTER</h3>
-                <pre class="signature">CALENDAR_PLAN_EDIT_AFTER</pre>
+                <pre class="signature">CALENDAR_PLAN_EDIT_AFTER = &#039;1&#039;</pre>
                 <p><em></em></p>
                 
             </article>
@@ -500,7 +500,7 @@
             <a id="constant_CALENDAR_PLAN_EDIT_ALL" name="constant_CALENDAR_PLAN_EDIT_ALL" class="anchor"></a>
             <article id="constant_CALENDAR_PLAN_EDIT_ALL" class="constant">
                 <h3 class="">CALENDAR_PLAN_EDIT_ALL</h3>
-                <pre class="signature">CALENDAR_PLAN_EDIT_ALL</pre>
+                <pre class="signature">CALENDAR_PLAN_EDIT_ALL = &#039;2&#039;</pre>
                 <p><em></em></p>
                 
             </article>
@@ -523,7 +523,7 @@
             <a id="constant_CALENDAR_PLUGIN_NAME" name="constant_CALENDAR_PLUGIN_NAME" class="anchor"></a>
             <article id="constant_CALENDAR_PLUGIN_NAME" class="constant">
                 <h3 class="">CALENDAR_PLUGIN_NAME</h3>
-                <pre class="signature">CALENDAR_PLUGIN_NAME</pre>
+                <pre class="signature">CALENDAR_PLUGIN_NAME = &#039;calendar&#039;</pre>
                 <p><em></em></p>
                 
             </article>
@@ -546,7 +546,7 @@
             <a id="constant_TASK_PLUGIN_NAME" name="constant_TASK_PLUGIN_NAME" class="anchor"></a>
             <article id="constant_TASK_PLUGIN_NAME" class="constant">
                 <h3 class="">TASK_PLUGIN_NAME</h3>
-                <pre class="signature">TASK_PLUGIN_NAME</pre>
+                <pre class="signature">TASK_PLUGIN_NAME = &#039;task&#039;</pre>
                 <p><em></em></p>
                 
             </article>
@@ -569,7 +569,7 @@
             <a id="constant_RESERVATION_PLUGIN_NAME" name="constant_RESERVATION_PLUGIN_NAME" class="anchor"></a>
             <article id="constant_RESERVATION_PLUGIN_NAME" class="constant">
                 <h3 class="">RESERVATION_PLUGIN_NAME</h3>
-                <pre class="signature">RESERVATION_PLUGIN_NAME</pre>
+                <pre class="signature">RESERVATION_PLUGIN_NAME = &#039;reservation&#039;</pre>
                 <p><em></em></p>
                 
             </article>
@@ -592,7 +592,7 @@
             <a id="constant_CALENDAR_LINK_UPDATE" name="constant_CALENDAR_LINK_UPDATE" class="anchor"></a>
             <article id="constant_CALENDAR_LINK_UPDATE" class="constant">
                 <h3 class="">CALENDAR_LINK_UPDATE</h3>
-                <pre class="signature">CALENDAR_LINK_UPDATE</pre>
+                <pre class="signature">CALENDAR_LINK_UPDATE = &#039;update&#039;</pre>
                 <p><em></em></p>
                 
             </article>
@@ -615,7 +615,7 @@
             <a id="constant_CALENDAR_LINK_CLEAR" name="constant_CALENDAR_LINK_CLEAR" class="anchor"></a>
             <article id="constant_CALENDAR_LINK_CLEAR" class="constant">
                 <h3 class="">CALENDAR_LINK_CLEAR</h3>
-                <pre class="signature">CALENDAR_LINK_CLEAR</pre>
+                <pre class="signature">CALENDAR_LINK_CLEAR = &#039;clear&#039;</pre>
                 <p><em></em></p>
                 
             </article>
@@ -638,7 +638,7 @@
             <a id="constant_CALENDAR_INSERT_MODE" name="constant_CALENDAR_INSERT_MODE" class="anchor"></a>
             <article id="constant_CALENDAR_INSERT_MODE" class="constant">
                 <h3 class="">CALENDAR_INSERT_MODE</h3>
-                <pre class="signature">CALENDAR_INSERT_MODE</pre>
+                <pre class="signature">CALENDAR_INSERT_MODE = &#039;insert&#039;</pre>
                 <p><em></em></p>
                 
             </article>
@@ -661,7 +661,7 @@
             <a id="constant_CALENDAR_UPDATE_MODE" name="constant_CALENDAR_UPDATE_MODE" class="anchor"></a>
             <article id="constant_CALENDAR_UPDATE_MODE" class="constant">
                 <h3 class="">CALENDAR_UPDATE_MODE</h3>
-                <pre class="signature">CALENDAR_UPDATE_MODE</pre>
+                <pre class="signature">CALENDAR_UPDATE_MODE = &#039;update&#039;</pre>
                 <p><em></em></p>
                 
             </article>
@@ -684,7 +684,7 @@
             <a id="constant__ON" name="constant__ON" class="anchor"></a>
             <article id="constant__ON" class="constant">
                 <h3 class="">_ON</h3>
-                <pre class="signature">_ON</pre>
+                <pre class="signature">_ON = 1</pre>
                 <p><em></em></p>
                 
             </article>
@@ -707,7 +707,7 @@
             <a id="constant__OFF" name="constant__OFF" class="anchor"></a>
             <article id="constant__OFF" class="constant">
                 <h3 class="">_OFF</h3>
-                <pre class="signature">_OFF</pre>
+                <pre class="signature">_OFF = 0</pre>
                 <p><em></em></p>
                 
             </article>
@@ -730,7 +730,7 @@
             <a id="constant_ROOM_ZERO" name="constant_ROOM_ZERO" class="anchor"></a>
             <article id="constant_ROOM_ZERO" class="constant">
                 <h3 class="">ROOM_ZERO</h3>
-                <pre class="signature">ROOM_ZERO</pre>
+                <pre class="signature">ROOM_ZERO = 0</pre>
                 <p><em></em></p>
                 
             </article>
@@ -884,8 +884,8 @@ registered_into to calendar_information</p>
                             author
                         </th>
                         <td>
-                                                            <p>Noriko Arai <a href="mailto:arai@nii.ac.jp">arai@nii.ac.jp</a></p>
-                                                            <p>AllCreator Co., Ltd. <a href="mailto:info@allcreator.net">info@allcreator.net</a></p>
+                                                                                            <p>Noriko Arai <a href="mailto:arai@nii.ac.jp">arai@nii.ac.jp</a></p>
+                                                                                            <p>AllCreator Co., Ltd. <a href="mailto:info@allcreator.net">info@allcreator.net</a></p>
                                                     </td>
                     </tr>
                                     <tr>
@@ -893,7 +893,7 @@ registered_into to calendar_information</p>
                             license
                         </th>
                         <td>
-                                                            <p><a href="http://www.netcommons.org/license.txt">http://www.netcommons.org/license.txt</a> NetCommons License</p>
+                                                                                            <p><a href="http://www.netcommons.org/license.txt">http://www.netcommons.org/license.txt</a> NetCommons License</p>
                                                     </td>
                     </tr>
                                     <tr>
@@ -901,7 +901,7 @@ registered_into to calendar_information</p>
                             copyright
                         </th>
                         <td>
-                                                            <p>Copyright 2015, NetCommons Project</p>
+                                                                                            <p>Copyright 2015, NetCommons Project</p>
                                                     </td>
                     </tr>
                             </table>
@@ -945,7 +945,7 @@ will allow you to make the validation fail.</em></p>
                                     <h4>Returns</h4>
                     mixed
                                             &mdash; <p>False or null will abort the operation. Any other result will continue.</p>
-                                    				
+                                    
                             </article>
         </div>
         <aside class="span4 detailsbar">
@@ -983,7 +983,7 @@ will allow you to make the validation fail.</em></p>
                                             </table>
                 
                 
-                				
+                
                             </article>
         </div>
         <aside class="span4 detailsbar">
@@ -1057,7 +1057,7 @@ will allow you to make the validation fail.</em></p>
                                     <h4>Returns</h4>
                     array
                                             &mdash; <p>$rEventData</p>
-                                    				
+                                    
                             </article>
         </div>
         <aside class="span4 detailsbar">
@@ -1111,7 +1111,7 @@ will allow you to make the validation fail.</em></p>
                                     <h4>Returns</h4>
                     array
                                             &mdash; <p>実際に登録する$rEventData配列を返す</p>
-                                    				
+                                    
                             </article>
         </div>
         <aside class="span4 detailsbar">
@@ -1182,7 +1182,7 @@ will allow you to make the validation fail.</em></p>
                                             </table>
                 
                 
-                				
+                
                             </article>
         </div>
         <aside class="span4 detailsbar">
@@ -1243,7 +1243,7 @@ will allow you to make the validation fail.</em></p>
                                             </table>
                 
                 
-                				
+                
                             </article>
         </div>
         <aside class="span4 detailsbar">
@@ -1284,7 +1284,7 @@ will allow you to make the validation fail.</em></p>
                                             </table>
                 
                 
-                				
+                
                             </article>
         </div>
         <aside class="span4 detailsbar">
@@ -1330,7 +1330,7 @@ will allow you to make the validation fail.</em></p>
                                             </table>
                 
                 
-                				
+                
                             </article>
         </div>
         <aside class="span4 detailsbar">
@@ -1366,7 +1366,7 @@ will allow you to make the validation fail.</em></p>
                                             </table>
                 
                 
-                				
+                
                             </article>
         </div>
         <aside class="span4 detailsbar">
@@ -1420,13 +1420,15 @@ will allow you to make the validation fail.</em></p>
                                     <h4>Returns</h4>
                     integer
                                             &mdash; <p>追加成功時 $eventId(calendarEvent.id)を返す。追加失敗時 InternalErrorExceptionを投げる。</p>
-                                    				
+                                    
                             </article>
         </div>
         <aside class="span4 detailsbar">
             <h1><i class="icon-arrow-down"></i></h1>
                                                             <dl>
-                                                                            </dl>
+                                                    <dt>Inherited from</dt>
+                    <dd><a href="../classes/CalendarInsertPlanBehavior.html"><div class="path-wrapper">\CalendarInsertPlanBehavior</div></a></dd>
+                                                            </dl>
             <h2>Tags</h2>
             <table class="table table-condensed">
                                     <tr><td colspan="2"><em>None found</em></td></tr>
@@ -1477,13 +1479,15 @@ will allow you to make the validation fail.</em></p>
                                     <h4>Returns</h4>
                     array
                                             &mdash; <p>$rruleDataを返す</p>
-                                    				
+                                    
                             </article>
         </div>
         <aside class="span4 detailsbar">
             <h1><i class="icon-arrow-down"></i></h1>
                                                             <dl>
-                                                                            </dl>
+                                                    <dt>Inherited from</dt>
+                    <dd><a href="../classes/CalendarInsertPlanBehavior.html"><div class="path-wrapper">\CalendarInsertPlanBehavior</div></a></dd>
+                                                            </dl>
             <h2>Tags</h2>
             <table class="table table-condensed">
                                     <tr><td colspan="2"><em>None found</em></td></tr>
@@ -1534,13 +1538,15 @@ will allow you to make the validation fail.</em></p>
                                     <h4>Returns</h4>
                     array
                                             &mdash; <p>$eventDataを返す</p>
-                                    				
+                                    
                             </article>
         </div>
         <aside class="span4 detailsbar">
             <h1><i class="icon-arrow-down"></i></h1>
                                                             <dl>
-                                                                            </dl>
+                                                    <dt>Inherited from</dt>
+                    <dd><a href="../classes/CalendarInsertPlanBehavior.html"><div class="path-wrapper">\CalendarInsertPlanBehavior</div></a></dd>
+                                                            </dl>
             <h2>Tags</h2>
             <table class="table table-condensed">
                                     <tr>
@@ -1590,7 +1596,7 @@ will allow you to make the validation fail.</em></p>
                                             </table>
                 
                 
-                				
+                
                             </article>
         </div>
         <aside class="span4 detailsbar">
@@ -1631,7 +1637,7 @@ will allow you to make the validation fail.</em></p>
                             <dd></dd>
                                                                     </dl>
                 
-                				
+                
                             </article>
         </div>
         <aside class="span4 detailsbar">
@@ -1696,7 +1702,7 @@ will allow you to make the validation fail.</em></p>
                 <section class="span10 offset1">
                     <hr />
                     Documentation is powered by <a href="http://www.phpdoc.org/">phpDocumentor </a> and authored
-                    on November 16th, 2019 at 00:09.
+                    on March 8th, 2020 at 23:42.
                 </section>
             </section>
         </section>

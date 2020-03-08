@@ -24,7 +24,7 @@
     <script type="text/javascript">
     function loadExternalCodeSnippets() {
         Array.prototype.slice.call(document.querySelectorAll('pre[data-src]')).forEach(function (pre) {
-            var src = pre.getAttribute('data-src');
+            var src = pre.getAttribute('data-src').replace( /\\/g, '/');
             var extension = (src.match(/\.(\w+)$/) || [, ''])[1];
             var language = 'php';
 
@@ -136,10 +136,10 @@
                                 <div class="accordion" style="margin-bottom: 0">
         <div class="accordion-group">
             <div class="accordion-heading">
-                                    <a class="accordion-toggle " data-toggle="collapse" data-target="#namespace-660366019"></a>
+                                    <a class="accordion-toggle " data-toggle="collapse" data-target="#namespace-1999667629"></a>
                                 <a href="../namespaces/default.html" style="margin-left: 30px; padding-left: 0">\</a>
             </div>
-            <div id="namespace-660366019" class="accordion-body collapse in">
+            <div id="namespace-1999667629" class="accordion-body collapse in">
                 <div class="accordion-inner">
 
                     
@@ -401,7 +401,7 @@
                         
                         
                         
-                        
+                                                
                                                                         </dl>
                     <h2>Tags</h2>
                     <table class="table table-condensed">
@@ -410,7 +410,7 @@
                                 author
                             </th>
                             <td>
-                                                                    <p>Allcreator <a href="mailto:info@allcreator.net">info@allcreator.net</a></p>
+                                                                                                        <p>Allcreator <a href="mailto:info@allcreator.net">info@allcreator.net</a></p>
                                                             </td>
                         </tr>
                                         </table>
@@ -589,13 +589,15 @@
 
                 
                 
-                				
+                
                             </article>
         </div>
         <aside class="span4 detailsbar">
             <h1><i class="icon-arrow-down"></i></h1>
                                                             <dl>
-                                                                                            <dt>See also</dt>
+                                                    <dt>Inherited from</dt>
+                    <dd><a href="../classes/CalendarMailSettingsController.html"><div class="path-wrapper">\CalendarMailSettingsController</div></a></dd>
+                                                                            <dt>See also</dt>
                                                                 <dd><a href="../classes/NetCommonsAppController.html#method_beforeFilter"><span class="namespace-wrapper">\NetCommonsAppController::beforeFilter()</span></a></dd>
                                                                 </dl>
             <h2>Tags</h2>
@@ -619,13 +621,15 @@
                 
                                     <h4>Returns</h4>
                     array
-                                    				
+                                    
                             </article>
         </div>
         <aside class="span4 detailsbar">
             <h1><i class="icon-arrow-down"></i></h1>
                                                             <dl>
-                                                                            </dl>
+                                                    <dt>Inherited from</dt>
+                    <dd><a href="../classes/CalendarMailSettingsController.html"><div class="path-wrapper">\CalendarMailSettingsController</div></a></dd>
+                                                            </dl>
             <h2>Tags</h2>
             <table class="table table-condensed">
                                     <tr><td colspan="2"><em>None found</em></td></tr>
@@ -682,7 +686,7 @@
                 <section class="span10 offset1">
                     <hr />
                     Documentation is powered by <a href="http://www.phpdoc.org/">phpDocumentor </a> and authored
-                    on November 16th, 2019 at 00:09.
+                    on March 8th, 2020 at 23:42.
                 </section>
             </section>
         </section>
