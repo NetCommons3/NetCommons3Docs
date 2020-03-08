@@ -24,7 +24,7 @@
     <script type="text/javascript">
     function loadExternalCodeSnippets() {
         Array.prototype.slice.call(document.querySelectorAll('pre[data-src]')).forEach(function (pre) {
-            var src = pre.getAttribute('data-src');
+            var src = pre.getAttribute('data-src').replace( /\\/g, '/');
             var extension = (src.match(/\.(\w+)$/) || [, ''])[1];
             var language = 'php';
 
@@ -136,10 +136,10 @@
                                 <div class="accordion" style="margin-bottom: 0">
         <div class="accordion-group">
             <div class="accordion-heading">
-                                    <a class="accordion-toggle " data-toggle="collapse" data-target="#namespace-1909913511"></a>
+                                    <a class="accordion-toggle " data-toggle="collapse" data-target="#namespace-2007669228"></a>
                                 <a href="../namespaces/default.html" style="margin-left: 30px; padding-left: 0">\</a>
             </div>
-            <div id="namespace-1909913511" class="accordion-body collapse in">
+            <div id="namespace-2007669228" class="accordion-body collapse in">
                 <div class="accordion-inner">
 
                     
@@ -362,7 +362,7 @@
                         
                         
                         
-                        
+                                                
                                                                         </dl>
                     <h2>Tags</h2>
                     <table class="table table-condensed">
@@ -371,7 +371,7 @@
                                 author
                             </th>
                             <td>
-                                                                    <p>Mitsuru Mutaguchi <a href="mailto:mutaguchi@opensource-workshop.jp">mutaguchi@opensource-workshop.jp</a></p>
+                                                                                                        <p>Mitsuru Mutaguchi <a href="mailto:mutaguchi@opensource-workshop.jp">mutaguchi@opensource-workshop.jp</a></p>
                                                             </td>
                         </tr>
                                         </table>
@@ -391,7 +391,7 @@
             <a id="constant_FIELD_USE_LIKE" name="constant_FIELD_USE_LIKE" class="anchor"></a>
             <article id="constant_FIELD_USE_LIKE" class="constant">
                 <h3 class="">FIELD_USE_LIKE</h3>
-                <pre class="signature">FIELD_USE_LIKE</pre>
+                <pre class="signature">FIELD_USE_LIKE = &#039;use_like&#039; : string</pre>
                 <p><em>フィールド名</em></p>
                 
             </article>
@@ -412,7 +412,7 @@
             <a id="constant_FIELD_USE_UNLIKE" name="constant_FIELD_USE_UNLIKE" class="anchor"></a>
             <article id="constant_FIELD_USE_UNLIKE" class="constant">
                 <h3 class="">FIELD_USE_UNLIKE</h3>
-                <pre class="signature">FIELD_USE_UNLIKE</pre>
+                <pre class="signature">FIELD_USE_UNLIKE = &#039;use_unlike&#039; : string</pre>
                 <p><em>フィールド名</em></p>
                 
             </article>
@@ -433,7 +433,7 @@
             <a id="constant_FIELD_USE_COMMENT" name="constant_FIELD_USE_COMMENT" class="anchor"></a>
             <article id="constant_FIELD_USE_COMMENT" class="constant">
                 <h3 class="">FIELD_USE_COMMENT</h3>
-                <pre class="signature">FIELD_USE_COMMENT</pre>
+                <pre class="signature">FIELD_USE_COMMENT = &#039;use_comment&#039; : string</pre>
                 <p><em>フィールド名</em></p>
                 
             </article>
@@ -454,7 +454,7 @@
             <a id="constant_FIELD_USE_WORKFLOW" name="constant_FIELD_USE_WORKFLOW" class="anchor"></a>
             <article id="constant_FIELD_USE_WORKFLOW" class="constant">
                 <h3 class="">FIELD_USE_WORKFLOW</h3>
-                <pre class="signature">FIELD_USE_WORKFLOW</pre>
+                <pre class="signature">FIELD_USE_WORKFLOW = &#039;use_workflow&#039; : string</pre>
                 <p><em>フィールド名</em></p>
                 
             </article>
@@ -475,7 +475,7 @@
             <a id="constant_FIELD_USE_COMMENT_APPROVAL" name="constant_FIELD_USE_COMMENT_APPROVAL" class="anchor"></a>
             <article id="constant_FIELD_USE_COMMENT_APPROVAL" class="constant">
                 <h3 class="">FIELD_USE_COMMENT_APPROVAL</h3>
-                <pre class="signature">FIELD_USE_COMMENT_APPROVAL</pre>
+                <pre class="signature">FIELD_USE_COMMENT_APPROVAL = &#039;use_comment_approval&#039; : string</pre>
                 <p><em>フィールド名</em></p>
                 
             </article>
@@ -496,7 +496,7 @@
             <a id="constant_TYPE_BOOLEAN" name="constant_TYPE_BOOLEAN" class="anchor"></a>
             <article id="constant_TYPE_BOOLEAN" class="constant">
                 <h3 class="">TYPE_BOOLEAN</h3>
-                <pre class="signature">TYPE_BOOLEAN</pre>
+                <pre class="signature">TYPE_BOOLEAN = &#039;boolean&#039; : string</pre>
                 <p><em>フィールド名の種類</em></p>
                 
             </article>
@@ -517,7 +517,7 @@
             <a id="constant_TYPE_NUMERIC" name="constant_TYPE_NUMERIC" class="anchor"></a>
             <article id="constant_TYPE_NUMERIC" class="constant">
                 <h3 class="">TYPE_NUMERIC</h3>
-                <pre class="signature">TYPE_NUMERIC</pre>
+                <pre class="signature">TYPE_NUMERIC = &#039;numeric&#039; : string</pre>
                 <p><em>フィールド名の種類</em></p>
                 
             </article>
@@ -635,13 +635,15 @@ public $actsAs = array(
                                             </table>
                 
                 
-                				
+                
                             </article>
         </div>
         <aside class="span4 detailsbar">
             <h1><i class="icon-arrow-down"></i></h1>
                                                             <dl>
-                                                                            </dl>
+                                                    <dt>Inherited from</dt>
+                    <dd><a href="../classes/BlockSettingBehavior.html"><div class="path-wrapper">\BlockSettingBehavior</div></a></dd>
+                                                            </dl>
             <h2>Tags</h2>
             <table class="table table-condensed">
                                     <tr><td colspan="2"><em>None found</em></td></tr>
@@ -677,13 +679,15 @@ public $actsAs = array(
                                     <h4>Returns</h4>
                     mixed
                                             &mdash; <p>False or null will abort the operation. Any other result will continue.</p>
-                                    				
+                                    
                             </article>
         </div>
         <aside class="span4 detailsbar">
             <h1><i class="icon-arrow-down"></i></h1>
                                                             <dl>
-                                                                                            <dt>See also</dt>
+                                                    <dt>Inherited from</dt>
+                    <dd><a href="../classes/BlockSettingBehavior.html"><div class="path-wrapper">\BlockSettingBehavior</div></a></dd>
+                                                                            <dt>See also</dt>
                                                                 <dd><a href=""><span class="namespace-wrapper">\Model::save()</span></a></dd>
                                                                 </dl>
             <h2>Tags</h2>
@@ -721,13 +725,15 @@ public $actsAs = array(
                                     <h4>Returns</h4>
                     mixed
                                             &mdash; <p>False if the operation should abort. Any other result will continue.</p>
-                                    				
+                                    
                             </article>
         </div>
         <aside class="span4 detailsbar">
             <h1><i class="icon-arrow-down"></i></h1>
                                                             <dl>
-                                                                                            <dt>See also</dt>
+                                                    <dt>Inherited from</dt>
+                    <dd><a href="../classes/BlockSettingBehavior.html"><div class="path-wrapper">\BlockSettingBehavior</div></a></dd>
+                                                                            <dt>See also</dt>
                                                                 <dd><a href=""><span class="namespace-wrapper">\Model::save()</span></a></dd>
                                                                 </dl>
             <h2>Tags</h2>
@@ -769,13 +775,15 @@ public $actsAs = array(
                 
                                     <h4>Returns</h4>
                     array
-                                    				
+                                    
                             </article>
         </div>
         <aside class="span4 detailsbar">
             <h1><i class="icon-arrow-down"></i></h1>
                                                             <dl>
-                                                                            </dl>
+                                                    <dt>Inherited from</dt>
+                    <dd><a href="../classes/BlockSettingBehavior.html"><div class="path-wrapper">\BlockSettingBehavior</div></a></dd>
+                                                            </dl>
             <h2>Tags</h2>
             <table class="table table-condensed">
                                     <tr>
@@ -827,13 +835,15 @@ public $actsAs = array(
                 
                                     <h4>Returns</h4>
                     array
-                                    				
+                                    
                             </article>
         </div>
         <aside class="span4 detailsbar">
             <h1><i class="icon-arrow-down"></i></h1>
                                                             <dl>
-                                                                            </dl>
+                                                    <dt>Inherited from</dt>
+                    <dd><a href="../classes/BlockSettingBehavior.html"><div class="path-wrapper">\BlockSettingBehavior</div></a></dd>
+                                                            </dl>
             <h2>Tags</h2>
             <table class="table table-condensed">
                                     <tr>
@@ -880,13 +890,15 @@ public $actsAs = array(
                 
                                     <h4>Returns</h4>
                     boolean
-                                    				
+                                    
                             </article>
         </div>
         <aside class="span4 detailsbar">
             <h1><i class="icon-arrow-down"></i></h1>
                                                             <dl>
-                                                                            </dl>
+                                                    <dt>Inherited from</dt>
+                    <dd><a href="../classes/BlockSettingBehavior.html"><div class="path-wrapper">\BlockSettingBehavior</div></a></dd>
+                                                            </dl>
             <h2>Tags</h2>
             <table class="table table-condensed">
                                     <tr><td colspan="2"><em>None found</em></td></tr>
@@ -986,13 +998,15 @@ array(
                                     <h4>Returns</h4>
                     mixed
                                             &mdash; <p>On success Model::$data if its not empty or true, false on failure</p>
-                                    				
+                                    
                             </article>
         </div>
         <aside class="span4 detailsbar">
             <h1><i class="icon-arrow-down"></i></h1>
                                                             <dl>
-                                                                            </dl>
+                                                    <dt>Inherited from</dt>
+                    <dd><a href="../classes/BlockSettingBehavior.html"><div class="path-wrapper">\BlockSettingBehavior</div></a></dd>
+                                                            </dl>
             <h2>Tags</h2>
             <table class="table table-condensed">
                                     <tr><td colspan="2"><em>None found</em></td></tr>
@@ -1027,13 +1041,15 @@ array(
                 
                                     <h4>Returns</h4>
                     boolean
-                                    				
+                                    
                             </article>
         </div>
         <aside class="span4 detailsbar">
             <h1><i class="icon-arrow-down"></i></h1>
                                                             <dl>
-                                                                            </dl>
+                                                    <dt>Inherited from</dt>
+                    <dd><a href="../classes/BlockSettingBehavior.html"><div class="path-wrapper">\BlockSettingBehavior</div></a></dd>
+                                                            </dl>
             <h2>Tags</h2>
             <table class="table table-condensed">
                                     <tr><td colspan="2"><em>None found</em></td></tr>
@@ -1064,13 +1080,15 @@ array(
                                     <h4>Returns</h4>
                     array
                                             &mdash; <p>フィールド</p>
-                                    				
+                                    
                             </article>
         </div>
         <aside class="span4 detailsbar">
             <h1><i class="icon-arrow-down"></i></h1>
                                                             <dl>
-                                                                            </dl>
+                                                    <dt>Inherited from</dt>
+                    <dd><a href="../classes/BlockSettingBehavior.html"><div class="path-wrapper">\BlockSettingBehavior</div></a></dd>
+                                                            </dl>
             <h2>Tags</h2>
             <table class="table table-condensed">
                                     <tr><td colspan="2"><em>None found</em></td></tr>
@@ -1101,13 +1119,15 @@ array(
                                     <h4>Returns</h4>
                     string
                                             &mdash; <p>プラグインキー</p>
-                                    				
+                                    
                             </article>
         </div>
         <aside class="span4 detailsbar">
             <h1><i class="icon-arrow-down"></i></h1>
                                                             <dl>
-                                                                            </dl>
+                                                    <dt>Inherited from</dt>
+                    <dd><a href="../classes/BlockSettingBehavior.html"><div class="path-wrapper">\BlockSettingBehavior</div></a></dd>
+                                                            </dl>
             <h2>Tags</h2>
             <table class="table table-condensed">
                                     <tr><td colspan="2"><em>None found</em></td></tr>
@@ -1154,13 +1174,15 @@ room.need_approvalによって、値変わる</em></p>
                                     <h4>Returns</h4>
                     array
                                             &mdash; <p>ブロックセッティングデータ</p>
-                                    				
+                                    
                             </article>
         </div>
         <aside class="span4 detailsbar">
             <h1><i class="icon-arrow-down"></i></h1>
                                                             <dl>
-                                                                            </dl>
+                                                    <dt>Inherited from</dt>
+                    <dd><a href="../classes/BlockSettingBehavior.html"><div class="path-wrapper">\BlockSettingBehavior</div></a></dd>
+                                                            </dl>
             <h2>Tags</h2>
             <table class="table table-condensed">
                                     <tr><td colspan="2"><em>None found</em></td></tr>
@@ -1200,13 +1222,15 @@ room.need_approvalによって、値変わる</em></p>
                 
                                     <h4>Returns</h4>
                     array
-                                    				
+                                    
                             </article>
         </div>
         <aside class="span4 detailsbar">
             <h1><i class="icon-arrow-down"></i></h1>
                                                             <dl>
-                                                                            </dl>
+                                                    <dt>Inherited from</dt>
+                    <dd><a href="../classes/BlockSettingBehavior.html"><div class="path-wrapper">\BlockSettingBehavior</div></a></dd>
+                                                            </dl>
             <h2>Tags</h2>
             <table class="table table-condensed">
                                     <tr><td colspan="2"><em>None found</em></td></tr>
@@ -1242,13 +1266,15 @@ room.need_approvalによって、値変わる</em></p>
                                     <h4>Returns</h4>
                     array
                                             &mdash; <p>ブロックセッティングデータ</p>
-                                    				
+                                    
                             </article>
         </div>
         <aside class="span4 detailsbar">
             <h1><i class="icon-arrow-down"></i></h1>
                                                             <dl>
-                                                                            </dl>
+                                                    <dt>Inherited from</dt>
+                    <dd><a href="../classes/BlockSettingBehavior.html"><div class="path-wrapper">\BlockSettingBehavior</div></a></dd>
+                                                            </dl>
             <h2>Tags</h2>
             <table class="table table-condensed">
                                     <tr><td colspan="2"><em>None found</em></td></tr>
@@ -1305,7 +1331,7 @@ room.need_approvalによって、値変わる</em></p>
                 <section class="span10 offset1">
                     <hr />
                     Documentation is powered by <a href="http://www.phpdoc.org/">phpDocumentor </a> and authored
-                    on October 29th, 2019 at 09:27.
+                    on March 8th, 2020 at 22:41.
                 </section>
             </section>
         </section>
