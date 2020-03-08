@@ -24,7 +24,7 @@
     <script type="text/javascript">
     function loadExternalCodeSnippets() {
         Array.prototype.slice.call(document.querySelectorAll('pre[data-src]')).forEach(function (pre) {
-            var src = pre.getAttribute('data-src');
+            var src = pre.getAttribute('data-src').replace( /\\/g, '/');
             var extension = (src.match(/\.(\w+)$/) || [, ''])[1];
             var language = 'php';
 
@@ -136,10 +136,10 @@
                                 <div class="accordion" style="margin-bottom: 0">
         <div class="accordion-group">
             <div class="accordion-heading">
-                                    <a class="accordion-toggle " data-toggle="collapse" data-target="#namespace-1084948346"></a>
+                                    <a class="accordion-toggle " data-toggle="collapse" data-target="#namespace-1777180063"></a>
                                 <a href="../namespaces/default.html" style="margin-left: 30px; padding-left: 0">\</a>
             </div>
-            <div id="namespace-1084948346" class="accordion-body collapse in">
+            <div id="namespace-1777180063" class="accordion-body collapse in">
                 <div class="accordion-inner">
 
                     
@@ -363,7 +363,7 @@ will inherit them.</p>
                         
                         
                         
-                        
+                                                
                                                                         </dl>
                     <h2>Tags</h2>
                     <table class="table table-condensed">
@@ -372,7 +372,7 @@ will inherit them.</p>
                                 author
                             </th>
                             <td>
-                                                                    <p>Shohei Nakajima <a href="mailto:nakajimashouhei@gmail.com">nakajimashouhei@gmail.com</a></p>
+                                                                                                        <p>Shohei Nakajima <a href="mailto:nakajimashouhei@gmail.com">nakajimashouhei@gmail.com</a></p>
                                                             </td>
                         </tr>
                                         </table>
@@ -392,7 +392,7 @@ will inherit them.</p>
             <a id="constant_TYPE_WITH_SITE" name="constant_TYPE_WITH_SITE" class="anchor"></a>
             <article id="constant_TYPE_WITH_SITE" class="constant">
                 <h3 class="">TYPE_WITH_SITE</h3>
-                <pre class="signature">TYPE_WITH_SITE</pre>
+                <pre class="signature">TYPE_WITH_SITE = &#039;1&#039;</pre>
                 <p><em>サイトタイプ</em></p>
                 
             </article>
@@ -413,7 +413,7 @@ will inherit them.</p>
             <a id="constant_TYPE_WITH_SPACE" name="constant_TYPE_WITH_SPACE" class="anchor"></a>
             <article id="constant_TYPE_WITH_SPACE" class="constant">
                 <h3 class="">TYPE_WITH_SPACE</h3>
-                <pre class="signature">TYPE_WITH_SPACE</pre>
+                <pre class="signature">TYPE_WITH_SPACE = &#039;2&#039;</pre>
                 <p><em>スペースタイプ</em></p>
                 
             </article>
@@ -434,7 +434,7 @@ will inherit them.</p>
             <a id="constant_TYPE_WITH_ROOM" name="constant_TYPE_WITH_ROOM" class="anchor"></a>
             <article id="constant_TYPE_WITH_ROOM" class="constant">
                 <h3 class="">TYPE_WITH_ROOM</h3>
-                <pre class="signature">TYPE_WITH_ROOM</pre>
+                <pre class="signature">TYPE_WITH_ROOM = &#039;3&#039;</pre>
                 <p><em>ルームタイプ</em></p>
                 
             </article>
@@ -455,7 +455,7 @@ will inherit them.</p>
             <a id="constant_TYPE_WITH_PAGE" name="constant_TYPE_WITH_PAGE" class="anchor"></a>
             <article id="constant_TYPE_WITH_PAGE" class="constant">
                 <h3 class="">TYPE_WITH_PAGE</h3>
-                <pre class="signature">TYPE_WITH_PAGE</pre>
+                <pre class="signature">TYPE_WITH_PAGE = &#039;4&#039;</pre>
                 <p><em>ページタイプ</em></p>
                 
             </article>
@@ -801,7 +801,7 @@ can also be an array of options, see above.</p></td>
                                             </table>
                 
                 
-                				
+                
                             </article>
         </div>
         <aside class="span4 detailsbar">
@@ -836,7 +836,7 @@ can also be an array of options, see above.</p></td>
 
                 
                 
-                				
+                
                             </article>
         </div>
         <aside class="span4 detailsbar">
@@ -864,7 +864,7 @@ can also be an array of options, see above.</p></td>
 
                 
                 
-                				
+                
                             </article>
         </div>
         <aside class="span4 detailsbar">
@@ -895,7 +895,7 @@ can also be an array of options, see above.</p></td>
                                     <h4>Returns</h4>
                     \DataSource
                                             &mdash; <p>A DataSource object</p>
-                                    				
+                                    
                             </article>
         </div>
         <aside class="span4 detailsbar">
@@ -950,7 +950,7 @@ schema data defaults are not merged.</p></td>
                                     <h4>Returns</h4>
                     array
                                             &mdash; <p>The current Model::data; after merging $data and/or defaults from database</p>
-                                    				
+                                    
                             </article>
         </div>
         <aside class="span4 detailsbar">
@@ -1005,7 +1005,7 @@ schema data defaults are not merged.</p></td>
                                     <h4>Returns</h4>
                     array
                                             &mdash; <p>The current Model::data; after merging $data and/or defaults from database</p>
-                                    				
+                                    
                             </article>
         </div>
         <aside class="span4 detailsbar">
@@ -1042,7 +1042,7 @@ schema data defaults are not merged.</p></td>
 
                 
                 
-                				
+                
                             </article>
         </div>
         <aside class="span4 detailsbar">
@@ -1070,7 +1070,7 @@ schema data defaults are not merged.</p></td>
 
                 
                 
-                				
+                
                             </article>
         </div>
         <aside class="span4 detailsbar">
@@ -1111,7 +1111,7 @@ schema data defaults are not merged.</p></td>
                             <dd></dd>
                                                                     </dl>
                 
-                				
+                
                             </article>
         </div>
         <aside class="span4 detailsbar">
@@ -1147,7 +1147,7 @@ schema data defaults are not merged.</p></td>
                                             </table>
                 
                 
-                				
+                
                             </article>
         </div>
         <aside class="span4 detailsbar">
@@ -1185,13 +1185,15 @@ schema data defaults are not merged.</p></td>
                 
                                     <h4>Returns</h4>
                     array
-                                    				
+                                    
                             </article>
         </div>
         <aside class="span4 detailsbar">
             <h1><i class="icon-arrow-down"></i></h1>
                                                             <dl>
-                                                                            </dl>
+                                                    <dt>Inherited from</dt>
+                    <dd><a href="../classes/Box.html"><div class="path-wrapper">\Box</div></a></dd>
+                                                            </dl>
             <h2>Tags</h2>
             <table class="table table-condensed">
                                     <tr>
@@ -1221,7 +1223,7 @@ schema data defaults are not merged.</p></td>
                                     <h4>Returns</h4>
                     array
                                             &mdash; <p>デフォルト値をセットした配列</p>
-                                    				
+                                    
                             </article>
         </div>
         <aside class="span4 detailsbar">
@@ -1278,7 +1280,7 @@ will enable only those callbacks.</li>
                                     <h4>Returns</h4>
                     mixed
                                             &mdash; <p>On success Model::$data if its not empty or true, false on failure</p>
-                                    				
+                                    
                             </article>
         </div>
         <aside class="span4 detailsbar">
@@ -1323,7 +1325,7 @@ will enable only those callbacks.</li>
                 
                                     <h4>Returns</h4>
                     array
-                                    				
+                                    
                             </article>
         </div>
         <aside class="span4 detailsbar">
@@ -1356,7 +1358,7 @@ will enable only those callbacks.</li>
                                     <h4>Returns</h4>
                     string
                                             &mdash; <p>The name of the DataSource, as defined in app/Config/database.php</p>
-                                    				
+                                    
                             </article>
         </div>
         <aside class="span4 detailsbar">
@@ -1384,7 +1386,7 @@ will enable only those callbacks.</li>
 
                 
                 
-                				
+                
                             </article>
         </div>
         <aside class="span4 detailsbar">
@@ -1449,7 +1451,7 @@ will enable only those callbacks.</li>
                 <section class="span10 offset1">
                     <hr />
                     Documentation is powered by <a href="http://www.phpdoc.org/">phpDocumentor </a> and authored
-                    on October 7th, 2019 at 01:22.
+                    on March 8th, 2020 at 14:32.
                 </section>
             </section>
         </section>
