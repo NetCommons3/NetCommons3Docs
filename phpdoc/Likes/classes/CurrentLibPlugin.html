@@ -24,7 +24,7 @@
     <script type="text/javascript">
     function loadExternalCodeSnippets() {
         Array.prototype.slice.call(document.querySelectorAll('pre[data-src]')).forEach(function (pre) {
-            var src = pre.getAttribute('data-src');
+            var src = pre.getAttribute('data-src').replace( /\\/g, '/');
             var extension = (src.match(/\.(\w+)$/) || [, ''])[1];
             var language = 'php';
 
@@ -106,12 +106,12 @@
                         <ul class="dropdown-menu">
                             <li>
                                 <a href="../reports/errors.html">
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                            <i class="icon-list-alt"></i>&#160;Errors <span class="label label-info pull-right">0</span>
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                        <i class="icon-list-alt"></i>&#160;Errors <span class="label label-info pull-right">0</span>
                                 </a>
                             </li>
                             <li>
                                 <a href="../reports/markers.html">
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                            <i class="icon-list-alt"></i>&#160;Markers <span class="label label-info pull-right">0</span>
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                        <i class="icon-list-alt"></i>&#160;Markers <span class="label label-info pull-right">0</span>
                                 </a>
                             </li>
                             <li>
@@ -136,16 +136,17 @@
                                 <div class="accordion" style="margin-bottom: 0">
         <div class="accordion-group">
             <div class="accordion-heading">
-                                    <a class="accordion-toggle " data-toggle="collapse" data-target="#namespace-2036012942"></a>
+                                    <a class="accordion-toggle " data-toggle="collapse" data-target="#namespace-801806134"></a>
                                 <a href="../namespaces/default.html" style="margin-left: 30px; padding-left: 0">\</a>
             </div>
-            <div id="namespace-2036012942" class="accordion-body collapse in">
+            <div id="namespace-801806134" class="accordion-body collapse in">
                 <div class="accordion-inner">
 
                     
                     <ul>
                                                                                                     <li class="class"><a href="../classes/AccessCtrlComponent.html">AccessCtrlComponent</a></li>
                                                     <li class="class"><a href="../classes/AddIndex.html">AddIndex</a></li>
+                                                    <li class="class"><a href="../classes/AngularParser.html">AngularParser</a></li>
                                                     <li class="class"><a href="../classes/AppController.html">AppController</a></li>
                                                     <li class="class"><a href="../classes/AppController.html">AppController</a></li>
                                                     <li class="class"><a href="../classes/AppHelper.html">AppHelper</a></li>
@@ -346,7 +347,7 @@
                         
                         
                         
-                        
+                                                
                                                                         </dl>
                     <h2>Tags</h2>
                     <table class="table table-condensed">
@@ -355,7 +356,7 @@
                                 author
                             </th>
                             <td>
-                                                                    <p>Shohei Nakajima <a href="mailto:nakajimashouhei@gmail.com">nakajimashouhei@gmail.com</a></p>
+                                                                                                        <p>Shohei Nakajima <a href="mailto:nakajimashouhei@gmail.com">nakajimashouhei@gmail.com</a></p>
                                                             </td>
                         </tr>
                                         </table>
@@ -375,7 +376,7 @@
             <a id="constant_PLUGIN_CONTROL_PANEL" name="constant_PLUGIN_CONTROL_PANEL" class="anchor"></a>
             <article id="constant_PLUGIN_CONTROL_PANEL" class="constant">
                 <h3 class="">PLUGIN_CONTROL_PANEL</h3>
-                <pre class="signature">PLUGIN_CONTROL_PANEL</pre>
+                <pre class="signature">PLUGIN_CONTROL_PANEL = &#039;control_panel&#039;</pre>
                 <p><em>ControlPanelプラグイン名の定数</em></p>
                 
             </article>
@@ -396,7 +397,7 @@
             <a id="constant_PLUGIN_USERS" name="constant_PLUGIN_USERS" class="anchor"></a>
             <article id="constant_PLUGIN_USERS" class="constant">
                 <h3 class="">PLUGIN_USERS</h3>
-                <pre class="signature">PLUGIN_USERS</pre>
+                <pre class="signature">PLUGIN_USERS = &#039;users&#039;</pre>
                 <p><em>Usersプラグイン名の定数</em></p>
                 
             </article>
@@ -417,7 +418,7 @@
             <a id="constant_PLUGIN_GROUPS" name="constant_PLUGIN_GROUPS" class="anchor"></a>
             <article id="constant_PLUGIN_GROUPS" class="constant">
                 <h3 class="">PLUGIN_GROUPS</h3>
-                <pre class="signature">PLUGIN_GROUPS</pre>
+                <pre class="signature">PLUGIN_GROUPS = &#039;groups&#039;</pre>
                 <p><em>Groupsプラグイン名の定数</em></p>
                 
             </article>
@@ -438,7 +439,7 @@
             <a id="constant_PLUGIN_WYSIWYG" name="constant_PLUGIN_WYSIWYG" class="anchor"></a>
             <article id="constant_PLUGIN_WYSIWYG" class="constant">
                 <h3 class="">PLUGIN_WYSIWYG</h3>
-                <pre class="signature">PLUGIN_WYSIWYG</pre>
+                <pre class="signature">PLUGIN_WYSIWYG = &#039;wysiwyg&#039;</pre>
                 <p><em>Wysiwygプラグイン名の定数</em></p>
                 
             </article>
@@ -459,7 +460,7 @@
             <a id="constant_PLUGIN_PAGES" name="constant_PLUGIN_PAGES" class="anchor"></a>
             <article id="constant_PLUGIN_PAGES" class="constant">
                 <h3 class="">PLUGIN_PAGES</h3>
-                <pre class="signature">PLUGIN_PAGES</pre>
+                <pre class="signature">PLUGIN_PAGES = &#039;pages&#039;</pre>
                 <p><em>Pagesプラグイン名の定数</em></p>
                 
             </article>
@@ -845,7 +846,7 @@
 
                 
                 
-                				
+                
                             </article>
         </div>
         <aside class="span4 detailsbar">
@@ -873,7 +874,7 @@
 
                 
                 
-                				
+                
                             </article>
         </div>
         <aside class="span4 detailsbar">
@@ -909,13 +910,15 @@
                                             </table>
                 
                 
-                				
+                
                             </article>
         </div>
         <aside class="span4 detailsbar">
             <h1><i class="icon-arrow-down"></i></h1>
                                                             <dl>
-                                                                            </dl>
+                                                    <dt>Inherited from</dt>
+                    <dd><a href="../classes/CurrentLibPlugin.html"><div class="path-wrapper">\CurrentLibPlugin</div></a></dd>
+                                                            </dl>
             <h2>Tags</h2>
             <table class="table table-condensed">
                                     <tr><td colspan="2"><em>None found</em></td></tr>
@@ -937,14 +940,16 @@
                 
                                     <h4>Returns</h4>
                     <a href="../classes/CurrentLibPlugin.html">\CurrentLibPlugin</a>
-                                    				
+                                    
                             </article>
         </div>
         <aside class="span4 detailsbar">
             <h1><i class="icon-arrow-down"></i></h1>
                             <span class="label label-info">static</span>
                                                             <dl>
-                                                                            </dl>
+                                                    <dt>Inherited from</dt>
+                    <dd><a href="../classes/CurrentLibPlugin.html"><div class="path-wrapper">\CurrentLibPlugin</div></a></dd>
+                                                            </dl>
             <h2>Tags</h2>
             <table class="table table-condensed">
                                     <tr><td colspan="2"><em>None found</em></td></tr>
@@ -964,14 +969,16 @@
 
                 
                 
-                				
+                
                             </article>
         </div>
         <aside class="span4 detailsbar">
             <h1><i class="icon-arrow-down"></i></h1>
                             <span class="label label-info">static</span>
                                                             <dl>
-                                                                            </dl>
+                                                    <dt>Inherited from</dt>
+                    <dd><a href="../classes/CurrentLibPlugin.html"><div class="path-wrapper">\CurrentLibPlugin</div></a></dd>
+                                                            </dl>
             <h2>Tags</h2>
             <table class="table table-condensed">
                                     <tr><td colspan="2"><em>None found</em></td></tr>
@@ -1006,13 +1013,15 @@
                 
                                     <h4>Returns</h4>
                     array
-                                    				
+                                    
                             </article>
         </div>
         <aside class="span4 detailsbar">
             <h1><i class="icon-arrow-down"></i></h1>
                                                             <dl>
-                                                                            </dl>
+                                                    <dt>Inherited from</dt>
+                    <dd><a href="../classes/CurrentLibPlugin.html"><div class="path-wrapper">\CurrentLibPlugin</div></a></dd>
+                                                            </dl>
             <h2>Tags</h2>
             <table class="table table-condensed">
                                     <tr><td colspan="2"><em>None found</em></td></tr>
@@ -1042,13 +1051,15 @@
                 
                                     <h4>Returns</h4>
                     array
-                                    				
+                                    
                             </article>
         </div>
         <aside class="span4 detailsbar">
             <h1><i class="icon-arrow-down"></i></h1>
                                                             <dl>
-                                                                            </dl>
+                                                    <dt>Inherited from</dt>
+                    <dd><a href="../classes/CurrentLibPlugin.html"><div class="path-wrapper">\CurrentLibPlugin</div></a></dd>
+                                                            </dl>
             <h2>Tags</h2>
             <table class="table table-condensed">
                                     <tr><td colspan="2"><em>None found</em></td></tr>
@@ -1078,13 +1089,15 @@
                 
                                     <h4>Returns</h4>
                     array
-                                    				
+                                    
                             </article>
         </div>
         <aside class="span4 detailsbar">
             <h1><i class="icon-arrow-down"></i></h1>
                                                             <dl>
-                                                                            </dl>
+                                                    <dt>Inherited from</dt>
+                    <dd><a href="../classes/CurrentLibPlugin.html"><div class="path-wrapper">\CurrentLibPlugin</div></a></dd>
+                                                            </dl>
             <h2>Tags</h2>
             <table class="table table-condensed">
                                     <tr><td colspan="2"><em>None found</em></td></tr>
@@ -1114,13 +1127,15 @@
                 
                                     <h4>Returns</h4>
                     boolean
-                                    				
+                                    
                             </article>
         </div>
         <aside class="span4 detailsbar">
             <h1><i class="icon-arrow-down"></i></h1>
                                                             <dl>
-                                                                            </dl>
+                                                    <dt>Inherited from</dt>
+                    <dd><a href="../classes/CurrentLibPlugin.html"><div class="path-wrapper">\CurrentLibPlugin</div></a></dd>
+                                                            </dl>
             <h2>Tags</h2>
             <table class="table table-condensed">
                                     <tr><td colspan="2"><em>None found</em></td></tr>
@@ -1140,14 +1155,16 @@
 
                 
                 
-                				
+                
                             </article>
         </div>
         <aside class="span4 detailsbar">
             <h1><i class="icon-arrow-down"></i></h1>
                             <span class="label label-info">static</span>
                                                             <dl>
-                                                                            </dl>
+                                                    <dt>Inherited from</dt>
+                    <dd><a href="../classes/CurrentLibPlugin.html"><div class="path-wrapper">\CurrentLibPlugin</div></a></dd>
+                                                            </dl>
             <h2>Tags</h2>
             <table class="table table-condensed">
                                     <tr><td colspan="2"><em>None found</em></td></tr>
@@ -1175,7 +1192,7 @@
                                             </table>
                 
                 
-                				
+                
                             </article>
         </div>
         <aside class="span4 detailsbar">
@@ -1214,7 +1231,7 @@
                 
                                     <h4>Returns</h4>
                     object
-                                    				
+                                    
                             </article>
         </div>
         <aside class="span4 detailsbar">
@@ -1251,7 +1268,7 @@
                                             </table>
                 
                 
-                				
+                
                             </article>
         </div>
         <aside class="span4 detailsbar">
@@ -1317,7 +1334,7 @@
                 <section class="span10 offset1">
                     <hr />
                     Documentation is powered by <a href="http://www.phpdoc.org/">phpDocumentor </a> and authored
-                    on August 11th, 2019 at 22:39.
+                    on March 9th, 2020 at 15:00.
                 </section>
             </section>
         </section>
