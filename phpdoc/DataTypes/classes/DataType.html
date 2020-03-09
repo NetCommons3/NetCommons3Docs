@@ -24,7 +24,7 @@
     <script type="text/javascript">
     function loadExternalCodeSnippets() {
         Array.prototype.slice.call(document.querySelectorAll('pre[data-src]')).forEach(function (pre) {
-            var src = pre.getAttribute('data-src');
+            var src = pre.getAttribute('data-src').replace( /\\/g, '/');
             var extension = (src.match(/\.(\w+)$/) || [, ''])[1];
             var language = 'php';
 
@@ -106,12 +106,12 @@
                         <ul class="dropdown-menu">
                             <li>
                                 <a href="../reports/errors.html">
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                        <i class="icon-list-alt"></i>&#160;Errors <span class="label label-info pull-right">0</span>
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    <i class="icon-list-alt"></i>&#160;Errors <span class="label label-info pull-right">0</span>
                                 </a>
                             </li>
                             <li>
                                 <a href="../reports/markers.html">
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                        <i class="icon-list-alt"></i>&#160;Markers <span class="label label-info pull-right">0</span>
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                    <i class="icon-list-alt"></i>&#160;Markers <span class="label label-info pull-right">0</span>
                                 </a>
                             </li>
                             <li>
@@ -136,10 +136,10 @@
                                 <div class="accordion" style="margin-bottom: 0">
         <div class="accordion-group">
             <div class="accordion-heading">
-                                    <a class="accordion-toggle " data-toggle="collapse" data-target="#namespace-2106645714"></a>
+                                    <a class="accordion-toggle " data-toggle="collapse" data-target="#namespace-1992968688"></a>
                                 <a href="../namespaces/default.html" style="margin-left: 30px; padding-left: 0">\</a>
             </div>
-            <div id="namespace-2106645714" class="accordion-body collapse in">
+            <div id="namespace-1992968688" class="accordion-body collapse in">
                 <div class="accordion-inner">
 
                     
@@ -150,6 +150,7 @@
                                                     <li class="class"><a href="../classes/AddIsOriginalCopy.html">AddIsOriginalCopy</a></li>
                                                     <li class="class"><a href="../classes/AddLanguageRecords.html">AddLanguageRecords</a></li>
                                                     <li class="class"><a href="../classes/AddTableForM17n1.html">AddTableForM17n1</a></li>
+                                                    <li class="class"><a href="../classes/AngularParser.html">AngularParser</a></li>
                                                     <li class="class"><a href="../classes/AppController.html">AppController</a></li>
                                                     <li class="class"><a href="../classes/AppController.html">AppController</a></li>
                                                     <li class="class"><a href="../classes/AppHelper.html">AppHelper</a></li>
@@ -371,7 +372,7 @@ will inherit them.</p>
                         
                         
                         
-                        
+                                                
                                                                         </dl>
                     <h2>Tags</h2>
                     <table class="table table-condensed">
@@ -380,7 +381,7 @@ will inherit them.</p>
                                 author
                             </th>
                             <td>
-                                                                    <p>Shohei Nakajima <a href="mailto:nakajimashouhei@gmail.com">nakajimashouhei@gmail.com</a></p>
+                                                                                                        <p>Shohei Nakajima <a href="mailto:nakajimashouhei@gmail.com">nakajimashouhei@gmail.com</a></p>
                                                             </td>
                         </tr>
                                         </table>
@@ -400,7 +401,7 @@ will inherit them.</p>
             <a id="constant_DATA_TYPE_LABEL" name="constant_DATA_TYPE_LABEL" class="anchor"></a>
             <article id="constant_DATA_TYPE_LABEL" class="constant">
                 <h3 class="">DATA_TYPE_LABEL</h3>
-                <pre class="signature">DATA_TYPE_LABEL</pre>
+                <pre class="signature">DATA_TYPE_LABEL = &#039;label&#039; : integer</pre>
                 <p><em>データタイプキー</em></p>
                 
             </article>
@@ -421,7 +422,7 @@ will inherit them.</p>
             <a id="constant_DATA_TYPE_TEXT" name="constant_DATA_TYPE_TEXT" class="anchor"></a>
             <article id="constant_DATA_TYPE_TEXT" class="constant">
                 <h3 class="">DATA_TYPE_TEXT</h3>
-                <pre class="signature">DATA_TYPE_TEXT</pre>
+                <pre class="signature">DATA_TYPE_TEXT = &#039;text&#039; : integer</pre>
                 <p><em>データタイプキー</em></p>
                 
             </article>
@@ -442,7 +443,7 @@ will inherit them.</p>
             <a id="constant_DATA_TYPE_TEXTAREA" name="constant_DATA_TYPE_TEXTAREA" class="anchor"></a>
             <article id="constant_DATA_TYPE_TEXTAREA" class="constant">
                 <h3 class="">DATA_TYPE_TEXTAREA</h3>
-                <pre class="signature">DATA_TYPE_TEXTAREA</pre>
+                <pre class="signature">DATA_TYPE_TEXTAREA = &#039;textarea&#039; : integer</pre>
                 <p><em>データタイプキー</em></p>
                 
             </article>
@@ -463,7 +464,7 @@ will inherit them.</p>
             <a id="constant_DATA_TYPE_RADIO" name="constant_DATA_TYPE_RADIO" class="anchor"></a>
             <article id="constant_DATA_TYPE_RADIO" class="constant">
                 <h3 class="">DATA_TYPE_RADIO</h3>
-                <pre class="signature">DATA_TYPE_RADIO</pre>
+                <pre class="signature">DATA_TYPE_RADIO = &#039;radio&#039; : integer</pre>
                 <p><em>データタイプキー</em></p>
                 
             </article>
@@ -484,7 +485,7 @@ will inherit them.</p>
             <a id="constant_DATA_TYPE_CHECKBOX" name="constant_DATA_TYPE_CHECKBOX" class="anchor"></a>
             <article id="constant_DATA_TYPE_CHECKBOX" class="constant">
                 <h3 class="">DATA_TYPE_CHECKBOX</h3>
-                <pre class="signature">DATA_TYPE_CHECKBOX</pre>
+                <pre class="signature">DATA_TYPE_CHECKBOX = &#039;checkbox&#039; : integer</pre>
                 <p><em>データタイプキー</em></p>
                 
             </article>
@@ -505,7 +506,7 @@ will inherit them.</p>
             <a id="constant_DATA_TYPE_SELECT" name="constant_DATA_TYPE_SELECT" class="anchor"></a>
             <article id="constant_DATA_TYPE_SELECT" class="constant">
                 <h3 class="">DATA_TYPE_SELECT</h3>
-                <pre class="signature">DATA_TYPE_SELECT</pre>
+                <pre class="signature">DATA_TYPE_SELECT = &#039;select&#039; : integer</pre>
                 <p><em>データタイプキー</em></p>
                 
             </article>
@@ -526,7 +527,7 @@ will inherit them.</p>
             <a id="constant_DATA_TYPE_MULTIPLE_SELECT" name="constant_DATA_TYPE_MULTIPLE_SELECT" class="anchor"></a>
             <article id="constant_DATA_TYPE_MULTIPLE_SELECT" class="constant">
                 <h3 class="">DATA_TYPE_MULTIPLE_SELECT</h3>
-                <pre class="signature">DATA_TYPE_MULTIPLE_SELECT</pre>
+                <pre class="signature">DATA_TYPE_MULTIPLE_SELECT = &#039;multiple_select&#039; : integer</pre>
                 <p><em>データタイプキー</em></p>
                 
             </article>
@@ -547,7 +548,7 @@ will inherit them.</p>
             <a id="constant_DATA_TYPE_PASSWORD" name="constant_DATA_TYPE_PASSWORD" class="anchor"></a>
             <article id="constant_DATA_TYPE_PASSWORD" class="constant">
                 <h3 class="">DATA_TYPE_PASSWORD</h3>
-                <pre class="signature">DATA_TYPE_PASSWORD</pre>
+                <pre class="signature">DATA_TYPE_PASSWORD = &#039;password&#039; : integer</pre>
                 <p><em>データタイプキー</em></p>
                 
             </article>
@@ -568,7 +569,7 @@ will inherit them.</p>
             <a id="constant_DATA_TYPE_EMAIL" name="constant_DATA_TYPE_EMAIL" class="anchor"></a>
             <article id="constant_DATA_TYPE_EMAIL" class="constant">
                 <h3 class="">DATA_TYPE_EMAIL</h3>
-                <pre class="signature">DATA_TYPE_EMAIL</pre>
+                <pre class="signature">DATA_TYPE_EMAIL = &#039;email&#039; : integer</pre>
                 <p><em>データタイプキー</em></p>
                 
             </article>
@@ -589,7 +590,7 @@ will inherit them.</p>
             <a id="constant_DATA_TYPE_IMG" name="constant_DATA_TYPE_IMG" class="anchor"></a>
             <article id="constant_DATA_TYPE_IMG" class="constant">
                 <h3 class="">DATA_TYPE_IMG</h3>
-                <pre class="signature">DATA_TYPE_IMG</pre>
+                <pre class="signature">DATA_TYPE_IMG = &#039;img&#039; : integer</pre>
                 <p><em>データタイプキー</em></p>
                 
             </article>
@@ -610,7 +611,7 @@ will inherit them.</p>
             <a id="constant_DATA_TYPE_FILE" name="constant_DATA_TYPE_FILE" class="anchor"></a>
             <article id="constant_DATA_TYPE_FILE" class="constant">
                 <h3 class="">DATA_TYPE_FILE</h3>
-                <pre class="signature">DATA_TYPE_FILE</pre>
+                <pre class="signature">DATA_TYPE_FILE = &#039;file&#039; : integer</pre>
                 <p><em>データタイプキー</em></p>
                 
             </article>
@@ -631,7 +632,7 @@ will inherit them.</p>
             <a id="constant_DATA_TYPE_DATE" name="constant_DATA_TYPE_DATE" class="anchor"></a>
             <article id="constant_DATA_TYPE_DATE" class="constant">
                 <h3 class="">DATA_TYPE_DATE</h3>
-                <pre class="signature">DATA_TYPE_DATE</pre>
+                <pre class="signature">DATA_TYPE_DATE = &#039;date&#039; : integer</pre>
                 <p><em>データタイプキー</em></p>
                 
             </article>
@@ -652,7 +653,7 @@ will inherit them.</p>
             <a id="constant_DATA_TYPE_TIME" name="constant_DATA_TYPE_TIME" class="anchor"></a>
             <article id="constant_DATA_TYPE_TIME" class="constant">
                 <h3 class="">DATA_TYPE_TIME</h3>
-                <pre class="signature">DATA_TYPE_TIME</pre>
+                <pre class="signature">DATA_TYPE_TIME = &#039;time&#039; : integer</pre>
                 <p><em>データタイプキー</em></p>
                 
             </article>
@@ -673,7 +674,7 @@ will inherit them.</p>
             <a id="constant_DATA_TYPE_DATETIME" name="constant_DATA_TYPE_DATETIME" class="anchor"></a>
             <article id="constant_DATA_TYPE_DATETIME" class="constant">
                 <h3 class="">DATA_TYPE_DATETIME</h3>
-                <pre class="signature">DATA_TYPE_DATETIME</pre>
+                <pre class="signature">DATA_TYPE_DATETIME = &#039;datetime&#039; : integer</pre>
                 <p><em>データタイプキー</em></p>
                 
             </article>
@@ -694,7 +695,7 @@ will inherit them.</p>
             <a id="constant_DATA_TYPE_WYSIWYG" name="constant_DATA_TYPE_WYSIWYG" class="anchor"></a>
             <article id="constant_DATA_TYPE_WYSIWYG" class="constant">
                 <h3 class="">DATA_TYPE_WYSIWYG</h3>
-                <pre class="signature">DATA_TYPE_WYSIWYG</pre>
+                <pre class="signature">DATA_TYPE_WYSIWYG = &#039;wysiwyg&#039; : integer</pre>
                 <p><em>データタイプキー</em></p>
                 
             </article>
@@ -715,7 +716,7 @@ will inherit them.</p>
             <a id="constant_DATA_TYPE_PREFECTURE" name="constant_DATA_TYPE_PREFECTURE" class="anchor"></a>
             <article id="constant_DATA_TYPE_PREFECTURE" class="constant">
                 <h3 class="">DATA_TYPE_PREFECTURE</h3>
-                <pre class="signature">DATA_TYPE_PREFECTURE</pre>
+                <pre class="signature">DATA_TYPE_PREFECTURE = &#039;prefecture&#039; : integer</pre>
                 <p><em>データタイプキー</em></p>
                 
             </article>
@@ -736,7 +737,7 @@ will inherit them.</p>
             <a id="constant_DATA_TYPE_TIMEZONE" name="constant_DATA_TYPE_TIMEZONE" class="anchor"></a>
             <article id="constant_DATA_TYPE_TIMEZONE" class="constant">
                 <h3 class="">DATA_TYPE_TIMEZONE</h3>
-                <pre class="signature">DATA_TYPE_TIMEZONE</pre>
+                <pre class="signature">DATA_TYPE_TIMEZONE = &#039;timezone&#039; : integer</pre>
                 <p><em>データタイプキー</em></p>
                 
             </article>
@@ -757,7 +758,7 @@ will inherit them.</p>
             <a id="constant_CHECKBOX_SEPARATOR" name="constant_CHECKBOX_SEPARATOR" class="anchor"></a>
             <article id="constant_CHECKBOX_SEPARATOR" class="constant">
                 <h3 class="">CHECKBOX_SEPARATOR</h3>
-                <pre class="signature">CHECKBOX_SEPARATOR</pre>
+                <pre class="signature">CHECKBOX_SEPARATOR = &quot;\n&quot; : \const</pre>
                 <p><em>チェックボックスのセパレータ</em></p>
                 
             </article>
@@ -1051,7 +1052,7 @@ can also be an array of options, see above.</p></td>
                                             </table>
                 
                 
-                				
+                
                             </article>
         </div>
         <aside class="span4 detailsbar">
@@ -1086,7 +1087,7 @@ can also be an array of options, see above.</p></td>
 
                 
                 
-                				
+                
                             </article>
         </div>
         <aside class="span4 detailsbar">
@@ -1114,7 +1115,7 @@ can also be an array of options, see above.</p></td>
 
                 
                 
-                				
+                
                             </article>
         </div>
         <aside class="span4 detailsbar">
@@ -1145,7 +1146,7 @@ can also be an array of options, see above.</p></td>
                                     <h4>Returns</h4>
                     \DataSource
                                             &mdash; <p>A DataSource object</p>
-                                    				
+                                    
                             </article>
         </div>
         <aside class="span4 detailsbar">
@@ -1200,7 +1201,7 @@ schema data defaults are not merged.</p></td>
                                     <h4>Returns</h4>
                     array
                                             &mdash; <p>The current Model::data; after merging $data and/or defaults from database</p>
-                                    				
+                                    
                             </article>
         </div>
         <aside class="span4 detailsbar">
@@ -1255,7 +1256,7 @@ schema data defaults are not merged.</p></td>
                                     <h4>Returns</h4>
                     array
                                             &mdash; <p>The current Model::data; after merging $data and/or defaults from database</p>
-                                    				
+                                    
                             </article>
         </div>
         <aside class="span4 detailsbar">
@@ -1292,7 +1293,7 @@ schema data defaults are not merged.</p></td>
 
                 
                 
-                				
+                
                             </article>
         </div>
         <aside class="span4 detailsbar">
@@ -1320,7 +1321,7 @@ schema data defaults are not merged.</p></td>
 
                 
                 
-                				
+                
                             </article>
         </div>
         <aside class="span4 detailsbar">
@@ -1361,7 +1362,7 @@ schema data defaults are not merged.</p></td>
                             <dd></dd>
                                                                     </dl>
                 
-                				
+                
                             </article>
         </div>
         <aside class="span4 detailsbar">
@@ -1397,7 +1398,7 @@ schema data defaults are not merged.</p></td>
                                             </table>
                 
                 
-                				
+                
                             </article>
         </div>
         <aside class="span4 detailsbar">
@@ -1437,13 +1438,15 @@ validation rules can be defined in $validate.</em></p>
                                     <h4>Returns</h4>
                     boolean
                                             &mdash; <p>True if validate operation should continue, false to abort</p>
-                                    				
+                                    
                             </article>
         </div>
         <aside class="span4 detailsbar">
             <h1><i class="icon-arrow-down"></i></h1>
                                                             <dl>
-                                                                                            <dt>See also</dt>
+                                                    <dt>Inherited from</dt>
+                    <dd><a href="../classes/DataType.html"><div class="path-wrapper">\DataType</div></a></dd>
+                                                                            <dt>See also</dt>
                                                                 <dd><a href="http://book.cakephp.org/2.0/en/models/callback-methods.html#beforevalidate"><span class="namespace-wrapper">http://book.cakephp.org/2.0/en/models/callback-methods.html#beforevalidate</span></a></dd>
                                                                                                     <dd><a href=""><span class="namespace-wrapper">\Model::save()</span></a></dd>
                                                                 </dl>
@@ -1477,13 +1480,15 @@ validation rules can be defined in $validate.</em></p>
                                     <h4>Returns</h4>
                     array
                                             &mdash; <p>DataTypes配列</p>
-                                    				
+                                    
                             </article>
         </div>
         <aside class="span4 detailsbar">
             <h1><i class="icon-arrow-down"></i></h1>
                                                             <dl>
-                                                                            </dl>
+                                                    <dt>Inherited from</dt>
+                    <dd><a href="../classes/DataType.html"><div class="path-wrapper">\DataType</div></a></dd>
+                                                            </dl>
             <h2>Tags</h2>
             <table class="table table-condensed">
                                     <tr><td colspan="2"><em>None found</em></td></tr>
@@ -1506,13 +1511,15 @@ validation rules can be defined in $validate.</em></p>
                                     <h4>Returns</h4>
                     array
                                             &mdash; <p>DataTypes配列</p>
-                                    				
+                                    
                             </article>
         </div>
         <aside class="span4 detailsbar">
             <h1><i class="icon-arrow-down"></i></h1>
                                                             <dl>
-                                                                            </dl>
+                                                    <dt>Inherited from</dt>
+                    <dd><a href="../classes/DataType.html"><div class="path-wrapper">\DataType</div></a></dd>
+                                                            </dl>
             <h2>Tags</h2>
             <table class="table table-condensed">
                                     <tr><td colspan="2"><em>None found</em></td></tr>
@@ -1535,7 +1542,7 @@ validation rules can be defined in $validate.</em></p>
                                     <h4>Returns</h4>
                     array
                                             &mdash; <p>デフォルト値をセットした配列</p>
-                                    				
+                                    
                             </article>
         </div>
         <aside class="span4 detailsbar">
@@ -1592,7 +1599,7 @@ will enable only those callbacks.</li>
                                     <h4>Returns</h4>
                     mixed
                                             &mdash; <p>On success Model::$data if its not empty or true, false on failure</p>
-                                    				
+                                    
                             </article>
         </div>
         <aside class="span4 detailsbar">
@@ -1637,7 +1644,7 @@ will enable only those callbacks.</li>
                 
                                     <h4>Returns</h4>
                     array
-                                    				
+                                    
                             </article>
         </div>
         <aside class="span4 detailsbar">
@@ -1670,7 +1677,7 @@ will enable only those callbacks.</li>
                                     <h4>Returns</h4>
                     string
                                             &mdash; <p>The name of the DataSource, as defined in app/Config/database.php</p>
-                                    				
+                                    
                             </article>
         </div>
         <aside class="span4 detailsbar">
@@ -1698,7 +1705,7 @@ will enable only those callbacks.</li>
 
                 
                 
-                				
+                
                             </article>
         </div>
         <aside class="span4 detailsbar">
@@ -1763,7 +1770,7 @@ will enable only those callbacks.</li>
                 <section class="span10 offset1">
                     <hr />
                     Documentation is powered by <a href="http://www.phpdoc.org/">phpDocumentor </a> and authored
-                    on August 11th, 2019 at 07:44.
+                    on March 9th, 2020 at 14:24.
                 </section>
             </section>
         </section>

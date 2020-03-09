@@ -136,10 +136,10 @@
                                 <div class="accordion" style="margin-bottom: 0">
         <div class="accordion-group">
             <div class="accordion-heading">
-                                    <a class="accordion-toggle " data-toggle="collapse" data-target="#namespace-1629388149"></a>
+                                    <a class="accordion-toggle " data-toggle="collapse" data-target="#namespace-1784289448"></a>
                                 <a href="../namespaces/default.html" style="margin-left: 30px; padding-left: 0">\</a>
             </div>
-            <div id="namespace-1629388149" class="accordion-body collapse in">
+            <div id="namespace-1784289448" class="accordion-body collapse in">
                 <div class="accordion-inner">
 
                     
@@ -255,8 +255,8 @@
                                             </nav>
                     <a href="#source-view" role="button" class="pull-right btn" data-toggle="modal"><i class="icon-code"></i></a>
 
-                    <h1><small>\</small>TokenHelper</h1>
-                    <p><em>TokenHelper</em></p>
+                    <h1><small>\</small>AngularParser</h1>
+                    <p><em>Angularに対するパーサ処理</em></p>
                     
                     
                                         
@@ -275,7 +275,8 @@
                         </section>
                         <section class="row-fluid public">
                             <section class="span4">
-                                                                    <a href="../classes/TokenHelper.html#method_getToken" class="">getToken()</a><br />
+                                                                    <a href="../classes/AngularParser.html#method_parse" class="">parse()</a><br />
+                                                                    <a href="../classes/AngularParser.html#method_convertText" class="">convertText()</a><br />
                                                             </section>
                             <section class="span4">
                                                                     <em>No public properties found</em>
@@ -286,8 +287,7 @@
                         </section>
                         <section class="row-fluid protected">
                             <section class="span4">
-                                                                    <a href="../classes/TokenHelper.html#method__getInputsFields" class="">_getInputsFields()</a><br />
-                                                                    <a href="../classes/TokenHelper.html#method__extractToken" class="">_extractToken()</a><br />
+                                                                    <em>No protected methods found</em>
                                                             </section>
                             <section class="span4">
                                                                     <em>No protected properties found</em>
@@ -314,14 +314,12 @@
                     
                     <dl>
                         <dt>File</dt>
-                            <dd><a href="../files/Plugin.NetCommons.View.Helper.TokenHelper.html"><div class="path-wrapper">Plugin/NetCommons/View/Helper/TokenHelper.php</div></a></dd>
+                            <dd><a href="../files/Plugin.NetCommons.Lib.AngularParser.html"><div class="path-wrapper">Plugin/NetCommons/Lib/AngularParser.php</div></a></dd>
                                                 <dt>Package</dt>
-                            <dd><div class="namespace-wrapper">Default</div></dd>
+                            <dd><div class="namespace-wrapper">NetCommons\Lib</div></dd>
                                                 <dt>Class hierarchy</dt>
                             <dd class="hierarchy">
-                                                                                                                                                                                                                                                                                                
-                                        <div class="namespace-wrapper">\FormHelper</div>
-                                                                                                    <div class="namespace-wrapper">\TokenHelper</div>
+                                                                                                                                                                    <div class="namespace-wrapper">\AngularParser</div>
                             </dd>
 
                         
@@ -331,7 +329,14 @@
                                                                         </dl>
                     <h2>Tags</h2>
                     <table class="table table-condensed">
-                                            <tr><td colspan="2"><em>None found</em></td></tr>
+                                            <tr>
+                            <th>
+                                author
+                            </th>
+                            <td>
+                                                                                                        <p>Shohei Nakajima <a href="mailto:nakajimashouhei@gmail.com">nakajimashouhei@gmail.com</a></p>
+                                                            </td>
+                        </tr>
                                         </table>
                 </aside>
             </div>
@@ -346,102 +351,35 @@
 
                                     <div class="row-fluid">
         <div class="span8 content class">
-            <a id="method_getToken" name="method_getToken" class="anchor"></a>
+            <a id="method_parse" name="method_parse" class="anchor"></a>
             <article class="method">
-                <h3 class="public ">getToken()</h3>
+                <h3 class="public ">parse()</h3>
                 <a href="#source-view" role="button" class="pull-right btn" data-toggle="modal" style="font-size: 1.1em; padding: 9px 14px"><i class="icon-code"></i></a>
-                <pre class="signature" style="margin-right: 54px;">getToken(mixed  <span class="argument">$model = null</span>, array|string  <span class="argument">$actionUrl = null</span>, array  <span class="argument">$tokenFields = null</span>, array  <span class="argument">$hiddenFields = array()</span>, array  <span class="argument">$blacklist = null</span>) : array</pre>
-                <p><em>Return _Token array.</em></p>
+                <pre class="signature" style="margin-right: 54px;">parse(  <span class="argument">$values</span>) : boolean</pre>
+                <p><em>Angularで使用できない文字のパーサ処理</em></p>
                 
 
                                     <h4>Parameters</h4>
                     <table class="table table-condensed table-hover">
                                                     <tr>
-                                <td>mixed</td>
-                                <td>$model </td>
-                                <td><p>The model name for which the form is being defined. Should
-include the plugin name for plugin models. e.g. <code>ContactManager.Contact</code>.
-If an array is passed and $options argument is empty, the array will be used as options.
-If <code>false</code> no model is used.</p></td>
-                            </tr>
-                                                    <tr>
-                                <td>array|string</td>
-                                <td>$actionUrl </td>
-                                <td><p>Action url.</p></td>
-                            </tr>
-                                                    <tr>
-                                <td>array</td>
-                                <td>$tokenFields </td>
-                                <td><p>An array of fields to generate inputs for, or null.</p></td>
-                            </tr>
-                                                    <tr>
-                                <td>array</td>
-                                <td>$hiddenFields </td>
-                                <td><p>An array of fields that exist in $tokenFields to generate inputs hidden for, or null.</p></td>
-                            </tr>
-                                                    <tr>
-                                <td>array</td>
-                                <td>$blacklist </td>
-                                <td><p>A array of fields to not create inputs for.</p></td>
+                                <td></td>
+                                <td>$values </td>
+                                <td></td>
                             </tr>
                                             </table>
                 
                 
                                     <h4>Returns</h4>
-                    array
-                                            &mdash; <p>_Token</p>
+                    boolean
                                     
                             </article>
         </div>
         <aside class="span4 detailsbar">
             <h1><i class="icon-arrow-down"></i></h1>
+                            <span class="label label-info">static</span>
                                                             <dl>
                                                     <dt>Inherited from</dt>
-                    <dd><a href="../classes/TokenHelper.html"><div class="path-wrapper">\TokenHelper</div></a></dd>
-                                                            </dl>
-            <h2>Tags</h2>
-            <table class="table table-condensed">
-                                    <tr><td colspan="2"><em>None found</em></td></tr>
-                            </table>
-        </aside>
-    </div>
-
-                                                    <div class="row-fluid">
-        <div class="span8 content class">
-            <a id="method__getInputsFields" name="method__getInputsFields" class="anchor"></a>
-            <article class="method">
-                <h3 class="protected ">_getInputsFields()</h3>
-                <a href="#source-view" role="button" class="pull-right btn" data-toggle="modal" style="font-size: 1.1em; padding: 9px 14px"><i class="icon-code"></i></a>
-                <pre class="signature" style="margin-right: 54px;">_getInputsFields(array  <span class="argument">$tokenFields</span>, array  <span class="argument">$hiddenFields</span>) : array</pre>
-                <p><em>Return input fields array added hidden option.</em></p>
-                
-
-                                    <h4>Parameters</h4>
-                    <table class="table table-condensed table-hover">
-                                                    <tr>
-                                <td>array</td>
-                                <td>$tokenFields </td>
-                                <td><p>An array of fields to generate inputs for, or null.</p></td>
-                            </tr>
-                                                    <tr>
-                                <td>array</td>
-                                <td>$hiddenFields </td>
-                                <td><p>An array of fields that exist in $tokenFields to generate inputs hidden for, or null.</p></td>
-                            </tr>
-                                            </table>
-                
-                
-                                    <h4>Returns</h4>
-                    array
-                                            &mdash; <p>input fields</p>
-                                    
-                            </article>
-        </div>
-        <aside class="span4 detailsbar">
-            <h1><i class="icon-arrow-down"></i></h1>
-                                                            <dl>
-                                                    <dt>Inherited from</dt>
-                    <dd><a href="../classes/TokenHelper.html"><div class="path-wrapper">\TokenHelper</div></a></dd>
+                    <dd><a href="../classes/AngularParser.html"><div class="path-wrapper">\AngularParser</div></a></dd>
                                                             </dl>
             <h2>Tags</h2>
             <table class="table table-condensed">
@@ -452,35 +390,36 @@ If <code>false</code> no model is used.</p></td>
 
                                     <div class="row-fluid">
         <div class="span8 content class">
-            <a id="method__extractToken" name="method__extractToken" class="anchor"></a>
+            <a id="method_convertText" name="method_convertText" class="anchor"></a>
             <article class="method">
-                <h3 class="protected ">_extractToken()</h3>
+                <h3 class="public ">convertText()</h3>
                 <a href="#source-view" role="button" class="pull-right btn" data-toggle="modal" style="font-size: 1.1em; padding: 9px 14px"><i class="icon-code"></i></a>
-                <pre class="signature" style="margin-right: 54px;">_extractToken(string  <span class="argument">$formHtml</span>) : array</pre>
-                <p><em>Return _Token array.</em></p>
+                <pre class="signature" style="margin-right: 54px;">convertText(string  <span class="argument">$value</span>) : string</pre>
+                <p><em>テキスト文字を変換する</em></p>
                 
 
                                     <h4>Parameters</h4>
                     <table class="table table-condensed table-hover">
                                                     <tr>
                                 <td>string</td>
-                                <td>$formHtml </td>
-                                <td><p>Token html string</p></td>
+                                <td>$value </td>
+                                <td><p>変換する値</p></td>
                             </tr>
                                             </table>
                 
                 
                                     <h4>Returns</h4>
-                    array
-                                            &mdash; <p>_Token</p>
+                    string
+                                            &mdash; <p>変換後の値</p>
                                     
                             </article>
         </div>
         <aside class="span4 detailsbar">
             <h1><i class="icon-arrow-down"></i></h1>
+                            <span class="label label-info">static</span>
                                                             <dl>
                                                     <dt>Inherited from</dt>
-                    <dd><a href="../classes/TokenHelper.html"><div class="path-wrapper">\TokenHelper</div></a></dd>
+                    <dd><a href="../classes/AngularParser.html"><div class="path-wrapper">\AngularParser</div></a></dd>
                                                             </dl>
             <h2>Tags</h2>
             <table class="table table-condensed">
@@ -489,16 +428,16 @@ If <code>false</code> no model is used.</p></td>
         </aside>
     </div>
 
-                                                    </div>
+                                                                    </div>
     </section>
 
     <div id="source-view" class="modal hide fade" tabindex="-1" role="dialog" aria-labelledby="source-view-label" aria-hidden="true">
         <div class="modal-header">
             <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
-            <h3 id="source-view-label">TokenHelper.php</h3>
+            <h3 id="source-view-label">AngularParser.php</h3>
         </div>
         <div class="modal-body">
-            <pre data-src="../files/Plugin/NetCommons/View/Helper/TokenHelper.php.txt" class="language-php line-numbers"></pre>
+            <pre data-src="../files/Plugin/NetCommons/Lib/AngularParser.php.txt" class="language-php line-numbers"></pre>
         </div>
     </div>
 
