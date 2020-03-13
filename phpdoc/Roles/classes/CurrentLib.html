@@ -24,7 +24,7 @@
     <script type="text/javascript">
     function loadExternalCodeSnippets() {
         Array.prototype.slice.call(document.querySelectorAll('pre[data-src]')).forEach(function (pre) {
-            var src = pre.getAttribute('data-src');
+            var src = pre.getAttribute('data-src').replace( /\\/g, '/');
             var extension = (src.match(/\.(\w+)$/) || [, ''])[1];
             var language = 'php';
 
@@ -106,12 +106,12 @@
                         <ul class="dropdown-menu">
                             <li>
                                 <a href="../reports/errors.html">
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                <i class="icon-list-alt"></i>&#160;Errors <span class="label label-info pull-right">0</span>
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                            <i class="icon-list-alt"></i>&#160;Errors <span class="label label-info pull-right">0</span>
                                 </a>
                             </li>
                             <li>
                                 <a href="../reports/markers.html">
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                <i class="icon-list-alt"></i>&#160;Markers <span class="label label-info pull-right">0</span>
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                            <i class="icon-list-alt"></i>&#160;Markers <span class="label label-info pull-right">0</span>
                                 </a>
                             </li>
                             <li>
@@ -136,10 +136,10 @@
                                 <div class="accordion" style="margin-bottom: 0">
         <div class="accordion-group">
             <div class="accordion-heading">
-                                    <a class="accordion-toggle " data-toggle="collapse" data-target="#namespace-306809670"></a>
+                                    <a class="accordion-toggle " data-toggle="collapse" data-target="#namespace-497615035"></a>
                                 <a href="../namespaces/default.html" style="margin-left: 30px; padding-left: 0">\</a>
             </div>
-            <div id="namespace-306809670" class="accordion-body collapse in">
+            <div id="namespace-497615035" class="accordion-body collapse in">
                 <div class="accordion-inner">
 
                     
@@ -150,6 +150,7 @@
                                                     <li class="class"><a href="../classes/AddIsOriginalCopy.html">AddIsOriginalCopy</a></li>
                                                     <li class="class"><a href="../classes/AddRoomRoleDesc.html">AddRoomRoleDesc</a></li>
                                                     <li class="class"><a href="../classes/AddTableForM17n1.html">AddTableForM17n1</a></li>
+                                                    <li class="class"><a href="../classes/AngularParser.html">AngularParser</a></li>
                                                     <li class="class"><a href="../classes/AppController.html">AppController</a></li>
                                                     <li class="class"><a href="../classes/AppController.html">AppController</a></li>
                                                     <li class="class"><a href="../classes/AppHelper.html">AppHelper</a></li>
@@ -581,7 +582,7 @@
                         
                         
                         
-                        
+                                                
                                                                         </dl>
                     <h2>Tags</h2>
                     <table class="table table-condensed">
@@ -590,7 +591,7 @@
                                 author
                             </th>
                             <td>
-                                                                    <p>Shohei Nakajima <a href="mailto:nakajimashouhei@gmail.com">nakajimashouhei@gmail.com</a></p>
+                                                                                                        <p>Shohei Nakajima <a href="mailto:nakajimashouhei@gmail.com">nakajimashouhei@gmail.com</a></p>
                                                             </td>
                         </tr>
                                             <tr>
@@ -598,9 +599,9 @@
                                 SuppressWarnings
                             </th>
                             <td>
-                                                                    <p>(PHPMD.TooManyPublicMethods) 別ファイルにすると分かりにくくなるため</p>
-                                                                    <p>(PHPMD.TooManyMethods) 別ファイルにすると分かりにくくなるため</p>
-                                                                    <p>(PHPMD.ExcessiveClassComplexity) $current変数を直接書き換えている処理が多数あり、分割できないため</p>
+                                                                                                        <p>(PHPMD.TooManyPublicMethods) 別ファイルにすると分かりにくくなるため</p>
+                                                                                                        <p>(PHPMD.TooManyMethods) 別ファイルにすると分かりにくくなるため</p>
+                                                                                                        <p>(PHPMD.ExcessiveClassComplexity) $current変数を直接書き換えている処理が多数あり、分割できないため</p>
                                                             </td>
                         </tr>
                                         </table>
@@ -620,7 +621,7 @@
             <a id="constant_SETTING_MODE_WORD" name="constant_SETTING_MODE_WORD" class="anchor"></a>
             <article id="constant_SETTING_MODE_WORD" class="constant">
                 <h3 class="">SETTING_MODE_WORD</h3>
-                <pre class="signature">SETTING_MODE_WORD</pre>
+                <pre class="signature">SETTING_MODE_WORD = \SettingMode::SETTING_MODE_WORD : string</pre>
                 <p><em>セッティングモードのワード</em></p>
                 <p>適切なライブラリに持っていきたいが、旧Currentライブラリで使用されているため、当クラスにも定義する。</p>
             </article>
@@ -641,7 +642,7 @@
             <a id="constant_PLUGIN_USERS" name="constant_PLUGIN_USERS" class="anchor"></a>
             <article id="constant_PLUGIN_USERS" class="constant">
                 <h3 class="">PLUGIN_USERS</h3>
-                <pre class="signature">PLUGIN_USERS</pre>
+                <pre class="signature">PLUGIN_USERS = \CurrentLibPlugin::PLUGIN_USERS : string</pre>
                 <p><em>Usersプラグイン名の定数</em></p>
                 <p>適切なライブラリに持っていきたいが、旧Currentライブラリで使用されているため、当クラスにも定義する。</p>
             </article>
@@ -662,7 +663,7 @@
             <a id="constant_PLUGIN_GROUPS" name="constant_PLUGIN_GROUPS" class="anchor"></a>
             <article id="constant_PLUGIN_GROUPS" class="constant">
                 <h3 class="">PLUGIN_GROUPS</h3>
-                <pre class="signature">PLUGIN_GROUPS</pre>
+                <pre class="signature">PLUGIN_GROUPS = \CurrentLibPlugin::PLUGIN_GROUPS : string</pre>
                 <p><em>Groupsプラグイン名の定数</em></p>
                 <p>適切なライブラリに持っていきたいが、旧Currentライブラリで使用されているため、当クラスにも定義する。</p>
             </article>
@@ -683,7 +684,7 @@
             <a id="constant_PLUGIN_WYSIWYG" name="constant_PLUGIN_WYSIWYG" class="anchor"></a>
             <article id="constant_PLUGIN_WYSIWYG" class="constant">
                 <h3 class="">PLUGIN_WYSIWYG</h3>
-                <pre class="signature">PLUGIN_WYSIWYG</pre>
+                <pre class="signature">PLUGIN_WYSIWYG = \CurrentLibPlugin::PLUGIN_WYSIWYG : string</pre>
                 <p><em>Wysiwygプラグイン名の定数</em></p>
                 <p>適切なライブラリに持っていきたいが、旧Currentライブラリで使用されているため、当クラスにも定義する。</p>
             </article>
@@ -704,7 +705,7 @@
             <a id="constant_PLUGIN_PAGES" name="constant_PLUGIN_PAGES" class="anchor"></a>
             <article id="constant_PLUGIN_PAGES" class="constant">
                 <h3 class="">PLUGIN_PAGES</h3>
-                <pre class="signature">PLUGIN_PAGES</pre>
+                <pre class="signature">PLUGIN_PAGES = \CurrentLibPlugin::PLUGIN_PAGES : string</pre>
                 <p><em>Pagesプラグイン名の定数</em></p>
                 <p>適切なライブラリに持っていきたいが、旧Currentライブラリで使用されているため、当クラスにも定義する。</p>
             </article>
@@ -1215,7 +1216,7 @@ NcPermissionクラスのメンバ変数ではなく、CurrentLibクラスとす�
 
                 
                 
-                				
+                
                             </article>
         </div>
         <aside class="span4 detailsbar">
@@ -1243,7 +1244,7 @@ NcPermissionクラスのメンバ変数ではなく、CurrentLibクラスとす�
 
                 
                 
-                				
+                
                             </article>
         </div>
         <aside class="span4 detailsbar">
@@ -1279,13 +1280,15 @@ NcPermissionクラスのメンバ変数ではなく、CurrentLibクラスとす�
                                             </table>
                 
                 
-                				
+                
                             </article>
         </div>
         <aside class="span4 detailsbar">
             <h1><i class="icon-arrow-down"></i></h1>
                                                             <dl>
-                                                                            </dl>
+                                                    <dt>Inherited from</dt>
+                    <dd><a href="../classes/CurrentLib.html"><div class="path-wrapper">\CurrentLib</div></a></dd>
+                                                            </dl>
             <h2>Tags</h2>
             <table class="table table-condensed">
                                     <tr><td colspan="2"><em>None found</em></td></tr>
@@ -1307,14 +1310,16 @@ NcPermissionクラスのメンバ変数ではなく、CurrentLibクラスとす�
                 
                                     <h4>Returns</h4>
                     <a href="../classes/CurrentLib.html">\CurrentLib</a>
-                                    				
+                                    
                             </article>
         </div>
         <aside class="span4 detailsbar">
             <h1><i class="icon-arrow-down"></i></h1>
                             <span class="label label-info">static</span>
                                                             <dl>
-                                                                            </dl>
+                                                    <dt>Inherited from</dt>
+                    <dd><a href="../classes/CurrentLib.html"><div class="path-wrapper">\CurrentLib</div></a></dd>
+                                                            </dl>
             <h2>Tags</h2>
             <table class="table table-condensed">
                                     <tr><td colspan="2"><em>None found</em></td></tr>
@@ -1334,14 +1339,16 @@ NcPermissionクラスのメンバ変数ではなく、CurrentLibクラスとす�
 
                 
                 
-                				
+                
                             </article>
         </div>
         <aside class="span4 detailsbar">
             <h1><i class="icon-arrow-down"></i></h1>
                             <span class="label label-info">static</span>
                                                             <dl>
-                                                                            </dl>
+                                                    <dt>Inherited from</dt>
+                    <dd><a href="../classes/CurrentLib.html"><div class="path-wrapper">\CurrentLib</div></a></dd>
+                                                            </dl>
             <h2>Tags</h2>
             <table class="table table-condensed">
                                     <tr><td colspan="2"><em>None found</em></td></tr>
@@ -1361,13 +1368,15 @@ NcPermissionクラスのメンバ変数ではなく、CurrentLibクラスとす�
 
                 
                 
-                				
+                
                             </article>
         </div>
         <aside class="span4 detailsbar">
             <h1><i class="icon-arrow-down"></i></h1>
                                                             <dl>
-                                                                            </dl>
+                                                    <dt>Inherited from</dt>
+                    <dd><a href="../classes/CurrentLib.html"><div class="path-wrapper">\CurrentLib</div></a></dd>
+                                                            </dl>
             <h2>Tags</h2>
             <table class="table table-condensed">
                                     <tr><td colspan="2"><em>None found</em></td></tr>
@@ -1398,13 +1407,15 @@ NcPermissionクラスのメンバ変数ではなく、CurrentLibクラスとす�
                                     <h4>Returns</h4>
                     boolean
                                             &mdash; <p>セット出来たか否か</p>
-                                    				
+                                    
                             </article>
         </div>
         <aside class="span4 detailsbar">
             <h1><i class="icon-arrow-down"></i></h1>
                                                             <dl>
-                                                                            </dl>
+                                                    <dt>Inherited from</dt>
+                    <dd><a href="../classes/CurrentLib.html"><div class="path-wrapper">\CurrentLib</div></a></dd>
+                                                            </dl>
             <h2>Tags</h2>
             <table class="table table-condensed">
                                     <tr><td colspan="2"><em>None found</em></td></tr>
@@ -1440,13 +1451,15 @@ NcPermissionクラスのメンバ変数ではなく、CurrentLibクラスとす�
                                     <h4>Returns</h4>
                     boolean
                                             &mdash; <p>セット出来たか否か</p>
-                                    				
+                                    
                             </article>
         </div>
         <aside class="span4 detailsbar">
             <h1><i class="icon-arrow-down"></i></h1>
                                                             <dl>
-                                                                            </dl>
+                                                    <dt>Inherited from</dt>
+                    <dd><a href="../classes/CurrentLib.html"><div class="path-wrapper">\CurrentLib</div></a></dd>
+                                                            </dl>
             <h2>Tags</h2>
             <table class="table table-condensed">
                                     <tr><td colspan="2"><em>None found</em></td></tr>
@@ -1474,13 +1487,15 @@ NcPermissionクラスのメンバ変数ではなく、CurrentLibクラスとす�
                                             </table>
                 
                 
-                				
+                
                             </article>
         </div>
         <aside class="span4 detailsbar">
             <h1><i class="icon-arrow-down"></i></h1>
                                                             <dl>
-                                                                            </dl>
+                                                    <dt>Inherited from</dt>
+                    <dd><a href="../classes/CurrentLib.html"><div class="path-wrapper">\CurrentLib</div></a></dd>
+                                                            </dl>
             <h2>Tags</h2>
             <table class="table table-condensed">
                                     <tr><td colspan="2"><em>None found</em></td></tr>
@@ -1508,13 +1523,15 @@ NcPermissionクラスのメンバ変数ではなく、CurrentLibクラスとす�
                                             </table>
                 
                 
-                				
+                
                             </article>
         </div>
         <aside class="span4 detailsbar">
             <h1><i class="icon-arrow-down"></i></h1>
                                                             <dl>
-                                                                            </dl>
+                                                    <dt>Inherited from</dt>
+                    <dd><a href="../classes/CurrentLib.html"><div class="path-wrapper">\CurrentLib</div></a></dd>
+                                                            </dl>
             <h2>Tags</h2>
             <table class="table table-condensed">
                                     <tr><td colspan="2"><em>None found</em></td></tr>
@@ -1537,14 +1554,16 @@ NcPermissionクラスのメンバ変数ではなく、CurrentLibクラスとす�
                                     <h4>Returns</h4>
                     array|null
                                             &mdash; <p>Current data.</p>
-                                    				
+                                    
                             </article>
         </div>
         <aside class="span4 detailsbar">
             <h1><i class="icon-arrow-down"></i></h1>
                             <span class="label label-info">static</span>
                                                             <dl>
-                                                                            </dl>
+                                                    <dt>Inherited from</dt>
+                    <dd><a href="../classes/CurrentLib.html"><div class="path-wrapper">\CurrentLib</div></a></dd>
+                                                            </dl>
             <h2>Tags</h2>
             <table class="table table-condensed">
                                     <tr><td colspan="2"><em>None found</em></td></tr>
@@ -1580,14 +1599,16 @@ NcPermissionクラスのメンバ変数ではなく、CurrentLibクラスとす�
                 
                                     <h4>Returns</h4>
                     array|null
-                                    				
+                                    
                             </article>
         </div>
         <aside class="span4 detailsbar">
             <h1><i class="icon-arrow-down"></i></h1>
                             <span class="label label-info">static</span>
                                                             <dl>
-                                                                            </dl>
+                                                    <dt>Inherited from</dt>
+                    <dd><a href="../classes/CurrentLib.html"><div class="path-wrapper">\CurrentLib</div></a></dd>
+                                                            </dl>
             <h2>Tags</h2>
             <table class="table table-condensed">
                                     <tr><td colspan="2"><em>None found</em></td></tr>
@@ -1623,14 +1644,16 @@ NcPermissionクラスのメンバ変数ではなく、CurrentLibクラスとす�
                                     <h4>Returns</h4>
                     boolean
                                             &mdash; <p>permission value</p>
-                                    				
+                                    
                             </article>
         </div>
         <aside class="span4 detailsbar">
             <h1><i class="icon-arrow-down"></i></h1>
                             <span class="label label-info">static</span>
                                                             <dl>
-                                                                            </dl>
+                                                    <dt>Inherited from</dt>
+                    <dd><a href="../classes/CurrentLib.html"><div class="path-wrapper">\CurrentLib</div></a></dd>
+                                                            </dl>
             <h2>Tags</h2>
             <table class="table table-condensed">
                                     <tr><td colspan="2"><em>None found</em></td></tr>
@@ -1663,14 +1686,16 @@ NcPermissionクラスのメンバ変数ではなく、CurrentLibクラスとす�
                                             </table>
                 
                 
-                				
+                
                             </article>
         </div>
         <aside class="span4 detailsbar">
             <h1><i class="icon-arrow-down"></i></h1>
                             <span class="label label-info">static</span>
                                                             <dl>
-                                                                            </dl>
+                                                    <dt>Inherited from</dt>
+                    <dd><a href="../classes/CurrentLib.html"><div class="path-wrapper">\CurrentLib</div></a></dd>
+                                                            </dl>
             <h2>Tags</h2>
             <table class="table table-condensed">
                                     <tr><td colspan="2"><em>None found</em></td></tr>
@@ -1690,14 +1715,16 @@ NcPermissionクラスのメンバ変数ではなく、CurrentLibクラスとす�
 
                 
                 
-                				
+                
                             </article>
         </div>
         <aside class="span4 detailsbar">
             <h1><i class="icon-arrow-down"></i></h1>
                             <span class="label label-info">static</span>
                                                             <dl>
-                                                                            </dl>
+                                                    <dt>Inherited from</dt>
+                    <dd><a href="../classes/CurrentLib.html"><div class="path-wrapper">\CurrentLib</div></a></dd>
+                                                            </dl>
             <h2>Tags</h2>
             <table class="table table-condensed">
                                     <tr><td colspan="2"><em>None found</em></td></tr>
@@ -1726,15 +1753,17 @@ NcPermissionクラスのメンバ変数ではなく、CurrentLibクラスとす�
                                             </table>
                 
                 
-                				
+                
                             </article>
         </div>
         <aside class="span4 detailsbar">
             <h1><i class="icon-arrow-down"></i></h1>
                             <span class="label label-info">static</span>
                                                             <dl>
-                                                                                            <dt>See also</dt>
-                                                                <dd><a href=""><span class="namespace-wrapper">https://github.com/NetCommons3/Wysiwyg/blob/3.2.2/Controller/WysiwygImageDownloadController.php#L120</span></a></dd>
+                                                    <dt>Inherited from</dt>
+                    <dd><a href="../classes/CurrentLib.html"><div class="path-wrapper">\CurrentLib</div></a></dd>
+                                                                            <dt>See also</dt>
+                                                                <dd><a href="https://github.com/NetCommons3/Wysiwyg/blob/3.2.2/Controller/WysiwygImageDownloadController.php#L120"><span class="namespace-wrapper">https://github.com/NetCommons3/Wysiwyg/blob/3.2.2/Controller/WysiwygImageDownloadController.php#L120</span></a></dd>
                                                                 </dl>
             <h2>Tags</h2>
             <table class="table table-condensed">
@@ -1773,14 +1802,16 @@ NcPermissionクラスのメンバ変数ではなく、CurrentLibクラスとす�
                                             </table>
                 
                 
-                				
+                
                             </article>
         </div>
         <aside class="span4 detailsbar">
             <h1><i class="icon-arrow-down"></i></h1>
                             <span class="label label-info">static</span>
                                                             <dl>
-                                                                            </dl>
+                                                    <dt>Inherited from</dt>
+                    <dd><a href="../classes/CurrentLib.html"><div class="path-wrapper">\CurrentLib</div></a></dd>
+                                                            </dl>
             <h2>Tags</h2>
             <table class="table table-condensed">
                                     <tr><td colspan="2"><em>None found</em></td></tr>
@@ -1814,14 +1845,16 @@ NcPermissionクラスのメンバ変数ではなく、CurrentLibクラスとす�
                                             </table>
                 
                 
-                				
+                
                             </article>
         </div>
         <aside class="span4 detailsbar">
             <h1><i class="icon-arrow-down"></i></h1>
                             <span class="label label-info">static</span>
                                                             <dl>
-                                                                            </dl>
+                                                    <dt>Inherited from</dt>
+                    <dd><a href="../classes/CurrentLib.html"><div class="path-wrapper">\CurrentLib</div></a></dd>
+                                                            </dl>
             <h2>Tags</h2>
             <table class="table table-condensed">
                                     <tr><td colspan="2"><em>None found</em></td></tr>
@@ -1853,14 +1886,16 @@ NcPermissionクラスのメンバ変数ではなく、CurrentLibクラスとす�
                                     <h4>Returns</h4>
                     array|null
                                             &mdash; <p>Current data.</p>
-                                    				
+                                    
                             </article>
         </div>
         <aside class="span4 detailsbar">
             <h1><i class="icon-arrow-down"></i></h1>
                             <span class="label label-info">static</span>
                                                             <dl>
-                                                                            </dl>
+                                                    <dt>Inherited from</dt>
+                    <dd><a href="../classes/CurrentLib.html"><div class="path-wrapper">\CurrentLib</div></a></dd>
+                                                            </dl>
             <h2>Tags</h2>
             <table class="table table-condensed">
                                     <tr><td colspan="2"><em>None found</em></td></tr>
@@ -1882,14 +1917,16 @@ NcPermissionクラスのメンバ変数ではなく、CurrentLibクラスとす�
                 
                                     <h4>Returns</h4>
                     boolean
-                                    				
+                                    
                             </article>
         </div>
         <aside class="span4 detailsbar">
             <h1><i class="icon-arrow-down"></i></h1>
                             <span class="label label-info">static</span>
                                                             <dl>
-                                                                            </dl>
+                                                    <dt>Inherited from</dt>
+                    <dd><a href="../classes/CurrentLib.html"><div class="path-wrapper">\CurrentLib</div></a></dd>
+                                                            </dl>
             <h2>Tags</h2>
             <table class="table table-condensed">
                                     <tr><td colspan="2"><em>None found</em></td></tr>
@@ -1911,14 +1948,16 @@ NcPermissionクラスのメンバ変数ではなく、CurrentLibクラスとす�
                 
                                     <h4>Returns</h4>
                     boolean
-                                    				
+                                    
                             </article>
         </div>
         <aside class="span4 detailsbar">
             <h1><i class="icon-arrow-down"></i></h1>
                             <span class="label label-info">static</span>
                                                             <dl>
-                                                                            </dl>
+                                                    <dt>Inherited from</dt>
+                    <dd><a href="../classes/CurrentLib.html"><div class="path-wrapper">\CurrentLib</div></a></dd>
+                                                            </dl>
             <h2>Tags</h2>
             <table class="table table-condensed">
                                     <tr><td colspan="2"><em>None found</em></td></tr>
@@ -1946,14 +1985,16 @@ NcPermissionクラスのメンバ変数ではなく、CurrentLibクラスとす�
                                             </table>
                 
                 
-                				
+                
                             </article>
         </div>
         <aside class="span4 detailsbar">
             <h1><i class="icon-arrow-down"></i></h1>
                             <span class="label label-info">static</span>
                                                             <dl>
-                                                                            </dl>
+                                                    <dt>Inherited from</dt>
+                    <dd><a href="../classes/CurrentLib.html"><div class="path-wrapper">\CurrentLib</div></a></dd>
+                                                            </dl>
             <h2>Tags</h2>
             <table class="table table-condensed">
                                     <tr><td colspan="2"><em>None found</em></td></tr>
@@ -1975,14 +2016,16 @@ NcPermissionクラスのメンバ変数ではなく、CurrentLibクラスとす�
                 
                                     <h4>Returns</h4>
                     boolean
-                                    				
+                                    
                             </article>
         </div>
         <aside class="span4 detailsbar">
             <h1><i class="icon-arrow-down"></i></h1>
                             <span class="label label-info">static</span>
                                                             <dl>
-                                                                            </dl>
+                                                    <dt>Inherited from</dt>
+                    <dd><a href="../classes/CurrentLib.html"><div class="path-wrapper">\CurrentLib</div></a></dd>
+                                                            </dl>
             <h2>Tags</h2>
             <table class="table table-condensed">
                                     <tr><td colspan="2"><em>None found</em></td></tr>
@@ -2004,14 +2047,16 @@ NcPermissionクラスのメンバ変数ではなく、CurrentLibクラスとす�
                 
                                     <h4>Returns</h4>
                     boolean
-                                    				
+                                    
                             </article>
         </div>
         <aside class="span4 detailsbar">
             <h1><i class="icon-arrow-down"></i></h1>
                             <span class="label label-info">static</span>
                                                             <dl>
-                                                                            </dl>
+                                                    <dt>Inherited from</dt>
+                    <dd><a href="../classes/CurrentLib.html"><div class="path-wrapper">\CurrentLib</div></a></dd>
+                                                            </dl>
             <h2>Tags</h2>
             <table class="table table-condensed">
                                     <tr><td colspan="2"><em>None found</em></td></tr>
@@ -2041,14 +2086,16 @@ NcPermissionクラスのメンバ変数ではなく、CurrentLibクラスとす�
                 
                                     <h4>Returns</h4>
                     boolean
-                                    				
+                                    
                             </article>
         </div>
         <aside class="span4 detailsbar">
             <h1><i class="icon-arrow-down"></i></h1>
                             <span class="label label-info">static</span>
                                                             <dl>
-                                                                            </dl>
+                                                    <dt>Inherited from</dt>
+                    <dd><a href="../classes/CurrentLib.html"><div class="path-wrapper">\CurrentLib</div></a></dd>
+                                                            </dl>
             <h2>Tags</h2>
             <table class="table table-condensed">
                                     <tr><td colspan="2"><em>None found</em></td></tr>
@@ -2070,14 +2117,16 @@ NcPermissionクラスのメンバ変数ではなく、CurrentLibクラスとす�
                 
                                     <h4>Returns</h4>
                     boolean
-                                    				
+                                    
                             </article>
         </div>
         <aside class="span4 detailsbar">
             <h1><i class="icon-arrow-down"></i></h1>
                             <span class="label label-info">static</span>
                                                             <dl>
-                                                                            </dl>
+                                                    <dt>Inherited from</dt>
+                    <dd><a href="../classes/CurrentLib.html"><div class="path-wrapper">\CurrentLib</div></a></dd>
+                                                            </dl>
             <h2>Tags</h2>
             <table class="table table-condensed">
                                     <tr><td colspan="2"><em>None found</em></td></tr>
@@ -2107,14 +2156,16 @@ NcPermissionクラスのメンバ変数ではなく、CurrentLibクラスとす�
                 
                                     <h4>Returns</h4>
                     boolean
-                                    				
+                                    
                             </article>
         </div>
         <aside class="span4 detailsbar">
             <h1><i class="icon-arrow-down"></i></h1>
                             <span class="label label-info">static</span>
                                                             <dl>
-                                                                            </dl>
+                                                    <dt>Inherited from</dt>
+                    <dd><a href="../classes/CurrentLib.html"><div class="path-wrapper">\CurrentLib</div></a></dd>
+                                                            </dl>
             <h2>Tags</h2>
             <table class="table table-condensed">
                                     <tr><td colspan="2"><em>None found</em></td></tr>
@@ -2142,7 +2193,7 @@ NcPermissionクラスのメンバ変数ではなく、CurrentLibクラスとす�
                                             </table>
                 
                 
-                				
+                
                             </article>
         </div>
         <aside class="span4 detailsbar">
@@ -2181,7 +2232,7 @@ NcPermissionクラスのメンバ変数ではなく、CurrentLibクラスとす�
                 
                                     <h4>Returns</h4>
                     object
-                                    				
+                                    
                             </article>
         </div>
         <aside class="span4 detailsbar">
@@ -2218,7 +2269,7 @@ NcPermissionクラスのメンバ変数ではなく、CurrentLibクラスとす�
                                             </table>
                 
                 
-                				
+                
                             </article>
         </div>
         <aside class="span4 detailsbar">
@@ -2247,13 +2298,15 @@ NcPermissionクラスのメンバ変数ではなく、CurrentLibクラスとす�
 
                 
                 
-                				
+                
                             </article>
         </div>
         <aside class="span4 detailsbar">
             <h1><i class="icon-arrow-down"></i></h1>
                                                             <dl>
-                                                                            </dl>
+                                                    <dt>Inherited from</dt>
+                    <dd><a href="../classes/CurrentLib.html"><div class="path-wrapper">\CurrentLib</div></a></dd>
+                                                            </dl>
             <h2>Tags</h2>
             <table class="table table-condensed">
                                     <tr><td colspan="2"><em>None found</em></td></tr>
@@ -2273,13 +2326,15 @@ NcPermissionクラスのメンバ変数ではなく、CurrentLibクラスとす�
 
                 
                 
-                				
+                
                             </article>
         </div>
         <aside class="span4 detailsbar">
             <h1><i class="icon-arrow-down"></i></h1>
                                                             <dl>
-                                                                            </dl>
+                                                    <dt>Inherited from</dt>
+                    <dd><a href="../classes/CurrentLib.html"><div class="path-wrapper">\CurrentLib</div></a></dd>
+                                                            </dl>
             <h2>Tags</h2>
             <table class="table table-condensed">
                                     <tr><td colspan="2"><em>None found</em></td></tr>
@@ -2299,13 +2354,15 @@ NcPermissionクラスのメンバ変数ではなく、CurrentLibクラスとす�
 
                 
                 
-                				
+                
                             </article>
         </div>
         <aside class="span4 detailsbar">
             <h1><i class="icon-arrow-down"></i></h1>
                                                             <dl>
-                                                                            </dl>
+                                                    <dt>Inherited from</dt>
+                    <dd><a href="../classes/CurrentLib.html"><div class="path-wrapper">\CurrentLib</div></a></dd>
+                                                            </dl>
             <h2>Tags</h2>
             <table class="table table-condensed">
                                     <tr><td colspan="2"><em>None found</em></td></tr>
@@ -2325,13 +2382,15 @@ NcPermissionクラスのメンバ変数ではなく、CurrentLibクラスとす�
 
                 
                 
-                				
+                
                             </article>
         </div>
         <aside class="span4 detailsbar">
             <h1><i class="icon-arrow-down"></i></h1>
                                                             <dl>
-                                                                            </dl>
+                                                    <dt>Inherited from</dt>
+                    <dd><a href="../classes/CurrentLib.html"><div class="path-wrapper">\CurrentLib</div></a></dd>
+                                                            </dl>
             <h2>Tags</h2>
             <table class="table table-condensed">
                                     <tr><td colspan="2"><em>None found</em></td></tr>
@@ -2351,13 +2410,15 @@ NcPermissionクラスのメンバ変数ではなく、CurrentLibクラスとす�
 
                 
                 
-                				
+                
                             </article>
         </div>
         <aside class="span4 detailsbar">
             <h1><i class="icon-arrow-down"></i></h1>
                                                             <dl>
-                                                                            </dl>
+                                                    <dt>Inherited from</dt>
+                    <dd><a href="../classes/CurrentLib.html"><div class="path-wrapper">\CurrentLib</div></a></dd>
+                                                            </dl>
             <h2>Tags</h2>
             <table class="table table-condensed">
                                     <tr><td colspan="2"><em>None found</em></td></tr>
@@ -2385,13 +2446,15 @@ NcPermissionクラスのメンバ変数ではなく、CurrentLibクラスとす�
                                             </table>
                 
                 
-                				
+                
                             </article>
         </div>
         <aside class="span4 detailsbar">
             <h1><i class="icon-arrow-down"></i></h1>
                                                             <dl>
-                                                                            </dl>
+                                                    <dt>Inherited from</dt>
+                    <dd><a href="../classes/CurrentLib.html"><div class="path-wrapper">\CurrentLib</div></a></dd>
+                                                            </dl>
             <h2>Tags</h2>
             <table class="table table-condensed">
                                     <tr><td colspan="2"><em>None found</em></td></tr>
@@ -2424,13 +2487,15 @@ NcPermissionクラスのメンバ変数ではなく、CurrentLibクラスとす�
                                             </table>
                 
                 
-                				
+                
                             </article>
         </div>
         <aside class="span4 detailsbar">
             <h1><i class="icon-arrow-down"></i></h1>
                                                             <dl>
-                                                                            </dl>
+                                                    <dt>Inherited from</dt>
+                    <dd><a href="../classes/CurrentLib.html"><div class="path-wrapper">\CurrentLib</div></a></dd>
+                                                            </dl>
             <h2>Tags</h2>
             <table class="table table-condensed">
                                     <tr><td colspan="2"><em>None found</em></td></tr>
@@ -2458,13 +2523,15 @@ NcPermissionクラスのメンバ変数ではなく、CurrentLibクラスとす�
                                             </table>
                 
                 
-                				
+                
                             </article>
         </div>
         <aside class="span4 detailsbar">
             <h1><i class="icon-arrow-down"></i></h1>
                                                             <dl>
-                                                                            </dl>
+                                                    <dt>Inherited from</dt>
+                    <dd><a href="../classes/CurrentLib.html"><div class="path-wrapper">\CurrentLib</div></a></dd>
+                                                            </dl>
             <h2>Tags</h2>
             <table class="table table-condensed">
                                     <tr><td colspan="2"><em>None found</em></td></tr>
@@ -2521,7 +2588,7 @@ NcPermissionクラスのメンバ変数ではなく、CurrentLibクラスとす�
                 <section class="span10 offset1">
                     <hr />
                     Documentation is powered by <a href="http://www.phpdoc.org/">phpDocumentor </a> and authored
-                    on September 16th, 2019 at 12:35.
+                    on March 13th, 2020 at 16:13.
                 </section>
             </section>
         </section>
