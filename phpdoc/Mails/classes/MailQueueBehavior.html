@@ -24,7 +24,7 @@
     <script type="text/javascript">
     function loadExternalCodeSnippets() {
         Array.prototype.slice.call(document.querySelectorAll('pre[data-src]')).forEach(function (pre) {
-            var src = pre.getAttribute('data-src');
+            var src = pre.getAttribute('data-src').replace( /\\/g, '/');
             var extension = (src.match(/\.(\w+)$/) || [, ''])[1];
             var language = 'php';
 
@@ -136,10 +136,10 @@
                                 <div class="accordion" style="margin-bottom: 0">
         <div class="accordion-group">
             <div class="accordion-heading">
-                                    <a class="accordion-toggle " data-toggle="collapse" data-target="#namespace-1370474198"></a>
+                                    <a class="accordion-toggle " data-toggle="collapse" data-target="#namespace-693165845"></a>
                                 <a href="../namespaces/default.html" style="margin-left: 30px; padding-left: 0">\</a>
             </div>
-            <div id="namespace-1370474198" class="accordion-body collapse in">
+            <div id="namespace-693165845" class="accordion-body collapse in">
                 <div class="accordion-inner">
 
                     
@@ -360,7 +360,7 @@
                         
                         
                         
-                        
+                                                
                                                                         </dl>
                     <h2>Tags</h2>
                     <table class="table table-condensed">
@@ -369,7 +369,7 @@
                                 author
                             </th>
                             <td>
-                                                                    <p>Mitsuru Mutaguchi <a href="mailto:mutaguchi@opensource-workshop.jp">mutaguchi@opensource-workshop.jp</a></p>
+                                                                                                        <p>Mitsuru Mutaguchi <a href="mailto:mutaguchi@opensource-workshop.jp">mutaguchi@opensource-workshop.jp</a></p>
                                                             </td>
                         </tr>
                                         </table>
@@ -389,7 +389,7 @@
             <a id="constant_MAIL_QUEUE_WORKFLOW_TYPE_NONE" name="constant_MAIL_QUEUE_WORKFLOW_TYPE_NONE" class="anchor"></a>
             <article id="constant_MAIL_QUEUE_WORKFLOW_TYPE_NONE" class="constant">
                 <h3 class="">MAIL_QUEUE_WORKFLOW_TYPE_NONE</h3>
-                <pre class="signature">MAIL_QUEUE_WORKFLOW_TYPE_NONE</pre>
+                <pre class="signature">MAIL_QUEUE_WORKFLOW_TYPE_NONE = &#039;none&#039; : string</pre>
                 <p><em>承認機能の種類</em></p>
                 
             </article>
@@ -410,7 +410,7 @@
             <a id="constant_MAIL_QUEUE_WORKFLOW_TYPE_WORKFLOW" name="constant_MAIL_QUEUE_WORKFLOW_TYPE_WORKFLOW" class="anchor"></a>
             <article id="constant_MAIL_QUEUE_WORKFLOW_TYPE_WORKFLOW" class="constant">
                 <h3 class="">MAIL_QUEUE_WORKFLOW_TYPE_WORKFLOW</h3>
-                <pre class="signature">MAIL_QUEUE_WORKFLOW_TYPE_WORKFLOW</pre>
+                <pre class="signature">MAIL_QUEUE_WORKFLOW_TYPE_WORKFLOW = &#039;workflow&#039; : string</pre>
                 <p><em>承認機能の種類</em></p>
                 
             </article>
@@ -431,7 +431,7 @@
             <a id="constant_MAIL_QUEUE_WORKFLOW_TYPE_COMMENT" name="constant_MAIL_QUEUE_WORKFLOW_TYPE_COMMENT" class="anchor"></a>
             <article id="constant_MAIL_QUEUE_WORKFLOW_TYPE_COMMENT" class="constant">
                 <h3 class="">MAIL_QUEUE_WORKFLOW_TYPE_COMMENT</h3>
-                <pre class="signature">MAIL_QUEUE_WORKFLOW_TYPE_COMMENT</pre>
+                <pre class="signature">MAIL_QUEUE_WORKFLOW_TYPE_COMMENT = &#039;contentComment&#039; : string</pre>
                 <p><em>承認機能の種類</em></p>
                 
             </article>
@@ -452,7 +452,7 @@
             <a id="constant_MAIL_QUEUE_WORKFLOW_TYPE_ANSWER" name="constant_MAIL_QUEUE_WORKFLOW_TYPE_ANSWER" class="anchor"></a>
             <article id="constant_MAIL_QUEUE_WORKFLOW_TYPE_ANSWER" class="constant">
                 <h3 class="">MAIL_QUEUE_WORKFLOW_TYPE_ANSWER</h3>
-                <pre class="signature">MAIL_QUEUE_WORKFLOW_TYPE_ANSWER</pre>
+                <pre class="signature">MAIL_QUEUE_WORKFLOW_TYPE_ANSWER = &#039;answer&#039; : string</pre>
                 <p><em>承認機能の種類</em></p>
                 
             </article>
@@ -473,7 +473,7 @@
             <a id="constant_MAIL_QUEUE_WORKFLOW_TYPE_GROUP_ONLY" name="constant_MAIL_QUEUE_WORKFLOW_TYPE_GROUP_ONLY" class="anchor"></a>
             <article id="constant_MAIL_QUEUE_WORKFLOW_TYPE_GROUP_ONLY" class="constant">
                 <h3 class="">MAIL_QUEUE_WORKFLOW_TYPE_GROUP_ONLY</h3>
-                <pre class="signature">MAIL_QUEUE_WORKFLOW_TYPE_GROUP_ONLY</pre>
+                <pre class="signature">MAIL_QUEUE_WORKFLOW_TYPE_GROUP_ONLY = &#039;groupOnly&#039; : string</pre>
                 <p><em>承認機能の種類</em></p>
                 
             </article>
@@ -494,7 +494,7 @@
             <a id="constant_MAIL_QUEUE_SETTING_USER_IDS" name="constant_MAIL_QUEUE_SETTING_USER_IDS" class="anchor"></a>
             <article id="constant_MAIL_QUEUE_SETTING_USER_IDS" class="constant">
                 <h3 class="">MAIL_QUEUE_SETTING_USER_IDS</h3>
-                <pre class="signature">MAIL_QUEUE_SETTING_USER_IDS</pre>
+                <pre class="signature">MAIL_QUEUE_SETTING_USER_IDS = &#039;userIds&#039; : string</pre>
                 <p><em>セッティングの種類(setSettingで利用)</em></p>
                 
             </article>
@@ -515,7 +515,7 @@
             <a id="constant_MAIL_QUEUE_SETTING_TO_ADDRESSES" name="constant_MAIL_QUEUE_SETTING_TO_ADDRESSES" class="anchor"></a>
             <article id="constant_MAIL_QUEUE_SETTING_TO_ADDRESSES" class="constant">
                 <h3 class="">MAIL_QUEUE_SETTING_TO_ADDRESSES</h3>
-                <pre class="signature">MAIL_QUEUE_SETTING_TO_ADDRESSES</pre>
+                <pre class="signature">MAIL_QUEUE_SETTING_TO_ADDRESSES = &#039;toAddresses&#039; : string</pre>
                 <p><em>セッティングの種類(setSettingで利用)</em></p>
                 
             </article>
@@ -536,7 +536,7 @@
             <a id="constant_MAIL_QUEUE_SETTING_IS_MAIL_SEND_POST" name="constant_MAIL_QUEUE_SETTING_IS_MAIL_SEND_POST" class="anchor"></a>
             <article id="constant_MAIL_QUEUE_SETTING_IS_MAIL_SEND_POST" class="constant">
                 <h3 class="">MAIL_QUEUE_SETTING_IS_MAIL_SEND_POST</h3>
-                <pre class="signature">MAIL_QUEUE_SETTING_IS_MAIL_SEND_POST</pre>
+                <pre class="signature">MAIL_QUEUE_SETTING_IS_MAIL_SEND_POST = &#039;isMailSendPost&#039; : string</pre>
                 <p><em>セッティングの種類(setSettingで利用)</em></p>
                 
             </article>
@@ -557,7 +557,7 @@
             <a id="constant_MAIL_QUEUE_SETTING_NOT_SEND_ROOM_USER_IDS" name="constant_MAIL_QUEUE_SETTING_NOT_SEND_ROOM_USER_IDS" class="anchor"></a>
             <article id="constant_MAIL_QUEUE_SETTING_NOT_SEND_ROOM_USER_IDS" class="constant">
                 <h3 class="">MAIL_QUEUE_SETTING_NOT_SEND_ROOM_USER_IDS</h3>
-                <pre class="signature">MAIL_QUEUE_SETTING_NOT_SEND_ROOM_USER_IDS</pre>
+                <pre class="signature">MAIL_QUEUE_SETTING_NOT_SEND_ROOM_USER_IDS = &#039;notSendRoomUserIds&#039; : string</pre>
                 <p><em>セッティングの種類(setSettingで利用)</em></p>
                 
             </article>
@@ -578,7 +578,7 @@
             <a id="constant_MAIL_QUEUE_SETTING_PLUGIN_NAME" name="constant_MAIL_QUEUE_SETTING_PLUGIN_NAME" class="anchor"></a>
             <article id="constant_MAIL_QUEUE_SETTING_PLUGIN_NAME" class="constant">
                 <h3 class="">MAIL_QUEUE_SETTING_PLUGIN_NAME</h3>
-                <pre class="signature">MAIL_QUEUE_SETTING_PLUGIN_NAME</pre>
+                <pre class="signature">MAIL_QUEUE_SETTING_PLUGIN_NAME = &#039;pluginName&#039; : string</pre>
                 <p><em>セッティングの種類(setSettingで利用)</em></p>
                 
             </article>
@@ -599,7 +599,7 @@
             <a id="constant_MAIL_QUEUE_SETTING_WORKFLOW_TYPE" name="constant_MAIL_QUEUE_SETTING_WORKFLOW_TYPE" class="anchor"></a>
             <article id="constant_MAIL_QUEUE_SETTING_WORKFLOW_TYPE" class="constant">
                 <h3 class="">MAIL_QUEUE_SETTING_WORKFLOW_TYPE</h3>
-                <pre class="signature">MAIL_QUEUE_SETTING_WORKFLOW_TYPE</pre>
+                <pre class="signature">MAIL_QUEUE_SETTING_WORKFLOW_TYPE = &#039;workflowType&#039; : string</pre>
                 <p><em>セッティングの種類(setSettingで利用)</em></p>
                 
             </article>
@@ -620,7 +620,7 @@
             <a id="constant_MAIL_QUEUE_SETTING_MAIL_BODY_AFTER" name="constant_MAIL_QUEUE_SETTING_MAIL_BODY_AFTER" class="anchor"></a>
             <article id="constant_MAIL_QUEUE_SETTING_MAIL_BODY_AFTER" class="constant">
                 <h3 class="">MAIL_QUEUE_SETTING_MAIL_BODY_AFTER</h3>
-                <pre class="signature">MAIL_QUEUE_SETTING_MAIL_BODY_AFTER</pre>
+                <pre class="signature">MAIL_QUEUE_SETTING_MAIL_BODY_AFTER = &#039;mailBodyAfter&#039; : string</pre>
                 <p><em>セッティングの種類(setSettingで利用)</em></p>
                 
             </article>
@@ -742,13 +742,15 @@
                                             </table>
                 
                 
-                				
+                
                             </article>
         </div>
         <aside class="span4 detailsbar">
             <h1><i class="icon-arrow-down"></i></h1>
                                                             <dl>
-                                                                                            <dt>See also</dt>
+                                                    <dt>Inherited from</dt>
+                    <dd><a href="../classes/MailQueueBehavior.html"><div class="path-wrapper">\MailQueueBehavior</div></a></dd>
+                                                                            <dt>See also</dt>
                                                                 <dd><a href="http://book.cakephp.org/2.0/ja/models/behaviors.html#ModelBehavior::setup"><span class="namespace-wrapper">http://book.cakephp.org/2.0/ja/models/behaviors.html#ModelBehavior::setup</span></a></dd>
                                                                 </dl>
             <h2>Tags</h2>
@@ -790,13 +792,15 @@
                 
                                     <h4>Returns</h4>
                     boolean
-                                    				
+                                    
                             </article>
         </div>
         <aside class="span4 detailsbar">
             <h1><i class="icon-arrow-down"></i></h1>
                                                             <dl>
-                                                                                            <dt>See also</dt>
+                                                    <dt>Inherited from</dt>
+                    <dd><a href="../classes/MailQueueBehavior.html"><div class="path-wrapper">\MailQueueBehavior</div></a></dd>
+                                                                            <dt>See also</dt>
                                                                 <dd><a href=""><span class="namespace-wrapper">\Model::save()</span></a></dd>
                                                                                                     <dd><a href="http://book.cakephp.org/2.0/ja/models/behaviors.html#ModelBehavior::afterSave"><span class="namespace-wrapper">http://book.cakephp.org/2.0/ja/models/behaviors.html#ModelBehavior::afterSave</span></a></dd>
                                                                 </dl>
@@ -842,13 +846,15 @@
                                     <h4>Returns</h4>
                     array
                                             &mdash; <p>$this-&gt;settings(テスト用)</p>
-                                    				
+                                    
                             </article>
         </div>
         <aside class="span4 detailsbar">
             <h1><i class="icon-arrow-down"></i></h1>
                                                             <dl>
-                                                                            </dl>
+                                                    <dt>Inherited from</dt>
+                    <dd><a href="../classes/MailQueueBehavior.html"><div class="path-wrapper">\MailQueueBehavior</div></a></dd>
+                                                            </dl>
             <h2>Tags</h2>
             <table class="table table-condensed">
                                     <tr><td colspan="2"><em>None found</em></td></tr>
@@ -930,13 +936,15 @@
                                     <h4>Returns</h4>
                     array
                                             &mdash; <p>$this-&gt;settings(テスト用)</p>
-                                    				
+                                    
                             </article>
         </div>
         <aside class="span4 detailsbar">
             <h1><i class="icon-arrow-down"></i></h1>
                                                             <dl>
-                                                                                            <dt>See also</dt>
+                                                    <dt>Inherited from</dt>
+                    <dd><a href="../classes/MailQueueBehavior.html"><div class="path-wrapper">\MailQueueBehavior</div></a></dd>
+                                                                            <dt>See also</dt>
                                                                 <dd><a href="../classes/MailQueueBehavior.html#constant_MAIL_QUEUE_SETTING_USER_IDS"><span class="namespace-wrapper">\MailQueueBehavior::MAIL_QUEUE_SETTING_USER_IDS</span></a></dd>
                                             <dd><a href="../classes/MailQueueBehavior.html#constant_MAIL_QUEUE_SETTING_TO_ADDRESSES"><span class="namespace-wrapper">\MailQueueBehavior::MAIL_QUEUE_SETTING_TO_ADDRESSES</span></a></dd>
                                             <dd><a href="../classes/MailQueueBehavior.html#constant_MAIL_QUEUE_SETTING_IS_MAIL_SEND_POST"><span class="namespace-wrapper">\MailQueueBehavior::MAIL_QUEUE_SETTING_IS_MAIL_SEND_POST</span></a></dd>
@@ -1009,13 +1017,15 @@
                                     <h4>Returns</h4>
                     array
                                             &mdash; <p>$this-&gt;settings(テスト用)</p>
-                                    				
+                                    
                             </article>
         </div>
         <aside class="span4 detailsbar">
             <h1><i class="icon-arrow-down"></i></h1>
                                                             <dl>
-                                                                            </dl>
+                                                    <dt>Inherited from</dt>
+                    <dd><a href="../classes/MailQueueBehavior.html"><div class="path-wrapper">\MailQueueBehavior</div></a></dd>
+                                                            </dl>
             <h2>Tags</h2>
             <table class="table table-condensed">
                                     <tr><td colspan="2"><em>None found</em></td></tr>
@@ -1053,13 +1063,15 @@
                                             </table>
                 
                 
-                				
+                
                             </article>
         </div>
         <aside class="span4 detailsbar">
             <h1><i class="icon-arrow-down"></i></h1>
                                                             <dl>
-                                                                            </dl>
+                                                    <dt>Inherited from</dt>
+                    <dd><a href="../classes/MailQueueBehavior.html"><div class="path-wrapper">\MailQueueBehavior</div></a></dd>
+                                                            </dl>
             <h2>Tags</h2>
             <table class="table table-condensed">
                                     <tr><td colspan="2"><em>None found</em></td></tr>
@@ -1123,13 +1135,15 @@
                             <dd></dd>
                                                                     </dl>
                 
-                				
+                
                             </article>
         </div>
         <aside class="span4 detailsbar">
             <h1><i class="icon-arrow-down"></i></h1>
                                                             <dl>
-                                                                            </dl>
+                                                    <dt>Inherited from</dt>
+                    <dd><a href="../classes/MailQueueBehavior.html"><div class="path-wrapper">\MailQueueBehavior</div></a></dd>
+                                                            </dl>
             <h2>Tags</h2>
             <table class="table table-condensed">
                                     <tr><td colspan="2"><em>None found</em></td></tr>
@@ -1160,13 +1174,15 @@
                                     <h4>Returns</h4>
                     \date
                                             &mdash; <p>送信日時</p>
-                                    				
+                                    
                             </article>
         </div>
         <aside class="span4 detailsbar">
             <h1><i class="icon-arrow-down"></i></h1>
                                                             <dl>
-                                                                            </dl>
+                                                    <dt>Inherited from</dt>
+                    <dd><a href="../classes/MailQueueBehavior.html"><div class="path-wrapper">\MailQueueBehavior</div></a></dd>
+                                                            </dl>
             <h2>Tags</h2>
             <table class="table table-condensed">
                                     <tr><td colspan="2"><em>None found</em></td></tr>
@@ -1207,13 +1223,15 @@
                                     <h4>Returns</h4>
                     array
                                             &mdash; <p>メール設定データ配列</p>
-                                    				
+                                    
                             </article>
         </div>
         <aside class="span4 detailsbar">
             <h1><i class="icon-arrow-down"></i></h1>
                                                             <dl>
-                                                                            </dl>
+                                                    <dt>Inherited from</dt>
+                    <dd><a href="../classes/MailQueueBehavior.html"><div class="path-wrapper">\MailQueueBehavior</div></a></dd>
+                                                            </dl>
             <h2>Tags</h2>
             <table class="table table-condensed">
                                     <tr><td colspan="2"><em>None found</em></td></tr>
@@ -1244,13 +1262,15 @@
                                     <h4>Returns</h4>
                     string
                                             &mdash; <p>コンテンツキー</p>
-                                    				
+                                    
                             </article>
         </div>
         <aside class="span4 detailsbar">
             <h1><i class="icon-arrow-down"></i></h1>
                                                             <dl>
-                                                                            </dl>
+                                                    <dt>Inherited from</dt>
+                    <dd><a href="../classes/MailQueueBehavior.html"><div class="path-wrapper">\MailQueueBehavior</div></a></dd>
+                                                            </dl>
             <h2>Tags</h2>
             <table class="table table-condensed">
                                     <tr><td colspan="2"><em>None found</em></td></tr>
@@ -1281,13 +1301,15 @@
                                     <h4>Returns</h4>
                     string
                                             &mdash; <p>コンテンツキー</p>
-                                    				
+                                    
                             </article>
         </div>
         <aside class="span4 detailsbar">
             <h1><i class="icon-arrow-down"></i></h1>
                                                             <dl>
-                                                                            </dl>
+                                                    <dt>Inherited from</dt>
+                    <dd><a href="../classes/MailQueueBehavior.html"><div class="path-wrapper">\MailQueueBehavior</div></a></dd>
+                                                            </dl>
             <h2>Tags</h2>
             <table class="table table-condensed">
                                     <tr><td colspan="2"><em>None found</em></td></tr>
@@ -1333,13 +1355,15 @@
                                     <h4>Returns</h4>
                     integer
                                             &mdash; <p>MailQueue.id</p>
-                                    				
+                                    
                             </article>
         </div>
         <aside class="span4 detailsbar">
             <h1><i class="icon-arrow-down"></i></h1>
                                                             <dl>
-                                                                            </dl>
+                                                    <dt>Inherited from</dt>
+                    <dd><a href="../classes/MailQueueBehavior.html"><div class="path-wrapper">\MailQueueBehavior</div></a></dd>
+                                                            </dl>
             <h2>Tags</h2>
             <table class="table table-condensed">
                                     <tr><td colspan="2"><em>None found</em></td></tr>
@@ -1372,13 +1396,15 @@
                                             </table>
                 
                 
-                				
+                
                             </article>
         </div>
         <aside class="span4 detailsbar">
             <h1><i class="icon-arrow-down"></i></h1>
                                                             <dl>
-                                                                            </dl>
+                                                    <dt>Inherited from</dt>
+                    <dd><a href="../classes/MailQueueBehavior.html"><div class="path-wrapper">\MailQueueBehavior</div></a></dd>
+                                                            </dl>
             <h2>Tags</h2>
             <table class="table table-condensed">
                                     <tr><td colspan="2"><em>None found</em></td></tr>
@@ -1413,13 +1439,15 @@
                 
                                     <h4>Returns</h4>
                     boolean
-                                    				
+                                    
                             </article>
         </div>
         <aside class="span4 detailsbar">
             <h1><i class="icon-arrow-down"></i></h1>
                                                             <dl>
-                                                                            </dl>
+                                                    <dt>Inherited from</dt>
+                    <dd><a href="../classes/MailQueueBehavior.html"><div class="path-wrapper">\MailQueueBehavior</div></a></dd>
+                                                            </dl>
             <h2>Tags</h2>
             <table class="table table-condensed">
                                     <tr><td colspan="2"><em>None found</em></td></tr>
@@ -1463,13 +1491,15 @@
                             <dd></dd>
                                                                     </dl>
                 
-                				
+                
                             </article>
         </div>
         <aside class="span4 detailsbar">
             <h1><i class="icon-arrow-down"></i></h1>
                                                             <dl>
-                                                                            </dl>
+                                                    <dt>Inherited from</dt>
+                    <dd><a href="../classes/MailQueueBehavior.html"><div class="path-wrapper">\MailQueueBehavior</div></a></dd>
+                                                            </dl>
             <h2>Tags</h2>
             <table class="table table-condensed">
                                     <tr><td colspan="2"><em>None found</em></td></tr>
@@ -1520,13 +1550,15 @@
                                     <h4>Returns</h4>
                     array
                                             &mdash; <p>メールキューデータ</p>
-                                    				
+                                    
                             </article>
         </div>
         <aside class="span4 detailsbar">
             <h1><i class="icon-arrow-down"></i></h1>
                                                             <dl>
-                                                                            </dl>
+                                                    <dt>Inherited from</dt>
+                    <dd><a href="../classes/MailQueueBehavior.html"><div class="path-wrapper">\MailQueueBehavior</div></a></dd>
+                                                            </dl>
             <h2>Tags</h2>
             <table class="table table-condensed">
                                     <tr><td colspan="2"><em>None found</em></td></tr>
@@ -1583,7 +1615,7 @@
                 <section class="span10 offset1">
                     <hr />
                     Documentation is powered by <a href="http://www.phpdoc.org/">phpDocumentor </a> and authored
-                    on November 13th, 2019 at 05:18.
+                    on March 13th, 2020 at 14:07.
                 </section>
             </section>
         </section>

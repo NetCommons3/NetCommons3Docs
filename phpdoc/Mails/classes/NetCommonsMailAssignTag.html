@@ -24,7 +24,7 @@
     <script type="text/javascript">
     function loadExternalCodeSnippets() {
         Array.prototype.slice.call(document.querySelectorAll('pre[data-src]')).forEach(function (pre) {
-            var src = pre.getAttribute('data-src');
+            var src = pre.getAttribute('data-src').replace( /\\/g, '/');
             var extension = (src.match(/\.(\w+)$/) || [, ''])[1];
             var language = 'php';
 
@@ -136,10 +136,10 @@
                                 <div class="accordion" style="margin-bottom: 0">
         <div class="accordion-group">
             <div class="accordion-heading">
-                                    <a class="accordion-toggle " data-toggle="collapse" data-target="#namespace-1932677697"></a>
+                                    <a class="accordion-toggle " data-toggle="collapse" data-target="#namespace-106712096"></a>
                                 <a href="../namespaces/default.html" style="margin-left: 30px; padding-left: 0">\</a>
             </div>
-            <div id="namespace-1932677697" class="accordion-body collapse in">
+            <div id="namespace-106712096" class="accordion-body collapse in">
                 <div class="accordion-inner">
 
                     
@@ -449,7 +449,7 @@
                         
                         
                         
-                        
+                                                
                                                                         </dl>
                     <h2>Tags</h2>
                     <table class="table table-condensed">
@@ -458,7 +458,7 @@
                                 author
                             </th>
                             <td>
-                                                                    <p>Mitsuru Mutaguchi <a href="mailto:mutaguchi@opensource-workshop.jp">mutaguchi@opensource-workshop.jp</a></p>
+                                                                                                        <p>Mitsuru Mutaguchi <a href="mailto:mutaguchi@opensource-workshop.jp">mutaguchi@opensource-workshop.jp</a></p>
                                                             </td>
                         </tr>
                                         </table>
@@ -478,7 +478,7 @@
             <a id="constant_MAX_LINE_LENGTH" name="constant_MAX_LINE_LENGTH" class="anchor"></a>
             <article id="constant_MAX_LINE_LENGTH" class="constant">
                 <h3 class="">MAX_LINE_LENGTH</h3>
-                <pre class="signature">MAX_LINE_LENGTH</pre>
+                <pre class="signature">MAX_LINE_LENGTH = 300 : integer</pre>
                 <p><em></em></p>
                 
             </article>
@@ -499,7 +499,7 @@
             <a id="constant_SITE_SETTING_FIXED_PHRASE_APPROVAL" name="constant_SITE_SETTING_FIXED_PHRASE_APPROVAL" class="anchor"></a>
             <article id="constant_SITE_SETTING_FIXED_PHRASE_APPROVAL" class="constant">
                 <h3 class="">SITE_SETTING_FIXED_PHRASE_APPROVAL</h3>
-                <pre class="signature">SITE_SETTING_FIXED_PHRASE_APPROVAL</pre>
+                <pre class="signature">SITE_SETTING_FIXED_PHRASE_APPROVAL = &#039;approval&#039; : string</pre>
                 <p><em>SiteSettingの定型文の種類</em></p>
                 
             </article>
@@ -520,7 +520,7 @@
             <a id="constant_SITE_SETTING_FIXED_PHRASE_DISAPPROVAL" name="constant_SITE_SETTING_FIXED_PHRASE_DISAPPROVAL" class="anchor"></a>
             <article id="constant_SITE_SETTING_FIXED_PHRASE_DISAPPROVAL" class="constant">
                 <h3 class="">SITE_SETTING_FIXED_PHRASE_DISAPPROVAL</h3>
-                <pre class="signature">SITE_SETTING_FIXED_PHRASE_DISAPPROVAL</pre>
+                <pre class="signature">SITE_SETTING_FIXED_PHRASE_DISAPPROVAL = &#039;disapproval&#039; : string</pre>
                 <p><em>SiteSettingの定型文の種類</em></p>
                 
             </article>
@@ -541,7 +541,7 @@
             <a id="constant_SITE_SETTING_FIXED_PHRASE_APPROVAL_COMPLETION" name="constant_SITE_SETTING_FIXED_PHRASE_APPROVAL_COMPLETION" class="anchor"></a>
             <article id="constant_SITE_SETTING_FIXED_PHRASE_APPROVAL_COMPLETION" class="constant">
                 <h3 class="">SITE_SETTING_FIXED_PHRASE_APPROVAL_COMPLETION</h3>
-                <pre class="signature">SITE_SETTING_FIXED_PHRASE_APPROVAL_COMPLETION</pre>
+                <pre class="signature">SITE_SETTING_FIXED_PHRASE_APPROVAL_COMPLETION = &#039;approval_completion&#039; : string</pre>
                 <p><em>SiteSettingの定型文の種類</em></p>
                 
             </article>
@@ -562,7 +562,7 @@
             <a id="constant_SITE_SETTING_FIXED_PHRASE_CONTACT_AFTER_APPROVAL" name="constant_SITE_SETTING_FIXED_PHRASE_CONTACT_AFTER_APPROVAL" class="anchor"></a>
             <article id="constant_SITE_SETTING_FIXED_PHRASE_CONTACT_AFTER_APPROVAL" class="constant">
                 <h3 class="">SITE_SETTING_FIXED_PHRASE_CONTACT_AFTER_APPROVAL</h3>
-                <pre class="signature">SITE_SETTING_FIXED_PHRASE_CONTACT_AFTER_APPROVAL</pre>
+                <pre class="signature">SITE_SETTING_FIXED_PHRASE_CONTACT_AFTER_APPROVAL = &#039;contact_after_approval&#039; : string</pre>
                 <p><em>SiteSettingの定型文の種類</em></p>
                 
             </article>
@@ -835,13 +835,15 @@
                                             </table>
                 
                 
-                				
+                
                             </article>
         </div>
         <aside class="span4 detailsbar">
             <h1><i class="icon-arrow-down"></i></h1>
                                                             <dl>
-                                                                                            <dt>See also</dt>
+                                                    <dt>Inherited from</dt>
+                    <dd><a href="../classes/NetCommonsMailAssignTag.html"><div class="path-wrapper">\NetCommonsMailAssignTag</div></a></dd>
+                                                                            <dt>See also</dt>
                                                                 <dd><a href=""><span class="namespace-wrapper">\CakeEmail::$charset</span></a></dd>
                                                                 </dl>
             <h2>Tags</h2>
@@ -876,13 +878,15 @@
                                             </table>
                 
                 
-                				
+                
                             </article>
         </div>
         <aside class="span4 detailsbar">
             <h1><i class="icon-arrow-down"></i></h1>
                                                             <dl>
-                                                                            </dl>
+                                                    <dt>Inherited from</dt>
+                    <dd><a href="../classes/NetCommonsMailAssignTag.html"><div class="path-wrapper">\NetCommonsMailAssignTag</div></a></dd>
+                                                            </dl>
             <h2>Tags</h2>
             <table class="table table-condensed">
                                     <tr><td colspan="2"><em>None found</em></td></tr>
@@ -920,13 +924,15 @@
                                             </table>
                 
                 
-                				
+                
                             </article>
         </div>
         <aside class="span4 detailsbar">
             <h1><i class="icon-arrow-down"></i></h1>
                                                             <dl>
-                                                                            </dl>
+                                                    <dt>Inherited from</dt>
+                    <dd><a href="../classes/NetCommonsMailAssignTag.html"><div class="path-wrapper">\NetCommonsMailAssignTag</div></a></dd>
+                                                            </dl>
             <h2>Tags</h2>
             <table class="table table-condensed">
                                     <tr><td colspan="2"><em>None found</em></td></tr>
@@ -954,13 +960,15 @@
                                             </table>
                 
                 
-                				
+                
                             </article>
         </div>
         <aside class="span4 detailsbar">
             <h1><i class="icon-arrow-down"></i></h1>
                                                             <dl>
-                                                                            </dl>
+                                                    <dt>Inherited from</dt>
+                    <dd><a href="../classes/NetCommonsMailAssignTag.html"><div class="path-wrapper">\NetCommonsMailAssignTag</div></a></dd>
+                                                            </dl>
             <h2>Tags</h2>
             <table class="table table-condensed">
                                     <tr><td colspan="2"><em>None found</em></td></tr>
@@ -998,13 +1006,15 @@
                                             </table>
                 
                 
-                				
+                
                             </article>
         </div>
         <aside class="span4 detailsbar">
             <h1><i class="icon-arrow-down"></i></h1>
                                                             <dl>
-                                                                            </dl>
+                                                    <dt>Inherited from</dt>
+                    <dd><a href="../classes/NetCommonsMailAssignTag.html"><div class="path-wrapper">\NetCommonsMailAssignTag</div></a></dd>
+                                                            </dl>
             <h2>Tags</h2>
             <table class="table table-condensed">
                                     <tr><td colspan="2"><em>None found</em></td></tr>
@@ -1032,13 +1042,15 @@
                                             </table>
                 
                 
-                				
+                
                             </article>
         </div>
         <aside class="span4 detailsbar">
             <h1><i class="icon-arrow-down"></i></h1>
                                                             <dl>
-                                                                            </dl>
+                                                    <dt>Inherited from</dt>
+                    <dd><a href="../classes/NetCommonsMailAssignTag.html"><div class="path-wrapper">\NetCommonsMailAssignTag</div></a></dd>
+                                                            </dl>
             <h2>Tags</h2>
             <table class="table table-condensed">
                                     <tr><td colspan="2"><em>None found</em></td></tr>
@@ -1066,13 +1078,15 @@
                                             </table>
                 
                 
-                				
+                
                             </article>
         </div>
         <aside class="span4 detailsbar">
             <h1><i class="icon-arrow-down"></i></h1>
                                                             <dl>
-                                                                            </dl>
+                                                    <dt>Inherited from</dt>
+                    <dd><a href="../classes/NetCommonsMailAssignTag.html"><div class="path-wrapper">\NetCommonsMailAssignTag</div></a></dd>
+                                                            </dl>
             <h2>Tags</h2>
             <table class="table table-condensed">
                                     <tr><td colspan="2"><em>None found</em></td></tr>
@@ -1108,13 +1122,15 @@
                                     <h4>Returns</h4>
                     array
                                             &mdash; <p>タグ</p>
-                                    				
+                                    
                             </article>
         </div>
         <aside class="span4 detailsbar">
             <h1><i class="icon-arrow-down"></i></h1>
                                                             <dl>
-                                                                            </dl>
+                                                    <dt>Inherited from</dt>
+                    <dd><a href="../classes/NetCommonsMailAssignTag.html"><div class="path-wrapper">\NetCommonsMailAssignTag</div></a></dd>
+                                                            </dl>
             <h2>Tags</h2>
             <table class="table table-condensed">
                                     <tr><td colspan="2"><em>None found</em></td></tr>
@@ -1142,13 +1158,15 @@
                                             </table>
                 
                 
-                				
+                
                             </article>
         </div>
         <aside class="span4 detailsbar">
             <h1><i class="icon-arrow-down"></i></h1>
                                                             <dl>
-                                                                            </dl>
+                                                    <dt>Inherited from</dt>
+                    <dd><a href="../classes/NetCommonsMailAssignTag.html"><div class="path-wrapper">\NetCommonsMailAssignTag</div></a></dd>
+                                                            </dl>
             <h2>Tags</h2>
             <table class="table table-condensed">
                                     <tr><td colspan="2"><em>None found</em></td></tr>
@@ -1181,13 +1199,15 @@
                                             </table>
                 
                 
-                				
+                
                             </article>
         </div>
         <aside class="span4 detailsbar">
             <h1><i class="icon-arrow-down"></i></h1>
                                                             <dl>
-                                                                            </dl>
+                                                    <dt>Inherited from</dt>
+                    <dd><a href="../classes/NetCommonsMailAssignTag.html"><div class="path-wrapper">\NetCommonsMailAssignTag</div></a></dd>
+                                                            </dl>
             <h2>Tags</h2>
             <table class="table table-condensed">
                                     <tr><td colspan="2"><em>None found</em></td></tr>
@@ -1210,13 +1230,15 @@
                                     <h4>Returns</h4>
                     array
                                             &mdash; <p>タグ</p>
-                                    				
+                                    
                             </article>
         </div>
         <aside class="span4 detailsbar">
             <h1><i class="icon-arrow-down"></i></h1>
                                                             <dl>
-                                                                            </dl>
+                                                    <dt>Inherited from</dt>
+                    <dd><a href="../classes/NetCommonsMailAssignTag.html"><div class="path-wrapper">\NetCommonsMailAssignTag</div></a></dd>
+                                                            </dl>
             <h2>Tags</h2>
             <table class="table table-condensed">
                                     <tr><td colspan="2"><em>None found</em></td></tr>
@@ -1247,13 +1269,15 @@
                                     <h4>Returns</h4>
                     string
                                             &mdash; <p>本文</p>
-                                    				
+                                    
                             </article>
         </div>
         <aside class="span4 detailsbar">
             <h1><i class="icon-arrow-down"></i></h1>
                                                             <dl>
-                                                                            </dl>
+                                                    <dt>Inherited from</dt>
+                    <dd><a href="../classes/NetCommonsMailAssignTag.html"><div class="path-wrapper">\NetCommonsMailAssignTag</div></a></dd>
+                                                            </dl>
             <h2>Tags</h2>
             <table class="table table-condensed">
                                     <tr><td colspan="2"><em>None found</em></td></tr>
@@ -1298,13 +1322,15 @@
                 
                                     <h4>Returns</h4>
                     string
-                                    				
+                                    
                             </article>
         </div>
         <aside class="span4 detailsbar">
             <h1><i class="icon-arrow-down"></i></h1>
                                                             <dl>
-                                                                            </dl>
+                                                    <dt>Inherited from</dt>
+                    <dd><a href="../classes/NetCommonsMailAssignTag.html"><div class="path-wrapper">\NetCommonsMailAssignTag</div></a></dd>
+                                                            </dl>
             <h2>Tags</h2>
             <table class="table table-condensed">
                                     <tr><td colspan="2"><em>None found</em></td></tr>
@@ -1339,13 +1365,15 @@
                 
                                     <h4>Returns</h4>
                     mixed
-                                    				
+                                    
                             </article>
         </div>
         <aside class="span4 detailsbar">
             <h1><i class="icon-arrow-down"></i></h1>
                                                             <dl>
-                                                                            </dl>
+                                                    <dt>Inherited from</dt>
+                    <dd><a href="../classes/NetCommonsMailAssignTag.html"><div class="path-wrapper">\NetCommonsMailAssignTag</div></a></dd>
+                                                            </dl>
             <h2>Tags</h2>
             <table class="table table-condensed">
                                     <tr><td colspan="2"><em>None found</em></td></tr>
@@ -1376,13 +1404,15 @@
                                     <h4>Returns</h4>
                     string
                                             &mdash; <p>変換した文字列</p>
-                                    				
+                                    
                             </article>
         </div>
         <aside class="span4 detailsbar">
             <h1><i class="icon-arrow-down"></i></h1>
                                                             <dl>
-                                                                            </dl>
+                                                    <dt>Inherited from</dt>
+                    <dd><a href="../classes/NetCommonsMailAssignTag.html"><div class="path-wrapper">\NetCommonsMailAssignTag</div></a></dd>
+                                                            </dl>
             <h2>Tags</h2>
             <table class="table table-condensed">
                                     <tr><td colspan="2"><em>None found</em></td></tr>
@@ -1413,13 +1443,15 @@
                                     <h4>Returns</h4>
                     string
                                             &mdash; <p>文字列</p>
-                                    				
+                                    
                             </article>
         </div>
         <aside class="span4 detailsbar">
             <h1><i class="icon-arrow-down"></i></h1>
                                                             <dl>
-                                                                            </dl>
+                                                    <dt>Inherited from</dt>
+                    <dd><a href="../classes/NetCommonsMailAssignTag.html"><div class="path-wrapper">\NetCommonsMailAssignTag</div></a></dd>
+                                                            </dl>
             <h2>Tags</h2>
             <table class="table table-condensed">
                                     <tr><td colspan="2"><em>None found</em></td></tr>
@@ -1476,7 +1508,7 @@
                 <section class="span10 offset1">
                     <hr />
                     Documentation is powered by <a href="http://www.phpdoc.org/">phpDocumentor </a> and authored
-                    on November 13th, 2019 at 05:18.
+                    on March 13th, 2020 at 14:07.
                 </section>
             </section>
         </section>
