@@ -24,7 +24,7 @@
     <script type="text/javascript">
     function loadExternalCodeSnippets() {
         Array.prototype.slice.call(document.querySelectorAll('pre[data-src]')).forEach(function (pre) {
-            var src = pre.getAttribute('data-src');
+            var src = pre.getAttribute('data-src').replace( /\\/g, '/');
             var extension = (src.match(/\.(\w+)$/) || [, ''])[1];
             var language = 'php';
 
@@ -136,10 +136,10 @@
                                 <div class="accordion" style="margin-bottom: 0">
         <div class="accordion-group">
             <div class="accordion-heading">
-                                    <a class="accordion-toggle " data-toggle="collapse" data-target="#namespace-1433000269"></a>
+                                    <a class="accordion-toggle " data-toggle="collapse" data-target="#namespace-1426196845"></a>
                                 <a href="../namespaces/default.html" style="margin-left: 30px; padding-left: 0">\</a>
             </div>
-            <div id="namespace-1433000269" class="accordion-body collapse in">
+            <div id="namespace-1426196845" class="accordion-body collapse in">
                 <div class="accordion-inner">
 
                     
@@ -415,7 +415,7 @@ will inherit them.</p>
                         
                         
                         
-                        
+                                                
                                                                         </dl>
                     <h2>Tags</h2>
                     <table class="table table-condensed">
@@ -424,7 +424,7 @@ will inherit them.</p>
                                 author
                             </th>
                             <td>
-                                                                    <p>Shohei Nakajima <a href="mailto:nakajimashouhei@gmail.com">nakajimashouhei@gmail.com</a></p>
+                                                                                                        <p>Shohei Nakajima <a href="mailto:nakajimashouhei@gmail.com">nakajimashouhei@gmail.com</a></p>
                                                             </td>
                         </tr>
                                         </table>
@@ -689,7 +689,7 @@ can also be an array of options, see above.</p></td>
                                             </table>
                 
                 
-                				
+                
                             </article>
         </div>
         <aside class="span4 detailsbar">
@@ -724,7 +724,7 @@ can also be an array of options, see above.</p></td>
 
                 
                 
-                				
+                
                             </article>
         </div>
         <aside class="span4 detailsbar">
@@ -752,7 +752,7 @@ can also be an array of options, see above.</p></td>
 
                 
                 
-                				
+                
                             </article>
         </div>
         <aside class="span4 detailsbar">
@@ -783,7 +783,7 @@ can also be an array of options, see above.</p></td>
                                     <h4>Returns</h4>
                     \DataSource
                                             &mdash; <p>A DataSource object</p>
-                                    				
+                                    
                             </article>
         </div>
         <aside class="span4 detailsbar">
@@ -838,7 +838,7 @@ schema data defaults are not merged.</p></td>
                                     <h4>Returns</h4>
                     array
                                             &mdash; <p>The current Model::data; after merging $data and/or defaults from database</p>
-                                    				
+                                    
                             </article>
         </div>
         <aside class="span4 detailsbar">
@@ -893,7 +893,7 @@ schema data defaults are not merged.</p></td>
                                     <h4>Returns</h4>
                     array
                                             &mdash; <p>The current Model::data; after merging $data and/or defaults from database</p>
-                                    				
+                                    
                             </article>
         </div>
         <aside class="span4 detailsbar">
@@ -930,7 +930,7 @@ schema data defaults are not merged.</p></td>
 
                 
                 
-                				
+                
                             </article>
         </div>
         <aside class="span4 detailsbar">
@@ -958,7 +958,7 @@ schema data defaults are not merged.</p></td>
 
                 
                 
-                				
+                
                             </article>
         </div>
         <aside class="span4 detailsbar">
@@ -999,7 +999,7 @@ schema data defaults are not merged.</p></td>
                             <dd></dd>
                                                                     </dl>
                 
-                				
+                
                             </article>
         </div>
         <aside class="span4 detailsbar">
@@ -1035,7 +1035,7 @@ schema data defaults are not merged.</p></td>
                                             </table>
                 
                 
-                				
+                
                             </article>
         </div>
         <aside class="span4 detailsbar">
@@ -1071,13 +1071,15 @@ schema data defaults are not merged.</p></td>
                                             </table>
                 
                 
-                				
+                
                             </article>
         </div>
         <aside class="span4 detailsbar">
             <h1><i class="icon-arrow-down"></i></h1>
                                                             <dl>
-                                                                            </dl>
+                                                    <dt>Inherited from</dt>
+                    <dd><a href="../classes/RoomDeleteRelatedTable.html"><div class="path-wrapper">\RoomDeleteRelatedTable</div></a></dd>
+                                                            </dl>
             <h2>Tags</h2>
             <table class="table table-condensed">
                                     <tr><td colspan="2"><em>None found</em></td></tr>
@@ -1110,13 +1112,15 @@ schema data defaults are not merged.</p></td>
                                             </table>
                 
                 
-                				
+                
                             </article>
         </div>
         <aside class="span4 detailsbar">
             <h1><i class="icon-arrow-down"></i></h1>
                                                             <dl>
-                                                                            </dl>
+                                                    <dt>Inherited from</dt>
+                    <dd><a href="../classes/RoomDeleteRelatedTable.html"><div class="path-wrapper">\RoomDeleteRelatedTable</div></a></dd>
+                                                            </dl>
             <h2>Tags</h2>
             <table class="table table-condensed">
                                     <tr><td colspan="2"><em>None found</em></td></tr>
@@ -1164,13 +1168,15 @@ schema data defaults are not merged.</p></td>
                                             </table>
                 
                 
-                				
+                
                             </article>
         </div>
         <aside class="span4 detailsbar">
             <h1><i class="icon-arrow-down"></i></h1>
                                                             <dl>
-                                                                            </dl>
+                                                    <dt>Inherited from</dt>
+                    <dd><a href="../classes/RoomDeleteRelatedTable.html"><div class="path-wrapper">\RoomDeleteRelatedTable</div></a></dd>
+                                                            </dl>
             <h2>Tags</h2>
             <table class="table table-condensed">
                                     <tr><td colspan="2"><em>None found</em></td></tr>
@@ -1200,13 +1206,15 @@ schema data defaults are not merged.</p></td>
                 
                                     <h4>Returns</h4>
                     boolean
-                                    				
+                                    
                             </article>
         </div>
         <aside class="span4 detailsbar">
             <h1><i class="icon-arrow-down"></i></h1>
                                                             <dl>
-                                                                            </dl>
+                                                    <dt>Inherited from</dt>
+                    <dd><a href="../classes/RoomDeleteRelatedTable.html"><div class="path-wrapper">\RoomDeleteRelatedTable</div></a></dd>
+                                                            </dl>
             <h2>Tags</h2>
             <table class="table table-condensed">
                                     <tr><td colspan="2"><em>None found</em></td></tr>
@@ -1236,13 +1244,15 @@ schema data defaults are not merged.</p></td>
                 
                                     <h4>Returns</h4>
                     boolean
-                                    				
+                                    
                             </article>
         </div>
         <aside class="span4 detailsbar">
             <h1><i class="icon-arrow-down"></i></h1>
                                                             <dl>
-                                                                            </dl>
+                                                    <dt>Inherited from</dt>
+                    <dd><a href="../classes/RoomDeleteRelatedTable.html"><div class="path-wrapper">\RoomDeleteRelatedTable</div></a></dd>
+                                                            </dl>
             <h2>Tags</h2>
             <table class="table table-condensed">
                                     <tr><td colspan="2"><em>None found</em></td></tr>
@@ -1265,7 +1275,7 @@ schema data defaults are not merged.</p></td>
                                     <h4>Returns</h4>
                     array
                                             &mdash; <p>デフォルト値をセットした配列</p>
-                                    				
+                                    
                             </article>
         </div>
         <aside class="span4 detailsbar">
@@ -1322,7 +1332,7 @@ will enable only those callbacks.</li>
                                     <h4>Returns</h4>
                     mixed
                                             &mdash; <p>On success Model::$data if its not empty or true, false on failure</p>
-                                    				
+                                    
                             </article>
         </div>
         <aside class="span4 detailsbar">
@@ -1367,7 +1377,7 @@ will enable only those callbacks.</li>
                 
                                     <h4>Returns</h4>
                     array
-                                    				
+                                    
                             </article>
         </div>
         <aside class="span4 detailsbar">
@@ -1400,7 +1410,7 @@ will enable only those callbacks.</li>
                                     <h4>Returns</h4>
                     string
                                             &mdash; <p>The name of the DataSource, as defined in app/Config/database.php</p>
-                                    				
+                                    
                             </article>
         </div>
         <aside class="span4 detailsbar">
@@ -1428,7 +1438,7 @@ will enable only those callbacks.</li>
 
                 
                 
-                				
+                
                             </article>
         </div>
         <aside class="span4 detailsbar">
@@ -1476,13 +1486,15 @@ will enable only those callbacks.</li>
                 
                                     <h4>Returns</h4>
                     boolean
-                                    				
+                                    
                             </article>
         </div>
         <aside class="span4 detailsbar">
             <h1><i class="icon-arrow-down"></i></h1>
                                                             <dl>
-                                                                            </dl>
+                                                    <dt>Inherited from</dt>
+                    <dd><a href="../classes/RoomDeleteRelatedTable.html"><div class="path-wrapper">\RoomDeleteRelatedTable</div></a></dd>
+                                                            </dl>
             <h2>Tags</h2>
             <table class="table table-condensed">
                                     <tr><td colspan="2"><em>None found</em></td></tr>
@@ -1535,13 +1547,15 @@ will enable only those callbacks.</li>
                                             </table>
                 
                 
-                				
+                
                             </article>
         </div>
         <aside class="span4 detailsbar">
             <h1><i class="icon-arrow-down"></i></h1>
                                                             <dl>
-                                                                            </dl>
+                                                    <dt>Inherited from</dt>
+                    <dd><a href="../classes/RoomDeleteRelatedTable.html"><div class="path-wrapper">\RoomDeleteRelatedTable</div></a></dd>
+                                                            </dl>
             <h2>Tags</h2>
             <table class="table table-condensed">
                                     <tr><td colspan="2"><em>None found</em></td></tr>
@@ -1582,13 +1596,15 @@ will enable only those callbacks.</li>
                                     <h4>Returns</h4>
                     boolean|array
                                             &mdash; <p>See Model::save() False on failure or an array of model data on success.</p>
-                                    				
+                                    
                             </article>
         </div>
         <aside class="span4 detailsbar">
             <h1><i class="icon-arrow-down"></i></h1>
                                                             <dl>
-                                                                                            <dt>See also</dt>
+                                                    <dt>Inherited from</dt>
+                    <dd><a href="../classes/RoomDeleteRelatedTable.html"><div class="path-wrapper">\RoomDeleteRelatedTable</div></a></dd>
+                                                                            <dt>See also</dt>
                                                                 <dd><a href=""><span class="namespace-wrapper">\Model::save()</span></a></dd>
                                                                                                     <dd><a href="https://book.cakephp.org/2.0/en/models/saving-your-data.html#model-savefield-string-fieldname-string-fieldvalue-validate-false"><span class="namespace-wrapper">https://book.cakephp.org/2.0/en/models/saving-your-data.html#model-savefield-string-fieldname-string-fieldvalue-validate-false</span></a></dd>
                                                                 </dl>
@@ -1648,7 +1664,7 @@ will enable only those callbacks.</li>
                 <section class="span10 offset1">
                     <hr />
                     Documentation is powered by <a href="http://www.phpdoc.org/">phpDocumentor </a> and authored
-                    on November 24th, 2019 at 10:58.
+                    on March 13th, 2020 at 16:24.
                 </section>
             </section>
         </section>

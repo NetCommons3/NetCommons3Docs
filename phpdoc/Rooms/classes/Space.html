@@ -24,7 +24,7 @@
     <script type="text/javascript">
     function loadExternalCodeSnippets() {
         Array.prototype.slice.call(document.querySelectorAll('pre[data-src]')).forEach(function (pre) {
-            var src = pre.getAttribute('data-src');
+            var src = pre.getAttribute('data-src').replace( /\\/g, '/');
             var extension = (src.match(/\.(\w+)$/) || [, ''])[1];
             var language = 'php';
 
@@ -136,10 +136,10 @@
                                 <div class="accordion" style="margin-bottom: 0">
         <div class="accordion-group">
             <div class="accordion-heading">
-                                    <a class="accordion-toggle " data-toggle="collapse" data-target="#namespace-2038972082"></a>
+                                    <a class="accordion-toggle " data-toggle="collapse" data-target="#namespace-252433455"></a>
                                 <a href="../namespaces/default.html" style="margin-left: 30px; padding-left: 0">\</a>
             </div>
-            <div id="namespace-2038972082" class="accordion-body collapse in">
+            <div id="namespace-252433455" class="accordion-body collapse in">
                 <div class="accordion-inner">
 
                     
@@ -422,7 +422,7 @@ will inherit them.</p>
                         
                         
                         
-                        
+                                                
                                                                         </dl>
                     <h2>Tags</h2>
                     <table class="table table-condensed">
@@ -431,7 +431,7 @@ will inherit them.</p>
                                 author
                             </th>
                             <td>
-                                                                    <p>Shohei Nakajima <a href="mailto:nakajimashouhei@gmail.com">nakajimashouhei@gmail.com</a></p>
+                                                                                                        <p>Shohei Nakajima <a href="mailto:nakajimashouhei@gmail.com">nakajimashouhei@gmail.com</a></p>
                                                             </td>
                         </tr>
                                         </table>
@@ -451,7 +451,7 @@ will inherit them.</p>
             <a id="constant_WHOLE_SITE_ID" name="constant_WHOLE_SITE_ID" class="anchor"></a>
             <article id="constant_WHOLE_SITE_ID" class="constant">
                 <h3 class="">WHOLE_SITE_ID</h3>
-                <pre class="signature">WHOLE_SITE_ID</pre>
+                <pre class="signature">WHOLE_SITE_ID = &#039;1&#039; : \const</pre>
                 <p><em>Space id</em></p>
                 
             </article>
@@ -472,7 +472,7 @@ will inherit them.</p>
             <a id="constant_PUBLIC_SPACE_ID" name="constant_PUBLIC_SPACE_ID" class="anchor"></a>
             <article id="constant_PUBLIC_SPACE_ID" class="constant">
                 <h3 class="">PUBLIC_SPACE_ID</h3>
-                <pre class="signature">PUBLIC_SPACE_ID</pre>
+                <pre class="signature">PUBLIC_SPACE_ID = &#039;2&#039; : \const</pre>
                 <p><em>Space id</em></p>
                 
             </article>
@@ -493,7 +493,7 @@ will inherit them.</p>
             <a id="constant_PRIVATE_SPACE_ID" name="constant_PRIVATE_SPACE_ID" class="anchor"></a>
             <article id="constant_PRIVATE_SPACE_ID" class="constant">
                 <h3 class="">PRIVATE_SPACE_ID</h3>
-                <pre class="signature">PRIVATE_SPACE_ID</pre>
+                <pre class="signature">PRIVATE_SPACE_ID = &#039;3&#039; : \const</pre>
                 <p><em>Space id</em></p>
                 
             </article>
@@ -514,7 +514,7 @@ will inherit them.</p>
             <a id="constant_COMMUNITY_SPACE_ID" name="constant_COMMUNITY_SPACE_ID" class="anchor"></a>
             <article id="constant_COMMUNITY_SPACE_ID" class="constant">
                 <h3 class="">COMMUNITY_SPACE_ID</h3>
-                <pre class="signature">COMMUNITY_SPACE_ID</pre>
+                <pre class="signature">COMMUNITY_SPACE_ID = &#039;4&#039; : \const</pre>
                 <p><em>Space id</em></p>
                 
             </article>
@@ -931,7 +931,7 @@ can also be an array of options, see above.</p></td>
                                             </table>
                 
                 
-                				
+                
                             </article>
         </div>
         <aside class="span4 detailsbar">
@@ -966,7 +966,7 @@ can also be an array of options, see above.</p></td>
 
                 
                 
-                				
+                
                             </article>
         </div>
         <aside class="span4 detailsbar">
@@ -994,7 +994,7 @@ can also be an array of options, see above.</p></td>
 
                 
                 
-                				
+                
                             </article>
         </div>
         <aside class="span4 detailsbar">
@@ -1025,7 +1025,7 @@ can also be an array of options, see above.</p></td>
                                     <h4>Returns</h4>
                     \DataSource
                                             &mdash; <p>A DataSource object</p>
-                                    				
+                                    
                             </article>
         </div>
         <aside class="span4 detailsbar">
@@ -1080,7 +1080,7 @@ schema data defaults are not merged.</p></td>
                                     <h4>Returns</h4>
                     array
                                             &mdash; <p>The current Model::data; after merging $data and/or defaults from database</p>
-                                    				
+                                    
                             </article>
         </div>
         <aside class="span4 detailsbar">
@@ -1135,7 +1135,7 @@ schema data defaults are not merged.</p></td>
                                     <h4>Returns</h4>
                     array
                                             &mdash; <p>The current Model::data; after merging $data and/or defaults from database</p>
-                                    				
+                                    
                             </article>
         </div>
         <aside class="span4 detailsbar">
@@ -1172,7 +1172,7 @@ schema data defaults are not merged.</p></td>
 
                 
                 
-                				
+                
                             </article>
         </div>
         <aside class="span4 detailsbar">
@@ -1200,7 +1200,7 @@ schema data defaults are not merged.</p></td>
 
                 
                 
-                				
+                
                             </article>
         </div>
         <aside class="span4 detailsbar">
@@ -1241,7 +1241,7 @@ schema data defaults are not merged.</p></td>
                             <dd></dd>
                                                                     </dl>
                 
-                				
+                
                             </article>
         </div>
         <aside class="span4 detailsbar">
@@ -1277,7 +1277,7 @@ schema data defaults are not merged.</p></td>
                                             </table>
                 
                 
-                				
+                
                             </article>
         </div>
         <aside class="span4 detailsbar">
@@ -1316,13 +1316,15 @@ schema data defaults are not merged.</p></td>
                                     <h4>Returns</h4>
                     array
                                             &mdash; <p>RoomSpaceルームのデフォルト値配列</p>
-                                    				
+                                    
                             </article>
         </div>
         <aside class="span4 detailsbar">
             <h1><i class="icon-arrow-down"></i></h1>
                                                             <dl>
-                                                                            </dl>
+                                                    <dt>Inherited from</dt>
+                    <dd><a href="../classes/Space.html"><div class="path-wrapper">\Space</div></a></dd>
+                                                            </dl>
             <h2>Tags</h2>
             <table class="table table-condensed">
                                     <tr><td colspan="2"><em>None found</em></td></tr>
@@ -1358,14 +1360,16 @@ schema data defaults are not merged.</p></td>
                                     <h4>Returns</h4>
                     object
                                             &mdash; <p>RoomSpaceルームのデフォルト値配列</p>
-                                    				
+                                    
                             </article>
         </div>
         <aside class="span4 detailsbar">
             <h1><i class="icon-arrow-down"></i></h1>
                             <span class="label label-info">static</span>
                                                             <dl>
-                                                                            </dl>
+                                                    <dt>Inherited from</dt>
+                    <dd><a href="../classes/Space.html"><div class="path-wrapper">\Space</div></a></dd>
+                                                            </dl>
             <h2>Tags</h2>
             <table class="table table-condensed">
                                     <tr><td colspan="2"><em>None found</em></td></tr>
@@ -1405,14 +1409,16 @@ schema data defaults are not merged.</p></td>
                 
                                     <h4>Returns</h4>
                     integer
-                                    				
+                                    
                             </article>
         </div>
         <aside class="span4 detailsbar">
             <h1><i class="icon-arrow-down"></i></h1>
                             <span class="label label-info">static</span>
                                                             <dl>
-                                                                            </dl>
+                                                    <dt>Inherited from</dt>
+                    <dd><a href="../classes/Space.html"><div class="path-wrapper">\Space</div></a></dd>
+                                                            </dl>
             <h2>Tags</h2>
             <table class="table table-condensed">
                                     <tr><td colspan="2"><em>None found</em></td></tr>
@@ -1442,14 +1448,16 @@ schema data defaults are not merged.</p></td>
                 
                                     <h4>Returns</h4>
                     integer
-                                    				
+                                    
                             </article>
         </div>
         <aside class="span4 detailsbar">
             <h1><i class="icon-arrow-down"></i></h1>
                             <span class="label label-info">static</span>
                                                             <dl>
-                                                                            </dl>
+                                                    <dt>Inherited from</dt>
+                    <dd><a href="../classes/Space.html"><div class="path-wrapper">\Space</div></a></dd>
+                                                            </dl>
             <h2>Tags</h2>
             <table class="table table-condensed">
                                     <tr><td colspan="2"><em>None found</em></td></tr>
@@ -1480,13 +1488,15 @@ schema data defaults are not merged.</p></td>
                                     <h4>Returns</h4>
                     array
                                             &mdash; <p>スペースデータ配列</p>
-                                    				
+                                    
                             </article>
         </div>
         <aside class="span4 detailsbar">
             <h1><i class="icon-arrow-down"></i></h1>
                                                             <dl>
-                                                                            </dl>
+                                                    <dt>Inherited from</dt>
+                    <dd><a href="../classes/Space.html"><div class="path-wrapper">\Space</div></a></dd>
+                                                            </dl>
             <h2>Tags</h2>
             <table class="table table-condensed">
                                     <tr><td colspan="2"><em>None found</em></td></tr>
@@ -1509,13 +1519,15 @@ schema data defaults are not merged.</p></td>
                                     <h4>Returns</h4>
                     array
                                             &mdash; <p>スペースデータ配列</p>
-                                    				
+                                    
                             </article>
         </div>
         <aside class="span4 detailsbar">
             <h1><i class="icon-arrow-down"></i></h1>
                                                             <dl>
-                                                                            </dl>
+                                                    <dt>Inherited from</dt>
+                    <dd><a href="../classes/Space.html"><div class="path-wrapper">\Space</div></a></dd>
+                                                            </dl>
             <h2>Tags</h2>
             <table class="table table-condensed">
                                     <tr><td colspan="2"><em>None found</em></td></tr>
@@ -1538,7 +1550,7 @@ schema data defaults are not merged.</p></td>
                                     <h4>Returns</h4>
                     array
                                             &mdash; <p>デフォルト値をセットした配列</p>
-                                    				
+                                    
                             </article>
         </div>
         <aside class="span4 detailsbar">
@@ -1595,7 +1607,7 @@ will enable only those callbacks.</li>
                                     <h4>Returns</h4>
                     mixed
                                             &mdash; <p>On success Model::$data if its not empty or true, false on failure</p>
-                                    				
+                                    
                             </article>
         </div>
         <aside class="span4 detailsbar">
@@ -1640,7 +1652,7 @@ will enable only those callbacks.</li>
                 
                                     <h4>Returns</h4>
                     array
-                                    				
+                                    
                             </article>
         </div>
         <aside class="span4 detailsbar">
@@ -1673,7 +1685,7 @@ will enable only those callbacks.</li>
                                     <h4>Returns</h4>
                     string
                                             &mdash; <p>The name of the DataSource, as defined in app/Config/database.php</p>
-                                    				
+                                    
                             </article>
         </div>
         <aside class="span4 detailsbar">
@@ -1701,7 +1713,7 @@ will enable only those callbacks.</li>
 
                 
                 
-                				
+                
                             </article>
         </div>
         <aside class="span4 detailsbar">
@@ -1766,7 +1778,7 @@ will enable only those callbacks.</li>
                 <section class="span10 offset1">
                     <hr />
                     Documentation is powered by <a href="http://www.phpdoc.org/">phpDocumentor </a> and authored
-                    on November 24th, 2019 at 10:58.
+                    on March 13th, 2020 at 16:24.
                 </section>
             </section>
         </section>
