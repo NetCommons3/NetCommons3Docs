@@ -24,7 +24,7 @@
     <script type="text/javascript">
     function loadExternalCodeSnippets() {
         Array.prototype.slice.call(document.querySelectorAll('pre[data-src]')).forEach(function (pre) {
-            var src = pre.getAttribute('data-src');
+            var src = pre.getAttribute('data-src').replace( /\\/g, '/');
             var extension = (src.match(/\.(\w+)$/) || [, ''])[1];
             var language = 'php';
 
@@ -136,10 +136,10 @@
                                 <div class="accordion" style="margin-bottom: 0">
         <div class="accordion-group">
             <div class="accordion-heading">
-                                    <a class="accordion-toggle " data-toggle="collapse" data-target="#namespace-2077754308"></a>
+                                    <a class="accordion-toggle " data-toggle="collapse" data-target="#namespace-1861454996"></a>
                                 <a href="../namespaces/default.html" style="margin-left: 30px; padding-left: 0">\</a>
             </div>
-            <div id="namespace-2077754308" class="accordion-body collapse in">
+            <div id="namespace-1861454996" class="accordion-body collapse in">
                 <div class="accordion-inner">
 
                     
@@ -398,7 +398,7 @@ will inherit them.</p>
                         
                         
                         
-                        
+                                                
                                                                         </dl>
                     <h2>Tags</h2>
                     <table class="table table-condensed">
@@ -407,7 +407,7 @@ will inherit them.</p>
                                 author
                             </th>
                             <td>
-                                                                    <p>Shohei Nakajima <a href="mailto:nakajimashouhei@gmail.com">nakajimashouhei@gmail.com</a></p>
+                                                                                                        <p>Shohei Nakajima <a href="mailto:nakajimashouhei@gmail.com">nakajimashouhei@gmail.com</a></p>
                                                             </td>
                         </tr>
                                             <tr>
@@ -415,7 +415,7 @@ will inherit them.</p>
                                 SuppressWarnings
                             </th>
                             <td>
-                                                                    <p>(PHPMD.TooManyFields)</p>
+                                                                                                        <p>(PHPMD.TooManyFields)</p>
                                                             </td>
                         </tr>
                                         </table>
@@ -435,7 +435,7 @@ will inherit them.</p>
             <a id="constant_MAIL_TRANSPORT_PHPMAIL" name="constant_MAIL_TRANSPORT_PHPMAIL" class="anchor"></a>
             <article id="constant_MAIL_TRANSPORT_PHPMAIL" class="constant">
                 <h3 class="">MAIL_TRANSPORT_PHPMAIL</h3>
-                <pre class="signature">MAIL_TRANSPORT_PHPMAIL</pre>
+                <pre class="signature">MAIL_TRANSPORT_PHPMAIL = &#039;phpmail&#039;</pre>
                 <p><em>メール送信方法のオプションの定数(phpmail)</em></p>
                 
             </article>
@@ -456,7 +456,7 @@ will inherit them.</p>
             <a id="constant_MAIL_TRANSPORT_SMTP" name="constant_MAIL_TRANSPORT_SMTP" class="anchor"></a>
             <article id="constant_MAIL_TRANSPORT_SMTP" class="constant">
                 <h3 class="">MAIL_TRANSPORT_SMTP</h3>
-                <pre class="signature">MAIL_TRANSPORT_SMTP</pre>
+                <pre class="signature">MAIL_TRANSPORT_SMTP = &#039;smtp&#039;</pre>
                 <p><em>メール送信方法のオプションの定数(smtp)</em></p>
                 
             </article>
@@ -477,7 +477,7 @@ will inherit them.</p>
             <a id="constant_DATABASE_SEARCH_MATCH_AGAIN" name="constant_DATABASE_SEARCH_MATCH_AGAIN" class="anchor"></a>
             <article id="constant_DATABASE_SEARCH_MATCH_AGAIN" class="constant">
                 <h3 class="">DATABASE_SEARCH_MATCH_AGAIN</h3>
-                <pre class="signature">DATABASE_SEARCH_MATCH_AGAIN</pre>
+                <pre class="signature">DATABASE_SEARCH_MATCH_AGAIN = &#039;match_against&#039;</pre>
                 <p><em>データベースタイプ（MATCH AGAINST）</em></p>
                 
             </article>
@@ -498,7 +498,7 @@ will inherit them.</p>
             <a id="constant_DATABASE_SEARCH_LIKE" name="constant_DATABASE_SEARCH_LIKE" class="anchor"></a>
             <article id="constant_DATABASE_SEARCH_LIKE" class="constant">
                 <h3 class="">DATABASE_SEARCH_LIKE</h3>
-                <pre class="signature">DATABASE_SEARCH_LIKE</pre>
+                <pre class="signature">DATABASE_SEARCH_LIKE = &#039;like&#039;</pre>
                 <p><em>データベースタイプ（LIKE）</em></p>
                 
             </article>
@@ -1148,7 +1148,7 @@ can also be an array of options, see above.</p></td>
                                             </table>
                 
                 
-                				
+                
                             </article>
         </div>
         <aside class="span4 detailsbar">
@@ -1183,7 +1183,7 @@ can also be an array of options, see above.</p></td>
 
                 
                 
-                				
+                
                             </article>
         </div>
         <aside class="span4 detailsbar">
@@ -1211,7 +1211,7 @@ can also be an array of options, see above.</p></td>
 
                 
                 
-                				
+                
                             </article>
         </div>
         <aside class="span4 detailsbar">
@@ -1242,7 +1242,7 @@ can also be an array of options, see above.</p></td>
                                     <h4>Returns</h4>
                     \DataSource
                                             &mdash; <p>A DataSource object</p>
-                                    				
+                                    
                             </article>
         </div>
         <aside class="span4 detailsbar">
@@ -1297,7 +1297,7 @@ schema data defaults are not merged.</p></td>
                                     <h4>Returns</h4>
                     array
                                             &mdash; <p>The current Model::data; after merging $data and/or defaults from database</p>
-                                    				
+                                    
                             </article>
         </div>
         <aside class="span4 detailsbar">
@@ -1352,7 +1352,7 @@ schema data defaults are not merged.</p></td>
                                     <h4>Returns</h4>
                     array
                                             &mdash; <p>The current Model::data; after merging $data and/or defaults from database</p>
-                                    				
+                                    
                             </article>
         </div>
         <aside class="span4 detailsbar">
@@ -1389,7 +1389,7 @@ schema data defaults are not merged.</p></td>
 
                 
                 
-                				
+                
                             </article>
         </div>
         <aside class="span4 detailsbar">
@@ -1417,7 +1417,7 @@ schema data defaults are not merged.</p></td>
 
                 
                 
-                				
+                
                             </article>
         </div>
         <aside class="span4 detailsbar">
@@ -1458,7 +1458,7 @@ schema data defaults are not merged.</p></td>
                             <dd></dd>
                                                                     </dl>
                 
-                				
+                
                             </article>
         </div>
         <aside class="span4 detailsbar">
@@ -1494,7 +1494,7 @@ schema data defaults are not merged.</p></td>
                                             </table>
                 
                 
-                				
+                
                             </article>
         </div>
         <aside class="span4 detailsbar">
@@ -1522,13 +1522,15 @@ schema data defaults are not merged.</p></td>
 
                 
                 
-                				
+                
                             </article>
         </div>
         <aside class="span4 detailsbar">
             <h1><i class="icon-arrow-down"></i></h1>
                                                             <dl>
-                                                                            </dl>
+                                                    <dt>Inherited from</dt>
+                    <dd><a href="../classes/SiteSetting.html"><div class="path-wrapper">\SiteSetting</div></a></dd>
+                                                            </dl>
             <h2>Tags</h2>
             <table class="table table-condensed">
                                     <tr><td colspan="2"><em>None found</em></td></tr>
@@ -1551,13 +1553,15 @@ schema data defaults are not merged.</p></td>
                                     <h4>Returns</h4>
                     string
                                             &mdash; <p>or null</p>
-                                    				
+                                    
                             </article>
         </div>
         <aside class="span4 detailsbar">
             <h1><i class="icon-arrow-down"></i></h1>
                                                             <dl>
-                                                                            </dl>
+                                                    <dt>Inherited from</dt>
+                    <dd><a href="../classes/SiteSetting.html"><div class="path-wrapper">\SiteSetting</div></a></dd>
+                                                            </dl>
             <h2>Tags</h2>
             <table class="table table-condensed">
                                     <tr><td colspan="2"><em>None found</em></td></tr>
@@ -1580,13 +1584,15 @@ schema data defaults are not merged.</p></td>
                                     <h4>Returns</h4>
                     string
                                             &mdash; <p>or null</p>
-                                    				
+                                    
                             </article>
         </div>
         <aside class="span4 detailsbar">
             <h1><i class="icon-arrow-down"></i></h1>
                                                             <dl>
-                                                                            </dl>
+                                                    <dt>Inherited from</dt>
+                    <dd><a href="../classes/SiteSetting.html"><div class="path-wrapper">\SiteSetting</div></a></dd>
+                                                            </dl>
             <h2>Tags</h2>
             <table class="table table-condensed">
                                     <tr><td colspan="2"><em>None found</em></td></tr>
@@ -1609,13 +1615,15 @@ schema data defaults are not merged.</p></td>
                                     <h4>Returns</h4>
                     string
                                             &mdash; <p>timezone</p>
-                                    				
+                                    
                             </article>
         </div>
         <aside class="span4 detailsbar">
             <h1><i class="icon-arrow-down"></i></h1>
                                                             <dl>
-                                                                            </dl>
+                                                    <dt>Inherited from</dt>
+                    <dd><a href="../classes/SiteSetting.html"><div class="path-wrapper">\SiteSetting</div></a></dd>
+                                                            </dl>
             <h2>Tags</h2>
             <table class="table table-condensed">
                                     <tr><td colspan="2"><em>None found</em></td></tr>
@@ -1646,13 +1654,15 @@ schema data defaults are not merged.</p></td>
                                     <h4>Returns</h4>
                     array
                                             &mdash; <p>サイト設定データ配列</p>
-                                    				
+                                    
                             </article>
         </div>
         <aside class="span4 detailsbar">
             <h1><i class="icon-arrow-down"></i></h1>
                                                             <dl>
-                                                                            </dl>
+                                                    <dt>Inherited from</dt>
+                    <dd><a href="../classes/SiteSetting.html"><div class="path-wrapper">\SiteSetting</div></a></dd>
+                                                            </dl>
             <h2>Tags</h2>
             <table class="table table-condensed">
                                     <tr><td colspan="2"><em>None found</em></td></tr>
@@ -1723,13 +1733,15 @@ array (
                                     <h4>Returns</h4>
                     boolean
                                             &mdash; <p>True on success, false on validation errors</p>
-                                    				
+                                    
                             </article>
         </div>
         <aside class="span4 detailsbar">
             <h1><i class="icon-arrow-down"></i></h1>
                                                             <dl>
-                                                                            </dl>
+                                                    <dt>Inherited from</dt>
+                    <dd><a href="../classes/SiteSetting.html"><div class="path-wrapper">\SiteSetting</div></a></dd>
+                                                            </dl>
             <h2>Tags</h2>
             <table class="table table-condensed">
                                     <tr><td colspan="2"><em>None found</em></td></tr>
@@ -1770,13 +1782,15 @@ array (
                                     <h4>Returns</h4>
                     boolean
                                             &mdash; <p>True on success, false on validation errors</p>
-                                    				
+                                    
                             </article>
         </div>
         <aside class="span4 detailsbar">
             <h1><i class="icon-arrow-down"></i></h1>
                                                             <dl>
-                                                                            </dl>
+                                                    <dt>Inherited from</dt>
+                    <dd><a href="../classes/SiteSetting.html"><div class="path-wrapper">\SiteSetting</div></a></dd>
+                                                            </dl>
             <h2>Tags</h2>
             <table class="table table-condensed">
                                     <tr><td colspan="2"><em>None found</em></td></tr>
@@ -1807,13 +1821,15 @@ array (
                                     <h4>Returns</h4>
                     boolean|array
                                             &mdash; <p>正常な場合、登録不要なデータを削除して戻す。validateionErrorが空でない場合は、falseを返す。</p>
-                                    				
+                                    
                             </article>
         </div>
         <aside class="span4 detailsbar">
             <h1><i class="icon-arrow-down"></i></h1>
                                                             <dl>
-                                                                            </dl>
+                                                    <dt>Inherited from</dt>
+                    <dd><a href="../classes/SiteSetting.html"><div class="path-wrapper">\SiteSetting</div></a></dd>
+                                                            </dl>
             <h2>Tags</h2>
             <table class="table table-condensed">
                                     <tr><td colspan="2"><em>None found</em></td></tr>
@@ -1836,7 +1852,7 @@ array (
                                     <h4>Returns</h4>
                     array
                                             &mdash; <p>デフォルト値をセットした配列</p>
-                                    				
+                                    
                             </article>
         </div>
         <aside class="span4 detailsbar">
@@ -1893,7 +1909,7 @@ will enable only those callbacks.</li>
                                     <h4>Returns</h4>
                     mixed
                                             &mdash; <p>On success Model::$data if its not empty or true, false on failure</p>
-                                    				
+                                    
                             </article>
         </div>
         <aside class="span4 detailsbar">
@@ -1938,7 +1954,7 @@ will enable only those callbacks.</li>
                 
                                     <h4>Returns</h4>
                     array
-                                    				
+                                    
                             </article>
         </div>
         <aside class="span4 detailsbar">
@@ -1971,7 +1987,7 @@ will enable only those callbacks.</li>
                                     <h4>Returns</h4>
                     string
                                             &mdash; <p>The name of the DataSource, as defined in app/Config/database.php</p>
-                                    				
+                                    
                             </article>
         </div>
         <aside class="span4 detailsbar">
@@ -1999,7 +2015,7 @@ will enable only those callbacks.</li>
 
                 
                 
-                				
+                
                             </article>
         </div>
         <aside class="span4 detailsbar">
@@ -2037,13 +2053,15 @@ will enable only those callbacks.</li>
                 
                                     <h4>Returns</h4>
                     array
-                                    				
+                                    
                             </article>
         </div>
         <aside class="span4 detailsbar">
             <h1><i class="icon-arrow-down"></i></h1>
                                                             <dl>
-                                                                            </dl>
+                                                    <dt>Inherited from</dt>
+                    <dd><a href="../classes/SiteSetting.html"><div class="path-wrapper">\SiteSetting</div></a></dd>
+                                                            </dl>
             <h2>Tags</h2>
             <table class="table table-condensed">
                                     <tr><td colspan="2"><em>None found</em></td></tr>
@@ -2100,7 +2118,7 @@ will enable only those callbacks.</li>
                 <section class="span10 offset1">
                     <hr />
                     Documentation is powered by <a href="http://www.phpdoc.org/">phpDocumentor </a> and authored
-                    on November 13th, 2019 at 05:53.
+                    on March 14th, 2020 at 06:21.
                 </section>
             </section>
         </section>

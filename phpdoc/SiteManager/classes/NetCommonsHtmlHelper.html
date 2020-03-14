@@ -24,7 +24,7 @@
     <script type="text/javascript">
     function loadExternalCodeSnippets() {
         Array.prototype.slice.call(document.querySelectorAll('pre[data-src]')).forEach(function (pre) {
-            var src = pre.getAttribute('data-src');
+            var src = pre.getAttribute('data-src').replace( /\\/g, '/');
             var extension = (src.match(/\.(\w+)$/) || [, ''])[1];
             var language = 'php';
 
@@ -136,10 +136,10 @@
                                 <div class="accordion" style="margin-bottom: 0">
         <div class="accordion-group">
             <div class="accordion-heading">
-                                    <a class="accordion-toggle " data-toggle="collapse" data-target="#namespace-557421412"></a>
+                                    <a class="accordion-toggle " data-toggle="collapse" data-target="#namespace-1826378895"></a>
                                 <a href="../namespaces/default.html" style="margin-left: 30px; padding-left: 0">\</a>
             </div>
-            <div id="namespace-557421412" class="accordion-body collapse in">
+            <div id="namespace-1826378895" class="accordion-body collapse in">
                 <div class="accordion-inner">
 
                     
@@ -361,7 +361,7 @@ will inherit them.</p>
                         
                         
                         
-                        
+                                                
                                                                         </dl>
                     <h2>Tags</h2>
                     <table class="table table-condensed">
@@ -370,7 +370,7 @@ will inherit them.</p>
                                 SuppressWarnings
                             </th>
                             <td>
-                                                                    <p>(PHPMD.ExcessiveClassComplexity)</p>
+                                                                                                        <p>(PHPMD.ExcessiveClassComplexity)</p>
                                                             </td>
                         </tr>
                                         </table>
@@ -485,13 +485,15 @@ NetCommonsHtml::mailHelp()<br>
                 
                                     <h4>Returns</h4>
                     string
-                                    				
+                                    
                             </article>
         </div>
         <aside class="span4 detailsbar">
             <h1><i class="icon-arrow-down"></i></h1>
                                                             <dl>
-                                                                            </dl>
+                                                    <dt>Inherited from</dt>
+                    <dd><a href="../classes/NetCommonsHtmlHelper.html"><div class="path-wrapper">\NetCommonsHtmlHelper</div></a></dd>
+                                                            </dl>
             <h2>Tags</h2>
             <table class="table table-condensed">
                                     <tr><td colspan="2"><em>None found</em></td></tr>
@@ -527,13 +529,15 @@ NetCommonsHtml::mailHelp()<br>
                                     <h4>Returns</h4>
                     mixed
                                             &mdash; <p><code>&lt;script&gt;</code>タグの出力</p>
-                                    				
+                                    
                             </article>
         </div>
         <aside class="span4 detailsbar">
             <h1><i class="icon-arrow-down"></i></h1>
                                                             <dl>
-                                                                                            <dt>See also</dt>
+                                                    <dt>Inherited from</dt>
+                    <dd><a href="../classes/NetCommonsHtmlHelper.html"><div class="path-wrapper">\NetCommonsHtmlHelper</div></a></dd>
+                                                                            <dt>See also</dt>
                                                                 <dd><a href="http://book.cakephp.org/2.0/ja/core-libraries/helpers/html.html#HtmlHelper::script"><span class="namespace-wrapper">HtmlHelper::script</span></a></dd>
                                                                 </dl>
             <h2>Tags</h2>
@@ -571,13 +575,15 @@ NetCommonsHtml::mailHelp()<br>
                                     <h4>Returns</h4>
                     string
                                             &mdash; <p>CSS <code>&lt;link&gt;</code> or <code>&lt;style&gt;</code>タグの出力</p>
-                                    				
+                                    
                             </article>
         </div>
         <aside class="span4 detailsbar">
             <h1><i class="icon-arrow-down"></i></h1>
                                                             <dl>
-                                                                                            <dt>See also</dt>
+                                                    <dt>Inherited from</dt>
+                    <dd><a href="../classes/NetCommonsHtmlHelper.html"><div class="path-wrapper">\NetCommonsHtmlHelper</div></a></dd>
+                                                                            <dt>See also</dt>
                                                                 <dd><a href="http://book.cakephp.org/2.0/ja/core-libraries/helpers/html.html#HtmlHelper::css"><span class="namespace-wrapper">HtmlHelper::css</span></a></dd>
                                                                 </dl>
             <h2>Tags</h2>
@@ -625,13 +631,15 @@ NetCommonsHtml::mailHelp()<br>
                                     <h4>Returns</h4>
                     string
                                             &mdash; <p>JSON形式の文字列</p>
-                                    				
+                                    
                             </article>
         </div>
         <aside class="span4 detailsbar">
             <h1><i class="icon-arrow-down"></i></h1>
                                                             <dl>
-                                                                                            <dt>See also</dt>
+                                                    <dt>Inherited from</dt>
+                    <dd><a href="../classes/NetCommonsHtmlHelper.html"><div class="path-wrapper">\NetCommonsHtmlHelper</div></a></dd>
+                                                                            <dt>See also</dt>
                                                                 <dd><a href="https://google.github.io/styleguide/jsoncstyleguide.xml"><span class="namespace-wrapper">Google JSON Style Guide</span></a></dd>
                                                                 </dl>
             <h2>Tags</h2>
@@ -676,13 +684,15 @@ NetCommonsHtml::mailHelp()<br>
                                     <h4>Returns</h4>
                     string
                                             &mdash; <p>URL</p>
-                                    				
+                                    
                             </article>
         </div>
         <aside class="span4 detailsbar">
             <h1><i class="icon-arrow-down"></i></h1>
                                                             <dl>
-                                                                                            <dt>See also</dt>
+                                                    <dt>Inherited from</dt>
+                    <dd><a href="../classes/NetCommonsHtmlHelper.html"><div class="path-wrapper">\NetCommonsHtmlHelper</div></a></dd>
+                                                                            <dt>See also</dt>
                                                                 <dd><a href="http://book.cakephp.org/2.0/ja/core-libraries/helpers/html.html#HtmlHelper::url"><span class="namespace-wrapper">HtmlHelper::url</span></a></dd>
                                                                 </dl>
             <h2>Tags</h2>
@@ -720,13 +730,15 @@ NetCommonsHtml::mailHelp()<br>
                                     <h4>Returns</h4>
                     string
                                             &mdash; <p>URL</p>
-                                    				
+                                    
                             </article>
         </div>
         <aside class="span4 detailsbar">
             <h1><i class="icon-arrow-down"></i></h1>
                                                             <dl>
-                                                                                            <dt>See also</dt>
+                                                    <dt>Inherited from</dt>
+                    <dd><a href="../classes/NetCommonsHtmlHelper.html"><div class="path-wrapper">\NetCommonsHtmlHelper</div></a></dd>
+                                                                            <dt>See also</dt>
                                                                 <dd><a href="http://book.cakephp.org/2.0/ja/core-libraries/helpers/html.html#HtmlHelper::url"><span class="namespace-wrapper">HtmlHelper::url</span></a></dd>
                                                                 </dl>
             <h2>Tags</h2>
@@ -776,13 +788,15 @@ NetCommonsHtml::mailHelp()<br>
                                     <h4>Returns</h4>
                     string
                                             &mdash; <p><code>&lt;a&gt;</code>タグ</p>
-                                    				
+                                    
                             </article>
         </div>
         <aside class="span4 detailsbar">
             <h1><i class="icon-arrow-down"></i></h1>
                                                             <dl>
-                                                                                            <dt>See also</dt>
+                                                    <dt>Inherited from</dt>
+                    <dd><a href="../classes/NetCommonsHtmlHelper.html"><div class="path-wrapper">\NetCommonsHtmlHelper</div></a></dd>
+                                                                            <dt>See also</dt>
                                                                 <dd><a href="http://book.cakephp.org/2.0/en/core-libraries/helpers/form.html#FormHelper::button"><span class="namespace-wrapper">http://book.cakephp.org/2.0/en/core-libraries/helpers/form.html#FormHelper::button</span></a></dd>
                                                                 </dl>
             <h2>Tags</h2>
@@ -822,21 +836,23 @@ displayTypeによってcss, js, elementを切り替えます。
                                     <h4>Returns</h4>
                     string
                                             &mdash; <p>HTMLタグ</p>
-                                    				
+                                    
                             </article>
         </div>
         <aside class="span4 detailsbar">
             <h1><i class="icon-arrow-down"></i></h1>
                                                             <dl>
-                                                                                            <dt>See also</dt>
-                                                                <dd><a href=""><span class="namespace-wrapper">参考：renderMain()、NetCommonsHtmlHelper::elementDisplayChange()呼び出し</span></a></dd>
-                                            <dd><a href=""><span class="namespace-wrapper">参考：renderMain()呼び出し</span></a></dd>
-                                            <dd><a href=""><span class="namespace-wrapper">参考：対応するプラグインのframe_settings系テーブルに displayType 追加</span></a></dd>
-                                            <dd><a href=""><span class="namespace-wrapper">参考：表示設定画面</span></a></dd>
-                                            <dd><a href=""><span class="namespace-wrapper">参考：frame_settings系テーブルのモデル</span></a></dd>
-                                            <dd><a href=""><span class="namespace-wrapper">参考：コントローラでframe_settings系のデータをセット</span></a></dd>
-                                            <dd><a href=""><span class="namespace-wrapper">参考：コントローラでframe_settings系のデータをviewにセット</span></a></dd>
-                                            <dd><a href=""><span class="namespace-wrapper">参考：Elements/Menusのディレクトリ構成</span></a></dd>
+                                                    <dt>Inherited from</dt>
+                    <dd><a href="../classes/NetCommonsHtmlHelper.html"><div class="path-wrapper">\NetCommonsHtmlHelper</div></a></dd>
+                                                                            <dt>See also</dt>
+                                                                <dd><a href="https://github.com/NetCommons3/Menus/blob/master/View/Helper/MenuHelper.php#L60"><span class="namespace-wrapper">参考：renderMain()、NetCommonsHtmlHelper::elementDisplayChange()呼び出し</span></a></dd>
+                                            <dd><a href="https://github.com/NetCommons3/Menus/blob/master/View/Menus/index.ctp"><span class="namespace-wrapper">参考：renderMain()呼び出し</span></a></dd>
+                                            <dd><a href="https://github.com/NetCommons3/Menus/blob/master/Config/Schema/schema.php#L56"><span class="namespace-wrapper">参考：対応するプラグインのframe_settings系テーブルに displayType 追加</span></a></dd>
+                                            <dd><a href="https://github.com/NetCommons3/Menus/blob/master/View/MenuFrameSettings/edit.ctp"><span class="namespace-wrapper">参考：表示設定画面</span></a></dd>
+                                            <dd><a href="https://github.com/NetCommons3/Menus/blob/master/Model/MenuFrameSetting.php"><span class="namespace-wrapper">参考：frame_settings系テーブルのモデル</span></a></dd>
+                                            <dd><a href="https://github.com/NetCommons3/Menus/blob/master/Model/MenuFrameSetting.php"><span class="namespace-wrapper">参考：コントローラでframe_settings系のデータをセット</span></a></dd>
+                                            <dd><a href="https://github.com/NetCommons3/Menus/blob/master/Controller/MenusController.php#L56"><span class="namespace-wrapper">参考：コントローラでframe_settings系のデータをviewにセット</span></a></dd>
+                                            <dd><a href="https://github.com/NetCommons3/Menus/tree/master/View/Elements/Menus"><span class="namespace-wrapper">参考：Elements/Menusのディレクトリ構成</span></a></dd>
                                                                 </dl>
             <h2>Tags</h2>
             <table class="table table-condensed">
@@ -867,13 +883,15 @@ displayTypeによってcss, js, elementを切り替えます。
                 
                                     <h4>Returns</h4>
                     array
-                                    				
+                                    
                             </article>
         </div>
         <aside class="span4 detailsbar">
             <h1><i class="icon-arrow-down"></i></h1>
                                                             <dl>
-                                                                            </dl>
+                                                    <dt>Inherited from</dt>
+                    <dd><a href="../classes/NetCommonsHtmlHelper.html"><div class="path-wrapper">\NetCommonsHtmlHelper</div></a></dd>
+                                                            </dl>
             <h2>Tags</h2>
             <table class="table table-condensed">
                                     <tr><td colspan="2"><em>None found</em></td></tr>
@@ -909,13 +927,15 @@ displayTypeによってcss, js, elementを切り替えます。
                                     <h4>Returns</h4>
                     string
                                             &mdash; <p>URL</p>
-                                    				
+                                    
                             </article>
         </div>
         <aside class="span4 detailsbar">
             <h1><i class="icon-arrow-down"></i></h1>
                                                             <dl>
-                                                                            </dl>
+                                                    <dt>Inherited from</dt>
+                    <dd><a href="../classes/NetCommonsHtmlHelper.html"><div class="path-wrapper">\NetCommonsHtmlHelper</div></a></dd>
+                                                            </dl>
             <h2>Tags</h2>
             <table class="table table-condensed">
                                     <tr><td colspan="2"><em>None found</em></td></tr>
@@ -946,13 +966,15 @@ displayTypeによってcss, js, elementを切り替えます。
                                     <h4>Returns</h4>
                     string
                                             &mdash; <p>URL</p>
-                                    				
+                                    
                             </article>
         </div>
         <aside class="span4 detailsbar">
             <h1><i class="icon-arrow-down"></i></h1>
                                                             <dl>
-                                                                            </dl>
+                                                    <dt>Inherited from</dt>
+                    <dd><a href="../classes/NetCommonsHtmlHelper.html"><div class="path-wrapper">\NetCommonsHtmlHelper</div></a></dd>
+                                                            </dl>
             <h2>Tags</h2>
             <table class="table table-condensed">
                                     <tr>
@@ -999,13 +1021,15 @@ displayTypeによってcss, js, elementを切り替えます。
                 
                                     <h4>Returns</h4>
                     array
-                                    				
+                                    
                             </article>
         </div>
         <aside class="span4 detailsbar">
             <h1><i class="icon-arrow-down"></i></h1>
                                                             <dl>
-                                                                            </dl>
+                                                    <dt>Inherited from</dt>
+                    <dd><a href="../classes/NetCommonsHtmlHelper.html"><div class="path-wrapper">\NetCommonsHtmlHelper</div></a></dd>
+                                                            </dl>
             <h2>Tags</h2>
             <table class="table table-condensed">
                                     <tr><td colspan="2"><em>None found</em></td></tr>
@@ -1062,7 +1086,7 @@ displayTypeによってcss, js, elementを切り替えます。
                 <section class="span10 offset1">
                     <hr />
                     Documentation is powered by <a href="http://www.phpdoc.org/">phpDocumentor </a> and authored
-                    on November 13th, 2019 at 05:53.
+                    on March 14th, 2020 at 06:21.
                 </section>
             </section>
         </section>

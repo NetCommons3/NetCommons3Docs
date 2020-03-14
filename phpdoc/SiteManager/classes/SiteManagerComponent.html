@@ -24,7 +24,7 @@
     <script type="text/javascript">
     function loadExternalCodeSnippets() {
         Array.prototype.slice.call(document.querySelectorAll('pre[data-src]')).forEach(function (pre) {
-            var src = pre.getAttribute('data-src');
+            var src = pre.getAttribute('data-src').replace( /\\/g, '/');
             var extension = (src.match(/\.(\w+)$/) || [, ''])[1];
             var language = 'php';
 
@@ -136,10 +136,10 @@
                                 <div class="accordion" style="margin-bottom: 0">
         <div class="accordion-group">
             <div class="accordion-heading">
-                                    <a class="accordion-toggle " data-toggle="collapse" data-target="#namespace-190549843"></a>
+                                    <a class="accordion-toggle " data-toggle="collapse" data-target="#namespace-569273979"></a>
                                 <a href="../namespaces/default.html" style="margin-left: 30px; padding-left: 0">\</a>
             </div>
-            <div id="namespace-190549843" class="accordion-body collapse in">
+            <div id="namespace-569273979" class="accordion-body collapse in">
                 <div class="accordion-inner">
 
                     
@@ -370,7 +370,7 @@ $this-&gt;reqeust-&gt;validationErrors[SiteSetting][App/site_name]</code></pre>
                         
                         
                         
-                        
+                                                
                                                                         </dl>
                     <h2>Tags</h2>
                     <table class="table table-condensed">
@@ -379,7 +379,7 @@ $this-&gt;reqeust-&gt;validationErrors[SiteSetting][App/site_name]</code></pre>
                                 author
                             </th>
                             <td>
-                                                                    <p>Shohei Nakajima <a href="mailto:nakajimashouhei@gmail.com">nakajimashouhei@gmail.com</a></p>
+                                                                                                        <p>Shohei Nakajima <a href="mailto:nakajimashouhei@gmail.com">nakajimashouhei@gmail.com</a></p>
                                                             </td>
                         </tr>
                                         </table>
@@ -399,7 +399,7 @@ $this-&gt;reqeust-&gt;validationErrors[SiteSetting][App/site_name]</code></pre>
             <a id="constant_STRTR_FROM_DOT" name="constant_STRTR_FROM_DOT" class="anchor"></a>
             <article id="constant_STRTR_FROM_DOT" class="constant">
                 <h3 class="">STRTR_FROM_DOT</h3>
-                <pre class="signature">STRTR_FROM_DOT</pre>
+                <pre class="signature">STRTR_FROM_DOT = &#039;.&#039;</pre>
                 <p><em>strtrで変換する文字列(from)</em></p>
                 
             </article>
@@ -420,7 +420,7 @@ $this-&gt;reqeust-&gt;validationErrors[SiteSetting][App/site_name]</code></pre>
             <a id="constant_STRTR_TO_DOT" name="constant_STRTR_TO_DOT" class="anchor"></a>
             <article id="constant_STRTR_TO_DOT" class="constant">
                 <h3 class="">STRTR_TO_DOT</h3>
-                <pre class="signature">STRTR_TO_DOT</pre>
+                <pre class="signature">STRTR_TO_DOT = &#039;/&#039;</pre>
                 <p><em>strtrで変換する文字列(to)</em></p>
                 
             </article>
@@ -441,7 +441,7 @@ $this-&gt;reqeust-&gt;validationErrors[SiteSetting][App/site_name]</code></pre>
             <a id="constant_STRTR_FROM_BRACKETS_LEFT" name="constant_STRTR_FROM_BRACKETS_LEFT" class="anchor"></a>
             <article id="constant_STRTR_FROM_BRACKETS_LEFT" class="constant">
                 <h3 class="">STRTR_FROM_BRACKETS_LEFT</h3>
-                <pre class="signature">STRTR_FROM_BRACKETS_LEFT</pre>
+                <pre class="signature">STRTR_FROM_BRACKETS_LEFT = &#039;[&#039;</pre>
                 <p><em>strtrで変換する文字列(from)</em></p>
                 
             </article>
@@ -462,7 +462,7 @@ $this-&gt;reqeust-&gt;validationErrors[SiteSetting][App/site_name]</code></pre>
             <a id="constant_STRTR_TO_BRACKETS_LEFT" name="constant_STRTR_TO_BRACKETS_LEFT" class="anchor"></a>
             <article id="constant_STRTR_TO_BRACKETS_LEFT" class="constant">
                 <h3 class="">STRTR_TO_BRACKETS_LEFT</h3>
-                <pre class="signature">STRTR_TO_BRACKETS_LEFT</pre>
+                <pre class="signature">STRTR_TO_BRACKETS_LEFT = &#039;{&#039;</pre>
                 <p><em>strtrで変換する文字列(to)</em></p>
                 
             </article>
@@ -483,7 +483,7 @@ $this-&gt;reqeust-&gt;validationErrors[SiteSetting][App/site_name]</code></pre>
             <a id="constant_STRTR_FROM_BRACKETS_RIGHT" name="constant_STRTR_FROM_BRACKETS_RIGHT" class="anchor"></a>
             <article id="constant_STRTR_FROM_BRACKETS_RIGHT" class="constant">
                 <h3 class="">STRTR_FROM_BRACKETS_RIGHT</h3>
-                <pre class="signature">STRTR_FROM_BRACKETS_RIGHT</pre>
+                <pre class="signature">STRTR_FROM_BRACKETS_RIGHT = &#039;]&#039;</pre>
                 <p><em>strtrで変換する文字列(from)</em></p>
                 
             </article>
@@ -504,7 +504,7 @@ $this-&gt;reqeust-&gt;validationErrors[SiteSetting][App/site_name]</code></pre>
             <a id="constant_STRTR_TO_BRACKETS_RIGHT" name="constant_STRTR_TO_BRACKETS_RIGHT" class="anchor"></a>
             <article id="constant_STRTR_TO_BRACKETS_RIGHT" class="constant">
                 <h3 class="">STRTR_TO_BRACKETS_RIGHT</h3>
-                <pre class="signature">STRTR_TO_BRACKETS_RIGHT</pre>
+                <pre class="signature">STRTR_TO_BRACKETS_RIGHT = &#039;}&#039;</pre>
                 <p><em>strtrで変換する文字列(to)</em></p>
                 
             </article>
@@ -548,13 +548,15 @@ $this-&gt;reqeust-&gt;validationErrors[SiteSetting][App/site_name]</code></pre>
                                             </table>
                 
                 
-                				
+                
                             </article>
         </div>
         <aside class="span4 detailsbar">
             <h1><i class="icon-arrow-down"></i></h1>
                                                             <dl>
-                                                                                            <dt>See also</dt>
+                                                    <dt>Inherited from</dt>
+                    <dd><a href="../classes/SiteManagerComponent.html"><div class="path-wrapper">\SiteManagerComponent</div></a></dd>
+                                                                            <dt>See also</dt>
                                                                 <dd><a href="http://book.cakephp.org/2.0/en/controllers/components.html#Component::initialize"><span class="namespace-wrapper">http://book.cakephp.org/2.0/en/controllers/components.html#Component::initialize</span></a></dd>
                                                                 </dl>
             <h2>Tags</h2>
@@ -589,13 +591,15 @@ $this-&gt;reqeust-&gt;validationErrors[SiteSetting][App/site_name]</code></pre>
                             <dd></dd>
                                                                     </dl>
                 
-                				
+                
                             </article>
         </div>
         <aside class="span4 detailsbar">
             <h1><i class="icon-arrow-down"></i></h1>
                                                             <dl>
-                                                                            </dl>
+                                                    <dt>Inherited from</dt>
+                    <dd><a href="../classes/SiteManagerComponent.html"><div class="path-wrapper">\SiteManagerComponent</div></a></dd>
+                                                            </dl>
             <h2>Tags</h2>
             <table class="table table-condensed">
                                     <tr><td colspan="2"><em>None found</em></td></tr>
@@ -623,13 +627,15 @@ $this-&gt;reqeust-&gt;validationErrors[SiteSetting][App/site_name]</code></pre>
                                             </table>
                 
                 
-                				
+                
                             </article>
         </div>
         <aside class="span4 detailsbar">
             <h1><i class="icon-arrow-down"></i></h1>
                                                             <dl>
-                                                                            </dl>
+                                                    <dt>Inherited from</dt>
+                    <dd><a href="../classes/SiteManagerComponent.html"><div class="path-wrapper">\SiteManagerComponent</div></a></dd>
+                                                            </dl>
             <h2>Tags</h2>
             <table class="table table-condensed">
                                     <tr><td colspan="2"><em>None found</em></td></tr>
@@ -658,13 +664,15 @@ the view class is loaded, and before Controller::render()</em></p>
                                             </table>
                 
                 
-                				
+                
                             </article>
         </div>
         <aside class="span4 detailsbar">
             <h1><i class="icon-arrow-down"></i></h1>
                                                             <dl>
-                                                                                            <dt>See also</dt>
+                                                    <dt>Inherited from</dt>
+                    <dd><a href="../classes/SiteManagerComponent.html"><div class="path-wrapper">\SiteManagerComponent</div></a></dd>
+                                                                            <dt>See also</dt>
                                                                 <dd><a href="http://book.cakephp.org/2.0/en/controllers/components.html#Component::beforeRender"><span class="namespace-wrapper">http://book.cakephp.org/2.0/en/controllers/components.html#Component::beforeRender</span></a></dd>
                                                                 </dl>
             <h2>Tags</h2>
@@ -696,14 +704,16 @@ the view class is loaded, and before Controller::render()</em></p>
                 
                                     <h4>Returns</h4>
                     string
-                                    				
+                                    
                             </article>
         </div>
         <aside class="span4 detailsbar">
             <h1><i class="icon-arrow-down"></i></h1>
                             <span class="label label-info">static</span>
                                                             <dl>
-                                                                            </dl>
+                                                    <dt>Inherited from</dt>
+                    <dd><a href="../classes/SiteManagerComponent.html"><div class="path-wrapper">\SiteManagerComponent</div></a></dd>
+                                                            </dl>
             <h2>Tags</h2>
             <table class="table table-condensed">
                                     <tr><td colspan="2"><em>None found</em></td></tr>
@@ -733,14 +743,16 @@ the view class is loaded, and before Controller::render()</em></p>
                 
                                     <h4>Returns</h4>
                     string
-                                    				
+                                    
                             </article>
         </div>
         <aside class="span4 detailsbar">
             <h1><i class="icon-arrow-down"></i></h1>
                             <span class="label label-info">static</span>
                                                             <dl>
-                                                                            </dl>
+                                                    <dt>Inherited from</dt>
+                    <dd><a href="../classes/SiteManagerComponent.html"><div class="path-wrapper">\SiteManagerComponent</div></a></dd>
+                                                            </dl>
             <h2>Tags</h2>
             <table class="table table-condensed">
                                     <tr><td colspan="2"><em>None found</em></td></tr>
@@ -797,7 +809,7 @@ the view class is loaded, and before Controller::render()</em></p>
                 <section class="span10 offset1">
                     <hr />
                     Documentation is powered by <a href="http://www.phpdoc.org/">phpDocumentor </a> and authored
-                    on November 13th, 2019 at 05:53.
+                    on March 14th, 2020 at 06:21.
                 </section>
             </section>
         </section>
