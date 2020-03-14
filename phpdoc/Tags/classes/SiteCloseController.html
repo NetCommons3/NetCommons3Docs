@@ -24,7 +24,7 @@
     <script type="text/javascript">
     function loadExternalCodeSnippets() {
         Array.prototype.slice.call(document.querySelectorAll('pre[data-src]')).forEach(function (pre) {
-            var src = pre.getAttribute('data-src');
+            var src = pre.getAttribute('data-src').replace( /\\/g, '/');
             var extension = (src.match(/\.(\w+)$/) || [, ''])[1];
             var language = 'php';
 
@@ -106,12 +106,12 @@
                         <ul class="dropdown-menu">
                             <li>
                                 <a href="../reports/errors.html">
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                <i class="icon-list-alt"></i>&#160;Errors <span class="label label-info pull-right">0</span>
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                            <i class="icon-list-alt"></i>&#160;Errors <span class="label label-info pull-right">0</span>
                                 </a>
                             </li>
                             <li>
                                 <a href="../reports/markers.html">
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                <i class="icon-list-alt"></i>&#160;Markers <span class="label label-info pull-right">0</span>
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                            <i class="icon-list-alt"></i>&#160;Markers <span class="label label-info pull-right">0</span>
                                 </a>
                             </li>
                             <li>
@@ -136,10 +136,10 @@
                                 <div class="accordion" style="margin-bottom: 0">
         <div class="accordion-group">
             <div class="accordion-heading">
-                                    <a class="accordion-toggle " data-toggle="collapse" data-target="#namespace-729120492"></a>
+                                    <a class="accordion-toggle " data-toggle="collapse" data-target="#namespace-1009840399"></a>
                                 <a href="../namespaces/default.html" style="margin-left: 30px; padding-left: 0">\</a>
             </div>
-            <div id="namespace-729120492" class="accordion-body collapse in">
+            <div id="namespace-1009840399" class="accordion-body collapse in">
                 <div class="accordion-inner">
 
                     
@@ -149,6 +149,7 @@
                                                     <li class="class"><a href="../classes/AddIndex.html">AddIndex</a></li>
                                                     <li class="class"><a href="../classes/AddIsOriginalCopy.html">AddIsOriginalCopy</a></li>
                                                     <li class="class"><a href="../classes/AddTableForM17n1.html">AddTableForM17n1</a></li>
+                                                    <li class="class"><a href="../classes/AngularParser.html">AngularParser</a></li>
                                                     <li class="class"><a href="../classes/AppController.html">AppController</a></li>
                                                     <li class="class"><a href="../classes/AppController.html">AppController</a></li>
                                                     <li class="class"><a href="../classes/AppHelper.html">AppHelper</a></li>
@@ -274,6 +275,7 @@
                             <section class="span4">
                                                                     <a href="../classes/NetCommonsAppController.html#method___construct" class="">__construct()</a><br />
                                                                     <a href="../classes/SiteCloseController.html#method_beforeFilter" class="">beforeFilter()</a><br />
+                                                                    <a href="../classes/NetCommonsAppController.html#method_referer" class="">referer()</a><br />
                                                                     <a href="../classes/NetCommonsAppController.html#method_afterFilter" class="">afterFilter()</a><br />
                                                                     <a href="../classes/NetCommonsAppController.html#method_beforeRender" class="">beforeRender()</a><br />
                                                                     <a href="../classes/NetCommonsAppController.html#method_beforeRedirect" class="">beforeRedirect()</a><br />
@@ -342,7 +344,7 @@
                         
                                                                             <dt>See also</dt>
                                                                                         <dd><a href="http://www.netcommons.org"><span class="namespace-wrapper">NetCommons Project</span></a></dd>
-                                                    
+                                                                            
                                                                         </dl>
                     <h2>Tags</h2>
                     <table class="table table-condensed">
@@ -351,7 +353,7 @@
                                 copyright
                             </th>
                             <td>
-                                                                    <p>Copyright 2014, NetCommons Project</p>
+                                                                                                        <p>Copyright 2014, NetCommons Project</p>
                                                             </td>
                         </tr>
                                             <tr>
@@ -359,7 +361,7 @@
                                 author
                             </th>
                             <td>
-                                                                    <p>Kohei Teraguchi <a href="mailto:kteraguchi@commonsnet.org">kteraguchi@commonsnet.org</a></p>
+                                                                                                        <p>Kohei Teraguchi <a href="mailto:kteraguchi@commonsnet.org">kteraguchi@commonsnet.org</a></p>
                                                             </td>
                         </tr>
                                             <tr>
@@ -367,7 +369,7 @@
                                 license
                             </th>
                             <td>
-                                                                    <p><a href="http://www.netcommons.org/license.txt">http://www.netcommons.org/license.txt</a> NetCommons License</p>
+                                                                                                        <p><a href="http://www.netcommons.org/license.txt">http://www.netcommons.org/license.txt</a> NetCommons License</p>
                                                             </td>
                         </tr>
                                         </table>
@@ -598,7 +600,7 @@ but expect that features that use the request parameters will not work.</p></td>
                                             </table>
                 
                 
-                				
+                
                             </article>
         </div>
         <aside class="span4 detailsbar">
@@ -626,16 +628,71 @@ but expect that features that use the request parameters will not work.</p></td>
 
                 
                 
-                				
+                
                             </article>
         </div>
         <aside class="span4 detailsbar">
             <h1><i class="icon-arrow-down"></i></h1>
                                                             <dl>
-                                                                            </dl>
+                                                    <dt>Inherited from</dt>
+                    <dd><a href="../classes/SiteCloseController.html"><div class="path-wrapper">\SiteCloseController</div></a></dd>
+                                                            </dl>
             <h2>Tags</h2>
             <table class="table table-condensed">
                                     <tr><td colspan="2"><em>None found</em></td></tr>
+                            </table>
+        </aside>
+    </div>
+
+                                    <div class="row-fluid">
+        <div class="span8 content class">
+            <a id="method_referer" name="method_referer" class="anchor"></a>
+            <article class="method">
+                <h3 class="public ">referer()</h3>
+                <a href="#source-view" role="button" class="pull-right btn" data-toggle="modal" style="font-size: 1.1em; padding: 9px 14px"><i class="icon-code"></i></a>
+                <pre class="signature" style="margin-right: 54px;">referer(string  <span class="argument">$default = null</span>, boolean  <span class="argument">$local = true</span>) : string</pre>
+                <p><em>Returns the referring URL for this request.</em></p>
+                
+
+                                    <h4>Parameters</h4>
+                    <table class="table table-condensed table-hover">
+                                                    <tr>
+                                <td>string</td>
+                                <td>$default </td>
+                                <td><p>Default URL to use if HTTP_REFERER cannot be read from headers</p></td>
+                            </tr>
+                                                    <tr>
+                                <td>boolean</td>
+                                <td>$local </td>
+                                <td><p>If true, restrict referring URLs to local server</p></td>
+                            </tr>
+                                            </table>
+                
+                
+                                    <h4>Returns</h4>
+                    string
+                                            &mdash; <p>Referring URL</p>
+                                    
+                            </article>
+        </div>
+        <aside class="span4 detailsbar">
+            <h1><i class="icon-arrow-down"></i></h1>
+                                                            <dl>
+                                                    <dt>Inherited from</dt>
+                    <dd><a href="../classes/NetCommonsAppController.html"><div class="path-wrapper">\NetCommonsAppController</div></a></dd>
+                                                                            <dt>See also</dt>
+                                                                <dd><a href="https://book.cakephp.org/2.0/en/controllers.html#Controller::referer"><span class="namespace-wrapper">https://book.cakephp.org/2.0/en/controllers.html#Controller::referer</span></a></dd>
+                                                                </dl>
+            <h2>Tags</h2>
+            <table class="table table-condensed">
+                                    <tr>
+                        <th>
+                            SuppressWarnings
+                        </th>
+                        <td>
+                                                                                            <p>(PHPMD.BooleanArgumentFlag)</p>
+                                                    </td>
+                    </tr>
                             </table>
         </aside>
     </div>
@@ -652,7 +709,7 @@ but expect that features that use the request parameters will not work.</p></td>
 
                 
                 
-                				
+                
                             </article>
         </div>
         <aside class="span4 detailsbar">
@@ -682,7 +739,7 @@ but expect that features that use the request parameters will not work.</p></td>
 
                 
                 
-                				
+                
                             </article>
         </div>
         <aside class="span4 detailsbar">
@@ -743,7 +800,7 @@ or an absolute URL</p></td>
                                             &mdash; <p>false to stop redirection event,
 string controllers a new redirection URL or
 array with the keys url, status and exit to be used by the redirect method.</p>
-                                    				
+                                    
                             </article>
         </div>
         <aside class="span4 detailsbar">
@@ -791,7 +848,7 @@ array with the keys url, status and exit to be used by the redirect method.</p>
                                     <h4>Returns</h4>
                     array
                                             &mdash; <p>camelized data</p>
-                                    				
+                                    
                             </article>
         </div>
         <aside class="span4 detailsbar">
@@ -833,7 +890,7 @@ array with the keys url, status and exit to be used by the redirect method.</p>
                             <dd></dd>
                                                                     </dl>
                 
-                				
+                
                             </article>
         </div>
         <aside class="span4 detailsbar">
@@ -861,7 +918,7 @@ array with the keys url, status and exit to be used by the redirect method.</p>
 
                 
                 
-                				
+                
                             </article>
         </div>
         <aside class="span4 detailsbar">
@@ -889,7 +946,7 @@ array with the keys url, status and exit to be used by the redirect method.</p>
 
                 
                 
-                				
+                
                             </article>
         </div>
         <aside class="span4 detailsbar">
@@ -917,13 +974,15 @@ array with the keys url, status and exit to be used by the redirect method.</p>
 
                 
                 
-                				
+                
                             </article>
         </div>
         <aside class="span4 detailsbar">
             <h1><i class="icon-arrow-down"></i></h1>
                                                             <dl>
-                                                                            </dl>
+                                                    <dt>Inherited from</dt>
+                    <dd><a href="../classes/SiteCloseController.html"><div class="path-wrapper">\SiteCloseController</div></a></dd>
+                                                            </dl>
             <h2>Tags</h2>
             <table class="table table-condensed">
                                     <tr><td colspan="2"><em>None found</em></td></tr>
@@ -943,7 +1002,7 @@ array with the keys url, status and exit to be used by the redirect method.</p>
 
                 
                 
-                				
+                
                             </article>
         </div>
         <aside class="span4 detailsbar">
@@ -971,7 +1030,7 @@ array with the keys url, status and exit to be used by the redirect method.</p>
 
                 
                 
-                				
+                
                             </article>
         </div>
         <aside class="span4 detailsbar">
@@ -999,7 +1058,7 @@ array with the keys url, status and exit to be used by the redirect method.</p>
 
                 
                 
-                				
+                
                             </article>
         </div>
         <aside class="span4 detailsbar">
@@ -1064,7 +1123,7 @@ array with the keys url, status and exit to be used by the redirect method.</p>
                 <section class="span10 offset1">
                     <hr />
                     Documentation is powered by <a href="http://www.phpdoc.org/">phpDocumentor </a> and authored
-                    on September 22nd, 2019 at 03:19.
+                    on March 14th, 2020 at 06:31.
                 </section>
             </section>
         </section>
